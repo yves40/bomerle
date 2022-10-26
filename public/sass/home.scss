@@ -1,0 +1,256 @@
+@import './utils/variables';
+@import './base/typography';
+@import './base/reset';
+@import './base/style';
+@import './components/buttons';
+@import './components/carousel';
+@import './layout/navigation';
+@import './layout/footer';
+@import './pages/home';
+
+
+#home
+{
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+    background-image: url(../images/homepageimages/enclume.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    .content{
+        position: relative;
+        // padding-top: 80px;
+
+        .name{
+            position: relative;
+            width: 100%;
+            background: $background;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            h1{
+                font-family: $title;
+                font-size: 2.7rem;
+                font-weight: 600;
+                text-align: center;
+
+                &.reveal{
+                    opacity: 0;
+                    transform: translateY(-30px);
+                }
+                &.reveal-visible{
+                    opacity: 1;
+                    transform: translateY(0px);
+                    transition: 1s all cubic-bezier(.5, 0, 0, 1);
+                }
+            }
+        }
+    }
+}
+
+#catalog
+{
+    padding: 20px 0 0px;
+    background: $alternateBackground;
+    
+    .button{
+        width: 250px;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%,-50%);
+        z-index: 1;
+    }
+    .banner
+    {
+        width: 100%;
+        position: relative;
+        overflow: hidden;
+        height: 50vh;
+
+        img{
+            max-width: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            animation: image-translate 120s linear infinite;
+        }
+    }
+    @keyframes image-translate {
+        0%{
+            transform: translateX(0);
+        }
+        50%{
+            transform: translateX(-100%);
+        }
+        100%{
+            transform: translateX(0);
+        }
+    }
+}
+
+#services
+{
+    position: relative;
+    width: 100%;
+    
+    .container{
+        padding: 85px 0 85px 5px;
+        // z-index: 2;
+        position: relative;
+
+        &:before{
+            position: absolute;
+            content: '';
+            inset: 0;
+            background-image: url(../images/knife/cuisine.jpg);
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+            filter: grayscale(100%) brightness(.9);
+        }
+        h1{
+            position: relative;
+            text-transform: uppercase;
+            font-size: 1.5rem;
+            font-family: $title;
+            font-weight: 600;
+            color: $titleWhite;
+            padding-bottom: 20px;
+            border-bottom: 2px solid $lightBorder;
+        }
+        ul{
+            z-index: 2;
+            position: relative;
+
+            li{
+                text-transform: uppercase;
+                font-size: 3.125rem;
+                border-bottom: 2px solid $lightBorder;
+                
+                a{
+                    text-decoration: none;
+                    color: $alternateText;
+                }
+            }
+        }
+    }
+}
+
+#instructions
+{
+    background: $background;
+    color: $text;
+    padding: 40px 5px;
+
+    h1{
+        width: 100%;
+        text-align: center;
+        font-family: $title;
+        font-size: 1.5rem;
+        font-weight: 600;
+    }
+    .article{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        .wrapper{
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            padding: 15px 5px;
+            img{
+                border-radius: 50%;
+                object-fit: cover;
+                object-position: center;
+                max-width: 300px;
+            }
+            .number{
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                color: $alternateText;
+                font-size: 5rem;
+                font-weight: 600;
+            }
+    
+        }
+        p{
+            text-align: justify;
+            font-size: 1.2rem;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+    }
+}
+
+#events
+{
+    width: 100%;
+    background: $alternateBackground;
+    padding: 30px 5px;
+
+    h1{
+        width: 100%;
+        text-align: center;
+        font-family: $title;
+        font-size: 1.45rem;
+        font-weight: 600;
+        color: $titleWhite;
+        padding-bottom: 20px;
+    }
+    table{
+        border: 1px solid $border;
+        thead{
+            color: $alternateText;
+            border: 1px solid $border;
+            th{
+                border: 1px solid $border;
+            }
+        }
+        tbody{
+            background: $background;
+            border: $border;
+            tr{
+                border: 1px solid $alternateBorder;
+                td{
+                    border: 1px solid $alternateBorder;
+                    padding: 1px 2px;
+                }
+            }
+        }
+    }
+}
+#workshop
+{
+    width: 100%;
+    padding: 30px 5px;
+
+    h1{
+        width: 100%;
+        text-align: center;
+        font-family: $title;
+        font-size: 2rem;
+        font-weight: 600;
+        color: $text;
+        padding-bottom: 20px;
+    }
+    iframe{
+        width: 100%;
+    }
+}

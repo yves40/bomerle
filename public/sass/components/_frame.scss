@@ -1,0 +1,77 @@
+.frame-small{
+    position: absolute;
+    top: 5vw;
+    left: -20vw;
+    width: 80%;
+    height: 50vw;
+    background: $alternateBackground;
+    z-index: 2;
+
+    .lines{
+        position: absolute;
+        inset: 0;
+        background: #000;
+        overflow: hidden;
+
+        &:before{
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 600px;
+            height: 120px;
+            background: linear-gradient(transparent,
+                                        $frame2,
+                                        $frame2,
+                                        $frame2,
+                                        transparent);
+            animation: border-rotate 8s linear infinite;
+        }
+        &:after{
+            content: '';
+            position: absolute;
+            inset: 3px;
+            background: $alternateBackground;
+        }
+    }
+}
+.frame-big{
+    position: absolute;
+    bottom: 10vw;
+    right: 0;
+    width: 70%;
+    height: 130vw;
+    background: $alternateBackground;
+    z-index: 3;
+
+    .lines
+    {
+        position: absolute;
+        inset: 0;
+        background: #000;
+        overflow: hidden;
+
+        &:before{
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 600px;
+            height: 120px;
+            background: linear-gradient(transparent,
+                                        $frame1,
+                                        $frame1,
+                                        $frame1,
+                                        transparent);
+            animation: border-rotate2 12s linear infinite;
+        }
+        &:after{
+            content: '';
+            position: absolute;
+            inset: 3px;
+            background: $alternateBackground;
+        }
+    }
+}

@@ -1,0 +1,33 @@
+
+
+body
+{
+    background: $background;
+    font-family: $main;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    max-width: 100%;
+    position: relative;
+}
+
+.contenu
+{
+    // grow shrink basis
+    flex: 1 0 auto;
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+section
+{
+    width: 100%;
+    position: relative;
+}
+
