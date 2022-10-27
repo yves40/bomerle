@@ -1,54 +1,45 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Connexion</title>
-    <link rel="stylesheet" href="../../public/css/register.css">
-</head>
-<body>
+{% extends "template.html.twig" %}
+{% form_theme form 'fields.twig' %}
+
+{% block title %}Inscription{% endblock %}
+
+{% block link %}
+    <link rel="stylesheet" href="{{asset('/css/register.css')}}">
+{% endblock %}
+
+{% block body %}
+    {{ form_start(form) }}
     <div class="full-screen-container">
         <div class="login-container">
             <h1 class="login-title">Bienvenue</h1>
-            <form action="{{path('users.register')}}" method="post" class="form">
-                <div class="input-group">
-                    <label for="firstname">Prénom</label>
-                    <input type="text" name="firstname" id="firstname">
-                    <span class="message"></span>
-                </div>
-                <div class="input-group">
-                    <label for="lastname">Nom</label>
-                    <input type="text" name="lastname" id="lastname">
-                    <span class="message"></span>
-                </div>
-                <div class="input-group">
-                    <label for="email">Email</label>
-                    <input type="email" name="email" id="email">
-                    <span class="message"></span>
-                </div>
-                <div class="input-group">
-                    <label for="address">Adresse</label>
-                    <input type="text" name="address" id="adress">
-                    <span class="message"></span>
-                </div>
-                <div class="input-group">
-                    <label for="password">Mot de passe</label>
-                    <input type="password" name="password" id="password">
-                    <span class="message"></span>
-                </div>
-                <div class="input-group">
-                    <label for="confirm-password">Confirmer le mot de passe</label>
-                    <input type="password" name="confirm-password" id="confirm-password">
-                    <span class="message"></span>
-                </div>
+            <div class="form">
+                {{ form_row(form.firstname, {
+                    label: 'Prénom'
+                }) }}
+                {# <span class="message"></span> #}
+                {{ form_row(form.lastname, {
+                    label: 'Nom'
+                }) }}
+                {# <span class="message"></span> #}
+                {{ form_row(form.email, {
+                    label: 'Email'
+                }) }}
+                {# <span class="message"></span>             #}
+                {{ form_row(form.address, {
+                    label: 'Adresse'
+                }) }}
+                {# <span class="message"></span>  #}
+                {{ form_row(form.password, {
+                    
+                }) }}
+                {# <span class="message"></span> #}
+                {# {{ form_row(form.confirm-password, {
+                    label: 'Confirmer le mot de passe'
+                }) }} #}
+                {# <span class="message"></span> #}
                 <button type="submit" class="login-button">S'inscrire</button>
-            </form>
-            <div class="navigation">
-                <a href="./index.html">Accueil</a>
-                <a href="{{path('users.login')}}">Se connecter</a>
             </div>
         </div>
     </div>
-</body>
-</html>
+    {{ form_end(form) }}
+{% endblock %}
