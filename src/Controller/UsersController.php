@@ -41,8 +41,11 @@ class UsersController extends AbstractController
         $form->remove('created');
         $form->remove('role');
         $form->remove('lastlogin');
+        // $form->add('confirm-password');
         $form->handleRequest($request);
-
+        if($form->isSubmitted()){
+            dd($form->getData());
+        }
         
         if($request->getMethod()=='POST') //penser à vérifier que les données sont valides
         {
