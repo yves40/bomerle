@@ -38,6 +38,11 @@
                     {{ form_widget(form.password) }}
                     {{ form_errors(form.password) }}
                 </div>
+                <div class="input-group">
+                    {{ form_label(form.confirmpassword, 'Confirmer le mot de passe') }}
+                    {{ form_widget(form.confirmpassword) }}
+                    {{ form_errors(form.confirmpassword) }}
+                </div>
                 <button type="submit" class="login-button">S'inscrire</button>
             </div>
         </div>
