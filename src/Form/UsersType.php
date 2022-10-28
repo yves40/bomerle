@@ -18,12 +18,7 @@ class UsersType extends AbstractType
             ->add('lastname')
             ->add('email')
             ->add('address')
-            ->add('password', RepeatedType::class, [
-                'type' => PasswordType::class,
-                'invalid_message' => 'Le mot de passe doit être identique',
-                'first_options' => ['label' => 'Mot de passe'],
-                'second_options' => ['label' => 'Confirmer le mot de passe']
-            ])
+            ->add('password')
             ->add('created')
             ->add('role')
             ->add('lastlogin')

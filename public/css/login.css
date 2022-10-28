@@ -104,6 +104,9 @@ section {
         .full-screen-container .login-container .form .input-group.error .message {
           display: block;
           color: #cc3333; }
+        .full-screen-container .login-container .form .input-group ul {
+          display: block;
+          color: #cc3333; }
         .full-screen-container .login-container .form .input-group label {
           color: #f1f1f1;
           font-weight: lighter; }
