@@ -6,6 +6,7 @@ use App\Repository\UsersRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Util\PropertyPath;
 
 #[ORM\Entity(repositoryClass: UsersRepository::class)]
 class Users
@@ -50,6 +51,13 @@ class Users
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $lastlogin = null;
+
+    #[ORM\Column(length: 128)]
+    #[Assert\NotBlank(message: "Merci de renseigner ce champ")]
+    #[Assert\IdenticalTo(['propertyPath' => 'password',
+                           'message' => "Les deux mots de passe doivent être identiques"])
+    ]
+    private ?string $confirmpassword = null;
 
     public function getId(): ?int
     {
@@ -148,6 +156,18 @@ class Users
     public function setLastlogin(?\DateTimeInterface $lastlogin): self
     {
         $this->lastlogin = $lastlogin;
+
+        return $this;
+    }
+
+    public function getConfirmpassword(): ?string
+    {
+        return $this->confirmpassword;
+    }
+
+    public function setConfirmpassword(string $confirmpassword): self
+    {
+        $this->confirmpassword = $confirmpassword;
 
         return $this;
     }
