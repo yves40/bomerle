@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\UsersRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: UsersRepository::class)]
 class Users
@@ -15,18 +16,30 @@ class Users
     private ?int $id = null;
 
     #[ORM\Column(length: 45)]
+    #[Assert\NotBlank(message: "Merci de renseigner ce champ")]
+    #[Assert\Length(
+        min: 4,
+        max: 16,
+        minMessage: "Ce champ doit contenir au moins {{ limit }} caractères, {{ value }} n'est pas correct",
+        maxMessage: "Ce champ ne peut pas contenir plus de {{ limit }} caractères"
+    )]
     private ?string $firstname = null;
 
     #[ORM\Column(length: 45)]
+    #[Assert\NotBlank(message: "Merci de renseigner ce champ")]
     private ?string $lastname = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: "Merci de renseigner ce champ")]
+    #[Assert\Email( message: "{{ value }} n'est pas un email valide." )] 
     private ?string $email = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: "Merci de renseigner ce champ")]
     private ?string $address = null;
 
     #[ORM\Column(length: 128)]
+    #[Assert\NotBlank(message: "Merci de renseigner ce champ")]
     private ?string $password = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]

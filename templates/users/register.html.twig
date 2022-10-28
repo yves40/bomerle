@@ -1,5 +1,5 @@
 {% extends "template.html.twig" %}
-{% form_theme form 'fields.twig' %}
+{# {% form_theme form 'fields.twig' %} #}
 
 {% block title %}Inscription{% endblock %}
 
@@ -8,35 +8,36 @@
 {% endblock %}
 
 {% block body %}
-    {{ form_start(form) }}
+    {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
     <div class="full-screen-container">
         <div class="login-container">
             <h1 class="login-title">Bienvenue</h1>
             <div class="form">
-                {{ form_row(form.firstname, {
-                    label: 'Prénom'
-                }) }}
-                {# <span class="message"></span> #}
-                {{ form_row(form.lastname, {
-                    label: 'Nom'
-                }) }}
-                {# <span class="message"></span> #}
-                {{ form_row(form.email, {
-                    label: 'Email'
-                }) }}
-                {# <span class="message"></span>             #}
-                {{ form_row(form.address, {
-                    label: 'Adresse'
-                }) }}
-                {# <span class="message"></span>  #}
-                {{ form_row(form.password, {
-                    
-                }) }}
-                {# <span class="message"></span> #}
-                {# {{ form_row(form.confirm-password, {
-                    label: 'Confirmer le mot de passe'
-                }) }} #}
-                {# <span class="message"></span> #}
+                <div class="input-group">
+                    {{ form_label(form.firstname, 'Prénom') }}
+                    {{ form_widget(form.firstname) }}
+                    {{ form_errors(form.firstname) }}
+                </div>
+                <div class="input-group">
+                    {{ form_label(form.lastname, 'Nom') }}
+                    {{ form_widget(form.lastname) }}
+                    {{ form_errors(form.lastname) }}
+                </div>
+                <div class="input-group">
+                    {{ form_label(form.email, 'Email') }}
+                    {{ form_widget(form.email) }}
+                    {{ form_errors(form.email) }}
+                </div>
+                <div class="input-group">
+                    {{ form_label(form.address, 'Adresse') }}
+                    {{ form_widget(form.address) }}
+                    {{ form_errors(form.address) }}
+                </div>
+                <div class="input-group">
+                    {{ form_label(form.password, 'Mot de passe') }}
+                    {{ form_widget(form.password) }}
+                    {{ form_errors(form.password) }}
+                </div>
                 <button type="submit" class="login-button">S'inscrire</button>
             </div>
         </div>

@@ -54,6 +54,11 @@
                         color: $formError;
                     }
                 }
+
+                ul{
+                    display: block;
+                    color: $formError;
+                }
                 
                 label{
                     color: $alternateText;

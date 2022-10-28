@@ -43,20 +43,17 @@ class UsersController extends AbstractController
         $form->remove('lastlogin');
         // $form->add('confirm-password');
         $form->handleRequest($request);
-        if($form->isSubmitted()){
+        if($form->isSubmitted() && $form->isValid()){
             dd($form->getData());
+            //     $user=$form->getData();
+            //     return $this->render('users/login.html.twig', [
+                    
+            //     ]);   
         }
-        
-        if($request->getMethod()=='POST') //penser à vérifier que les données sont valides
-        {
-            $user=$form->getData();
-            return $this->render('users/login.html.twig', [
-                
-            ]);   
-        }else{
+        else{
             return $this->render('users/register.html.twig', [
                 'form' => $form->createView()
             ]);    
-        }
+        }     
     }
 }
