@@ -4,11 +4,17 @@ namespace App\Controller;
 
 use App\Entity\Users;
 use App\Form\UsersType;
+use App\Security\LoginAuthenticator;
+use DateTime;
+use DateTimeZone;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Http\Authentication\UserAuthenticatorInterface;
 
 #[Route('/users')]
 class UsersController extends AbstractController
@@ -32,8 +38,12 @@ class UsersController extends AbstractController
     #[Route('/register', name: 'users.register')]
     public function register(
         Users $user = null,
-        ManagerRegistry $doctrine,
-        Request $request
+        // ManagerRegistry $doctrine,
+        Request $request,
+        UserPasswordHasherInterface $userPasswordHasher,
+        // UserAuthenticatorInterface $userAuthenticator,
+        // LoginAuthenticator $authenticator,
+        EntityManagerInterface $entityManager
         ): Response
     {
         $user = new Users();
@@ -41,14 +51,23 @@ class UsersController extends AbstractController
         $form->remove('created');
         $form->remove('role');
         $form->remove('lastlogin');
-        // $form->add('confirm-password');
         $form->handleRequest($request);
+
         if($form->isSubmitted() && $form->isValid()){
-            dd($form->getData());
-            //     $user=$form->getData();
-            //     return $this->render('users/login.html.twig', [
-                    
-            //     ]);   
+            $user->setPassword(
+                $userPasswordHasher->hashPassword(
+                    $user,
+                    $form->get('password')->getData()
+                )
+            )
+            ->setConfirmpassword($user->getPassword());
+            $user->setCreated(new DateTime('now', new DateTimeZone('Europe/Paris')));
+            $entityManager->persist($user);
+            $entityManager->flush();
+            
+            return $this->render('users/login.html.twig', [
+                
+            ]);   
         }
         else{
             return $this->render('users/register.html.twig', [
