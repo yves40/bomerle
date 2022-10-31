@@ -1,0 +1,26 @@
+{% extends 'template.html.twig' %}
+
+{% block title %}Home sweet home{% endblock %}
+
+{% block link %}
+    <link rel="stylesheet" href="{{asset('/css/home.css')}}">
+{% endblock %}
+
+{% block body %}
+    <h1>So good to be at home again</h1>
+
+    <p>
+        Ceci est la page principale du plus gros site e-commerce dédié aux couteaux en Europe
+    </p>
+    <div class="navigation yvesestnulencss">
+        <a href="{{path('users.register')}}">S'enregistrer</a>
+        <a href="{{path('users.login')}}">Se connecter</a>
+    </div>
+
+<style>
+.yvesestnulencss {
+    margin-top: 2rem;
+}
+</style>
+
+{% endblock %}
