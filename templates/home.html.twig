@@ -9,12 +9,20 @@
 {% block body %}
     <h1>So good to be at home again</h1>
 
+    <div>
+        {% if app.user %}
+            <p class="text-success">{{ app.user.email }}</p>
+        {% else %}
+            <p class="text-success">Anonymous</p>
+        {% endif %}
+    </div>
+
     <p>
         Ceci est la page principale du plus gros site e-commerce dédié aux couteaux en Europe
     </p>
     <div class="navigation yvesestnulencss">
         <a href="{{path('users.register')}}">S'enregistrer</a>
-        <a href="{{path('users.login')}}">Se connecter</a>
+        <a href="{{path('app_login')}}">Se connecter</a>
     </div>
 
 <style>

@@ -27,13 +27,13 @@ class UsersController extends AbstractController
         ]);
     }
 
-    #[Route('/login', name: 'users.login')]
-    public function login(): Response
-    {
-        return $this->render('users/login.html.twig', [
-            'controller_name' => 'UsersController',
-        ]);
-    }
+    // #[Route('/login', name: 'users.login')]
+    // public function login(): Response
+    // {
+    //     return $this->render('users/login.html.twig', [
+    //         'controller_name' => 'UsersController',
+    //     ]);
+    // }
 
     #[Route('/register', name: 'users.register')]
     public function register(
