@@ -12,6 +12,7 @@
     <div>
         {% if app.user %}
             <p class="text-success">{{ app.user.email }}</p>
+            <a href="{{path('app_logout')}}">Logout</a>
         {% else %}
             <p class="text-success">Anonymous</p>
         {% endif %}
