@@ -2,18 +2,21 @@
 
 namespace App\Controller;
 
-use App\Entity\Users;
-use App\Form\UsersType;
-use App\Security\LoginAuthenticator;
 use DateTime;
 use DateTimeZone;
+use App\Entity\Users;
+use App\Form\UsersType;
+use Symfony\Component\Mime\Email;
+use App\Security\LoginAuthenticator;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Security\Http\Authentication\UserAuthenticatorInterface;
 
 #[Route('/users')]
@@ -43,7 +46,8 @@ class UsersController extends AbstractController
         UserPasswordHasherInterface $userPasswordHasher,
         // UserAuthenticatorInterface $userAuthenticator,
         // LoginAuthenticator $authenticator,
-        EntityManagerInterface $entityManager
+        EntityManagerInterface $entityManager,
+        MailerInterface $mailer
         ): Response
     {
         $user = new Users();
@@ -64,10 +68,39 @@ class UsersController extends AbstractController
             $user->setCreated(new DateTime('now', new DateTimeZone('Europe/Paris')));
             $entityManager->persist($user);
             $entityManager->flush();
-            
-            return $this->render('users/login.html.twig', [
+            // ------------------------------------------------------------------------
+            // Test email
+            // Remember a worker has to consume the emails otherwise they won't be sent
+            // Can be launched with this command :  
+            //                  php bin/console messenger:consume async -vv
+            // or
+            //                  php bin/console messenger:consume async
+            // This should be automatically started in production with a cron job...
+            // The consumer must be stopped properly with this command:
+            //                  php bin/console messenger:stop
+            // ------------------------------------------------------------------------
+            $email = (new Email())
+                ->from('noreply@beaumerledev.big-ben.fr')
+                ->to('yves.toubhans@free.fr')
+                //->cc('cc@example.com')
+                //->bcc('bcc@example.com')
+                ->replyTo('noreply@beaumerledev.big-ben.fr')
+                //->priority(Email::PRIORITY_HIGH)
+                ->subject('Time for Symfony Mailer!')
+                ->html('<p>Sending emails is fun again!</p>'.
+                        '<p>If you started a consumer as explained here </p>'.
+                        '<p>https://symfony.com/doc/current/messenger.html#messenger-worker</p>'
+                );
                 
-            ]);   
+            try {
+                $mailer->send($email);
+            } catch (TransportExceptionInterface $e) {
+                dd($e);         // Will manage this later
+            }            
+            // ------------------------------------------------------------------------
+
+            return $this->render('security/login.html.twig', ['last_username' => '', 'error' => array()]);   
+
         }
         else{
             return $this->render('users/register.html.twig', [
