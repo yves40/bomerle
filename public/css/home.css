@@ -256,6 +256,15 @@ header {
       transition: all 0.5s; }
       header .container .navigation.active {
         scale: 1; }
+      header .container .navigation p {
+        position: absolute;
+        top: 25%;
+        left: 50%;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        font-size: 1.7rem;
+        transform: translateX(-50%); }
       header .container .navigation ul {
         display: flex;
         flex-direction: column;
