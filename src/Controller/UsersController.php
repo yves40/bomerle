@@ -65,9 +65,7 @@ class UsersController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
             
-            return $this->render('users/login.html.twig', [
-                
-            ]);   
+            return $this->render('security/login.html.twig', ['last_username' => '', 'error' => array()]);   
         }
         else{
             return $this->render('users/register.html.twig', [
