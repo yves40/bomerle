@@ -79,24 +79,24 @@ class UsersController extends AbstractController
             // The consumer must be stopped properly with this command:
             //                  php bin/console messenger:stop
             // ------------------------------------------------------------------------
-            $email = (new Email())
-                ->from('noreply@beaumerledev.big-ben.fr')
-                ->to('yves.toubhans@free.fr')
-                //->cc('cc@example.com')
-                //->bcc('bcc@example.com')
-                ->replyTo('noreply@beaumerledev.big-ben.fr')
-                //->priority(Email::PRIORITY_HIGH)
-                ->subject('Time for Symfony Mailer!')
-                ->html('<p>Sending emails is fun again!</p>'.
-                        '<p>If you started a consumer as explained here </p>'.
-                        '<p>https://symfony.com/doc/current/messenger.html#messenger-worker</p>'
-                );
+            // $email = (new Email())
+            //     ->from('noreply@beaumerledev.big-ben.fr')
+            //     ->to('yves.toubhans@free.fr')
+            //     //->cc('cc@example.com')
+            //     //->bcc('bcc@example.com')
+            //     ->replyTo('noreply@beaumerledev.big-ben.fr')
+            //     //->priority(Email::PRIORITY_HIGH)
+            //     ->subject('Time for Symfony Mailer!')
+            //     ->html('<p>Sending emails is fun again!</p>'.
+            //             '<p>If you started a consumer as explained here </p>'.
+            //             '<p>https://symfony.com/doc/current/messenger.html#messenger-worker</p>'
+            //     );
                 
-            try {
-                $mailer->send($email);
-            } catch (TransportExceptionInterface $e) {
-                dd($e);         // Will manage this later
-            }            
+            // try {
+            //     $mailer->send($email);
+            // } catch (TransportExceptionInterface $e) {
+            //     dd($e);         // Will manage this later
+            // }            
             // ------------------------------------------------------------------------
 
             return $this->render('security/login.html.twig', ['last_username' => '', 'error' => array()]);   
