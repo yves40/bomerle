@@ -44,4 +44,23 @@
                 {% endfor %}
             </select>
         </div>
+    {{ form_start(formmechanism, {'attr': {'novalidate': 'novalidate'}}) }}
+                <form action="" method="post" class="form">
+                    <div class="input-group">
+                        {{ form_label(formmechanism.name, "Mécanisme") }}
+                        {{ form_widget(formmechanism.name) }}
+                        {{ form_errors(formmechanism.name) }}
+                    </div>
+                    <button type="submit" class="add-button">Ajouter</button>
+                </form>
+    {{ form_end(formmechanism)}}
+        <div class="input-group">
+            <label for="mechanism">Mécanisme</label>
+            <select name="mechanism" id="mechanism">
+                <option value="--">--</option>
+                {% for mechanism in mechanisms %}
+                    <option value="{{ mechanism.name }}">{{ mechanism.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
 {% endblock %}
