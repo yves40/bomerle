@@ -15,7 +15,6 @@
                     <button type="submit" class="add-button">Ajouter</button>
                 </form>
     {{ form_end(formcategory)}}
-
         <div class="input-group">
             <label for="category">Catégorie</label>
             <select name="category" id="category">
@@ -72,13 +71,32 @@
                     </div>
                     <button type="submit" class="add-button">Ajouter</button>
                 </form>
-    {{ form_end(formmechanism)}}
+    {{ form_end(formaccessories)}}
         <div class="input-group">
-            <label for="mechanism">Accessoire</label>
-            <select name="mechanism" id="mechanism">
+            <label for="accessory">Accessoire</label>
+            <select name="accessory" id="accessory">
                 <option value="--">--</option>
                 {% for accessory in accessories %}
                     <option value="{{ accessory.name }}">{{ accessory.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+    {{ form_start(formhandle, {'attr': {'novalidate': 'novalidate'}}) }}
+                <form action="" method="post" class="form">
+                    <div class="input-group">
+                        {{ form_label(formhandle.name, "Manche") }}
+                        {{ form_widget(formhandle.name) }}
+                        {{ form_errors(formhandle.name) }}
+                    </div>
+                    <button type="submit" class="add-button">Ajouter</button>
+                </form>
+    {{ form_end(formhandle)}}
+        <div class="input-group">
+            <label for="handle">Manche</label>
+            <select name="handle" id="handle">
+                <option value="--">--</option>
+                {% for handle in handles %}
+                    <option value="{{ handle.name }}">{{ handle.name }}</option>
                 {% endfor %}
             </select>
         </div>

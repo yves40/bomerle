@@ -4,10 +4,12 @@ namespace App\Controller;
 
 use App\Entity\Accessories;
 use App\Entity\Category;
+use App\Entity\Handle;
 use App\Entity\Mechanism;
 use App\Entity\Metals;
 use App\Form\AccessoriesType;
 use App\Form\CategoryType;
+use App\Form\HandleType;
 use App\Form\MechanismType;
 use App\Form\MetalsType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -27,10 +29,12 @@ class ComponentsController extends AbstractController
         $metal = new Metals();
         $mechanism = new Mechanism();
         $accessory = new Accessories();
+        $handle = new Handle();
         $categories = $entityManager->getRepository(Category::class)->listCategories();
         $metals = $entityManager->getRepository(Metals::class)->listMetals();
         $mechanisms = $entityManager->getRepository(Mechanism::class)->listMechanisms();
         $accessories = $entityManager->getRepository(Accessories::class)->listAccessories();
+        $handles = $entityManager->getRepository(Handle::class)->listHandles();
         $formCategory = $this->createForm(CategoryType::class, $category, [
             'action' => $this->generateUrl('category.add'),
             'method' => 'POST',
@@ -47,6 +51,10 @@ class ComponentsController extends AbstractController
             'action' => $this->generateUrl('accessory.add'),
             'method' => 'POST',
         ]);
+        $formHandle = $this->createForm(HandleType::class, $handle, [
+            'action' => $this->generateUrl('handle.add'),
+            'method' => 'POST',
+        ]);
         return $this->render('components/dashboard.html.twig', [
             'formcategory' => $formCategory->createView(),
             'category' => $category,
@@ -59,7 +67,10 @@ class ComponentsController extends AbstractController
             'mechanisms' => $mechanisms,
             'formaccessories' => $formAccessories->createView(),
             'accessory' => $accessory,
-            'accessories' => $accessories
+            'accessories' => $accessories,
+            'formhandle' => $formHandle->createView(),
+            'handle' => $handle,
+            'handles' => $handles
         ]);        
     }
 
@@ -115,6 +126,19 @@ class ComponentsController extends AbstractController
         $entityManager->persist($accessory);
         $entityManager->flush();
         $accessory->setName('');
+        return $this->redirectToRoute('index_components');
+    }
+    #[Route('/addhandle', name: 'handle.add')]
+    public function addHandle(
+        Handle $handle = null,
+        EntityManagerInterface $entityManager
+    ): Response
+    {
+        $handle = new Handle();
+        $handle->setName(($_POST['handle'])['name']);
+        $entityManager->persist($handle);
+        $entityManager->flush();
+        $handle->setName('');
         return $this->redirectToRoute('index_components');
     }
 }
