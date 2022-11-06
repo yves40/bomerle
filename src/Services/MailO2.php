@@ -2,78 +2,58 @@
 namespace App\Services;
 
 use App\Core\Mail;
-use PHPMailer\PHPMailer\PHPMailer;
+use App\Core\Token;
+use Symfony\Component\Mime\Email;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 
-class MailTrap extends Mail 
+class MailO2 extends Mail 
 {
 
-  private PHPMailer $phpmailer;
-
   //----------------------------------------------------------------------
-  public function __construct(string $to)
+  public function __construct(private MailerInterface $mailer)
   {
-    parent::__construct($to, __CLASS__);
+    parent::__construct();
   }
   //----------------------------------------------------------------------
-  public function sendRegisterConfirmation(string $mailtext, $useremail) {
-
+  public function sendRegisterConfirmation(String $to) : Token {
+    $this->setTo($to);
     // Get a token + selector object
     $tks = $this->createToken('/admin/registeruserconfirmed'); 
-    // PHP mailer
-    $this->phpmailer = new PHPMailer();
-    $this->phpmailer->isSMTP();
-    $this->phpmailer->Host = 'smtp.mailtrap.io';
-    $this->phpmailer->SMTPAuth = true;
-    $this->phpmailer->Port = 2525;
-    $this->phpmailer->Username = '8173ffa6d214ac';
-    $this->phpmailer->Password = '7267baab0b8650';
+    $message = $this->buildMessage($_ENV['MAIL_REGISTER_SUBJECT'], $tks);
+    // ------------------------------------------------------------------------
+    // Send email
+    // Remember a worker has to consume the emails otherwise they won't be sent
+    // Can be launched with this command :  
+    //                  php bin/console messenger:consume async -vv
+    // or
+    //                  php bin/console messenger:consume async
+    // This should be automatically started in production with a cron job...
+    // The consumer must be stopped properly with this command:
+    //                  php bin/console messenger:stop
+    // ------------------------------------------------------------------------
+    // dd($_ENV["MAIL_USER"]);
+    $email = (new Email())
+        ->from($_ENV["MAIL_FROM"])
+        ->to($this->getTo())
+        //->cc('cc@example.com')
+        //->bcc('bcc@example.com')
+        ->replyTo($_ENV["MAIL_FROM"])
+        //->priority(Email::PRIORITY_HIGH)
+        ->subject($_ENV['MAIL_REGISTER_SUBJECT'])
+        ->html($message);
+    try {
+        $this->mailer->send($email);
+        return $tks;
+    } catch (TransportExceptionInterface $e) {
+        return null;
+    }            
+    // ------------------------------------------------------------------------
 
-    $this->phpmailer->setFrom($this->from);
-    $this->phpmailer->isHTML(true);
-    $this->phpmailer->Subject = 'Registration confirmation';
-    $this->phpmailer->Body = $this->buildMessage($mailtext, $tks);
-    $this->phpmailer->addAddress($this->to);
-    if($this->phpmailer->send()) 
-    {
-      // Memorize a request record used later for confirmation
-      $this->storeMailRequest($useremail, $tks, 'register');
-      return true;
-    }
-    else 
-    {
-      return false;
-    }
   }
   //----------------------------------------------------------------------
   public function sendPasswordReset(string $subject, $userpseudo) {
 
-    // Get a token + selector object
-    $tks = $this->createToken('/admin/passwordresetconfirmed'); 
-    // PHP mailer
-    $this->phpmailer = new PHPMailer();
-    $this->phpmailer->isSMTP();
-    $this->phpmailer->Host = 'smtp.mailtrap.io';
-    $this->phpmailer->SMTPAuth = true;
-    $this->phpmailer->Port = 2525;
-    $this->phpmailer->Username = '8173ffa6d214ac';
-    $this->phpmailer->Password = '7267baab0b8650';
-
-    $this->phpmailer->setFrom($this->from);
-    $this->phpmailer->isHTML(true);
-    $this->phpmailer->Subject = 'Reset password request confirmation';
-    $this->phpmailer->Body = $this->buildMessage($subject, $tks);
-    $this->phpmailer->addAddress($this->to);
-    if($this->phpmailer->send()) 
-    {
-      $this->logger->db('email URL :'.$tks->getUrl());
-      // Memorize a request record used later for confirmation
-      $this->storeMailRequest($userpseudo, $tks, 'reset');
-      return true;
-    }
-    else 
-    {
-      return false;
-    }
   }
 }
 

@@ -12,6 +12,7 @@ class Token {
 
   /**
    * TARGETURL est le path dans le routeur pour confirmer l'enregistrement
+   * Appelé lorsque l'utilisateur accepte l'action en cliquant dans son mail
    */
   public function __construct($targetUrl)
   {
@@ -20,8 +21,6 @@ class Token {
     $this->selector = bin2hex(random_bytes(8));
     // token is used to check the request is safe
     $this->token = random_bytes(32);
-    // $this->hashedtoken = password_hash($this->token, PASSWORD_DEFAULT);
-    // expires gives a maximum 30 minutes delay for the user to act
     date_default_timezone_set('Europe/Paris');
     $this->expires = date("U") + 1800; 
     $this->url = 'http://'.$host.$targetUrl;
