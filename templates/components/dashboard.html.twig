@@ -149,15 +149,21 @@
                     {{ form_widget(formknifes.category) }}
                     {{ form_errors(formknifes.category) }}
                 </div>
-                {# <div class="input-group">
-                    <label for="category">Catégorie</label>
-                    <select name="category" id="category">
-                        <option value="--">--</option>
-                        {% for category in categories %}
-                            <option value="{{ category.name }}">{{ category.name }}</option>
-                        {% endfor %}
-                    </select>
-                </div> #}
+                <div class="input-group">
+                    {{ form_label(formknifes.mechanism, "Mécanisme") }}
+                    {{ form_widget(formknifes.mechanism) }}
+                    {{ form_errors(formknifes.mechanism) }}
+                </div>
+                <div class="input-group">
+                    {{ form_label(formknifes.accessories, "Accessoires") }}
+                    {{ form_widget(formknifes.accessories) }}
+                    {{ form_errors(formknifes.accessories) }}
+                </div>
+                <div class="input-group">
+                    {{ form_label(formknifes.handle, "Manche") }}
+                    {{ form_widget(formknifes.handle) }}
+                    {{ form_errors(formknifes.handle) }}
+                </div>
                 <button type="submit" class="add-button">Ajouter</button>
             </form>
         {{ form_end(formknifes) }}

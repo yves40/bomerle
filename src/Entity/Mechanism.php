@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\MechanismRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: MechanismRepository::class)]
@@ -15,6 +17,14 @@ class Mechanism
 
     #[ORM\Column(length: 255)]
     private ?string $name = null;
+
+    #[ORM\OneToMany(mappedBy: 'mechanism', targetEntity: Knifes::class)]
+    private Collection $knifes;
+
+    public function __construct()
+    {
+        $this->knifes = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -31,5 +41,40 @@ class Mechanism
         $this->name = $name;
 
         return $this;
+    }
+
+    /**
+     * @return Collection<int, Knifes>
+     */
+    public function getKnifes(): Collection
+    {
+        return $this->knifes;
+    }
+
+    public function addKnife(Knifes $knife): self
+    {
+        if (!$this->knifes->contains($knife)) {
+            $this->knifes->add($knife);
+            $knife->setMechanism($this);
+        }
+
+        return $this;
+    }
+
+    public function removeKnife(Knifes $knife): self
+    {
+        if ($this->knifes->removeElement($knife)) {
+            // set the owning side to null (unless already changed)
+            if ($knife->getMechanism() === $this) {
+                $knife->setMechanism(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->name;
     }
 }

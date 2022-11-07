@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\AccessoriesRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: AccessoriesRepository::class)]
@@ -15,6 +17,14 @@ class Accessories
 
     #[ORM\Column(length: 255)]
     private ?string $name = null;
+
+    #[ORM\ManyToMany(targetEntity: Knifes::class, mappedBy: 'accessories')]
+    private Collection $knifes;
+
+    public function __construct()
+    {
+        $this->knifes = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -31,5 +41,37 @@ class Accessories
         $this->name = $name;
 
         return $this;
+    }
+
+    /**
+     * @return Collection<int, Knifes>
+     */
+    public function getKnifes(): Collection
+    {
+        return $this->knifes;
+    }
+
+    public function addKnife(Knifes $knife): self
+    {
+        if (!$this->knifes->contains($knife)) {
+            $this->knifes->add($knife);
+            $knife->addAccessory($this);
+        }
+
+        return $this;
+    }
+
+    public function removeKnife(Knifes $knife): self
+    {
+        if ($this->knifes->removeElement($knife)) {
+            $knife->removeAccessory($this);
+        }
+
+        return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->name;
     }
 }

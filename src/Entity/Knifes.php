@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\KnifesRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -41,6 +43,22 @@ class Knifes
     #[ORM\ManyToOne(inversedBy: 'knifes')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Category $category = null;
+
+    #[ORM\ManyToOne(inversedBy: 'knifes')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Mechanism $mechanism = null;
+
+    #[ORM\ManyToMany(targetEntity: Accessories::class, inversedBy: 'knifes')]
+    private Collection $accessories;
+
+    #[ORM\ManyToMany(targetEntity: Handle::class, inversedBy: 'knifes')]
+    private Collection $handle;
+
+    public function __construct()
+    {
+        $this->accessories = new ArrayCollection();
+        $this->handle = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -151,6 +169,66 @@ class Knifes
     public function setCategory(?Category $category): self
     {
         $this->category = $category;
+
+        return $this;
+    }
+
+    public function getMechanism(): ?Mechanism
+    {
+        return $this->mechanism;
+    }
+
+    public function setMechanism(?Mechanism $mechanism): self
+    {
+        $this->mechanism = $mechanism;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Accessories>
+     */
+    public function getAccessories(): Collection
+    {
+        return $this->accessories;
+    }
+
+    public function addAccessory(Accessories $accessory): self
+    {
+        if (!$this->accessories->contains($accessory)) {
+            $this->accessories->add($accessory);
+        }
+
+        return $this;
+    }
+
+    public function removeAccessory(Accessories $accessory): self
+    {
+        $this->accessories->removeElement($accessory);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Handle>
+     */
+    public function getHandle(): Collection
+    {
+        return $this->handle;
+    }
+
+    public function addHandle(Handle $handle): self
+    {
+        if (!$this->handle->contains($handle)) {
+            $this->handle->add($handle);
+        }
+
+        return $this;
+    }
+
+    public function removeHandle(Handle $handle): self
+    {
+        $this->handle->removeElement($handle);
 
         return $this;
     }

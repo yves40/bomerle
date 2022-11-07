@@ -21,6 +21,9 @@ class KnifesType extends AbstractType
             ->add('cuttingedge_lenght')
             ->add('price')
             ->add('category')
+            ->add('mechanism')
+            ->add('accessories')
+            ->add('handle')
         ;
     }
 
