@@ -5,11 +5,13 @@ namespace App\Controller;
 use App\Entity\Accessories;
 use App\Entity\Category;
 use App\Entity\Handle;
+use App\Entity\Knifes;
 use App\Entity\Mechanism;
 use App\Entity\Metals;
 use App\Form\AccessoriesType;
 use App\Form\CategoryType;
 use App\Form\HandleType;
+use App\Form\KnifesType;
 use App\Form\MechanismType;
 use App\Form\MetalsType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -30,6 +32,7 @@ class ComponentsController extends AbstractController
         $mechanism = new Mechanism();
         $accessory = new Accessories();
         $handle = new Handle();
+        $knife = new Knifes();
         $categories = $entityManager->getRepository(Category::class)->listCategories();
         $metals = $entityManager->getRepository(Metals::class)->listMetals();
         $mechanisms = $entityManager->getRepository(Mechanism::class)->listMechanisms();
@@ -55,6 +58,11 @@ class ComponentsController extends AbstractController
             'action' => $this->generateUrl('handle.add'),
             'method' => 'POST',
         ]);
+        $formKnifes = $this->createForm(KnifesType::class, $knife, [
+            'action' =>$this->generateUrl('knife.add'),
+            'method' => 'POST',
+        ]);
+        // dd($knife);
         return $this->render('components/dashboard.html.twig', [
             'formcategory' => $formCategory->createView(),
             'category' => $category,
@@ -70,7 +78,9 @@ class ComponentsController extends AbstractController
             'accessories' => $accessories,
             'formhandle' => $formHandle->createView(),
             'handle' => $handle,
-            'handles' => $handles
+            'handles' => $handles,
+            'formknifes' => $formKnifes->createView(),
+            'knife' => $knife
         ]);        
     }
 
@@ -139,6 +149,31 @@ class ComponentsController extends AbstractController
         $entityManager->persist($handle);
         $entityManager->flush();
         $handle->setName('');
+        return $this->redirectToRoute('index_components');
+    }
+    #[Route('/addknife', name: 'knife.add')]
+    public function addKnife(
+        Knifes $knife = null,
+        EntityManagerInterface $entityManager
+    ): Response
+    {
+        $knife = new Knifes();
+        // $category = new Category();
+        // $category->setName(($_POST['knifes'])['category']);
+        $knife->setName(($_POST['knifes'])['name'])
+              ->setDescription(($_POST['knifes'])['description'])
+              ->setStock(($_POST['knifes'])['stock'])
+              ->setWeight(($_POST['knifes'])['weight'])
+              ->setLenght(($_POST['knifes'])['lenght'])
+              ->setCloseLenght(($_POST['knifes'])['close_lenght'])
+              ->setCuttingedgeLenght(($_POST['knifes'])['cuttingedge_lenght'])
+              ->setPrice(($_POST['knifes'])['price']);
+        // $knife->setCategory($category);
+        
+        // $entityManager->persist($category); // pas une bonne idée
+        $entityManager->persist($knife);
+        $entityManager->flush();
+        $knife->setName('');
         return $this->redirectToRoute('index_components');
     }
 }

@@ -100,4 +100,66 @@
                 {% endfor %}
             </select>
         </div>
+    <h1>Ajouter un couteau</h1>
+    <div class="new-knife-container">
+        {{ form_start(formknifes, {'attr': {'novalidate': 'novalidate'}}) }}
+            <form action="" method="post" class="form">
+                <div class="input-group">
+                    {{ form_label(formknifes.name, "Nom") }}
+                    {{ form_widget(formknifes.name) }}
+                    {{ form_errors(formknifes.name) }}
+                </div>
+                <div class="input-group">
+                    {{ form_label(formknifes.description, "Description") }}
+                    {{ form_widget(formknifes.description) }}
+                    {{ form_errors(formknifes.description) }}
+                </div>
+                <div class="input-group">
+                    {{ form_label(formknifes.stock, "Stock") }}
+                    {{ form_widget(formknifes.stock) }}
+                    {{ form_errors(formknifes.stock) }}
+                </div>
+                <div class="input-group">
+                    {{ form_label(formknifes.weight, "Poids") }}
+                    {{ form_widget(formknifes.weight) }}
+                    {{ form_errors(formknifes.weight) }}
+                </div>
+                <div class="input-group">
+                    {{ form_label(formknifes.lenght, "Longueur") }}
+                    {{ form_widget(formknifes.lenght) }}
+                    {{ form_errors(formknifes.lenght) }}
+                </div>
+                <div class="input-group">
+                    {{ form_label(formknifes.close_lenght, "Longeur fermé") }}
+                    {{ form_widget(formknifes.close_lenght) }}
+                    {{ form_errors(formknifes.close_lenght) }}
+                </div>
+                <div class="input-group">
+                    {{ form_label(formknifes.cuttingedge_lenght, "Longeur du tranchant") }}
+                    {{ form_widget(formknifes.cuttingedge_lenght) }}
+                    {{ form_errors(formknifes.cuttingedge_lenght) }}
+                </div>
+                <div class="input-group">
+                    {{ form_label(formknifes.price, "Prix") }}
+                    {{ form_widget(formknifes.price) }}
+                    {{ form_errors(formknifes.price) }}
+                </div>
+                <div class="input-group">
+                    {{ form_label(formknifes.category, "Catégorie") }}
+                    {{ form_widget(formknifes.category) }}
+                    {{ form_errors(formknifes.category) }}
+                </div>
+                {# <div class="input-group">
+                    <label for="category">Catégorie</label>
+                    <select name="category" id="category">
+                        <option value="--">--</option>
+                        {% for category in categories %}
+                            <option value="{{ category.name }}">{{ category.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div> #}
+                <button type="submit" class="add-button">Ajouter</button>
+            </form>
+        {{ form_end(formknifes) }}
+    </div>
 {% endblock %}

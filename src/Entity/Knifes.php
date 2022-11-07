@@ -24,7 +24,7 @@ class Knifes
     private ?int $stock = null;
 
     #[ORM\Column]
-    private ?int $wheight = null;
+    private ?int $weight = null;
 
     #[ORM\Column]
     private ?int $lenght = null;
@@ -83,14 +83,14 @@ class Knifes
         return $this;
     }
 
-    public function getWheight(): ?int
+    public function getWeight(): ?int
     {
-        return $this->wheight;
+        return $this->weight;
     }
 
-    public function setWheight(int $wheight): self
+    public function setWeight(int $weight): self
     {
-        $this->wheight = $wheight;
+        $this->weight = $weight;
 
         return $this;
     }
