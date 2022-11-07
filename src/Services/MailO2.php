@@ -7,22 +7,17 @@ use Symfony\Component\Mime\Email;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 
-class MailO2 extends Mail 
+class MailO2
 {
-
   //----------------------------------------------------------------------
-  public function __construct(private MailerInterface $mailer)
-  {
-    parent::__construct();
-  }
+  public function __construct(private MailerInterface $mailer) { }
   //----------------------------------------------------------------------
   public function sendRegisterConfirmation(String $to) : Token {
-    $this->setTo($to);
     // Get a token + selector object
-    $tks = $this->createToken('/admin/registeruserconfirmed'); 
-    $message = $this->buildMessage($_ENV['MAIL_REGISTER_SUBJECT'], $tks);
+    $tks =  new Token('/robot/registeruserconfirmed'); 
+    $message = $this->buildRegistrationMessage($_ENV['MAIL_REGISTER_SUBJECT'], $tks);
     // ------------------------------------------------------------------------
-    // Send email
+    // Send email: here we use the symfony standard package
     // Remember a worker has to consume the emails otherwise they won't be sent
     // Can be launched with this command :  
     //                  php bin/console messenger:consume async -vv
@@ -32,10 +27,9 @@ class MailO2 extends Mail
     // The consumer must be stopped properly with this command:
     //                  php bin/console messenger:stop
     // ------------------------------------------------------------------------
-    // dd($_ENV["MAIL_USER"]);
     $email = (new Email())
         ->from($_ENV["MAIL_FROM"])
-        ->to($this->getTo())
+        ->to($to)
         //->cc('cc@example.com')
         //->bcc('bcc@example.com')
         ->replyTo($_ENV["MAIL_FROM"])
@@ -48,9 +42,18 @@ class MailO2 extends Mail
     } catch (TransportExceptionInterface $e) {
         return null;
     }            
-    // ------------------------------------------------------------------------
-
   }
+  //----------------------------------------------------------------------
+  private function buildRegistrationMessage(string $subject, Token $tks) 
+  {
+    $atlast = date('d-m-Y h:i',$tks->getExpires());
+    date_default_timezone_set('Europe/Paris');
+    $message = "<p>".$subject."</p>";
+    $message .= "<p>Click on this link to confirm</p>";
+    $message .= "<a href='".$tks->getUrl()."'>".$tks->getUrl()."</a>";
+    $message .= '<p>Proceed before '.$atlast.'</p>';
+    return $message;
+  }  
   //----------------------------------------------------------------------
   public function sendPasswordReset(string $subject, $userpseudo) {
 

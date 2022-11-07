@@ -38,11 +38,6 @@ class UsersController extends AbstractController
         MailO2 $mailo2
         ): Response
     {
-        /* @$tks Token */
-        $tks = null;
-        /* @$rqt RequestTracker */
-        $rqt = null;
-
         $user = new Users();
         $form = $this->createForm(UsersType::class, $user);
         $form->remove('created');
@@ -66,22 +61,23 @@ class UsersController extends AbstractController
             // ---------------------------------------------------------------------
             // Send the registration mail
             // ---------------------------------------------------------------------
+            /* @$tks Token */
             $tks = $mailo2->sendRegisterConfirmation($user->getEmail());
             // ---------------------------------------------------------------------
             // Track the registration request in the requests_tracker table
             // ---------------------------------------------------------------------
+            /* @$rqtracker RequestTracker */
             $rqtracker = new RequestsTracker();
             date_default_timezone_set('Europe/Paris');
             $expires = date("U") + 1800; // 30 minutes delay before expiration
-            $rqtracker = new RequestsTracker();
-            $rqtracker->setRequestactiontype('Register');
-            $rqtracker->setEmail($user->getEmail());
-            $rqtracker->setCreated(new DateTime('now'));
-            $rqtracker->setProcessed(new DateTime('now'));
-            $rqtracker->setExpires($expires);
-            $rqtracker->setToken($tks->getToken());
-            $rqtracker->setSelector($tks->getSelector());
-            $rqtracker->setStatus(RequestsTracker::STATUS_REQUESTED);
+            $rqtracker->setRequestactiontype('Register')
+                    ->setEmail($user->getEmail())
+                    ->setCreated(new DateTime('now'))
+                    ->setProcessed(new DateTime('now'))
+                    ->setExpires($expires)
+                    ->setToken($tks->getToken())
+                    ->setSelector($tks->getSelector())
+                    ->setStatus(RequestsTracker::STATUS_REQUESTED);
             $entityManager->persist($rqtracker);
             // ---------------------------------------------------------------------
             // Final commit of the global transaction
