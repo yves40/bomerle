@@ -63,6 +63,9 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     ])]
     private ?string $confirmpassword = null;
 
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    private ?\DateTimeInterface $confirmed = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -203,5 +206,17 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     public function getUserIdentifier(): string 
     {
         return (string) $this->email;
+    }
+
+    public function getConfirmed(): ?\DateTimeInterface
+    {
+        return $this->confirmed;
+    }
+
+    public function setConfirmed(?\DateTimeInterface $confirmed): self
+    {
+        $this->confirmed = $confirmed;
+
+        return $this;
     }
 }
