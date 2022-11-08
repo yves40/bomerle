@@ -14,6 +14,7 @@ class RequestsTracker
     public  const STATUS_PROCESSED = 1;  // The request has been validated
     public  const STATUS_REJECTED = 2;   // The request has been rejected
     public  const STATUS_EXPIRED = 3;    // The request has expired before user answered the email
+    public  const STATUS_ERROR = 4;      // The request will not be processed, severe error
   
     #[ORM\Id]
     #[ORM\GeneratedValue]

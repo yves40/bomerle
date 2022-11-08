@@ -46,12 +46,15 @@ class MailO2
   //----------------------------------------------------------------------
   private function buildRegistrationMessage(string $subject, Token $tks) 
   {
-    $atlast = date('d-m-Y h:i',$tks->getExpires());
+    $atlast = date('d-m-Y H:i',$tks->getExpires());
     date_default_timezone_set('Europe/Paris');
     $message = "<p>".$subject."</p>";
-    $message .= "<p>Click on this link to confirm</p>";
-    $message .= "<a href='".$tks->getUrl()."'>".$tks->getUrl()."</a>";
-    $message .= '<p>Proceed before '.$atlast.'</p>';
+    $message .= "<br><br>";
+    $message .= "<p>En confirmant cette demande vous acceptez le stockage sécurisé de votre email dans nos serveurs.</p>";
+    $message .= "<br>";
+    $message .= "<a href='".$tks->getUrl()."'>Confirmer ma demande</a>";
+    $message .= "<br><br>";
+    $message .= '<p>Avant le '.$atlast.'</p>';
     return $message;
   }  
   //----------------------------------------------------------------------
