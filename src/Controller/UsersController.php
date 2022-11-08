@@ -109,4 +109,52 @@ class UsersController extends AbstractController
         $user->setConfirmpassword('1111');
         return $user;
     }
+    // ------------------------------------------------------------------------
+    #[Route('/resetpassrequest', name: 'users.resetpassrequest')]
+    public function requestNewPassword(
+        Users $user = null,
+        Request $request,
+        EntityManagerInterface $entityManager,
+        MailO2 $mailo2
+        ): Response
+    {
+        $user = new Users();
+        $form = $this->createForm(UsersType::class, $user);
+        $form->remove('created');
+        $form->remove('role');
+        $form->remove('lastlogin');
+        $form->handleRequest($request);
+        if($form->isSubmitted()){
+            
+            // ---------------------------------------------------------------------
+            // Send the registration mail
+            // ---------------------------------------------------------------------
+            /* @$tks Token */
+            $tks = $mailo2->sendPasswordReset($form->getData()->getEmail());
+            // ---------------------------------------------------------------------
+            // Track the registration request in the requests_tracker table
+            // ---------------------------------------------------------------------
+            /* @$rqtracker RequestTracker */
+            $rqtracker = new RequestsTracker();
+            date_default_timezone_set('Europe/Paris');
+            $expires = date("U") + 1800; // 30 minutes delay before expiration
+            $rqtracker->setRequestactiontype('PasswordReset')
+                    ->setEmail($user->getEmail())
+                    ->setCreated(new DateTime('now'))
+                    ->setProcessed(new DateTime('now'))
+                    ->setExpires($expires)
+                    ->setToken($tks->getToken())
+                    ->setSelector($tks->getSelector())
+                    ->setStatus(RequestsTracker::STATUS_REQUESTED);
+            $entityManager->persist($rqtracker);
+            // ---------------------------------------------------------------------
+            // Final commit of the global transaction
+            // ---------------------------------------------------------------------
+            $entityManager->flush();
+            return $this->render('security/login.html.twig', ['last_username' => '', 'error' => array()]);   
+        }
+        return $this->render('security/passwordreset.html.twig', 
+                                    ['form' => $form->createView()]);
+    }
+
 }

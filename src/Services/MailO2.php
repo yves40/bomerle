@@ -44,6 +44,27 @@ class MailO2
     }            
   }
   //----------------------------------------------------------------------
+  public function sendPasswordReset(string $to) {
+        // Get a token + selector object
+        $tks =  new Token('/robot/resetmypassword'); 
+        $message = $this->buildPasswordResetMessage($_ENV['MAIL_PWDRESET_SUBJECT'], $tks);
+        $email = (new Email())
+            ->from($_ENV["MAIL_FROM"])
+            ->to($to)
+            //->cc('cc@example.com')
+            //->bcc('bcc@example.com')
+            ->replyTo($_ENV["MAIL_FROM"])
+            //->priority(Email::PRIORITY_HIGH)
+            ->subject($_ENV['MAIL_REGISTER_SUBJECT'])
+            ->html($message);
+        try {
+            $this->mailer->send($email);
+            return $tks;
+        } catch (TransportExceptionInterface $e) {
+            return null;
+        }            
+  }
+  //----------------------------------------------------------------------
   private function buildRegistrationMessage(string $subject, Token $tks) 
   {
     $atlast = date('d-m-Y H:i',$tks->getExpires());
@@ -58,9 +79,15 @@ class MailO2
     return $message;
   }  
   //----------------------------------------------------------------------
-  public function sendPasswordReset(string $subject, $userpseudo) {
-
-  }
+  private function buildPasswordResetMessage(string $subject, Token $tks) 
+  {
+    date_default_timezone_set('Europe/Paris');
+    $message = "<p>".$subject."</p>";
+    $message .= "<br>";
+    $message .= "<a href='".$tks->getUrl()."'>Réinitialiser mon mot de passe</a>";
+    $message .= "<br><br>";
+    return $message;
+  }  
 }
 
 ?>
