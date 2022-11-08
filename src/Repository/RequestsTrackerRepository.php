@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Core\Token;
 use App\Entity\RequestsTracker;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -38,6 +39,19 @@ class RequestsTrackerRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
+
+   public function findRequestBySelector($selector): array
+   {
+       return $this->createQueryBuilder('r')
+            ->andWhere('r.selector = :val0')
+            ->andWhere('r.status = :val1')
+            ->setParameter('val0', $selector)
+            ->setParameter('val1', RequestsTracker::STATUS_REQUESTED )
+           ->getQuery()
+           ->getResult()
+       ;
+   }
+
 
 //    /**
 //     * @return RequestsTracker[] Returns an array of RequestsTracker objects
