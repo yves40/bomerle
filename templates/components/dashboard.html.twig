@@ -160,9 +160,14 @@
                     {{ form_errors(formknifes.accessories) }}
                 </div>
                 <div class="input-group">
-                    {{ form_label(formknifes.handle, "Manche") }}
+                    {{ form_label(formknifes.handle, "Matériaux du manche") }}
                     {{ form_widget(formknifes.handle) }}
                     {{ form_errors(formknifes.handle) }}
+                </div>
+                <div class="input-group">
+                    {{ form_label(formknifes.metals, "Métaux") }}
+                    {{ form_widget(formknifes.metals) }}
+                    {{ form_errors(formknifes.metals) }}
                 </div>
                 <button type="submit" class="add-button">Ajouter</button>
             </form>

@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\KnifesRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -17,47 +18,63 @@ class Knifes
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: "Merci de renseigner ce champ")]
     private ?string $name = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Assert\NotBlank(message: "Merci de renseigner ce champ")]
     private ?string $description = null;
 
     #[ORM\Column]
+    #[Assert\NotBlank(message: "Merci de renseigner ce champ")]
     private ?int $stock = null;
 
     #[ORM\Column]
+    #[Assert\NotBlank(message: "Merci de renseigner ce champ")]
     private ?int $weight = null;
 
     #[ORM\Column]
+    #[Assert\NotBlank(message: "Merci de renseigner ce champ")]
     private ?int $lenght = null;
 
     #[ORM\Column(nullable: true)]
     private ?int $close_lenght = null;
 
     #[ORM\Column]
+    #[Assert\NotBlank(message: "Merci de renseigner ce champ")]
     private ?int $cuttingedge_lenght = null;
 
     #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 2, nullable: true)]
+    #[Assert\NotBlank(message: "Merci de renseigner ce champ")]
     private ?string $price = null;
 
     #[ORM\ManyToOne(inversedBy: 'knifes')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Assert\NotBlank(message: "Merci de renseigner ce champ")]
     private ?Category $category = null;
 
     #[ORM\ManyToOne(inversedBy: 'knifes')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Assert\NotBlank(message: "Merci de renseigner ce champ")]
     private ?Mechanism $mechanism = null;
 
     #[ORM\ManyToMany(targetEntity: Accessories::class, inversedBy: 'knifes')]
+    #[Assert\NotBlank(message: "Merci de renseigner ce champ")]
     private Collection $accessories;
 
     #[ORM\ManyToMany(targetEntity: Handle::class, inversedBy: 'knifes')]
+    #[Assert\NotBlank(message: "Merci de renseigner ce champ")]
     private Collection $handle;
+
+    #[ORM\ManyToMany(targetEntity: Metals::class, inversedBy: 'knifes')]
+    #[Assert\NotBlank(message: "Merci de renseigner ce champ")]
+    private Collection $metals;
 
     public function __construct()
     {
         $this->accessories = new ArrayCollection();
         $this->handle = new ArrayCollection();
+        $this->metals = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -229,6 +246,30 @@ class Knifes
     public function removeHandle(Handle $handle): self
     {
         $this->handle->removeElement($handle);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Metals>
+     */
+    public function getMetals(): Collection
+    {
+        return $this->metals;
+    }
+
+    public function addMetal(Metals $metal): self
+    {
+        if (!$this->metals->contains($metal)) {
+            $this->metals->add($metal);
+        }
+
+        return $this;
+    }
+
+    public function removeMetal(Metals $metal): self
+    {
+        $this->metals->removeElement($metal);
 
         return $this;
     }

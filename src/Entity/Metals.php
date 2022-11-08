@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\MetalsRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: MetalsRepository::class)]
@@ -15,6 +17,14 @@ class Metals
 
     #[ORM\Column(length: 255)]
     private ?string $name = null;
+
+    #[ORM\ManyToMany(targetEntity: Knifes::class, mappedBy: 'metals')]
+    private Collection $knifes;
+
+    public function __construct()
+    {
+        $this->knifes = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -31,5 +41,37 @@ class Metals
         $this->name = $name;
 
         return $this;
+    }
+
+    /**
+     * @return Collection<int, Knifes>
+     */
+    public function getKnifes(): Collection
+    {
+        return $this->knifes;
+    }
+
+    public function addKnife(Knifes $knife): self
+    {
+        if (!$this->knifes->contains($knife)) {
+            $this->knifes->add($knife);
+            $knife->addMetal($this);
+        }
+
+        return $this;
+    }
+
+    public function removeKnife(Knifes $knife): self
+    {
+        if ($this->knifes->removeElement($knife)) {
+            $knife->removeMetal($this);
+        }
+
+        return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->name;
     }
 }
