@@ -12,8 +12,10 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\File;
 
 class KnifesType extends AbstractType
 {
@@ -59,6 +61,23 @@ class KnifesType extends AbstractType
                     return $er->createQueryBuilder('m')
                               ->orderBy('m.name', 'ASC');
                 }
+            ])
+            ->add('images', FileType::class, [
+                'mapped' => false,
+                'required' => true,
+                'multiple' => true,
+                'constraints' => [
+                    new File([
+                        'maxSize' => '1024k',
+                        'mimeTypes' => [
+                            'image/jpeg',
+                            'image/jpg',
+                            'image/png',
+                            'image/gif'
+                        ],
+                        'mimeTypesMessage' => 'Merci de chosir un format de fichier valide (jpg, jpeg, gif, png)'
+                    ])
+                ]
             ])
         ;
     }

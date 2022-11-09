@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Accessories;
 use App\Entity\Category;
 use App\Entity\Handle;
+use App\Entity\Images;
 use App\Entity\Knifes;
 use App\Entity\Mechanism;
 use App\Entity\Metals;
@@ -84,7 +85,7 @@ class ComponentsController extends AbstractController
             'handle' => $handle,
             'handles' => $handles,
             'formknifes' => $formKnifes->createView(),
-            'knife' => $knife
+            'knife' => $knife,
         ]);        
     }
 
@@ -161,8 +162,15 @@ class ComponentsController extends AbstractController
     ): Response
     {
         $knife = new Knifes();
+        $image = new Images();
         $form = $this->createForm(KnifesType::class, $knife);
         $form->handleRequest($request);
+        $toto = $form->get('images')->getData();
+        dd($toto);
+        $image->setFilename($toto);
+        $image->setMainpicture(true);
+        $knife->addImage($image);
+        // dd($knife);
         $entityManager->persist($knife);
         $entityManager->flush();
         return $this->redirectToRoute('index_components');

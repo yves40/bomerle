@@ -169,6 +169,11 @@
                     {{ form_widget(formknifes.metals) }}
                     {{ form_errors(formknifes.metals) }}
                 </div>
+                <div class="input-group">
+                    {{ form_label(formknifes.images, "Images") }}
+                    {{ form_widget(formknifes.images) }}
+                    {{ form_errors(formknifes.images) }}
+                </div>
                 <button type="submit" class="add-button">Ajouter</button>
             </form>
         {{ form_end(formknifes) }}

@@ -70,11 +70,15 @@ class Knifes
     #[Assert\NotBlank(message: "Merci de renseigner ce champ")]
     private Collection $metals;
 
+    #[ORM\OneToMany(mappedBy: 'knifes', targetEntity: Images::class, cascade:['persist'])]
+    private Collection $images;
+
     public function __construct()
     {
         $this->accessories = new ArrayCollection();
         $this->handle = new ArrayCollection();
         $this->metals = new ArrayCollection();
+        $this->images = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -270,6 +274,36 @@ class Knifes
     public function removeMetal(Metals $metal): self
     {
         $this->metals->removeElement($metal);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Images>
+     */
+    public function getImages(): Collection
+    {
+        return $this->images;
+    }
+
+    public function addImage(Images $image): self
+    {
+        if (!$this->images->contains($image)) {
+            $this->images->add($image);
+            $image->setKnifes($this);
+        }
+
+        return $this;
+    }
+
+    public function removeImage(Images $image): self
+    {
+        if ($this->images->removeElement($image)) {
+            // set the owning side to null (unless already changed)
+            if ($image->getKnifes() === $this) {
+                $image->setKnifes(null);
+            }
+        }
 
         return $this;
     }

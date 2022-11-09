@@ -19,6 +19,10 @@ class Images
     #[ORM\Column]
     private ?bool $mainpicture = null;
 
+    #[ORM\ManyToOne(inversedBy: 'images')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Knifes $knifes = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -44,6 +48,18 @@ class Images
     public function setMainpicture(bool $mainpicture): self
     {
         $this->mainpicture = $mainpicture;
+
+        return $this;
+    }
+
+    public function getKnifes(): ?Knifes
+    {
+        return $this->knifes;
+    }
+
+    public function setKnifes(?Knifes $knifes): self
+    {
+        $this->knifes = $knifes;
 
         return $this;
     }
