@@ -8,6 +8,7 @@
     {{ form_start(formcategory, {'attr': {'novalidate': 'novalidate'}}) }}
                 <form action="" method="post" class="form">
                     <div class="input-group">
+                        {{ form_row(formcategory._token) }}
                         {{ form_label(formcategory.name, "Catégorie") }}
                         {{ form_widget(formcategory.name) }}
                         {{ form_errors(formcategory.name) }}
@@ -27,6 +28,7 @@
     {{ form_start(formmetals, {'attr': {'novalidate': 'novalidate'}}) }}
                 <form action="" method="post" class="form">
                     <div class="input-group">
+                        {{ form_row(formmetals._token) }}
                         {{ form_label(formmetals.name, "Métal") }}
                         {{ form_widget(formmetals.name) }}
                         {{ form_errors(formmetals.name) }}
