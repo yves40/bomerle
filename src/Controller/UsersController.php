@@ -83,7 +83,8 @@ class UsersController extends AbstractController
             // Final commit of the global transaction
             // ---------------------------------------------------------------------
             $entityManager->flush();
-            return $this->render('security/login.html.twig', ['last_username' => '', 'error' => array()]);   
+            $this->addFlash('success', 'read your emails, a register confirmation is required');
+            return $this->redirectToRoute('home'); 
         }
         else{
             // To remove later
@@ -151,10 +152,10 @@ class UsersController extends AbstractController
             // Final commit of the global transaction
             // ---------------------------------------------------------------------
             $entityManager->flush();
-            return $this->render('security/login.html.twig', ['last_username' => '', 'error' => array()]);   
+            $this->addFlash('success', 'read your emails, a reset has been sent');
+            return $this->redirectToRoute('home');
         }
-        return $this->render('security/passwordreset.html.twig', 
-                                    ['form' => $form->createView()]);
+        return $this->render('security/passwordresetrequest.html.twig', [ 'form' => $form->createView()] );
     }
 
 }

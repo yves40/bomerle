@@ -55,7 +55,7 @@ class MailO2
             //->bcc('bcc@example.com')
             ->replyTo($_ENV["MAIL_FROM"])
             //->priority(Email::PRIORITY_HIGH)
-            ->subject($_ENV['MAIL_REGISTER_SUBJECT'])
+            ->subject($_ENV['MAIL_PWDRESET_SUBJECT'])
             ->html($message);
         try {
             $this->mailer->send($email);
