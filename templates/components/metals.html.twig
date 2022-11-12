@@ -1,0 +1,28 @@
+{% extends 'template.html.twig' %}
+
+{% block title %}Ajouter un métal{% endblock %}
+{% block link %}{% endblock %}
+
+
+{% block body %}
+    {{ form_start(formmetals, {'attr': {'novalidate': 'novalidate'}}) }}
+        <form action="" method="post" class="form">
+            <div class="input-group">
+                {{ form_row(formmetals._token) }}
+                {{ form_label(formmetals.name, "Métal") }}
+                {{ form_widget(formmetals.name) }}
+                {{ form_errors(formmetals.name) }}
+            </div>
+            <button type="submit" class="add-button">Ajouter</button>
+        </form>
+    {{ form_end(formmetals)}}
+    <div class="input-group">
+        <label for="metal">Métal</label>
+        <select name="metal" id="metal">
+            <option value="--">--</option>
+            {% for metal in metals %}
+                <option value="{{ metal.name }}">{{ metal.name }}</option>
+            {% endfor %}
+        </select>
+    </div>
+{% endblock %}

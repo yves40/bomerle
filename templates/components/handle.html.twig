@@ -1,0 +1,28 @@
+{% extends 'template.html.twig' %}
+
+{% block title %}Ajouter un manche{% endblock %}
+{% block link %}{% endblock %}
+
+
+{% block body %}
+    {{ form_start(formhandle, {'attr': {'novalidate': 'novalidate'}}) }}
+        <form action="" method="post" class="form">
+            <div class="input-group">
+                {{ form_row(formhandle._token) }}
+                {{ form_label(formhandle.name, "Manche") }}
+                {{ form_widget(formhandle.name) }}
+                {{ form_errors(formhandle.name) }}
+            </div>
+            <button type="submit" class="add-button">Ajouter</button>
+        </form>
+    {{ form_end(formhandle)}}
+    <div class="input-group">
+        <label for="handle">Manche</label>
+        <select name="handle" id="handle">
+            <option value="--">--</option>
+            {% for handle in handles %}
+                <option value="{{ handle.name }}">{{ handle.name }}</option>
+            {% endfor %}
+        </select>
+    </div>
+{% endblock %}

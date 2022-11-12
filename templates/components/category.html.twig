@@ -6,24 +6,23 @@
 
 {% block body %}
     {{ form_start(formcategory, {'attr': {'novalidate': 'novalidate'}}) }}
-                <form action="" method="post" class="form">
-                    <div class="input-group">
-                        {{ form_row(formcategory._token) }}
-                        {{ form_label(formcategory.name, "Catégorie") }}
-                        {{ form_widget(formcategory.name) }}
-                        {{ form_errors(formcategory.name) }}
-                    </div>
-                    <button type="submit" class="add-button">Ajouter</button>
-                </form>
+        <form action="" method="post" class="form">
+            <div class="input-group">
+                {{ form_row(formcategory._token) }}
+                {{ form_label(formcategory.name, "Catégorie") }}
+                {{ form_widget(formcategory.name) }}
+                {{ form_errors(formcategory.name) }}
+            </div>
+            <button type="submit" class="add-button">Ajouter</button>
+        </form>
     {{ form_end(formcategory)}}
-        <div class="input-group">
-            <label for="category">Catégorie</label>
-            <select name="category" id="category">
-                <option value="--">--</option>
-                {% for category in categories %}
-                    <option value="{{ category.name }}">{{ category.name }}</option>
-                {% endfor %}
-            </select>
-        </div>
+    <div class="input-group">
+        <label for="category">Catégorie</label>
+        <select name="category" id="category">
+            <option value="--">--</option>
+            {% for category in categories %}
+                <option value="{{ category.name }}">{{ category.name }}</option>
+            {% endfor %}
+        </select>
     </div>
 {% endblock %}

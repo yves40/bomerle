@@ -89,8 +89,8 @@ class ComponentsController extends AbstractController
         ]);               
     }
 
-    #[Route('/testcategory', name: 'test.category.add')]
-    public function testCategory(
+    #[Route('/addcategory', name: 'category.add')]
+    public function addCategory(
         EntityManagerInterface $entityManager,
         Request $request
     ): Response
@@ -111,32 +111,18 @@ class ComponentsController extends AbstractController
                 'formcategory' => $form->createView(),
                 'categories' => $categories
             ]);
+        }elseif($form->isSubmitted() && !$form->isValid()){
+            $this->addFlash('error', 'Un problème est survenu !');
+            return $this->render('components/category.html.twig', [
+                'formcategory' => $form->createView(),
+                'categories' => $categories
+            ]);
         }else{
             return $this->render('components/category.html.twig', [
                 'formcategory' => $form->createView(),
                 'categories' => $categories
             ]);
         }
-    }
-
-    #[Route('/addcategory', name: 'category.add')]
-    public function addCategory(
-        EntityManagerInterface $entityManager,
-        Request $request
-    ): Response
-    {
-        $category = new Category();
-        $form = $this->createForm(CategoryType::class, $category);
-        $form->handleRequest($request);
-        // dd($form->getErrors());
-        if($form->isValid()){
-            $entityManager->persist($category);
-            $entityManager->flush();
-            $this->addFlash('success', 'La catégorie a été ajoutée');
-        }else{
-            $this->addFlash('error', 'La catégorie ne peut être vide');
-        }
-        return $this->redirectToRoute('index_components');
     }
     #[Route('/addmetal', name: 'metal.add')]
     public function addMetal(
@@ -145,17 +131,33 @@ class ComponentsController extends AbstractController
     ): Response
     {
         $metal = new Metals();
+        $met = $entityManager->getRepository(Metals::class);
+        $metals = $met->listMetals();
         $form = $this->createForm(MetalsType::class, $metal);
         $form->handleRequest($request);
-        if($form->isValid()){    
+        if($form->isSubmitted() && $form->isValid()){    
             $entityManager->persist($metal);
             $entityManager->flush();
-            $this->addFlash('success', 'Le métal a été ajouté');
+            $metals = $met->listMetals();
+            $this->addFlash('success', $metal->getName());
+            $metal = new Metals();
+            $form = $this->createForm(MetalsType::class, $metal);
+            return $this->render('components/metals.html.twig', [
+                'formmetals' => $form->createView(),
+                'metals' => $metals
+            ]);
+        }elseif($form->isSubmitted() && !$form->isValid()){
+            $this->addFlash('error', 'Un problème est survenu !');
+            return $this->render('components/metals.html.twig', [
+                'formmetals' => $form->createView(),
+                'metals' => $metals
+            ]);
         }else{
-            $this->addFlash('error', 'Le métal ne peut être vide');
-            dd($form->getErrors());
+            return $this->render('components/metals.html.twig', [
+                'formmetals' => $form->createView(),
+                'metals' => $metals
+            ]);
         }
-        return $this->redirectToRoute('index_components');
     }
     #[Route('/addmechanism', name: 'mechanism.add')]
     public function addMechanism(
@@ -164,11 +166,33 @@ class ComponentsController extends AbstractController
     ): Response
     {
         $mechanism = new Mechanism();
+        $mecha = $entityManager->getRepository(Mechanism::class);
+        $mechanisms = $mecha->listMechanisms();
         $form = $this->createForm(MechanismType::class, $mechanism);
         $form->handleRequest($request);
-        $entityManager->persist($mechanism);
-        $entityManager->flush();
-        return $this->redirectToRoute('index_components');
+        if($form->isSubmitted() && $form->isValid()){
+            $entityManager->persist($mechanism);
+            $entityManager->flush();
+            $mechanisms = $mecha->listMechanisms();
+            $this->addFlash('success', $mechanism->getName());
+            $mechanism = new Mechanism();
+            $form = $this->createForm(MechanismType::class, $mechanism);
+            return $this->render('components/mechanism.html.twig', [
+                'formmechanism' => $form->createView(),
+                'mechanisms' => $mechanisms
+            ]);
+        }elseif($form->isSubmitted() && !$form->isValid()){
+            $this->addFlash('error', 'Un problème est survenu !');
+            return $this->render('components/mechanism.html.twig', [
+                'formmechanism' => $form->createView(),
+                'mechanisms' => $mechanisms
+            ]);
+        }else{
+            return $this->render('components/mechanism.html.twig', [
+                'formmechanism' => $form->createView(),
+                'mechanisms' => $mechanisms
+            ]);
+        }
     }
     #[Route('/addaccessory', name: 'accessory.add')]
     public function addAccessory(
@@ -177,11 +201,33 @@ class ComponentsController extends AbstractController
     ): Response
     {
         $accessory = new Accessories();
+        $acc = $entityManager->getRepository(Accessories::class);
+        $accessories = $acc->listAccessories();
         $form = $this->createForm(AccessoriesType::class, $accessory);
         $form->handleRequest($request);
-        $entityManager->persist($accessory);
-        $entityManager->flush();
-        return $this->redirectToRoute('index_components');
+        if($form->isSubmitted() && $form->isValid()){
+            $entityManager->persist($accessory);
+            $entityManager->flush();
+            $accessories = $acc->listAccessories();
+            $this->addFlash('success', $accessory->getName());
+            $accessory = new Accessories();
+            $form = $this->createForm(AccessoriesType::class, $accessory);
+            return $this->render('components/accessories.html.twig', [
+                'formaccessories' => $form->createView(),
+                'accessories' => $accessories
+            ]);
+        }elseif($form->isSubmitted() && !$form->isValid()){
+            $this->addFlash('error', 'Un problème est survenu !');
+            return $this->render('components/accessories.html.twig', [
+                'formaccessories' => $form->createView(),
+                'accessories' => $accessories
+            ]);
+        }else{
+            return $this->render('components/accessories.html.twig', [
+                'formaccessories' => $form->createView(),
+                'accessories' => $accessories
+            ]);
+        }
     }
     #[Route('/addhandle', name: 'handle.add')]
     public function addHandle(
@@ -190,10 +236,34 @@ class ComponentsController extends AbstractController
     ): Response
     {
         $handle = new Handle();
+        $han = $entityManager->getRepository(Handle::class);
+        $handles = $han->listHandles();
         $form = $this->createForm(HandleType::class, $handle);
         $form->handleRequest($request);
-        $entityManager->persist($handle);
-        $entityManager->flush();
+        if($form->isSubmitted() && $form->isValid()){
+            $entityManager->persist($handle);
+            $entityManager->flush();
+            $handles = $han->listHandles();
+            $this->addFlash('success', $handle->getName());
+            $handle = new Handle();
+            $form = $this->createForm(HandleType::class, $handle);
+            return $this->render('components/handle.html.twig', [
+                'formhandle' => $form->createView(),
+                'handles' => $handles
+            ]);
+        }elseif($form->isSubmitted() && !$form->isValid()){
+            $this->addFlash('error', 'Un problème est survenu !');
+            return $this->render('components/handle.html.twig', [
+                'formhandle' => $form->createView(),
+                'handles' => $handles
+            ]);
+        }else{
+            return $this->render('components/handle.html.twig', [
+                'formhandle' => $form->createView(),
+                'handles' => $handles
+            ]);
+        }
+        
         $handle->setName('');
         return $this->redirectToRoute('index_components');
     }

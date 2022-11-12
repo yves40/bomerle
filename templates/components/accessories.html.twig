@@ -1,0 +1,28 @@
+{% extends 'template.html.twig' %}
+
+{% block title %}Ajouter un accessoire{% endblock %}
+{% block link %}{% endblock %}
+
+
+{% block body %}
+    {{ form_start(formaccessories, {'attr': {'novalidate': 'novalidate'}}) }}
+        <form action="" method="post" class="form">
+            <div class="input-group">
+                {{ form_row(formaccessories._token) }}
+                {{ form_label(formaccessories.name, "Accessoire") }}
+                {{ form_widget(formaccessories.name) }}
+                {{ form_errors(formaccessories.name) }}
+            </div>
+            <button type="submit" class="add-button">Ajouter</button>
+        </form>
+    {{ form_end(formaccessories)}}
+    <div class="input-group">
+        <label for="accessory">Accessoire</label>
+        <select name="accessory" id="accessory">
+            <option value="--">--</option>
+            {% for accessory in accessories %}
+                <option value="{{ accessory.name }}">{{ accessory.name }}</option>
+            {% endfor %}
+        </select>
+    </div>
+{% endblock %}
