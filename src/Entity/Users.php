@@ -44,8 +44,16 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $address = null;
 
     #[ORM\Column(length: 128)]
-    #[Assert\NotBlank(message: "Merci de renseigner ce champ")]
+    #[Assert\NotBlank(message: "Merci de renseigner ce champ", groups: ['passwordreset'])]
     private ?string $password = null;
+
+    #[ORM\Column(length: 128)]
+    #[Assert\NotBlank(message: "Merci de renseigner ce champ", groups: ['passwordreset'])]
+    #[Assert\IdenticalTo(['propertyPath' => 'password',
+                          'message' => "Les deux mots de passe doivent être identiques",
+                          'groups' => ['passwordreset']
+    ])]
+    private ?string $confirmpassword = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $created = null;
@@ -56,12 +64,6 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $lastlogin = null;
 
-    #[ORM\Column(length: 128)]
-    #[Assert\NotBlank(message: "Merci de renseigner ce champ")]
-    #[Assert\IdenticalTo(['propertyPath' => 'password',
-                          'message' => "Les deux mots de passe doivent être identiques"
-    ])]
-    private ?string $confirmpassword = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $confirmed = null;

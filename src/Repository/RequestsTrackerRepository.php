@@ -40,15 +40,16 @@ class RequestsTrackerRepository extends ServiceEntityRepository
         }
     }
 
-   public function findRequestBySelector($selector): array
+   public function findRequestBySelector($selector, 
+                    int $status = RequestsTracker::STATUS_REQUESTED): ?RequestsTracker
    {
        return $this->createQueryBuilder('r')
             ->andWhere('r.selector = :val0')
             ->andWhere('r.status = :val1')
             ->setParameter('val0', $selector)
-            ->setParameter('val1', RequestsTracker::STATUS_REQUESTED )
+            ->setParameter('val1', $status )
            ->getQuery()
-           ->getResult()
+           ->getOneOrNullResult()
        ;
    }
 

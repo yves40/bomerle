@@ -8,11 +8,12 @@ use App\Form\UsersType;
 use App\Entity\RequestsTracker;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\RequestsTrackerRepository;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 #[Route('/robot')]
 class RobotController extends AbstractController
@@ -33,7 +34,7 @@ class RobotController extends AbstractController
         $userrequest = $rqtr->findRequestBySelector($selector);
         // Any match ??
         if(!empty($userrequest)) {
-            $userrequest = $rqtr->findRequestBySelector($selector)[0];
+            // $userrequest = $rqtr->findRequestBySelector($selector)[0];
             if($userrequest->getToken() === $token) {
                 // Now check the expiration date
                 $currentdate = date("U");
@@ -44,7 +45,6 @@ class RobotController extends AbstractController
                     // Set confirmation date in the user table
                     $regusr = $usrr->findUserByEmail($userrequest->getEmail());
                     if(!empty($regusr)){    // Ok the user with this email is known, update it's confirmation date
-                        $regusr = $regusr[0];
                         $regusr->setConfirmed(new DateTime('now'));
                         $entityManager->persist($regusr);
                     }
@@ -108,7 +108,7 @@ class RobotController extends AbstractController
         $userrequest = $rqtr->findRequestBySelector($selector);
         // Any match ??
         if(!empty($userrequest)) {
-            $userrequest = $rqtr->findRequestBySelector($selector)[0];
+            // $userrequest = $rqtr->findRequestBySelector($selector)[0];
             if($userrequest->getToken() === $token) {
                 // Now check the expiration date
                 $currentdate = date("U");
@@ -142,11 +142,10 @@ class RobotController extends AbstractController
             $this->addFlash('success', 'Saisissez un nouveau mot de passe');
             $user = $usrr->findUserByEmail($userrequest->getEmail());
             if(!empty($user)) {
-                $user = $user[0];
                 // Here we we test another method to create the form.
                 // We do not use the usual $this->createForm(UsersType::class, $user);
                 // This is just to set the action URL
-                $form = $this->createResetForm($user);
+                $form = $this->createResetForm($user, $selector);
                 return $this->render('security/passwordreset.html.twig', [ 'form' => $form->createView(), 'usermail' => $user->getEmail()]);
             }
         }
@@ -167,16 +166,32 @@ class RobotController extends AbstractController
         }
     }
     // -------------------------------------------------------------------------------------------------------  
-    #[Route('/setpassword', name: 'user.setpassword')]
-    public function setUserPassword(EntityManagerInterface $entityManager,
+    #[Route('/setpassword/{selector}', name: 'user.setpassword')]
+    public function setUserPassword(string $selector,
+                                    EntityManagerInterface $entityManager,
+                                    UserPasswordHasherInterface $userPasswordHasher,
                                     Request $request): Response
     {
-        $user = new Users();
-        $form = $this->createResetForm($user);
+        /* @$rqtr RequestsTrackerRepository */
+        $rqtr = $entityManager->getRepository(RequestsTracker::class);
+        /* @$usrr UsersRepository */
+        $usrr = $entityManager->getRepository(Users::class);
+        $userrequest = $rqtr->findRequestBySelector($selector, RequestsTracker::STATUS_PROCESSED);
+        $user = $usrr->findUserByEmail($userrequest->getEmail());
+        // $user = new Users();
+        $form = $this->createResetForm($user, $selector);
         $form->handleRequest($request);
         if($form->isValid()){
             $this->addFlash('success', 'Votre mot de passe a été réinitialisé');
-            dd($user);
+            $user->setPassword(
+                $userPasswordHasher->hashPassword(
+                    $user,
+                    $form->get('password')->getData()
+                )
+            )
+            ->setConfirmpassword($user->getPassword());  
+            $entityManager->persist($user);
+            $entityManager->flush();
             return $this->redirectToRoute('home');
         }
         else {
@@ -184,14 +199,16 @@ class RobotController extends AbstractController
         }
     }
 
-    private function createResetForm($user) {
-        return $this->createFormBuilder($user)
-        ->setAction($this->generateUrl('user.setpassword'))
+    private function createResetForm(Users $user, string $selector) {
+        return $this->createFormBuilder($user, ['validation_groups' => ['passwordreset']])  // Reduce validation scope to password fields
+                                                                                            // Look into the Users entity assert rules ;-)
+        ->setAction($this->generateUrl('user.setpassword', array('selector' => $selector)))         // The form action must call this method
         ->setMethod('POST')
         ->add('firstname')
         ->add('lastname')
         ->add('email', null, [ 'attr' => [ 'placeholder' => 'A valid email please']])
         ->add('address')
+        ->add('created')
         ->add('password', PasswordType::class, [ 'attr' => [ 'placeholder' => 'Password 4 to 20 characters']])
         ->add('confirmpassword', PasswordType::class,  [ 'attr' => [ 'placeholder' => 'Password 4 to 20 characters']])
         ->getForm();

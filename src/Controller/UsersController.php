@@ -138,7 +138,7 @@ class UsersController extends AbstractController
             /* @$rqtracker RequestTracker */
             $rqtracker = new RequestsTracker();
             date_default_timezone_set('Europe/Paris');
-            $expires = date("U") + 1800; // 30 minutes delay before expiration
+            $expires = date("U") + 3600; // 60 minutes delay before expiration
             $rqtracker->setRequestactiontype('PasswordReset')
                     ->setEmail($user->getEmail())
                     ->setCreated(new DateTime('now'))
