@@ -186,7 +186,7 @@ class RobotController extends AbstractController
         $form->handleRequest($request);
         if($form->isValid()){
             $this->addFlash('success', 'Votre mot de passe a été réinitialisé');
-            $message = $translator('user.resetpassword');
+            $message = $translator->trans('user.resetpassword');
             $this->addFlash('success', "Translated message : $message");
             $user->setPassword(
                     $userPasswordHasher->hashPassword($user,$form->get('password')->getData())
