@@ -13,6 +13,24 @@
 
 </head>
 <body>
+    <section id="flash">
+        <!-- The flash message section -->  
+        {% for message in app.session.flashBag.get('info') %}
+            <div class="alert-info">{{message}}</div>
+        {% endfor %}
+        {% for message in app.session.flashBag.get('success') %}
+            <div class="alert-success">{{message}}</div>
+        {% endfor %}
+        {% for message in app.session.flashBag.get('error') %}
+            <div class="alert-danger">{{message}}</div>
+        {% endfor %}
+        <style>
+            .alert { font-size: 2rem; }
+            .alert-danger { color: red; opacity: 1}
+            .alert-info { color: cyan; opacity: 1}
+            .alert-success { color: green; opacity: 1}
+        </style>
+    </section>
     {% block body %}
 
     {% endblock %}

@@ -11,6 +11,8 @@ use App\Repository\RequestsTrackerRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Translation\LocaleSwitcher;
+use Symfony\Contracts\Translation\TranslatorInterface;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
@@ -170,6 +172,7 @@ class RobotController extends AbstractController
     public function setUserPassword(string $selector,
                                     EntityManagerInterface $entityManager,
                                     UserPasswordHasherInterface $userPasswordHasher,
+                                    TranslatorInterface $translator,
                                     Request $request): Response
     {
         /* @$rqtr RequestsTrackerRepository */
@@ -183,6 +186,8 @@ class RobotController extends AbstractController
         $form->handleRequest($request);
         if($form->isValid()){
             $this->addFlash('success', 'Votre mot de passe a été réinitialisé');
+            $message = $translator('user.resetpassword');
+            $this->addFlash('success', "Translated message : $message");
             $user->setPassword(
                     $userPasswordHasher->hashPassword($user,$form->get('password')->getData())
             )

@@ -14,6 +14,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Translation\LocaleSwitcher;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
@@ -152,7 +153,7 @@ class UsersController extends AbstractController
             // Final commit of the global transaction
             // ---------------------------------------------------------------------
             $entityManager->flush();
-            $this->addFlash('success', 'read your emails, a reset has been sent');
+            $this->addFlash('success', 'Read your emails, a reset has been sent');
             return $this->redirectToRoute('home');
         }
         return $this->render('security/passwordresetrequest.html.twig', [ 'form' => $form->createView()] );
