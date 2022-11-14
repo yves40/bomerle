@@ -25,68 +25,10 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/components')]
 class ComponentsController extends AbstractController
 {
-    #[Route('/index', name: 'index_components')]
-    public function index(
-        EntityManagerInterface $entityManager,
-    ): Response
+    #[Route('/index', name: 'index.dashboard')]
+    public function index(): Response
     {
-
-        $category = new Category();
-        $metal = new Metals();
-        $mechanism = new Mechanism();
-        $accessory = new Accessories();
-        $handle = new Handle();
-        $knife = new Knifes();
-        
-        $categories = $entityManager->getRepository(Category::class)->listCategories();
-        $metals = $entityManager->getRepository(Metals::class)->listMetals();
-        $mechanisms = $entityManager->getRepository(Mechanism::class)->listMechanisms();
-        $accessories = $entityManager->getRepository(Accessories::class)->listAccessories();
-        $handles = $entityManager->getRepository(Handle::class)->listHandles();
-        
-        $formCategory = $this->createForm(CategoryType::class, $category, [
-            'action' => $this->generateUrl('category.add'),
-            'method' => 'POST',
-        ]);
-        $formMetals = $this->createForm(MetalsType::class, $metal, [
-            'action' => $this->generateUrl('metal.add'),
-            'method' => 'POST',
-        ]);
-        $formMechanism = $this->createForm(MechanismType::class, $mechanism, [
-            'action' => $this->generateUrl('mechanism.add'),
-            'method' => 'POST',
-        ]);
-        $formAccessories = $this->createForm(AccessoriesType::class, $accessory, [
-            'action' => $this->generateUrl('accessory.add'),
-            'method' => 'POST',
-        ]);
-        $formHandle = $this->createForm(HandleType::class, $handle, [
-            'action' => $this->generateUrl('handle.add'),
-            'method' => 'POST',
-        ]);
-        $formKnifes = $this->createForm(KnifesType::class, $knife, [
-            'action' =>$this->generateUrl('knife.add'),
-            'method' => 'POST',
-        ]);
-        return $this->render('components/dashboard.html.twig', [
-            'formcategory' => $formCategory->createView(),
-            'category' => $category,
-            'categories' => $categories,
-            'formmetals' => $formMetals->createView(),
-            'metal' => $metal,
-            'metals' => $metals,
-            'formmechanism' => $formMechanism->createView(),
-            'mechanism' => $mechanism,
-            'mechanisms' => $mechanisms,
-            'formaccessories' => $formAccessories->createView(),
-            'accessory' => $accessory,
-            'accessories' => $accessories,
-            'formhandle' => $formHandle->createView(),
-            'handle' => $handle,
-            'handles' => $handles,
-            'formknifes' => $formKnifes->createView(),
-            'knife' => $knife,
-        ]);               
+        return $this->render('components/dashboard.html.twig');               
     }
 
     #[Route('/addcategory', name: 'category.add')]
@@ -275,32 +217,45 @@ class ComponentsController extends AbstractController
     ): Response
     {
         $knife = new Knifes();
+
         $form = $this->createForm(KnifesType::class, $knife);
         $form->handleRequest($request);
+
         $uploadedFiles = $form->get('images')->getData();
-        $physicalPath = $this->getParameter('knifeimages_directory');
-        $error = false;
-        for($i=0; $i < count($uploadedFiles); $i++){
-            if($uploadedFiles[$i] && $uploadedFiles[$i]->getError() === UPLOAD_ERR_OK){
+
+        if($form->isSubmitted() && $form->isValid()){
+            $physicalPath = $this->getParameter('knifeimages_directory');
+            for($i=0; $i < count($uploadedFiles); $i++){
                 $image = new Images();
+
                 $newFileName = $uploader->uploadFile($uploadedFiles[$i], $physicalPath);
-                // dd($newFileName);
                 $image->setFilename($newFileName);
                 if($i == 0){
                     $image->setMainpicture(true);
                 }else{
                     $image->setMainpicture(false);
                 }
-                $knife->addImage($image);    
-            }else{
-                $errorMessage = $uploader->getErrorMessage($uploadedFiles[$i]);
-                $error = true;     
+                $knife->addImage($image);
             }
-        }
-        if(!$error){    
             $entityManager->persist($knife);
             $entityManager->flush();
+            $this->addFlash('success', $knife->getName());
+            $knife = new Knifes();
+            $form = $this->createForm(KnifesType::class, $knife);
+            return $this->render('components/knifes.html.twig', [
+                'formknifes' => $form->createView()
+            ]);
+        }elseif($form->isSubmitted() && !$form->isValid()){
+            // dd($request);
+            // dd($form->getErrors());
+            $this->addFlash('error', 'Un problème est survenu !');
+            return $this->render('components/knifes.html.twig', [
+                'formknifes' => $form->createView()
+            ]);
+        }else{
+            return $this->render('components/knifes.html.twig', [
+                'formknifes' => $form->createView()
+            ]);
         }
-        return $this->redirectToRoute('index_components');
     }
 }

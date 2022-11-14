@@ -1,0 +1,88 @@
+{% extends 'template.html.twig' %}
+
+{% block title %}Ajouter un couteau{% endblock %}
+{% block link %}{% endblock %}
+
+
+{% block body %}
+    <h1>Ajouter un couteau</h1>
+    <div class="new-knife-container">
+        {{ form_start(formknifes, {'attr': {'novalidate': 'novalidate'}}) }}
+            <form action="" method="post" class="form">
+            {{ form_row(formknifes._token) }}
+                <div class="input-group">
+                    {{ form_label(formknifes.name, "Nom") }}
+                    {{ form_widget(formknifes.name) }}
+                    {{ form_errors(formknifes.name) }}
+                </div>
+                <div class="input-group">
+                    {{ form_label(formknifes.description, "Description") }}
+                    {{ form_widget(formknifes.description) }}
+                    {{ form_errors(formknifes.description) }}
+                </div>
+                <div class="input-group">
+                    {{ form_label(formknifes.stock, "Stock") }}
+                    {{ form_widget(formknifes.stock) }}
+                    {{ form_errors(formknifes.stock) }}
+                </div>
+                <div class="input-group">
+                    {{ form_label(formknifes.weight, "Poids") }}
+                    {{ form_widget(formknifes.weight) }}
+                    {{ form_errors(formknifes.weight) }}
+                </div>
+                <div class="input-group">
+                    {{ form_label(formknifes.lenght, "Longueur") }}
+                    {{ form_widget(formknifes.lenght) }}
+                    {{ form_errors(formknifes.lenght) }}
+                </div>
+                <div class="input-group">
+                    {{ form_label(formknifes.close_lenght, "Longueur fermé") }}
+                    {{ form_widget(formknifes.close_lenght) }}
+                    {{ form_errors(formknifes.close_lenght) }}
+                </div>
+                <div class="input-group">
+                    {{ form_label(formknifes.cuttingedge_lenght, "Longueur du tranchant") }}
+                    {{ form_widget(formknifes.cuttingedge_lenght) }}
+                    {{ form_errors(formknifes.cuttingedge_lenght) }}
+                </div>
+                <div class="input-group">
+                    {{ form_label(formknifes.price, "Prix") }}
+                    {{ form_widget(formknifes.price) }}
+                    {{ form_errors(formknifes.price) }}
+                </div>
+                <div class="input-group">
+                    {{ form_label(formknifes.category, "Catégorie") }}
+                    {{ form_widget(formknifes.category) }}
+                    {{ form_errors(formknifes.category) }}
+                </div>
+                <div class="input-group">
+                    {{ form_label(formknifes.mechanism, "Mécanisme") }}
+                    {{ form_widget(formknifes.mechanism) }}
+                    {{ form_errors(formknifes.mechanism) }}
+                </div>
+                <div class="input-group">
+                    {{ form_label(formknifes.accessories, "Accessoires") }}
+                    {{ form_widget(formknifes.accessories) }}
+                    {{ form_errors(formknifes.accessories) }}
+                </div>
+                <div class="input-group">
+                    {{ form_label(formknifes.handle, "Matériaux du manche") }}
+                    {{ form_widget(formknifes.handle) }}
+                    {{ form_errors(formknifes.handle) }}
+                </div>
+                <div class="input-group">
+                    {{ form_label(formknifes.metals, "Métaux") }}
+                    {{ form_widget(formknifes.metals) }}
+                    {{ form_errors(formknifes.metals) }}
+                </div>
+                <div class="input-group">
+                    {{ form_label(formknifes.images, "Images") }}
+                    {{ form_widget(formknifes.images) }}
+                    {{ form_errors(formknifes.images) }}
+                </div>
+                <button type="submit" class="add-button">Ajouter</button>
+            </form>
+        {{ form_end(formknifes) }}
+    </div>
+    <a href="{{path('index.dashboard')}}">Retour</a>
+{% endblock %}
