@@ -1,6 +1,9 @@
+# Have a look at config/packages/translation.yaml
 user:
   passreqtitle: Mot de passe oublié
   passrequest: Demander la réinitialisation
   resetpassword: Votre mot de passe a été réinitialisé
+  connect: Se connecter
 home:
+  button: Accueil
   subtitle: Fabrication à Chabreloche, France
