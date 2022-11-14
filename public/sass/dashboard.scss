@@ -1,0 +1,71 @@
+@import './utils/variables';
+@import './base/typography';
+@import './base/reset';
+@import './base/style';
+@import './layout/navigation';
+@import './pages/dashboard';
+
+.new-components
+{
+    width: 70%;
+    max-width: 700px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: $formBackgroundDark;
+    box-shadow: 0 0 15px 0 $formBackgroundDark;
+    border-radius: 20px;
+    padding: 20px 7px;
+
+    h1{
+        width: 100%;
+        text-align: center;
+        color: $alternateText;
+        font-family: $title;
+        font-weight: 600;
+        font-size: 2.3rem;
+    }
+    .categories-container{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 15px 0px;
+        width: 80%;
+
+        h2{
+            color: $alternateText;
+            font-size: 1.5rem;
+        }
+        .quick-access{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+
+            .button{
+                width: 50%;
+                background: $formBackground;
+                border-radius: 10px;
+                border: 1px solid $formBorder;
+                margin: 7px 0px;
+                height: 40px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                text-decoration: none;
+                color: $alternateText;
+                font-size: 1.3rem;
+                letter-spacing: 2.3px;
+                transition: all 0.3s;
+
+                &:hover{
+                    background: $formBackgroundHover;
+                    letter-spacing: 2.6px;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,31 @@
+#flash{
+    position: absolute;
+    width: 70%;
+    max-width: 700px;
+    top: 160px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: $formBackgroundDark;
+    border-radius: .25em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+
+    .alert-danger{
+        height: 60px;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: $formError;
+    }
+    .alert-success{
+        height: 60px;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: $formSuccess;
+    }
+}

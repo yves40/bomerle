@@ -1,183 +1,81 @@
 {% extends 'template.html.twig' %}
 
 {% block title %}Dashboard{% endblock %}
-{% block link %}{% endblock %}
+{% block link %}
+    <link rel="stylesheet" href="{{asset('/css/dashboard.css')}}">
+{% endblock %}
+{% block script %}
+    <script src="{{asset('/scripts/mainmenu.js')}}" defer></script>
+{% endblock %}
 
 
 {% block body %}
-    {{ form_start(formcategory, {'attr': {'novalidate': 'novalidate'}}) }}
-                <form action="" method="post" class="form">
-                    <div class="input-group">
-                        {{ form_row(formcategory._token) }}
-                        {{ form_label(formcategory.name, "Catégorie") }}
-                        {{ form_widget(formcategory.name) }}
-                        {{ form_errors(formcategory.name) }}
-                    </div>
-                    <button type="submit" class="add-button">Ajouter</button>
-                </form>
-    {{ form_end(formcategory)}}
-        <div class="input-group">
-            <label for="category">Catégorie</label>
-            <select name="category" id="category">
-                <option value="--">--</option>
-                {% for category in categories %}
-                    <option value="{{ category.name }}">{{ category.name }}</option>
-                {% endfor %}
-            </select>
+    <header>
+        <div class="container">
+            <nav class="navigation">
+                {% if app.user %}
+                    <p>Bonjour {{ app.user.firstname }}</p>
+                {% endif %}
+                <ul>
+                    <li class="list">
+                        <a href="{{path('home')}}">
+                            <span class="icon"><ion-icon name="home-outline"></ion-icon></span>
+                            <span class="text">Accueil</span>
+                        </a>
+                    </li>
+                    <li class="list">
+                        <a href="#">
+                            <span class="icon"><ion-icon name="camera-outline"></ion-icon></span>
+                            <span class="text">Galerie</span>
+                        </a>
+                    </li>
+                    <li class="list">
+                        <a href="#">
+                            <span class="icon"><ion-icon name="chatbubble-outline"></ion-icon></span>
+                            <span class="text">Contact</span>
+                        </a>
+                    </li>
+                    <li class="list">
+                        <a href="{{path('index.dashboard')}}">
+                            <span class="icon"><ion-icon name="hammer-outline"></ion-icon></span>
+                            <span class="text">Admin</span>
+                        </a>
+                    </li>
+                    <li class="list">
+                        {% if app.user %}
+                            <a href="{{path('app_logout')}}">
+                                <span class="icon"><ion-icon name="person-outline"></ion-icon></span>
+                                <span class="text">Se déconnecter</span>
+                            </a>
+                        {% else %}
+                            <a href="{{path('app_login')}}">
+                                <span class="icon"><ion-icon name="person-outline"></ion-icon></span>
+                                <span class="text">Se connecter</span>
+                            </a>
+                        {% endif %}
+                    </li>
+                </ul>
+            </nav>
+            <img src="{{asset('/images/logo1.png')}}" alt="Logo Beau Merle" class="logo">
+            <div class="about">Rencontres</div>
+            <div class="menu-toggle"></div>
         </div>
-    {{ form_start(formmetals, {'attr': {'novalidate': 'novalidate'}}) }}
-                <form action="" method="post" class="form">
-                    <div class="input-group">
-                        {{ form_row(formmetals._token) }}
-                        {{ form_label(formmetals.name, "Métal") }}
-                        {{ form_widget(formmetals.name) }}
-                        {{ form_errors(formmetals.name) }}
-                    </div>
-                    <button type="submit" class="add-button">Ajouter</button>
-                </form>
-    {{ form_end(formmetals)}}
-        <div class="input-group">
-            <label for="metal">Métal</label>
-            <select name="metal" id="metal">
-                <option value="--">--</option>
-                {% for metal in metals %}
-                    <option value="{{ metal.name }}">{{ metal.name }}</option>
-                {% endfor %}
-            </select>
-        </div>
-    {{ form_start(formmechanism, {'attr': {'novalidate': 'novalidate'}}) }}
-                <form action="" method="post" class="form">
-                    <div class="input-group">
-                        {{ form_label(formmechanism.name, "Mécanisme") }}
-                        {{ form_widget(formmechanism.name) }}
-                        {{ form_errors(formmechanism.name) }}
-                    </div>
-                    <button type="submit" class="add-button">Ajouter</button>
-                </form>
-    {{ form_end(formmechanism)}}
-        <div class="input-group">
-            <label for="mechanism">Mécanisme</label>
-            <select name="mechanism" id="mechanism">
-                <option value="--">--</option>
-                {% for mechanism in mechanisms %}
-                    <option value="{{ mechanism.name }}">{{ mechanism.name }}</option>
-                {% endfor %}
-            </select>
-        </div>
-    {{ form_start(formaccessories, {'attr': {'novalidate': 'novalidate'}}) }}
-                <form action="" method="post" class="form">
-                    <div class="input-group">
-                        {{ form_label(formaccessories.name, "Accessoire") }}
-                        {{ form_widget(formaccessories.name) }}
-                        {{ form_errors(formaccessories.name) }}
-                    </div>
-                    <button type="submit" class="add-button">Ajouter</button>
-                </form>
-    {{ form_end(formaccessories)}}
-        <div class="input-group">
-            <label for="accessory">Accessoire</label>
-            <select name="accessory" id="accessory">
-                <option value="--">--</option>
-                {% for accessory in accessories %}
-                    <option value="{{ accessory.name }}">{{ accessory.name }}</option>
-                {% endfor %}
-            </select>
-        </div>
-    {{ form_start(formhandle, {'attr': {'novalidate': 'novalidate'}}) }}
-                <form action="" method="post" class="form">
-                    <div class="input-group">
-                        {{ form_label(formhandle.name, "Manche") }}
-                        {{ form_widget(formhandle.name) }}
-                        {{ form_errors(formhandle.name) }}
-                    </div>
-                    <button type="submit" class="add-button">Ajouter</button>
-                </form>
-    {{ form_end(formhandle)}}
-        <div class="input-group">
-            <label for="handle">Manche</label>
-            <select name="handle" id="handle">
-                <option value="--">--</option>
-                {% for handle in handles %}
-                    <option value="{{ handle.name }}">{{ handle.name }}</option>
-                {% endfor %}
-            </select>
-        </div>
-    <h1>Ajouter un couteau</h1>
-    <div class="new-knife-container">
-        {{ form_start(formknifes, {'attr': {'novalidate': 'novalidate'}}) }}
-            <form action="" method="post" class="form">
-                <div class="input-group">
-                    {{ form_label(formknifes.name, "Nom") }}
-                    {{ form_widget(formknifes.name) }}
-                    {{ form_errors(formknifes.name) }}
+    </header>
+    <div class="contenu">
+        <section class="new-components">
+            <h1>Gestion du site</h1>
+            <div class="categories-container">
+                <h2>Ajouter un(e) :</h2>
+                <div class="quick-access">
+                    <a href="{{path('accessory.add')}}" class="button">Accessoire</a>
+                    <a href="{{path('category.add')}}" class="button">Catégorie</a>
+                    <a href="{{path('handle.add')}}" class="button">Manche</a>
+                    <a href="{{path('mechanism.add')}}" class="button">Mécanisme</a>
+                    <a href="{{path('metal.add')}}" class="button">Métal</a>
+                    <a href="{{path('knife.add')}}" class="button">Couteau</a>
+                    <a href="#" class="button">Salon</a>
                 </div>
-                <div class="input-group">
-                    {{ form_label(formknifes.description, "Description") }}
-                    {{ form_widget(formknifes.description) }}
-                    {{ form_errors(formknifes.description) }}
-                </div>
-                <div class="input-group">
-                    {{ form_label(formknifes.stock, "Stock") }}
-                    {{ form_widget(formknifes.stock) }}
-                    {{ form_errors(formknifes.stock) }}
-                </div>
-                <div class="input-group">
-                    {{ form_label(formknifes.weight, "Poids") }}
-                    {{ form_widget(formknifes.weight) }}
-                    {{ form_errors(formknifes.weight) }}
-                </div>
-                <div class="input-group">
-                    {{ form_label(formknifes.lenght, "Longueur") }}
-                    {{ form_widget(formknifes.lenght) }}
-                    {{ form_errors(formknifes.lenght) }}
-                </div>
-                <div class="input-group">
-                    {{ form_label(formknifes.close_lenght, "Longeur fermé") }}
-                    {{ form_widget(formknifes.close_lenght) }}
-                    {{ form_errors(formknifes.close_lenght) }}
-                </div>
-                <div class="input-group">
-                    {{ form_label(formknifes.cuttingedge_lenght, "Longeur du tranchant") }}
-                    {{ form_widget(formknifes.cuttingedge_lenght) }}
-                    {{ form_errors(formknifes.cuttingedge_lenght) }}
-                </div>
-                <div class="input-group">
-                    {{ form_label(formknifes.price, "Prix") }}
-                    {{ form_widget(formknifes.price) }}
-                    {{ form_errors(formknifes.price) }}
-                </div>
-                <div class="input-group">
-                    {{ form_label(formknifes.category, "Catégorie") }}
-                    {{ form_widget(formknifes.category) }}
-                    {{ form_errors(formknifes.category) }}
-                </div>
-                <div class="input-group">
-                    {{ form_label(formknifes.mechanism, "Mécanisme") }}
-                    {{ form_widget(formknifes.mechanism) }}
-                    {{ form_errors(formknifes.mechanism) }}
-                </div>
-                <div class="input-group">
-                    {{ form_label(formknifes.accessories, "Accessoires") }}
-                    {{ form_widget(formknifes.accessories) }}
-                    {{ form_errors(formknifes.accessories) }}
-                </div>
-                <div class="input-group">
-                    {{ form_label(formknifes.handle, "Matériaux du manche") }}
-                    {{ form_widget(formknifes.handle) }}
-                    {{ form_errors(formknifes.handle) }}
-                </div>
-                <div class="input-group">
-                    {{ form_label(formknifes.metals, "Métaux") }}
-                    {{ form_widget(formknifes.metals) }}
-                    {{ form_errors(formknifes.metals) }}
-                </div>
-                <div class="input-group">
-                    {{ form_label(formknifes.images, "Images") }}
-                    {{ form_widget(formknifes.images) }}
-                    {{ form_errors(formknifes.images) }}
-                </div>
-                <button type="submit" class="add-button">Ajouter</button>
-            </form>
-        {{ form_end(formknifes) }}
+            </div>
+        </section>    
     </div>
 {% endblock %}

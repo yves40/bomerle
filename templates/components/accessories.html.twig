@@ -1,28 +1,85 @@
 {% extends 'template.html.twig' %}
 
 {% block title %}Ajouter un accessoire{% endblock %}
-{% block link %}{% endblock %}
-
+{% block link %}
+    <link rel="stylesheet" href="{{asset('/css/admin.css')}}">
+{% endblock %}
+{% block script %}
+    <script src="{{asset('/scripts/mainmenu.js')}}" defer></script>
+{% endblock %}
 
 {% block body %}
-    {{ form_start(formaccessories, {'attr': {'novalidate': 'novalidate'}}) }}
-        <form action="" method="post" class="form">
-            <div class="input-group">
-                {{ form_row(formaccessories._token) }}
-                {{ form_label(formaccessories.name, "Accessoire") }}
-                {{ form_widget(formaccessories.name) }}
-                {{ form_errors(formaccessories.name) }}
-            </div>
-            <button type="submit" class="add-button">Ajouter</button>
-        </form>
-    {{ form_end(formaccessories)}}
-    <div class="input-group">
-        <label for="accessory">Accessoire</label>
-        <select name="accessory" id="accessory">
-            <option value="--">--</option>
-            {% for accessory in accessories %}
-                <option value="{{ accessory.name }}">{{ accessory.name }}</option>
-            {% endfor %}
-        </select>
+    <header>
+        <div class="container">
+            <nav class="navigation">
+                {% if app.user %}
+                    <p>Bonjour {{ app.user.firstname }}</p>
+                {% endif %}
+                <ul>
+                    <li class="list">
+                        <a href="{{path('home')}}">
+                            <span class="icon"><ion-icon name="home-outline"></ion-icon></span>
+                            <span class="text">Accueil</span>
+                        </a>
+                    </li>
+                    <li class="list">
+                        <a href="#">
+                            <span class="icon"><ion-icon name="camera-outline"></ion-icon></span>
+                            <span class="text">Galerie</span>
+                        </a>
+                    </li>
+                    <li class="list">
+                        <a href="#">
+                            <span class="icon"><ion-icon name="chatbubble-outline"></ion-icon></span>
+                            <span class="text">Contact</span>
+                        </a>
+                    </li>
+                    <li class="list">
+                        <a href="{{path('index.dashboard')}}">
+                            <span class="icon"><ion-icon name="hammer-outline"></ion-icon></span>
+                            <span class="text">Admin</span>
+                        </a>
+                    </li>
+                    <li class="list">
+                        {% if app.user %}
+                            <a href="{{path('app_logout')}}">
+                                <span class="icon"><ion-icon name="person-outline"></ion-icon></span>
+                                <span class="text">Se déconnecter</span>
+                            </a>
+                        {% else %}
+                            <a href="{{path('app_login')}}">
+                                <span class="icon"><ion-icon name="person-outline"></ion-icon></span>
+                                <span class="text">Se connecter</span>
+                            </a>
+                        {% endif %}
+                    </li>
+                </ul>
+            </nav>
+            <img src="{{asset('/images/logo1.png')}}" alt="Logo Beau Merle" class="logo">
+            <div class="about">Rencontres</div>
+            <div class="menu-toggle"></div>
+        </div>
+    </header>
+    <div class="contenu">
+        <div class="form-container">
+            <h1 class="form-title">Ajouter un :</h1>
+            {{ form_start(formaccessories, {'attr': {'novalidate': 'novalidate', 'class': 'form'}}) }}
+                <div class="input-group">
+                    {{ form_row(formaccessories._token) }}
+                    {{ form_label(formaccessories.name, "Accessoire") }}
+                    {{ form_widget(formaccessories.name) }}
+                    {{ form_errors(formaccessories.name) }}
+                </div>
+                <button type="submit" class="add-button">Ajouter</button>
+            {{ form_end(formaccessories)}}
+        </div>
+        <div class="admin-list">
+            <h2>Accessoires disponibles :</h2>
+            <ul>
+                {% for accessory in accessories %}
+                    <li>{{accessory.name}}</li>
+                {% endfor %}
+            </ul>
+        </div>
     </div>
 {% endblock %}
