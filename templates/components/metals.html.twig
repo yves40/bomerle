@@ -1,28 +1,85 @@
 {% extends 'template.html.twig' %}
 
 {% block title %}Ajouter un métal{% endblock %}
-{% block link %}{% endblock %}
-
+{% block link %}
+    <link rel="stylesheet" href="{{asset('/css/admin.css')}}">
+{% endblock %}
+{% block script %}
+    <script src="{{asset('/scripts/mainmenu.js')}}" defer></script>
+{% endblock %}
 
 {% block body %}
-    {{ form_start(formmetals, {'attr': {'novalidate': 'novalidate'}}) }}
-        <form action="" method="post" class="form">
-            <div class="input-group">
-                {{ form_row(formmetals._token) }}
-                {{ form_label(formmetals.name, "Métal") }}
-                {{ form_widget(formmetals.name) }}
-                {{ form_errors(formmetals.name) }}
-            </div>
-            <button type="submit" class="add-button">Ajouter</button>
-        </form>
-    {{ form_end(formmetals)}}
-    <div class="input-group">
-        <label for="metal">Métal</label>
-        <select name="metal" id="metal">
-            <option value="--">--</option>
-            {% for metal in metals %}
-                <option value="{{ metal.name }}">{{ metal.name }}</option>
-            {% endfor %}
-        </select>
+    <header>
+        <div class="container">
+            <nav class="navigation">
+                {% if app.user %}
+                    <p>Bonjour {{ app.user.firstname }}</p>
+                {% endif %}
+                <ul>
+                    <li class="list">
+                        <a href="{{path('home')}}">
+                            <span class="icon"><ion-icon name="home-outline"></ion-icon></span>
+                            <span class="text">Accueil</span>
+                        </a>
+                    </li>
+                    <li class="list">
+                        <a href="#">
+                            <span class="icon"><ion-icon name="camera-outline"></ion-icon></span>
+                            <span class="text">Galerie</span>
+                        </a>
+                    </li>
+                    <li class="list">
+                        <a href="#">
+                            <span class="icon"><ion-icon name="chatbubble-outline"></ion-icon></span>
+                            <span class="text">Contact</span>
+                        </a>
+                    </li>
+                    <li class="list">
+                        <a href="{{path('index.dashboard')}}">
+                            <span class="icon"><ion-icon name="hammer-outline"></ion-icon></span>
+                            <span class="text">Admin</span>
+                        </a>
+                    </li>
+                    <li class="list">
+                        {% if app.user %}
+                            <a href="{{path('app_logout')}}">
+                                <span class="icon"><ion-icon name="person-outline"></ion-icon></span>
+                                <span class="text">Se déconnecter</span>
+                            </a>
+                        {% else %}
+                            <a href="{{path('app_login')}}">
+                                <span class="icon"><ion-icon name="person-outline"></ion-icon></span>
+                                <span class="text">Se connecter</span>
+                            </a>
+                        {% endif %}
+                    </li>
+                </ul>
+            </nav>
+            <img src="{{asset('/images/logo1.png')}}" alt="Logo Beau Merle" class="logo">
+            <div class="about">Rencontres</div>
+            <div class="menu-toggle"></div>
+        </div>
+    </header>
+    <div class="contenu">
+        <div class="form-container">
+            <h1 class="form-title">Ajouter un :</h1>
+            {{ form_start(formmetals, {'attr': {'novalidate': 'novalidate', 'class': 'form'}}) }}
+                <div class="input-group">
+                    {{ form_row(formmetals._token) }}
+                    {{ form_label(formmetals.name, "Métal") }}
+                    {{ form_widget(formmetals.name) }}
+                    {{ form_errors(formmetals.name) }}
+                </div>
+                <button type="submit" class="add-button">Ajouter</button>
+            {{ form_end(formmetals)}}
+        </div>
+        <div class="admin-list">
+            <h2>Métaux disponibles :</h2>
+            <ul>
+                {% for metal in metals %}
+                    <li>{{ metal.name }}</li>
+                {% endfor %}
+            </ul>
+        </div>
     </div>
 {% endblock %}

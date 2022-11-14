@@ -1,28 +1,86 @@
 {% extends 'template.html.twig' %}
 
 {% block title %}Ajouter un manche{% endblock %}
-{% block link %}{% endblock %}
+{% block link %}
+    <link rel="stylesheet" href="{{asset('/css/admin.css')}}">
+{% endblock %}
+{% block script %}
+    <script src="{{asset('/scripts/mainmenu.js')}}" defer></script>
+{% endblock %}
 
 
 {% block body %}
-    {{ form_start(formhandle, {'attr': {'novalidate': 'novalidate'}}) }}
-        <form action="" method="post" class="form">
-            <div class="input-group">
-                {{ form_row(formhandle._token) }}
-                {{ form_label(formhandle.name, "Manche") }}
-                {{ form_widget(formhandle.name) }}
-                {{ form_errors(formhandle.name) }}
-            </div>
+    <header>
+        <div class="container">
+            <nav class="navigation">
+                {% if app.user %}
+                    <p>Bonjour {{ app.user.firstname }}</p>
+                {% endif %}
+                <ul>
+                    <li class="list">
+                        <a href="{{path('home')}}">
+                            <span class="icon"><ion-icon name="home-outline"></ion-icon></span>
+                            <span class="text">Accueil</span>
+                        </a>
+                    </li>
+                    <li class="list">
+                        <a href="#">
+                            <span class="icon"><ion-icon name="camera-outline"></ion-icon></span>
+                            <span class="text">Galerie</span>
+                        </a>
+                    </li>
+                    <li class="list">
+                        <a href="#">
+                            <span class="icon"><ion-icon name="chatbubble-outline"></ion-icon></span>
+                            <span class="text">Contact</span>
+                        </a>
+                    </li>
+                    <li class="list">
+                        <a href="{{path('index.dashboard')}}">
+                            <span class="icon"><ion-icon name="hammer-outline"></ion-icon></span>
+                            <span class="text">Admin</span>
+                        </a>
+                    </li>
+                    <li class="list">
+                        {% if app.user %}
+                            <a href="{{path('app_logout')}}">
+                                <span class="icon"><ion-icon name="person-outline"></ion-icon></span>
+                                <span class="text">Se déconnecter</span>
+                            </a>
+                        {% else %}
+                            <a href="{{path('app_login')}}">
+                                <span class="icon"><ion-icon name="person-outline"></ion-icon></span>
+                                <span class="text">Se connecter</span>
+                            </a>
+                        {% endif %}
+                    </li>
+                </ul>
+            </nav>
+            <img src="{{asset('/images/logo1.png')}}" alt="Logo Beau Merle" class="logo">
+            <div class="about">Rencontres</div>
+            <div class="menu-toggle"></div>
+        </div>
+    </header>
+    <div class="contenu">
+        <div class="form-container">
+            <h1 class="form-title">Ajouter un :</h1>
+            {{ form_start(formhandle, {'attr': {'novalidate': 'novalidate', 'class': 'form'}}) }}
+                <div class="input-group">
+                    {{ form_row(formhandle._token) }}
+                    {{ form_label(formhandle.name, "Manche") }}
+                    {{ form_widget(formhandle.name) }}
+                    {{ form_errors(formhandle.name) }}
+                </div>
             <button type="submit" class="add-button">Ajouter</button>
-        </form>
-    {{ form_end(formhandle)}}
-    <div class="input-group">
-        <label for="handle">Manche</label>
-        <select name="handle" id="handle">
-            <option value="--">--</option>
-            {% for handle in handles %}
-                <option value="{{ handle.name }}">{{ handle.name }}</option>
-            {% endfor %}
-        </select>
+            {{ form_end(formhandle)}}
+        </div>
+        <div class="admin-list">
+            <h2>Manches disponibles</h2>
+            <ul>
+                {% for handle in handles %}
+                    <li>{{ handle.name }}</li>
+                {% endfor %}
+            </ul>
+        </div>
     </div>
 {% endblock %}
