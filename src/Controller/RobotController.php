@@ -184,10 +184,7 @@ class RobotController extends AbstractController
         if($form->isValid()){
             $this->addFlash('success', 'Votre mot de passe a été réinitialisé');
             $user->setPassword(
-                $userPasswordHasher->hashPassword(
-                    $user,
-                    $form->get('password')->getData()
-                )
+                    $userPasswordHasher->hashPassword($user,$form->get('password')->getData())
             )
             ->setConfirmpassword($user->getPassword());  
             $entityManager->persist($user);
@@ -206,7 +203,7 @@ class RobotController extends AbstractController
         ->setMethod('POST')
         ->add('firstname')
         ->add('lastname')
-        ->add('email', null, [ 'attr' => [ 'placeholder' => 'A valid email please']])
+        ->add('email', null, [ 'attr' => [ 'placeholder' => 'A valid email please', 'readonly'=> true ]])
         ->add('address')
         ->add('created')
         ->add('password', PasswordType::class, [ 'attr' => [ 'placeholder' => 'Password 4 to 20 characters']])
