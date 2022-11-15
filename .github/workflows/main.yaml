@@ -11,6 +11,9 @@ jobs:
       uses: actions/checkout@v2
       name: APT UPDATE and INSTALL SSHPASS
       run:
+        sudo apt update && sudo apt install sshpass
+      name: deploy
+      run:
         sshpass -e ssh -o stricthostkeychecking=no ${{ secrets.APP_USER}}@${{secrets.APP_HOST}}
         "cd public_html/ &&
         git pull &&
