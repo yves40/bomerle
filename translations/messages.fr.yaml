@@ -2,7 +2,9 @@
 user:
   passreqtitle: Mot de passe oublié
   passrequest: Demander la réinitialisation
-  resetpassword: Votre mot de passe a été réinitialisé
+  passreset: Nouveau mot de passe
+  passresetbutton: Confirmer
+  passresetdone: Votre mot de passe a été réinitialisé
   connect: Se connecter
 home:
   button: Accueil

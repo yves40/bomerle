@@ -2,7 +2,9 @@
 user:
   passreqtitle: Forgotten password
   passrequest: Password reset request
-  resetpassword: Your password has been reset
+  passreset: New password
+  passresetbutton: Proceed to password reset
+  passresetdone: Your password has been reset
   connect: Connect
 home:
   button: Back home page
