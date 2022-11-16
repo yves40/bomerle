@@ -6,7 +6,6 @@ use App\Repository\KnifesRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Component\HttpFoundation\File\File;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -55,31 +54,30 @@ class Knifes
 
     #[ORM\ManyToOne(inversedBy: 'knifes')]
     #[ORM\JoinColumn(nullable: false)]
-    #[Assert\NotBlank(message: "Merci de renseigner ce champ")]
+    #[Assert\Valid]
     private ?Category $category = null;
 
     #[ORM\ManyToOne(inversedBy: 'knifes')]
     #[ORM\JoinColumn(nullable: false)]
-    #[Assert\NotBlank(message: "Merci de renseigner ce champ")]
+    #[Assert\Valid]
     private ?Mechanism $mechanism = null;
 
     #[ORM\ManyToMany(targetEntity: Accessories::class, inversedBy: 'knifes')]
-    #[Assert\Valid()]
     private Collection $accessories;
 
     #[ORM\ManyToMany(targetEntity: Handle::class, inversedBy: 'knifes')]
-    #[Assert\Valid()]
+    #[Assert\Valid]
     private Collection $handle;
 
     #[ORM\ManyToMany(targetEntity: Metals::class, inversedBy: 'knifes')]
-    #[Assert\Valid()]
+    #[Assert\Valid]
     private Collection $metals;
 
     #[ORM\OneToMany(mappedBy: 'knifes', targetEntity: Images::class, cascade:['persist'])]
-    // #[Assert\NotBlank(message: "Merci de sélectionner au moins une image")]
     // #[Assert\File(
-    //     maxSize: '1024k',
-    //     maxSizeMessage: 'Taille maximale autorisée 1Mo',
+    //     maxSize: '10M',
+    //     maxSizeMessage: 'Taille maximale autorisée 10Mo par image',
+    //     uploadIniSizeErrorMessage: 'Taille maximale autorisée 10Mo par image',
     //     mimeTypes:[
     //         'image/jpeg',
     //         'image/jpg',
@@ -87,9 +85,10 @@ class Knifes
     //         'image/gif'
     //     ],
     //     mimeTypesMessage: 'Merci de chosir un format de fichier valide (jpg, jpeg, gif, png)',
-    //     notFoundMessage: "Merci de sélectionner au moins une image"
+    //     notFoundMessage: "Merci de sélectionner au moins une image",
+    //     uploadNoFileErrorMessage: "Merci de sélectionner au moins une image"
     // )]
-    #[Assert\Valid()]
+    // #[Assert\Valid]
     private Collection $images;
 
     public function __construct()
@@ -325,5 +324,10 @@ class Knifes
         }
 
         return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->name;
     }
 }

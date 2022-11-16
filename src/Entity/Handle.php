@@ -21,6 +21,7 @@ class Handle
     private ?string $name = null;
 
     #[ORM\ManyToMany(targetEntity: Knifes::class, mappedBy: 'handle')]
+    #[Assert\NotBlank(message: "Merci de sélectionner au moins un matériau pour le manche")]
     private Collection $knifes;
 
     public function __construct()

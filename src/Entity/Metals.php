@@ -21,6 +21,7 @@ class Metals
     private ?string $name = null;
 
     #[ORM\ManyToMany(targetEntity: Knifes::class, mappedBy: 'metals')]
+    #[Assert\NotBlank(message: "Merci de sélectionner au moins un métal")]
     private Collection $knifes;
 
     public function __construct()

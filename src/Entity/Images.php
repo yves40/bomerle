@@ -15,20 +15,19 @@ class Images
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    /*
-    #[Assert\File(
-        maxSize: '1024k',
-        maxSizeMessage: 'Taille maximale autorisée 1Mo',
-        mimeTypes:[
-            'image/jpeg',
-            'image/jpg',
-            'image/png',
-            'image/gif'
-        ],
-        mimeTypesMessage: 'Merci de chosir un format de fichier valide (jpg, jpeg, gif, png)',
-        notFoundMessage: "Merci de sélectionner au moins une image",
-        uploadNoFileErrorMessage: "Merci de sélectionner au moins une image"
-    )]*/
+    // #[Assert\File(
+    //     maxSize: '10M',
+    //     maxSizeMessage: 'Taille maximale autorisée 10Mo par image',
+    //     mimeTypes:[
+    //         'image/jpeg',
+    //         'image/jpg',
+    //         'image/png',
+    //         'image/gif'
+    //     ],
+    //     mimeTypesMessage: 'Merci de chosir un format de fichier valide (jpg, jpeg, gif, png)',
+    //     notFoundMessage: "Merci de sélectionner au moins une image",
+    //     uploadNoFileErrorMessage: "Merci de sélectionner au moins une image"
+    // )]
     private ?string $filename = null;
 
     #[ORM\Column]
@@ -77,5 +76,10 @@ class Images
         $this->knifes = $knifes;
 
         return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->name;
     }
 }

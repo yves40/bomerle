@@ -21,6 +21,7 @@ class Category
     private ?string $name = null;
 
     #[ORM\OneToMany(mappedBy: 'category', targetEntity: Knifes::class)]
+    #[Assert\NotBlank(message: "Merci de sélectionner une catégorie")]
     private Collection $knifes;
 
     public function __construct()

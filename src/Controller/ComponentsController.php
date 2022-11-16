@@ -21,6 +21,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 #[Route('/components')]
 class ComponentsController extends AbstractController
@@ -46,7 +47,7 @@ class ComponentsController extends AbstractController
             $entityManager->persist($category);
             $entityManager->flush();
             $categories = $cater->listCategories();
-            $this->addFlash('success', $category->getName());
+            $this->addFlash('success', "La catégorie ".$category->getName()." a été ajoutée");
             $category = new Category();
             $form = $this->createForm(CategoryType::class, $category);
             return $this->render('components/category.html.twig', [
@@ -81,7 +82,7 @@ class ComponentsController extends AbstractController
             $entityManager->persist($metal);
             $entityManager->flush();
             $metals = $met->listMetals();
-            $this->addFlash('success', $metal->getName());
+            $this->addFlash('success', "Le métal ".$metal->getName()." a été ajouté");
             $metal = new Metals();
             $form = $this->createForm(MetalsType::class, $metal);
             return $this->render('components/metals.html.twig', [
@@ -116,7 +117,7 @@ class ComponentsController extends AbstractController
             $entityManager->persist($mechanism);
             $entityManager->flush();
             $mechanisms = $mecha->listMechanisms();
-            $this->addFlash('success', $mechanism->getName());
+            $this->addFlash('success', "Le mécanisme ".$mechanism->getName()." a été ajouté");
             $mechanism = new Mechanism();
             $form = $this->createForm(MechanismType::class, $mechanism);
             return $this->render('components/mechanism.html.twig', [
@@ -151,7 +152,7 @@ class ComponentsController extends AbstractController
             $entityManager->persist($accessory);
             $entityManager->flush();
             $accessories = $acc->listAccessories();
-            $this->addFlash('success', $accessory->getName());
+            $this->addFlash('success', "L'accessoire ".$accessory->getName()." a été ajouté");
             $accessory = new Accessories();
             $form = $this->createForm(AccessoriesType::class, $accessory);
             return $this->render('components/accessories.html.twig', [
@@ -186,7 +187,7 @@ class ComponentsController extends AbstractController
             $entityManager->persist($handle);
             $entityManager->flush();
             $handles = $han->listHandles();
-            $this->addFlash('success', $handle->getName());
+            $this->addFlash('success', "Le matériau ".$handle->getName()." a été ajouté");
             $handle = new Handle();
             $form = $this->createForm(HandleType::class, $handle);
             return $this->render('components/handle.html.twig', [
@@ -213,18 +214,22 @@ class ComponentsController extends AbstractController
     public function addKnife(
         Request $request,
         EntityManagerInterface $entityManager,
-        Uploader $uploader
+        Uploader $uploader,
+        ValidatorInterface $validator
     ): Response
     {
+        ini_set('upload_max_filesize', 5);
         $knife = new Knifes();
 
         $form = $this->createForm(KnifesType::class, $knife);
         $form->handleRequest($request);
 
-        $uploadedFiles = $form->get('images')->getData();
-
         if($form->isSubmitted() && $form->isValid()){
+            // $errors = $validator->validate($form);
+            // dd($errors);
+            $uploadedFiles = $form->get('images')->getData();
             $physicalPath = $this->getParameter('knifeimages_directory');
+
             for($i=0; $i < count($uploadedFiles); $i++){
                 $image = new Images();
 
@@ -239,7 +244,7 @@ class ComponentsController extends AbstractController
             }
             $entityManager->persist($knife);
             $entityManager->flush();
-            $this->addFlash('success', $knife->getName());
+            $this->addFlash('success', "Le couteau ".$knife->getName()." a été ajouté");
             $knife = new Knifes();
             $form = $this->createForm(KnifesType::class, $knife);
             return $this->render('components/knifes.html.twig', [
@@ -248,6 +253,8 @@ class ComponentsController extends AbstractController
         }elseif($form->isSubmitted() && !$form->isValid()){
             // dd($request);
             // dd($form->getErrors());
+            // $errors = $validator->validate($form);
+            // dd($errors);
             $this->addFlash('error', 'Un problème est survenu !');
             return $this->render('components/knifes.html.twig', [
                 'formknifes' => $form->createView()

@@ -27,8 +27,14 @@ class KnifesType extends AbstractType
             ->add('close_lenght')
             ->add('cuttingedge_lenght')
             ->add('price')
-            ->add('category')
-            ->add('mechanism')
+            ->add('category', null, [
+                'required' => false,
+                'empty_data' => ''
+            ])
+            ->add('mechanism', null, [
+                'required' => false,
+                'empty_data' => ''
+            ])
             ->add('accessories', EntityType::class, [
                 'expanded' => true,
                 'multiple' => true,
@@ -47,7 +53,7 @@ class KnifesType extends AbstractType
                 'query_builder' => function(EntityRepository $er) {
                     return $er->createQueryBuilder('h')
                               ->orderBy('h.name', 'ASC');
-                }
+                },
             ])
             ->add('metals', EntityType::class, [
                 'expanded' => true,
@@ -66,6 +72,7 @@ class KnifesType extends AbstractType
                 // 'constraints' => [
                 //      new File([
                 //         'maxSize' => '1024k',
+                //         'maxSizeMessage' => "Taille maximale autorisée 1Mo",
                 //         'mimeTypes' => [
                 //             'image/jpeg',
                 //             'image/jpg',
