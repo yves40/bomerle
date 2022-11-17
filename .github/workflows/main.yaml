@@ -1,7 +1,7 @@
 name: YT
 on:
   push:
-    branches: [main, users]
+    branches: [disabled]
 jobs:
   deploy:
     runs-on: ubuntu-latest
