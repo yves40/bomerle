@@ -113,6 +113,38 @@
         li{
             font-size: 1.7rem;
             color: $alternateText;
+            display: flex;
+            justify-content: space-between;
+            margin: 10px 0px;
+
+            p{
+                display: flex;
+                width: calc(100% - 30px);
+                justify-content: flex-start;
+                align-items: center;
+            }
+            .links{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 30px;
+
+                a{
+                    width: 100%;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    color: $alternateText;
+                    transition: all .3s;
+
+                    &.update:hover{
+                        color: $buttonNext;
+                    }
+                    &.delete:hover{
+                        color: $buttonDelete;
+                    }
+                }
+            }
         }
     }
 }

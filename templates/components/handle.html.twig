@@ -78,7 +78,13 @@
             <h2>Manches disponibles</h2>
             <ul>
                 {% for handle in handles %}
-                    <li>{{ handle.name }}</li>
+                    <li>
+                        <p> {{handle.name}} </p>
+                        <div class="links">
+                            <a href="" class="update"><ion-icon name="construct-outline"></ion-icon></a>
+                            <a href="" class="delete"><ion-icon name="trash-outline"></ion-icon></a>
+                        </div>
+                    </li>
                 {% endfor %}
             </ul>
         </div>
