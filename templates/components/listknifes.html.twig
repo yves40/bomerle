@@ -2,7 +2,7 @@
 
 {% block title %}Dashboard{% endblock %}
 {% block link %}
-    <link rel="stylesheet" href="{{asset('/css/dashboard.css')}}">
+    <link rel="stylesheet" href="{{asset('/css/adminlist.css')}}">
 {% endblock %}
 {% block script %}
     <script src="{{asset('/scripts/mainmenu.js')}}" defer></script>
@@ -62,21 +62,19 @@
         </div>
     </header>
     <div class="contenu">
-        <section class="new-components">
-            <h1>Gestion du site</h1>
-            <div class="categories-container">
-                <h2>Ajouter un(e) :</h2>
-                <div class="quick-access">
-                    <a href="{{path('accessory.add')}}" class="button">Accessoire</a>
-                    <a href="{{path('category.add')}}" class="button">Catégorie</a>
-                    <a href="{{path('handle.add')}}" class="button">Manche</a>
-                    <a href="{{path('mechanism.add')}}" class="button">Mécanisme</a>
-                    <a href="{{path('metal.add')}}" class="button">Métal</a>
-                    <a href="{{path('knife.add')}}" class="button">Couteau</a>
-                    <a href="#" class="button">Salon</a>
-                    <a href="{{path('knife.list')}}" class="button">Couteaux créés</a>
-                </div>
-            </div>
-        </section>    
+        <div class="admin-list">
+            <h2>Couteaux existants :</h2>
+            <ul>
+                {% for knife in allknifes %}
+                    <li>
+                        <p>{{ knife.name }}</p>
+                        <div class="links">
+                            <a href="" class="update"><ion-icon name="construct-outline"></ion-icon></a>
+                            <a href=""class="delete"><ion-icon name="trash-outline"></ion-icon></a>
+                        </div>
+                    </li>                
+                {% endfor %}
+            </ul>
+        </div>
     </div>
-{% endblock %}
+    {% endblock %}
