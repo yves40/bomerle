@@ -78,17 +78,18 @@
             </div>
             <div class="banner">
                 <img src="./images/banner.png" alt="Catalogue">
+                <img src="./images/banner.png" alt="Catalogue">
             </div>
         </section>
         <section id="services">
             <div class="container">
                 <h1>Nos Collections</h1>
-                <ul class="reveal">
-                    <li class="service cuisine active"><a href="#">Cuisine</a></li>
-                    <li class="service poche"><a href="#">Poche</a></li>
-                    <li class="service table"><a href="#">Table</a></li>
-                    <li class="service collection"><a href="#">Collection</a></li>
-                    <li class="service autres"><a href="#">Autres</a></li>
+                <ul>
+                    <li class="service cuisine active"><a href="#" data-text="&nbsp;Cuisine">&nbsp;Cuisine</a></li>
+                    <li class="service poche"><a href="#" data-text="&nbsp;Poche">&nbsp;Poche</a></li>
+                    <li class="service table"><a href="#" data-text="&nbsp;Table">&nbsp;Table</a></li>
+                    <li class="service collection"><a href="#" data-text="&nbsp;Collection">&nbsp;Collection</a></li>
+                    <li class="service autres"><a href="#" data-text="&nbsp;Autres">&nbsp;Autres</a></li>
                 </ul>
             </div>
         </section>
@@ -166,7 +167,8 @@
         </section>
         <section id="workshop">
             <h1>L'atelier</h1>
-            <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d691.4358282440386!2d4.177253510868741!3d45.91800827506115!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e1!3m2!1sfr!2sdk!4v1666552867020!5m2!1sfr!2sdk" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            <p>335 Route de Saint-Thomas, Bras de Fer, 63250 Arconsat - France</p>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d827.4510672236495!2d3.706656325636536!3d45.8823780745658!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0!2zNDXCsDUyJzQ2LjUiTiAzwrA0MicwNC4xIkU!5e0!3m2!1sfr!2sfr!4v1668792379167!5m2!1sfr!2sfr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         </section>
     </div>
     <footer>
@@ -185,17 +187,9 @@
                 <p>contact-mail@beaumerle.fr</p>
                 <p>Grotte des ours bruns de l'Allier 03000 Thiers</p>
             </div>
-            <div class="bloc footer-horaires">
-                <h3>Nos horaires</h3>
-                <ul>
-                    <li>✔️ Lun 10h-19h</li>
-                    <li>✔️ Mar 10h-19h</li>
-                    <li>✔️ Mer 10h-19h</li>
-                    <li>✔️ Jeu 10h-19h</li>
-                    <li>✔️ Ven 10h-19h</li>
-                    <li>❌ Sam fermé</li>
-                    <li>❌ Dim fermé</li>
-                </ul>
+            <div class="bloc newsletter">
+                <h3>Newsletter</h3>
+                
             </div>
             <div class="bloc footer-networks">
                 <h3>Nos réseaux</h3>
@@ -209,31 +203,4 @@
             </div>
         </div>
     </footer>
-
-
-    {# <h1>So good to be at home again</h1>
-
-    <div>
-        {% if app.user %}
-            <p class="text-success">{{ app.user.email }}</p>
-            <a href="{{path('app_logout')}}">Logout</a>
-        {% else %}
-            <p class="text-success">Anonymous</p>
-        {% endif %}
-    </div>
-
-    <p>
-        Ceci est la page principale du plus gros site e-commerce dédié aux couteaux en Europe
-    </p>
-    <div class="navigation yvesestnulencss">
-        <a href="{{path('users.register')}}">S'enregistrer</a>
-        <a href="{{path('app_login')}}">Se connecter</a>
-    </div>
-
-<style>
-.yvesestnulencss {
-    margin-top: 2rem;
-}
-</style> #}
-
 {% endblock %}
