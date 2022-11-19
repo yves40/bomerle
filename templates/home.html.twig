@@ -189,7 +189,25 @@
             </div>
             <div class="bloc newsletter">
                 <h3>Newsletter</h3>
-                
+                {{ form_start(formnewsletter) }}
+                    {# {{ form_row(formnewsletter._token) }} #}
+                    <div class="input-group">
+                        {{ form_label(formnewsletter.email, "Email") }}
+                        {{ form_widget(formnewsletter.email) }}
+                        {{ form_errors(formnewsletter.email) }}
+                    </div>
+                    <div class="input-group">
+                        {{ form_label(formnewsletter.forknife, "Couteaux") }}
+                        {{ form_widget(formnewsletter.forknife) }}
+                        {{ form_errors(formnewsletter.forknife) }}
+                    </div>
+                    <div class="input-group">
+                        {{ form_label(formnewsletter.forevents, "Salons") }}
+                        {{ form_widget(formnewsletter.forevents) }}
+                        {{ form_errors(formnewsletter.forevents) }}
+                    </div>
+                    <button type="submit" class="add-button">S'inscrire</button>
+                {{ form_end(formnewsletter) }}
             </div>
             <div class="bloc footer-networks">
                 <h3>Nos réseaux</h3>
