@@ -62,15 +62,27 @@
     </header>
     <div class="contenu">
         <div class="form-container">
-            <h1 class="form-title">Ajouter une :</h1>
+            {% if new %}
+                <h1 class="form-title">Ajouter une :</h1>
+            {% else %}
+                <h1 class="form-title">Modifier une :</h1>
+            {% endif %}
             {{ form_start(formcategory, {'attr': {'novalidate': 'novalidate', 'class': 'form'}}) }}
                 <div class="input-group">
                     {{ form_row(formcategory._token) }}
                     {{ form_label(formcategory.name, "Catégorie") }}
-                    {{ form_widget(formcategory.name) }}
+                    {% if new %}
+                        {{ form_widget(formcategory.name) }}
+                    {% else %}
+                        {{ form_widget(formcategory.name, {'value' : category.name}) }}
+                    {% endif %}
                     {{ form_errors(formcategory.name) }}
                 </div>
-                <button type="submit" class="add-button">Ajouter</button>
+                {% if new %}
+                    <button type="submit" class="add-button">Ajouter</button>
+                {% else %}
+                    <button type="submit" class="add-button">Modifier</button>
+                {% endif %}
             {{ form_end(formcategory)}}
         </div>    
         <div class="admin-list">
@@ -80,8 +92,8 @@
                     <li>
                         <p> {{category.name}} </p>
                         <div class="links">
-                            <a href="" class="update"><ion-icon name="construct-outline"></ion-icon></a>                        
-                            <a href="" class="delete"><ion-icon name="trash-outline"></ion-icon></a>
+                            <a href="{{ path('category.update', {id: category.id}) }}" class="update"><ion-icon name="construct-outline"></ion-icon></a>                        
+                            <a href="{{ path('category.delete', {id: category.id}) }}" class="delete"><ion-icon name="trash-outline"></ion-icon></a>
                         </div>
                     </li>
                 {% endfor %}        

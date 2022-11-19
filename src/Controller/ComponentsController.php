@@ -40,6 +40,7 @@ class ComponentsController extends AbstractController
         Request $request
     ): Response
     {
+        $new = true;
         $category = new Category();
         $cater = $entityManager->getRepository(Category::class);
         $categories = $cater->listCategories();
@@ -54,18 +55,83 @@ class ComponentsController extends AbstractController
             $form = $this->createForm(CategoryType::class, $category);
             return $this->render('components/category.html.twig', [
                 'formcategory' => $form->createView(),
-                'categories' => $categories
+                'categories' => $categories,
+                'new' => $new
             ]);
         }elseif($form->isSubmitted() && !$form->isValid()){
             $this->addFlash('error', 'Un problème est survenu !');
             return $this->render('components/category.html.twig', [
                 'formcategory' => $form->createView(),
-                'categories' => $categories
+                'categories' => $categories,
+                'new' => $new
             ]);
         }else{
             return $this->render('components/category.html.twig', [
                 'formcategory' => $form->createView(),
-                'categories' => $categories
+                'categories' => $categories,
+                'new' => $new
+            ]);
+        }
+    }
+    #[Route('/deletecategory/{id}', name: 'category.delete')]
+    public function deleteCategory(
+        int $id,
+        EntityManagerInterface $entityManager,
+    ): Response
+    {
+        $category = $entityManager->getRepository(Category::class)->find($id);
+        $knifes = $category->getKnifes();
+        $cat = $entityManager->getRepository(Category::class);
+        $categories = $cat->listCategories();
+        $form = $this->createForm(CategoryType::class, $category);
+        $new = true;
+        if($knifes->count() > 0){
+            $this->addFlash('error', 'Cette catégorie contient au moins un couteau');
+            return $this->render('components/category.html.twig', [
+                'formcategory' => $form->createView(),
+                'categories' => $categories,
+                'new' => $new
+            ]);
+        }else{
+            $entityManager->getRepository(Category::class)->remove($category, true);
+            $this->addFlash('success', "La catégorie ".$category->getName()." a été supprimée");
+            return $this->redirectToRoute('category.add');
+        }
+    }
+    #[Route('/updatecategory/{id}', name: 'category.update')]
+    public function updateCategory(
+        Category $category,
+        EntityManagerInterface $entityManager,
+        Request $request
+    ): Response
+    {
+        $new = false;
+        $cat = $entityManager->getRepository(Category::class);
+        $categories = $cat->listCategories();
+        $form = $this->createForm(CategoryType::class, $category);
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()){
+            $entityManager->persist($category);
+            $entityManager->flush();
+            $categories = $cat->listCategories();
+            $this->addFlash('success', "La catégorie ".$category->getName()." a été modifiée");
+            $category = new Category();
+            $form = $this->createForm(CategoryType::class, $category);
+            return $this->redirectToRoute('category.add');
+        }elseif($form->isSubmitted() && !$form->isValid()){
+            $this->addFlash('error', 'Un problème est survenu !');
+            return $this->render('components/category.html.twig', [
+                'formcategory' => $form->createView(),
+                'categories' => $categories,
+                'new' => $new,
+                'category' => $category
+            ]);
+        }else{
+            return $this->render('components/category.html.twig', [
+                'formcategory' => $form->createView(),
+                'categories' => $categories,
+                'new' => $new,
+                'category' => $category
             ]);
         }
     }
@@ -207,7 +273,6 @@ class ComponentsController extends AbstractController
     public function updateAccessory(
         Accessories $accessory,
         EntityManagerInterface $entityManager,
-        ManagerRegistry $doctrine,
         Request $request
     ): Response
     {
@@ -216,12 +281,7 @@ class ComponentsController extends AbstractController
         $accessories = $acc->listAccessories();
         $form = $this->createForm(AccessoriesType::class, $accessory);
         $form->handleRequest($request);
-        // dump($new);
-        
-        // dump($request);
         if($form->isSubmitted() && $form->isValid()){
-            // $accessory->setName();
-            // $entityManager = $doctrine->getManager();
             $entityManager->persist($accessory);
             $entityManager->flush();
             $accessories = $acc->listAccessories();
@@ -252,6 +312,7 @@ class ComponentsController extends AbstractController
         Request $request
     ): Response
     {
+        $new = true;
         $handle = new Handle();
         $han = $entityManager->getRepository(Handle::class);
         $handles = $han->listHandles();
@@ -266,23 +327,85 @@ class ComponentsController extends AbstractController
             $form = $this->createForm(HandleType::class, $handle);
             return $this->render('components/handle.html.twig', [
                 'formhandle' => $form->createView(),
-                'handles' => $handles
+                'handles' => $handles,
+                'new' => $new
             ]);
         }elseif($form->isSubmitted() && !$form->isValid()){
             $this->addFlash('error', 'Un problème est survenu !');
             return $this->render('components/handle.html.twig', [
                 'formhandle' => $form->createView(),
-                'handles' => $handles
+                'handles' => $handles,
+                'new' => $new
             ]);
         }else{
             return $this->render('components/handle.html.twig', [
                 'formhandle' => $form->createView(),
-                'handles' => $handles
+                'handles' => $handles,
+                'new' => $new
             ]);
         }
-        
-        $handle->setName('');
-        return $this->redirectToRoute('index_components');
+    }
+    #[Route('/deletehandle/{id}', name: 'handle.delete')]
+    public function deleteHandle(
+        int $id,
+        EntityManagerInterface $entityManager,
+    ): Response
+    {
+        $handle = $entityManager->getRepository(Handle::class)->find($id);
+        $knifes = $handle->getKnifes();
+        $han = $entityManager->getRepository(Handle::class);
+        $handles = $han->listHandles();
+        $form = $this->createForm(HandleType::class, $handle);
+        $new = true;
+        if($knifes->count() > 0){
+            $this->addFlash('error', 'Ce matériau est attribué à au moins un couteau');
+            return $this->render('components/handle.html.twig', [
+                'formhandle' => $form->createView(),
+                'handles' => $handles,
+                'new' => $new
+            ]);
+        }else{
+            $entityManager->getRepository(Handle::class)->remove($handle, true);
+            $this->addFlash('success', "L'accessoire ".$handle->getName()." a été supprimé");
+            return $this->redirectToRoute('handle.add');
+        }
+    }
+    #[Route('/updatehandle/{id}', name: 'handle.update')]
+    public function updateHandle(
+        Handle $handle,
+        EntityManagerInterface $entityManager,
+        Request $request
+    ): Response
+    {
+        $new = false;
+        $han = $entityManager->getRepository(Handle::class);
+        $handles = $han->listHandles();
+        $form = $this->createForm(HandleType::class, $handle);
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()){
+            $entityManager->persist($handle);
+            $entityManager->flush();
+            $handles = $han->listHandles();
+            $this->addFlash('success', "Le matériau ".$handle->getName()." a été modifié");
+            $handle = new Handle();
+            $form = $this->createForm(HandleType::class, $handle);
+            return $this->redirectToRoute('handle.add');
+        }elseif($form->isSubmitted() && !$form->isValid()){
+            $this->addFlash('error', 'Un problème est survenu !');
+            return $this->render('components/handle.html.twig', [
+                'formhandle' => $form->createView(),
+                'handles' => $handles,
+                'new' => $new,
+                'handle' => $handle
+            ]);
+        }else{
+            return $this->render('components/handle.html.twig', [
+                'formhandle' => $form->createView(),
+                'handles' => $handles,
+                'new' => $new,
+                'handle' => $handle
+            ]);
+        }
     }
     #[Route('/addknife', name: 'knife.add')]
     public function addKnife(
