@@ -7,8 +7,10 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 #[ORM\Entity(repositoryClass: AccessoriesRepository::class)]
+#[UniqueEntity(fields:['name'], message: "Cet accessoire existe déjà")]
 class Accessories
 {
     #[ORM\Id]
@@ -20,7 +22,7 @@ class Accessories
     #[Assert\NotBlank(message: "Merci de renseigner ce champ")]
     private ?string $name = null;
 
-    #[ORM\ManyToMany(targetEntity: Knifes::class, mappedBy: 'accessories')]
+    #[ORM\ManyToMany(targetEntity: Knifes::class, mappedBy: 'accessories', fetch: "EAGER")]
     private Collection $knifes;
 
     public function __construct()

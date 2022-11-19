@@ -16,7 +16,9 @@ use App\Form\KnifesType;
 use App\Form\MechanismType;
 use App\Form\MetalsType;
 use App\Services\Uploader;
+use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -143,6 +145,7 @@ class ComponentsController extends AbstractController
         Request $request
     ): Response
     {
+        $new = true;
         $accessory = new Accessories();
         $acc = $entityManager->getRepository(Accessories::class);
         $accessories = $acc->listAccessories();
@@ -157,18 +160,89 @@ class ComponentsController extends AbstractController
             $form = $this->createForm(AccessoriesType::class, $accessory);
             return $this->render('components/accessories.html.twig', [
                 'formaccessories' => $form->createView(),
-                'accessories' => $accessories
+                'accessories' => $accessories,
+                'new' => $new
             ]);
         }elseif($form->isSubmitted() && !$form->isValid()){
             $this->addFlash('error', 'Un problème est survenu !');
             return $this->render('components/accessories.html.twig', [
                 'formaccessories' => $form->createView(),
-                'accessories' => $accessories
+                'accessories' => $accessories,
+                'new' => $new
             ]);
         }else{
             return $this->render('components/accessories.html.twig', [
                 'formaccessories' => $form->createView(),
-                'accessories' => $accessories
+                'accessories' => $accessories,
+                'new' => $new
+            ]);
+        }
+    }
+    #[Route('/deleteaccessory/{id}', name: 'accessory.delete')]
+    public function deleteAccessory(
+        int $id,
+        EntityManagerInterface $entityManager,
+    ): Response
+    {
+        $accessory = $entityManager->getRepository(Accessories::class)->find($id);
+        $knifes = $accessory->getKnifes();
+        $acc = $entityManager->getRepository(Accessories::class);
+        $accessories = $acc->listAccessories();
+        $form = $this->createForm(AccessoriesType::class, $accessory);
+        $new = true;
+        if($knifes->count() > 0){
+            $this->addFlash('error', 'Cet accessoire est attribué à au moins un couteau');
+            return $this->render('components/accessories.html.twig', [
+                'formaccessories' => $form->createView(),
+                'accessories' => $accessories,
+                'new' => $new
+            ]);
+        }else{
+            $entityManager->getRepository(Accessories::class)->remove($accessory, true);
+            $this->addFlash('success', "L'accessoire ".$accessory->getName()." a été supprimé");
+            return $this->redirectToRoute('accessory.add');
+        }
+    }
+    #[Route('/updateaccessory/{id}', name: 'accessory.update')]
+    public function updateAccessory(
+        Accessories $accessory,
+        EntityManagerInterface $entityManager,
+        ManagerRegistry $doctrine,
+        Request $request
+    ): Response
+    {
+        $new = false;
+        $acc = $entityManager->getRepository(Accessories::class);
+        $accessories = $acc->listAccessories();
+        $form = $this->createForm(AccessoriesType::class, $accessory);
+        $form->handleRequest($request);
+        // dump($new);
+        
+        // dump($request);
+        if($form->isSubmitted() && $form->isValid()){
+            // $accessory->setName();
+            // $entityManager = $doctrine->getManager();
+            $entityManager->persist($accessory);
+            $entityManager->flush();
+            $accessories = $acc->listAccessories();
+            $this->addFlash('success', "L'accessoire ".$accessory->getName()." a été modifié");
+            $accessory = new Accessories();
+            $form = $this->createForm(AccessoriesType::class, $accessory);
+            return $this->redirectToRoute('accessory.add');
+        }elseif($form->isSubmitted() && !$form->isValid()){
+            $this->addFlash('error', 'Un problème est survenu !');
+            return $this->render('components/accessories.html.twig', [
+                'formaccessories' => $form->createView(),
+                'accessories' => $accessories,
+                'new' => $new,
+                'accessory' => $accessory
+            ]);
+        }else{
+            return $this->render('components/accessories.html.twig', [
+                'formaccessories' => $form->createView(),
+                'accessories' => $accessories,
+                'new' => $new,
+                'accessory' => $accessory
             ]);
         }
     }
@@ -264,5 +338,15 @@ class ComponentsController extends AbstractController
                 'formknifes' => $form->createView()
             ]);
         }
+    }
+    #[Route('/listknife', name: 'knife.list')]
+    public function listKnife(
+        EntityManagerInterface $entityManager,
+    ): Response
+    {
+        $allKnifes = $entityManager->getRepository(Knifes::class)->findAll();
+        return $this->render('components/listknifes.html.twig', [
+            'allknifes' => $allKnifes
+        ]);
     }
 }

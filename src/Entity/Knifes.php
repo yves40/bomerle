@@ -52,28 +52,28 @@ class Knifes
     #[Assert\NotBlank(message: "Merci de renseigner ce champ")]
     private ?string $price = null;
 
-    #[ORM\ManyToOne(inversedBy: 'knifes')]
+    #[ORM\ManyToOne(inversedBy: 'knifes', fetch: "EAGER")]
     #[ORM\JoinColumn(nullable: false)]
     #[Assert\Valid]
     private ?Category $category = null;
 
-    #[ORM\ManyToOne(inversedBy: 'knifes')]
+    #[ORM\ManyToOne(inversedBy: 'knifes', fetch: "EAGER")]
     #[ORM\JoinColumn(nullable: false)]
     #[Assert\Valid]
     private ?Mechanism $mechanism = null;
 
-    #[ORM\ManyToMany(targetEntity: Accessories::class, inversedBy: 'knifes')]
+    #[ORM\ManyToMany(targetEntity: Accessories::class, inversedBy: 'knifes', fetch: "EAGER")]
     private Collection $accessories;
 
-    #[ORM\ManyToMany(targetEntity: Handle::class, inversedBy: 'knifes')]
+    #[ORM\ManyToMany(targetEntity: Handle::class, inversedBy: 'knifes', fetch: "EAGER")]
     #[Assert\Valid]
     private Collection $handle;
 
-    #[ORM\ManyToMany(targetEntity: Metals::class, inversedBy: 'knifes')]
+    #[ORM\ManyToMany(targetEntity: Metals::class, inversedBy: 'knifes', fetch: "EAGER")]
     #[Assert\Valid]
     private Collection $metals;
 
-    #[ORM\OneToMany(mappedBy: 'knifes', targetEntity: Images::class, cascade:['persist'])]
+    #[ORM\OneToMany(mappedBy: 'knifes', targetEntity: Images::class, cascade:['persist'], fetch: "EAGER")]
     // #[Assert\File(
     //     maxSize: '10M',
     //     maxSizeMessage: 'Taille maximale autorisée 10Mo par image',

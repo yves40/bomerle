@@ -62,15 +62,29 @@
     </header>
     <div class="contenu">
         <div class="form-container">
-            <h1 class="form-title">Ajouter un :</h1>
+            {% if new %}
+                <h1 class="form-title">Ajouter un :</h1>    
+            {% else %}
+                <h1 class="form-title">Modifier un :</h1>
+            {% endif %}
+            
+            
             {{ form_start(formaccessories, {'attr': {'novalidate': 'novalidate', 'class': 'form'}}) }}
                 <div class="input-group">
                     {{ form_row(formaccessories._token) }}
                     {{ form_label(formaccessories.name, "Accessoire") }}
-                    {{ form_widget(formaccessories.name) }}
+                    {% if new %}
+                        {{ form_widget(formaccessories.name) }}
+                    {% else %}
+                        {{ form_widget(formaccessories.name, {'value' : accessory.name }) }}
+                    {% endif %}
                     {{ form_errors(formaccessories.name) }}
                 </div>
-                <button type="submit" class="add-button">Ajouter</button>
+                {% if new %}
+                    <button type="submit" class="add-button">Ajouter</button>
+                {% else %}
+                    <button type="submit" class="add-button">Modifier</button>
+                {% endif %}
             {{ form_end(formaccessories)}}
         </div>
         <div class="admin-list">
@@ -80,8 +94,8 @@
                     <li>
                         <p> {{accessory.name}} </p>
                         <div class="links">
-                            <a href="" class="update"><ion-icon name="construct-outline"></ion-icon></a>
-                            <a href="" class="delete"><ion-icon name="trash-outline"></ion-icon></a>
+                            <a href="{{ path('accessory.update', {id: accessory.id}) }}" class="update"><ion-icon name="construct-outline"></ion-icon></a>
+                            <a href="{{ path('accessory.delete', {id: accessory.id}) }}" class="delete"><ion-icon name="trash-outline"></ion-icon></a>
                         </div>
                     </li>
                 {% endfor %}
