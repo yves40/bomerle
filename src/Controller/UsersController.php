@@ -4,24 +4,24 @@ namespace App\Controller;
 
 use DateTime;
 use DateTimeZone;
+use App\Core\Token;
 use App\Entity\Users;
 use App\Form\UsersType;
-use Symfony\Component\Mime\Email;
-use App\Security\LoginAuthenticator;
+use App\Services\MailO2;
+use App\Entity\RequestsTracker;
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Translation\LocaleSwitcher;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
-use Symfony\Component\Security\Http\Authentication\UserAuthenticatorInterface;
 
 #[Route('/users')]
 class UsersController extends AbstractController
 {
+    // ------------------------------------------------------------------------
     #[Route('/index', name: 'users.index')]
     public function index(): Response
     {
@@ -29,25 +29,14 @@ class UsersController extends AbstractController
             'controller_name' => 'UsersController',
         ]);
     }
-
-    // #[Route('/login', name: 'users.login')]
-    // public function login(): Response
-    // {
-    //     return $this->render('users/login.html.twig', [
-    //         'controller_name' => 'UsersController',
-    //     ]);
-    // }
-
+    // ------------------------------------------------------------------------
     #[Route('/register', name: 'users.register')]
     public function register(
         Users $user = null,
-        // ManagerRegistry $doctrine,
         Request $request,
         UserPasswordHasherInterface $userPasswordHasher,
-        // UserAuthenticatorInterface $userAuthenticator,
-        // LoginAuthenticator $authenticator,
         EntityManagerInterface $entityManager,
-        MailerInterface $mailer
+        MailO2 $mailo2
         ): Response
     {
         $user = new Users();
@@ -58,6 +47,9 @@ class UsersController extends AbstractController
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()){
+            // ---------------------------------------------------------------------
+            // Create the user in the DB
+            // ---------------------------------------------------------------------
             $user->setPassword(
                 $userPasswordHasher->hashPassword(
                     $user,
@@ -67,45 +59,104 @@ class UsersController extends AbstractController
             ->setConfirmpassword($user->getPassword());
             $user->setCreated(new DateTime('now', new DateTimeZone('Europe/Paris')));
             $entityManager->persist($user);
+            // ---------------------------------------------------------------------
+            // Send the registration mail
+            // ---------------------------------------------------------------------
+            /* @$tks Token */
+            $tks = $mailo2->sendRegisterConfirmation($user->getEmail());
+            // ---------------------------------------------------------------------
+            // Track the registration request in the requests_tracker table
+            // ---------------------------------------------------------------------
+            /* @$rqtracker RequestTracker */
+            $rqtracker = new RequestsTracker();
+            date_default_timezone_set('Europe/Paris');
+            $expires = date("U") + 1800; // 30 minutes delay before expiration
+            $rqtracker->setRequestactiontype('Register')
+                    ->setEmail($user->getEmail())
+                    ->setCreated(new DateTime('now'))
+                    ->setProcessed(new DateTime('now'))
+                    ->setExpires($expires)
+                    ->setToken($tks->getToken())
+                    ->setSelector($tks->getSelector())
+                    ->setStatus(RequestsTracker::STATUS_REQUESTED);
+            $entityManager->persist($rqtracker);
+            // ---------------------------------------------------------------------
+            // Final commit of the global transaction
+            // ---------------------------------------------------------------------
             $entityManager->flush();
-            // ------------------------------------------------------------------------
-            // Test email
-            // Remember a worker has to consume the emails otherwise they won't be sent
-            // Can be launched with this command :  
-            //                  php bin/console messenger:consume async -vv
-            // or
-            //                  php bin/console messenger:consume async
-            // This should be automatically started in production with a cron job...
-            // The consumer must be stopped properly with this command:
-            //                  php bin/console messenger:stop
-            // ------------------------------------------------------------------------
-            // $email = (new Email())
-            //     ->from('noreply@beaumerledev.big-ben.fr')
-            //     ->to('yves.toubhans@free.fr')
-            //     //->cc('cc@example.com')
-            //     //->bcc('bcc@example.com')
-            //     ->replyTo('noreply@beaumerledev.big-ben.fr')
-            //     //->priority(Email::PRIORITY_HIGH)
-            //     ->subject('Time for Symfony Mailer!')
-            //     ->html('<p>Sending emails is fun again!</p>'.
-            //             '<p>If you started a consumer as explained here </p>'.
-            //             '<p>https://symfony.com/doc/current/messenger.html#messenger-worker</p>'
-            //     );
-                
-            // try {
-            //     $mailer->send($email);
-            // } catch (TransportExceptionInterface $e) {
-            //     dd($e);         // Will manage this later
-            // }            
-            // ------------------------------------------------------------------------
-
-            return $this->render('security/login.html.twig', ['last_username' => '', 'error' => array()]);   
-
+            $this->addFlash('success', 'read your emails, a register confirmation is required');
+            return $this->redirectToRoute('home'); 
         }
         else{
-            return $this->render('users/register.html.twig', [
+            // To remove later
+            $user = $this->dummyUser();
+            $form = $this->createForm(UsersType::class, $user);
+            $form->remove('created');
+            $form->remove('role');
+            // ---------------------
+            $form->remove('lastlogin');
+                return $this->render('users/register.html.twig', [
                 'form' => $form->createView()
             ]);    
         }     
     }
+    // Dummy function used during tests
+    private function dummyUser(): Users {
+        $user = new Users();
+        $user->setFirstname('Yves');
+        $user->setLastname('Toubhans');
+        $user->setEmail('yves.toubhans@free.fr');
+        $user->setAddress('21 rue des moines épicuriens, 77200 Pontolt');
+        $user->setPassword('1111');
+        $user->setConfirmpassword('1111');
+        return $user;
+    }
+    // ------------------------------------------------------------------------
+    #[Route('/resetpassrequest', name: 'users.resetpassrequest')]
+    public function requestNewPassword(
+        Users $user = null,
+        Request $request,
+        EntityManagerInterface $entityManager,
+        MailO2 $mailo2
+        ): Response
+    {
+        $user = new Users();
+        $form = $this->createForm(UsersType::class, $user);
+        $form->remove('created');
+        $form->remove('role');
+        $form->remove('lastlogin');
+        $form->handleRequest($request);
+        if($form->isSubmitted()){
+            
+            // ---------------------------------------------------------------------
+            // Send the registration mail
+            // ---------------------------------------------------------------------
+            /* @$tks Token */
+            $tks = $mailo2->sendPasswordReset($form->getData()->getEmail());
+            // ---------------------------------------------------------------------
+            // Track the registration request in the requests_tracker table
+            // ---------------------------------------------------------------------
+            /* @$rqtracker RequestTracker */
+            $rqtracker = new RequestsTracker();
+            date_default_timezone_set('Europe/Paris');
+            $expires = date("U") + 3600; // 60 minutes delay before expiration
+            $rqtracker->setRequestactiontype('PasswordReset')
+                    ->setEmail($user->getEmail())
+                    ->setCreated(new DateTime('now'))
+                    ->setProcessed(new DateTime('now'))
+                    ->setExpires($expires)
+                    ->setToken($tks->getToken())
+                    ->setSelector($tks->getSelector())
+                    ->setStatus(RequestsTracker::STATUS_REQUESTED);
+            $entityManager->persist($rqtracker);
+            // ---------------------------------------------------------------------
+            // Final commit of the global transaction
+            // ---------------------------------------------------------------------
+            $entityManager->flush();
+            $this->addFlash('success', 'Read your emails, a reset has been sent');
+            return $this->redirectToRoute('home');
+        }
+        return $this->render('security/passwordresetrequest.html.twig', [ 'form' => $form->createView()] );
+    }
+
 }

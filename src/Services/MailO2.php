@@ -2,79 +2,92 @@
 namespace App\Services;
 
 use App\Core\Mail;
-use PHPMailer\PHPMailer\PHPMailer;
+use App\Core\Token;
+use Symfony\Component\Mime\Email;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 
-class MailTrap extends Mail 
+class MailO2
 {
-
-  private PHPMailer $phpmailer;
-
   //----------------------------------------------------------------------
-  public function __construct(string $to)
+  public function __construct(private MailerInterface $mailer) { }
+  //----------------------------------------------------------------------
+  public function sendRegisterConfirmation(String $to) : Token {
+    // Get a token + selector object
+    $tks =  new Token('/robot/registeruserconfirmed'); 
+    $message = $this->buildRegistrationMessage($_ENV['MAIL_REGISTER_SUBJECT'], $tks);
+    // ------------------------------------------------------------------------
+    // Send email: here we use the symfony standard package
+    // Remember a worker has to consume the emails otherwise they won't be sent
+    // Can be launched with this command :  
+    //                  php bin/console messenger:consume async -vv
+    // or
+    //                  php bin/console messenger:consume async
+    // This should be automatically started in production with a cron job...
+    // The consumer must be stopped properly with this command:
+    //                  php bin/console messenger:stop
+    // ------------------------------------------------------------------------
+    $email = (new Email())
+        ->from($_ENV["MAIL_FROM"])
+        ->to($to)
+        //->cc('cc@example.com')
+        //->bcc('bcc@example.com')
+        ->replyTo($_ENV["MAIL_FROM"])
+        //->priority(Email::PRIORITY_HIGH)
+        ->subject($_ENV['MAIL_REGISTER_SUBJECT'])
+        ->html($message);
+    try {
+        $this->mailer->send($email);
+        return $tks;
+    } catch (TransportExceptionInterface $e) {
+        return null;
+    }            
+  }
+  //----------------------------------------------------------------------
+  public function sendPasswordReset(string $to) {
+        // Get a token + selector object
+        $tks =  new Token('/robot/resetmypassword'); 
+        $message = $this->buildPasswordResetMessage($_ENV['MAIL_PWDRESET_SUBJECT'], $tks);
+        $email = (new Email())
+            ->from($_ENV["MAIL_FROM"])
+            ->to($to)
+            //->cc('cc@example.com')
+            //->bcc('bcc@example.com')
+            ->replyTo($_ENV["MAIL_FROM"])
+            //->priority(Email::PRIORITY_HIGH)
+            ->subject($_ENV['MAIL_PWDRESET_SUBJECT'])
+            ->html($message);
+        try {
+            $this->mailer->send($email);
+            return $tks;
+        } catch (TransportExceptionInterface $e) {
+            return null;
+        }            
+  }
+  //----------------------------------------------------------------------
+  private function buildRegistrationMessage(string $subject, Token $tks) 
   {
-    parent::__construct($to, __CLASS__);
-  }
+    $atlast = date('d-m-Y H:i',$tks->getExpires());
+    date_default_timezone_set('Europe/Paris');
+    $message = "<p>".$subject."</p>";
+    $message .= "<br><br>";
+    $message .= "<p>En confirmant cette demande vous acceptez le stockage sécurisé de votre email dans nos serveurs.</p>";
+    $message .= "<br>";
+    $message .= "<a href='".$tks->getUrl()."'>Confirmer ma demande</a>";
+    $message .= "<br><br>";
+    $message .= '<p>Avant le '.$atlast.'</p>';
+    return $message;
+  }  
   //----------------------------------------------------------------------
-  public function sendRegisterConfirmation(string $mailtext, $useremail) {
-
-    // Get a token + selector object
-    $tks = $this->createToken('/admin/registeruserconfirmed'); 
-    // PHP mailer
-    $this->phpmailer = new PHPMailer();
-    $this->phpmailer->isSMTP();
-    $this->phpmailer->Host = 'smtp.mailtrap.io';
-    $this->phpmailer->SMTPAuth = true;
-    $this->phpmailer->Port = 2525;
-    $this->phpmailer->Username = '8173ffa6d214ac';
-    $this->phpmailer->Password = '7267baab0b8650';
-
-    $this->phpmailer->setFrom($this->from);
-    $this->phpmailer->isHTML(true);
-    $this->phpmailer->Subject = 'Registration confirmation';
-    $this->phpmailer->Body = $this->buildMessage($mailtext, $tks);
-    $this->phpmailer->addAddress($this->to);
-    if($this->phpmailer->send()) 
-    {
-      // Memorize a request record used later for confirmation
-      $this->storeMailRequest($useremail, $tks, 'register');
-      return true;
-    }
-    else 
-    {
-      return false;
-    }
-  }
-  //----------------------------------------------------------------------
-  public function sendPasswordReset(string $subject, $userpseudo) {
-
-    // Get a token + selector object
-    $tks = $this->createToken('/admin/passwordresetconfirmed'); 
-    // PHP mailer
-    $this->phpmailer = new PHPMailer();
-    $this->phpmailer->isSMTP();
-    $this->phpmailer->Host = 'smtp.mailtrap.io';
-    $this->phpmailer->SMTPAuth = true;
-    $this->phpmailer->Port = 2525;
-    $this->phpmailer->Username = '8173ffa6d214ac';
-    $this->phpmailer->Password = '7267baab0b8650';
-
-    $this->phpmailer->setFrom($this->from);
-    $this->phpmailer->isHTML(true);
-    $this->phpmailer->Subject = 'Reset password request confirmation';
-    $this->phpmailer->Body = $this->buildMessage($subject, $tks);
-    $this->phpmailer->addAddress($this->to);
-    if($this->phpmailer->send()) 
-    {
-      $this->logger->db('email URL :'.$tks->getUrl());
-      // Memorize a request record used later for confirmation
-      $this->storeMailRequest($userpseudo, $tks, 'reset');
-      return true;
-    }
-    else 
-    {
-      return false;
-    }
-  }
+  private function buildPasswordResetMessage(string $subject, Token $tks) 
+  {
+    date_default_timezone_set('Europe/Paris');
+    $message = "<p>".$subject."</p>";
+    $message .= "<br>";
+    $message .= "<a href='".$tks->getUrl()."'>Réinitialiser mon mot de passe</a>";
+    $message .= "<br><br>";
+    return $message;
+  }  
 }
 
 ?>
