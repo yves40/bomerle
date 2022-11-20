@@ -7,8 +7,7 @@
 {% block body %}
     <h1>Ajouter un couteau</h1>
     <div class="new-knife-container">
-        {{ form_start(formknifes, {'attr': {'novalidate': 'novalidate'}}) }}
-            <form action="" method="post" class="form">
+        {{ form_start(formknifes, {'attr': {'novalidate': 'novalidate', 'class' : 'form'}}) }}
             {{ form_row(formknifes._token) }}
                 <div class="input-group">
                     {{ form_label(formknifes.name, "Nom") }}
@@ -81,8 +80,18 @@
                     {{ form_errors(formknifes.images) }}
                 </div>
                 <button type="submit" class="add-button">Ajouter</button>
-            </form>
         {{ form_end(formknifes) }}
+        {% if new %}
+        {% else %}
+            <ul>
+                {% for image in knife.images %}
+                    <li>
+                        {{ image.filename }}
+                        
+                    </li>
+                {% endfor %}    
+            </ul>
+        {% endif %}
     </div>
     <a href="{{path('index.dashboard')}}">Retour</a>
 {% endblock %}

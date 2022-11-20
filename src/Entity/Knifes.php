@@ -73,7 +73,7 @@ class Knifes
     #[Assert\Valid]
     private Collection $metals;
 
-    #[ORM\OneToMany(mappedBy: 'knifes', targetEntity: Images::class, cascade:['persist'], fetch: "EAGER")]
+    #[ORM\OneToMany(mappedBy: 'knifes', targetEntity: Images::class, cascade:['persist', 'remove'], fetch: "EAGER")]
     // #[Assert\File(
     //     maxSize: '10M',
     //     maxSizeMessage: 'Taille maximale autorisée 10Mo par image',

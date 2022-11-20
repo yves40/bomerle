@@ -542,7 +542,6 @@ class ComponentsController extends AbstractController
         Request $request,
         EntityManagerInterface $entityManager,
         Uploader $uploader,
-        ValidatorInterface $validator
     ): Response
     {
         ini_set('upload_max_filesize', 5);
@@ -589,6 +588,61 @@ class ComponentsController extends AbstractController
         }else{
             return $this->render('components/knifes.html.twig', [
                 'formknifes' => $form->createView()
+            ]);
+        }
+    }
+    #[Route('/deleteknife/{id}', name: 'knife.delete')]
+    public function deleteKnife(
+        int $id,
+        EntityManagerInterface $entityManager
+    ): Response
+    {
+        $knife = $entityManager->getRepository(Knifes::class)->find($id);
+        $entityManager->getRepository(Knifes::class)->remove($knife, true);
+        $this->addFlash('success', "Le couteau ".$knife->getName()." a été supprimé");
+        return $this->redirectToRoute('knife.list');
+    }
+    #[Route('/updateknife/{id}', name: 'knife.update')]
+    public function updateKnife(
+        Knifes $knife,
+        EntityManagerInterface $entityManager,
+        Request $request,
+        Uploader $uploader
+    ): Response
+    {
+        $new = false;
+        $form = $this->createForm(KnifesType::class, $knife);
+        $form->handleRequest($request);
+        // dd($knife);
+        if($form->isSubmitted() && $form->isValid()){
+            $uploadedFiles = $form->get('images')->getData();
+            $physicalPath = $this->getParameter('knifeimages_directory');
+
+            if(count($uploadedFiles) > 0){
+                for($i=0; $i < count($uploadedFiles); $i++){
+                    $image = new Images();
+                    $newFileName = $uploader->uploadFile($uploadedFiles[$i], $physicalPath);
+                    $image->setFilename($newFileName);
+                    $image->setMainpicture(false);
+                    $knife->addImage($image);
+                }
+            }
+            $entityManager->persist($knife);
+            $entityManager->flush($knife);
+            $this->addFlash('success', "Le couteau ".$knife->getName()." a été modifié");
+            return $this->redirectToRoute('knife.list');
+        }elseif($form->isSubmitted() && !$form->isValid()){
+            $this->addFlash('error', 'Un problème est survenu !');
+            return $this->render('components/knifes.html.twig', [
+                'formknifes' => $form->createView(),
+                'knife' => $knife,
+                'new' => $new
+            ]);
+        }else{
+            return $this->render('components/knifes.html.twig', [
+                'formknifes' => $form->createView(),
+                'knife' => $knife,
+                'new' => $new
             ]);
         }
     }
