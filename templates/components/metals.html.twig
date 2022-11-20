@@ -62,15 +62,27 @@
     </header>
     <div class="contenu">
         <div class="form-container">
-            <h1 class="form-title">Ajouter un :</h1>
+            {% if new %}
+                <h1 class="form-title">Ajouter un :</h1>
+            {% else %}
+                <h1 class="form-title">Modifier un :</h1>
+            {% endif %}
             {{ form_start(formmetals, {'attr': {'novalidate': 'novalidate', 'class': 'form'}}) }}
                 <div class="input-group">
                     {{ form_row(formmetals._token) }}
                     {{ form_label(formmetals.name, "Métal") }}
-                    {{ form_widget(formmetals.name) }}
+                    {% if new %}
+                        {{ form_widget(formmetals.name) }}
+                    {% else %}
+                        {{ form_widget(formmetals.name, {'value' : metal.name}) }}
+                    {% endif %}
                     {{ form_errors(formmetals.name) }}
                 </div>
-                <button type="submit" class="add-button">Ajouter</button>
+                {% if new %}
+                    <button type="submit" class="add-button">Ajouter</button>
+                {% else %}
+                    <button type="submit" class="add-button">Modifier</button>
+                {% endif %}
             {{ form_end(formmetals)}}
         </div>
         <div class="admin-list">
@@ -80,8 +92,8 @@
                     <li>
                         <p> {{metal.name}} </p>
                         <div class="links">
-                            <a href="" class="update"><ion-icon name="construct-outline"></ion-icon></a>
-                            <a href="" class="delete"><ion-icon name="trash-outline"></ion-icon></a>
+                            <a href="{{ path('metal.update', {id: metal.id}) }}" class="update"><ion-icon name="construct-outline"></ion-icon></a>
+                            <a href="{{ path('metal.delete', {id: metal.id}) }}" class="delete"><ion-icon name="trash-outline"></ion-icon></a>
                         </div>
                     </li>
                 {% endfor %}

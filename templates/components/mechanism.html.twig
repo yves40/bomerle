@@ -62,15 +62,27 @@
     </header>
     <div class="contenu">
         <div class="form-container">
-            <h1 class="form-title">Ajouter un :</h1>
+            {% if new %}
+                <h1 class="form-title">Ajouter un :</h1>
+            {% else %}
+                <h1 class="form-title">Modifier un :</h1>
+            {% endif %}
             {{ form_start(formmechanism, {'attr': {'novalidate': 'novalidate', 'class': 'form'}}) }}
                 <div class="input-group">
                     {{ form_row(formmechanism._token) }}
                     {{ form_label(formmechanism.name, "Mécanisme") }}
-                    {{ form_widget(formmechanism.name) }}
+                    {% if new %}
+                        {{ form_widget(formmechanism.name) }}
+                    {% else %}
+                        {{ form_widget(formmechanism.name, {'value' : mechanism.name}) }}
+                    {% endif %}
                     {{ form_errors(formmechanism.name) }}
                 </div>
-                <button type="submit" class="add-button">Ajouter</button>
+                {% if new %}
+                    <button type="submit" class="add-button">Ajouter</button>
+                {% else %}
+                    <button type="submit" class="add-button">Modifier</button>
+                {% endif %}
             {{ form_end(formmechanism)}}
         </div>
         <div class="admin-list">
@@ -80,8 +92,8 @@
                     <li>
                         <p> {{mechanism.name}} </p>
                         <div class="links">
-                            <a href="" class="update"><ion-icon name="construct-outline"></ion-icon></a>
-                            <a href="" class="delete"><ion-icon name="trash-outline"></ion-icon></a>
+                            <a href="{{ path('mechanism.update', {id: mechanism.id}) }}" class="update"><ion-icon name="construct-outline"></ion-icon></a>
+                            <a href="{{ path('mechanism.delete', {id: mechanism.id}) }}" class="delete"><ion-icon name="trash-outline"></ion-icon></a>
                         </div>
                     </li>
                 {% endfor %}
