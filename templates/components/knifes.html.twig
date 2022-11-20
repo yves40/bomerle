@@ -86,8 +86,8 @@
             <ul>
                 {% for image in knife.images %}
                     <li>
-                        {{ image.filename }}
-                        
+                        <p>{{ image.filename }}</p>
+                        <a href="{{ path('image.delete', {knife_id : knife.id, id : image.id}) }}">Supprimer</a>
                     </li>
                 {% endfor %}    
             </ul>

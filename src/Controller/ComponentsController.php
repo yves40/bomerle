@@ -12,6 +12,7 @@ use App\Entity\Metals;
 use App\Form\AccessoriesType;
 use App\Form\CategoryType;
 use App\Form\HandleType;
+use App\Form\ImagesType;
 use App\Form\KnifesType;
 use App\Form\MechanismType;
 use App\Form\MetalsType;
@@ -646,6 +647,22 @@ class ComponentsController extends AbstractController
             ]);
         }
     }
+    #[Route('/deleteimage/{knife_id}/{id}', name:'image.delete')]
+    public function deleteImage(
+        int $knife_id,
+        int $id,
+        EntityManagerInterface $entityManager,
+    ): Response
+    {
+        $knife = $entityManager->getRepository(Knifes::class)->findOneBy(['id' => $knife_id]);
+        $image = $entityManager->getRepository(Images::class)->findOneBy(['id' => $id]);
+        $entityManager->getRepository(Images::class)->remove($image, false);
+        $knife->removeImage($image);
+        $entityManager->persist($knife);
+        $entityManager->flush();
+        return $this->redirectToRoute('knife.update', ['id' => $knife_id]);
+    }
+
     #[Route('/listknife', name: 'knife.list')]
     public function listKnife(
         EntityManagerInterface $entityManager,
