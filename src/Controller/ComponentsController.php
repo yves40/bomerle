@@ -545,7 +545,7 @@ class ComponentsController extends AbstractController
         Uploader $uploader,
     ): Response
     {
-        ini_set('upload_max_filesize', 5);
+        $new = true;
         $knife = new Knifes();
 
         $form = $this->createForm(KnifesType::class, $knife);
@@ -575,7 +575,8 @@ class ComponentsController extends AbstractController
             $knife = new Knifes();
             $form = $this->createForm(KnifesType::class, $knife);
             return $this->render('components/knifes.html.twig', [
-                'formknifes' => $form->createView()
+                'formknifes' => $form->createView(),
+                'new' => $new
             ]);
         }elseif($form->isSubmitted() && !$form->isValid()){
             // dd($request);
@@ -584,11 +585,13 @@ class ComponentsController extends AbstractController
             // dd($errors);
             $this->addFlash('error', 'Un problème est survenu !');
             return $this->render('components/knifes.html.twig', [
-                'formknifes' => $form->createView()
+                'formknifes' => $form->createView(),
+                'new' => $new
             ]);
         }else{
             return $this->render('components/knifes.html.twig', [
-                'formknifes' => $form->createView()
+                'formknifes' => $form->createView(),
+                'new' => $new
             ]);
         }
     }

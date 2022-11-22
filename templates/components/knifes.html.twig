@@ -1,97 +1,119 @@
 {% extends 'template.html.twig' %}
 
 {% block title %}Ajouter un couteau{% endblock %}
-{% block link %}{% endblock %}
-
+{% block link %}
+    <link rel="stylesheet" href="{{asset('/css/adminknife.css')}}">
+{% endblock %}
+{% block script %}
+    <script src="{{asset('/scripts/mainmenu.js')}}" defer></script>
+{% endblock %}
 
 {% block body %}
-    <h1>Ajouter un couteau</h1>
-    <div class="new-knife-container">
-        {{ form_start(formknifes, {'attr': {'novalidate': 'novalidate', 'class' : 'form'}}) }}
-            {{ form_row(formknifes._token) }}
-                <div class="input-group">
+    <div class="contenu">
+        <div class="form-container">
+            {% if new %}
+                <h1 class="form-title">Ajouter un couteau:</h1>
+            {% else %}
+                <h1 class="form-title">Modifier un couteau :</h1>
+            {% endif %}
+
+            {{ form_start(formknifes, {'attr': {'novalidate': 'novalidate', 'class' : 'form'}}) }}
+                {{ form_row(formknifes._token) }}
+                <div class="input-group name">
                     {{ form_label(formknifes.name, "Nom") }}
                     {{ form_widget(formknifes.name) }}
                     {{ form_errors(formknifes.name) }}
                 </div>
-                <div class="input-group">
+                <div class="input-group description">
                     {{ form_label(formknifes.description, "Description") }}
                     {{ form_widget(formknifes.description) }}
                     {{ form_errors(formknifes.description) }}
                 </div>
-                <div class="input-group">
+                <div class="input-group spec stock">
                     {{ form_label(formknifes.stock, "Stock") }}
                     {{ form_widget(formknifes.stock) }}
                     {{ form_errors(formknifes.stock) }}
                 </div>
-                <div class="input-group">
+                <div class="input-group spec weight">
                     {{ form_label(formknifes.weight, "Poids") }}
                     {{ form_widget(formknifes.weight) }}
                     {{ form_errors(formknifes.weight) }}
                 </div>
-                <div class="input-group">
+                <div class="input-group spec length">
                     {{ form_label(formknifes.lenght, "Longueur") }}
                     {{ form_widget(formknifes.lenght) }}
                     {{ form_errors(formknifes.lenght) }}
                 </div>
-                <div class="input-group">
+                <div class="input-group spec close_length">
                     {{ form_label(formknifes.close_lenght, "Longueur fermé") }}
                     {{ form_widget(formknifes.close_lenght) }}
                     {{ form_errors(formknifes.close_lenght) }}
                 </div>
-                <div class="input-group">
+                <div class="input-group spec cuttingedge_length">
                     {{ form_label(formknifes.cuttingedge_lenght, "Longueur du tranchant") }}
                     {{ form_widget(formknifes.cuttingedge_lenght) }}
                     {{ form_errors(formknifes.cuttingedge_lenght) }}
                 </div>
-                <div class="input-group">
+                <div class="input-group spec price">
                     {{ form_label(formknifes.price, "Prix") }}
                     {{ form_widget(formknifes.price) }}
                     {{ form_errors(formknifes.price) }}
                 </div>
-                <div class="input-group">
+                <div class="input-group listbox category">
                     {{ form_label(formknifes.category, "Catégorie") }}
                     {{ form_widget(formknifes.category) }}
                     {{ form_errors(formknifes.category) }}
                 </div>
-                <div class="input-group">
+                <div class="input-group listbox mechanism">
                     {{ form_label(formknifes.mechanism, "Mécanisme") }}
                     {{ form_widget(formknifes.mechanism) }}
                     {{ form_errors(formknifes.mechanism) }}
                 </div>
-                <div class="input-group">
+                <div class="input-group checkbox accessories">
                     {{ form_label(formknifes.accessories, "Accessoires") }}
                     {{ form_widget(formknifes.accessories) }}
                     {{ form_errors(formknifes.accessories) }}
                 </div>
-                <div class="input-group">
+                <div class="input-group checkbox handle">
                     {{ form_label(formknifes.handle, "Matériaux du manche") }}
                     {{ form_widget(formknifes.handle) }}
                     {{ form_errors(formknifes.handle) }}
                 </div>
-                <div class="input-group">
+                <div class="input-group checkbox metals">
                     {{ form_label(formknifes.metals, "Métaux") }}
                     {{ form_widget(formknifes.metals) }}
                     {{ form_errors(formknifes.metals) }}
                 </div>
-                <div class="input-group">
+                <div class="input-group images">
                     {{ form_label(formknifes.images, "Images") }}
                     {{ form_widget(formknifes.images) }}
                     {{ form_errors(formknifes.images) }}
                 </div>
-                <button type="submit" class="add-button">Ajouter</button>
-        {{ form_end(formknifes) }}
-        {% if new %}
-        {% else %}
-            <ul>
-                {% for image in knife.images %}
-                    <li>
-                        <p>{{ image.filename }}</p>
-                        <a href="{{ path('image.delete', {knife_id : knife.id, id : image.id}) }}">Supprimer</a>
-                    </li>
-                {% endfor %}    
-            </ul>
-        {% endif %}
+                {% if new %}
+                    <button type="submit" class="add-button">Ajouter</button>
+                {% else %}
+                    <button type="submit" class="add-button">Modifier</button>
+                {% endif %}
+            {{ form_end(formknifes) }}
+        </div>
+        <div class="modify-knife-container">
+            {% if new %}
+            {% else %}
+                <h2>Collection d'images du couteau {{knife.name}}</h2>
+                <div class="list-images">
+                    <ul>
+                        {% for image in knife.images %}
+                            <li>
+                                <img src="{{asset('/images/knife/')}}{{image.filename}}" alt="Image de la collection {{knife.name}}">
+                                <a href="{{ path('image.delete', {knife_id : knife.id, id : image.id}) }}">Supprimer</a>
+                            </li>
+                        {% endfor %}    
+                    </ul>
+                </div>
+            {% endif %}
+        </div>
     </div>
-    <a href="{{path('index.dashboard')}}">Retour</a>
+
+    {# <a href="{{path('index.dashboard')}}">Retour</a> #}
 {% endblock %}
+{% block footer %}{% endblock %}

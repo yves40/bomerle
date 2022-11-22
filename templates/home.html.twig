@@ -12,57 +12,6 @@
 {% endblock %}
 
 {% block body %}
-    <header>
-        <div class="container">
-            <nav class="navigation">
-                {% if app.user %}
-                    <p>Bonjour {{ app.user.firstname }}</p>
-                {% endif %}
-                <ul>
-                    <li class="list">
-                        <a href="#">
-                            <span class="icon"><ion-icon name="home-outline"></ion-icon></span>
-                            <span class="text">Accueil</span>
-                        </a>
-                    </li>
-                    <li class="list">
-                        <a href="#">
-                            <span class="icon"><ion-icon name="camera-outline"></ion-icon></span>
-                            <span class="text">Galerie</span>
-                        </a>
-                    </li>
-                    <li class="list">
-                        <a href="#">
-                            <span class="icon"><ion-icon name="chatbubble-outline"></ion-icon></span>
-                            <span class="text">Contact</span>
-                        </a>
-                    </li>
-                    <li class="list">
-                        <a href="{{path('index.dashboard')}}">
-                            <span class="icon"><ion-icon name="hammer-outline"></ion-icon></span>
-                            <span class="text">Admin</span>
-                        </a>
-                    </li>
-                    <li class="list">
-                        {% if app.user %}
-                            <a href="{{path('app_logout')}}">
-                                <span class="icon"><ion-icon name="person-outline"></ion-icon></span>
-                                <span class="text">Se déconnecter</span>
-                            </a>
-                        {% else %}
-                            <a href="{{path('app_login')}}">
-                                <span class="icon"><ion-icon name="person-outline"></ion-icon></span>
-                                <span class="text">Se connecter</span>
-                            </a>
-                        {% endif %}
-                    </li>
-                </ul>
-            </nav>
-            <img src="./images/logo1.png" alt="Logo Beau Merle" class="logo">
-            <div class="about">Rencontres</div>
-            <div class="menu-toggle"></div>
-        </div>
-    </header>
     <div class="contenu">
         <section id="home">
             <div class="content">
@@ -171,36 +120,4 @@
             <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d827.4510672236495!2d3.706656325636536!3d45.8823780745658!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0!2zNDXCsDUyJzQ2LjUiTiAzwrA0MicwNC4xIkU!5e0!3m2!1sfr!2sfr!4v1668792379167!5m2!1sfr!2sfr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         </section>
     </div>
-    <footer>
-        <div class="contenu-footer">
-            <div class="bloc footer-services">
-                <h3>Nos Services</h3>
-                <ul>
-                    <li><a href="#">Galerie</a></li>
-                    <li><a href="#">L'atelier</a></li>
-                    <li><a href="#">Commander</a></li>
-                </ul>
-            </div>
-            <div class="bloc footer-contact">
-                <h3>Restons en contact</h3>
-                <p>55-55-55-55-55</p>
-                <p>contact-mail@beaumerle.fr</p>
-                <p>Grotte des ours bruns de l'Allier 03000 Thiers</p>
-            </div>
-            <div class="bloc newsletter">
-                <h3>Newsletter</h3>
-                
-            </div>
-            <div class="bloc footer-networks">
-                <h3>Nos réseaux</h3>
-                <ul>
-                    <li><a href="#"><ion-icon name="logo-facebook"></ion-icon>Facebook</a></li>
-                    <li><a href="#"><ion-icon name="logo-instagram"></ion-icon>Instagram</a></li>
-                    <li><a href="#"><ion-icon name="logo-twitter"></ion-icon>Tweeter</a></li>
-                    <li><a href="#"><ion-icon name="logo-tiktok"></ion-icon>TikTok</a></li>
-                    <li><a href="#"><ion-icon name="logo-snapchat"></ion-icon>Snapchat</a></li>
-                </ul>
-            </div>
-        </div>
-    </footer>
 {% endblock %}
