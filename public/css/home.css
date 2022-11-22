@@ -244,10 +244,19 @@ header {
           background: #b48645;
           width: 22px; }
     header .container .about {
-      padding: 10px 5px;
+      padding: 10px 15px;
+      letter-spacing: 2.3px;
+      text-align: center;
       background: #b48645;
       text-transform: uppercase;
-      color: #f1f1f1; }
+      color: #f1f1f1;
+      transition: all .3s; }
+      @media screen and (min-width: 1024px) {
+        header .container .about {
+          cursor: pointer;
+          width: 150px; }
+          header .container .about:hover {
+            letter-spacing: 2.6px; } }
     header .container .navigation {
       position: absolute;
       background: #f1f1f1;
@@ -260,7 +269,7 @@ header {
       transition: all 0.5s; }
       header .container .navigation.active {
         scale: 1; }
-      header .container .navigation p {
+      header .container .navigation .sayhello {
         position: absolute;
         top: 25%;
         left: 50%;
@@ -269,6 +278,14 @@ header {
         justify-content: center;
         font-size: 1.7rem;
         transform: translateX(-50%); }
+        @media screen and (min-width: 1024px) {
+          header .container .navigation .sayhello {
+            position: relative;
+            top: 0;
+            left: 0;
+            transform: translateX(0%);
+            width: auto;
+            color: #f1f1f1; } }
       header .container .navigation ul {
         display: flex;
         flex-direction: column;
@@ -301,12 +318,12 @@ header {
         header .container .navigation {
           display: flex;
           flex-direction: row;
-          justify-content: center;
+          justify-content: flex-start;
           align-items: center;
           position: relative;
           scale: 1;
           background: none;
-          width: 50%;
+          width: auto;
           height: 80px; }
           header .container .navigation ul {
             flex-direction: row; }
@@ -476,7 +493,8 @@ footer {
         border-bottom: 2px solid rgba(74, 71, 71, 0.387); }
         #services .container ul li a {
           text-decoration: none;
-          color: #f1f1f1; }
+          color: #f1f1f1;
+          position: relative; }
           @media screen and (min-width: 1024px) {
             #services .container ul li a {
               padding-left: 40px; }
@@ -489,7 +507,7 @@ footer {
                 transition: 1.3s ease-in-out;
                 border-right: 8px solid #b48645; }
               #services .container ul li a:hover::before {
-                width: 18%;
+                width: 100%;
                 filter: drop-shadow(0 0 25px #b48645); } }
 
 #instructions {
