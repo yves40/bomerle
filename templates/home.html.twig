@@ -97,21 +97,13 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td class="date">18.12.2022</td>
-                        <td class="name">Paris Knifes Week</td>
-                        <td class="address">Parc des expositions - Porte de Versailles</td>
-                    </tr>
-                    <tr>
-                        <td class="date">13.01.2023</td>
-                        <td class="name">Marché de Brives la Gaillarde</td>
-                        <td class="address">Place du marché</td>
-                    </tr>
-                    <tr>
-                        <td class="date">20.01.2023</td>
-                        <td class="name">Fête du cochon</td>
-                        <td class="address">Salle Justin Bridou, Saint-Jean-Pied-de-Porc 64220</td>
-                    </tr>
+                    {% for event in events %}
+                        <tr>
+                            <td class="date">{{ event.date|date("d/m/Y") }}</td>
+                            <td class="name">{{ event.name }}</td>
+                            <td class="address">{{ event.address }}</td>
+                        </tr>
+                    {% endfor %}
                 </tbody>
             </table>
         </section>

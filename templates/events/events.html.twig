@@ -1,0 +1,81 @@
+{% extends 'template.html.twig' %}
+
+{% block title %}Ajouter un manche{% endblock %}
+{% block link %}
+    <link rel="stylesheet" href="{{asset('/css/admin.css')}}">
+{% endblock %}
+{% block script %}
+    <script src="{{asset('/scripts/mainmenu.js')}}" defer></script>
+{% endblock %}
+
+{% block body %}
+    <div class="contenu">
+        <div class="form-container">
+            {% if new %}
+                <h1 class="form-title">Ajouter un salon :</h1>
+            {% else %}
+                <h1 class="form-title">Modifier un salon :</h1>
+            {% endif %}
+
+            {{ form_start(formevent, {'attr': {'novalidate': 'novalidate', 'class': 'form'}}) }}
+                {{ form_row(formevent._token) }}
+                <div class="input-group">
+                    {{ form_label(formevent.name, "Nom") }}
+                    {% if new %}
+                        {{ form_widget(formevent.name) }}
+                    {% else %}
+                        {{ form_widget(formevent.name, {'value' : event.name}) }}
+                    {% endif %}
+                    {{ form_errors(formevent.name) }}
+                </div>
+                <div class="input-group">
+                    {{ form_label(formevent.address, "Adresse") }}
+                    {% if new %}
+                        {{ form_widget(formevent.address) }}
+                    {% else %}
+                        {{ form_widget(formevent.address, {'value' : event.address}) }}
+                    {% endif %}
+                    {{ form_errors(formevent.address) }}
+                </div>
+                <div class="input-group">
+                    {{ form_label(formevent.date, "Date") }}
+                    {{ form_widget(formevent.date) }}
+                    {{ form_errors(formevent.date) }}
+                </div>
+                {% if new %}
+                    <button type="submit" class="add-button">Ajouter</button>
+                {% else %}
+                    <button type="submit" class="add-button">Modifier</button>
+                {% endif %} 
+            {{ form_end(formevent) }}
+        </div>
+        <div class="admin-list">
+            <h2>Salons disponibles</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th colspan="1">Date</th>
+                        <th colspan="1">Nom</th>
+                        <th colspan="1">Adresse</th>
+                        <th colspan="1">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for event in events %}
+                        <tr>
+                            <td class="date">{{ event.date|date("d/m/Y") }}</td>
+                            <td class="name">{{ event.name }}</td>
+                            <td class="address">{{ event.address }}</td>
+                            <td class="action">
+                                <a href="{{ path('event.update', {id: event.id}) }}" class="update"><ion-icon name="construct-outline"></ion-icon></a>
+                                <a href="{{ path('event.delete', {id: event.id}) }}" class="delete"><ion-icon name="trash-outline"></ion-icon></a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}
+
+{% block footer %}{% endblock %}
