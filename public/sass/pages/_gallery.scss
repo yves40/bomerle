@@ -1,0 +1,108 @@
+.contenu
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    overflow: hidden;
+}
+
+.gallery-title
+{
+    margin: 95px 0px 30px;
+    width: 100%;
+    text-align: center;
+    font-family: $title;
+    font-size: 2rem;
+    font-weight: 600;
+}
+
+.gallery
+{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .blocknife{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        .knifename{
+            font-size: 1.7rem;
+            width: 100%;
+            text-align: left;
+            padding: 0 0 20px 15px;
+        }
+        .mainpicture{
+            width: 300px;
+            height: 300px;
+            border-radius: .3rem;
+            overflow: hidden;
+
+            img{
+                width: 300px;
+                height: 300px;
+                object-fit: cover;
+                object-position: center;
+            }
+        }
+        .specificities{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+
+            .knifedescription{
+                width: 100%;
+                text-align: justify;
+                font-size: 1.3rem;
+                padding: 10px 15px 5px;
+            }
+            .category{
+                width: 100%;
+                text-align: left;
+                font-size: 1.1rem;
+                padding: 5px 15px;
+            }
+            .groups{
+                width: 100%;
+                display: flex;
+                flex-direction: column
+                ;
+                font-size: 1.1rem;
+                padding: 5px 15px;
+
+                ul{
+                    display: grid;
+                    grid-template-columns: repeat(3, 1fr);
+                    font-size: .95rem;
+                    li{
+                        width: 100%;
+                        display: flex;
+                        flex-direction: column;
+                        font-size: .85rem;
+
+                        h3{
+                            text-decoration: underline;
+                        }
+                        .available{
+                            color: $formSuccess;
+                        }
+                        .unavailable{
+                            color: $formError;
+                        }
+                    }
+                }
+            }
+            .knifespec{
+                @extend .groups
+            }
+        }
+    }
+}

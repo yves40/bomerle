@@ -389,237 +389,82 @@ footer {
           font-size: 2rem;
           padding-right: 1vw; }
 
-#home {
-  width: 100%;
-  height: 100vh;
-  overflow: hidden;
-  position: relative;
-  background-image: url(../images/homepageimages/enclume.jpg);
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
+.contenu {
   display: flex;
   flex-direction: column;
-  justify-content: center; }
-  #home .content {
-    position: relative; }
-    #home .content .name {
-      position: relative;
-      width: 100%;
-      background: #f1f1f1;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center; }
-      #home .content .name h1 {
-        font-family: "Cinzel Decorative", sans-serif;
-        font-size: 2.7rem;
-        font-weight: 600;
-        text-align: center; }
-        #home .content .name h1.reveal {
-          opacity: 0;
-          transform: translateY(-30px); }
-        #home .content .name h1.reveal-visible {
-          opacity: 1;
-          transform: translateY(0px);
-          transition: 1s all cubic-bezier(0.5, 0, 0, 1); }
-
-#catalog {
-  padding: 20px 0 0px;
-  background: #333; }
-  #catalog .button {
-    width: 250px;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 1; }
-  #catalog .banner {
-    width: 100%;
-    display: flex;
-    flex-wrap: nowrap;
-    overflow: hidden;
-    height: 50vh; }
-    @media screen and (min-width: 1024px) {
-      #catalog .banner {
-        height: 70vh; } }
-    #catalog .banner img {
-      max-width: none;
-      animation: image-translate 60s linear infinite; }
-
-@keyframes image-translate {
-  0% {
-    transform: translateX(0); }
-  100% {
-    transform: translateX(-100%); } }
-
-#services {
-  position: relative;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
+  justify-content: flex-start;
   align-items: center;
-  justify-content: center; }
-  @media screen and (min-width: 1024px) {
-    #services {
-      height: 70vh; } }
-  #services .container {
-    padding: 85px 5px 85px 5px;
-    width: 100%;
-    height: 100%;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    justify-content: center; }
-    #services .container:before {
-      position: absolute;
-      content: '';
-      inset: 0;
-      background-image: url(../images/knife/cuisine.jpg);
-      background-repeat: no-repeat;
-      background-position: center;
-      background-size: cover;
-      filter: grayscale(100%) brightness(0.9); }
-    #services .container h1 {
-      position: relative;
-      text-transform: uppercase;
-      font-size: 1.5rem;
-      font-family: "Cinzel Decorative", sans-serif;
-      font-weight: 600;
-      color: #f0eee3;
-      padding-bottom: 20px;
-      border-bottom: 2px solid rgba(74, 71, 71, 0.387); }
-      @media screen and (min-width: 1024px) {
-        #services .container h1 {
-          padding-left: 40px; } }
-    #services .container ul {
-      z-index: 2;
-      position: relative; }
-      #services .container ul li {
-        text-transform: uppercase;
-        font-size: 3.125rem;
-        border-bottom: 2px solid rgba(74, 71, 71, 0.387); }
-        #services .container ul li a {
-          text-decoration: none;
-          color: #f1f1f1;
-          position: relative; }
-          @media screen and (min-width: 1024px) {
-            #services .container ul li a {
-              padding-left: 40px; }
-              #services .container ul li a::before {
-                content: attr(data-text);
-                position: absolute;
-                color: #b48645;
-                width: 0;
-                overflow: hidden;
-                transition: .6s ease-in-out;
-                border-right: 8px solid #b48645; }
-              #services .container ul li a:hover::before {
-                width: 100%;
-                filter: drop-shadow(0 0 25px #b48645); } }
+  overflow: hidden; }
 
-#instructions {
-  background: #f1f1f1;
-  color: #333;
-  padding: 40px 5px; }
-  @media screen and (min-width: 1024px) {
-    #instructions ul {
-      display: flex;
-      justify-content: center;
-      align-items: flex-start; }
-      #instructions ul li {
-        width: 30%;
-        margin: 0 15px; } }
-  #instructions h1 {
-    width: 100%;
-    text-align: center;
-    font-family: "Cinzel Decorative", sans-serif;
-    font-size: 1.5rem;
-    font-weight: 600; }
-  #instructions .article {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 100%; }
-    #instructions .article .wrapper {
-      inset: 0;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      position: relative;
-      padding: 15px 5px; }
-      #instructions .article .wrapper img {
-        border-radius: 50%;
-        object-fit: cover;
-        object-position: center;
-        max-width: 300px; }
-      #instructions .article .wrapper .number {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        color: #f1f1f1;
-        font-size: 5rem;
-        font-weight: 600;
-        width: 100%;
-        text-align: center; }
-    #instructions .article p {
-      text-align: left;
-      font-size: 1.2rem;
-      width: 100%; }
-      @media screen and (min-width: 1024px) {
-        #instructions .article p {
-          text-align: justify; } }
-
-#events {
+.gallery-title {
+  margin: 95px 0px 30px;
   width: 100%;
-  background: #333;
-  padding: 30px 5px;
+  text-align: center;
+  font-family: "Cinzel Decorative", sans-serif;
+  font-size: 2rem;
+  font-weight: 600; }
+
+.gallery {
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center; }
-  #events h1 {
+  .gallery .blocknife {
     width: 100%;
-    text-align: center;
-    font-family: "Cinzel Decorative", sans-serif;
-    font-size: 1.45rem;
-    font-weight: 600;
-    color: #f0eee3;
-    padding-bottom: 20px; }
-  #events table {
-    border: 1px solid #f1f1f1;
-    width: 100%;
-    max-width: 700px; }
-    #events table thead {
-      color: #f1f1f1;
-      border: 1px solid #f1f1f1; }
-      #events table thead th {
-        border: 1px solid #f1f1f1; }
-    #events table tbody {
-      background: #f1f1f1;
-      border: #f1f1f1; }
-      #events table tbody tr {
-        border: 1px solid #333; }
-        #events table tbody tr td {
-          border: 1px solid #333;
-          padding: 1px 2px; }
-
-#workshop {
-  width: 100%;
-  padding: 30px 5px; }
-  #workshop h1 {
-    width: 100%;
-    text-align: center;
-    font-family: "Cinzel Decorative", sans-serif;
-    font-size: 2rem;
-    font-weight: 600;
-    color: #333;
-    padding-bottom: 20px; }
-  #workshop p {
-    text-align: center;
-    padding: 10px 0;
-    font-size: 1.4rem; }
-  #workshop iframe {
-    width: 100%; }
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; }
+    .gallery .blocknife .knifename {
+      font-size: 1.7rem;
+      width: 100%;
+      text-align: left;
+      padding: 0 0 20px 15px; }
+    .gallery .blocknife .mainpicture {
+      width: 300px;
+      height: 300px;
+      border-radius: .3rem;
+      overflow: hidden; }
+      .gallery .blocknife .mainpicture img {
+        width: 300px;
+        height: 300px;
+        object-fit: cover;
+        object-position: center; }
+    .gallery .blocknife .specificities {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 100%; }
+      .gallery .blocknife .specificities .knifedescription {
+        width: 100%;
+        text-align: justify;
+        font-size: 1.3rem;
+        padding: 10px 15px 5px; }
+      .gallery .blocknife .specificities .category {
+        width: 100%;
+        text-align: left;
+        font-size: 1.1rem;
+        padding: 5px 15px; }
+      .gallery .blocknife .specificities .groups, .gallery .blocknife .specificities .knifespec {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        font-size: 1.1rem;
+        padding: 5px 15px; }
+        .gallery .blocknife .specificities .groups ul, .gallery .blocknife .specificities .knifespec ul {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          font-size: .95rem; }
+          .gallery .blocknife .specificities .groups ul li, .gallery .blocknife .specificities .knifespec ul li {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            font-size: .85rem; }
+            .gallery .blocknife .specificities .groups ul li h3, .gallery .blocknife .specificities .knifespec ul li h3 {
+              text-decoration: underline; }
+            .gallery .blocknife .specificities .groups ul li .available, .gallery .blocknife .specificities .knifespec ul li .available {
+              color: #66cc33; }
+            .gallery .blocknife .specificities .groups ul li .unavailable, .gallery .blocknife .specificities .knifespec ul li .unavailable {
+              color: #cc3333; }
