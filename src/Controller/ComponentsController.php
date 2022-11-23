@@ -671,7 +671,10 @@ class ComponentsController extends AbstractController
         EntityManagerInterface $entityManager,
     ): Response
     {
-        $allKnifes = $entityManager->getRepository(Knifes::class)->findAll();
+        $allKnifes = $entityManager->getRepository(Knifes::class)->findBy(
+            [],
+            ['id' => 'ASC']
+        );
         return $this->render('components/listknifes.html.twig', [
             'allknifes' => $allKnifes
         ]);
