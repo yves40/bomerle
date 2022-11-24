@@ -61,9 +61,8 @@
 
     @media screen and (min-width: 1200px) {
 
-        &:hover{
-
-            a{
+        a{
+            &:hover{
                 background: $buttonNext;
                 color: $buttonNext;
 
@@ -148,24 +147,23 @@
 
     @media screen and (min-width: 1200px) {
 
-        &:hover{
+            a{  
+                &:hover{
+                    background: $buttonNext;
+                    color: $buttonNext;
 
-            a{
-                background: $buttonNext;
-                color: $buttonNext;
+                    i{
 
-                i{
-
-                    &:before{
-                        width: 20px;
-                        left: 20%;
-                    }
-                    &:after{
-                        width: 20px;
-                        left: 80%;
+                        &:before{
+                            width: 20px;
+                            left: 20%;
+                        }
+                        &:after{
+                            width: 20px;
+                            left: 80%;
+                        }
                     }
                 }
             }
-        }
     }
 }

@@ -109,13 +109,13 @@ section {
         transform: translate(-50%) skewX(325deg);
         transition: 0.5s; }
   @media screen and (min-width: 1200px) {
-    .button:hover a {
+    .button a:hover {
       background: #b48645;
       color: #b48645; }
-      .button:hover a i:before {
+      .button a:hover i:before {
         width: 20px;
         left: 20%; }
-      .button:hover a i:after {
+      .button a:hover i:after {
         width: 20px;
         left: 80%; } }
 
@@ -169,13 +169,13 @@ section {
         transform: translate(-50%) skewX(325deg);
         transition: 0.5s; }
   @media screen and (min-width: 1200px) {
-    .button-gallery:hover a {
+    .button-gallery a:hover {
       background: #b48645;
       color: #b48645; }
-      .button-gallery:hover a i:before {
+      .button-gallery a:hover i:before {
         width: 20px;
         left: 20%; }
-      .button-gallery:hover a i:after {
+      .button-gallery a:hover i:after {
         width: 20px;
         left: 80%; } }
 

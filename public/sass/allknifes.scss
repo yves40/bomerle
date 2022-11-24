@@ -7,3 +7,51 @@
 @import './layout/footer';
 @import './pages/gallery';
 
+.alldetails{
+
+    .details{
+        display: none;
+        width: 300px;
+
+        @media screen and (min-width: 1024px){
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: flex-start;
+            
+
+            .components{
+                font-size: 1.1rem;
+                padding: 5px 15px;
+
+                ul{
+                    display: grid;
+                    grid-template-columns: repeat(1, 1fr);
+                    font-size: .95rem;
+                    li{
+                        width: 100%;
+                        display: flex;
+                        flex-direction: column;
+                        font-size: .85rem;
+
+                        h3{
+                            text-decoration: underline;
+                        }
+                        .available{
+                            color: $formSuccess;
+                        }
+                        .unavailable{
+                            color: $formError;
+                        }
+                    }
+                }
+            }
+            .knifespec{
+                @extend .components;
+                ul{
+                    grid-template-columns: repeat(2, 1fr);
+                }
+            } 
+        }
+    }
+}
