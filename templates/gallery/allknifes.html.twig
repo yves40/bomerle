@@ -15,7 +15,7 @@
         <h1 class="gallery-title">Nos créations</h1>
         <section class="gallery">
             {% for knife in knifes %}
-                <div class="blocknife">
+                <div class="blocknife" id="anchor{{knife.id}}">
                     <h2 class="knifename">{{ knife.name }} :</h2>
                     <div class="card  {% if loop.index is odd %}left{% else %}right{% endif %}">
                         <div class="mainpicture">

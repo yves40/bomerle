@@ -48,23 +48,7 @@
             padding: 0 0 20px 15px;
         }
         .card{
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            width: 100%;
 
-            @media screen and (min-width: 600px) {
-                max-height: 300px;
-                justify-content: space-around;
-
-                &.left{
-                    flex-direction: row;
-                }
-                &.right{
-                    flex-direction: row-reverse;
-                }
-            }
             .mainpicture{
                 width: 300px;
                 height: 300px;
@@ -79,9 +63,7 @@
                 }
             }
             .alldetails{
-                display: flex;
-                justify-content: center;
-                align-items: flex-start;
+
 
                 .specificities{
                     display: flex;

@@ -124,7 +124,7 @@ section {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 10px; }
+  margin-top: 10px; }
   .button-gallery a {
     position: relative;
     background: #f1f1f1;
@@ -135,7 +135,9 @@ section {
     font-weight: 400;
     letter-spacing: 0.1rem;
     padding: 10px 30px;
-    transition: 0.5s; }
+    transition: 0.5s;
+    margin: 0 10px;
+    width: 137px; }
     .button-gallery a:before {
       content: '';
       position: absolute;
@@ -429,84 +431,85 @@ footer {
       width: 100%;
       text-align: left;
       padding: 0 0 20px 15px; }
-    .gallery .blocknife .card {
+    .gallery .blocknife .card .mainpicture {
+      width: 300px;
+      height: 300px;
+      border-radius: .3rem;
+      overflow: hidden; }
+      .gallery .blocknife .card .mainpicture img {
+        width: 300px;
+        height: 300px;
+        object-fit: cover;
+        object-position: center; }
+    .gallery .blocknife .card .alldetails .specificities {
       display: flex;
       flex-direction: column;
       justify-content: center;
-      align-items: center;
-      width: 100%; }
+      align-items: flex-start;
+      width: 100%;
+      height: 300px; }
       @media screen and (min-width: 600px) {
-        .gallery .blocknife .card {
-          max-height: 300px;
-          justify-content: space-around; }
-          .gallery .blocknife .card.left {
-            flex-direction: row; }
-          .gallery .blocknife .card.right {
-            flex-direction: row-reverse; } }
-      .gallery .blocknife .card .mainpicture {
-        width: 300px;
-        height: 300px;
-        border-radius: .3rem;
-        overflow: hidden; }
-        .gallery .blocknife .card .mainpicture img {
-          width: 300px;
-          height: 300px;
-          object-fit: cover;
-          object-position: center; }
-      .gallery .blocknife .card .alldetails {
-        display: flex;
-        justify-content: center;
-        align-items: flex-start; }
         .gallery .blocknife .card .alldetails .specificities {
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: flex-start;
-          width: 100%;
-          height: 300px; }
-          @media screen and (min-width: 600px) {
-            .gallery .blocknife .card .alldetails .specificities {
-              width: 300px; } }
+          width: 300px; } }
+      .gallery .blocknife .card .alldetails .specificities .knifedescription {
+        width: 100%;
+        text-align: justify;
+        font-size: 1.3rem;
+        padding: 10px 15px 5px; }
+        @media screen and (min-width: 600px) {
           .gallery .blocknife .card .alldetails .specificities .knifedescription {
-            width: 100%;
-            text-align: justify;
-            font-size: 1.3rem;
-            padding: 10px 15px 5px; }
-            @media screen and (min-width: 600px) {
-              .gallery .blocknife .card .alldetails .specificities .knifedescription {
-                height: 240px; } }
-          .gallery .blocknife .card .alldetails .specificities .category {
-            width: 100%;
-            text-align: left;
-            font-size: 1.1rem;
-            padding: 5px 15px; }
-
-.alldetails .details {
-  display: none;
-  width: 300px; }
-  @media screen and (min-width: 1024px) {
-    .alldetails .details {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      align-items: flex-start; }
-      .alldetails .details .components, .alldetails .details .knifespec {
+            height: 240px; } }
+      .gallery .blocknife .card .alldetails .specificities .category {
+        width: 100%;
+        text-align: left;
         font-size: 1.1rem;
         padding: 5px 15px; }
-        .alldetails .details .components ul, .alldetails .details .knifespec ul {
-          display: grid;
-          grid-template-columns: repeat(1, 1fr);
-          font-size: .95rem; }
-          .alldetails .details .components ul li, .alldetails .details .knifespec ul li {
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            font-size: .85rem; }
-            .alldetails .details .components ul li h3, .alldetails .details .knifespec ul li h3 {
-              text-decoration: underline; }
-            .alldetails .details .components ul li .available, .alldetails .details .knifespec ul li .available {
-              color: #66cc33; }
-            .alldetails .details .components ul li .unavailable, .alldetails .details .knifespec ul li .unavailable {
-              color: #cc3333; }
-      .alldetails .details .knifespec ul {
-        grid-template-columns: repeat(2, 1fr); } }
+
+.card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%; }
+  @media screen and (min-width: 600px) {
+    .card {
+      max-height: 300px;
+      justify-content: space-around; }
+      .card.left {
+        flex-direction: row; }
+      .card.right {
+        flex-direction: row-reverse; } }
+
+.alldetails {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; }
+  .alldetails .details {
+    display: none;
+    width: 300px; }
+    @media screen and (min-width: 1024px) {
+      .alldetails .details {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: flex-start; }
+        .alldetails .details .components, .alldetails .details .knifespec {
+          font-size: 1.1rem;
+          padding: 5px 15px; }
+          .alldetails .details .components ul, .alldetails .details .knifespec ul {
+            display: grid;
+            grid-template-columns: repeat(1, 1fr);
+            font-size: .95rem; }
+            .alldetails .details .components ul li, .alldetails .details .knifespec ul li {
+              width: 100%;
+              display: flex;
+              flex-direction: column;
+              font-size: .85rem; }
+              .alldetails .details .components ul li h3, .alldetails .details .knifespec ul li h3 {
+                text-decoration: underline; }
+              .alldetails .details .components ul li .available, .alldetails .details .knifespec ul li .available {
+                color: #66cc33; }
+              .alldetails .details .components ul li .unavailable, .alldetails .details .knifespec ul li .unavailable {
+                color: #cc3333; }
+        .alldetails .details .knifespec ul {
+          grid-template-columns: repeat(2, 1fr); } }

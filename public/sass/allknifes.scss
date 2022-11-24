@@ -7,7 +7,30 @@
 @import './layout/footer';
 @import './pages/gallery';
 
+.card{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+
+    @media screen and (min-width: 600px) {
+        max-height: 300px;
+        justify-content: space-around;
+
+        &.left{
+            flex-direction: row;
+        }
+        &.right{
+            flex-direction: row-reverse;
+        }
+    }
+}
+
 .alldetails{
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
 
     .details{
         display: none;
