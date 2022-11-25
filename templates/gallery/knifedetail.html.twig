@@ -111,7 +111,6 @@
                 <button class="carousel-button next" data-carousel-button="next"><ion-icon name="chevron-forward-outline"></ion-icon></button>
                 <ul data-slides>
                     {% for image in knife.images %}
-                        {% if loop.index is odd %}left{% else %}right{% endif %}
                         <li class="slide" {% if loop.first %}data-active{% else %}{% endif %}>
                             <img src="{{asset('/images/knife/')}}{{image.filename}}" alt="Carousel {{knife.name}}">
                         </li>
