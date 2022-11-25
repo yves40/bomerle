@@ -508,6 +508,8 @@ footer {
     z-index: 2;
     background: none;
     border: none;
+    height: 64px;
+    width: 64px;
     font-size: 4rem;
     top: 50%;
     transform: translateY(-50%);
@@ -520,6 +522,11 @@ footer {
       left: .1rem; }
     .carousel .carousel-button.next {
       right: .1rem; }
+    .carousel .carousel-button ion-icon {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%; }
     @media screen and (min-width: 1024px) {
       .carousel .carousel-button.prev {
         left: 1rem; }
