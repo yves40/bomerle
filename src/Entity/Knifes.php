@@ -74,21 +74,7 @@ class Knifes
     private Collection $metals;
 
     #[ORM\OneToMany(mappedBy: 'knifes', targetEntity: Images::class, cascade:['persist', 'remove'], fetch: "EAGER")]
-    // #[Assert\File(
-    //     maxSize: '10M',
-    //     maxSizeMessage: 'Taille maximale autorisée 10Mo par image',
-    //     uploadIniSizeErrorMessage: 'Taille maximale autorisée 10Mo par image',
-    //     mimeTypes:[
-    //         'image/jpeg',
-    //         'image/jpg',
-    //         'image/png',
-    //         'image/gif'
-    //     ],
-    //     mimeTypesMessage: 'Merci de chosir un format de fichier valide (jpg, jpeg, gif, png)',
-    //     notFoundMessage: "Merci de sélectionner au moins une image",
-    //     uploadNoFileErrorMessage: "Merci de sélectionner au moins une image"
-    // )]
-    // #[Assert\Valid]
+    #[Assert\Valid]
     private Collection $images;
 
     public function __construct()

@@ -12,7 +12,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Validator\Constraints\File;
+use Symfony\Component\Validator\Constraints as Assert;
 
 class KnifesType extends AbstractType
 {
@@ -69,19 +69,21 @@ class KnifesType extends AbstractType
                 'mapped' => false,
                 'required' => true,
                 'multiple' => true,
-                // 'constraints' => [
-                //      new File([
-                //         'maxSize' => '1024k',
-                //         'maxSizeMessage' => "Taille maximale autorisée 1Mo",
-                //         'mimeTypes' => [
-                //             'image/jpeg',
-                //             'image/jpg',
-                //             'image/png',
-                //             'image/gif'
-                //         ],
-                //         'mimeTypesMessage' => 'Merci de chosir un format de fichier valide (jpg, jpeg, gif, png)'
-                //      ])
-                // ]
+                'constraints' => [
+                    new Assert\All(
+                        new Assert\File([
+                            'maxSize' => '4M',
+                            'maxSizeMessage' => "{{ name }} Taille maximale autorisée {{ limit }} (Actuellement : {{ size }})",
+                            'mimeTypes' => [
+                                'image/jpeg',
+                                'image/jpg',
+                                'image/png',
+                                'image/gif'
+                            ],
+                            'mimeTypesMessage' => '{{ name }} Merci de chosir un format de fichier valide (jpg, jpeg, gif, png)',
+                         ])
+                    )
+                ]
             ])
         ;
     }
