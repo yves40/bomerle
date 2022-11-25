@@ -475,7 +475,8 @@ footer {
   width: 300px;
   height: 300px;
   position: relative;
-  max-width: 1200px; }
+  border-radius: .3rem;
+  overflow: hidden; }
   @media screen and (min-width: 600px) {
     .carousel {
       width: 500px;
