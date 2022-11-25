@@ -3,7 +3,6 @@
 @import './base/reset';
 @import './base/style';
 @import './components/buttons';
-@import './components/carousel';
 @import './layout/navigation';
 @import './layout/footer';
 @import './pages/home';
@@ -153,6 +152,7 @@
                 a{
                     text-decoration: none;
                     color: $alternateText;
+                    position: relative;
 
                     @media screen and (min-width: 1024px) {
                         padding-left: 40px;
@@ -163,11 +163,11 @@
                             color: $buttonNext;
                             width: 0;
                             overflow: hidden;
-                            transition: 1.3s ease-in-out;
+                            transition: .6s ease-in-out;
                             border-right: 8px solid $buttonNext;
                         }
                         &:hover::before{
-                            width: 18%;    
+                            width: 100%;    
                             filter: drop-shadow(0 0 25px $buttonNext);
                         }
                     }

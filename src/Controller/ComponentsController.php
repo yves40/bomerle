@@ -12,13 +12,12 @@ use App\Entity\Metals;
 use App\Form\AccessoriesType;
 use App\Form\CategoryType;
 use App\Form\HandleType;
+use App\Form\ImagesType;
 use App\Form\KnifesType;
 use App\Form\MechanismType;
 use App\Form\MetalsType;
 use App\Services\Uploader;
-use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -141,6 +140,7 @@ class ComponentsController extends AbstractController
         Request $request
     ): Response
     {
+        $new = true;
         $metal = new Metals();
         $met = $entityManager->getRepository(Metals::class);
         $metals = $met->listMetals();
@@ -155,19 +155,84 @@ class ComponentsController extends AbstractController
             $form = $this->createForm(MetalsType::class, $metal);
             return $this->render('components/metals.html.twig', [
                 'formmetals' => $form->createView(),
-                'metals' => $metals
+                'metals' => $metals,
+                'new' => $new
             ]);
         }elseif($form->isSubmitted() && !$form->isValid()){
             $this->addFlash('error', 'Un problème est survenu !');
             return $this->render('components/metals.html.twig', [
                 'formmetals' => $form->createView(),
-                'metals' => $metals
+                'metals' => $metals,
+                'new' => $new
             ]);
         }else{
             return $this->render('components/metals.html.twig', [
                 'formmetals' => $form->createView(),
-                'metals' => $metals
+                'metals' => $metals,
+                'new' => $new
             ]);
+        }
+    }
+    #[Route('/updatemetal/{id}', name: 'metal.update')]
+    public function updateMetal(
+        Metals $metal,
+        EntityManagerInterface $entityManager,
+        Request $request
+    ): Response
+    {
+        $new = false;
+        $met = $entityManager->getRepository(Metals::class);
+        $metals = $met->listMetals();
+        $form = $this->createForm(MetalsType::class, $metal);
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()){
+            $entityManager->persist($metal);
+            $entityManager->flush();
+            $metals = $met->listMetals();
+            $this->addFlash('success', "Le métal ".$metal->getName()." a été modifié");
+            $metal = new Metals();
+            $form = $this->createForm(MetalsType::class, $metal);
+            return $this->redirectToRoute('metal.add');
+        }elseif($form->isSubmitted() && !$form->isValid()){
+            $this->addFlash('error', 'Un problème est survenu !');
+            return $this->render('components/metals.html.twig', [
+                'formmetals' => $form->createView(),
+                'metals' => $metals,
+                'new' => $new,
+                'metal' => $metal
+            ]);
+        }else{
+            return $this->render('components/metals.html.twig', [
+                'formmetals' => $form->createView(),
+                'metals' => $metals,
+                'new' => $new,
+                'metal' => $metal
+            ]);
+        }
+    }
+    #[Route('/deletemetal/{id}', name: 'metal.delete')]
+    public function deleteMetal(
+        int $id,
+        EntityManagerInterface $entityManager,
+    ): Response
+    {
+        $metal = $entityManager->getRepository(Metals::class)->find($id);
+        $knifes = $metal->getKnifes();
+        $met = $entityManager->getRepository(Metals::class);
+        $metals = $met->listMetals();
+        $form = $this->createForm(MetalsType::class, $metal);
+        $new = true;
+        if($knifes->count() > 0){
+            $this->addFlash('error', 'Ce métal est utilisé pour au moins un couteau');
+            return $this->render('components/metals.html.twig', [
+                'formmetals' => $form->createView(),
+                'metals' => $metals,
+                'new' => $new
+            ]);
+        }else{
+            $entityManager->getRepository(Metals::class)->remove($metal, true);
+            $this->addFlash('success', "Le métal ".$metal->getName()." a été supprimé");
+            return $this->redirectToRoute('metal.add');
         }
     }
     #[Route('/addmechanism', name: 'mechanism.add')]
@@ -176,6 +241,7 @@ class ComponentsController extends AbstractController
         Request $request
     ): Response
     {
+        $new = true;
         $mechanism = new Mechanism();
         $mecha = $entityManager->getRepository(Mechanism::class);
         $mechanisms = $mecha->listMechanisms();
@@ -190,19 +256,84 @@ class ComponentsController extends AbstractController
             $form = $this->createForm(MechanismType::class, $mechanism);
             return $this->render('components/mechanism.html.twig', [
                 'formmechanism' => $form->createView(),
-                'mechanisms' => $mechanisms
+                'mechanisms' => $mechanisms,
+                'new' => $new
             ]);
         }elseif($form->isSubmitted() && !$form->isValid()){
             $this->addFlash('error', 'Un problème est survenu !');
             return $this->render('components/mechanism.html.twig', [
                 'formmechanism' => $form->createView(),
-                'mechanisms' => $mechanisms
+                'mechanisms' => $mechanisms,
+                'new' => $new
             ]);
         }else{
             return $this->render('components/mechanism.html.twig', [
                 'formmechanism' => $form->createView(),
-                'mechanisms' => $mechanisms
+                'mechanisms' => $mechanisms,
+                'new' => $new
             ]);
+        }
+    }
+    #[Route('/updatemechanism/{id}', name: 'mechanism.update')]
+    public function updateMechanism(
+        Mechanism $mechanism,
+        EntityManagerInterface $entityManager,
+        Request $request
+    ): Response
+    {
+        $new = false;
+        $mec = $entityManager->getRepository(Mechanism::class);
+        $mechanisms = $mec->listMechanisms();
+        $form = $this->createForm(MechanismType::class, $mechanism);
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()){
+            $entityManager->persist($mechanism);
+            $entityManager->flush();
+            $mechanisms = $mec->listMechanisms();
+            $this->addFlash('success', "Le mécanisme ".$mechanism->getName()." a été modifié");
+            $mechanism = new Mechanism();
+            $form = $this->createForm(MechanismType::class, $mechanism);
+            return $this->redirectToRoute('mechanism.add');
+        }elseif($form->isSubmitted() && !$form->isValid()){
+            $this->addFlash('error', 'Un problème est survenu !');
+            return $this->render('components/mechanism.html.twig', [
+                'formmechanism' => $form->createView(),
+                'mechanisms' => $mechanisms,
+                'new' => $new,
+                'mechanism' => $mechanism
+            ]);
+        }else{
+            return $this->render('components/mechanism.html.twig', [
+                'formmechanism' => $form->createView(),
+                'mechanisms' => $mechanisms,
+                'new' => $new,
+                'mechanism' => $mechanism
+            ]);
+        }
+    }
+    #[Route('/deletemechanism/{id}', name: 'mechanism.delete')]
+    public function deleteMechanism(
+        int $id,
+        EntityManagerInterface $entityManager,
+    ): Response
+    {
+        $mechanism = $entityManager->getRepository(Mechanism::class)->find($id);
+        $knifes = $mechanism->getKnifes();
+        $mec = $entityManager->getRepository(Mechanism::class);
+        $mechanisms = $mec->listMechanisms();
+        $form = $this->createForm(MechanismType::class, $mechanism);
+        $new = true;
+        if($knifes->count() > 0){
+            $this->addFlash('error', 'Ce mécanisme est utilisé pour au moins un couteau');
+            return $this->render('components/mechanism.html.twig', [
+                'formmechanism' => $form->createView(),
+                'mechanisms' => $mechanisms,
+                'new' => $new
+            ]);
+        }else{
+            $entityManager->getRepository(Mechanism::class)->remove($mechanism, true);
+            $this->addFlash('success', "Le mécanisme ".$mechanism->getName()." a été supprimé");
+            return $this->redirectToRoute('mechanism.add');
         }
     }
     #[Route('/addaccessory', name: 'accessory.add')]
@@ -412,10 +543,9 @@ class ComponentsController extends AbstractController
         Request $request,
         EntityManagerInterface $entityManager,
         Uploader $uploader,
-        ValidatorInterface $validator
     ): Response
     {
-        ini_set('upload_max_filesize', 5);
+        $new = true;
         $knife = new Knifes();
 
         $form = $this->createForm(KnifesType::class, $knife);
@@ -445,7 +575,8 @@ class ComponentsController extends AbstractController
             $knife = new Knifes();
             $form = $this->createForm(KnifesType::class, $knife);
             return $this->render('components/knifes.html.twig', [
-                'formknifes' => $form->createView()
+                'formknifes' => $form->createView(),
+                'new' => $new
             ]);
         }elseif($form->isSubmitted() && !$form->isValid()){
             // dd($request);
@@ -454,20 +585,96 @@ class ComponentsController extends AbstractController
             // dd($errors);
             $this->addFlash('error', 'Un problème est survenu !');
             return $this->render('components/knifes.html.twig', [
-                'formknifes' => $form->createView()
+                'formknifes' => $form->createView(),
+                'new' => $new
             ]);
         }else{
             return $this->render('components/knifes.html.twig', [
-                'formknifes' => $form->createView()
+                'formknifes' => $form->createView(),
+                'new' => $new
             ]);
         }
     }
+    #[Route('/deleteknife/{id}', name: 'knife.delete')]
+    public function deleteKnife(
+        int $id,
+        EntityManagerInterface $entityManager
+    ): Response
+    {
+        $knife = $entityManager->getRepository(Knifes::class)->find($id);
+        $entityManager->getRepository(Knifes::class)->remove($knife, true);
+        $this->addFlash('success', "Le couteau ".$knife->getName()." a été supprimé");
+        return $this->redirectToRoute('knife.list');
+    }
+    #[Route('/updateknife/{id}', name: 'knife.update')]
+    public function updateKnife(
+        Knifes $knife,
+        EntityManagerInterface $entityManager,
+        Request $request,
+        Uploader $uploader
+    ): Response
+    {
+        $new = false;
+        $form = $this->createForm(KnifesType::class, $knife);
+        $form->handleRequest($request);
+        // dd($knife);
+        if($form->isSubmitted() && $form->isValid()){
+            $uploadedFiles = $form->get('images')->getData();
+            $physicalPath = $this->getParameter('knifeimages_directory');
+
+            if(count($uploadedFiles) > 0){
+                for($i=0; $i < count($uploadedFiles); $i++){
+                    $image = new Images();
+                    $newFileName = $uploader->uploadFile($uploadedFiles[$i], $physicalPath);
+                    $image->setFilename($newFileName);
+                    $image->setMainpicture(false);
+                    $knife->addImage($image);
+                }
+            }
+            $entityManager->persist($knife);
+            $entityManager->flush($knife);
+            $this->addFlash('success', "Le couteau ".$knife->getName()." a été modifié");
+            return $this->redirectToRoute('knife.list');
+        }elseif($form->isSubmitted() && !$form->isValid()){
+            $this->addFlash('error', 'Un problème est survenu !');
+            return $this->render('components/knifes.html.twig', [
+                'formknifes' => $form->createView(),
+                'knife' => $knife,
+                'new' => $new
+            ]);
+        }else{
+            return $this->render('components/knifes.html.twig', [
+                'formknifes' => $form->createView(),
+                'knife' => $knife,
+                'new' => $new
+            ]);
+        }
+    }
+    #[Route('/deleteimage/{knife_id}/{id}', name:'image.delete')]
+    public function deleteImage(
+        int $knife_id,
+        int $id,
+        EntityManagerInterface $entityManager,
+    ): Response
+    {
+        $knife = $entityManager->getRepository(Knifes::class)->findOneBy(['id' => $knife_id]);
+        $image = $entityManager->getRepository(Images::class)->findOneBy(['id' => $id]);
+        $entityManager->getRepository(Images::class)->remove($image, false);
+        $knife->removeImage($image);
+        $entityManager->persist($knife);
+        $entityManager->flush();
+        return $this->redirectToRoute('knife.update', ['id' => $knife_id]);
+    }
+
     #[Route('/listknife', name: 'knife.list')]
     public function listKnife(
         EntityManagerInterface $entityManager,
     ): Response
     {
-        $allKnifes = $entityManager->getRepository(Knifes::class)->findAll();
+        $allKnifes = $entityManager->getRepository(Knifes::class)->findBy(
+            [],
+            ['id' => 'ASC']
+        );
         return $this->render('components/listknifes.html.twig', [
             'allknifes' => $allKnifes
         ]);

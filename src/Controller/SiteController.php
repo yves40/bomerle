@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Entity\Events;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Translation\LocaleSwitcher;
@@ -13,10 +15,15 @@ class SiteController extends AbstractController
 
 
     #[Route('/', name: 'home')]
-    public function home(): Response
+    public function home(
+        EntityManagerInterface $entityManager
+    ): Response
     {
+        $events = $entityManager->getRepository(Events::class)->listEvents();
         // $this->localeSwitcher->setlocale('en');
-        return $this->render('home.html.twig', []);
+        return $this->render('home.html.twig', [
+            "events" => $events
+        ]);
     }
 
 }

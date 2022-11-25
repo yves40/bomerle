@@ -61,9 +61,8 @@
 
     @media screen and (min-width: 1200px) {
 
-        &:hover{
-
-            a{
+        a{
+            &:hover{
                 background: $buttonNext;
                 color: $buttonNext;
 
@@ -80,5 +79,93 @@
                 }
             }
         }
+    }
+}
+
+.button-gallery
+{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+    
+    a{
+        position: relative;
+        background: $background;
+        color: $alternateText;
+        text-decoration: none;
+        text-transform: uppercase;
+        font-size: 1rem;
+        font-weight: 400;
+        letter-spacing: 0.1rem;
+        padding: 10px 30px;
+        transition: 0.5s;
+        margin: 0 10px;
+        width: 137px;
+
+        &:before{
+            content: '';
+            position: absolute;
+            inset: 2px;
+            background: $alternateBackground;
+        }
+        span{
+            position: relative;
+            z-index: 99;
+        }
+        i{
+            position: absolute;
+            inset: 0;
+            display: block;
+
+            &:before{
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 80%;
+                width: 10px;
+                height: 10px;
+                background: $alternateBackground;
+                transform: translate(-50%) skewX(325deg);
+                transition: 0.5s;
+            }
+            &:after{
+                content: '';
+                position: absolute;
+                bottom: 0;
+                left: 20%;
+                width: 10px;
+                height: 10px;
+                background: $alternateBackground;
+                transform: translate(-50%) skewX(325deg);
+                transition: 0.5s;
+            }
+        }
+    }
+    @media screen and (min-width: 800px) {
+        
+    }
+
+    @media screen and (min-width: 1200px) {
+
+            a{  
+                &:hover{
+                    background: $buttonNext;
+                    color: $buttonNext;
+
+                    i{
+
+                        &:before{
+                            width: 20px;
+                            left: 20%;
+                        }
+                        &:after{
+                            width: 20px;
+                            left: 80%;
+                        }
+                    }
+                }
+            }
     }
 }
