@@ -61,9 +61,8 @@
 
     @media screen and (min-width: 1200px) {
 
-        &:hover{
-
-            a{
+        a{
+            &:hover{
                 background: $buttonNext;
                 color: $buttonNext;
 
@@ -89,7 +88,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 10px;
+    margin-top: 10px;
     
     a{
         position: relative;
@@ -102,6 +101,8 @@
         letter-spacing: 0.1rem;
         padding: 10px 30px;
         transition: 0.5s;
+        margin: 0 10px;
+        width: 137px;
 
         &:before{
             content: '';
@@ -148,24 +149,23 @@
 
     @media screen and (min-width: 1200px) {
 
-        &:hover{
+            a{  
+                &:hover{
+                    background: $buttonNext;
+                    color: $buttonNext;
 
-            a{
-                background: $buttonNext;
-                color: $buttonNext;
+                    i{
 
-                i{
-
-                    &:before{
-                        width: 20px;
-                        left: 20%;
-                    }
-                    &:after{
-                        width: 20px;
-                        left: 80%;
+                        &:before{
+                            width: 20px;
+                            left: 20%;
+                        }
+                        &:after{
+                            width: 20px;
+                            left: 80%;
+                        }
                     }
                 }
             }
-        }
     }
 }

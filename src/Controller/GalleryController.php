@@ -25,4 +25,17 @@ class GalleryController extends AbstractController
             'knifes' => $knifes,
         ]);
     }
+
+    #[Route('/detail/{id}', name: 'gallery.detail')]
+    public function knifeDetail(
+        int $id,
+        EntityManagerInterface $entityManager
+    ): Response
+    {
+        $knife = $entityManager->getRepository(Knifes::class)->findOneBy(['id' => $id]);
+        // dd($knife);
+        return $this->render('gallery/knifedetail.html.twig', [
+            'knife' => $knife
+        ]);
+    }
 }

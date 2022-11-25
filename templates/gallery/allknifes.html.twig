@@ -15,87 +15,93 @@
         <h1 class="gallery-title">Nos créations</h1>
         <section class="gallery">
             {% for knife in knifes %}
-                <div class="blocknife">
+                <div class="blocknife" id="anchor{{knife.id}}">
                     <h2 class="knifename">{{ knife.name }} :</h2>
-                    <div class="mainpicture">
-                        {% for image in knife.images %}
-                            {% if image.mainpicture == true %}
-                                <img src="{{asset('/images/knife/')}}{{image.filename}}" alt="Photo principale {{ knife.name }}">
-                            {% endif %}
-                        {% endfor %}
-                    </div>
-                    <div class="specificities">
-                        <p class="knifedescription">{{ knife.description }}</p>
-                        <p class="category">Catégorie : {{ knife.category }}</p>
-                        <div class="groups">
-                            Composants : 
-                            <ul>
-                                <li class="group metals">
-                                    <h3>Lame :</h3>
-                                    <p>
-                                        {% for metals in knife.metals %}
-                                            {{ metals.name }}, 
-                                        {% endfor %}
-                                    </p>
-                                </li>
-                                <li class="group handle">
-                                    <h3>Manche :</h3>
-                                    <p>
-                                        {% for handles in knife.handle %}
-                                            {{ handles.name }}, 
-                                        {% endfor %}                                    
-                                    </p>
-                                </li>
-                                <li class="group accessories">
-                                    <h3>Accessoire(s) :</h3>
-                                    <p>
-                                        {% for accessories in knife.accessories %}
-                                            {{ accessories.name }}, 
-                                        {% endfor %}
-                                    </p>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="knifespec">
-                            <ul>
-                                <li>
-                                    <h3>Stock :</h3>
-                                    <p></p>
-                                    {% if knife.stock >0 %}
-                                        <p class="available">Disponible</p>
-                                    {% else %}
-                                        <p class="unavailable">Indisponible</p>
-                                    {% endif %}    
-                                </li>
-                                <li>
-                                    <h3>Poids :</h3> 
-                                    <p>{{ knife.weight }}g</p>
-                                </li>
-                                <li>
-                                    <h3>Longueur :</h3>
-                                    <p>{{ knife.lenght }}cm</p>
-                                </li>
-                                {% if knife.mechanism == "Fixe" %}
-
-                                {% else %}
-                                    <li>
-                                    <h3>Longueur fermé :</h3>
-                                    <p>{{ knife.closelenght }}cm</p>
-                                    </li>    
+                    <div class="card  {% if loop.index is odd %}left{% else %}right{% endif %}">
+                        <div class="mainpicture">
+                            {% for image in knife.images %}
+                                {% if image.mainpicture == true %}
+                                    <img src="{{asset('/images/knife/')}}{{image.filename}}" alt="Photo principale {{ knife.name }}">
                                 {% endif %}
-                                <li>
-                                    <h3>Tranchant :</h3>
-                                    <p>{{ knife.cuttingedgelenght }}cm</p>
-                                </li>
-                                <li>
-                                    <h3>Prix :</h3>
-                                    <p>{{ knife.price }} €</p>
-                                </li>
-                            </ul>
+                            {% endfor %}
                         </div>
-                    </div>
-                    <div class="button-gallery">
-                        <a href="{{ path('gallery.home') }}"><span>Détail</span><i></i></a>
+                        <div class="alldetails">
+                            <div class="specificities">
+                                <p class="knifedescription">{{ knife.description }}</p>
+                                <p class="category">Catégorie : {{ knife.category }}</p>
+                                <div class="button-gallery">
+                                    <a href="{{ path('gallery.detail', {id: knife.id}) }}"><span>Détail</span><i></i></a>
+                                </div>                        
+                            </div>
+                            <div class="details">
+                                <div class="components">
+                                    Composants : 
+                                    <ul>
+                                        <li class="group metals">
+                                            <h3>Lame :</h3>
+                                            <p>
+                                                {% for metals in knife.metals %}
+                                                    {{ metals.name }}, 
+                                                {% endfor %}
+                                            </p>
+                                        </li>
+                                        <li class="group handle">
+                                            <h3>Manche :</h3>
+                                            <p>
+                                                {% for handles in knife.handle %}
+                                                    {{ handles.name }}, 
+                                                {% endfor %}                                    
+                                            </p>
+                                        </li>
+                                        <li class="group accessories">
+                                            <h3>Accessoire(s) :</h3>
+                                            <p>
+                                                {% for accessories in knife.accessories %}
+                                                    {{ accessories.name }}, 
+                                                {% endfor %}
+                                            </p>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="knifespec">
+                                    <ul>
+                                        <li>
+                                            <h3>Stock :</h3>
+                                            <p></p>
+                                            {% if knife.stock >0 %}
+                                                <p class="available">Disponible</p>
+                                            {% else %}
+                                                <p class="unavailable">Indisponible</p>
+                                            {% endif %}    
+                                        </li>
+                                        <li>
+                                            <h3>Poids :</h3> 
+                                            <p>{{ knife.weight }}g</p>
+                                        </li>
+                                        <li>
+                                            <h3>Longueur :</h3>
+                                            <p>{{ knife.lenght }}cm</p>
+                                        </li>
+                                        {% if knife.mechanism == "Fixe" %}
+
+                                        {% else %}
+                                            <li>
+                                            <h3>Longueur fermé :</h3>
+                                            <p>{{ knife.closelenght }}cm</p>
+                                            </li>    
+                                        {% endif %}
+                                        <li>
+                                            <h3>Tranchant :</h3>
+                                            <p>{{ knife.cuttingedgelenght }}cm</p>
+                                        </li>
+                                        <li>
+                                            <h3>Prix :</h3>
+                                            <p>{{ knife.price }} €</p>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>    
                     </div>
                 </div>
             {% endfor %}        
