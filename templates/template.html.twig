@@ -8,6 +8,8 @@
     {% block link %}{% endblock %}
     <link rel="icon" type="image/gif" href="{{ asset('/images/logo1.png')}}"/>
     {% block script %}{% endblock %}
+    <script src="{{asset('/node_modules/jquery/dist/jquery.min.js')}}"></script>
+    <script src="{{asset('/scripts/newsletter.js')}}" defer></script>
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 
@@ -113,7 +115,10 @@
                             {{ form_widget(formnewsletter.forevents) }}
                             {{ form_errors(formnewsletter.forevents) }}
                         </div>
-                        <button type="submit" class="add-button">S'inscrire</button>
+                        {# <p>{{formnewsletter.vars.value.email}}</p> #}
+                        <a href="{{ path('newsletter.subscribe', {'email': formnewsletter.vars.value.email}) }}" class="add-button disabled">S'inscrire</a>
+                        {# <a href="{{ path('newsletter.subscribe') }}" class="add-button">S'inscrire</a> #}
+                        {# <button class="add-button">S'inscrire</button> #}
                     {{ form_end(formnewsletter) }}
                 </div>
                 <div class="bloc footer-networks">

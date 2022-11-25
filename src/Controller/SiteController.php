@@ -36,14 +36,4 @@ class SiteController extends AbstractController
             "events" => $events
             ]);
     }
-
-    #[Route('/unsubscribenewsletter/{id}', name: 'home.unsubscribenewsletter')]
-    public function unsubscribeNewsletter(): Response
-    {
-        $newsletter = new Newsletter();
-        $form = $this->createForm(NewsletterType::class, $newsletter);
-        return $this->render('home.html.twig', [
-            'formnewsletter' => $form->createView()
-        ]);
-    }
 }
