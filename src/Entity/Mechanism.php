@@ -7,8 +7,10 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 #[ORM\Entity(repositoryClass: MechanismRepository::class)]
+#[UniqueEntity(fields:['name'], message: "Ce mécanisme existe déjà")]
 class Mechanism
 {
     #[ORM\Id]

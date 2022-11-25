@@ -1,0 +1,78 @@
+@import './utils/variables';
+@import './base/typography';
+@import './base/reset';
+@import './base/style';
+@import './components/buttons';
+@import './layout/navigation';
+@import './layout/footer';
+@import './pages/gallery';
+@import './components/carousel';
+
+.card{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    @media screen and (min-width: 1024px) {
+        flex-direction: row;
+    }
+}
+
+.alldetails{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+
+    @media screen and (min-width: 600px) {
+        flex-direction: row;
+        justify-content: center;
+        align-items: flex-start;
+    }
+    @media screen and (min-width: 1024px){
+        width: calc(100% - 300px);
+    }
+
+    .details{
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        padding: 10px 15px 5px;
+
+        .components{
+            width: 50%;
+            font-size: 1.1rem;
+            padding: 5px 15px;
+
+            ul{
+                display: grid;
+                grid-template-columns: repeat(1, 1fr);
+                font-size: .95rem;
+                li{
+                    width: 100%;
+                    display: flex;
+                    flex-direction: column;
+                    font-size: .85rem;
+
+                    h3{
+                        text-decoration: underline;
+                    }
+                    .available{
+                        color: $formSuccess;
+                    }
+                    .unavailable{
+                        color: $formError;
+                    }
+                }
+            }
+        }
+        .knifespec{
+            @extend .components;
+            ul{
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    }
+}

@@ -10,57 +10,6 @@
 
 
 {% block body %}
-    <header>
-        <div class="container">
-            <nav class="navigation">
-                {% if app.user %}
-                    <p>Bonjour {{ app.user.firstname }}</p>
-                {% endif %}
-                <ul>
-                    <li class="list">
-                        <a href="{{path('home')}}">
-                            <span class="icon"><ion-icon name="home-outline"></ion-icon></span>
-                            <span class="text">Accueil</span>
-                        </a>
-                    </li>
-                    <li class="list">
-                        <a href="#">
-                            <span class="icon"><ion-icon name="camera-outline"></ion-icon></span>
-                            <span class="text">Galerie</span>
-                        </a>
-                    </li>
-                    <li class="list">
-                        <a href="#">
-                            <span class="icon"><ion-icon name="chatbubble-outline"></ion-icon></span>
-                            <span class="text">Contact</span>
-                        </a>
-                    </li>
-                    <li class="list">
-                        <a href="{{path('index.dashboard')}}">
-                            <span class="icon"><ion-icon name="hammer-outline"></ion-icon></span>
-                            <span class="text">Admin</span>
-                        </a>
-                    </li>
-                    <li class="list">
-                        {% if app.user %}
-                            <a href="{{path('app_logout')}}">
-                                <span class="icon"><ion-icon name="person-outline"></ion-icon></span>
-                                <span class="text">Se déconnecter</span>
-                            </a>
-                        {% else %}
-                            <a href="{{path('app_login')}}">
-                                <span class="icon"><ion-icon name="person-outline"></ion-icon></span>
-                                <span class="text">Se connecter</span>
-                            </a>
-                        {% endif %}
-                    </li>
-                </ul>
-            </nav>
-            <img src="{{asset('/images/logo1.png')}}" alt="Logo Beau Merle" class="logo">
-            <div class="about">Rencontres</div>
-            <div class="menu-toggle"></div>
-        </div>
-    </header>
     <div class="contenu">
         <section class="new-components">
             <h1>Gestion du site</h1>
@@ -73,7 +22,7 @@
                     <a href="{{path('mechanism.add')}}" class="button">Mécanisme</a>
                     <a href="{{path('metal.add')}}" class="button">Métal</a>
                     <a href="{{path('knife.add')}}" class="button">Couteau</a>
-                    <a href="#" class="button">Salon</a>
+                    <a href="{{path('event.add')}}" class="button">Salon</a>
                     <a href="{{path('knife.list')}}" class="button">Couteaux créés</a>
                     <a href="{{path('newsletter.send')}}" class="button">Envoyer une Newsletter</a>
                 </div>
@@ -81,3 +30,5 @@
         </section>    
     </div>
 {% endblock %}
+
+{% block footer %}{% endblock %}

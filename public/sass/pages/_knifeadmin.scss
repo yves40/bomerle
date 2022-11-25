@@ -1,0 +1,59 @@
+.form-container
+{
+    width: 85%;
+    max-width: 1050px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: $formBackgroundDark;
+    box-shadow: 0 0 15px 0 $formBackgroundDark;
+    border-radius: 20px;
+    padding: 20px 7px;
+
+    .form-title{
+        width: 100%;
+        text-align: center;
+        font-family: $title;
+        font-weight: 600;
+        font-size: 2.3rem;
+        color: $alternateText;
+    }
+    .form{
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+        margin-top: 40px;
+
+        .input-group{
+            display: flex;
+            flex-direction: column;
+            gap: 7px;
+
+            label{
+                color: $alternateText;
+                font-weight: lighter;
+                font-size: 1.7rem;
+            }
+            input{
+                font-size: 1.25rem;
+                padding: .5em;
+                background-color: $formBackgroundLight;
+                border: none;
+                outline: none;
+                border-radius: .25em;
+                color: $alternateText;
+                font-weight: lighter;
+
+                &:focus{
+                    box-shadow: 0 0 0 1px $formBorder;
+                }
+            }
+            ul{
+                li{
+                    color: $formError;
+                }
+            }
+        }
+    }
+}
