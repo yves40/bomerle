@@ -550,10 +550,10 @@ class ComponentsController extends AbstractController
 
         $form = $this->createForm(KnifesType::class, $knife);
         $form->handleRequest($request);
+        // dd($request);
 
         if($form->isSubmitted() && $form->isValid()){
             // $errors = $validator->validate($form);
-            // dd($errors);
             $uploadedFiles = $form->get('images')->getData();
             $physicalPath = $this->getParameter('knifeimages_directory');
 
