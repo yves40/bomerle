@@ -199,11 +199,12 @@ class RobotController extends AbstractController
             return $this->render('security/passwordreset.html.twig', [ 'form' => $form->createView(), 'usermail' => $user->getEmail()]);        
         }
     }
-
+    // Here is a special form for the password reset screen, as only 2 fields needes to 
+    // be checked. We use the passwordreset group to target these fields in the validator
     private function createResetForm(Users $user, string $selector) {
         return $this->createFormBuilder($user, ['validation_groups' => ['passwordreset']])  // Reduce validation scope to password fields
                                                                                             // Look into the Users entity assert rules ;-)
-        ->setAction($this->generateUrl('user.setpassword', array('selector' => $selector)))         // The form action must call this method
+        ->setAction($this->generateUrl('user.setpassword', array('selector' => $selector))) // The form action must call this method
         ->setMethod('POST')
         ->add('firstname')
         ->add('lastname')

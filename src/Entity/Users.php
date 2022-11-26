@@ -46,10 +46,24 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(length: 128)]
     #[Assert\NotBlank(message: "Merci de renseigner ce champ", groups: ['passwordreset'])]
+    #[Assert\Length(
+        min: 4,
+        max: 20,
+        minMessage: "Ce champ doit contenir au moins {{ limit }} caractères, {{ value }} n'est pas correct",
+        maxMessage: "Ce champ ne peut pas contenir plus de {{ limit }} caractères",
+        groups: ['passwordreset']
+    )]
     private ?string $password = null;
 
     #[ORM\Column(length: 128)]
     #[Assert\NotBlank(message: "Merci de renseigner ce champ", groups: ['passwordreset'])]
+    #[Assert\Length(
+        min: 4,
+        max: 20,
+        minMessage: "Ce champ doit contenir au moins {{ limit }} caractères, {{ value }} n'est pas correct",
+        maxMessage: "Ce champ ne peut pas contenir plus de {{ limit }} caractères",
+        groups: ['passwordreset']
+    )]
     #[Assert\IdenticalTo(['propertyPath' => 'password',
                           'message' => "Les deux mots de passe doivent être identiques",
                           'groups' => ['passwordreset']
