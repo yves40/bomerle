@@ -21,26 +21,27 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     private ?int $id = null;
 
     #[ORM\Column(length: 45)]
-    #[Assert\NotBlank(message: "Merci de renseigner ce champ")]
+    #[Assert\NotBlank(message: "Merci de renseigner ce champ", groups: ['standard'])]
     #[Assert\Length(
         min: 4,
         max: 16,
         minMessage: "Ce champ doit contenir au moins {{ limit }} caractères, {{ value }} n'est pas correct",
-        maxMessage: "Ce champ ne peut pas contenir plus de {{ limit }} caractères"
+        maxMessage: "Ce champ ne peut pas contenir plus de {{ limit }} caractères",
+        groups: ['standard']
     )]
     private ?string $firstname = null;
 
     #[ORM\Column(length: 45)]
-    #[Assert\NotBlank(message: "Merci de renseigner ce champ")]
+    #[Assert\NotBlank(message: "Merci de renseigner ce champ", groups: ['standard'])]
     private ?string $lastname = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\NotBlank(message: "Merci de renseigner ce champ")]
-    #[Assert\Email( message: "{{ value }} n'est pas un email valide." )] 
+    #[Assert\NotBlank(message: "Merci de renseigner ce champ", groups: ['standard'])]
+    #[Assert\Email( message: "{{ value }} n'est pas un email valide." , groups: ['standard'])] 
     private ?string $email = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\NotBlank(message: "Merci de renseigner ce champ")]
+    #[Assert\NotBlank(message: "Merci de renseigner ce champ", groups: ['standard'])]
     private ?string $address = null;
 
     #[ORM\Column(length: 128)]
