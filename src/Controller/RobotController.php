@@ -175,22 +175,22 @@ class RobotController extends AbstractController
                                     TranslatorInterface $translator,
                                     Request $request): Response
     {
-        /* @$rqtr RequestsTrackerRepository */
-        $rqtr = $entityManager->getRepository(RequestsTracker::class);
-        /* @$usrr UsersRepository */
-        $usrr = $entityManager->getRepository(Users::class);
-        $userrequest = $rqtr->findRequestBySelector($selector, RequestsTracker::STATUS_PROCESSED);
-        $user = $usrr->findUserByEmail($userrequest->getEmail());
-        // $user = new Users();
+        $user = new Users();
         $form = $this->createResetForm($user, $selector);
         $form->handleRequest($request);
         if($form->isValid()){
+            $newpass = $user->getPassword();            // save the new password
+            // Search for the user with the token
+            /* @$rqtr RequestsTrackerRepository */
+            $rqtr = $entityManager->getRepository(RequestsTracker::class);
+            /* @$usrr UsersRepository */
+            $usrr = $entityManager->getRepository(Users::class);
+            $userrequest = $rqtr->findRequestBySelector($selector, RequestsTracker::STATUS_PROCESSED);
+            $user = $usrr->findUserByEmail($userrequest->getEmail());
             $message = $translator->trans('user.passresetdone');
             $this->addFlash('success', $message);
-            $user->setPassword(
-                    $userPasswordHasher->hashPassword($user,$form->get('password')->getData())
-            )
-            ->setConfirmpassword($user->getPassword());  
+            $user->setPassword( $userPasswordHasher->hashPassword($user,$newpass))
+                                        ->setConfirmpassword($user->getPassword());  
             $entityManager->persist($user);
             $entityManager->flush();
             return $this->redirectToRoute('home');
