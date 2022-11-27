@@ -15,7 +15,7 @@
     <div class="contenu">
         <div class="form-container">
             <h1 class="form-title">Newsletter pour :</h1>
-            <form action="Post" class="form">
+            <form class="form">
                 <select name="choice" id="newsletter-choice">
                     <option value="blank">--</option>
                     <option value="knife">Un couteau</option>
@@ -24,13 +24,13 @@
                 <select name="knife" id="knife-choice">
                     <option value="blank">--</option>
                     {% for knife in knifes %}
-                        <option value="knife{{knife.id}}">{{knife.name}}</option>
+                        <option value="{{knife.id}}">{{knife.name}}</option>
                     {% endfor %}
                 </Select>
                 <select name="event" id="event-choice">
                     <option value="blank">--</option>
                     {% for event in events %}
-                        <option value="event{{event.id}}">{{event.name}}</option>
+                        <option value="{{event.id}}">{{event.name}}</option>
                     {% endfor %}
                 </select>
                 <a href="{{path('newsletter.send')}}" class="add-button">Envoyer</a>           

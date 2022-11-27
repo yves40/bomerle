@@ -5,10 +5,11 @@ namespace App\Controller;
 use App\Entity\Events;
 use App\Entity\Knifes;
 use App\Entity\Newsletter;
+use App\Services\FileHandler;
 use App\Services\MailO2;
 use Doctrine\ORM\EntityManagerInterface;
+use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Bundle\MakerBundle\Str;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -26,16 +27,41 @@ class NewsletterController extends AbstractController
             'knifes' => $knifes
         ]);
     }
-    #[Route('/newsletter/{mailingtype?null}/{objectname?null}', name: 'newsletter.send')]
+    #[Route('/sendmailing/{mailingtype?null}/{objectname?null}', name: 'newsletter.send')]
     public function sendNewsletter(
         string $mailingtype,
         string $objectname,
-        EntityManagerInterface $entityManager
-    ): Response
+        EntityManagerInterface $entityManager,
+        MailO2 $mail,
+        FileHandler $fileHandler
+    )
     {
-        return $this->json([
-            "message" => "Votre demande a été prise en compte pour $mailingtype / $objectname"
-        ], 200);
+        $html =  'emails/event-announcement.html';
+        $content = $fileHandler->getFileContent($html);
+        if($mailingtype === 'knife'){
+            $members = $entityManager->getRepository(Newsletter::class)->findBy(['forknife' =>  1]);
+        }else{
+            $members = $entityManager->getRepository(Newsletter::class)->findBy(['forevents' =>  1]);
+        }
+        $mailinglist = [];
+
+        try {
+            foreach($members as $member) {
+                array_push($mailinglist, $member->getEmail());
+                // $this->addFlash('success', "Email sent to ".$member->getEmail());
+                $mail->sendEmail($_ENV['MAIL_FROM'], $member->getEmail(), "Marketing blast prototype", $content);
+            }
+            return $this->json([
+                "message" => "Votre demande a été prise en compte pour $mailingtype / $objectname. Emails envoyés à ".count($mailinglist).
+                " destinataires"
+            ], 200);
+        }
+        catch(Exception $e) {
+            // $this->addFlash('error', $e->getMessage())
+            return $this->json([
+                "message" => "Erreur : ".$e->getMessage()
+            ], 400);
+        }
     }
 
     #[Route('/subscribenewsletter/{email?null}/{knife?false}/{events?false}', name: 'newsletter.subscribe')]
