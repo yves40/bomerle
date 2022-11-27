@@ -175,22 +175,22 @@ class RobotController extends AbstractController
                                     TranslatorInterface $translator,
                                     Request $request): Response
     {
-        /* @$rqtr RequestsTrackerRepository */
-        $rqtr = $entityManager->getRepository(RequestsTracker::class);
-        /* @$usrr UsersRepository */
-        $usrr = $entityManager->getRepository(Users::class);
-        $userrequest = $rqtr->findRequestBySelector($selector, RequestsTracker::STATUS_PROCESSED);
-        $user = $usrr->findUserByEmail($userrequest->getEmail());
-        // $user = new Users();
+        $user = new Users();
         $form = $this->createResetForm($user, $selector);
         $form->handleRequest($request);
         if($form->isValid()){
+            $newpass = $user->getPassword();            // save the new password
+            // Search for the user with the token
+            /* @$rqtr RequestsTrackerRepository */
+            $rqtr = $entityManager->getRepository(RequestsTracker::class);
+            /* @$usrr UsersRepository */
+            $usrr = $entityManager->getRepository(Users::class);
+            $userrequest = $rqtr->findRequestBySelector($selector, RequestsTracker::STATUS_PROCESSED);
+            $user = $usrr->findUserByEmail($userrequest->getEmail());
             $message = $translator->trans('user.passresetdone');
             $this->addFlash('success', $message);
-            $user->setPassword(
-                    $userPasswordHasher->hashPassword($user,$form->get('password')->getData())
-            )
-            ->setConfirmpassword($user->getPassword());  
+            $user->setPassword( $userPasswordHasher->hashPassword($user,$newpass))
+                                        ->setConfirmpassword($user->getPassword());  
             $entityManager->persist($user);
             $entityManager->flush();
             return $this->redirectToRoute('home');
@@ -199,11 +199,12 @@ class RobotController extends AbstractController
             return $this->render('security/passwordreset.html.twig', [ 'form' => $form->createView(), 'usermail' => $user->getEmail()]);        
         }
     }
-
+    // Here is a special form for the password reset screen, as only 2 fields needes to 
+    // be checked. We use the passwordreset group to target these fields in the validator
     private function createResetForm(Users $user, string $selector) {
         return $this->createFormBuilder($user, ['validation_groups' => ['passwordreset']])  // Reduce validation scope to password fields
                                                                                             // Look into the Users entity assert rules ;-)
-        ->setAction($this->generateUrl('user.setpassword', array('selector' => $selector)))         // The form action must call this method
+        ->setAction($this->generateUrl('user.setpassword', array('selector' => $selector))) // The form action must call this method
         ->setMethod('POST')
         ->add('firstname')
         ->add('lastname')

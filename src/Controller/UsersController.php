@@ -11,10 +11,8 @@ use App\Services\MailO2;
 use App\Entity\RequestsTracker;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Translation\LocaleSwitcher;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
@@ -40,7 +38,7 @@ class UsersController extends AbstractController
         ): Response
     {
         $user = new Users();
-        $form = $this->createForm(UsersType::class, $user);
+        $form = $this->createForm(UsersType::class, $user, ['validation_groups' => ['standard', 'passwordreset']]);
         $form->remove('created');
         $form->remove('role');
         $form->remove('lastlogin');
@@ -88,14 +86,7 @@ class UsersController extends AbstractController
             return $this->redirectToRoute('home'); 
         }
         else{
-            // To remove later
-            $user = $this->dummyUser();
-            $form = $this->createForm(UsersType::class, $user);
-            $form->remove('created');
-            $form->remove('role');
-            // ---------------------
-            $form->remove('lastlogin');
-                return $this->render('users/register.html.twig', [
+            return $this->render('users/register.html.twig', [
                 'form' => $form->createView()
             ]);    
         }     
