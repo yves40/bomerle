@@ -1,0 +1,40 @@
+{% extends 'template.html.twig' %}
+
+{% block title %}Ajouter un accessoire{% endblock %}
+{% block link %}
+    <link rel="stylesheet" href="{{asset('/css/admin.css')}}">
+{% endblock %}
+{% block script %}
+    <script src="{{asset('/scripts/mainmenu.js')}}" defer></script>
+    <script src="{{asset('/scripts/adminnewsletter.js')}}" defer></script>
+{% endblock %}
+
+{% block footer %}{% endblock %}
+
+{% block body %}
+    <div class="contenu">
+        <div class="form-container">
+            <h1 class="form-title">Newsletter pour :</h1>
+            <form action="Post" class="form">
+                <select name="choice" id="newsletter-choice">
+                    <option value="blank">--</option>
+                    <option value="knife">Un couteau</option>
+                    <option value="event">Un salon</option>
+                </select>
+                <select name="knife" id="knife-choice">
+                    <option value="blank">--</option>
+                    {% for knife in knifes %}
+                        <option value="knife{{knife.id}}">{{knife.name}}</option>
+                    {% endfor %}
+                </Select>
+                <select name="event" id="event-choice">
+                    <option value="blank">--</option>
+                    {% for event in events %}
+                        <option value="event{{event.id}}">{{event.name}}</option>
+                    {% endfor %}
+                </select>
+                <a href="{{path('newsletter.send')}}" class="add-button">Envoyer</a>           
+            </form>
+        </div>
+    </div>
+{% endblock %}

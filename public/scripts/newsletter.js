@@ -2,9 +2,9 @@
 $(document).ready(function () {
     console.log('Initializing buttons handlers');
     $(".add-button").click( function (event) { 
-            event.preventDefault();
-            actionRequest(this) ;
-        });
+        event.preventDefault();
+        actionRequest(this) ;
+    });
     $("#newsletter_email").on('keyup', function (event){
         // var validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
         // var validRegex = /^[a-zA-Z0-9][\-_\.\+\!\#\$\%\&\'\*\/\=\?\^\`\{\|]{0,1}([a-zA-Z0-9][\-_\.\+\!\#\$\%\&\'\*\/\=\?\^\`\{\|]{0,1})*[a-zA-Z0-9]@[a-zA-Z0-9][-\.]{0,1}([a-zA-Z][-\.]{0,1})*[a-zA-Z0-9]\.[a-zA-Z0-9]{0,1}([\.\-]{0,1}[a-zA-Z]){0,1}[a-zA-Z0-9]{0,1}$/
