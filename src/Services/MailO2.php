@@ -1,9 +1,7 @@
 <?php
 namespace App\Services;
 
-use App\Core\Mail;
 use App\Core\Token;
-use phpDocumentor\Reflection\Types\Boolean;
 use Symfony\Component\Mime\Email;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
@@ -74,9 +72,11 @@ class MailO2
   //----------------------------------------------------------------------
   // Return true if the email has been properly sent
   //----------------------------------------------------------------------
-  public function sendAdministratorInfo(string $to = null, $subject = 'No subject, probably a programming error', $message = 'No message, is it a test ?'): bool {
+  public function sendAdministratorInfo(string $to = null, 
+                                      $subject = 'No subject, probably a programming error', 
+                                      $message = 'No message, is it a test ?') {
     if(!$to) {
-      $to= $admin = ($_ENV['MAIL_ADMIN']);
+      $to = ($_ENV['MAIL_ADMIN']);
     }
     $email = (new Email())
         ->from($_ENV["MAIL_FROM"])
@@ -91,6 +91,31 @@ class MailO2
     }            
   }
 
+  //----------------------------------------------------------------------
+  // Return true if the email has been properly sent
+  //----------------------------------------------------------------------
+  public function sendEmail(string $from, 
+                            string $to = null, 
+                            $subject = 'No subject, probably a programming error', 
+                            $message = 'No message, is it a test ?') {
+    if(!$from) {
+      $from = ($_ENV['MAIL_FROM']);
+    }
+    if(!$to) {
+      $to = ($_ENV['MAIL_ADMIN']);
+    }
+    $email = (new Email())
+        ->from($from)
+        ->to($to)
+        ->subject($subject)
+        ->html($message);
+    try {
+        $this->mailer->send($email);
+        return true;
+    } catch (TransportExceptionInterface $e) {
+        return false;
+    }            
+  }
   //----------------------------------------------------------------------
   private function buildRegistrationMessage(string $subject, Token $tks) 
   {
