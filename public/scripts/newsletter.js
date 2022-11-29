@@ -29,13 +29,15 @@ function actionRequest(element) {
     let email = $("#newsletter_email").val();
     let knife = $("#newsletter_forknife").prop('checked');
     let events = $("#newsletter_forevents").prop('checked');
+
     console.log('Email : ' + email);
+    let b64email = window.btoa(email);
+    console.log('Email Base 64 : ' + b64email);
     console.log('Knife : ' + knife);
     console.log('Events : ' + events);
 
     if((email.length !== 0) && ((knife) || (events))){
-        let url = $(element).attr('href');
-        // let url = '/subscribenewsletter';
+        let url = $(element).attr('href')+'/'+b64email+'/'+knife+'/'+events;
         console.log('Subcribe ' +  url);
         
         
@@ -58,7 +60,7 @@ function actionRequest(element) {
                     //message en vert inscription ok 
                 },
                 error: function (xhr, status, error) {
-                    console.log("Oups un problème est survenu");
+                    console.log(status + ' Something went wrong during ' + email + ' registration');
                 }
             }
         )        
