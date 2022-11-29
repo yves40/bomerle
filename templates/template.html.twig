@@ -115,8 +115,8 @@
                             {{ form_errors(formnewsletter.forevents) }}
                         </div>
                         {# <p>{{formnewsletter.vars.value.email}}</p> #}
-                        <a href="{{ path('newsletter.subscribe', {'email': formnewsletter.vars.value.email}) }}" class="add-button disabled">S'inscrire</a>
-                        {# <a href="{{ path('newsletter.subscribe') }}" class="add-button">S'inscrire</a> #}
+                        {# <a href="{{ path('newsletter.subscribe', {'email': formnewsletter.vars.value.email}) }}" class="add-button disabled">S'inscrire</a> #}
+                        <a href="{{ path('newsletter.subscribe') }}" class="add-button">S'inscrire</a>
                         {# <button class="add-button">S'inscrire</button> #}
                     {{ form_end(formnewsletter) }}
                 </div>

@@ -19,8 +19,7 @@ $(document).ready(function () {
         }else{
             $(".add-button").addClass('disabled');
             $(".add-button").removeClass('active');
-        }
-        
+        }        
     })
 })
 
@@ -35,20 +34,31 @@ function actionRequest(element) {
     console.log('Events : ' + events);
 
     if((email.length !== 0) && ((knife) || (events))){
-        let url = $(element).attr('href')+'/'+email+'/'+knife+'/'+events;
+        let url = $(element).attr('href');
+        // let url = '/subscribenewsletter';
         console.log('Subcribe ' +  url);
+        
+        
+        let data = {
+            "email" : email,
+            "knifes" :knife,
+            "events" : events
+        };
+
         $.ajax(
             {
                 type: "POST",
                 url: url,
                 datatype: "json",
+                data: data,
                 async: false,
                 success: function (response) {
                     console.log(response);
+                    // vide le formulaire
+                    //message en vert inscription ok 
                 },
                 error: function (xhr, status, error) {
-                    var jsonResponse = JSON.parse(xhr.responseText);
-                    console.log(jsonResponse);
+                    console.log("Oups un problème est survenu");
                 }
             }
         )        
