@@ -30,12 +30,6 @@ function actionRequest(element) {
     let knife = $("#newsletter_forknife").prop('checked');
     let events = $("#newsletter_forevents").prop('checked');
 
-    console.log('Email : ' + email);
-    let b64email = window.btoa(email);
-    console.log('Email Base 64 : ' + b64email);
-    console.log('Knife : ' + knife);
-    console.log('Events : ' + events);
-
     if((email.length !== 0) && ((knife) || (events))){
         let url = $(element).attr('href');
         console.log('Subcribe ' +  url);

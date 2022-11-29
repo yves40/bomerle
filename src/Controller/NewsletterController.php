@@ -106,7 +106,7 @@ class NewsletterController extends AbstractController
                 $content = $fh->getFileContent($html);
                 $content = str_replace('{useremail}', $email, $content);
                 $content = str_replace('{registertypemessage}', $subscribedevents, $content);
-                // $mail->sendEmail($_ENV['MAIL_FROM'],$_ENV['MAIL_ADMIN'], "New user registered ", $content);
+                $mail->sendEmail($_ENV['MAIL_FROM'],$_ENV['MAIL_ADMIN'], "New user registered ", $content);
                 return $this->json([
                     "message" => "Votre demande a été prise en compte pour $email"
                 ], 200);
