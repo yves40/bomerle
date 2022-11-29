@@ -70,31 +70,47 @@ class NewsletterController extends AbstractController
         string $knife,
         string $events,
         EntityManagerInterface $entityManager,
-        MailO2 $mail
+        MailO2 $mail,
+        FileHandler $fh
     ): Response
     {
         $newsletter = new Newsletter();
         $kb = 0;
         $eb = 0;
+        $subscribedevents = 'Aucun abonnement';
         if($knife == 'true'){
             $kb = 1;
+            $subscribedevents = 'Abonné aux news sur les couteaux';
         }
         if($events == 'true'){
             $eb = 1;
+            if($kb) {
+                $subscribedevents .= ' et aux annonces de présence sur les salons.';
+            }
+            else {
+                $subscribedevents = ' Abonné aux annonces de présence sur les salons.';
+            }
         }
-        if(filter_var($email, FILTER_VALIDATE_EMAIL)){
-            $newsletter->setEmail($email)
+        $emaildecoded = base64_decode($email, true);
+        if(filter_var($emaildecoded, FILTER_VALIDATE_EMAIL)){
+            $newsletter->setEmail($emaildecoded)
                    ->setForknife($kb)
                    ->setForevents($eb);
             $entityManager->persist($newsletter);
             $entityManager->flush();
-            $mail->sendAdministratorInfo(null, 'Abonnement Newsletter', "$email s'est inscrit");
+            // Inform administrator
+            $html =  'emails/newsletter-member-added.html';
+            $content = $fh->getFileContent($html);
+            $content = str_replace('{useremail}', $emaildecoded, $content);
+            $content = str_replace('{registertypemessage}', $subscribedevents, $content);
+            $mail->sendEmail($_ENV['MAIL_FROM'],$_ENV['MAIL_ADMIN'], "New user registered ", $content);
             return $this->json([
-                "message" => "Votre demande a été prise en compte"
+                "message" => "Votre demande a été prise en compte pour $emaildecoded"
+                // "debugtext" => $content
             ], 200);
         }else{
             return $this->json([
-                "message" => "Merci de saisir un email valide"
+                "message" => "Merci de saisir un email valide : $emaildecoded"
             ], 400);
         }
     }

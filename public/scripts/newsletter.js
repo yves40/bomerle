@@ -30,12 +30,15 @@ function actionRequest(element) {
     let email = $("#newsletter_email").val();
     let knife = $("#newsletter_forknife").prop('checked');
     let events = $("#newsletter_forevents").prop('checked');
+
     console.log('Email : ' + email);
+    let b64email = window.btoa(email);
+    console.log('Email Base 64 : ' + b64email);
     console.log('Knife : ' + knife);
     console.log('Events : ' + events);
 
     if((email.length !== 0) && ((knife) || (events))){
-        let url = $(element).attr('href')+'/'+email+'/'+knife+'/'+events;
+        let url = $(element).attr('href')+'/'+b64email+'/'+knife+'/'+events;
         console.log('Subcribe ' +  url);
         $.ajax(
             {
@@ -47,8 +50,7 @@ function actionRequest(element) {
                     console.log(response);
                 },
                 error: function (xhr, status, error) {
-                    var jsonResponse = JSON.parse(xhr.responseText);
-                    console.log(jsonResponse);
+                    console.log(status + ' Something went wrong during ' + email + ' registration');
                 }
             }
         )        
