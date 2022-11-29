@@ -10,6 +10,7 @@ use App\Services\MailO2;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -64,15 +65,41 @@ class NewsletterController extends AbstractController
         }
     }
 
-    #[Route('/subscribenewsletter/{email?null}/{knife?false}/{events?false}', name: 'newsletter.subscribe')]
+    #[Route('/subscribenewsletter', name: 'newsletter.subscribe')]
     public function subscribeNewsletter(
-        string $email,
-        string $knife,
-        string $events,
+        Request $request, 
         EntityManagerInterface $entityManager,
         MailO2 $mail
     ): Response
     {
+
+        // $data = json_decode($request->getContent());
+        $data = file_get_contents("php://input");
+
+        // $response = new Response();
+        // $response->setContent(json_encode([
+        //     "data" => $data,
+        //     "message" => "Votre demande a été prise en compte"
+        // ]));
+        // return $response;
+        try {
+                return $this->json([
+                    "data" => $data,
+                    "message" => "Votre demande a été prise en compte"
+                ], 200);
+        }
+        catch(Exception $e) {
+            // $this->addFlash('error', $e->getMessage())
+            return $this->json([
+                "message" => "Erreur : ".$e->getMessage(),
+                "data" =>$data
+            ], 400);
+        }
+        // return $this->json([
+        //     "data" => $data,
+        //     "message" => "Votre demande a été prise en compte"
+        // ], 200);
+/*
         $newsletter = new Newsletter();
         $kb = 0;
         $eb = 0;
@@ -96,7 +123,7 @@ class NewsletterController extends AbstractController
             return $this->json([
                 "message" => "Merci de saisir un email valide"
             ], 400);
-        }
+        }*/
     }
     #[Route('/unsubscribenewsletter/{id}', name: 'newsletter.unsubscribe')]
     public function unsubscribeNewsletter(): Response
