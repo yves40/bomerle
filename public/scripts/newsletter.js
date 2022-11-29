@@ -50,6 +50,11 @@ function actionRequest(element) {
                 async: false,
                 success: function (response) {
                     console.log(response);
+                    $("#newsletter_email").val("");
+                    $("#newsletter_forknife").prop('checked', false);
+                    $("#newsletter_forevents").prop('checked', false);
+                    $(".add-button").addClass('disabled');
+                    $(".add-button").removeClass('active');
                 },
                 error: function (xhr, status, error) {
                     console.log(status + ' Something went wrong during ' + email + ' registration');
