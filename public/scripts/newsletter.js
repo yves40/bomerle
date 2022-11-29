@@ -37,7 +37,7 @@ function actionRequest(element) {
     console.log('Events : ' + events);
 
     if((email.length !== 0) && ((knife) || (events))){
-        let url = $(element).attr('href')+'/'+b64email+'/'+knife+'/'+events;
+        let url = $(element).attr('href');
         console.log('Subcribe ' +  url);
         
         
@@ -56,8 +56,6 @@ function actionRequest(element) {
                 async: false,
                 success: function (response) {
                     console.log(response);
-                    // vide le formulaire
-                    //message en vert inscription ok 
                 },
                 error: function (xhr, status, error) {
                     console.log(status + ' Something went wrong during ' + email + ' registration');
