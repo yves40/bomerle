@@ -225,62 +225,64 @@ header {
               header .container .navigation ul li a {
                 color: #f1f1f1; } }
 
-body {
-  background-image: url(../images/loginpage/fire.jpg);
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
-  max-height: 100vh; }
-
-.new-components {
-  width: 70%;
-  max-width: 700px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background: #00141fb3;
-  box-shadow: 0 0 15px 0 #00141fb3;
-  border-radius: 20px;
-  padding: 20px 7px; }
-  .new-components h1 {
-    width: 100%;
-    text-align: center;
-    color: #f1f1f1;
-    font-family: "Cinzel Decorative", sans-serif;
-    font-weight: 600;
-    font-size: 2.3rem; }
-  .new-components .categories-container {
+footer {
+  flex-shrink: 0;
+  border-top: 1px dashed #333;
+  width: 100%;
+  background: #f1f1f1;
+  color: #333; }
+  footer .contenu-footer {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 15px 0px;
-    width: 80%; }
-    .new-components .categories-container h2 {
-      color: #f1f1f1;
-      font-size: 1.5rem; }
-    .new-components .categories-container .quick-access {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      width: 100%; }
-      .new-components .categories-container .quick-access .button {
-        width: 50%;
-        background: #00aaff40;
-        border-radius: 10px;
-        border: 1px solid #00aaff;
-        margin: 7px 0px;
-        height: 40px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        text-decoration: none;
-        color: #f1f1f1;
-        font-size: 1.3rem;
-        letter-spacing: 2.3px;
-        transition: all 0.3s; }
-        .new-components .categories-container .quick-access .button:hover {
-          background: #00aaff66;
-          letter-spacing: 2.6px; }
+    align-items: flex-start;
+    justify-content: center; }
+    @media screen and (min-width: 800px) {
+      footer .contenu-footer {
+        flex-direction: row;
+        flex-wrap: wrap; } }
+    @media screen and (min-width: 1024px) {
+      footer .contenu-footer {
+        width: 80%;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 50px 0 100px;
+        flex-wrap: nowrap; } }
+  footer .bloc {
+    width: 100%;
+    margin: 5px 0px;
+    padding: 0px 5px; }
+    @media screen and (min-width: 800px) {
+      footer .bloc {
+        width: 50%; } }
+    @media screen and (min-width: 1024px) {
+      footer .bloc {
+        width: 25%;
+        margin: 0 30px; } }
+    footer .bloc h3 {
+      font-size: 1.7rem;
+      padding-bottom: 10px; }
+    footer .bloc ul {
+      list-style-type: none; }
+      footer .bloc ul li {
+        padding: 3px 0; }
+        footer .bloc ul li a {
+          text-decoration: none;
+          color: #333;
+          display: flex;
+          align-items: center;
+          font-size: 1.3rem; }
+        footer .bloc ul li ion-icon {
+          font-size: 2rem;
+          padding-right: 1vw; }
+    footer .bloc.newsletter a {
+      text-decoration: none;
+      border-radius: .3rem;
+      border: 2px solid #00aaff;
+      color: #333; }
+      footer .bloc.newsletter a.disabled {
+        color: #cc3333;
+        cursor: default;
+        pointer-events: none; }
+      footer .bloc.newsletter a.active {
+        color: #66cc33;
+        cursor: pointer; }

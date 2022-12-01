@@ -94,6 +94,11 @@ header
             text-transform: uppercase;
             color: $alternateText;
             transition: all .3s;
+            
+            a{
+                text-decoration: none;
+                color: $alternateText;
+            }
 
             @media screen and (min-width: 1024px){
                 cursor: pointer;
