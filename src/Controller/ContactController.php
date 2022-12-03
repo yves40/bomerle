@@ -46,7 +46,14 @@ class ContactController extends AbstractController
             $content = str_replace('{object}', $object, $content);
             $content = str_replace('{text}', $text, $content);
             $content = str_replace('{knife}', $knife, $content);
+            
+            $contentClient = $fh->getFileContent('emails/contact-confirmation.html');
+            $contentClient = str_replace('{object}', $object, $contentClient);
+            $contentClient = str_replace('{text}', $text, $contentClient);
+            $contentClient = str_replace('{knife}', $knife, $contentClient);
+            
             $mail->sendEmail($_ENV['MAIL_FROM'],$_ENV['MAIL_ADMIN'], "New resquest sent : $object", $content);
+            $mail->sendEmail($_ENV['MAIL_FROM'], $_ENV[$email], "Accusé de réception : $object", $contentClient);
             $this->addFlash('success', 'Votre demande a été prise en compte');
             return $this->redirectToRoute('home');
 
