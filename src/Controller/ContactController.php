@@ -35,6 +35,20 @@ class ContactController extends AbstractController
         if($formContact->isSubmitted() && $formContact->isValid()){
             $email = $contact->getEmail();
             $object = $contact->getObject();
+            switch($object){
+                case 'knife_personalisation' :
+                    $message = "Je souhaite personnaliser un couteau";
+                    break;
+                case 'knife_reservation' :
+                    $message = "Je souhaite réserver un couteau";
+                    break;
+                case 'other' :
+                    $message = "Autre";
+                    break;
+                case 'information';
+                    $message = "Je souhaite obtenir des informations";
+                    break;
+            }
             $text = $contact->getText();
             if($contact->getReservation() !== null){
                 $knife = $contact->getReservation()->getName();
@@ -43,17 +57,17 @@ class ContactController extends AbstractController
             }            
             $content = $fh->getFileContent('emails/contact-request.html');
             $content = str_replace('{email}', $email, $content);
-            $content = str_replace('{object}', $object, $content);
+            $content = str_replace('{object}', $message, $content);
             $content = str_replace('{text}', $text, $content);
             $content = str_replace('{knife}', $knife, $content);
             
             $contentClient = $fh->getFileContent('emails/contact-confirmation.html');
-            $contentClient = str_replace('{object}', $object, $contentClient);
+            $contentClient = str_replace('{object}', $message, $contentClient);
             $contentClient = str_replace('{text}', $text, $contentClient);
             $contentClient = str_replace('{knife}', $knife, $contentClient);
             
-            $mail->sendEmail($_ENV['MAIL_FROM'],$_ENV['MAIL_ADMIN'], "New resquest sent : $object", $content);
-            $mail->sendEmail($_ENV['MAIL_FROM'], $_ENV[$email], "Accusé de réception : $object", $contentClient);
+            $mail->sendEmail($_ENV['MAIL_FROM'],$_ENV['MAIL_ADMIN'], "New resquest sent : $message", $content);
+            $mail->sendEmail($_ENV['MAIL_FROM'], $_ENV[$email], "Accusé de réception : $message", $contentClient);
             $this->addFlash('success', 'Votre demande a été prise en compte');
             return $this->redirectToRoute('home');
 
