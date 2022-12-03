@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\ContactRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: ContactRepository::class)]
 class Contact
@@ -14,16 +15,23 @@ class Contact
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: "Merci de renseigner ce champ")]
+    #[Assert\Email( message: "{{ value }} n'est pas un email valide.")]
     private ?string $email = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: "Merci de renseigner ce champ")]
     private ?string $object = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: "Merci de renseigner ce champ")]
     private ?string $text = null;
 
-    #[ORM\Column(nullable: true)]
-    private ?int $knife = null;
+    // #[ORM\Column(nullable: true)]
+    // private ?int $knife = null;
+
+    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
+    private ?Knifes $reservation = null;
 
     public function getId(): ?int
     {
@@ -74,6 +82,18 @@ class Contact
     public function setKnife(?int $knife): self
     {
         $this->knife = $knife;
+
+        return $this;
+    }
+
+    public function getReservation(): ?Knifes
+    {
+        return $this->reservation;
+    }
+
+    public function setReservation(?Knifes $reservation): self
+    {
+        $this->reservation = $reservation;
 
         return $this;
     }

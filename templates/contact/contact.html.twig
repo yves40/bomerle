@@ -15,14 +15,29 @@
         <div class="form-container">
             <h1 class="form-title">Nous écrire :</h1>
             {{ form_start(formcontact, {'attr': {'novalidate': 'novalidate', 'class': 'form'}}) }}
-                <select name="knife" id="knife-choice">
-                    <option value="blank">--</option>
-                    {% for knife in knifes %}
-                        <option value="{{knife.id}}">{{knife.name}}</option>
-                    {% endfor %}
-                </Select>
+                <div class="input-group">
+                    {{ form_label(formcontact.email, "Email :") }}
+                    {{ form_widget(formcontact.email) }}
+                    {{ form_errors(formcontact.email) }}
+                </div>
+                <div class="input-group">
+                    {{ form_label(formcontact.reservation, "Je suis intéressé par :") }}
+                    {{ form_widget(formcontact.reservation) }}
+                    {{ form_errors(formcontact.reservation) }}
+                </div>
+                <div class="input-group">
+                    {{ form_label(formcontact.object, "Objet :") }}
+                    {{ form_widget(formcontact.object) }}
+                    {{ form_errors(formcontact.object) }}
+                </div>
+                <div class="input-group">
+                    {{ form_label(formcontact.text, "Message :") }}
+                    {{ form_widget(formcontact.text) }}
+                    {{ form_errors(formcontact.text) }}
+                </div>
 
-                <a href="" class="add-button">Envoyer</a>           
+
+                <button class="add-button">Envoyer</button>           
             {{ form_end(formcontact) }}
     </div>
 {% endblock %}
