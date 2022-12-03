@@ -12,6 +12,17 @@
 
 {% block body %}
     <div class="contenu">
+        <div class="form-container">
+            <h1 class="form-title">Nous écrire :</h1>
+            {{ form_start(formcontact, {'attr': {'novalidate': 'novalidate', 'class': 'form'}}) }}
+                <select name="knife" id="knife-choice">
+                    <option value="blank">--</option>
+                    {% for knife in knifes %}
+                        <option value="{{knife.id}}">{{knife.name}}</option>
+                    {% endfor %}
+                </Select>
 
+                <a href="" class="add-button">Envoyer</a>           
+            {{ form_end(formcontact) }}
     </div>
 {% endblock %}

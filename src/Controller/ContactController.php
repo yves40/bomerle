@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
+use App\Entity\Knifes;
 use App\Entity\Newsletter;
+use App\Form\ContactType;
 use App\Form\NewsletterType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -20,11 +22,17 @@ class ContactController extends AbstractController
     ): Response
     {
         $newsletter = new Newsletter;
-        $form = $this->createForm(NewsletterType::class, $newsletter);
-        $form->handleRequest($request);
+        $knife = new Knifes();
+        
+        $knifes = $entityManager->getRepository(Knifes::class)->findAll();
+        $formNewsletter = $this->createForm(NewsletterType::class, $newsletter);
+        $formNewsletter->handleRequest($request);
+        $formContact = $this->createForm(ContactType::class);
         
         return $this->render('contact/contact.html.twig', [
-            'formnewsletter' => $form->createView()
+            'formnewsletter' => $formNewsletter->createView(),
+            'formcontact' => $formContact,
+            'knifes' => $knifes
         ]);
     }
 }
