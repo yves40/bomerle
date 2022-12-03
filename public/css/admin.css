@@ -141,6 +141,9 @@ header {
       text-transform: uppercase;
       color: #f1f1f1;
       transition: all .3s; }
+      header .container .about a {
+        text-decoration: none;
+        color: #f1f1f1; }
       @media screen and (min-width: 1024px) {
         header .container .about {
           cursor: pointer;
@@ -266,6 +269,27 @@ header {
           box-shadow: 0 0 0 1px #00aaff; }
       .form-container .form .input-group ul li {
         color: #cc3333; }
+      .form-container .form .input-group #events_date {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center; }
+        .form-container .form .input-group #events_date #events_date_month, .form-container .form .input-group #events_date #events_date_day, .form-container .form .input-group #events_date #events_date_year {
+          width: 30%;
+          font-size: 1.25rem;
+          padding: .5em;
+          background-color: #d1f0ff4d;
+          color: #f1f1f1;
+          border: none;
+          outline: none;
+          border-radius: .25em;
+          font-weight: lighter; }
+          .form-container .form .input-group #events_date #events_date_month option, .form-container .form .input-group #events_date #events_date_day option, .form-container .form .input-group #events_date #events_date_year option {
+            background-color: #333; }
+          .form-container .form .input-group #events_date #events_date_month:focus, .form-container .form .input-group #events_date #events_date_day:focus, .form-container .form .input-group #events_date #events_date_year:focus {
+            box-shadow: 0 0 0 1px #00aaff; }
+        .form-container .form .input-group #events_date #events_date_year {
+          width: 35%; }
     .form-container .form button {
       padding: .5em 1em;
       font-size: 1.5rem;
@@ -375,3 +399,32 @@ body {
     justify-content: center;
     align-items: center;
     color: #66cc33; }
+
+table {
+  border: 1px solid #f1f1f1;
+  color: #f1f1f1; }
+  table thead {
+    font-size: 1.3rem;
+    border: 1px solid #f1f1f1; }
+    table thead tr th {
+      border: 1px solid #f1f1f1;
+      text-align: center;
+      padding: 5px 10px; }
+  table tbody tr {
+    border: 1px solid #f1f1f1; }
+    table tbody tr td {
+      border: 1px solid #f1f1f1;
+      text-align: left;
+      padding: 5px 10px;
+      height: fit-content; }
+      table tbody tr td.action a {
+        color: #f1f1f1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 1.5rem;
+        transition: all .3s; }
+        table tbody tr td.action a.update:hover {
+          color: #b48645; }
+        table tbody tr td.action a.delete:hover {
+          color: #d15757; }

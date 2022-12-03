@@ -141,6 +141,9 @@ header {
       text-transform: uppercase;
       color: #f1f1f1;
       transition: all .3s; }
+      header .container .about a {
+        text-decoration: none;
+        color: #f1f1f1; }
       @media screen and (min-width: 1024px) {
         header .container .about {
           cursor: pointer;

@@ -1,0 +1,51 @@
+table{
+    border: 1px solid $border;
+    color: $alternateText;
+
+    thead{
+        font-size: 1.3rem;
+        border: 1px solid $border;
+
+        tr{
+
+            th{
+                border: 1px solid $border;
+                text-align: center;
+                padding: 5px 10px;
+            }
+        }
+    }
+    tbody{
+
+        tr{
+            border: 1px solid $border;
+
+
+            td{
+                border: 1px solid $border;
+                text-align: left;
+                padding: 5px 10px;
+                height: fit-content;
+
+                &.action{
+
+                    a{
+                        color: $alternateText;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        font-size: 1.5rem;
+                        transition: all .3s;
+
+                        &.update:hover{
+                            color: $buttonNext;
+                        }
+                        &.delete:hover{
+                            color: $buttonDelete;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

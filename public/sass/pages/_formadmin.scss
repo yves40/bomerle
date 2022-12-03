@@ -54,6 +54,39 @@
                     color: $formError;
                 }
             }
+
+            #events_date{
+                width: 100%;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+
+                #events_date_month{
+                    width: 30%;
+                    font-size: 1.25rem;
+                    padding: .5em;
+                    background-color: $formBackgroundLight;
+                    color: $alternateText;
+                    border: none;
+                    outline: none;
+                    border-radius: .25em;
+                    font-weight: lighter;
+
+                    option{
+                        background-color: $alternateBackground;
+                    }
+                    &:focus{
+                        box-shadow: 0 0 0 1px $formBorder;
+                    }
+                }
+                #events_date_day{
+                    @extend #events_date_month;
+                }
+                #events_date_year{
+                    @extend #events_date_month;
+                    width: 35%;
+                }
+            }
         }
         button{
             padding: .5em 1em;
