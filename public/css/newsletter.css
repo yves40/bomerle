@@ -225,6 +225,34 @@ header {
               header .container .navigation ul li a {
                 color: #f1f1f1; } }
 
+#flash {
+  position: absolute;
+  width: 70%;
+  max-width: 700px;
+  top: 160px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #00141fb3;
+  border-radius: .25em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem; }
+  #flash .alert-danger {
+    height: 60px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #cc3333; }
+  #flash .alert-success {
+    height: 60px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #66cc33; }
+
 .form-container {
   width: 70%;
   max-width: 700px;

@@ -3,4 +3,29 @@
 @import './base/reset';
 @import './base/style';
 @import './layout/navigation';
+@import './layout/flashbag';
 @import './layout/footer';
+@import './pages/mailing';
+
+
+.input-group{
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+
+    label{
+        color: $alternateText;
+        font-weight: lighter;
+        font-size: 1.7rem;
+    }
+    input{
+        font-size: 1.25rem;
+        padding: .5em;
+        background-color: $formBackgroundLight;
+        border: none;
+        outline: none;
+        border-radius: .25em;
+        color: $alternateText;
+        font-weight: lighter;
+    }
+}
