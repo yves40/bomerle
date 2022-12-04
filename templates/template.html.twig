@@ -89,8 +89,7 @@
                     <h3>Nos Services</h3>
                     <ul>
                         <li><a href="{{ path('gallery.home') }}">Galerie</a></li>
-                        <li><a href="#">L'atelier</a></li>
-                        <li><a href="#">Commander</a></li>
+                        <li><a href="{{ path('contact.classic') }}">Contact</a></li>
                     </ul>
                 </div>
                 <div class="bloc footer-contact">
@@ -101,7 +100,7 @@
                 </div>
                 <div class="bloc newsletter">
                     <h3>Newsletter</h3>
-                    {{ form_start(formnewsletter) }}
+                    {{ form_start(formnewsletter, {'attr': {'novalidate': 'novalidate', 'class': 'form'}}) }}
                         {# {{ form_row(formnewsletter._token) }} #}
                         <div class="input-group email">
                             {{ form_label(formnewsletter.email, "Email") }}
@@ -123,10 +122,10 @@
                                 {{ form_errors(formnewsletter.forevents) }}
                             </div>
                         </div>
-                        <div class="add-button">
-                            <a href="{{ path('newsletter.subscribe') }}" class="subscribe">S'inscrire</a>
-                        </div>
                     {{ form_end(formnewsletter) }}
+                    <a href="{{ path('newsletter.subscribe') }}" class="subscribe disabled">S'inscrire</a>
+                    <p class="subscribe-success"></p>
+                    <p class="subscribe-error"></p>
                 </div>
                 <div class="bloc footer-networks">
                     <h3>Nos réseaux</h3>

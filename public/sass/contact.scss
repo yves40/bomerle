@@ -7,25 +7,76 @@
 @import './layout/footer';
 @import './pages/mailing';
 
+body{
+    background-image: url(../images/loginpage/tools.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
 
-.input-group{
-    display: flex;
-    flex-direction: column;
-    gap: 7px;
+.contenu{
+    .input-group{
+        display: flex;
+        flex-direction: column;
+        gap: 7px;
+    
+        label{
+            color: $alternateText;
+            font-weight: lighter;
+            font-size: 1.7rem;
+        }
+        input{
+            font-size: 1.25rem;
+            padding: .5em;
+            background-color: $formBackgroundLight;
+            border: none;
+            outline: none;
+            border-radius: .25em;
+            color: $alternateText;
+            font-weight: lighter;
 
-    label{
-        color: $alternateText;
-        font-weight: lighter;
-        font-size: 1.7rem;
+            &:focus{
+                box-shadow: 0 0 0 1px $formBorder
+            }
+        }
+
+        textarea{
+            @extend input;
+            height: 300px;
+            overflow-y: scroll;
+        }
     }
-    input{
-        font-size: 1.25rem;
-        padding: .5em;
-        background-color: $formBackgroundLight;
-        border: none;
-        outline: none;
-        border-radius: .25em;
-        color: $alternateText;
-        font-weight: lighter;
+    
+    .object{
+
+        select{
+            font-size: .9rem;
+            padding: .5em;
+            background-color: $formBackgroundLight;
+            border: none;
+            outline: none;
+            border-radius: .25em;
+            color: $alternateText;
+            font-weight: lighter;
+
+            &:focus{
+                box-shadow: 0 0 0 1px $formBorder;
+            }
+
+            option{
+                background-color: $alternateBackground;
+            }
+        }
+    }
+    .knife{
+        @extend .object;
+        scale: 0;
+        height: 0;
+        transition: all .3s;
+
+        &.visible{
+            scale: 1;
+            height: auto;
+        }
     }
 }
