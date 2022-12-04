@@ -393,18 +393,39 @@ footer {
         footer .bloc ul li ion-icon {
           font-size: 2rem;
           padding-right: 1vw; }
-    footer .bloc.newsletter a {
-      text-decoration: none;
-      border-radius: .3rem;
-      border: 2px solid #00aaff;
-      color: #333; }
-      footer .bloc.newsletter a.disabled {
-        color: #cc3333;
-        cursor: default;
-        pointer-events: none; }
-      footer .bloc.newsletter a.active {
-        color: #66cc33;
-        cursor: pointer; }
+    footer .bloc.newsletter {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start; }
+      footer .bloc.newsletter .input-group {
+        gap: 7px;
+        width: 100%; }
+        footer .bloc.newsletter .input-group.email {
+          display: flex;
+          flex-direction: column; }
+        footer .bloc.newsletter .input-group label {
+          font-size: 1rem; }
+        footer .bloc.newsletter .input-group input {
+          padding: .5em;
+          background-color: #333;
+          border: none;
+          outline: none;
+          border-radius: .25em;
+          color: #f1f1f1;
+          font-weight: lighter;
+          max-width: 300px; }
+          footer .bloc.newsletter .input-group input:focus {
+            box-shadow: 0 0 0 1px #00aaff; }
+        footer .bloc.newsletter .input-group.choice input {
+          font-size: 1.7rem; }
+      footer .bloc.newsletter .add-button {
+        text-decoration: none;
+        text-align: center;
+        width: 100%;
+        max-width: 300px;
+        border: solid 2px #333;
+        padding: 10px 15px; }
 
 #flash {
   position: absolute;
