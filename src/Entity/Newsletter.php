@@ -3,11 +3,13 @@
 namespace App\Entity;
 
 use App\Repository\NewsletterRepository;
+use App\Services\AEScrypto;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 #[ORM\Entity(repositoryClass: NewsletterRepository::class)]
+#[ORM\HasLifecycleCallbacks]
 #[UniqueEntity(fields:['email'], message: "Cet email est déjà enregistré")]
 class Newsletter
 {
@@ -67,5 +69,23 @@ class Newsletter
         $this->email = $email;
 
         return $this;
+    }
+
+    #[ORM\PreFlush]
+    public function onPreFlush(){
+        $aes = new AEScrypto($_ENV['AESKEY']);
+        $this->email = $aes->encrypt($this->email);
+    }
+
+    #[ORM\PreUpdate]
+    public function onPreUpdate(){
+        $aes = new AEScrypto($_ENV['AESKEY']);
+        $this->email = $aes->encrypt($this->email);
+    }
+
+    #[ORM\PostLoad]
+    public function onPostLoad(){
+        $aes = new AEScrypto($_ENV['AESKEY']);
+        $this->email = $aes->decrypt($this->email);
     }
 }

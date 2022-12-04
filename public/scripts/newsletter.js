@@ -1,7 +1,7 @@
 // ------------------ Init loop to trap all mouse clicks -------------------------
 $(document).ready(function () {
     console.log('Initializing buttons handlers');
-    $(".add-button").click( function (event) { 
+    $(".subscribe").click( function (event) { 
         event.preventDefault();
         actionRequest(this) ;
     });
@@ -14,11 +14,11 @@ $(document).ready(function () {
         const validEmail = validRegex.test($("#newsletter_email").val());
         console.log(validEmail);
         if(validEmail){
-            $(".add-button").addClass('active');
-            $(".add-button").removeClass('disabled');
+            $(".subscribe").addClass('active');
+            $(".subscribe").removeClass('disabled');
         }else{
-            $(".add-button").addClass('disabled');
-            $(".add-button").removeClass('active');
+            $(".subscribe").addClass('disabled');
+            $(".subscribe").removeClass('active');
         }        
     })
 })
@@ -53,8 +53,8 @@ function actionRequest(element) {
                     $("#newsletter_email").val("");
                     $("#newsletter_forknife").prop('checked', false);
                     $("#newsletter_forevents").prop('checked', false);
-                    $(".add-button").addClass('disabled');
-                    $(".add-button").removeClass('active');
+                    $(".subscribe").addClass('disabled');
+                    $(".subscribe").removeClass('active');
                 },
                 error: function (xhr, status, error) {
                     console.log(status + ' Something went wrong during ' + email + ' registration');
