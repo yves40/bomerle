@@ -34,7 +34,7 @@ class LoadUsers extends Fixture
         $admin2->setFirstname('Benjamin');
         $admin2->setLastname('Toubhans');
         $admin2->setAddress('Mars with Elon');
-        $admin2->setEmail('benjamin.toubhans@orange.com');
+        $admin2->setEmail('benjamin.toubhans@orange.fr');
         $admin2->setPassword($this->hasher->hashPassword($admin2, 'admin'));
         $admin2->setConfirmpassword($this->hasher->hashPassword($admin2, 'admin'));
         $admin2->setRole(['ROLE_ADMIN']);
