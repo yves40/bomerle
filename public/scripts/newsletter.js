@@ -1,4 +1,7 @@
 // ------------------ Init loop to trap all mouse clicks -------------------------
+let validEmail = false;
+let knifeChecked = false;
+let eventsChecked = false;
 $(document).ready(function () {
     console.log('Initializing buttons handlers');
     $(".subscribe").click( function (event) { 
@@ -6,20 +9,40 @@ $(document).ready(function () {
         actionRequest(this) ;
     });
     $("#newsletter_email").on('keyup', function (event){
-        const maregex = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,}$/;
-        const validEmail = maregex.test($("#newsletter_email").val());
+        const maregex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        
+        validEmail = maregex.test($("#newsletter_email").val());
 
-        //const validEmail = validRegex.test($("#newsletter_email").val());
         console.log(validEmail);
-        if(validEmail){
-            $(".subscribe").addClass('active');
-            $(".subscribe").removeClass('disabled');
+        buttonActivation();
+    })
+    $("#newsletter_forknife").change( function () {
+        if(this.checked){
+            knifeChecked = true;
         }else{
-            $(".subscribe").addClass('disabled');
-            $(".subscribe").removeClass('active');
-        }        
+            knifeChecked = false;
+        }
+        buttonActivation();
+    })
+    $("#newsletter_forevents").change( function () {
+        if(this.checked){
+            eventsChecked = true;
+        }else{
+            eventsChecked = false;
+        }
+        buttonActivation();
     })
 })
+
+function buttonActivation() {
+    if(validEmail && (knifeChecked || eventsChecked)){
+        $(".subscribe").addClass('active');
+        $(".subscribe").removeClass('disabled');
+    }else{
+        $(".subscribe").addClass('disabled');
+        $(".subscribe").removeClass('active');
+    }  
+}
 
 // ------------------ Handler -------------------------
 function actionRequest(element) {
@@ -53,7 +76,10 @@ function actionRequest(element) {
                     $("#newsletter_forevents").prop('checked', false);
                     $(".subscribe").addClass('disabled');
                     $(".subscribe").removeClass('active');
-                    // $(".subscribe-success").str_
+                    $(".subscribe-success").text(response.message)
+                    validEmail = false;
+                    knifeChecked = false;
+                    eventsChecked = false;
                 },
                 error: function (xhr, status, error) {
                     console.log(status + ' Something went wrong during ' + email + ' registration');
