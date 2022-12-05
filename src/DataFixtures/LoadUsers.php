@@ -21,7 +21,7 @@ class LoadUsers extends Fixture
     public function load(ObjectManager $manager): void
     {
         $admin1 = new Users();
-        $admin1->setFirstname('Benjamin');
+        $admin1->setFirstname('Yves');
         $admin1->setLastname('Toubhans');
         $admin1->setAddress('La Lune 3ème étage');
         $admin1->setEmail('yves77340@gmail.com');
@@ -31,7 +31,7 @@ class LoadUsers extends Fixture
         $admin1->setCreated(new DateTime('now', new DateTimeZone('Europe/Paris')));
         
         $admin2 = new Users();
-        $admin2->setFirstname('Yves');
+        $admin2->setFirstname('Benjamin');
         $admin2->setLastname('Toubhans');
         $admin2->setAddress('Mars with Elon');
         $admin2->setEmail('benjamin.toubhans@gmail.com');
