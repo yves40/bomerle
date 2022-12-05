@@ -6,9 +6,10 @@ $(document).ready(function () {
         actionRequest(this) ;
     });
     $("#newsletter_email").on('keyup', function (event){
-        const validRegex = new RegExp(/^[A-Za-z0-9_!#$%&'*+\/=?`{|}~^.-]+@[A-Za-z0-9.-]+$/, "gm");
+        const maregex = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,}$/;
+        const validEmail = maregex.test($("#newsletter_email").val());
 
-        const validEmail = validRegex.test($("#newsletter_email").val());
+        //const validEmail = validRegex.test($("#newsletter_email").val());
         console.log(validEmail);
         if(validEmail){
             $(".subscribe").addClass('active');
