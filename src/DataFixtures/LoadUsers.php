@@ -24,7 +24,7 @@ class LoadUsers extends Fixture
         $admin1->setFirstname('Benjamin');
         $admin1->setLastname('Toubhans');
         $admin1->setAddress('La Lune 3ème étage');
-        $admin1->setEmail('admin1@gmail.com');
+        $admin1->setEmail('yves77340@gmail.com');
         $admin1->setPassword($this->hasher->hashPassword($admin1, 'admin'));
         $admin1->setConfirmpassword($this->hasher->hashPassword($admin1, 'admin'));
         $admin1->setRole(['ROLE_ADMIN']);
@@ -34,7 +34,7 @@ class LoadUsers extends Fixture
         $admin2->setFirstname('Yves');
         $admin2->setLastname('Toubhans');
         $admin2->setAddress('Mars with Elon');
-        $admin2->setEmail('admin2@gmail.com');
+        $admin2->setEmail('benjamin.toubhans@gmail.com');
         $admin2->setPassword($this->hasher->hashPassword($admin2, 'admin'));
         $admin2->setConfirmpassword($this->hasher->hashPassword($admin2, 'admin'));
         $admin2->setRole(['ROLE_ADMIN']);
@@ -44,7 +44,7 @@ class LoadUsers extends Fixture
         $admin3->setFirstname('Isabelle');
         $admin3->setLastname('Toubhans');
         $admin3->setAddress('Pluton with Jeff');
-        $admin3->setEmail('admin3@gmail.com');
+        $admin3->setEmail('i.toubhans@free.fr');
         $admin3->setPassword($this->hasher->hashPassword($admin3, 'admin'));
         $admin3->setConfirmpassword($this->hasher->hashPassword($admin3, 'admin'));
         $admin3->setRole(['ROLE_SUPER_ADMIN']);
