@@ -26,6 +26,7 @@ footer{
     }
     .bloc{
         width: 100%;
+        max-width: 400px;
         margin: 5px 0px;
         padding: 0px 5px;
         @media screen and (min-width: 800px) {
@@ -62,9 +63,11 @@ footer{
         &.newsletter{
             display: flex;
             flex-direction: column;
-            align-items: center;
+            align-items: flex-start;
             justify-content: flex-start;
-
+            .form{
+                width: 100%;
+            }
             .input-group{
                 gap: 7px;
                 width: 100%;
@@ -72,6 +75,7 @@ footer{
                 &.email{
                     display: flex;
                     flex-direction: column;
+                    margin-bottom: 7px;
                 }
                 label{
                     font-size: 1.25rem;
@@ -106,16 +110,43 @@ footer{
                 }
                 
             }
-            .add-button{
-                text-align: center;
+            // .add-button{
+            //     text-align: center;
+            //     width: 100%;
+            //     max-width: 300px;
+            //     border: solid 2px $alternateBackground;
+            //     border-radius: .25rem;
+            //     padding: 10px 15px;
+            //     position: relative;
+            // }
+            .subscribe{
                 width: 100%;
+                text-align: center;
                 max-width: 300px;
-                border: solid 2px $alternateBackground;
+                text-decoration: none;
+                color: $text;
                 border-radius: .25rem;
+                border: solid 2px $alternateBackground;
+                margin-top: 10px;
                 padding: 10px 15px;
-                
-                a{
-                    text-decoration: none;
+                pointer-events: none;
+                cursor: auto;
+                transition: all .3s;
+                scale: 0;
+
+                &.active{
+                    pointer-events: auto;
+                    cursor: pointer;
+                    scale: 1;
+
+                    &:hover{
+                        color: $alternateText;
+                        background-color: $alternateBackground;
+                    }
+                    &:focus{
+                        color: $alternateText;
+                        background-color: $alternateBackground;                    
+                    }
                 }
             }
         }

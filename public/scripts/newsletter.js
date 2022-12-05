@@ -6,11 +6,8 @@ $(document).ready(function () {
         actionRequest(this) ;
     });
     $("#newsletter_email").on('keyup', function (event){
-        // var validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-        // var validRegex = /^[a-zA-Z0-9][\-_\.\+\!\#\$\%\&\'\*\/\=\?\^\`\{\|]{0,1}([a-zA-Z0-9][\-_\.\+\!\#\$\%\&\'\*\/\=\?\^\`\{\|]{0,1})*[a-zA-Z0-9]@[a-zA-Z0-9][-\.]{0,1}([a-zA-Z][-\.]{0,1})*[a-zA-Z0-9]\.[a-zA-Z0-9]{0,1}([\.\-]{0,1}[a-zA-Z]){0,1}[a-zA-Z0-9]{0,1}$/
-        // var validRegex =  /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
         const validRegex = new RegExp(/^[A-Za-z0-9_!#$%&'*+\/=?`{|}~^.-]+@[A-Za-z0-9.-]+$/, "gm");
-        // const validEmail = ($("#newsletter_email").val()).match(validRegex);
+
         const validEmail = validRegex.test($("#newsletter_email").val());
         console.log(validEmail);
         if(validEmail){
@@ -55,6 +52,7 @@ function actionRequest(element) {
                     $("#newsletter_forevents").prop('checked', false);
                     $(".subscribe").addClass('disabled');
                     $(".subscribe").removeClass('active');
+                    // $(".subscribe-success").str_
                 },
                 error: function (xhr, status, error) {
                     console.log(status + ' Something went wrong during ' + email + ' registration');
