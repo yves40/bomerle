@@ -72,7 +72,7 @@ class KnifesType extends AbstractType
                 'constraints' => [
                     new Assert\All(
                         new Assert\File([
-                            'maxSize' => '4M',
+                            'maxSize' => '8M',
                             'maxSizeMessage' => "{{ name }} Taille maximale autorisée {{ limit }} (Actuellement : {{ size }})",
                             'mimeTypes' => [
                                 'image/jpeg',
