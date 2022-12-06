@@ -87,7 +87,7 @@ header
             }
         }
         .about{
-            padding: 10px 15px;
+            // padding: 10px 15px;
             letter-spacing: 2.3px;
             text-align: center;
             background: $buttonNext;
@@ -96,6 +96,8 @@ header
             transition: all .3s;
             
             a{
+                padding: 10px 15px;
+                display: block;
                 text-decoration: none;
                 color: $alternateText;
             }
