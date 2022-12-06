@@ -136,11 +136,17 @@ section {
         border: 1px solid #00aaff;
         border-radius: .25em;
         outline: none;
-        cursor: pointer; }
-        .full-screen-container .login-container .form .login-button:hover {
-          background-color: #00aaff66; }
-        .full-screen-container .login-container .form .login-button:focus {
-          background-color: #00aaff66; }
+        cursor: pointer;
+        height: 0;
+        scale: 0;
+        transition: all .3s; }
+        .full-screen-container .login-container .form .login-button.active {
+          scale: 1;
+          height: auto; }
+          .full-screen-container .login-container .form .login-button.active:hover {
+            background-color: #00aaff66; }
+          .full-screen-container .login-container .form .login-button.active:focus {
+            background-color: #00aaff66; }
     .full-screen-container .login-container .navigation {
       display: flex;
       justify-content: space-between;

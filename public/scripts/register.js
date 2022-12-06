@@ -17,8 +17,12 @@ $(document).ready(function () {
         validEmail = maregex.test($("#users_email").val());
         if(validEmail){
             $('.email').children('.message').text('Email valide').show();
+            $(".email").addClass('success');
+            $(".email").removeClass('error');
         }else{
             $('.email').children('.message').text('Email invalide').show();
+            $(".email").addClass('error');
+            $(".email").removeClass('success');
         }
         buttonActivation();
     })
@@ -27,9 +31,13 @@ $(document).ready(function () {
         if(firstName.length === 0){
             validFirstname = false;
             $('.firstname').children('.message').text('Prénom invalide').show();
+            $(".firstname").addClass('error');
+            $(".firstname").removeClass('success');
         }else{
             validFirstname = true;
             $('.firstname').children('.message').text('Prénom valide').show();
+            $(".firstname").addClass('success');
+            $(".firstname").removeClass('error');
         }
         buttonActivation();
     })
@@ -38,9 +46,13 @@ $(document).ready(function () {
         if(lastName.length === 0){
             validLastname = false;
             $('.lastname').children('.message').text('Nom invalide').show();
+            $(".lastname").addClass('error');
+            $(".lastname").removeClass('success');
         }else{
             validLastname = true;
             $('.lastname').children('.message').text('Nom valide').show();
+            $(".lastname").addClass('success');
+            $(".lastname").removeClass('error');
         }
         buttonActivation();
     })
@@ -49,9 +61,13 @@ $(document).ready(function () {
         if(address.length === 0){
             validAddress = false;
             $('.address').children('.message').text('Adresse invalide').show();
+            $(".address").addClass('error');
+            $(".address").removeClass('success');
         }else{
             validAddress = true;
             $('.address').children('.message').text('Adresse valide').show();
+            $(".address").addClass('success');
+            $(".address").removeClass('error');
         }
         buttonActivation();
     })
@@ -71,14 +87,18 @@ function checkPasswords() {
     if(password.length > 3 && password.length < 21 && (password === passwordChecked) ){
         validPassword = true;
         $('.password').children('.message').text('Mot de passe valide').show();
+        $(".password").addClass('success');
+        $(".password").removeClass('error');
     }else{
         validPassword = false;
-        $('.password').children('.message').text('Mot de passe invalide').show();
+        $('.password').children('.message').text('Mot de passe invalide (confirmez le mot de passe)').show();
+        $(".password").addClass('error');
+        $(".password").removeClass('success');
     }
 }
 
 function buttonActivation() {
-    if(validEmail && validFirstname && validAddress && validLastname){
+    if(validEmail && validFirstname && validAddress && validLastname && validPassword){
         $(".login-button").addClass('active').removeClass('disabled');
     }else{
         $(".login-button").addClass('disabled').removeClass('active');

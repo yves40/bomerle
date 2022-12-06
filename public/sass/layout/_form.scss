@@ -96,12 +96,20 @@
                 border-radius: .25em;
                 outline: none;
                 cursor: pointer;
+                height: 0;
+                scale: 0;
+                transition: all .3s;
 
-                &:hover{
-                    background-color: $formBackgroundHover;
-                }
-                &:focus{
-                    background-color: $formBackgroundHover;
+                &.active{
+                    scale: 1;
+                    height: auto;
+
+                    &:hover{
+                        background-color: $formBackgroundHover;
+                    }
+                    &:focus{
+                        background-color: $formBackgroundHover;
+                    }
                 }
             }
         }
