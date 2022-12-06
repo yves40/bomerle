@@ -7,6 +7,10 @@
     <link rel="stylesheet" href="{{asset('/css/register.css')}}">
 {% endblock %}
 
+{% block script %}
+    <script src="{{asset('/scripts/register.js')}}" defer></script>
+{% endblock %}
+
 {% block header %}{% endblock %}
 {% block footer %}{% endblock %}
 
@@ -16,32 +20,37 @@
         <div class="login-container">
             <h1 class="login-title">Bienvenue</h1>
             <div class="form">
-                <div class="input-group">
+                <div class="input-group firstname">
                     {{ form_label(form.firstname, 'Prénom') }}
                     {{ form_widget(form.firstname) }}
                     {{ form_errors(form.firstname) }}
+                    <span class="message"></span>
                 </div>
-                <div class="input-group">
+                <div class="input-group lastname">
                     {{ form_label(form.lastname, 'Nom') }}
                     {{ form_widget(form.lastname) }}
                     {{ form_errors(form.lastname) }}
+                    <span class="message"></span>
                 </div>
-                <div class="input-group">
+                <div class="input-group email">
                     {{ form_label(form.email, 'Email') }}
                     {{ form_widget(form.email) }}
                     {{ form_errors(form.email) }}
+                    <span class="message"></span>
                 </div>
-                <div class="input-group">
+                <div class="input-group address">
                     {{ form_label(form.address, 'Adresse') }}
                     {{ form_widget(form.address) }}
                     {{ form_errors(form.address) }}
+                    <span class="message"></span>
                 </div>
-                <div class="input-group">
+                <div class="input-group password">
                     {{ form_label(form.password, 'Mot de passe') }}
                     {{ form_widget(form.password) }}
                     {{ form_errors(form.password) }}
+                    <span class="message"></span>
                 </div>
-                <div class="input-group">
+                <div class="input-group confirmpassword">
                     {{ form_label(form.confirmpassword, 'Confirmer le mot de passe') }}
                     {{ form_widget(form.confirmpassword) }}
                     {{ form_errors(form.confirmpassword) }}
