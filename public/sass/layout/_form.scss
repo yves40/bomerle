@@ -96,8 +96,6 @@
                 border-radius: .25em;
                 outline: none;
                 cursor: pointer;
-                height: 0;
-                scale: 0;
                 transition: all .3s;
 
                 &.active{
@@ -110,6 +108,10 @@
                     &:focus{
                         background-color: $formBackgroundHover;
                     }
+                }
+                &.disable{
+                    height: 0;
+                    scale: 0;
                 }
             }
         }

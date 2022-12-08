@@ -137,8 +137,6 @@ section {
         border-radius: .25em;
         outline: none;
         cursor: pointer;
-        height: 0;
-        scale: 0;
         transition: all .3s; }
         .full-screen-container .login-container .form .login-button.active {
           scale: 1;
@@ -147,6 +145,9 @@ section {
             background-color: #00aaff66; }
           .full-screen-container .login-container .form .login-button.active:focus {
             background-color: #00aaff66; }
+        .full-screen-container .login-container .form .login-button.disable {
+          height: 0;
+          scale: 0; }
     .full-screen-container .login-container .navigation {
       display: flex;
       justify-content: space-between;
