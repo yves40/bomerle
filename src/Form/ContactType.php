@@ -26,7 +26,10 @@ class ContactType extends AbstractType
             ->add('text', TextareaType::class, [
                 'attr' => ['class' => 'text']
             ])
-            ->add('reservation')
+            ->add('reservation', null, [
+                'required' => false,
+                'empty_data' => ''
+            ])
         ;
     }
 

@@ -53,7 +53,7 @@ class ContactController extends AbstractController
             if($contact->getReservation() !== null){
                 $knife = $contact->getReservation()->getName();
             }else{
-                $knife = " ";
+                $knife = "";
             }            
             $content = $fh->getFileContent('emails/contact-request.html');
             $content = str_replace('{email}', $email, $content);
