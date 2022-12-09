@@ -28,7 +28,7 @@ class ContactType extends AbstractType
             ])
             ->add('reservation', null, [
                 'required' => false,
-                'empty_data' => 'choisir'
+                'empty_data' => ''
             ])
         ;
     }

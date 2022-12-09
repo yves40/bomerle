@@ -70,13 +70,19 @@ body{
     }
     .knife{
         @extend .object;
-        scale: 0;
-        height: 0;
+        // scale: 0;
+        // height: 0;
         transition: all .3s;
 
         &.visible{
             scale: 1;
             height: auto;
+            display: flex;
+        }
+        &.hidden{
+            scale: 0;
+            height: 0;
+            display: none;
         }
     }
 }
