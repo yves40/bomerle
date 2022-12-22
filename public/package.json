@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "jquery": "^3.6.1",
+    "jquery": "^3.6.2",
     "node-sass": "^7.0.3"
   },
   "scripts": {
