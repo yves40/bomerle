@@ -35,6 +35,20 @@ class timeHelper {
         this.end = new Date();
     }
     getElapsed() {
-        return this.end - this.start;
+        if(this.end > this.start)
+            return this.end - this.start;
+        else return 0;
+    }
+    getElapsedString() {
+        if(this.end <= this.start)
+            return 0;
+        let elapsed = this.end - this.start;
+        if(elapsed >= 1000) // More than 1 sec ? 
+        {
+            return (this.end - this.start)/1000 + ' sec';
+        }
+        else {
+            return this.end - this.start + ' msec';
+        }
     }
 }
