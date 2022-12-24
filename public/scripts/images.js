@@ -24,9 +24,10 @@ $(document).ready(function () {
             element.src = "/images/gif/loading.gif";
             $(element).height("20px").width("20px").attr( { 'object-fit': 'cover', 'object-position': 'center'} );
             $(element).on("load", () => {     // Here we track the end of the wait gif load
+                // Will load images with a delay
                 timeoutid = setTimeout( () => {
                     $(element).off("load");     // Removes event handlers that were attached with .on()
-                    getImage(element, url)
+                    getImage(element, url)      // Load the real image
                         .then( (timer) => {
                             $(element).height(elemheight).width(elemwidth);
                             let elapsed = timer.getElapsedString();
@@ -38,7 +39,6 @@ $(document).ready(function () {
                         })
 
                 }, 
-                // Will load the image later
                 sessiondelay * indexInArray, url, filename, indexInArray);
             })
         });
