@@ -42,7 +42,7 @@ $(document).ready(function () {
                 sessiondelay * indexInArray, url, filename, indexInArray);
             })
         });
-        console.log(`Loading ${nbimages} images`)
+        console.log(`Loading ${nbimages} images`);
     }
 )
 
