@@ -13,7 +13,7 @@ $(document).ready(function () {
     $("img").each(function (indexInArray, element) { 
         ++nbimages;
         let url = element.src;
-        let filename = url.replace(/^.*[\\\/]/, '')
+        let filename = url.replace(/^.*[\\\/]/, '');
         let elemwidth = element.width;
         let elemheight = element.height;
         element.src = "/images/gif/loading.gif";
@@ -22,42 +22,30 @@ $(document).ready(function () {
             // Will load images with a delay
             timeoutid = setTimeout( () => {
                 $(element).off("load");     // Removes event handlers that were attached with .on()
-                getImage(element, url)      // Load the real image
-                    .then( (timer) => {
-                        $(element).height(elemheight).width(elemwidth);
-                        let elapsed = timer.getElapsedString();
-                        // Ajust timeout delay for the next image loop
-                        $props.set('imageloadingdelay', ($props.imageloadingdelay() + timer.getElapsed()) / 2);
-                        $props.set('imageloadcount', $props.imageloadcount() + 1);
-                        $props.save();
-                        let timestamp = timer.getTime();
-                        console.log(`${timestamp} Image Index : ${indexInArray} loaded ${filename} in ${elapsed}`)
-                    })
-                    .catch( (message) => {
-                        console.log(`Error : ${message}`)
-                    })
-
+                element.src = url;
+                let timer = new timeHelper();
+                timer.startTimer();
+                $(element).on("load", () => {
+                    timer.stopTimer();
+                    $(element).height(elemheight).width(elemwidth);
+                    let elapsed = timer.getElapsedString();
+                    // Ajust timeout delay for the next image loop
+                    // $props.set('imageloadingdelay', ($props.imageloadingdelay() + timer.getElapsed()) / 2);
+                    $props.set('imageloadcount', $props.imageloadcount() + 1);
+                    $props.save();
+                    let timestamp = timer.getTime();
+                    console.log(`${timestamp} Image Index : ${indexInArray} loaded ${filename} in ${elapsed}`)
+                })    
+                $(element).on("abort", () => {
+                    console.log(`Error : ${message}`)
+                })
+                $(element).on("error", () => {
+                    console.log(`Error : ${message}`)
+                })
             }, 
-            imagedelay * indexInArray, url, filename, indexInArray);
+            imagedelay * indexInArray, 
+            url, filename, indexInArray, elemwidth, elemheight);
         })
     });
     console.log(`Loading ${nbimages} images`);
 })
-
-function getImage(element, url) {
-    return new Promise((resolve, reject) => {
-            let timer = new timeHelper();
-            timer.startTimer();
-            element.src = url;          // Load the desired image
-            $(element).on("load", () => {
-                    timer.stopTimer();
-                    resolve(timer);
-            })    
-            $(element).on("abort", () => {
-                reject('Abort...');
-            })
-            $(element).on("error", () => {
-                reject('Error...');
-            })
-    });
-}
