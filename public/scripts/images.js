@@ -1,9 +1,10 @@
 // ------------------ Init loop to trap all mouse clicks -------------------------
 $(document).ready(function () {
-        console.log('Images handler');
-        let sessiondelay  = sessionStorage.getItem("sessiondelay");
+    console.log(getStaticProperty('version'));
+    console.log('Images loader');
+    let sessiondelay  = sessionStorage.getItem("sessiondelay");
         if(sessiondelay === null) { 
-            sessiondelay = 2000;      // Default delay to be used between images load
+            sessiondelay = get('imageloadingdelay');      // Default delay to be used between images load
             sessionStorage.setItem('sessiondelay', sessiondelay);
             sessionStorage.setItem('checkdelay', true);
             console.log('Session delay has been set to ' + sessiondelay + ' msec');
