@@ -4,27 +4,29 @@
 //    Dec 26 2022 Initial
 //----------------------------------------------------------------------------
 const $props = ( () => {
-  let allprops = {
+  const allprops = {
     version : 'bomerle:1.00, Dec 26 2022 ',
     copyright:  'Ratoon software Corporation Inc, Chabreloche France ',
-    imagehandler: 'images.js Dec 26 2022, 1.21',
-    'imageloadingdelay' : 1000,
+    imagehandler: 'images.js Dec 26 2022, 1.22',
+  }
+  let dynprops = {
+    'imageloadingdelay' : 400,
     'imageloadcount' :0
   }
-
+dynprops
   return {
     version: () => { return allprops.version; },
     copyright: () => { return allprops.copyright; },
-    imageloadingdelay: () => { return allprops['imageloadingdelay']; },
-    imageloadcount: () => { return allprops['imageloadcount']; },
     imagehandler: () => { return allprops.imagehandler; },
-    set: (propertyname, value) => { allprops[propertyname] = value; },
-    get: (propertyname) => { return allprops[propertyname]; },
-    save: () => { sessionStorage.setItem('allprops', JSON.stringify(allprops)); },
+    imageloadingdelay: () => { return dynprops['imageloadingdelay']; },
+    imageloadcount: () => { return dynprops['imageloadcount']; },
+    set: (propertyname, value) => { dynprops[propertyname] = value; },
+    get: (propertyname) => { return dynprops[propertyname]; },
+    save: () => { sessionStorage.setItem('dynprops', JSON.stringify(dynprops)); },
     load: () => {
-      let savedprops = sessionStorage.getItem("allprops");
+      let savedprops = sessionStorage.getItem("dynprops");
       if( savedprops !== null) {
-        allprops = JSON.parse(savedprops);
+        dynprops = JSON.parse(savedprops);
       }
      }
   }
