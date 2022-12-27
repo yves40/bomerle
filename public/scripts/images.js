@@ -3,7 +3,7 @@ $(document).ready(function () {
     $props.load();
     console.log('Application version : ' + $props.version());
     const handlerversion = $props.imagehandler();
-    let imagedelay  = $props.imageloadingdelay();
+    let imagedelay  = $props.imageloadingdelay().toFixed(2);
     console.log(`${handlerversion} : Delay between images currently set to ${imagedelay} msec`);
     console.log(`You loaded ${$props.imageloadcount()} images in this session`);
     // -------------------------
@@ -30,10 +30,11 @@ $(document).ready(function () {
                     $(element).height(elemheight).width(elemwidth);
                     let elapsed = timer.getElapsedString();
                     // Ajust timeout delay for the next image loop
-                    // $props.set('imageloadingdelay', ($props.imageloadingdelay() + timer.getElapsed()) / 2);
+                    $props.set('imageloadingdelay', ($props.imageloadingdelay() + timer.getElapsed()) / 2);
                     $props.set('imageloadcount', $props.imageloadcount() + 1);
                     $props.save();
-                    let timestamp = timer.getTime();
+                    // let timestamp = timer.getTime();
+                    let timestamp = timer.getTimeMsec();
                     console.log(`${timestamp} Image Index : ${indexInArray} loaded ${filename} in ${elapsed}`)
                 })    
                 $(element).on("abort", () => {

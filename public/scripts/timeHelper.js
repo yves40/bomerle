@@ -1,9 +1,10 @@
-/*
-    timeHelper
+/*----------------------------------------------------------------------------
+timeHelper
 
     Dec 23 2022     Initial
+    Dec 27 2022     Add msec 
 
-*/
+----------------------------------------------------------------------------*/
 class timeHelper {
 
     constructor() {
@@ -24,6 +25,11 @@ class timeHelper {
     getTime() {
         let d = new Date();
         return d.toTimeString().replace(/.*(\d{2}:\d{2}:\d{2}).*/, "$1") ;
+    }
+    getTimeMsec() {
+        let dd = new Date().toISOString(); 
+        let d = dd.match(/T.*\d{0,2}:\d{0,2}.\d{0,3}/);
+        return d[0].substring(1);
     }
     getShortTime() {
         return new Date().toTimeString().slice(0,5);
