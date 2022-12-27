@@ -1,10 +1,10 @@
 // ------------------ Init loop to trap all mouse clicks -------------------------
 $(document).ready(function () {
     $props.load();
-    console.log('Application version : ' + $props.version());
+    console.log(`[${$props.version()} ]` );
     const handlerversion = $props.imagehandler();
     let imagedelay  = $props.imageloadingdelay().toFixed(2);
-    console.log(`${handlerversion} : Delay between images currently set to ${imagedelay} msec`);
+    console.log(`[${handlerversion}] : Delay between images currently set to ${imagedelay} msec`);
     console.log(`You loaded ${$props.imageloadcount()} images in this session`);
     // -------------------------
     // Load document images

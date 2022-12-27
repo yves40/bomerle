@@ -28,7 +28,7 @@ class timeHelper {
     }
     getTimeMsec() {
         let dd = new Date().toISOString(); 
-        let d = dd.match(/T.*\d{0,2}:\d{0,2}.\d{0,3}/);
+        let d = dd.match(/T.*\d{0,2}:\d{0,2}.\d{0,3}/); // T is time delimiter in ISO format
         return d[0].substring(1);
     }
     getShortTime() {

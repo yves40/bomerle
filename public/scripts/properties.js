@@ -5,15 +5,14 @@
 //----------------------------------------------------------------------------
 const $props = ( () => {
   const allprops = {
-    version : 'bomerle:1.00, Dec 26 2022 ',
+    version : 'bomerle:1.01, Dec 27 2022 ',
     copyright:  'Ratoon software Corporation Inc, Chabreloche France ',
-    imagehandler: 'images.js Dec 26 2022, 1.22',
+    imagehandler: 'images.js Dec 27 2022, 1.23',
   }
   let dynprops = {
     'imageloadingdelay' : 400,
     'imageloadcount' :0
   }
-dynprops
   return {
     version: () => { return allprops.version; },
     copyright: () => { return allprops.copyright; },
