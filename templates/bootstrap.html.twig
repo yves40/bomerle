@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title
+    >       {% block title %}
+                Static Navigation - SB Admin
+            {% endblock %} 
+        </title>
+        {% block stylesheets %}
+        {% endblock %}
+        <link rel="stylesheet" href="{{ asset('node_modules/bootstrap/dist/css/bootstrap.css')}}">
+    </head>
+    <body>
+        <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+            <!-- Navbar Brand-->
+            <a class="navbar-brand ps-3" href="{{ path('home')}}">Beau Merle</a>
+            <!-- Sidebar Toggle-->
+            <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
+            <!-- Navbar Search-->
+            <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
+                {# <h3 class="small">{{ app.request.server.get('APP_VERSION') }}</h3> #}
+                <h3 class="small">Bomerle Admin Dec 28 2022, 1.00</h3>
+            </form>
+            <div>
+                {% if app.user %}
+                    <p class="small">{{ app.user.email }}</p>
+                {% else %}
+                    <p class="small">Anonymous</p>
+                {% endif %}
+            </div>
+            <!-- Navbar-->
+            <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                        {% if app.user %}
+                            <li><a class="dropdown-item" href="{{ path('app_logout') }}">Logout</a></li>
+                        {% else %}
+                            <li><a class="dropdown-item" href="{{ path('app_login') }}">Login</a></li>
+                        {%  endif %}
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+        <div id="layoutSidenav">
+            <div id="layoutSidenav_nav">
+                <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+                    <div class="sb-sidenav-menu">
+                        <div class="nav">
+                            <div class="sb-sidenav-menu-heading">Aministration</div>
+                                <a class="nav-link" href="{{ path('home') }}">
+                                    <div class="sb-nav-link-icon"><i class="fas fa-house"></i></div>
+                                    Home
+                                </a>
+                                {% if app.user %}
+                                    <a class="nav-link" href="{{ path('app_logout') }}">
+                                        <div class="sb-nav-link-icon"><i class="fas fa-square-xmark"></i></div>
+                                        Logout
+                                    </a>
+                                {% else %}
+                                    <a class="nav-link" href="{{ path('app_login') }}">
+                                        <div class="sb-nav-link-icon"><i class="fas fa-right-to-bracket"></i></div>
+                                        Login
+                                    </a>
+                                {% endif %}
+                            <div class="sb-sidenav-menu-heading">Actions</div>
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
+                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                                Users
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+            <div id="layoutSidenav_content">
+                <main>
+                    <div class="container-fluid px-4">
+                    {% block pagetitle %}
+                        <h1 class="mt-4">bootstrap template</h1>
+                    {% endblock %}
+                        <div class="card mb-4">
+                            <div class="card-body">
+                                <!-- The flash message section -->  
+                                {% for message in app.session.flashBag.get('info') %}
+                                    <div class="alert alert-info">{{message}}</div>
+                                {% endfor %}
+                                {% for message in app.session.flashBag.get('success') %}
+                                    <div class="alert alert-success">{{message}}</div>
+                                {% endfor %}
+                                {% for message in app.session.flashBag.get('error') %}
+                                    <div class="alert alert-danger">{{message}}</div>
+                                {% endfor %}
+                                <!-- The page main content -->  
+                                <p class="mb-0">
+                                    {% block body %}
+                                        bootstrap template body
+                                    {% endblock %}
+                                </p>
+                            </div>
+                        </div>
+                        <div style="height: 100vh"></div>
+                        <div class="card mb-4"><div class="card-body">When scrolling, the navigation stays at the top of the page. This is the end of the static navigation demo.</div></div>
+                    </div>
+                </main>
+                <footer class="py-4 bg-light mt-auto">
+                    <div class="container-fluid px-4">
+                        <div class="d-flex align-items-center justify-content-between small">
+                            <div class="text-muted">Copyright &copy; Your Website 2022</div>
+                            <div>
+                                <a href="#">Privacy Policy</a>
+                                &middot;
+                                <a href="#">Terms &amp; Conditions</a>
+                            </div>
+                        </div>
+                    </div>
+                </footer>
+            </div>
+        </div>
+        <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+        <script src="{{ asset('node_modules/bootstrap/dist/js/bootstrap.bundle.min.js')}}"></script>
+        <script src="{{ asset('node_modules/jquery/dist/jquery.min.js')}}"></script>
+        {# <script src="{{ asset('node_modules/fontawesome-free/js/all.js')}}"></script> #}
+        {% block javascripts %}
+        {% endblock %}
+
+    </body>
+</html>
