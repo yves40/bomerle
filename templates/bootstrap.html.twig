@@ -6,14 +6,14 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title
-    >       {% block title %}
+        <title>
+            {% block title %}
                 Static Navigation - SB Admin
             {% endblock %} 
         </title>
     </head>
     <body>
-        <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+        <nav class="navbar navbar-expand navbar-dark bg-dark sb-topnav">
             <!-- Navbar Brand-->
             <a class="navbar-brand ps-3" href="{{ path('home')}}">CV Tech</a>
             <!-- Sidebar Toggle-->
@@ -131,16 +131,14 @@
                 </footer>
             </div>
         </div>
-        <link href={{asset("node_modules/bootstrap/dist/css/bootstrap.css")}} rel="stylesheet" />
-        <script src="{{asset("node_modules/bootstrap/dist/js/bootstrap.bundle.min.js")}}"></script>
-        {# <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script> #}
-        <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
-        <script src="{{ asset('node_modules/jquery/dist/jquery.min.js')}}"></script>
-        <script src="{{ asset('scripts/scripts.js')}}"></script>
-        <script src="{{ asset('scripts/properties.js')}}"></script>
-        <script src="{{ asset('scripts/images.js')}}"></script>
         {% block javascripts %}
         {% endblock %}
-
     </body>
+    <link href={{asset("node_modules/bootstrap/dist/css/bootstrap.css")}} rel="stylesheet" />
+    <script src="{{asset("node_modules/bootstrap/dist/js/bootstrap.bundle.min.js")}}"></script>
+    <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+    <script src="{{ asset('node_modules/jquery/dist/jquery.min.js')}}"></script>
+    <script src="{{ asset('scripts/scripts.js')}}"></script>
+    <script src="{{ asset('scripts/properties.js')}}"></script>
+    <script src="{{ asset('scripts/images.js')}}"></script>
 </html>
