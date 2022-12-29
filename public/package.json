@@ -3,7 +3,8 @@
     "bootstrap": "^5.2.3",
     "fontawesome-free": "^1.0.4",
     "jquery": "^3.6.2",
-    "node-sass": "^7.0.3"
+    "node-sass": "^7.0.3",
+    "startbootstrap-sb-admin": "^7.0.5"
   },
   "scripts": {
     "sass": "node-sass --watch sass -o css"
