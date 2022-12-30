@@ -38,10 +38,10 @@ $(document).ready(function () {
                     console.log(`${timestamp} Image Index : ${indexInArray} loaded ${filename} in ${elapsed}`)
                 })    
                 $(element).on("abort", () => {
-                    console.log(`Error : ${message}`)
+                    console.log(`Upload Abort for : ${element.src}`)
                 })
                 $(element).on("error", () => {
-                    console.log(`Error : ${message}`)
+                    console.log(`Upload Error for : ${element.src}`)
                 })
             }, 
             imagedelay * indexInArray, 

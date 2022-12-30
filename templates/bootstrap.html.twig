@@ -53,14 +53,17 @@
                                 <div class="sb-nav-link-icon"><i class="fas fa-house"></i></div>
                                 {% trans %}home.home{% endtrans %}
                             </a>
-                            <a class="nav-link" href="{{ path('bootadmin.en') }}">
-                                <div class="sb-nav-link-icon"><i class="fas fa-house"></i></div>
-                                {% trans %}admin.english{% endtrans %}
-                            </a>
-                            <a class="nav-link" href="{{ path('bootadmin.fr') }}">
-                                <div class="sb-nav-link-icon"><i class="fas fa-house"></i></div>
-                                {% trans %}admin.french{% endtrans %}
-                            </a>
+                            {% if ( locale == 'en' ) %}
+                                <a class="nav-link" href="{{ path('bootadmin.fr') }}">
+                                    <div class="sb-nav-link-icon"><img src="/images/france16.png" alt=""></div>
+                                    {% trans %}admin.french{% endtrans %}
+                                </a>
+                            {% else %}
+                                <a class="nav-link" href="{{ path('bootadmin.en') }}">
+                                    <div class="sb-nav-link-icon"><img src="/images/usa16.png" alt=""></div>
+                                    {% trans %}admin.english{% endtrans %}
+                                </a>
+                            {% endif %}
                             {% if app.user %}
                                 <a class="nav-link" href="{{ path('app_logout') }}">
                                     <div class="sb-nav-link-icon"><i class="fas fa-square-xmark"></i></div>
@@ -180,5 +183,6 @@
     <script src="{{ asset('node_modules/jquery/dist/jquery.min.js')}}"></script>
     <script src="{{ asset('scripts/scripts.js')}}"></script>
     <script src="{{ asset('scripts/properties.js')}}"></script>
+    <script src="{{ asset('scripts/timeHelper.js')}}"></script>
     <script src="{{ asset('scripts/images.js')}}"></script>
 </html>
