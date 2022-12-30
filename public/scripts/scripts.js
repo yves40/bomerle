@@ -20,7 +20,6 @@ window.addEventListener('DOMContentLoaded', event => {
             event.preventDefault();
             sidebarToggle.classList.toggle('sb-sidenav-toggled');
             // document.body.classList.toggle('sb-sidenav-toggled');
-            console.log('*********** ' + document.body.classList.contains('sb-sidenav-toggled'));
             localStorage.setItem('sb|sidebar-toggle', document.body.classList.contains('sb-sidenav-toggled'));
         });
     }
