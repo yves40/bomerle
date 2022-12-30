@@ -48,6 +48,7 @@
                 <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
                     <div class="sb-sidenav-menu">
                         <div class="nav">
+                            {# The general menu starts here #}
                             <div class="sb-sidenav-menu-heading">Admin tools</div>
                             <a class="nav-link" href="{{ path('home') }}">
                                 <div class="sb-nav-link-icon"><i class="fas fa-house"></i></div>
@@ -64,6 +65,7 @@
                                     Login
                                 </a>
                             {% endif %}
+                            {# The action menu starts here #}
                             <div class="sb-sidenav-menu-heading">Actions</div>
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
                                 <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
@@ -79,6 +81,35 @@
                                     {% endif %}
                                     {% if is_granted('ROLE_ADMIN') %}
                                         <a class="nav-link" href="#">Add</a>
+                                    {% endif %}                                
+                                </nav>
+                            </div>
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseKnives" aria-expanded="false" aria-controls="collapseLayouts">
+                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                                Manage Knives
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="collapseKnives" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    {% if is_granted('ROLE_ADMIN') %}
+                                        <a class="nav-link" href="#">Liste des couteaux</a>
+                                        <a class="nav-link" href="#">Accessoires</a>
+                                        <a class="nav-link" href="#">Catégories</a>
+                                        <a class="nav-link" href="#">Manches</a>
+                                        <a class="nav-link" href="#">Mécanismes</a>
+                                        <a class="nav-link" href="#">Metaux</a>
+                                    {% endif %}                                
+                                </nav>
+                            </div>
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseEvents" aria-expanded="false" aria-controls="collapseLayouts">
+                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                                Les salons
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="collapseEvents" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    {% if is_granted('ROLE_ADMIN') %}
+                                        <a class="nav-link" href="#">Liste des salons</a>
                                     {% endif %}                                
                                 </nav>
                             </div>
