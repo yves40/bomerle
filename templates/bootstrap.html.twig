@@ -21,23 +21,21 @@
             <!-- Navbar Search-->
             <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
                 <h3 class="topnavtext">Beaumerle Dec 2022, 1.40</h3>
-            </form>
-            <div>
                 {% if app.user %}
                     <p class="topnavtext">{{ app.user.email }}</p>
                 {% else %}
-                    <p class="topnavtext">Anonymous</p>
+                    <p class="topnavtext">{% trans %}user.anonymous{% endtrans %}</p>
                 {% endif %}
-            </div>
+            </form>
             <!-- Navbar-->
             <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                         {% if app.user %}
-                            <li><a class="dropdown-item" href="{{ path('app_logout') }}">Logout</a></li>
+                            <li><a class="dropdown-item" href="{{ path('app_logout') }}">{% trans %}user.disconnect{% endtrans %}</a></li>
                         {% else %}
-                            <li><a class="dropdown-item" href="{{ path('app_login') }}">Login</a></li>
+                            <li><a class="dropdown-item" href="{{ path('app_login') }}">{% trans %}user.connect{% endtrans %}</a></li>
                         {%  endif %}
                     </ul>
                 </li>
@@ -57,33 +55,16 @@
                             {% if app.user %}
                                 <a class="nav-link" href="{{ path('app_logout') }}">
                                     <div class="sb-nav-link-icon"><i class="fas fa-square-xmark"></i></div>
-                                    Logout
+                                    {% trans %}user.disconnect{% endtrans %}
                                 </a>
                             {% else %}
                                 <a class="nav-link" href="{{ path('app_login') }}">
                                     <div class="sb-nav-link-icon"><i class="fas fa-right-to-bracket"></i></div>
-                                    Login
+                                    {% trans %}user.connect{% endtrans %}
                                 </a>
                             {% endif %}
                             {# The action menu starts here #}
                             <div class="sb-sidenav-menu-heading">Actions</div>
-                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
-                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                                Users
-                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                            </a>
-                            <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-                                <nav class="sb-sidenav-menu-nested nav">
-                                    {# <a class="nav-link" href="{{ path('user.list') }}">List all</a> #}
-                                    <a class="nav-link" href="#">List</a>
-                                    {% if not is_granted('IS_AUTHENTICATED_FULLY') %}
-                                        <a class="nav-link" href="#">Register</a>
-                                    {% endif %}
-                                    {% if is_granted('ROLE_ADMIN') %}
-                                        <a class="nav-link" href="#">Add</a>
-                                    {% endif %}                                
-                                </nav>
-                            </div>
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseKnives" aria-expanded="false" aria-controls="collapseLayouts">
                                 <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
                                 Manage Knives
@@ -110,6 +91,24 @@
                                 <nav class="sb-sidenav-menu-nested nav">
                                     {% if is_granted('ROLE_ADMIN') %}
                                         <a class="nav-link" href="#">Liste des salons</a>
+                                    {% endif %}                                
+                                </nav>
+                            </div>
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
+                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                                Users
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    {# <a class="nav-link" href="{{ path('user.list') }}">List all</a> #}
+                                    <a class="nav-link" href="#">List</a>
+                                    {% if not is_granted('IS_AUTHENTICATED_FULLY') %}
+                                        <a class="nav-link" href="#">Register</a>
+                                    {% endif %}
+                                    {% if is_granted('ROLE_ADMIN') %}
+                                        <a class="nav-link" href="#">Add</a>
+                                        <a class="nav-link" href="#">Edit</a>
                                     {% endif %}                                
                                 </nav>
                             </div>

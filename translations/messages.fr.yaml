@@ -6,6 +6,8 @@ user:
   passresetbutton: Confirmer
   passresetdone: Votre mot de passe a été réinitialisé
   connect: Se connecter
+  disconnect: Se déconnecter
+  anonymous: anonyme
 home:
   button: Accueil
   subtitle: Fabrication à Chabreloche, France
