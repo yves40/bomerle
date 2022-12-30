@@ -46,11 +46,20 @@
                 <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
                     <div class="sb-sidenav-menu">
                         <div class="nav">
+                            {# ----------------------------------------------------------------------------------- #}
                             {# The general menu starts here #}
-                            <div class="sb-sidenav-menu-heading">Admin tools</div>
+                            <div class="sb-sidenav-menu-heading">{% trans %}admin.tools{% endtrans %}</div>
                             <a class="nav-link" href="{{ path('home') }}">
                                 <div class="sb-nav-link-icon"><i class="fas fa-house"></i></div>
-                                Home
+                                {% trans %}home.home{% endtrans %}
+                            </a>
+                            <a class="nav-link" href="{{ path('bootadmin.en') }}">
+                                <div class="sb-nav-link-icon"><i class="fas fa-house"></i></div>
+                                {% trans %}admin.english{% endtrans %}
+                            </a>
+                            <a class="nav-link" href="{{ path('bootadmin.fr') }}">
+                                <div class="sb-nav-link-icon"><i class="fas fa-house"></i></div>
+                                {% trans %}admin.french{% endtrans %}
                             </a>
                             {% if app.user %}
                                 <a class="nav-link" href="{{ path('app_logout') }}">
@@ -63,34 +72,36 @@
                                     {% trans %}user.connect{% endtrans %}
                                 </a>
                             {% endif %}
+                            {# ----------------------------------------------------------------------------------- #}
                             {# The action menu starts here #}
                             <div class="sb-sidenav-menu-heading">Actions</div>
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseKnives" aria-expanded="false" aria-controls="collapseLayouts">
                                 <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                                Manage Knives
+                                {% trans %}admin.knives{% endtrans %}
                                 <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                             </a>
                             <div class="collapse" id="collapseKnives" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
                                     {% if is_granted('ROLE_ADMIN') %}
-                                        <a class="nav-link" href="#">Liste des couteaux</a>
-                                        <a class="nav-link" href="#">Accessoires</a>
-                                        <a class="nav-link" href="#">Catégories</a>
-                                        <a class="nav-link" href="#">Manches</a>
-                                        <a class="nav-link" href="#">Mécanismes</a>
-                                        <a class="nav-link" href="#">Metaux</a>
+                                        <a class="nav-link" href="#">{% trans %}admin.listknives{% endtrans %}</a>
+                                        <a class="nav-link" href="#">{% trans %}admin.addknife{% endtrans %}</a>
+                                        <a class="nav-link" href="#">{% trans %}admin.accessories{% endtrans %}</a>
+                                        <a class="nav-link" href="#">{% trans %}admin.categories{% endtrans %}</a>
+                                        <a class="nav-link" href="#">{% trans %}admin.handles{% endtrans %}</a>
+                                        <a class="nav-link" href="#">{% trans %}admin.mechanisms{% endtrans %}</a>
+                                        <a class="nav-link" href="#">{% trans %}admin.metals{% endtrans %}</a>
                                     {% endif %}                                
                                 </nav>
                             </div>
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseEvents" aria-expanded="false" aria-controls="collapseLayouts">
                                 <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                                Les salons
+                                {% trans %}admin.events.events{% endtrans %}
                                 <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                             </a>
                             <div class="collapse" id="collapseEvents" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
                                     {% if is_granted('ROLE_ADMIN') %}
-                                        <a class="nav-link" href="#">Liste des salons</a>
+                                        <a class="nav-link" href="#">{% trans %}admin.events.list{% endtrans %}</a>
                                     {% endif %}                                
                                 </nav>
                             </div>
@@ -102,13 +113,9 @@
                             <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
                                     {# <a class="nav-link" href="{{ path('user.list') }}">List all</a> #}
-                                    <a class="nav-link" href="#">List</a>
-                                    {% if not is_granted('IS_AUTHENTICATED_FULLY') %}
-                                        <a class="nav-link" href="#">Register</a>
-                                    {% endif %}
+                                    <a class="nav-link" href="#">{% trans %}user.list{% endtrans %}</a>
                                     {% if is_granted('ROLE_ADMIN') %}
-                                        <a class="nav-link" href="#">Add</a>
-                                        <a class="nav-link" href="#">Edit</a>
+                                        <a class="nav-link" href="#">{% trans %}user.add{% endtrans %}</a>
                                     {% endif %}                                
                                 </nav>
                             </div>

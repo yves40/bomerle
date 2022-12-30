@@ -7,7 +7,26 @@ user:
   passresetdone: Votre mot de passe a été réinitialisé
   connect: Se connecter
   disconnect: Se déconnecter
-  anonymous: anonyme
+  anonymous: Anonyme
+  list: Lister
+  add: Ajouter un utilisateur
 home:
+  home: Accueil
   button: Accueil
   subtitle: Fabrication à Chabreloche, France
+admin:
+  english: Anglais
+  french: Français
+  tools: Outils de gestion
+  actions: Actions
+  knives: Gérer les couteaux
+  listknives: Voir les couteaux
+  addknife: Ajouter un couteau
+  accessories: Accessoires
+  categories: Catégories
+  handles: Manches
+  mechanisms: Mécanismes
+  metals: Métaux
+  events:
+    events:  Salons
+    list: Liste des salons

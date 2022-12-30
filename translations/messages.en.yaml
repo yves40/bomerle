@@ -8,6 +8,25 @@ user:
   connect: Login
   disconnect: Logout
   anonymous: anonymous
+  list: Show users
+  add: Add
 home:
+  home: Home
   button: Back home page
   subtitle: Made in Chabreloche, France
+admin:
+  english: English
+  french: French
+  tools: Admin Tools
+  actions: Actions
+  knives: Manage Knives
+  listknives: Show knives
+  addknife: Add a knife
+  accessories: Accessories
+  categories: Categories
+  handles: Handles
+  mechanisms: Mecanisms
+  metals: Metals
+  events:
+    events:  Events
+    list: List events
