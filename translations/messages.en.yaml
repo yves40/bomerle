@@ -1,4 +1,9 @@
 # Have a look at config/packages/translation.yaml
+app:
+  version: Beaumerle Jan 2023, 1.41
+lang:
+  menufr: Langue
+  menuuk: Language
 user:
   passreqtitle: Forgotten password
   passrequest: Password reset request
