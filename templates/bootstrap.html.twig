@@ -55,13 +55,13 @@
                             </a>
                             {% if ( locale == 'en' ) %}
                                 <a class="nav-link" href="{{ path('bootadmin.fr') }}">
-                                    <div class="sb-nav-link-icon"><img src="/images/france16.png" alt=""></div>
-                                    {% trans %}admin.french{% endtrans %}
+                                    <div class="sb-nav-link-icon"><img src="/images/fr32.png" alt=""></div>
+                                    {# {% trans %}admin.french{% endtrans %} #}
                                 </a>
                             {% else %}
                                 <a class="nav-link" href="{{ path('bootadmin.en') }}">
-                                    <div class="sb-nav-link-icon"><img src="/images/usa16.png" alt=""></div>
-                                    {% trans %}admin.english{% endtrans %}
+                                    <div class="sb-nav-link-icon"><img src="/images/uk32.png" alt=""></div>
+                                    {# {% trans %}admin.english{% endtrans %} #}
                                 </a>
                             {% endif %}
                             {% if app.user %}
