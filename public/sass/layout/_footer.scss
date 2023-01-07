@@ -132,12 +132,12 @@ footer{
                 pointer-events: none;
                 cursor: auto;
                 transition: all .3s;
-                scale: 0;
+                transform: scale(0);
 
                 &.active{
                     pointer-events: auto;
                     cursor: pointer;
-                    scale: 1;
+                    transform: scale(1);
 
                     &:hover{
                         color: $alternateText;

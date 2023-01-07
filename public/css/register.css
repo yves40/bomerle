@@ -139,7 +139,7 @@ section {
         cursor: pointer;
         transition: all .3s; }
         .full-screen-container .login-container .form .login-button.active {
-          scale: 1;
+          transform: scale(1);
           height: auto; }
           .full-screen-container .login-container .form .login-button.active:hover {
             background-color: #00aaff66; }
@@ -147,7 +147,7 @@ section {
             background-color: #00aaff66; }
         .full-screen-container .login-container .form .login-button.disable {
           height: 0;
-          scale: 0; }
+          transform: scale(0); }
     .full-screen-container .login-container .navigation {
       display: flex;
       justify-content: space-between;
