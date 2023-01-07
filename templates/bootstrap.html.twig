@@ -21,8 +21,8 @@
             <!-- Navbar-->
             <ul class="navbar-nav me-auto me-md-0 me-3 me-lg-4">
                 <!-- lang -->
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle dropdown-toggle-split" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <li class="nav-item dropdown" >
+                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         {% if locale == 'fr' %}
                             {% trans %}lang.menufr{% endtrans %}
                         {% else %}
@@ -30,13 +30,14 @@
                         {% endif %}
                         
                     </a>
-                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown"
+                                style="z-index: 1000; transform: translate(50%)">
                         <li><a class="dropdown-item" href="{{ path('bootadmin.fr') }}" ><div class="sb-nav-link-icon">
-                                <img src="/images/fr32.png" alt=""></div>
+                                <img src="/images/fr16.png" alt=""></div>
                             </a>
                         </li>
                         <li><a class="dropdown-item" href="{{ path('bootadmin.en') }}" ><div class="sb-nav-link-icon">
-                                <img src="/images/uk32.png" alt=""></div>
+                                <img src="/images/uk16.png" alt=""></div>
                             </a>
                         </li>
                     </ul>
@@ -58,22 +59,6 @@
                         {%  endif %}
                     </ul>
                 </li>
-
-<!-- Example split button -->
-<div class="btn-group">
-  <button type="button" class="btn btn-secondary">Action</button>
-  <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
-    <span class="visually-hidden">Toggle Dropdown</span>
-  </button>
-  <ul class="dropdown-menu">
-    <li><a class="dropdown-item" href="#">Action</a></li>
-    <li><a class="dropdown-item" href="#">Another action</a></li>
-    <li><a class="dropdown-item" href="#">Something else here</a></li>
-    <li><hr class="dropdown-divider"></li>
-    <li><a class="dropdown-item" href="#">Separated link</a></li>
-  </ul>
-</div>
-
             </ul>
         </nav>
         <div id="layoutSidenav">
