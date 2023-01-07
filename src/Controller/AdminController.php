@@ -30,7 +30,6 @@ class AdminController extends AbstractController
     public function english(): Response
     {
         $currentLocale = $this->localeSwitcher->getLocale();
-        var_dump($currentLocale);
         $this->localeSwitcher->setLocale('en');
         return $this->render('admin/boothome.html.twig', [
             "locale" =>  $this->localeSwitcher->getLocale()
@@ -41,7 +40,6 @@ class AdminController extends AbstractController
     #[Route('/french', name: 'bootadmin.fr')]
     public function french(): Response
     {
-        var_dump($this->localeSwitcher->getLocale());
         $this->localeSwitcher->setLocale('fr');
         return $this->render('admin/boothome.html.twig', [
             "locale" =>  $this->localeSwitcher->getLocale()
