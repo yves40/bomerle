@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Services\FileHandler;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -20,8 +21,12 @@ class AdminController extends AbstractController
     #[Route('/home', name: 'bootadmin.home')]
     public function home(): Response
     {
+        $fh = new FileHandler();
+        $loc = $this->localeSwitcher->getLocale(); 
+        $content = $fh->getFileContent('templates/'.$loc.'/adminhome.html');
         return $this->render('admin/boothome.html.twig', [
-            "locale" =>  $this->localeSwitcher->getLocale()
+            "locale" =>  $this->localeSwitcher->getLocale(),
+            "page" => $content
             ]
         );               
     }
@@ -31,8 +36,12 @@ class AdminController extends AbstractController
     {
         $currentLocale = $this->localeSwitcher->getLocale();
         $this->localeSwitcher->setLocale('en');
+        $fh = new FileHandler();
+        $loc = $this->localeSwitcher->getLocale(); 
+        $content = $fh->getFileContent('templates/'.$loc.'/adminhome.html');
         return $this->render('admin/boothome.html.twig', [
-            "locale" =>  $this->localeSwitcher->getLocale()
+            "locale" =>  $this->localeSwitcher->getLocale(),
+            "page" => $content
             ]
         );               
     }
@@ -41,8 +50,12 @@ class AdminController extends AbstractController
     public function french(): Response
     {
         $this->localeSwitcher->setLocale('fr');
+        $fh = new FileHandler();
+        $loc = $this->localeSwitcher->getLocale(); 
+        $content = $fh->getFileContent('templates/'.$loc.'/adminhome.html');
         return $this->render('admin/boothome.html.twig', [
-            "locale" =>  $this->localeSwitcher->getLocale()
+            "locale" =>  $this->localeSwitcher->getLocale(),
+            "page" => $content
             ]
         );               
     }

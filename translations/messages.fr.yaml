@@ -1,6 +1,6 @@
 # Have a look at config/packages/translation.yaml
 app:
-  version: Beaumerle Jan 2023, 1.42
+  version: Beaumerle Jan 2023, 1.43
   copyright:  'Ratoon software Corporation Inc, Chabreloche France '
 lang:
   menufr: Langue
@@ -21,6 +21,8 @@ home:
   button: Accueil
   subtitle: Fabrication à Chabreloche, France
 admin:
+  title: Beaumerle Admin
+  home: Administration des données
   english: Anglais
   french: Français
   tools: Outils de gestion
