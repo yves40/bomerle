@@ -40,9 +40,9 @@
             </ul>
             <!-- lang Toggle -->
             {% if locale == 'fr' %}
-                <a href="{{ path('bootadmin.en') }}" class="nav-link"><img src="/images/uk16.png" alt=""></a>
+                <a href="{{ path('bootadmin.switch', { locale: 'en'}) }}" class="nav-link"><img src="/images/uk16.png" alt=""></a>
             {% else %}
-                <a href="{{ path('bootadmin.fr') }}" class="nav-link"><img src="/images/fr16.png" alt=""></a>
+                <a href="{{ path('bootadmin.switch', { locale: 'fr'}) }}" class="nav-link"><img src="/images/fr16.png" alt=""></a>
             {% endif %}                        
         </nav>
         <div id="layoutSidenav">
@@ -169,7 +169,7 @@
 
     <link rel="stylesheet" href="{{ asset('css/mini.css') }}">
     <link rel="stylesheet" href="{{ asset('node_modules/startbootstrap-sb-admin/dist/css/styles.css') }}">
-    
+
     <script src="{{asset("node_modules/bootstrap/dist/js/bootstrap.bundle.min.js")}}"></script>
     <script src="{{asset("node_modules/startbootstrap-sb-admin/dist/js/scripts.js")}}"></script>
 

@@ -31,28 +31,13 @@ class AdminController extends AbstractController
         );               
     }
     // --------------------------------------------------------------------------
-    #[Route('/english', name: 'bootadmin.en')]
-    public function english(): Response
+    #[Route('/switch/{locale}', name: 'bootadmin.switch')]
+    public function switch(string $locale): Response
     {
         $currentLocale = $this->localeSwitcher->getLocale();
-        $this->localeSwitcher->setLocale('en');
+        $this->localeSwitcher->setLocale($locale);
         $fh = new FileHandler();
-        $loc = $this->localeSwitcher->getLocale(); 
-        $content = $fh->getFileContent('templates/'.$loc.'/adminhome.html');
-        return $this->render('admin/boothome.html.twig', [
-            "locale" =>  $this->localeSwitcher->getLocale(),
-            "page" => $content
-            ]
-        );               
-    }
-    // --------------------------------------------------------------------------
-    #[Route('/french', name: 'bootadmin.fr')]
-    public function french(): Response
-    {
-        $this->localeSwitcher->setLocale('fr');
-        $fh = new FileHandler();
-        $loc = $this->localeSwitcher->getLocale(); 
-        $content = $fh->getFileContent('templates/'.$loc.'/adminhome.html');
+        $content = $fh->getFileContent('templates/'.$locale.'/adminhome.html');
         return $this->render('admin/boothome.html.twig', [
             "locale" =>  $this->localeSwitcher->getLocale(),
             "page" => $content
