@@ -1,6 +1,6 @@
 # Have a look at config/packages/translation.yaml
 app:
-  version: Beaumerle Jan 2023, 1.43
+  version: Beaumerle Jan 2023, 1.44
   copyright:  'Ratoon software Corporation Inc, Chabreloche France '
 lang:
   menufr: Langue
@@ -38,3 +38,11 @@ admin:
   events:
     events:  Events
     list: List events
+  managemetals:
+    title: Metals management
+    header: Add
+    adddmessage: Metal added
+    modifymessage: Metal updated
+buttons:
+  add: Add
+  modify: Update

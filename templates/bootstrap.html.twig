@@ -20,6 +20,12 @@
             <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i></button>
             <!-- Navbar-->
             <ul class="navbar-nav me-auto me-md-0 me-3 me-lg-4">
+                <!-- lang Toggle -->
+                {% if locale == 'fr' %}
+                    <a href="{{ path('bootadmin.switch', { locale: 'en'}) }}" class="nav-link"><img src="/images/uk16.png" alt=""></a>
+                {% else %}
+                    <a href="{{ path('bootadmin.switch', { locale: 'fr'}) }}" class="nav-link"><img src="/images/fr16.png" alt=""></a>
+                {% endif %}                        
                 <!-- user info if connected -->
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -38,12 +44,6 @@
                     </ul>
                 </li>
             </ul>
-            <!-- lang Toggle -->
-            {% if locale == 'fr' %}
-                <a href="{{ path('bootadmin.switch', { locale: 'en'}) }}" class="nav-link"><img src="/images/uk16.png" alt=""></a>
-            {% else %}
-                <a href="{{ path('bootadmin.switch', { locale: 'fr'}) }}" class="nav-link"><img src="/images/fr16.png" alt=""></a>
-            {% endif %}                        
         </nav>
         <div id="layoutSidenav">
             <div id="layoutSidenav_nav">
@@ -53,7 +53,7 @@
                             {# ----------------------------------------------------------------------------------- #}
                             {# The general menu starts here #}
                             <div class="sb-sidenav-menu-heading">{% trans %}admin.tools{% endtrans %}</div>
-                            <a class="nav-link" href="{{ path('home') }}">
+                            <a class="nav-link" href="{{ path('bootadmin.home') }}">
                                 <div class="sb-nav-link-icon"><i class="fas fa-house"></i></div>
                                 {% trans %}home.home{% endtrans %}
                             </a>
@@ -85,7 +85,7 @@
                                         <a class="nav-link" href="#">{% trans %}admin.categories{% endtrans %}</a>
                                         <a class="nav-link" href="#">{% trans %}admin.handles{% endtrans %}</a>
                                         <a class="nav-link" href="#">{% trans %}admin.mechanisms{% endtrans %}</a>
-                                        <a class="nav-link" href="#">{% trans %}admin.metals{% endtrans %}</a>
+                                        <a class="nav-link" href="{{ path('bootadmin.metals') }}">{% trans %}admin.metals{% endtrans %}</a>
                                     {% endif %}                                
                                 </nav>
                             </div>

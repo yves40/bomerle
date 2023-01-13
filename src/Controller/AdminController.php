@@ -3,8 +3,10 @@
 namespace App\Controller;
 
 use App\Services\FileHandler;
+use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Translation\LocaleSwitcher;
 
@@ -19,10 +21,10 @@ class AdminController extends AbstractController
     }
     // --------------------------------------------------------------------------
     #[Route('/home', name: 'bootadmin.home')]
-    public function home(): Response
+    public function home(Request $request): Response
     {
+        $loc = $this->locale($request);
         $fh = new FileHandler();
-        $loc = $this->localeSwitcher->getLocale(); 
         $content = $fh->getFileContent('templates/'.$loc.'/adminhome.html');
         return $this->render('admin/boothome.html.twig', [
             "locale" =>  $this->localeSwitcher->getLocale(),
@@ -32,9 +34,9 @@ class AdminController extends AbstractController
     }
     // --------------------------------------------------------------------------
     #[Route('/switch/{locale}', name: 'bootadmin.switch')]
-    public function switch(string $locale): Response
+    public function switch(Request $request, string $locale): Response
     {
-        $currentLocale = $this->localeSwitcher->getLocale();
+        $request->getSession()->set('bootadmin.lang', $locale);
         $this->localeSwitcher->setLocale($locale);
         $fh = new FileHandler();
         $content = $fh->getFileContent('templates/'.$locale.'/adminhome.html');
@@ -45,12 +47,27 @@ class AdminController extends AbstractController
         );               
     }
     // --------------------------------------------------------------------------
-    #[Route('/locale', name: 'bootadmin.locale')]
-    public function locale(): Response
+    #[Route('/metals', name: 'bootadmin.metals')]
+    public function AdminMetals(Request $request): Response
     {
-        return $this->render('admin/boothome.html.twig', [
-            "locale" =>  $this->localeSwitcher->getLocale()
+        $loc = $this->locale($request);
+        return $this->render('admin/metals.html.twig', [
+            "locale" =>  $loc,
+            "new" =>  false,
             ]
         );               
+    }
+    // --------------------------------------------------------------------------
+    private function locale(Request $request) {
+        $session = $request->getSession();
+        if($session->has('bootadmin.lang')) {
+            $loc = $session->get('bootadmin.lang');
+        }
+        else {
+            $loc = $this->localeSwitcher->getLocale();
+            $session->set('bootadmin.lang', $loc);
+        }
+        $this->localeSwitcher->setLocale($loc);
+        return $loc;
     }
 }
