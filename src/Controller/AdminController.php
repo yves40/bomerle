@@ -63,17 +63,18 @@ class AdminController extends AbstractController
         $metals = $repo->listMetals();
         $form = $this->createForm(MetalsType::class, $metal);
         $form->handleRequest($request);
-        if($form->isSubmitted() && $form->isValid()){  
+        if($form->isSubmitted() && $form->isValid()){
+            $entityManager->persist($metal);
+            $entityManager->flush();
+            $metals = $repo->listMetals();
         }
-        else {
-            return $this->render('admin/metals.html.twig', [
-                "locale" =>  $loc,
-                "new" =>  $new,
-                "metals" => $metals,
-                "form" => $form->createView()
-                ]
-            );               
-        }
+        return $this->render('admin/metals.html.twig', [
+            "locale" =>  $loc,
+            "new" =>  $new,
+            "metals" => $metals,
+            "form" => $form->createView()
+            ]
+        );               
     }
     // --------------------------------------------------------------------------
     private function locale(Request $request) {

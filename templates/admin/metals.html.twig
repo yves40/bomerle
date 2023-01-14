@@ -9,29 +9,37 @@
 {% endblock %}
 
 {% block body %}
-    {% if new %}
-        <button type="button" class="btn btn-primary">{% trans %}buttons.add{% endtrans %}</button>
-    {% else %}
-        <button type="button" class="btn btn-primary">{% trans %}buttons.modify{% endtrans %}</button>
-    {% endif %}
-    {{ form_start(form, {'attr': {'novalidate': 'novalidate', 'class': 'form'}}) }}
-        {# {{ form_label(formm.name, {% trans %}admin.managemetals.label{% endtrans %}) }} #}
-        {# {{ form_label(form.name, 'The name') }}
-        {{ form_widget(form.name, { 'value': 'Toto '}) }}
-        {{ form_errors(form.name) }} #}
-
-        {# {% set message = 'admin.managemetals.label' %} #}
-        {# {% set thelabel = {% trans %}admin.managemetals.title{% endtrans %} %} #}
-
+    {# Form #}
+    {{ form_start(form, {'attr': {'novalidate': 'novalidate', 'class': 'form'},
+                         'action': path('bootadmin.metals'), 
+                         'method': 'POST'
+                        }) 
+    }}
+        {% if new %}
+            <button type="submit" class="btn btn-primary mb-3">{% trans %}buttons.add{% endtrans %}</button>
+        {% else %}
+            <button type="submit" class="btn btn-primary mb-3">{% trans %}buttons.modify{% endtrans %}</button>
+        {% endif %}
         {{ form_row(form.name, { 'label' : 'admin.managemetals.label'|trans,
-                                 'value': 'toto',
-                                 'help': 'admin.managemetals.help'|trans }) }}
-        
+                                'value': '',
+                                'help': 'admin.managemetals.help'|trans,
+                                }
+                    ) 
+        }}
     {{ form_end(form) }}
-    <ul>
+    {# List existing #}
+    <ul class="list-group">
         {% for metal in metals %}
-            <li>
-                <p> {{metal.name}} </p>
+            <li class="list-group-item">
+                <div class="row">
+                    <div class="col-8">{{metal.name}}</div>
+                    <div class="col-1">
+                        <a href="{{ path('metal.delete', {id: metal.id}) }}"><i class="fa fa-trash"></i></a>
+                    </div>
+                    <div class="col-1">
+                        <a href="{{ path('metal.update', {id: metal.id}) }}"><i class="fa fa-pen-to-square"></i></a>
+                    </div>
+                </div>
             </li>
         {% endfor %}
     </ul>
