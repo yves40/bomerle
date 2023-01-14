@@ -2,13 +2,16 @@
 
 namespace App\Controller;
 
-use App\Services\FileHandler;
 use Exception;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Response;
+use App\Entity\Metals;
+use App\Form\MetalsType;
+use App\Services\FileHandler;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Translation\LocaleSwitcher;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route('/bootadmin')]
 class AdminController extends AbstractController
@@ -48,14 +51,29 @@ class AdminController extends AbstractController
     }
     // --------------------------------------------------------------------------
     #[Route('/metals', name: 'bootadmin.metals')]
-    public function AdminMetals(Request $request): Response
+    public function AdminMetals(Request $request,
+                                EntityManagerInterface $entityManager
+                            ): Response
     {
         $loc = $this->locale($request);
-        return $this->render('admin/metals.html.twig', [
-            "locale" =>  $loc,
-            "new" =>  false,
-            ]
-        );               
+
+        $new = true;
+        $metal = new Metals();
+        $repo = $entityManager->getRepository(Metals::class);
+        $metals = $repo->listMetals();
+        $form = $this->createForm(MetalsType::class, $metal);
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()){  
+        }
+        else {
+            return $this->render('admin/metals.html.twig', [
+                "locale" =>  $loc,
+                "new" =>  $new,
+                "metals" => $metals,
+                "form" => $form->createView()
+                ]
+            );               
+        }
     }
     // --------------------------------------------------------------------------
     private function locale(Request $request) {

@@ -2,10 +2,37 @@
 
 {% block title %}{% trans %}admin.title{% endtrans %}{% endblock %}
 
-{# {% form_theme form 'bootstrap_5_layout.html.twig' %} #}
+{% form_theme form 'bootstrap_5_layout.html.twig' %}
 
-{% block pagetitle %}<h1 class="mt-4">{% trans %}admin.managemetals.title{% endtrans %}</h1>{% endblock %}
+{% block pagetitle %}
+    <h1 class="mt-4">{% trans %}admin.managemetals.title{% endtrans %}</h1>
+{% endblock %}
 
 {% block body %}
-    RAS
+    {% if new %}
+        <button type="button" class="btn btn-primary">{% trans %}buttons.add{% endtrans %}</button>
+    {% else %}
+        <button type="button" class="btn btn-primary">{% trans %}buttons.modify{% endtrans %}</button>
+    {% endif %}
+    {{ form_start(form, {'attr': {'novalidate': 'novalidate', 'class': 'form'}}) }}
+        {# {{ form_label(formm.name, {% trans %}admin.managemetals.label{% endtrans %}) }} #}
+        {# {{ form_label(form.name, 'The name') }}
+        {{ form_widget(form.name, { 'value': 'Toto '}) }}
+        {{ form_errors(form.name) }} #}
+
+        {# {% set message = 'admin.managemetals.label' %} #}
+        {# {% set thelabel = {% trans %}admin.managemetals.title{% endtrans %} %} #}
+
+        {{ form_row(form.name, { 'label' : 'admin.managemetals.label'|trans,
+                                 'value': 'toto',
+                                 'help': 'admin.managemetals.help'|trans }) }}
+        
+    {{ form_end(form) }}
+    <ul>
+        {% for metal in metals %}
+            <li>
+                <p> {{metal.name}} </p>
+            </li>
+        {% endfor %}
+    </ul>
 {% endblock %}

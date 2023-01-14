@@ -43,6 +43,8 @@ admin:
     header: Ajouter
     adddmessage: Le métal a été ajouté
     modifymessage: Le métal a été mis à jour
+    label: Métal
+    help: Le nom du métal utilisé
 buttons:
   add: Ajouter
   modify: Modifier

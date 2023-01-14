@@ -43,6 +43,8 @@ admin:
     header: Add
     adddmessage: Metal added
     modifymessage: Metal updated
+    label: Metal
+    help: Enter the metal name please
 buttons:
   add: Add
   modify: Update
