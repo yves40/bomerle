@@ -50,14 +50,16 @@ class AdminController extends AbstractController
         );               
     }
     // --------------------------------------------------------------------------
-    #[Route('/metals', name: 'bootadmin.metals')]
+    // M E T A L S 
+    // --------------------------------------------------------------------------
+    #[Route('/metals/{new?true}', name: 'bootadmin.metals')]
     public function AdminMetals(Request $request,
+                                $new,
                                 EntityManagerInterface $entityManager
                             ): Response
     {
         $loc = $this->locale($request);
 
-        $new = true;
         $metal = new Metals();
         $repo = $entityManager->getRepository(Metals::class);
         $metals = $repo->listMetals();
@@ -76,6 +78,28 @@ class AdminController extends AbstractController
             ]
         );               
     }
+    // --------------------------------------------------------------------------
+    #[Route('/metals/delete/{id}', name: 'bootadmin.metals.delete')]
+    public function DeleteMetal(Request $request,
+                                int $id,
+                                EntityManagerInterface $entityManager
+                            ): Response
+    {
+        // $loc = $this->locale($request);
+        // Search for the selected metal to be deleted
+        $repo = $entityManager->getRepository(Metals::class);
+        $metal = $repo->find($id);
+        $knifes = $metal->getKnifes();
+        // Is this metal related to any knife ?
+        if($knifes->count() > 0){
+            $this->addFlash('error', 'Ce métal est utilisé pour au moins un couteau');
+            return $this->redirectToRoute('bootadmin.metals', array( 'new' => true));        }
+
+        $this->addFlash('success', 'Ce métal peut être effacé');
+        return $this->redirectToRoute('bootadmin.metals', array( 'new' => true));
+    }
+    // --------------------------------------------------------------------------
+    // P R I V A T E     S E R V I C E S 
     // --------------------------------------------------------------------------
     private function locale(Request $request) {
         $session = $request->getSession();
