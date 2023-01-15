@@ -48,6 +48,7 @@ admin:
     isused: Ce métal est utilisé par un couteau
     created: Métal ajouté
     deleted: Métal supprimé
+    updated: Métal mis à jour
 buttons:
   add: Ajouter
   modify: Modifier

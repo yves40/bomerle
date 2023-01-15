@@ -105,6 +105,28 @@ class AdminController extends AbstractController
         return $this->redirectToRoute('bootadmin.metals', array( 'new' => true));
     }
     // --------------------------------------------------------------------------
+    #[Route('/metals/update/{id}', name: 'bootadmin.metals.update')]
+    public function UpdateMetal(Request $request,
+                                int $id,
+                                EntityManagerInterface $entityManager,
+                                TranslatorInterface $translator
+                            ): Response
+    {
+        $loc = $this->locale($request); // Set the proper language for translations
+        // Search for the selected metal to be deleted
+        $repo = $entityManager->getRepository(Metals::class);
+        $metal = $repo->find($id);
+        $knifes = $metal->getKnifes();
+        // Is this metal related to any knife ?
+        if($knifes->count() > 0){
+            $notice = $translator->trans('admin.managemetals.isused');
+            $this->addFlash('error', $notice);
+            return $this->redirectToRoute('bootadmin.metals', array( 'new' => true));        
+        }
+        $this->addFlash('success', $translator->trans('admin.managemetals.updated'));
+        return $this->redirectToRoute('bootadmin.metals', array( 'new' => true));
+    }
+    // --------------------------------------------------------------------------
     // P R I V A T E     S E R V I C E S 
     // --------------------------------------------------------------------------
     private function locale(Request $request) {

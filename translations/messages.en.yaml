@@ -48,6 +48,7 @@ admin:
     isused: This metal is used by a knife
     created: Metal added
     deleted: Metal deleted
+    updated: Metal updated
 buttons:
   add: Add
   modify: Update
