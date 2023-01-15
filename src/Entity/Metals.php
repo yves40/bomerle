@@ -19,11 +19,11 @@ class Metals
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\NotBlank(message: "Merci de renseigner ce champ")]
+    #[Assert\NotBlank(message: 'generic.notempty')]
     private ?string $name = null;
 
     #[ORM\ManyToMany(targetEntity: Knifes::class, mappedBy: 'metals')]
-    #[Assert\NotBlank(message: "Merci de sélectionner au moins un métal")]
+    #[Assert\NotBlank(message: 'metal.selectone')]
     private Collection $knifes;
 
     public function __construct()
