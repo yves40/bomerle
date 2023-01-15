@@ -45,6 +45,9 @@ admin:
     modifymessage: Metal updated
     label: Metal
     help: Enter the metal name please
+    isused: This metal is used by a knife
+    created: Metal added
+    deleted: Metal deleted
 buttons:
   add: Add
   modify: Update

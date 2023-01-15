@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Translation\LocaleSwitcher;
+use Symfony\Contracts\Translation\TranslatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route('/bootadmin')]
@@ -26,7 +27,7 @@ class AdminController extends AbstractController
     #[Route('/home', name: 'bootadmin.home')]
     public function home(Request $request): Response
     {
-        $loc = $this->locale($request);
+        $loc = $this->locale($request); // Set the proper language for translations
         $fh = new FileHandler();
         $content = $fh->getFileContent('templates/'.$loc.'/adminhome.html');
         return $this->render('admin/boothome.html.twig', [
@@ -50,15 +51,16 @@ class AdminController extends AbstractController
         );               
     }
     // --------------------------------------------------------------------------
-    // M E T A L S 
+    // M E T A L S     S E R V I C E S 
     // --------------------------------------------------------------------------
     #[Route('/metals/{new?true}', name: 'bootadmin.metals')]
     public function AdminMetals(Request $request,
                                 $new,
-                                EntityManagerInterface $entityManager
+                                EntityManagerInterface $entityManager,
+                                TranslatorInterface $translator
                             ): Response
     {
-        $loc = $this->locale($request);
+        $loc = $this->locale($request); // Set the proper language for translations
 
         $metal = new Metals();
         $repo = $entityManager->getRepository(Metals::class);
@@ -69,6 +71,7 @@ class AdminController extends AbstractController
             $entityManager->persist($metal);
             $entityManager->flush();
             $metals = $repo->listMetals();
+            $this->addFlash('success', $translator->trans('admin.managemetals.created'));
         }
         return $this->render('admin/metals.html.twig', [
             "locale" =>  $loc,
@@ -82,20 +85,23 @@ class AdminController extends AbstractController
     #[Route('/metals/delete/{id}', name: 'bootadmin.metals.delete')]
     public function DeleteMetal(Request $request,
                                 int $id,
-                                EntityManagerInterface $entityManager
+                                EntityManagerInterface $entityManager,
+                                TranslatorInterface $translator
                             ): Response
     {
-        // $loc = $this->locale($request);
+        $loc = $this->locale($request); // Set the proper language for translations
         // Search for the selected metal to be deleted
         $repo = $entityManager->getRepository(Metals::class);
         $metal = $repo->find($id);
         $knifes = $metal->getKnifes();
         // Is this metal related to any knife ?
         if($knifes->count() > 0){
-            $this->addFlash('error', 'Ce métal est utilisé pour au moins un couteau');
-            return $this->redirectToRoute('bootadmin.metals', array( 'new' => true));        }
-
-        $this->addFlash('success', 'Ce métal peut être effacé');
+            $notice = $translator->trans('admin.managemetals.isused');
+            $this->addFlash('error', $notice);
+            return $this->redirectToRoute('bootadmin.metals', array( 'new' => true));        
+        }
+        $repo->remove($metal, true);
+        $this->addFlash('success', $translator->trans('admin.managemetals.deleted'));
         return $this->redirectToRoute('bootadmin.metals', array( 'new' => true));
     }
     // --------------------------------------------------------------------------

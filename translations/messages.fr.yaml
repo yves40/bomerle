@@ -45,6 +45,9 @@ admin:
     modifymessage: Le métal a été mis à jour
     label: Métal
     help: Le nom du métal utilisé
+    isused: Ce métal est utilisé par un couteau
+    created: Métal ajouté
+    deleted: Métal supprimé
 buttons:
   add: Ajouter
   modify: Modifier

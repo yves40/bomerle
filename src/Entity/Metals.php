@@ -10,7 +10,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 #[ORM\Entity(repositoryClass: MetalsRepository::class)]
-#[UniqueEntity(fields:['name'], message: "Ce métal existe déjà")]
+#[UniqueEntity(fields:['name'], message: 'metal.alreadyexist')]
 class Metals
 {
     #[ORM\Id]
