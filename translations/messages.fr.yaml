@@ -52,3 +52,4 @@ admin:
 buttons:
   add: Ajouter
   modify: Modifier
+  cancel: Annuler

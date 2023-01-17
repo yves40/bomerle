@@ -68,12 +68,17 @@ class AdminController extends AbstractController
         $repo = $entityManager->getRepository(Metals::class);
         $metals = $repo->listMetals();
         $form = $this->createForm(MetalsType::class, $metal);
-        $form->handleRequest($request);
-        if($form->isSubmitted() && $form->isValid()){
-            $entityManager->persist($metal);
-            $entityManager->flush();
-            $metals = $repo->listMetals();
-            $this->addFlash('success', $translator->trans('admin.managemetals.created'));
+        if($new === 'abort') {  // The user aborted the modification
+            $new = "true";
+        }
+        else {
+            $form->handleRequest($request);
+            if($form->isSubmitted() && $form->isValid()){
+                $entityManager->persist($metal);
+                $entityManager->flush();
+                $metals = $repo->listMetals();
+                $this->addFlash('success', $translator->trans('admin.managemetals.created'));
+            }
         }
         return $this->render('admin/metals.html.twig', [
             "locale" =>  $loc,
