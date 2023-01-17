@@ -49,6 +49,14 @@ admin:
     created: Métal ajouté
     deleted: Métal supprimé
     updated: Métal mis à jour
+  managemechanisms:
+    title: Gestion des mécanismes
+    label: Mécanisme
+    help: Nom du mécanisme
+    isused: Ce mécanisme est utilisé par un couteau
+    created: Mécanisme ajouté
+    deleted: Mécanisme supprimé
+    updated: Mécanisme mis à jour
 buttons:
   add: Ajouter
   modify: Modifier

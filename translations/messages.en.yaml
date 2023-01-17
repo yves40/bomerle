@@ -49,6 +49,14 @@ admin:
     created: Metal added
     deleted: Metal deleted
     updated: Metal updated
+  managemechanisms:
+    title: Mechanisms Management
+    label: Mechanism
+    help: Enter the mechanism name
+    isused: This mechanism is used by a knife
+    created: mechanism added
+    deleted: mechanism deleted
+    updated: mechanism updated
 buttons:
   add: Add
   modify: Update

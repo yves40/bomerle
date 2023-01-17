@@ -5,6 +5,8 @@ namespace App\Controller;
 use Exception;
 use App\Entity\Metals;
 use App\Form\MetalsType;
+use App\Entity\Mechanism;
+use App\Form\MechanismType;
 use App\Services\FileHandler;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -150,6 +152,50 @@ class AdminController extends AbstractController
                                     'metalname' => $metal->getName(),
                                     'id' => $metal->getId()
                                 ));
+    }
+    // --------------------------------------------------------------------------
+    // M E C H A N I S M S     S E R V I C E S 
+    // --------------------------------------------------------------------------
+    #[Route('/mechanisms/home/{new?true}/{mechanismname?#}/{id?10000}', name: 'bootadmin.mechanisms')]
+    public function AdminMechanisms(Request $request,
+                                $new,
+                                $mechanismname,
+                                $id,
+                                EntityManagerInterface $entityManager,
+                                TranslatorInterface $translator
+                            ): Response
+    {
+        $loc = $this->locale($request); // Set the proper language for translations
+        /** 
+         * @var Mechanism $mechanism 
+         * @var MechanismRepository $repo
+         * 
+        */
+        $mechanism = new Mechanism();
+        $repo = $entityManager->getRepository(Mechanism::class);
+        $mechanisms = $repo->listMechanisms();
+        $form = $this->createForm(MechanismType::class, $mechanism);
+        if($new === 'abort') {  // The user aborted the modification
+            $new = "true";
+        }
+        else {
+            $form->handleRequest($request);
+            if($form->isSubmitted() && $form->isValid()){
+                $entityManager->persist($mechanism);
+                $entityManager->flush();
+                $mechanisms = $repo->listMechanisms();
+                $this->addFlash('success', $translator->trans('admin.managemechanisms.created'));
+            }
+        }
+        return $this->render('admin/mechanisms.html.twig', [
+            "locale" =>  $loc,
+            "new" =>  $new,
+            "mechanismname" => $mechanismname,
+            "id" => $id,
+            "mechanisms" => $mechanisms,
+            "form" => $form->createView()
+            ]
+        );               
     }
     // --------------------------------------------------------------------------
     // P R I V A T E     S E R V I C E S 
