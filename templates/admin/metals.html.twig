@@ -9,19 +9,34 @@
 {% endblock %}
 
 {% block body %}
+    {# 
+        Check form call context: The form is generic and called for all CRUD ops.
+        When updating, the action must call the update service with an ID
+    #}
+    {% set param = [] %}
+    {% if new == "true" %}  {# Update, or Create, delete ? #}
+        {% set action = 'bootadmin.metals' %}
+    {% else %}
+        {% set action = 'bootadmin.metals.update' %}
+        {% set param = { 'id': id } %}
+    {% endif %}
     {# Form #}
     {{ form_start(form, {'attr': {'novalidate': 'novalidate', 'class': 'form'},
-                         'action': path('bootadmin.metals'), 
+                         'action': path(action, param), 
                          'method': 'POST'
                         }) 
     }}
-        {% if new %}
+        <p>{{new}} et le label est : {{metalname}}</p>
+        {% if metalname == '#' %}
+            {% set metalname = '' %}
+        {% endif %}
+        {% if new == "true" %}
             <button type="submit" class="btn btn-primary mb-3">{% trans %}buttons.add{% endtrans %}</button>
         {% else %}
             <button type="submit" class="btn btn-primary mb-3">{% trans %}buttons.modify{% endtrans %}</button>
         {% endif %}
         {{ form_row(form.name, { 'label' : 'admin.managemetals.label'|trans,
-                                'value': '',
+                                'value': metalname,
                                 'help': 'admin.managemetals.help'|trans,
                                 }
                     ) 

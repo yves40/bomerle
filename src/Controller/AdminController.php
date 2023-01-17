@@ -53,9 +53,11 @@ class AdminController extends AbstractController
     // --------------------------------------------------------------------------
     // M E T A L S     S E R V I C E S 
     // --------------------------------------------------------------------------
-    #[Route('/metals/{new?true}', name: 'bootadmin.metals')]
+    #[Route('/metals/home/{new?true}/{metalname?#}/{id?10000}', name: 'bootadmin.metals')]
     public function AdminMetals(Request $request,
                                 $new,
+                                $metalname,
+                                $id,
                                 EntityManagerInterface $entityManager,
                                 TranslatorInterface $translator
                             ): Response
@@ -76,6 +78,8 @@ class AdminController extends AbstractController
         return $this->render('admin/metals.html.twig', [
             "locale" =>  $loc,
             "new" =>  $new,
+            "metalname" => $metalname,
+            "id" => $id,
             "metals" => $metals,
             "form" => $form->createView()
             ]
@@ -98,11 +102,11 @@ class AdminController extends AbstractController
         if($knifes->count() > 0){
             $notice = $translator->trans('admin.managemetals.isused');
             $this->addFlash('error', $notice);
-            return $this->redirectToRoute('bootadmin.metals', array( 'new' => true));        
+            return $this->redirectToRoute('bootadmin.metals', array( 'new' => "true"));
         }
         $repo->remove($metal, true);
         $this->addFlash('success', $translator->trans('admin.managemetals.deleted'));
-        return $this->redirectToRoute('bootadmin.metals', array( 'new' => true));
+        return $this->redirectToRoute('bootadmin.metals', array( 'new' => "true"));
     }
     // --------------------------------------------------------------------------
     #[Route('/metals/update/{id}', name: 'bootadmin.metals.update')]
@@ -116,15 +120,20 @@ class AdminController extends AbstractController
         // Search for the selected metal to be deleted
         $repo = $entityManager->getRepository(Metals::class);
         $metal = $repo->find($id);
-        $knifes = $metal->getKnifes();
-        // Is this metal related to any knife ?
-        if($knifes->count() > 0){
-            $notice = $translator->trans('admin.managemetals.isused');
-            $this->addFlash('error', $notice);
-            return $this->redirectToRoute('bootadmin.metals', array( 'new' => true));        
+        $form = $this->createForm(MetalsType::class, $metal);
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()){
+            $entityManager->persist($metal);
+            $entityManager->flush();
+            $this->addFlash('success', $translator->trans('admin.managemetals.updated'));
+            return $this->redirectToRoute('bootadmin.metals', array( 'new' => "true"));
         }
-        $this->addFlash('success', $translator->trans('admin.managemetals.updated'));
-        return $this->redirectToRoute('bootadmin.metals', array( 'new' => true));
+        // var_dump($metal->getName(), $metal->getId());die;
+        return $this->redirectToRoute('bootadmin.metals', 
+                            array(  'new' => "false", 
+                                    'metalname' => $metal->getName(),
+                                    'id' => $metal->getId()
+                                ));
     }
     // --------------------------------------------------------------------------
     // P R I V A T E     S E R V I C E S 
