@@ -52,7 +52,18 @@ class AdminController extends AbstractController
     }
     // --------------------------------------------------------------------------
     // M E T A L S     S E R V I C E S 
+    // The generic handler is used for all CRUD ops and render the page with 
+    // a form and the metals list.
+    // The render page is located in template/admin/metals.html.twig
     // --------------------------------------------------------------------------
+    /*
+        @param string $new  true : if creating a metal or displaying metals list
+                            false: When updating a metal namespace
+                            abort: When canceling a modification
+        @param string $metalname contains the metal name when updating it
+        @param number $id used when updating or deleting a metal
+        @return Response
+    */
     #[Route('/metals/home/{new?true}/{metalname?#}/{id?10000}', name: 'bootadmin.metals')]
     public function AdminMetals(Request $request,
                                 $new,
