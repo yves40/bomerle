@@ -198,6 +198,56 @@ class AdminController extends AbstractController
         );               
     }
     // --------------------------------------------------------------------------
+    #[Route('/mechanisms/delete/{id}', name: 'bootadmin.mechanisms.delete')]
+    public function DeleteMechanism(Request $request,
+                                int $id,
+                                EntityManagerInterface $entityManager,
+                                TranslatorInterface $translator
+                            ): Response
+    {
+        $loc = $this->locale($request); // Set the proper language for translations
+        // Search for the selected metal to be deleted
+        $repo = $entityManager->getRepository(mechanism::class);
+        $mechanism = $repo->find($id);
+        $knifes = $mechanism->getKnifes();
+        // Is this metal related to any knife ?
+        if($knifes->count() > 0){
+            $notice = $translator->trans('admin.managemechanisms.isused');
+            $this->addFlash('error', $notice);
+            return $this->redirectToRoute('bootadmin.mechanisms', array( 'new' => "true"));
+        }
+        $repo->remove($mechanism, true);
+        $this->addFlash('success', $translator->trans('admin.managemechanisms.deleted'));
+        return $this->redirectToRoute('bootadmin.mechanisms', array( 'new' => "true"));
+    }
+    // --------------------------------------------------------------------------
+    #[Route('/mechanisms/update/{id}', name: 'bootadmin.mechanisms.update')]
+    public function UpdateMechanism(Request $request,
+                                int $id,
+                                EntityManagerInterface $entityManager,
+                                TranslatorInterface $translator
+                            ): Response
+    {
+        $loc = $this->locale($request); // Set the proper language for translations
+        // Search for the selected metal to be deleted
+        $repo = $entityManager->getRepository(Mechanism::class);
+        $mechanism = $repo->find($id);
+        $form = $this->createForm(MechanismType::class, $mechanism);
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()){
+            $entityManager->persist($mechanism);
+            $entityManager->flush();
+            $this->addFlash('success', $translator->trans('admin.managemechanisms.updated'));
+            return $this->redirectToRoute('bootadmin.mechanisms', array( 'new' => "true"));
+        }
+        // var_dump($metal->getName(), $metal->getId());die;
+        return $this->redirectToRoute('bootadmin.mechanisms', 
+                            array(  'new' => "false", 
+                                    'mechanismname' => $mechanism->getName(),
+                                    'id' => $mechanism->getId()
+                                ));
+    }
+    // --------------------------------------------------------------------------
     // P R I V A T E     S E R V I C E S 
     // --------------------------------------------------------------------------
     private function locale(Request $request) {

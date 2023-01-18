@@ -17,7 +17,7 @@
     {% if new == "true" %}  {# Update, or Create, delete ? #}
         {% set action = 'bootadmin.mechanisms' %}
     {% else %}
-        {% set action = 'bootadmin.metals.update' %}
+        {% set action = 'bootadmin.mechanisms.update' %}
         {% set param = { 'id': id } %}
     {% endif %}
     {# Form #}
@@ -34,7 +34,7 @@
         {% else %}
             <button type="submit" 
                     class="btn btn-primary mb-3">{% trans %}buttons.modify{% endtrans %}</button>
-            <button type="submit" formaction="{{path('bootadmin.metals', { new: 'abort'})}}" 
+            <button type="submit" formaction="{{path('bootadmin.mechanisms', { new: 'abort'})}}" 
                     class="btn btn-primary mb-3">{% trans %}buttons.cancel{% endtrans %}</button>
         {% endif %}
         {{ form_row(form.name, { 'label' : 'admin.managemechanisms.label'|trans,
@@ -51,10 +51,10 @@
                 <div class="row">
                     <div class="col-8">{{mechanism.name}}</div>
                     <div class="col-1">
-                        <a href="{{ path('bootadmin.metals.delete', {id: mechanism.id}) }}"><i class="fa fa-trash"></i></a>
+                        <a href="{{ path('bootadmin.mechanisms.delete', {id: mechanism.id}) }}"><i class="fa fa-trash"></i></a>
                     </div>
                     <div class="col-1">
-                        <a href="{{ path('bootadmin.metals.update', {id: mechanism.id}) }}"><i class="fa fa-pen-to-square"></i></a>
+                        <a href="{{ path('bootadmin.mechanisms.update', {id: mechanism.id}) }}"><i class="fa fa-pen-to-square"></i></a>
                     </div>
                 </div>
             </li>

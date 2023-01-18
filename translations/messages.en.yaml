@@ -50,13 +50,13 @@ admin:
     deleted: Metal deleted
     updated: Metal updated
   managemechanisms:
-    title: Mechanisms Management
+    title: Mechanism Management
     label: Mechanism
     help: Enter the mechanism name
     isused: This mechanism is used by a knife
-    created: mechanism added
-    deleted: mechanism deleted
-    updated: mechanism updated
+    created: Mechanism added
+    deleted: Mechanism deleted
+    updated: Mechanism updated
 buttons:
   add: Add
   modify: Update
