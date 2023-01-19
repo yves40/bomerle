@@ -3,11 +3,15 @@
 namespace App\Controller;
 
 use Exception;
+use App\Entity\Handle;
 use App\Entity\Metals;
-use App\Form\MetalsType;
 use App\Entity\Mechanism;
+use App\Form\HandleType;
+use App\Form\MetalsType;
 use App\Form\MechanismType;
 use App\Services\FileHandler;
+use App\Repository\HandleRepository;
+
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -246,6 +250,146 @@ class AdminController extends AbstractController
                                     'mechanismname' => $mechanism->getName(),
                                     'id' => $mechanism->getId()
                                 ));
+    }
+    // --------------------------------------------------------------------------
+    // H A N D L E S     S E R V I C E S 
+    // --------------------------------------------------------------------------
+    #[Route('/handles/home/{new?true}/{handlename?#}/{id?10000}', name: 'bootadmin.handles')]
+    public function AdminHandles(Request $request,
+                                $new,
+                                $handlename,
+                                $id,
+                                EntityManagerInterface $entityManager,
+                                TranslatorInterface $translator
+                            ): Response
+    {
+        $loc = $this->locale($request); // Set the proper language for translations
+        /** 
+         * @var Handle $handle 
+         * @var HandleRepository $repo
+         * 
+        */
+        $handle = new Handle();
+        $repo = $entityManager->getRepository(Handle::class);
+        $handles = $repo->listHandles();
+        $form = $this->createForm(HandleType::class, $handle);
+        if($new === 'abort') {  // The user aborted the modification
+            $new = "true";
+        }
+        else {
+            $form->handleRequest($request);
+            if($form->isSubmitted() && $form->isValid()){
+                $entityManager->persist($handle);
+                $entityManager->flush();
+                $handles = $repo->listHandles();
+                $this->addFlash('success', $translator->trans('admin.managehandles.created'));
+            }
+        }
+        return $this->render('admin/handles.html.twig', [
+            "locale" =>  $loc,
+            "new" =>  $new,
+            "handlename" => $handlename,
+            "id" => $id,
+            "handles" => $handles,
+            "form" => $form->createView()
+            ]
+        );               
+    }
+    // --------------------------------------------------------------------------
+    #[Route('/handles/delete/{id}', name: 'bootadmin.handles.delete')]
+    public function Deletehandle(Request $request,
+                                int $id,
+                                EntityManagerInterface $entityManager,
+                                TranslatorInterface $translator
+                            ): Response
+    {
+        $loc = $this->locale($request); // Set the proper language for translations
+        // Search for the selected metal to be deleted
+        $repo = $entityManager->getRepository(Handle::class);
+        $handle = $repo->find($id);
+        $knifes = $handle->getKnifes();
+        // Is this metal related to any knife ?
+        if($knifes->count() > 0){
+            $notice = $translator->trans('admin.managehandles.isused');
+            $this->addFlash('error', $notice);
+            return $this->redirectToRoute('bootadmin.handles', array( 'new' => "true"));
+        }
+        $repo->remove($handle, true);
+        $this->addFlash('success', $translator->trans('admin.managehandles.deleted'));        
+        return $this->redirectToRoute('bootadmin.handles', array(  'new' => "true" ));
+    }
+    // --------------------------------------------------------------------------
+    #[Route('/handles/update/{id}', name: 'bootadmin.handles.update')]
+    public function Updatehandle(Request $request,
+                                int $id,
+                                EntityManagerInterface $entityManager,
+                                TranslatorInterface $translator
+                            ): Response
+    {
+        $loc = $this->locale($request); // Set the proper language for translations
+        // Search for the selected metal to be deleted
+        $repo = $entityManager->getRepository(Handle::class);
+        $handle = $repo->find($id);
+        $form = $this->createForm(HandleType::class, $handle);
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()){
+            $entityManager->persist($handle);
+            $entityManager->flush();
+            $this->addFlash('success', $translator->trans('admin.managehandles.updated'));
+            return $this->redirectToRoute('bootadmin.handles', array( 'new' => "true"));
+        }        
+        return $this->redirectToRoute('bootadmin.handles', array(  'new' => "false",
+                                                                'handlename' => $handle->getName(),
+                                                                'id' => $handle->getId()
+                                                            ));
+    }
+    // --------------------------------------------------------------------------
+    // C A T E G O R I E S     S E R V I C E S 
+    // --------------------------------------------------------------------------
+    #[Route('/categories/delete/{id}', name: 'bootadmin.categories.delete')]
+    public function DeleteCategory(Request $request,
+                                int $id,
+                                EntityManagerInterface $entityManager,
+                                TranslatorInterface $translator
+                            ): Response
+    {
+        $loc = $this->locale($request); // Set the proper language for translationstu
+        return $this->redirectToRoute('bootadmin.categories', array(  'new' => "true" ));
+    }
+    // --------------------------------------------------------------------------
+    #[Route('/categories/update/{id}', name: 'bootadmin.categories.update')]
+    public function UpdateCategory(Request $request,
+                                int $id,
+                                EntityManagerInterface $entityManager,
+                                TranslatorInterface $translator
+                            ): Response
+    {
+        $loc = $this->locale($request); // Set the proper language for translationstu
+        return $this->redirectToRoute('bootadmin.categories', array(  'new' => "true" ));
+    }
+    // --------------------------------------------------------------------------
+    // A C C E S S O R I E S     S E R V I C E S 
+    // --------------------------------------------------------------------------
+    #[Route('/accessories/delete/{id}', name: 'bootadmin.accessories.delete')]
+    public function DeleteAccessory(Request $request,
+                                int $id,
+                                EntityManagerInterface $entityManager,
+                                TranslatorInterface $translator
+                            ): Response
+    {
+        $loc = $this->locale($request); // Set the proper language for translationstu
+        return $this->redirectToRoute('bootadmin.accessories', array(  'new' => "true" ));
+    }
+    // --------------------------------------------------------------------------
+    #[Route('/accessories/update/{id}', name: 'bootadmin.accessories.update')]
+    public function UpdateAccessory(Request $request,
+                                int $id,
+                                EntityManagerInterface $entityManager,
+                                TranslatorInterface $translator
+                            ): Response
+    {
+        $loc = $this->locale($request); // Set the proper language for translationstu
+        return $this->redirectToRoute('bootadmin.accessories', array(  'new' => "true" ));
     }
     // --------------------------------------------------------------------------
     // P R I V A T E     S E R V I C E S 

@@ -57,6 +57,14 @@ admin:
     created: Mécanisme ajouté
     deleted: Mécanisme supprimé
     updated: Mécanisme mis à jour
+  managehandles:
+    title: Gestion des manches
+    label: Manches
+    help: Nom du manche
+    isused: Ce manche est utilisé par au moins un couteau
+    created: Manche ajouté
+    deleted: Manche supprimé
+    updated: Manche mis à jour
 buttons:
   add: Ajouter
   modify: Modifier

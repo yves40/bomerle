@@ -57,6 +57,14 @@ admin:
     created: Mechanism added
     deleted: Mechanism deleted
     updated: Mechanism updated
+  managehandles:
+    title: Handles management
+    label: Handle
+    help: Handle name
+    isused: This handle is used by a knife
+    created: Handle added
+    deleted: Handle deleted
+    updated: Handle updated
 buttons:
   add: Add
   modify: Update
