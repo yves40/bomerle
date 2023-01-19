@@ -1,6 +1,6 @@
 # Have a look at config/packages/translation.yaml
 app:
-  version: Beaumerle Jan 2023, 1.46
+  version: Beaumerle Administration [Jan 2023, 1.46]
   copyright:  'Ratoon software Corporation Inc, Chabreloche France '
 lang:
   menufr: Langue
@@ -65,6 +65,14 @@ admin:
     created: Handle added
     deleted: Handle deleted
     updated: Handle updated
+  managecategories:
+    title: Category management
+    label: Category
+    help: Category name
+    isused: This Category is used by at least one knife
+    created: Category added
+    deleted: Category deleted
+    updated: Category updated
 buttons:
   add: Add
   modify: Update

@@ -3,15 +3,20 @@
 namespace App\Controller;
 
 use Exception;
+
 use App\Entity\Handle;
 use App\Entity\Metals;
+use App\Entity\Category;
 use App\Entity\Mechanism;
+
 use App\Form\HandleType;
 use App\Form\MetalsType;
+use App\Form\CategoryType;
 use App\Form\MechanismType;
-use App\Services\FileHandler;
-use App\Repository\HandleRepository;
 
+use App\Services\FileHandler;
+
+use App\Repository\HandleRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -346,6 +351,48 @@ class AdminController extends AbstractController
     // --------------------------------------------------------------------------
     // C A T E G O R I E S     S E R V I C E S 
     // --------------------------------------------------------------------------
+    #[Route('/categories/home/{new?true}/{categoryname?#}/{id?10000}', name: 'bootadmin.categories')]
+    public function AdminCategories(Request $request,
+                                $new,
+                                $categoryname,
+                                $id,
+                                EntityManagerInterface $entityManager,
+                                TranslatorInterface $translator
+                            ): Response
+    {         
+        $loc = $this->locale($request); // Set the proper language for translations
+        /** 
+         * @var Category $category 
+         * @var CategoryRepository $repo
+         * 
+        */
+        $category = new Category();
+        $repo = $entityManager->getRepository(Category::class);
+        $categories = $repo->listCategories();
+        $form = $this->createForm(CategoryType::class, $category);
+        if($new === 'abort') {  // The user aborted the modification
+            $new = "true";
+        }
+        else {
+            $form->handleRequest($request);
+            if($form->isSubmitted() && $form->isValid()){
+                $entityManager->persist($category);
+                $entityManager->flush();
+                $categories = $repo->listCategories();
+                $this->addFlash('success', $translator->trans('admin.managecategories.created'));
+            }
+        }
+        return $this->render('admin/categories.html.twig', [
+            "locale" =>  $loc,
+            "new" =>  $new,
+            "categoryname" => $categoryname,
+            "id" => $id,
+            "categories" => $categories,
+            "form" => $form->createView()
+            ]
+        );       
+    }        
+    // --------------------------------------------------------------------------
     #[Route('/categories/delete/{id}', name: 'bootadmin.categories.delete')]
     public function DeleteCategory(Request $request,
                                 int $id,
@@ -353,9 +400,18 @@ class AdminController extends AbstractController
                                 TranslatorInterface $translator
                             ): Response
     {
-        $loc = $this->locale($request); // Set the proper language for translationstu
-        return $this->redirectToRoute('bootadmin.categories', array(  'new' => "true" ));
-    }
+        $loc = $this->locale($request); // Set the proper language for translations
+        $repo = $entityManager->getRepository(Category::class);
+        $category = $repo->find($id);
+        $knifes = $category->getKnifes();
+        if($knifes->count() > 0){
+            $notice = $translator->trans('admin.managecategories.isused');
+            $this->addFlash('error', $notice);
+            return $this->redirectToRoute('bootadmin.categories', array( 'new' => "true"));
+        }
+        $repo->remove($category, true);
+        $this->addFlash('success', $translator->trans('admin.managecategories.deleted'));        
+        return $this->redirectToRoute('bootadmin.categories', array(  'new' => "true" ));    }
     // --------------------------------------------------------------------------
     #[Route('/categories/update/{id}', name: 'bootadmin.categories.update')]
     public function UpdateCategory(Request $request,
@@ -364,8 +420,21 @@ class AdminController extends AbstractController
                                 TranslatorInterface $translator
                             ): Response
     {
-        $loc = $this->locale($request); // Set the proper language for translationstu
-        return $this->redirectToRoute('bootadmin.categories', array(  'new' => "true" ));
+        $loc = $this->locale($request); // Set the proper language for translations
+        $repo = $entityManager->getRepository(Category::class);
+        $category = $repo->find($id);
+        $form = $this->createForm(CategoryType::class, $category);
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()){
+            $entityManager->persist($category);
+            $entityManager->flush();
+            $this->addFlash('success', $translator->trans('admin.managecategories.updated'));
+            return $this->redirectToRoute('bootadmin.categories', array( 'new' => "true"));
+        }        
+        return $this->redirectToRoute('bootadmin.categories', array(  'new' => "false",
+                                                                'categoryname' => $category->getName(),
+                                                                'id' => $category->getId()
+                                                            ));
     }
     // --------------------------------------------------------------------------
     // A C C E S S O R I E S     S E R V I C E S 
