@@ -73,6 +73,14 @@ admin:
     created: Catégorie ajoutée
     deleted: Catégorie supprimée
     updated: Catégorie mise à jour
+  manageaccessories:
+    title: Gestion des accessoires
+    label: Accessoires
+    help: Nom de l'accessoire
+    isused: Cet accessoire est utilisée par au moins un couteau
+    created: Accessoire ajouté
+    deleted: Accessoire supprimé
+    updated: Accessoire mis à jour
 buttons:
   add: Ajouter
   modify: Modifier

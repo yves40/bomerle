@@ -8,15 +8,16 @@ use App\Entity\Handle;
 use App\Entity\Metals;
 use App\Entity\Category;
 use App\Entity\Mechanism;
+use App\Entity\Accessories;
 
-use App\Form\HandleType;
-use App\Form\MetalsType;
-use App\Form\CategoryType;
 use App\Form\MechanismType;
+use App\Form\HandleType;
+use App\Form\CategoryType;
+use App\Form\MetalsType;
+use App\Form\AccessoriesType;
 
 use App\Services\FileHandler;
 
-use App\Repository\HandleRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -269,11 +270,6 @@ class AdminController extends AbstractController
                             ): Response
     {
         $loc = $this->locale($request); // Set the proper language for translations
-        /** 
-         * @var Handle $handle 
-         * @var HandleRepository $repo
-         * 
-        */
         $handle = new Handle();
         $repo = $entityManager->getRepository(Handle::class);
         $handles = $repo->listHandles();
@@ -439,6 +435,48 @@ class AdminController extends AbstractController
     // --------------------------------------------------------------------------
     // A C C E S S O R I E S     S E R V I C E S 
     // --------------------------------------------------------------------------
+    #[Route('/accessories/home/{new?true}/{accessoryname?#}/{id?10000}', name: 'bootadmin.accessories')]
+    public function AdminAccessories(Request $request,
+                                $new,
+                                $accessoryname,
+                                $id,
+                                EntityManagerInterface $entityManager,
+                                TranslatorInterface $translator
+                            ): Response
+    {         
+        $loc = $this->locale($request); // Set the proper language for translations
+        /** 
+         * @var Accessories $accessory 
+         * @var AccessoryRepository $repo
+         * 
+        */
+        $accessory = new Accessories();
+        $repo = $entityManager->getRepository(Accessories::class);
+        $accessories = $repo->listAccessories();
+        $form = $this->createForm(AccessoriesType::class, $accessory);
+        if($new === 'abort') {  // The user aborted the modification
+            $new = "true";
+        }
+        else {
+            $form->handleRequest($request);
+            if($form->isSubmitted() && $form->isValid()){
+                $entityManager->persist($accessory);
+                $entityManager->flush();
+                $accessories = $repo->listAccessories();
+                $this->addFlash('success', $translator->trans('admin.manageaccessories.created'));
+            }
+        }
+        return $this->render('admin/accessories.html.twig', [
+            "locale" =>  $loc,
+            "new" =>  $new,
+            "accessoryname" => $accessoryname,
+            "id" => $id,
+            "accessories" => $accessories,
+            "form" => $form->createView()
+            ]
+        );       
+    }
+    // --------------------------------------------------------------------------
     #[Route('/accessories/delete/{id}', name: 'bootadmin.accessories.delete')]
     public function DeleteAccessory(Request $request,
                                 int $id,
@@ -446,8 +484,18 @@ class AdminController extends AbstractController
                                 TranslatorInterface $translator
                             ): Response
     {
-        $loc = $this->locale($request); // Set the proper language for translationstu
-        return $this->redirectToRoute('bootadmin.accessories', array(  'new' => "true" ));
+        $loc = $this->locale($request); // Set the proper language for translations
+        $repo = $entityManager->getRepository(Accessories::class);
+        $accessory = $repo->find($id);
+        $knifes = $accessory->getKnifes();
+        if($knifes->count() > 0){
+            $notice = $translator->trans('admin.manageaccessories.isused');
+            $this->addFlash('error', $notice);
+            return $this->redirectToRoute('bootadmin.accessories', array( 'new' => "true"));
+        }
+        $repo->remove($accessory, true);
+        $this->addFlash('success', $translator->trans('admin.manageaccessories.deleted'));        
+        return $this->redirectToRoute('bootadmin.accessories', array(  'new' => "true" ));    
     }
     // --------------------------------------------------------------------------
     #[Route('/accessories/update/{id}', name: 'bootadmin.accessories.update')]
@@ -457,8 +505,21 @@ class AdminController extends AbstractController
                                 TranslatorInterface $translator
                             ): Response
     {
-        $loc = $this->locale($request); // Set the proper language for translationstu
-        return $this->redirectToRoute('bootadmin.accessories', array(  'new' => "true" ));
+        $loc = $this->locale($request); // Set the proper language for translations
+        $repo = $entityManager->getRepository(Accessories::class);
+        $accessory = $repo->find($id);
+        $form = $this->createForm(AccessoriesType::class, $accessory);
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()){
+            $entityManager->persist($accessory);
+            $entityManager->flush();
+            $this->addFlash('success', $translator->trans('admin.manageaccessories.updated'));
+            return $this->redirectToRoute('bootadmin.accessories', array( 'new' => "true"));
+        }        
+        return $this->redirectToRoute('bootadmin.accessories', array(  'new' => "false",
+                                                                'accessoryname' => $accessory->getName(),
+                                                                'id' => $accessory->getId()
+                                                            ));
     }
     // --------------------------------------------------------------------------
     // P R I V A T E     S E R V I C E S 

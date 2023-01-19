@@ -73,6 +73,14 @@ admin:
     created: Category added
     deleted: Category deleted
     updated: Category updated
+  manageaccessories:
+    title: Accessories Management
+    label: Accessories
+    help: Accessory name
+    isused: This accessory is used by at least one knife
+    created: Accessory added
+    deleted: Accessory deleted
+    updated: Accessory updated
 buttons:
   add: Add
   modify: Update
