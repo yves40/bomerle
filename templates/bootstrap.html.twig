@@ -70,51 +70,53 @@
                             {% endif %}
                             {# ----------------------------------------------------------------------------------- #}
                             {# The action menu starts here #}
-                            <div class="sb-sidenav-menu-heading">Actions</div>
-                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseKnives" aria-expanded="false" aria-controls="collapseLayouts">
-                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                                {% trans %}admin.knives{% endtrans %}
-                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                            </a>
-                            <div class="collapse" id="collapseKnives" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-                                <nav class="sb-sidenav-menu-nested nav">
-                                    {% if is_granted('ROLE_ADMIN') %}
-                                        <a class="nav-link" href="#">{% trans %}admin.listknives{% endtrans %}</a>
-                                        <a class="nav-link" href="#">{% trans %}admin.addknife{% endtrans %}</a>
-                                        <a class="nav-link" href="#">{% trans %}admin.accessories{% endtrans %}</a>
-                                        <a class="nav-link" href="#">{% trans %}admin.categories{% endtrans %}</a>
-                                        <a class="nav-link" href="#">{% trans %}admin.handles{% endtrans %}</a>
-                                        <a class="nav-link" href="{{ path('bootadmin.mechanisms', { "new" : "true" } )}}">{% trans %}admin.mechanisms{% endtrans %}</a>
-                                        <a class="nav-link" href="{{ path('bootadmin.metals', { "new" : "true" } )}}">{% trans %}admin.metals{% endtrans %}</a>
-                                    {% endif %}                                
-                                </nav>
-                            </div>
-                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseEvents" aria-expanded="false" aria-controls="collapseLayouts">
-                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                                {% trans %}admin.events.events{% endtrans %}
-                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                            </a>
-                            <div class="collapse" id="collapseEvents" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-                                <nav class="sb-sidenav-menu-nested nav">
-                                    {% if is_granted('ROLE_ADMIN') %}
-                                        <a class="nav-link" href="#">{% trans %}admin.events.list{% endtrans %}</a>
-                                    {% endif %}                                
-                                </nav>
-                            </div>
-                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
-                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                                Users
-                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                            </a>
-                            <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-                                <nav class="sb-sidenav-menu-nested nav">
-                                    {# <a class="nav-link" href="{{ path('user.list') }}">List all</a> #}
-                                    <a class="nav-link" href="#">{% trans %}user.list{% endtrans %}</a>
-                                    {% if is_granted('ROLE_ADMIN') %}
-                                        <a class="nav-link" href="#">{% trans %}user.add{% endtrans %}</a>
-                                    {% endif %}                                
-                                </nav>
-                            </div>
+                            {% if app.user %} 
+                                <div class="sb-sidenav-menu-heading">{% trans %}admin.actions{% endtrans %}</div>
+                                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseKnives" aria-expanded="false" aria-controls="collapseLayouts">
+                                    <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                                    {% trans %}admin.knives{% endtrans %}
+                                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                                </a>
+                                <div class="collapse" id="collapseKnives" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                                    <nav class="sb-sidenav-menu-nested nav">
+                                        {% if is_granted('ROLE_ADMIN') %}
+                                            <a class="nav-link" href="#">{% trans %}admin.listknives{% endtrans %}</a>
+                                            <a class="nav-link" href="#">{% trans %}admin.addknife{% endtrans %}</a>
+                                            <a class="nav-link" href="#">{% trans %}admin.accessories{% endtrans %}</a>
+                                            <a class="nav-link" href="#">{% trans %}admin.categories{% endtrans %}</a>
+                                            <a class="nav-link" href="#">{% trans %}admin.handles{% endtrans %}</a>
+                                            <a class="nav-link" href="{{ path('bootadmin.mechanisms', { "new" : "true" } )}}">{% trans %}admin.mechanisms{% endtrans %}</a>
+                                            <a class="nav-link" href="{{ path('bootadmin.metals', { "new" : "true" } )}}">{% trans %}admin.metals{% endtrans %}</a>
+                                        {% endif %}                                
+                                    </nav>
+                                </div>
+                                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseEvents" aria-expanded="false" aria-controls="collapseLayouts">
+                                    <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                                    {% trans %}admin.events.events{% endtrans %}
+                                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                                </a>
+                                <div class="collapse" id="collapseEvents" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                                    <nav class="sb-sidenav-menu-nested nav">
+                                        {% if is_granted('ROLE_ADMIN') %}
+                                            <a class="nav-link" href="#">{% trans %}admin.events.list{% endtrans %}</a>
+                                        {% endif %}                                
+                                    </nav>
+                                </div>
+                                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
+                                    <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                                    Users
+                                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                                </a>
+                                <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                                    <nav class="sb-sidenav-menu-nested nav">
+                                        {# <a class="nav-link" href="{{ path('user.list') }}">List all</a> #}
+                                        <a class="nav-link" href="#">{% trans %}user.list{% endtrans %}</a>
+                                        {% if is_granted('ROLE_ADMIN') %}
+                                            <a class="nav-link" href="#">{% trans %}user.add{% endtrans %}</a>
+                                        {% endif %}                                
+                                    </nav>
+                                </div>
+                            {% endif %}
                         </div>
                     </div>
                 </nav>
