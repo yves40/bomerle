@@ -9,7 +9,7 @@ use App\Repository\CategoryRepository;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 #[ORM\Entity(repositoryClass: CategoryRepository::class)]
-#[UniqueEntity(fields:['name'], message: "Cette catégorie existe déjà")]
+#[UniqueEntity(fields:['name'], message: "category.alreadyexist")]
 class Category
 {
     #[ORM\Id]
@@ -18,11 +18,11 @@ class Category
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\NotBlank(message: "Merci de renseigner ce champ")]
+    #[Assert\NotBlank(message: "generic.notempty")]
     private ?string $name = null;
 
     #[ORM\OneToMany(mappedBy: 'category', targetEntity: Knifes::class)]
-    #[Assert\NotBlank(message: "Merci de sélectionner une catégorie")]
+    #[Assert\NotBlank(message: "category.selectone")]
     private Collection $knifes;
 
     public function __construct()

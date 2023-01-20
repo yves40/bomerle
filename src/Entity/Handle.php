@@ -10,7 +10,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 #[ORM\Entity(repositoryClass: HandleRepository::class)]
-#[UniqueEntity(fields:['name'], message: "Ce matériau existe déjà")]
+#[UniqueEntity(fields:['name'], message: "handle.alreadyexist")]
 class Handle
 {
     #[ORM\Id]
@@ -19,7 +19,7 @@ class Handle
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\NotBlank(message: "Merci de renseigner ce champ")]
+    #[Assert\NotBlank(message: "generic.notempty")]
     private ?string $name = null;
 
     #[ORM\ManyToMany(targetEntity: Knifes::class, mappedBy: 'handle')]
