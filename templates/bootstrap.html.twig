@@ -81,7 +81,7 @@
                                     <nav class="sb-sidenav-menu-nested nav">
                                         {% if is_granted('ROLE_ADMIN') %}
                                             <a class="nav-link" href="{{ path('bootadmin.knives.all', { "new" : "true" } )}}">{% trans %}admin.listknives{% endtrans %}</a>
-                                            <a class="nav-link" href="#">{% trans %}admin.addknife{% endtrans %}</a>
+                                            <a class="nav-link" href="{{ path('bootadmin.knives.edit', { "new" : "true" } )}}">{% trans %}admin.addknife{% endtrans %}</a>
                                             <a class="nav-link" href="{{ path('bootadmin.accessories', { "new" : "true" } )}}">{% trans %}admin.accessories{% endtrans %}</a>
                                             <a class="nav-link" href="{{ path('bootadmin.categories', { "new" : "true" } )}}">{% trans %}admin.categories{% endtrans %}</a>
                                             <a class="nav-link" href="{{ path('bootadmin.handles', { "new" : "true" } )}}">{% trans %}admin.handles{% endtrans %}</a>

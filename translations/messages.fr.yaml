@@ -1,6 +1,6 @@
 # Have a look at config/packages/translation.yaml
 app:
-  version: Beaumerle Administration [Jan 2023, 1.46]
+  version: Beaumerle Administration [Jan 2023, 1.47]
   copyright:  'Ratoon software Corporation Inc, Chabreloche France '
 lang:
   menufr: Langue
@@ -83,7 +83,20 @@ admin:
     updated: Accessoire mis à jour
   manageknives:
     title: Gestion des couteaux
-    label: Couteaux
+    label: Nom
+    description: Description
+    stock: Stock
+    weight: Poids
+    length: Longueur
+    closed: Longueur fermée
+    bladelength: Longueur de la lame
+    price: Prix
+    category: Catégorie
+    mechanism: Mécanisme
+    accessories: Accessoires
+    handle: Manche
+    metal: Métal
+    images: Photos
     help: Nom du couteau
     isused: Ce couteau est utilisé, impossible de l'effacer
     created: Couteau ajouté

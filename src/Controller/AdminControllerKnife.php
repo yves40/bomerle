@@ -48,6 +48,24 @@ class AdminControllerKnife extends AbstractController
         );               
     }
     // --------------------------------------------------------------------------
+    #[Route('/knives/edit', name: 'bootadmin.knives.edit')]
+    public function edit(Request $request,
+                        EntityManagerInterface $entityManager,
+                        TranslatorInterface $translator): Response
+    {
+        $loc = $this->locale($request);
+        $knife = new Knifes();
+        $repo = $entityManager->getRepository(Knifes::class);
+        $form = $this->createForm(KnifesType::class, $knife);
+        return $this->render('admin/knife.html.twig', [
+            "locale" =>  $loc,
+            "new" => true,
+            "knife" => $knife,
+            "form" => $form->createView()
+            ]
+        );               
+    }
+    // --------------------------------------------------------------------------
     // P R I V A T E     S E R V I C E S 
     // --------------------------------------------------------------------------
     private function locale(Request $request) {

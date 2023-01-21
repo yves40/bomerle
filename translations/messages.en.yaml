@@ -1,6 +1,6 @@
 # Have a look at config/packages/translation.yaml
 app:
-  version: Beaumerle Administration [Jan 2023, 1.46]
+  version: Beaumerle Administration [Jan 2023, 1.47]
   copyright:  'Ratoon software Corporation Inc, Chabreloche France '
 lang:
   menufr: Langue
@@ -83,7 +83,20 @@ admin:
     updated: Accessory updated
   manageknives:
     title: Knives management
-    label: Knife
+    label: Knife name
+    description: Description
+    stock: Stock
+    weight: Weight
+    length: Length
+    closed: Closed length
+    bladelength: Blade length
+    price: Price
+    category: Category
+    mechanism: Mechanism
+    accessories: Accessories
+    handle: Handle
+    metal: Metal
+    images: images
     help: Knife name
     isused: This knife is used
     created: Knife added

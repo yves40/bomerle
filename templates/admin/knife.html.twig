@@ -1,0 +1,133 @@
+{% extends 'bootstrap.html.twig' %}
+
+{% block title %}{% trans %}admin.title{% endtrans %}{% endblock %}
+
+{% form_theme form 'bootstrap_5_layout.html.twig' %}
+
+{% block pagetitle %}
+    <h1 class="mt-4">{% trans %}admin.manageknives.title{% endtrans %}</h1>
+{% endblock %}
+
+{% block body %}
+    {# 
+        Check form call context: The form is generic and called for all CRUD ops.
+        When updating, the action must call the update service with an ID
+    #}
+    {% set param = [] %}
+    {% if new == "true" %}  {# Update, or Create, delete ? #}
+        {% set action = 'bootadmin.knives.all' %}
+    {% else %}
+        {% set action = 'bootadmin.knives.update' %}
+        {% set param = { 'id': id } %}
+    {% endif %}
+    {# Form #}
+    {{ form_start(form, {'attr': {'novalidate': 'novalidate', 'class': 'form'},
+                         'action': path(action, param), 
+                         'method': 'POST'
+                        }) 
+    }}
+        {% if new == "true" %}
+            <button type="submit" class="btn btn-primary mb-3">{% trans %}buttons.add{% endtrans %}</button>
+        {% else %}
+            <button type="submit" 
+                    class="btn btn-primary mb-3">{% trans %}buttons.modify{% endtrans %}</button>
+            <button type="submit" formaction="{{path('bootadmin.knives.all', { new: 'abort'})}}" 
+                    class="btn btn-primary mb-3">{% trans %}buttons.cancel{% endtrans %}</button>
+        {% endif %}
+        <div class="container text-center">
+            <div class="row align-items-start">
+                <div class="col">
+                    {{ form_row(form.name, { 'label' : 'admin.manageknives.label'|trans,
+                                            'value': knife.name,
+                                            }
+                                ) 
+                    }}
+                </div>
+                <div class="col">
+                    {{ form_row(form.description, { 'label' : 'admin.manageknives.description'|trans,
+                                            'value': knife.description,
+                                            }
+                                ) 
+                    }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    {{ form_row(form.stock, { 'label' : 'admin.manageknives.stock'|trans,
+                                            'value': knife.stock,
+                                            }
+                                ) 
+                    }}
+                </div>
+                <div class="col">
+                    {{ form_row(form.weight, { 'label' : 'admin.manageknives.weight'|trans,
+                                            'value': knife.weight,
+                                            }
+                                ) 
+                    }}
+                </div>
+                <div class="col">
+                    {{ form_row(form.lenght, { 'label' : 'admin.manageknives.length'|trans,
+                                            'value': knife.lenght,
+                                            }
+                                ) 
+                    }}
+                </div>
+                <div class="col">
+                    {{ form_row(form.close_lenght, { 'label' : 'admin.manageknives.closed'|trans,
+                                            'value': knife.lenght,
+                                            }
+                                ) 
+                    }}
+                </div>
+                <div class="col">
+                    {{ form_row(form.cuttingedge_lenght, { 'label' : 'admin.manageknives.bladelength'|trans,
+                                            }
+                                ) 
+                    }}
+                </div>
+                <div class="col">
+                    {{ form_row(form.price, { 'label' : 'admin.manageknives.price'|trans,
+                                            }
+                                ) 
+                    }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    {{ form_row(form.category, { 'label' : 'admin.manageknives.category'|trans,
+                                            }
+                                ) 
+                    }}
+                </div>
+                <div class="col">
+                    {{ form_row(form.mechanism, { 'label' : 'admin.manageknives.mechanism'|trans,
+                                            }
+                                ) 
+                    }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col ">
+                    {{ form_row(form.accessories, { 'label' : 'admin.manageknives.accessories'|trans,
+                                            }
+                                ) 
+                    }}
+                </div>
+                <div class="col">
+                    {{ form_row(form.handle, { 'label' : 'admin.manageknives.handle'|trans,
+                                            }
+                                ) 
+                    }}
+                </div>
+                <div class="col">
+                    {{ form_row(form.metals, { 'label' : 'admin.manageknives.metal'|trans,
+                                            }
+                                ) 
+                    }}
+                </div>
+            </div>
+        </div>        
+        {{ form_rest(form) }}
+    {{ form_end(form) }}
+{% endblock %}
