@@ -81,6 +81,14 @@ admin:
     created: Accessory added
     deleted: Accessory deleted
     updated: Accessory updated
+  manageknives:
+    title: Knives management
+    label: Knife
+    help: Knife name
+    isused: This knife is used
+    created: Knife added
+    deleted: Knife deleted
+    updated: Knife updated
 buttons:
   add: Add
   modify: Update

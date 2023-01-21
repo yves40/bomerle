@@ -1,0 +1,58 @@
+{% extends 'bootstrap.html.twig' %}
+
+{% block title %}{% trans %}admin.title{% endtrans %}{% endblock %}
+
+{% form_theme form 'bootstrap_5_layout.html.twig' %}
+
+{% block pagetitle %}
+    <h1 class="mt-4">{% trans %}admin.manageknives.title{% endtrans %}</h1>
+{% endblock %}
+
+{% block body %}
+    {# 
+        Check form call context: The form is generic and called for all CRUD ops.
+        When updating, the action must call the update service with an ID
+    #}
+    {% set param = [] %}
+    {% if new == "true" %}  {# Update, or Create, delete ? #}
+        {% set action = 'bootadmin.knives.all' %}
+    {% else %}
+        {% set action = 'bootadmin.knives.update' %}
+        {% set param = { 'id': id } %}
+    {% endif %}
+    {# Form #}
+    {{ form_start(form, {'attr': {'novalidate': 'novalidate', 'class': 'form'},
+                         'action': path(action, param), 
+                         'method': 'POST'
+                        }) 
+    }}
+        {% if knifename == '#' %}
+            {% set knifename = '' %}
+        {% endif %}
+        {% if new == "true" %}
+            <button type="submit" class="btn btn-primary mb-3">{% trans %}buttons.add{% endtrans %}</button>
+        {% else %}
+            <button type="submit" 
+                    class="btn btn-primary mb-3">{% trans %}buttons.modify{% endtrans %}</button>
+            <button type="submit" formaction="{{path('bootadmin.knives.all', { new: 'abort'})}}" 
+                    class="btn btn-primary mb-3">{% trans %}buttons.cancel{% endtrans %}</button>
+        {% endif %}
+        {{ form_rest(form) }}
+    {{ form_end(form) }}
+    {# List existing metals #}
+        {% for knife in allknives %}
+    <ul class="list-group">
+            <li class="list-group-item">
+                <div class="row">
+                    <div class="col-8">{{knife.name}}</div>
+                    <div class="col-1">
+                        <a href="{{ path('bootadmin.knives.all', {id: knife.id}) }}"><i class="fa fa-trash"></i></a>
+                    </div>
+                    <div class="col-1">
+                        <a href="{{ path('bootadmin.knives.all', {id: knife.id}) }}"><i class="fa fa-pen-to-square"></i></a>
+                    </div>
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}

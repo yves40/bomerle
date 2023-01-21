@@ -81,6 +81,14 @@ admin:
     created: Accessoire ajouté
     deleted: Accessoire supprimé
     updated: Accessoire mis à jour
+  manageknives:
+    title: Gestion des couteaux
+    label: Couteaux
+    help: Nom du couteau
+    isused: Ce couteau est utilisé, impossible de l'effacer
+    created: Couteau ajouté
+    deleted: Couteau supprimé
+    updated: Couteau mis à jour
 buttons:
   add: Ajouter
   modify: Modifier
