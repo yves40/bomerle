@@ -102,6 +102,8 @@ admin:
     created: Knife added
     deleted: Knife deleted
     updated: Knife updated
+    tab1: Main data
+    tab2: Images
 buttons:
   add: Add
   modify: Update

@@ -9,6 +9,14 @@
 {% endblock %}
 
 {% block body %}
+    <ul class="nav mb-2">
+        <li class="nav-item"><a class="nav-link" href="{{ path('bootadmin.knives.edit', { "new" : "true" } )}}">{% trans %}admin.addknife{% endtrans %}</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ path('bootadmin.accessories', { "new" : "true" } )}}">{% trans %}admin.accessories{% endtrans %}</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ path('bootadmin.categories', { "new" : "true" } )}}">{% trans %}admin.categories{% endtrans %}</</li></a>
+        <li class="nav-item"><a class="nav-link" href="{{ path('bootadmin.handles', { "new" : "true" } )}}">{% trans %}admin.handles{% endtrans %}</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ path('bootadmin.mechanisms', { "new" : "true" } )}}">{% trans %}admin.mechanisms{% endtrans %}</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ path('bootadmin.metals', { "new" : "true" } )}}">{% trans %}admin.metals{% endtrans %}</a></li>                                                                            
+    </ul>
     {# List knives #}
     <ul class="list-group">
         {% for knife in allknives %}

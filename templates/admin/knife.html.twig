@@ -9,6 +9,14 @@
 {% endblock %}
 
 {% block body %}
+    <ul class="nav mb-2">
+        <li class="nav-item"><a class="nav-link" href="{{ path('bootadmin.knives.all', { "new" : "true" } )}}">{% trans %}admin.listknives{% endtrans %}</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ path('bootadmin.accessories', { "new" : "true" } )}}">{% trans %}admin.accessories{% endtrans %}</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ path('bootadmin.categories', { "new" : "true" } )}}">{% trans %}admin.categories{% endtrans %}</</li></a>
+        <li class="nav-item"><a class="nav-link" href="{{ path('bootadmin.handles', { "new" : "true" } )}}">{% trans %}admin.handles{% endtrans %}</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ path('bootadmin.mechanisms', { "new" : "true" } )}}">{% trans %}admin.mechanisms{% endtrans %}</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ path('bootadmin.metals', { "new" : "true" } )}}">{% trans %}admin.metals{% endtrans %}</a></li>                                                                            
+    </ul>
     {# 
         Check form call context: The form is generic and called for all CRUD ops.
         When updating, the action must call the update service with an ID
@@ -24,14 +32,16 @@
                          'method': 'POST'
                         }) 
     }}
-        {% if id == 0 %}
-            <button type="submit" class="btn btn-primary mb-3">{% trans %}buttons.add{% endtrans %}</button>
-        {% else %}
-            <button type="submit" 
-                    class="btn btn-primary mb-3">{% trans %}buttons.modify{% endtrans %}</button>
-            <button type="submit" formaction="{{path('bootadmin.knives.all')}}" 
-                    class="btn btn-primary mb-3">{% trans %}buttons.cancel{% endtrans %}</button>
-        {% endif %}
+        <div>
+            {% if id == 0 %}
+                <button type="submit" class="btn btn-primary mb-3">{% trans %}buttons.add{% endtrans %}</button>
+            {% else %}
+                <button type="submit" 
+                        class="btn btn-primary mb-3">{% trans %}buttons.modify{% endtrans %}</button>
+                <button type="submit" formaction="{{path('bootadmin.knives.all')}}" 
+                        class="btn btn-primary mb-3">{% trans %}buttons.cancel{% endtrans %}</button>
+            {% endif %}
+        </div>
         <div class="container">
             <div class="row align-items-start">
                 <div class="col"> {{ form_row(form.name, { 'label' : 'admin.manageknives.label'|trans, 'value': knife.name })  }}</div>

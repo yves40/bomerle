@@ -102,6 +102,8 @@ admin:
     created: Couteau ajouté
     deleted: Couteau supprimé
     updated: Couteau mis à jour
+    tab1: Données
+    tab2: Images
 buttons:
   add: Ajouter
   modify: Modifier
