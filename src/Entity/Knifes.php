@@ -54,11 +54,13 @@ class Knifes
 
     #[ORM\ManyToOne(inversedBy: 'knifes', fetch: "EAGER")]
     #[ORM\JoinColumn(nullable: false)]
+    #[Assert\NotBlank(message: "Merci de renseigner ce champ")]
     #[Assert\Valid]
     private ?Category $category = null;
 
     #[ORM\ManyToOne(inversedBy: 'knifes', fetch: "EAGER")]
     #[ORM\JoinColumn(nullable: false)]
+    #[Assert\NotBlank(message: "Merci de renseigner ce champ")]
     #[Assert\Valid]
     private ?Mechanism $mechanism = null;
 

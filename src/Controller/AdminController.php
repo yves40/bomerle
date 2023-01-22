@@ -156,7 +156,7 @@ class AdminController extends AbstractController
             $this->addFlash('success', $translator->trans('admin.managemetals.updated'));
             return $this->redirectToRoute('bootadmin.metals', array( 'new' => "true"));
         }
-        // var_dump($metal->getName(), $metal->getId());die;
+        
         return $this->redirectToRoute('bootadmin.metals', 
                             array(  'new' => "false", 
                                     'metalname' => $metal->getName(),

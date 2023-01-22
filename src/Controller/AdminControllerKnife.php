@@ -37,6 +37,7 @@ class AdminControllerKnife extends AbstractController
         $knife = new Knifes();
         $repo = $entityManager->getRepository(Knifes::class);
         $allknives = $repo->findAll();
+
         $form = $this->createForm(KnifesType::class, $knife);
         return $this->render('admin/knives.html.twig', [
             "locale" =>  $loc,
@@ -48,18 +49,47 @@ class AdminControllerKnife extends AbstractController
         );               
     }
     // --------------------------------------------------------------------------
-    #[Route('/knives/edit', name: 'bootadmin.knives.edit')]
-    public function edit(Request $request,
+    #[Route('/knives/delete/{id}', name: 'bootadmin.knives.delete')]
+    public function DeleteMetal(Request $request,
+                                int $id,
+                                EntityManagerInterface $entityManager,
+                                TranslatorInterface $translator
+                            ): Response
+    {
+        $loc = $this->locale($request); // Set the proper language for translations
+        $repo = $entityManager->getRepository(Knifes::class);
+        $knife = $repo->find($id);
+        $repo->remove($knife, true);
+        $this->addFlash('success', $translator->trans('admin.manageknives.deleted'));
+        return $this->redirectToRoute('bootadmin.knives.all', array( 'new' => "true"));
+    }
+    // --------------------------------------------------------------------------
+    #[Route('/knives/edit/{id?0}', name: 'bootadmin.knives.edit')]
+    public function update(Request $request,
+                        int $id,    // If 0 : insert mode
                         EntityManagerInterface $entityManager,
                         TranslatorInterface $translator): Response
     {
         $loc = $this->locale($request);
-        $knife = new Knifes();
         $repo = $entityManager->getRepository(Knifes::class);
+        $knife = new Knifes();
+        if($id !== 0 ) $knife = $repo->find($id); // Update or new ? 
         $form = $this->createForm(KnifesType::class, $knife);
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()){   // Form submitted ? 
+            $entityManager->persist($knife);
+            $entityManager->flush();
+            if($id === 0)  {    // Insert ? 
+                $this->addFlash('success', $translator->trans('admin.manageknives.created'));
+            }
+            else {
+                $this->addFlash('success', $translator->trans('admin.manageknives.updated'));
+            }
+            return $this->redirectToRoute('bootadmin.knives.all', array( 'new' => "true"));
+        }
         return $this->render('admin/knife.html.twig', [
             "locale" =>  $loc,
-            "new" => true,
+            "id" => $id,
             "knife" => $knife,
             "form" => $form->createView()
             ]

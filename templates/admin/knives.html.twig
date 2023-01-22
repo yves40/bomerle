@@ -20,10 +20,10 @@
                     <div class="col">{{'admin.manageknives.stock'|trans}} : {{knife.stock}} </div>
                     <div class="col">{{'admin.manageknives.category'|trans}} : {{knife.category}}</div>
                     <div class="col-1">
-                        <a href="{{ path('bootadmin.knives.all', {id: knife.id}) }}"><i class="fa fa-trash"></i></a>
+                        <a href="{{ path('bootadmin.knives.delete', {id: knife.id}) }}"><i class="fa fa-trash"></i></a>
                     </div>
                     <div class="col-1">
-                        <a href="{{ path('bootadmin.knives.all', {id: knife.id}) }}"><i class="fa fa-pen-to-square"></i></a>
+                        <a href="{{ path('bootadmin.knives.edit', {id: knife.id}) }}"><i class="fa fa-pen-to-square"></i></a>
                     </div>
                 </div>
             </li>
