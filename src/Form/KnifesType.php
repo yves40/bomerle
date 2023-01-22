@@ -30,12 +30,12 @@ class KnifesType extends AbstractType
             ->add('category', null, [
                 'required' => true,
                 'empty_data' => '',
-                'choice_value' => 'name'
+                'choice_value' => 'name'    // used to load the currently selected value !!!
             ])
             ->add('mechanism', null, [
                 'required' => true,
                 'empty_data' => '',
-                'choice_value' => 'name'
+                'choice_value' => 'name'    // used to load the currently selected value !!!
             ])
             ->add('accessories', EntityType::class, [
                 'expanded' => true,
