@@ -28,12 +28,14 @@ class KnifesType extends AbstractType
             ->add('cuttingedge_lenght')
             ->add('price')
             ->add('category', null, [
-                'required' => false,
-                'empty_data' => ''
+                'required' => true,
+                'empty_data' => '',
+                'choice_value' => 'name'
             ])
             ->add('mechanism', null, [
-                'required' => false,
-                'empty_data' => ''
+                'required' => true,
+                'empty_data' => '',
+                'choice_value' => 'name'
             ])
             ->add('accessories', EntityType::class, [
                 'expanded' => true,
