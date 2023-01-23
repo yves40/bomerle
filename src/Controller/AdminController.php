@@ -135,7 +135,8 @@ class AdminController extends AbstractController
             $notice = $translator->trans('admin.managemetals.isused');
             $notice = $notice.' : '.$conflicts[0]['name'];
             $this->addFlash('error', $notice);
-            return $this->redirectToRoute('bootadmin.metals', array( 'new' => "true", 'knifeconflict' => $conflicts[0]['id']));
+            return $this->redirectToRoute('bootadmin.metals', array( 'new' => "true", 
+                                                                'knifeconflict' => $conflicts[0]['id']));
         }
         $repo->remove($metal, true);
         $this->addFlash('success', $translator->trans('admin.managemetals.deleted'));
@@ -171,11 +172,12 @@ class AdminController extends AbstractController
     // --------------------------------------------------------------------------
     // M E C H A N I S M S     S E R V I C E S 
     // --------------------------------------------------------------------------
-    #[Route('/mechanisms/home/{new?true}/{mechanismname?#}/{id?10000}', name: 'bootadmin.mechanisms')]
+    #[Route('/mechanisms/home/{new?true}/{mechanismname?#}/{id?10000}/{knifeconflict?0}', name: 'bootadmin.mechanisms')]
     public function AdminMechanisms(Request $request,
                                 $new,
                                 $mechanismname,
                                 $id,
+                                $knifeconflict,
                                 EntityManagerInterface $entityManager,
                                 TranslatorInterface $translator
                             ): Response
@@ -207,6 +209,7 @@ class AdminController extends AbstractController
             "new" =>  $new,
             "mechanismname" => $mechanismname,
             "id" => $id,
+            "knifeconflict" => $knifeconflict,
             "mechanisms" => $mechanisms,
             "form" => $form->createView()
             ]
@@ -227,9 +230,13 @@ class AdminController extends AbstractController
         $knifes = $mechanism->getKnifes();
         // Is this metal related to any knife ?
         if($knifes->count() > 0){
+            $conflicts = array();
+            foreach($knifes as $violation) { array_push($conflicts, ['name' => $violation->getName(), 'id' => $violation->getId()]);}
             $notice = $translator->trans('admin.managemechanisms.isused');
             $this->addFlash('error', $notice);
-            return $this->redirectToRoute('bootadmin.mechanisms', array( 'new' => "true"));
+            $notice = $notice.' : '.$conflicts[0]['name'];
+            return $this->redirectToRoute('bootadmin.mechanisms', array( 'new' => "true",
+                                                                 'knifeconflict' => $conflicts[0]['id']));
         }
         $repo->remove($mechanism, true);
         $this->addFlash('success', $translator->trans('admin.managemechanisms.deleted'));
@@ -265,11 +272,12 @@ class AdminController extends AbstractController
     // --------------------------------------------------------------------------
     // H A N D L E S     S E R V I C E S 
     // --------------------------------------------------------------------------
-    #[Route('/handles/home/{new?true}/{handlename?#}/{id?10000}', name: 'bootadmin.handles')]
+    #[Route('/handles/home/{new?true}/{handlename?#}/{id?10000}/{knifeconflict?0}', name: 'bootadmin.handles')]
     public function AdminHandles(Request $request,
                                 $new,
                                 $handlename,
                                 $id,
+                                $knifeconflict,
                                 EntityManagerInterface $entityManager,
                                 TranslatorInterface $translator
                             ): Response
@@ -296,6 +304,7 @@ class AdminController extends AbstractController
             "new" =>  $new,
             "handlename" => $handlename,
             "id" => $id,
+            "knifeconflict" => $knifeconflict,
             "handles" => $handles,
             "form" => $form->createView()
             ]
@@ -316,9 +325,13 @@ class AdminController extends AbstractController
         $knifes = $handle->getKnifes();
         // Is this metal related to any knife ?
         if($knifes->count() > 0){
+            $conflicts = array();
+            foreach($knifes as $violation) { array_push($conflicts, ['name' => $violation->getName(), 'id' => $violation->getId()]);}
             $notice = $translator->trans('admin.managehandles.isused');
+            $notice = $notice.' : '.$conflicts[0]['name'];
             $this->addFlash('error', $notice);
-            return $this->redirectToRoute('bootadmin.handles', array( 'new' => "true"));
+            return $this->redirectToRoute('bootadmin.handles', array( 'new' => "true",
+                                                                'knifeconflict' => $conflicts[0]['id']));
         }
         $repo->remove($handle, true);
         $this->addFlash('success', $translator->trans('admin.managehandles.deleted'));        
@@ -352,11 +365,12 @@ class AdminController extends AbstractController
     // --------------------------------------------------------------------------
     // C A T E G O R I E S     S E R V I C E S 
     // --------------------------------------------------------------------------
-    #[Route('/categories/home/{new?true}/{categoryname?#}/{id?10000}', name: 'bootadmin.categories')]
+    #[Route('/categories/home/{new?true}/{categoryname?#}/{id?10000}/{knifeconflict?0}', name: 'bootadmin.categories')]
     public function AdminCategories(Request $request,
                                 $new,
                                 $categoryname,
                                 $id,
+                                $knifeconflict,
                                 EntityManagerInterface $entityManager,
                                 TranslatorInterface $translator
                             ): Response
@@ -388,6 +402,7 @@ class AdminController extends AbstractController
             "new" =>  $new,
             "categoryname" => $categoryname,
             "id" => $id,
+            "knifeconflict" => $knifeconflict,
             "categories" => $categories,
             "form" => $form->createView()
             ]
@@ -406,9 +421,13 @@ class AdminController extends AbstractController
         $category = $repo->find($id);
         $knifes = $category->getKnifes();
         if($knifes->count() > 0){
+            $conflicts = array();
+            foreach($knifes as $violation) { array_push($conflicts, ['name' => $violation->getName(), 'id' => $violation->getId()]);}
             $notice = $translator->trans('admin.managecategories.isused');
+            $notice = $notice.' : '.$conflicts[0]['name'];
             $this->addFlash('error', $notice);
-            return $this->redirectToRoute('bootadmin.categories', array( 'new' => "true"));
+            return $this->redirectToRoute('bootadmin.categories', array( 'new' => "true",
+                                                                        'knifeconflict' => $conflicts[0]['id']));
         }
         $repo->remove($category, true);
         $this->addFlash('success', $translator->trans('admin.managecategories.deleted'));        
@@ -440,11 +459,12 @@ class AdminController extends AbstractController
     // --------------------------------------------------------------------------
     // A C C E S S O R I E S     S E R V I C E S 
     // --------------------------------------------------------------------------
-    #[Route('/accessories/home/{new?true}/{accessoryname?#}/{id?10000}', name: 'bootadmin.accessories')]
+    #[Route('/accessories/home/{new?true}/{accessoryname?#}/{id?10000}/{knifeconflict?0}', name: 'bootadmin.accessories')]
     public function AdminAccessories(Request $request,
                                 $new,
                                 $accessoryname,
                                 $id,
+                                $knifeconflict,
                                 EntityManagerInterface $entityManager,
                                 TranslatorInterface $translator
                             ): Response
@@ -476,6 +496,7 @@ class AdminController extends AbstractController
             "new" =>  $new,
             "accessoryname" => $accessoryname,
             "id" => $id,
+            "knifeconflict" => $knifeconflict,
             "accessories" => $accessories,
             "form" => $form->createView()
             ]
@@ -494,9 +515,13 @@ class AdminController extends AbstractController
         $accessory = $repo->find($id);
         $knifes = $accessory->getKnifes();
         if($knifes->count() > 0){
+            $conflicts = array();
+            foreach($knifes as $violation) { array_push($conflicts, ['name' => $violation->getName(), 'id' => $violation->getId()]);}
             $notice = $translator->trans('admin.manageaccessories.isused');
+            $notice = $notice.' : '.$conflicts[0]['name'];
             $this->addFlash('error', $notice);
-            return $this->redirectToRoute('bootadmin.accessories', array( 'new' => "true"));
+            return $this->redirectToRoute('bootadmin.accessories', array( 'new' => "true",
+                                                                        'knifeconflict' => $conflicts[0]['id']));
         }
         $repo->remove($accessory, true);
         $this->addFlash('success', $translator->trans('admin.manageaccessories.deleted'));        

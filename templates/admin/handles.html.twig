@@ -9,6 +9,12 @@
 {% endblock %}
 
 {% block body %}
+    {#  Tried to delete a used handle ?  #}
+    <div class="feedback">
+        {% if (knifeconflict != 0) %}
+            <a class="nav-link" href="{{ path('bootadmin.knives.edit', {id: knifeconflict}) }}">{% trans %}admin.manageknives.checkknife{% endtrans %}</a>
+        {% endif %}
+    </div>
     <ul class="nav mb-2">
         <li class="nav-item"><a class="nav-link" href="{{ path('bootadmin.knives.all', { "new" : "true" } )}}">{% trans %}admin.listknives{% endtrans %}</a></li>
         <li class="nav-item"><a class="nav-link" href="{{ path('bootadmin.knives.edit', { "new" : "true" } )}}">{% trans %}admin.addknife{% endtrans %}</a></li>
