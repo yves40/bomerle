@@ -6,6 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
+        <link rel="stylesheet" href="{{asset('/css/yves.css')}}">
         <title>
             {% block title %}
                 Static Navigation - SB Admin
@@ -125,9 +126,9 @@
                 <main>
                     <div class="container-fluid px-4">
                     {% block pagetitle %}
-                        <h1 class="mt-4">bootstrap template</h1>
+                        <h1 class="mt-0">bootstrap template</h1>
                     {% endblock %}
-                        <div class="card mb-4">
+                        <div class="card mb-0">
                             <div class="card-body">
                                 <!-- The flash message section -->  
                                 {% for message in app.session.flashBag.get('info') %}
