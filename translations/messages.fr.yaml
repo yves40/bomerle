@@ -1,6 +1,6 @@
 # Have a look at config/packages/translation.yaml
 app:
-  version: Beaumerle Administration [Jan 2023, 1.48]
+  version: Beaumerle Administration [Jan 2023, 1.49]
   copyright:  'Ratoon software Corporation Inc, Chabreloche France '
 lang:
   menufr: Langue
@@ -104,6 +104,7 @@ admin:
     updated: Couteau mis à jour
     tab1: Données
     tab2: Images
+    checkknife: Editer le couteau en conflit
 buttons:
   add: Ajouter
   modify: Modifier

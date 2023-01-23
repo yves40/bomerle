@@ -76,11 +76,12 @@ class AdminController extends AbstractController
         @param number $id used when updating or deleting a metal
         @return Response
     */
-    #[Route('/metals/home/{new?true}/{metalname?#}/{id?10000}', name: 'bootadmin.metals')]
+    #[Route('/metals/home/{new?true}/{metalname?#}/{id?10000}/{knifeconflict?0}', name: 'bootadmin.metals')]
     public function AdminMetals(Request $request,
                                 $new,
                                 $metalname,
                                 $id,
+                                $knifeconflict,
                                 EntityManagerInterface $entityManager,
                                 TranslatorInterface $translator
                             ): Response
@@ -108,6 +109,7 @@ class AdminController extends AbstractController
             "new" =>  $new,
             "metalname" => $metalname,
             "id" => $id,
+            "knifeconflict" => $knifeconflict,
             "metals" => $metals,
             "form" => $form->createView()
             ]
@@ -128,9 +130,12 @@ class AdminController extends AbstractController
         $knifes = $metal->getKnifes();
         // Is this metal related to any knife ?
         if($knifes->count() > 0){
+            $conflicts = array();
+            foreach($knifes as $violation) { array_push($conflicts, ['name' => $violation->getName(), 'id' => $violation->getId()]);}
             $notice = $translator->trans('admin.managemetals.isused');
+            $notice = $notice.' : '.$conflicts[0]['name'];
             $this->addFlash('error', $notice);
-            return $this->redirectToRoute('bootadmin.metals', array( 'new' => "true"));
+            return $this->redirectToRoute('bootadmin.metals', array( 'new' => "true", 'knifeconflict' => $conflicts[0]['id']));
         }
         $repo->remove($metal, true);
         $this->addFlash('success', $translator->trans('admin.managemetals.deleted'));
