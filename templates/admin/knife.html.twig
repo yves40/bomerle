@@ -20,6 +20,14 @@
         {% set param = { 'id': id } %}
     {% endif %}
 
+    {# Form --------------------------------------------------------------------------------------------------------- #}
+    {{ form_start(form, {'attr': {'novalidate': 'novalidate', 'class': 'form'},
+                        'action': path(action, param), 
+                        'method': 'POST'
+                        }) 
+    }}
+
+
     <ul class="nav mb-2">
         <li class="nav-item"><a class="nav-link" href="{{ path('bootadmin.knives.all', { "new" : "true" } )}}">{% trans %}admin.listknives{% endtrans %}</a></li>
         <li class="nav-item"><a class="nav-link" href="{{ path('bootadmin.accessories', { "new" : "true" } )}}">{% trans %}admin.accessories{% endtrans %}</a></li>
@@ -38,13 +46,6 @@
                     class="btn btn-primary mb-3">{% trans %}buttons.cancel{% endtrans %}</button>
         {% endif %}
     </div>
-
-    {# Form --------------------------------------------------------------------------------------------------------- #}
-    {{ form_start(form, {'attr': {'novalidate': 'novalidate', 'class': 'form'},
-                        'action': path(action, param), 
-                        'method': 'POST'
-                        }) 
-    }}
 
     {# Nav Tabs --------------------------------------------------------------------------------------------------------- #}
     <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -65,11 +66,12 @@
         </li>
     </ul>
   
+
     {# Nav Panes --------------------------------------------------------------------------------------------------------- #}
     <div class="tab-content">
         {# M A I N --------------------------------------------------------------------------------------------------------- #}
-        <div class="tab-pane active" id="home" role="tabpanel" aria-labelledby="home-tab"  align-items="left">
-            <div class="container">
+        <div class="tab-pane active " id="home" role="tabpanel" aria-labelledby="home-tab"  align-items="left">
+            {# <div class="padleft0"> #}
                 <div class="row align-items-start">
                     <div class="col"> {{ form_row(form.name, { 'label' : 'admin.manageknives.label'|trans, 'value': knife.name })  }}</div>
                     <div class="col">{{ form_row(form.description, { 'label' : 'admin.manageknives.description'|trans,'value': knife.description,}) }}</div>
@@ -91,13 +93,11 @@
                     <div class="col">{{ form_row(form.handle, { 'label' : 'admin.manageknives.handle'|trans,'value': knife.handle}) }}</div>
                     <div class="col">{{ form_row(form.metals, { 'label' : 'admin.manageknives.metal'|trans,'value': knife.metals}) }}</div>
                 </div>
-            </div>        
+            {# </div>         #}
         </div>
         {# I M A G E S --------------------------------------------------------------------------------------------------------- #}
         <div class="tab-pane" id="profile" role="tabpanel" aria-labelledby="profile-tab"  align-items="left">
-            <div class="container">
-                {{ form_rest(form) }}
-            </div>
+            {{ form_rest(form) }}
         </div>
     </div>
     {{ form_end(form) }}
