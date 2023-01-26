@@ -9,14 +9,7 @@
 {% endblock %}
 
 {% block body %}
-    <ul class="nav mb-2">
-        <li class="nav-item"><a class="nav-link" href="{{ path('bootadmin.knives.all', { "new" : "true" } )}}">{% trans %}admin.listknives{% endtrans %}</a></li>
-        <li class="nav-item"><a class="nav-link" href="{{ path('bootadmin.accessories', { "new" : "true" } )}}">{% trans %}admin.accessories{% endtrans %}</a></li>
-        <li class="nav-item"><a class="nav-link" href="{{ path('bootadmin.categories', { "new" : "true" } )}}">{% trans %}admin.categories{% endtrans %}</</li></a>
-        <li class="nav-item"><a class="nav-link" href="{{ path('bootadmin.handles', { "new" : "true" } )}}">{% trans %}admin.handles{% endtrans %}</a></li>
-        <li class="nav-item"><a class="nav-link" href="{{ path('bootadmin.mechanisms', { "new" : "true" } )}}">{% trans %}admin.mechanisms{% endtrans %}</a></li>
-        <li class="nav-item"><a class="nav-link" href="{{ path('bootadmin.metals', { "new" : "true" } )}}">{% trans %}admin.metals{% endtrans %}</a></li>                                                                            
-    </ul>
+
     {# 
         Check form call context: The form is generic and called for all CRUD ops.
         When updating, the action must call the update service with an ID
@@ -26,45 +19,94 @@
     {% if id != 0 %}  {# Update, or Create, delete ? #}
         {% set param = { 'id': id } %}
     {% endif %}
-    {# Form #}
+
+    <ul class="nav mb-2">
+        <li class="nav-item"><a class="nav-link" href="{{ path('bootadmin.knives.all', { "new" : "true" } )}}">{% trans %}admin.listknives{% endtrans %}</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ path('bootadmin.accessories', { "new" : "true" } )}}">{% trans %}admin.accessories{% endtrans %}</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ path('bootadmin.categories', { "new" : "true" } )}}">{% trans %}admin.categories{% endtrans %}</</li></a>
+        <li class="nav-item"><a class="nav-link" href="{{ path('bootadmin.handles', { "new" : "true" } )}}">{% trans %}admin.handles{% endtrans %}</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ path('bootadmin.mechanisms', { "new" : "true" } )}}">{% trans %}admin.mechanisms{% endtrans %}</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ path('bootadmin.metals', { "new" : "true" } )}}">{% trans %}admin.metals{% endtrans %}</a></li>                                                                            
+    </ul>
+    <div>
+        {% if id == 0 %}
+            <button type="submit" class="btn btn-primary mb-3">{% trans %}buttons.add{% endtrans %}</button>
+        {% else %}
+            <button type="submit" 
+                    class="btn btn-primary mb-3">{% trans %}buttons.modify{% endtrans %}</button>
+            <button type="submit" formaction="{{path('bootadmin.knives.all')}}" 
+                    class="btn btn-primary mb-3">{% trans %}buttons.cancel{% endtrans %}</button>
+        {% endif %}
+    </div>
+
+    {# Form --------------------------------------------------------------------------------------------------------- #}
     {{ form_start(form, {'attr': {'novalidate': 'novalidate', 'class': 'form'},
-                         'action': path(action, param), 
-                         'method': 'POST'
+                        'action': path(action, param), 
+                        'method': 'POST'
                         }) 
     }}
-        <div>
-            {% if id == 0 %}
-                <button type="submit" class="btn btn-primary mb-3">{% trans %}buttons.add{% endtrans %}</button>
-            {% else %}
-                <button type="submit" 
-                        class="btn btn-primary mb-3">{% trans %}buttons.modify{% endtrans %}</button>
-                <button type="submit" formaction="{{path('bootadmin.knives.all')}}" 
-                        class="btn btn-primary mb-3">{% trans %}buttons.cancel{% endtrans %}</button>
-            {% endif %}
+
+    {# Nav Tabs --------------------------------------------------------------------------------------------------------- #}
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item" role="presentation">
+        <button class="nav-link active" 
+                id="home-tab" data-bs-toggle="tab" 
+                data-bs-target="#home" 
+                type="button" role="tab" aria-controls="home" 
+                aria-selected="true">{% trans %}admin.manageknives.tab1{% endtrans %}</button>
+        </li>
+        <li class="nav-item" role="presentation">
+        <button class="nav-link" 
+                id="profile-tab" 
+                data-bs-toggle="tab" 
+                data-bs-target="#profile" 
+                type="button" role="tab" aria-controls="profile" 
+                aria-selected="false">{% trans %}admin.manageknives.tab2{% endtrans %}</button>
+        </li>
+    </ul>
+  
+    {# Nav Panes --------------------------------------------------------------------------------------------------------- #}
+    <div class="tab-content">
+        {# M A I N --------------------------------------------------------------------------------------------------------- #}
+        <div class="tab-pane active" id="home" role="tabpanel" aria-labelledby="home-tab"  align-items="left">
+            <div class="container">
+                <div class="row align-items-start">
+                    <div class="col"> {{ form_row(form.name, { 'label' : 'admin.manageknives.label'|trans, 'value': knife.name })  }}</div>
+                    <div class="col">{{ form_row(form.description, { 'label' : 'admin.manageknives.description'|trans,'value': knife.description,}) }}</div>
+                </div>
+                <div class="row align-items-start">
+                    <div class="col">{{ form_row(form.stock, { 'label' : 'admin.manageknives.stock'|trans,'value': knife.stock,})}}</div>
+                    <div class="col">{{ form_row(form.weight, { 'label' : 'admin.manageknives.weight'|trans,'value': knife.weight,}) }}</div>
+                    <div class="col">{{ form_row(form.lenght, { 'label' : 'admin.manageknives.length'|trans,'value': knife.lenght,}) }}</div>
+                    <div class="col">{{ form_row(form.close_lenght, { 'label' : 'admin.manageknives.closed'|trans,'value': knife.closelenght,}) }}</div>
+                    <div class="col">{{ form_row(form.cuttingedge_lenght, { 'label' : 'admin.manageknives.bladelength'|trans,'value': knife.cuttingedgelenght}) }}</div>
+                    <div class="col">{{ form_row(form.price, { 'label' : 'admin.manageknives.price'|trans,'value': knife.price}) }}</div>
+                </div>
+                <div class="row align-items-start">
+                    <div class="col">{{ form_row(form.category , { 'label' : 'admin.manageknives.category'|trans,'value': knife.category }) }}</div>
+                    <div class="col">{{ form_row(form.mechanism, { 'label' : 'admin.manageknives.mechanism'|trans,'value': knife.mechanism}) }}</div>
+                </div>
+                <div class="row align-items-start">
+                    <div class="col ">{{ form_row(form.accessories, { 'label' : 'admin.manageknives.accessories'|trans,'value': knife.accessories}) }}</div>
+                    <div class="col">{{ form_row(form.handle, { 'label' : 'admin.manageknives.handle'|trans,'value': knife.handle}) }}</div>
+                    <div class="col">{{ form_row(form.metals, { 'label' : 'admin.manageknives.metal'|trans,'value': knife.metals}) }}</div>
+                </div>
+            </div>        
         </div>
-        <div class="container">
-            <div class="row align-items-start">
-                <div class="col"> {{ form_row(form.name, { 'label' : 'admin.manageknives.label'|trans, 'value': knife.name })  }}</div>
-                <div class="col">{{ form_row(form.description, { 'label' : 'admin.manageknives.description'|trans,'value': knife.description,}) }}</div>
+        {# I M A G E S --------------------------------------------------------------------------------------------------------- #}
+        <div class="tab-pane" id="profile" role="tabpanel" aria-labelledby="profile-tab"  align-items="left">
+            <div class="container">
+                {{ form_rest(form) }}
             </div>
-            <div class="row">
-                <div class="col">{{ form_row(form.stock, { 'label' : 'admin.manageknives.stock'|trans,'value': knife.stock,})}}</div>
-                <div class="col">{{ form_row(form.weight, { 'label' : 'admin.manageknives.weight'|trans,'value': knife.weight,}) }}</div>
-                <div class="col">{{ form_row(form.lenght, { 'label' : 'admin.manageknives.length'|trans,'value': knife.lenght,}) }}</div>
-                <div class="col">{{ form_row(form.close_lenght, { 'label' : 'admin.manageknives.closed'|trans,'value': knife.closelenght,}) }}</div>
-                <div class="col">{{ form_row(form.cuttingedge_lenght, { 'label' : 'admin.manageknives.bladelength'|trans,'value': knife.cuttingedgelenght}) }}</div>
-                <div class="col">{{ form_row(form.price, { 'label' : 'admin.manageknives.price'|trans,'value': knife.price}) }}</div>
-            </div>
-            <div class="row">
-                <div class="col">{{ form_row(form.category , { 'label' : 'admin.manageknives.category'|trans,'value': knife.category }) }}</div>
-                <div class="col">{{ form_row(form.mechanism, { 'label' : 'admin.manageknives.mechanism'|trans,'value': knife.mechanism}) }}</div>
-            </div>
-            <div class="row">
-                <div class="col ">{{ form_row(form.accessories, { 'label' : 'admin.manageknives.accessories'|trans,'value': knife.accessories}) }}</div>
-                <div class="col">{{ form_row(form.handle, { 'label' : 'admin.manageknives.handle'|trans,'value': knife.handle}) }}</div>
-                <div class="col">{{ form_row(form.metals, { 'label' : 'admin.manageknives.metal'|trans,'value': knife.metals}) }}</div>
-            </div>
-        </div>        
-        {{ form_rest(form) }}
+        </div>
+    </div>
     {{ form_end(form) }}
+    <style>
+        .tab-pane {
+            display: flex;
+            flex-direction: column;
+            align-items: left;
+            justify-content: left;        
+        }
+    </style>
 {% endblock %}
