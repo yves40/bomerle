@@ -95,16 +95,8 @@
         </div>
         {# I M A G E S --------------------------------------------------------------------------------------------------------- #}
         <div class="tab-pane" id="profile" role="tabpanel" aria-labelledby="profile-tab"  align-items="left">
-            {{ form_rest(form) }}
+            {{ form_row(form.images, { 'label' : 'admin.manageknives.images'|trans,'value': knife.images}) }}
         </div>
     </div>
     {{ form_end(form) }}
-    <style>
-        .tab-pane {
-            display: flex;
-            flex-direction: column;
-            align-items: left;
-            justify-content: left;        
-        }
-    </style>
 {% endblock %}

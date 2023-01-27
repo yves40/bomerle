@@ -103,7 +103,7 @@ admin:
     deleted: Knife deleted
     updated: Knife updated
     tab1: Main data
-    tab2: Images
+    tab2: Knife Images
     checkknife: Edit conflicting knife
 buttons:
   add: Add
