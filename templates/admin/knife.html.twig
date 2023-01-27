@@ -50,14 +50,14 @@
     {# Nav Tabs --------------------------------------------------------------------------------------------------------- #}
     <ul class="nav nav-tabs" id="myTab" role="tablist">
         <li class="nav-item" role="presentation">
-        <button class="nav-link active" 
+        <button class="nav-link active ylink" 
                 id="home-tab" data-bs-toggle="tab" 
                 data-bs-target="#home" 
                 type="button" role="tab" aria-controls="home" 
                 aria-selected="true">{% trans %}admin.manageknives.tab1{% endtrans %}</button>
         </li>
         <li class="nav-item" role="presentation">
-        <button class="nav-link" 
+        <button class="nav-link ylink" 
                 id="profile-tab" 
                 data-bs-toggle="tab" 
                 data-bs-target="#profile" 
@@ -71,29 +71,27 @@
     <div class="tab-content">
         {# M A I N --------------------------------------------------------------------------------------------------------- #}
         <div class="tab-pane active " id="home" role="tabpanel" aria-labelledby="home-tab"  align-items="left">
-            {# <div class="padleft0"> #}
                 <div class="row align-items-start">
-                    <div class="col"> {{ form_row(form.name, { 'label' : 'admin.manageknives.label'|trans, 'value': knife.name })  }}</div>
-                    <div class="col">{{ form_row(form.description, { 'label' : 'admin.manageknives.description'|trans,'value': knife.description,}) }}</div>
+                    <div class="col ylabel"> {{ form_row(form.name, { 'label' : 'admin.manageknives.label'|trans, 'value': knife.name })  }}</div>
+                    <div class="col ylabel">{{ form_row(form.description, { 'label' : 'admin.manageknives.description'|trans,'value': knife.description,}) }}</div>
                 </div>
                 <div class="row align-items-start">
-                    <div class="col">{{ form_row(form.stock, { 'label' : 'admin.manageknives.stock'|trans,'value': knife.stock,})}}</div>
-                    <div class="col">{{ form_row(form.weight, { 'label' : 'admin.manageknives.weight'|trans,'value': knife.weight,}) }}</div>
-                    <div class="col">{{ form_row(form.lenght, { 'label' : 'admin.manageknives.length'|trans,'value': knife.lenght,}) }}</div>
-                    <div class="col">{{ form_row(form.close_lenght, { 'label' : 'admin.manageknives.closed'|trans,'value': knife.closelenght,}) }}</div>
-                    <div class="col">{{ form_row(form.cuttingedge_lenght, { 'label' : 'admin.manageknives.bladelength'|trans,'value': knife.cuttingedgelenght}) }}</div>
-                    <div class="col">{{ form_row(form.price, { 'label' : 'admin.manageknives.price'|trans,'value': knife.price}) }}</div>
+                    <div class="col ylabel">{{ form_row(form.stock, { 'label' : 'admin.manageknives.stock'|trans,'value': knife.stock,})}}</div>
+                    <div class="col ylabel">{{ form_row(form.weight, { 'label' : 'admin.manageknives.weight'|trans,'value': knife.weight,}) }}</div>
+                    <div class="col ylabel">{{ form_row(form.lenght, { 'label' : 'admin.manageknives.length'|trans,'value': knife.lenght,}) }}</div>
+                    <div class="col ylabel">{{ form_row(form.close_lenght, { 'label' : 'admin.manageknives.closed'|trans,'value': knife.closelenght,}) }}</div>
+                    <div class="col ylabel">{{ form_row(form.cuttingedge_lenght, { 'label' : 'admin.manageknives.bladelength'|trans,'value': knife.cuttingedgelenght}) }}</div>
+                    <div class="col ylabel">{{ form_row(form.price, { 'label' : 'admin.manageknives.price'|trans,'value': knife.price}) }}</div>
                 </div>
                 <div class="row align-items-start">
-                    <div class="col">{{ form_row(form.category , { 'label' : 'admin.manageknives.category'|trans,'value': knife.category }) }}</div>
-                    <div class="col">{{ form_row(form.mechanism, { 'label' : 'admin.manageknives.mechanism'|trans,'value': knife.mechanism}) }}</div>
+                    <div class="col ylabel">{{ form_row(form.category , { 'label' : 'admin.manageknives.category'|trans,'value': knife.category }) }}</div>
+                    <div class="col ylabel">{{ form_row(form.mechanism, { 'label' : 'admin.manageknives.mechanism'|trans,'value': knife.mechanism}) }}</div>
                 </div>
                 <div class="row align-items-start">
                     <div class="col ">{{ form_row(form.accessories, { 'label' : 'admin.manageknives.accessories'|trans,'value': knife.accessories}) }}</div>
-                    <div class="col">{{ form_row(form.handle, { 'label' : 'admin.manageknives.handle'|trans,'value': knife.handle}) }}</div>
-                    <div class="col">{{ form_row(form.metals, { 'label' : 'admin.manageknives.metal'|trans,'value': knife.metals}) }}</div>
+                    <div class="col ">{{ form_row(form.handle, { 'label' : 'admin.manageknives.handle'|trans,'value': knife.handle}) }}</div>
+                    <div class="col ">{{ form_row(form.metals, { 'label' : 'admin.manageknives.metal'|trans,'value': knife.metals}) }}</div>
                 </div>
-            {# </div>         #}
         </div>
         {# I M A G E S --------------------------------------------------------------------------------------------------------- #}
         <div class="tab-pane" id="profile" role="tabpanel" aria-labelledby="profile-tab"  align-items="left">

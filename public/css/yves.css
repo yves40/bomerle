@@ -3,5 +3,9 @@
   border: 1px solid blue;
   border-radius: 5px; }
 
-.padleft0 {
-  padding-left: 0; }
+.ylabel {
+  font-weight: bold; }
+
+button.active.ylink {
+  font-weight: bold;
+  font-size: 1.4rem; }
