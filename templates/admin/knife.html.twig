@@ -101,11 +101,14 @@
                 </div>
             </div>
             {% if knife.images is defined and knife.images is not null  %}
+                <div class="row">
                     {% for image in knife.images %}
-                        <div class="row">
-                            <p>{{image.filename}}</p>
+                        <div class="col-sm imagesmall">
+                            <img class="imagesmall" src="{{asset('images/knife/' ~ image.filename)}}" alt="Not loaded">
+                            {# <p>{{asset('images/knife/' ~ image.filename)}}</p> #}
                         </div>
                     {% endfor %}
+                </div>  
             {% endif %}
         </div>
     </div>
