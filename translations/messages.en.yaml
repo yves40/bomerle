@@ -96,7 +96,7 @@ admin:
     accessories: Accessories
     handle: Handle
     metal: Metal
-    images: images
+    images: Select the knife images
     help: Knife name
     isused: This knife is used
     created: Knife added

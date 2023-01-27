@@ -87,6 +87,7 @@ class AdminControllerKnife extends AbstractController
             }
             return $this->redirectToRoute('bootadmin.knives.all', array( 'new' => "true"));
         }
+        // dd($knife);
         return $this->render('admin/knife.html.twig', [
             "locale" =>  $loc,
             "id" => $id,

@@ -94,8 +94,19 @@
                 </div>
         </div>
         {# I M A G E S --------------------------------------------------------------------------------------------------------- #}
-        <div class="tab-pane" id="profile" role="tabpanel" aria-labelledby="profile-tab"  align-items="left">
-            {{ form_row(form.images, { 'label' : 'admin.manageknives.images'|trans,'value': knife.images}) }}
+        <div class="tab-pane mt-4" id="profile" role="tabpanel" aria-labelledby="profile-tab"  align-items="left">
+            <div class="row">
+                <div class="col ylabel">
+                    {{ form_row(form.images, { 'label' : 'admin.manageknives.images'|trans}) }}
+                </div>
+            </div>
+            {% if knife.images is defined and knife.images is not null  %}
+                    {% for image in knife.images %}
+                        <div class="row">
+                            <p>{{image.filename}}</p>
+                        </div>
+                    {% endfor %}
+            {% endif %}
         </div>
     </div>
     {{ form_end(form) }}

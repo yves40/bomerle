@@ -96,7 +96,7 @@ admin:
     accessories: Accessoires
     handle: Manche
     metal: Métal
-    images: Photos
+    images: Sélectionnez les photos du couteau
     help: Nom du couteau
     isused: Ce couteau est utilisé, impossible de l'effacer
     created: Couteau ajouté
