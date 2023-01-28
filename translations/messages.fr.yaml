@@ -35,6 +35,7 @@ admin:
   handles: Manches
   mechanisms: Mécanismes
   metals: Métaux
+  users: Utilisateurs
   events:
     events:  Salons
     list: Liste des salons

@@ -35,6 +35,7 @@ admin:
   handles: Handles
   mechanisms: Mecanisms
   metals: Metals
+  users: Registered Users
   events:
     events:  Events
     list: List events
