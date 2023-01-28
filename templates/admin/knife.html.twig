@@ -103,9 +103,21 @@
             {% if knife.images is defined and knife.images is not null  %}
                 <div class="row">
                     {% for image in knife.images %}
-                        <div class="col-sm imagesmall">
+                        {# <div class="col-sm">
                             <img class="imagesmall" src="{{asset('images/knife/' ~ image.filename)}}" alt="Not loaded">
-                            {# <p>{{asset('images/knife/' ~ image.filename)}}</p> #}
+                        </div> #}
+                        <div class="card" style="width: 20rem;">
+                            <img class="imagesmall" src="{{asset('images/knife/' ~ image.filename)}}" alt="Not loaded">
+                            <div class="card-body">
+                                <p class="card-title textsmall">{{loop.index}} - {{image.filename}}</p>
+                                {% if loop.index != 1 %}
+                                    <a href="#" class="btn btn-primary">Shift left</a>
+                                {% endif %}
+                                <a href="#" class="btn btn-primary">Delete</a>
+                                {% if not loop.last %}
+                                    <a href="#" class="btn btn-primary">Shift right</a>
+                                {% endif %}                                
+                          </div>
                         </div>
                     {% endfor %}
                 </div>  

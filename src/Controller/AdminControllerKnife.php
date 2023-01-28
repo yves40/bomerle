@@ -4,9 +4,10 @@ namespace App\Controller;
 
 use Exception;
 
+use App\Entity\Images;
 use App\Entity\Knifes;
-
 use App\Form\KnifesType;
+use App\Services\Uploader;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -68,6 +69,7 @@ class AdminControllerKnife extends AbstractController
     public function update(Request $request,
                         int $id,    // If 0 : insert mode
                         EntityManagerInterface $entityManager,
+                        Uploader $uploader,
                         TranslatorInterface $translator): Response
     {
         $loc = $this->locale($request);
@@ -77,6 +79,21 @@ class AdminControllerKnife extends AbstractController
         $form = $this->createForm(KnifesType::class, $knife);
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()){   // Form submitted ? 
+            // Take care of uploaded images
+            $uploadedFiles = $form->get('images')->getData();
+            $physicalPath = $this->getParameter('knifeimages_directory');
+            for($i=0; $i < count($uploadedFiles); $i++){
+                $image = new Images();
+                $newFileName = $uploader->uploadFile($uploadedFiles[$i], $physicalPath);
+                $image->setFilename($newFileName);
+                if($i == 0){
+                    $image->setMainpicture(true);
+                }else{
+                    $image->setMainpicture(false);
+                }
+                $knife->addImage($image);
+            }
+            // Now can persist the knife object
             $entityManager->persist($knife);
             $entityManager->flush();
             if($id === 0)  {    // Insert ? 
@@ -87,7 +104,6 @@ class AdminControllerKnife extends AbstractController
             }
             return $this->redirectToRoute('bootadmin.knives.all', array( 'new' => "true"));
         }
-        // dd($knife);
         return $this->render('admin/knife.html.twig', [
             "locale" =>  $loc,
             "id" => $id,
