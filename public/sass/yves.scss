@@ -25,6 +25,12 @@ button.active.ylink {
 .textverysmall {
   font-size: 0.3rem;
 }
-.centeredtext {
-  align-self: center;
+legend {
+  font-weight: bold;
+}
+.ysuccess {
+  color: green;
+}
+.yerror {
+  color: red;
 }

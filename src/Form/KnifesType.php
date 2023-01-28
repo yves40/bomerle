@@ -30,12 +30,21 @@ class KnifesType extends AbstractType
             ->add('category', null, [
                 'required' => true,
                 'empty_data' => '',
-                'choice_value' => 'name'    // used to load the currently selected value !!!
+                'choice_value' => 'name',    // used to load the currently selected value !!!
+                'query_builder' => function(EntityRepository $er) {
+                    return $er->createQueryBuilder('h')
+                              ->orderBy('h.name', 'ASC');
+                },
+
             ])
             ->add('mechanism', null, [
                 'required' => true,
                 'empty_data' => '',
-                'choice_value' => 'name'    // used to load the currently selected value !!!
+                'choice_value' => 'name',    // used to load the currently selected value !!!
+                'query_builder' => function(EntityRepository $er) {
+                    return $er->createQueryBuilder('h')
+                              ->orderBy('h.name', 'ASC');
+                },
             ])
             ->add('accessories', EntityType::class, [
                 'expanded' => true,

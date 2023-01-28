@@ -101,23 +101,41 @@
                 </div>
             </div>
             {% if knife.images is defined and knife.images is not null  %}
-                <div class="row">
-                    {% for image in knife.images %}
-                    <div class="col-sm">
-                        <img class="imagesmall" src="{{asset('images/knife/' ~ image.filename)}}" alt="Not loaded">
-                        <p class="centeredtext">[ {{loop.index}} / {{loop.length}} ]</p>
-                        {% if loop.index != 1 %}
-                            <a href="#"><ion-icon name="arrow-back-circle-outline"></ion-icon></a>
-                        {% endif %}
-                        <a href="#"><ion-icon name="trash-bin-outline"></ion-icon></a>
-                        {% if not loop.last %}
-                            <a href="#"><ion-icon name="arrow-forward-circle-outline"></ion-icon></a>
-                        {% endif %}                                
-                    </div>
-                    {% endfor %}
-                </div>  
+                <div class="container text-center allimages">
+                    <div class="row">
+                        {% for image in knife.images %}
+                        <div class="col-sm">
+                            <img id="img-{{image.id}}" class="imagesmall" src="{{asset('images/knife/' ~ image.filename)}}" alt="Not loaded">
+                            <p>[ {{loop.index}} / {{loop.length}} ]</p>
+                            {# The shift left icon #}
+                            {% if loop.index != 1 %}
+                                <a id="left-{{image.id}}" 
+                                    href="#">
+                                    <ion-icon name="arrow-back-circle-outline"></ion-icon></a>
+                            {% endif %}
+                            {# The delete icon #}
+                            <a id="del-{{image.id}}" 
+                                href="{{ path('bootadmin.knives.removephoto',
+                                        { 'knifeid' : knife.id , 'imageid' : image.id }) }}">
+                                <ion-icon name="trash-bin-outline"></ion-icon></a>
+                            {# The shit right icon  #}
+                            {% if not loop.last %}
+                                <a id="right-{{image.id}}" 
+                                    href="#">
+                                    <ion-icon name="arrow-forward-circle-outline"></ion-icon></a>
+                            {% endif %}                                
+                        </div>
+                        {% endfor %}
+                    </div> 
+                    <div id="feedback" class="row"><p></p></div>
+                </div>
             {% endif %}
         </div>
     </div>
     {{ form_end(form) }}
+
+    {# Load manage script  #}
+    <script src="{{ asset('node_modules/jquery/dist/jquery.min.js')}}"></script>
+    <script src="{{ asset('scripts/knife.js')}}"></script>
+
 {% endblock %}

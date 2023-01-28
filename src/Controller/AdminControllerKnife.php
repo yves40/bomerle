@@ -37,7 +37,7 @@ class AdminControllerKnife extends AbstractController
         $loc = $this->locale($request);
         $knife = new Knifes();
         $repo = $entityManager->getRepository(Knifes::class);
-        $allknives = $repo->findAll();
+        $allknives = $repo->findBy([], ['name' => 'asc']);
 
         $form = $this->createForm(KnifesType::class, $knife);
         return $this->render('admin/knives.html.twig', [
@@ -111,6 +111,36 @@ class AdminControllerKnife extends AbstractController
             "form" => $form->createView()
             ]
         );               
+    }
+    // --------------------------------------------------------------------------
+    // J S O N    S E R V I C E S 
+    // --------------------------------------------------------------------------
+    #[Route('/knives/removephoto/{knifeid?0}/{imageid?0}', name: 'bootadmin.knives.removephoto')]
+    public function removePhoto(Request $request,
+        int $knifeid,
+        int $imageid,
+        EntityManagerInterface $emgr,
+        TranslatorInterface $translator)
+    {
+        $loc = $this->locale($request);
+        $image = $emgr->getRepository(Images::class)->findOneBy([ 'id' => $imageid]);
+        if(empty($image)) {
+            return $this->json([
+                'message' => "Image with ID :" . $imageid . "non trouvée !!" 
+            ], 400);
+        }
+        else {
+            $emgr->getRepository(Images::class)->remove($image);
+        }
+        $knife = $emgr->getRepository(Knifes::class)->findOneBy([ 'id' => $knifeid]);
+        $knife->removeImage($image);    // Shoot image from knife object
+        $emgr->persist($knife);
+        $emgr->flush();
+        return $this->json([
+            'message' => 'bootadmin.knives.removephoto called',
+            'knifeid' => $knifeid,
+            'imageid' => $imageid
+        ], 200);
     }
     // --------------------------------------------------------------------------
     // P R I V A T E     S E R V I C E S 

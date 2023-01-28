@@ -18,23 +18,23 @@ class Knifes
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\NotBlank(message: "Merci de renseigner ce champ")]
+    #[Assert\NotBlank(message: "generic.notempty")]
     private ?string $name = null;
 
     #[ORM\Column(type: Types::TEXT)]
-    #[Assert\NotBlank(message: "Merci de renseigner ce champ")]
+    #[Assert\NotBlank(message: "generic.notempty")]
     private ?string $description = null;
 
     #[ORM\Column]
-    #[Assert\NotBlank(message: "Merci de renseigner ce champ")]
+    #[Assert\NotBlank(message: "generic.notempty")]
     private ?int $stock = null;
 
     #[ORM\Column]
-    #[Assert\NotBlank(message: "Merci de renseigner ce champ")]
+    #[Assert\NotBlank(message: "generic.notempty")]
     private ?int $weight = null;
 
     #[ORM\Column]
-    #[Assert\NotBlank(message: "Merci de renseigner ce champ")]
+    #[Assert\NotBlank(message: "generic.notempty")]
     #[Assert\Type(
         type: 'integer', 
         message: "La longueur doit être exprimée en cm, à l'unité près",
@@ -45,22 +45,22 @@ class Knifes
     private ?int $close_lenght = null;
 
     #[ORM\Column]
-    #[Assert\NotBlank(message: "Merci de renseigner ce champ")]
+    #[Assert\NotBlank(message: "generic.notempty")]
     private ?int $cuttingedge_lenght = null;
 
     #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 2, nullable: true)]
-    #[Assert\NotBlank(message: "Merci de renseigner ce champ")]
+    #[Assert\NotBlank(message: "generic.notempty")]
     private ?string $price = null;
 
     #[ORM\ManyToOne(inversedBy: 'knifes', fetch: "EAGER")]
     #[ORM\JoinColumn(nullable: false)]
-    #[Assert\NotBlank(message: "Merci de renseigner ce champ")]
+    #[Assert\NotBlank(message: "generic.notempty")]
     #[Assert\Valid]
     private ?Category $category = null;
 
     #[ORM\ManyToOne(inversedBy: 'knifes', fetch: "EAGER")]
     #[ORM\JoinColumn(nullable: false)]
-    #[Assert\NotBlank(message: "Merci de renseigner ce champ")]
+    #[Assert\NotBlank(message: "generic.notempty")]
     #[Assert\Valid]
     private ?Mechanism $mechanism = null;
 

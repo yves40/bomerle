@@ -22,11 +22,11 @@
         {% for knife in allknives %}
             <li class="list-group-item">
                 <div class="row">
-                    <div class="col">{{knife.name}}</div>
-                    <div class="col">{{knife.price}} €</div>
-                    <div class="col">{{'admin.manageknives.mechanism'|trans}} : {{knife.mechanism}}</div>
-                    <div class="col">{{'admin.manageknives.stock'|trans}} : {{knife.stock}} </div>
-                    <div class="col">{{'admin.manageknives.category'|trans}} : {{knife.category}}</div>
+                    <div class="col-2">{{knife.name}}</div>
+                    <div class="col-3">{{'admin.manageknives.category'|trans}} : {{knife.category}}</div>
+                    <div class="col-3">{{'admin.manageknives.mechanism'|trans}} : {{knife.mechanism}}</div>
+                    <div class="col-1">{{'admin.manageknives.stock'|trans}} : {{knife.stock}} </div>
+                    <div class="col-1">{{knife.price}} €</div>
                     <div class="col-1">
                         <a href="{{ path('bootadmin.knives.delete', {id: knife.id}) }}"><i class="fa fa-trash"></i></a>
                     </div>
