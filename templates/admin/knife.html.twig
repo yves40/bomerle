@@ -103,22 +103,17 @@
             {% if knife.images is defined and knife.images is not null  %}
                 <div class="row">
                     {% for image in knife.images %}
-                        {# <div class="col-sm">
-                            <img class="imagesmall" src="{{asset('images/knife/' ~ image.filename)}}" alt="Not loaded">
-                        </div> #}
-                        <div class="card" style="width: 20rem;">
-                            <img class="imagesmall" src="{{asset('images/knife/' ~ image.filename)}}" alt="Not loaded">
-                            <div class="card-body">
-                                <p class="card-title textsmall">{{loop.index}} - {{image.filename}}</p>
-                                {% if loop.index != 1 %}
-                                    <a href="#" class="btn btn-primary">Shift left</a>
-                                {% endif %}
-                                <a href="#" class="btn btn-primary">Delete</a>
-                                {% if not loop.last %}
-                                    <a href="#" class="btn btn-primary">Shift right</a>
-                                {% endif %}                                
-                          </div>
-                        </div>
+                    <div class="col-sm">
+                        <img class="imagesmall" src="{{asset('images/knife/' ~ image.filename)}}" alt="Not loaded">
+                        <p class="centeredtext">[ {{loop.index}} / {{loop.length}} ]</p>
+                        {% if loop.index != 1 %}
+                            <a href="#"><ion-icon name="arrow-back-circle-outline"></ion-icon></a>
+                        {% endif %}
+                        <a href="#"><ion-icon name="trash-bin-outline"></ion-icon></a>
+                        {% if not loop.last %}
+                            <a href="#"><ion-icon name="arrow-forward-circle-outline"></ion-icon></a>
+                        {% endif %}                                
+                    </div>
                     {% endfor %}
                 </div>  
             {% endif %}
