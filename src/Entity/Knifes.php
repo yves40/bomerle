@@ -75,7 +75,8 @@ class Knifes
     #[Assert\Valid]
     private Collection $metals;
 
-    #[ORM\OneToMany(mappedBy: 'knifes', targetEntity: Images::class, cascade:['persist', 'remove'], fetch: "EAGER")]
+    #[ORM\OneToMany(mappedBy: 'knifes', targetEntity: Images::class, cascade:['persist', 'remove'])]
+    #[ORM\OrderBy(['mainpicture'  => 'ASC'])]
     #[Assert\Valid]
     private Collection $images;
 

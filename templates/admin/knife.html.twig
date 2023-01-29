@@ -106,6 +106,7 @@
                         {% for image in knife.images %}
                         <div class="col-sm">
                             <img id="img-{{image.id}}" class="imagesmall" src="{{asset('images/knife/' ~ image.filename)}}" alt="Not loaded">
+                            <p>{{image.filename}}</p>
                             <p>[ {{loop.index}} / {{loop.length}} ]</p>
                             {# The shift left icon #}
                             {% if loop.index != 1 %}
