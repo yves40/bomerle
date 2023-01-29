@@ -110,3 +110,6 @@ buttons:
   add: Ajouter
   modify: Modifier
   cancel: Annuler
+images:
+  errortype: Merci de choisir un format de fichier valide (jpg, jpeg, gif, png)
+  errorsize: Taille maximale autorisée dépassée
