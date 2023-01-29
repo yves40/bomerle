@@ -91,7 +91,7 @@ class KnifesType extends AbstractType
                                 'image/png',
                                 'image/gif'
                             ],
-                            'mimeTypesMessage' => '{{ name }} Merci de chosir un format de fichier valide (jpg, jpeg, gif, png)',
+                            'mimeTypesMessage' => '{{ name }} Merci de choisir un format de fichier valide (jpg, jpeg, gif, png)',
                          ])
                     )
                 ]

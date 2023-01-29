@@ -90,7 +90,7 @@ admin:
     weight: Poids
     length: Longueur
     closed: Longueur fermée
-    bladelength: Longueur de la lame
+    bladelength: Longueur lame
     price: Prix
     category: Catégorie
     mechanism: Mécanisme
