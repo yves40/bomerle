@@ -25,9 +25,25 @@ $(document).ready(function () {
 })
 // ------------------------------------------------------------- handler 
 function actionRequest(element) {
-    let url = $(element).attr('href');
+    let command = $(element).attr('id').split('-')[0];
+    let id = $(element).attr('id').split('-')[1];
+    switch(command) {
+        case 'left': console.log($props.knifehandler() + `Move image left with ID: ${{id}}`);
+                break;
+        case 'right': console.log($props.knifehandler() + `Move image right with ID: ${{id}}`);
+                break;
+        case 'del': console.log('Delete image ');
+                deleteImage(element);
+                break;
+        default: console.log('Unknown command'); 
+                break;
+    }
+}
+// ------------------------------------------------------------- Delete handler 
+function deleteImage(element){
     let feedbackmessage = $('#feedback');
     feedbackmessage.text('');
+    let url = $(element).attr('href');
     console.log(`Remove image, url: ${url}`);
     $.ajax({
         type: "method",
@@ -49,4 +65,5 @@ function actionRequest(element) {
             console.log(xhr.responseJSON.detail);
         }
     });
+    
 }
