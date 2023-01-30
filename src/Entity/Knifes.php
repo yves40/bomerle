@@ -77,7 +77,21 @@ class Knifes
 
     #[ORM\OneToMany(mappedBy: 'knifes', targetEntity: Images::class, cascade:['persist', 'remove'])]
     #[ORM\OrderBy(['mainpicture'  => 'ASC'])]
-    #[Assert\Valid]
+    // #[Assert\All([
+    //     'constraints' => [
+    //         new Assert\File([
+    //             'maxSize' => '8M',
+    //             'maxSizeMessage' => "{{ name }} Taille maximale autorisée {{ limit }} (Actuellement : {{ size }})",
+    //             'mimeTypes' => [
+    //                 'image/jpeg',
+    //                 'image/jpg',
+    //                 'image/png',
+    //                 'image/gif'
+    //             ],
+    //             'mimeTypesMessage' => '{{ name }} Merci de choisir un format de fichier valide (jpg, jpeg, gif, png)',
+    //             ])
+    //     ]
+    // ])]
     private Collection $images;
 
     public function __construct()

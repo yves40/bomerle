@@ -11,4 +11,6 @@ return [
   'category.selectone' => 'Sélectionnez une catégorie',
   'category.alreadyexist' => 'This category already exist',
   'accessory.alreadyexist' => 'This accessory already exist',
+  'file.upload.type' => 'Please choose a valid file format (jpg, jpeg, gif, png)',
+  'file.upload.sizemax' => 'File too big',
 ];
