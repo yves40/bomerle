@@ -111,6 +111,6 @@ buttons:
   modify: Update
   cancel: Abort
 images:
-  errortype: Merci de choisir un format de fichier valide (jpg, jpeg, gif, png)
-  errorsize: Taille maximale autorisée dépassée
+  errortype: Please choose a valid file format (jpg, jpeg, gif, png)
+  errorsize: Maximum allowed size exceeded
 

@@ -31,14 +31,15 @@ class Uploader {
     }
   }
   // ---------------------------------------------------------------------------------------------
-  public function deletePreviousFile(string $directoryFolder, string $previousfile) {
+  public function deletePreviousFile(string $directoryFolder, 
+                          string $previousfile) {
     try {
       if(file_exists($directoryFolder.'/'.$previousfile)){
           unlink($directoryFolder.'/'.$previousfile);
       }
     }
     catch(Exception $e) {
-        $this->logger->error("Cannot remove previous file $directoryFolder.'/'.$previousfile");
+//        $this->logger->error("Cannot remove previous file $directoryFolder.'/'.$previousfile");
     }
   }
 
