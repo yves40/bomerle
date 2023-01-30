@@ -7,6 +7,11 @@ parameters:
     knifeimages_directory: '%kernel.project_dir%/public/images/knife'
 
 services:
+    App\Events\LogoutHandler:
+        tags:
+            - name: 'kernel.event_listener'
+              event: 'Symfony\Component\Security\Http\Event\LogoutEvent'
+              dispatcher: security.event_dispatcher.main
     # default configuration for services in *this* file
     _defaults:
         autowire: true      # Automatically injects dependencies in your services.
