@@ -11,14 +11,14 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /*
-        In services.yaml
-        Under the services: section. 
+    For this to work, update services.yaml.
+    Under the services: section. 
 
-        App\Events\LogoutHandler:
-        tags:
-            - name: 'kernel.event_listener'
-              event: 'Symfony\Component\Security\Http\Event\LogoutEvent'
-              dispatcher: security.event_dispatcher.main
+    App\Events\LogoutHandler:
+    tags:
+        - name: 'kernel.event_listener'
+            event: 'Symfony\Component\Security\Http\Event\LogoutEvent'
+            dispatcher: security.event_dispatcher.main
 */
 
 class LogoutHandler implements EventSubscriberInterface
