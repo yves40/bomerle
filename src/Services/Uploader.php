@@ -42,6 +42,17 @@ class Uploader {
 //        $this->logger->error("Cannot remove previous file $directoryFolder.'/'.$previousfile");
     }
   }
+  // ---------------------------------------------------------------------------------------------
+  public function deleteFile(string $filepath) {
+    try {
+      if(file_exists($filepath)){
+          unlink($filepath);
+      }
+    }
+    catch(Exception $e) {
+//        $this->logger->error("Cannot remove previous file $directoryFolder.'/'.$previousfile");
+    }
+  }
 
   /*
           UPLOAD_ERR_OK  : 0. Aucune erreur, le téléchargement est correct.

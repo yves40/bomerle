@@ -119,10 +119,12 @@ class AdminControllerKnife extends AbstractController
     public function removePhoto(Request $request,
         int $knifeid,
         int $imageid,
+        Uploader $uploader,
         EntityManagerInterface $emgr,
         TranslatorInterface $translator)
     {
         $loc = $this->locale($request);
+        $imagepath = $this->getParameter('knifeimages_directory');  // Defined in services.yaml
         $image = $emgr->getRepository(Images::class)->findOneBy([ 'id' => $imageid]);
         if(empty($image)) {
             return $this->json([
@@ -131,6 +133,7 @@ class AdminControllerKnife extends AbstractController
         }
         else {
             $emgr->getRepository(Images::class)->remove($image);
+            $uploader->deleteFile($imagepath . '/'. $image->getFilename());
         }
         $knife = $emgr->getRepository(Knifes::class)->findOneBy([ 'id' => $knifeid]);
         $knife->removeImage($image);    // Shoot image from knife object

@@ -2,12 +2,14 @@
 //    properties.js
 //
 //    Dec 26 2022 Initial
+//    Jan 30 2023 Knife images location
 //----------------------------------------------------------------------------
 const $props = ( () => {
   const allprops = {
-    version : 'bomerle:1.03, Jan 28 2023 ',
+    version : 'bomerle:1.04, Jan 30 2023 ',
     copyright:  'Ratoon software Corporation Inc, Chabreloche France ',
     imagehandler: 'images.js Dec 27 2022, 1.23',
+    knivesimageslocation: '%kernel.project_dir%/public/images/knife'
   }
   let dynprops = {
     'imageloadingdelay' : 400,
@@ -17,6 +19,7 @@ const $props = ( () => {
     version: () => { return allprops.version; },
     copyright: () => { return allprops.copyright; },
     imagehandler: () => { return allprops.imagehandler; },
+    knivesimageslocation: () => { return allprops.knivesimageslocation; },
     imageloadingdelay: () => { return dynprops['imageloadingdelay']; },
     imageloadcount: () => { return dynprops['imageloadcount']; },
     set: (propertyname, value) => { dynprops[propertyname] = value; },
