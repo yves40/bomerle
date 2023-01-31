@@ -6,10 +6,10 @@
 //----------------------------------------------------------------------------
 const $props = ( () => {
   const allprops = {
-    version : 'bomerle:1.04, Jan 30 2023 ',
+    version : 'bomerle:1.05, Jan 31 2023 ',
     copyright:  'Ratoon software Corporation Inc, Chabreloche France ',
-    imagehandler: 'images.js Dec 27 2022, 1.23',
-    knifehandler: 'knife.js Jan 30 2023, 1.03',
+    imagehandler: 'images.js Dec 27 2022, 1.23 ',
+    knifehandler: 'knife.js Jan 30 2023, 1.03 ',
     knivesimageslocation: '%kernel.project_dir%/public/images/knife'
   }
   let dynprops = {

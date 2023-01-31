@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\ImagesRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -15,19 +16,6 @@ class Images
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    // #[Assert\File(
-    //     maxSize: '10M',
-    //     maxSizeMessage: 'Taille maximale autorisée 10Mo par image',
-    //     mimeTypes:[
-    //         'image/jpeg',
-    //         'image/jpg',
-    //         'image/png',
-    //         'image/gif'
-    //     ],
-    //     mimeTypesMessage: 'Merci de chosir un format de fichier valide (jpg, jpeg, gif, png)',
-    //     notFoundMessage: "Merci de sélectionner au moins une image",
-    //     uploadNoFileErrorMessage: "Merci de sélectionner au moins une image"
-    // )]
     private ?string $filename = null;
 
     #[ORM\Column]
@@ -36,6 +24,9 @@ class Images
     #[ORM\ManyToOne(inversedBy: 'images')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Knifes $knifes = null;
+
+    #[ORM\Column(type: Types::SMALLINT, nullable: true)]
+    private ?int $rank = null;
 
     public function getId(): ?int
     {
@@ -81,5 +72,17 @@ class Images
     public function __toString()
     {
         return $this->filename;
+    }
+
+    public function getRank(): ?int
+    {
+        return $this->rank;
+    }
+
+    public function setRank(?int $rank): self
+    {
+        $this->rank = $rank;
+
+        return $this;
     }
 }

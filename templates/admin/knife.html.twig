@@ -107,10 +107,10 @@
                         <div class="col-sm">
                             <img id="img-{{image.id}}" class="imagesmall" src="{{asset('images/knife/' ~ image.filename)}}" alt="Not loaded">
                             <p>{{image.filename}}</p>
-                            <p>[ {{loop.index}} / {{loop.length}} ]</p>
+                            <p>[ {{loop.index}} / {{loop.length}} / {{image.rank}}]</p>
                             {# The shift left icon #}
                             {% if loop.index != 1 %}
-                                <a id="left-{{image.id}}" 
+                                <a id="left-{{knife.id}}-{{image.id}}-{{image.rank}}" 
                                     href="#">
                                     <ion-icon name="arrow-back-circle-outline"></ion-icon></a>
                             {% endif %}
@@ -121,7 +121,7 @@
                                 <ion-icon name="trash-bin-outline"></ion-icon></a>
                             {# The shit right icon  #}
                             {% if not loop.last %}
-                                <a id="right-{{image.id}}" 
+                                <a id="right-{{knife.id}}-{{image.id}}-{{image.rank}}" 
                                     href="#">
                                     <ion-icon name="arrow-forward-circle-outline"></ion-icon></a>
                             {% endif %}                                

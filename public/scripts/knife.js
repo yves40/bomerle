@@ -25,12 +25,12 @@ $(document).ready(function () {
 })
 // ------------------------------------------------------------- handler 
 function actionRequest(element) {
+    console.log($(element).attr('id'));
     let command = $(element).attr('id').split('-')[0];
-    let id = $(element).attr('id').split('-')[1];
     switch(command) {
-        case 'left': console.log($props.knifehandler() + `Move image left with ID: ${{id}}`);
+        case 'left': moveLeft(element);
                 break;
-        case 'right': console.log($props.knifehandler() + `Move image right with ID: ${{id}}`);
+        case 'right': moveRight(element);
                 break;
         case 'del': console.log('Delete image ');
                 deleteImage(element);
@@ -67,3 +67,19 @@ function deleteImage(element){
     });
     
 }
+// ------------------------------------------------------------- Left handler 
+function moveRight(element) {
+    let knifeid = $(element).attr('id').split('-')[1];
+    let imageid = $(element).attr('id').split('-')[2];
+    let order = $(element).attr('id').split('-')[3];
+    //
+    console.log($props.knifehandler() + `RIGHT: ImageID: ${imageid} knifeID: ${knifeid} Order:${order}`);
+}
+// ------------------------------------------------------------- Right handler 
+function moveLeft(element) {
+    let knifeid = $(element).attr('id').split('-')[1];
+    let imageid = $(element).attr('id').split('-')[2];
+    let order = $(element).attr('id').split('-')[3];
+    console.log($props.knifehandler() + `LEFT: ImageID: ${imageid} knifeID: ${knifeid} Order:${order}`);
+}
+

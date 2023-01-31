@@ -75,7 +75,12 @@ class AdminControllerKnife extends AbstractController
         $loc = $this->locale($request);
         $repo = $entityManager->getRepository(Knifes::class);
         $knife = new Knifes();
-        if($id !== 0 ) $knife = $repo->find($id); // Update or new ? 
+        $rank = 0;          // Used to order images in the knife photo catalog
+        if($id !== 0 ) {    // Update or new ? 
+            $knife = $repo->find($id);
+            $img = $entityManager->getRepository(Images::class);
+            $rank = $img->getMaxRankForKnifeImage($knife);
+        }
         $form = $this->createForm(KnifesType::class, $knife);
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()){   // Form submitted ? 
@@ -86,6 +91,7 @@ class AdminControllerKnife extends AbstractController
                 $image = new Images();
                 $newFileName = $uploader->uploadFile($uploadedFiles[$i], $physicalPath);
                 $image->setFilename($newFileName);
+                $image->setRank(++$rank);
                 if($i == 0){
                     $image->setMainpicture(true);
                 }else{

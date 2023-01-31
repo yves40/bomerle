@@ -76,7 +76,7 @@ class Knifes
     private Collection $metals;
 
     #[ORM\OneToMany(mappedBy: 'knifes', targetEntity: Images::class, cascade:['persist', 'remove'])]
-    #[ORM\OrderBy(['mainpicture'  => 'ASC'])]
+    #[ORM\OrderBy(['rank'  => 'ASC'])]
     private Collection $images;
 
     public function __construct()
