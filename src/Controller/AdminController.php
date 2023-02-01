@@ -49,6 +49,16 @@ class AdminController extends AbstractController
         );               
     }
     // --------------------------------------------------------------------------
+    #[Route('/login', name: 'bootadmin.login')]
+    public function login(Request $request): Response
+    {
+        $loc = $this->locale($request); // Set the proper language for translations
+        return $this->render('admin/login.html.twig', [
+            "locale" =>  $this->localeSwitcher->getLocale(),
+            ]
+        );               
+    }
+    // --------------------------------------------------------------------------
     #[Route('/switch/{locale}', name: 'bootadmin.switch')]
     public function switch(Request $request, string $locale): Response
     {

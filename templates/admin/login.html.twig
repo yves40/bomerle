@@ -1,0 +1,28 @@
+{% extends 'bootstrap.html.twig' %}
+
+{% block title %}Log in!{% endblock %}
+
+{% block pagetitle %}
+    <h1 class="mt-4">{% trans %}user.login{% endtrans %}</h1>
+{% endblock %}
+
+{% block body %}
+    <form method="post">
+        <div class="row">
+            <div class="col">
+                <label class="mb-4" for="inputEmail">{% trans %}user.email{% endtrans %}</label>
+                <input type="email" name="email" id="inputEmail" class="form-control" autocomplete="email" autofocus>
+            </div>
+            <div class="col">
+                <label class="mb-4" for="inputPassword">{% trans %}user.password{% endtrans %}</label>
+                <input type="password" name="password" id="inputPassword" class="form-control">
+            </div>
+        </div>
+        <input type="hidden" name="_csrf_token"
+            value="{{ csrf_token('authenticate') }}"
+        >
+        <button class="btn btn-lg btn-primary mt-4" type="submit">
+            {% trans %}buttons.login{% endtrans %}
+        </button>
+    </form>
+{% endblock %}
