@@ -117,6 +117,29 @@ function getImageAtributes(element, selectedimageid, requestedaction) {
 function moveImage(imageslist) {
     console.log(`${JSON.stringify(imageslist)}`);
     $('.allimages').fadeOut(1000, () => {
+        imageslist.forEach((element, index) => {
+            if(element.action !== NOACTION) {   
+                let moveto = '';
+                let imagemoved = imageslist[index];
+                let imagetarget = {};
+                if(element.action === RIGHTACTION) {
+                    moveto = 'right';
+                    imagetarget = imageslist[index+1];
+                    imageslist[index] = imagetarget;
+                    imageslist[index+1] = imagemoved;
+                }
+                else {
+                    moveto = 'left';
+                    imagetarget = imageslist[index-1];
+                    imageslist[index] = imagetarget;
+                    imageslist[index-1] = imagemoved;
+                }
+                // console.log(`have to move image[${index}] ${element.file} to ${moveto}`);
+
+                $(`#img-${imagemoved.imageid}`).remove();
+                $(`#img-${imagetarget.imageid}`).remove();
+            }
+        });
         $('.allimages').fadeIn(1000, () => {
             console.log('Image moved');
         })
