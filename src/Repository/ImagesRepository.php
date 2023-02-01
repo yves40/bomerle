@@ -25,7 +25,6 @@ class ImagesRepository extends ServiceEntityRepository
     public function save(Images $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
-
         if ($flush) {
             $this->getEntityManager()->flush();
         }
@@ -39,6 +38,7 @@ class ImagesRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
+    // To sort knife images by rank
     public function getMaxRankForKnifeImage(Knifes $knife): int
     {
         $query = $this->createQueryBuilder('s');

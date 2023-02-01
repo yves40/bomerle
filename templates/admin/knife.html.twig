@@ -101,31 +101,37 @@
                 </div>
             </div>
             {% if knife.images is defined and knife.images is not null  %}
-                <div class="container text-center allimages">
-                    <div class="row">
+                <div class="container text-center">
+                    <div class="row allimages">
                         {% for image in knife.images %}
-                        <div class="col-sm">
-                            <img id="img-{{image.id}}" class="imagesmall" src="{{asset('images/knife/' ~ image.filename)}}" alt="Not loaded">
-                            <p>{{image.filename}}</p>
-                            <p>[ {{loop.index}} / {{loop.length}} / {{image.rank}}]</p>
-                            {# The shift left icon #}
-                            {% if loop.index != 1 %}
-                                <a id="left-{{knife.id}}-{{image.id}}-{{image.rank}}" 
-                                    href="#">
-                                    <ion-icon name="arrow-back-circle-outline"></ion-icon></a>
-                            {% endif %}
-                            {# The delete icon #}
-                            <a id="del-{{image.id}}" 
-                                href="{{ path('bootadmin.knives.removephoto',
-                                        { 'knifeid' : knife.id , 'imageid' : image.id }) }}">
-                                <ion-icon name="trash-bin-outline"></ion-icon></a>
-                            {# The shit right icon  #}
-                            {% if not loop.last %}
-                                <a id="right-{{knife.id}}-{{image.id}}-{{image.rank}}" 
-                                    href="#">
-                                    <ion-icon name="arrow-forward-circle-outline"></ion-icon></a>
-                            {% endif %}                                
-                        </div>
+                            <div class="col-sm imagelist">
+                                <img id="img-{{image.id}}" class="imagesmall"
+                                    data-imageid="{{image.id}}"
+                                    data-imagefile="{{image.filename}}"
+                                    data-imageknifeid="{{knife.id}}"
+                                    data-imagerank="{{image.rank}}"
+                                    src="{{asset('images/knife/' ~ image.filename)}}" alt="Not loaded"
+                                >
+                                <p>{{image.filename}}</p>
+                                <p>[ {{loop.index}} / {{loop.length}} / {{image.rank}}]</p>
+                                {# The shift left icon #}
+                                {% if loop.index != 1 %}
+                                    <a id="left-{{knife.id}}-{{image.id}}-{{image.rank}}" 
+                                        href="#">
+                                        <ion-icon name="arrow-back-circle-outline"></ion-icon></a>
+                                {% endif %}
+                                {# The delete icon #}
+                                <a id="del-{{image.id}}" 
+                                    href="{{ path('bootadmin.knives.removephoto',
+                                            { 'knifeid' : knife.id , 'imageid' : image.id }) }}">
+                                    <ion-icon name="trash-bin-outline"></ion-icon></a>
+                                {# The shit right icon  #}
+                                {% if not loop.last %}
+                                    <a id="right-{{knife.id}}-{{image.id}}-{{image.rank}}" 
+                                        href="#">
+                                        <ion-icon name="arrow-forward-circle-outline"></ion-icon></a>
+                                {% endif %}                                
+                            </div>
                         {% endfor %}
                     </div> 
                     <div id="feedback" class="row"><p></p></div>
@@ -134,7 +140,6 @@
         </div>
     </div>
     {{ form_end(form) }}
-
     {# Load manage script  #}
     <script src="{{ asset('node_modules/jquery/dist/jquery.min.js')}}"></script>
     <script src="{{ asset('scripts/knife.js')}}"></script>

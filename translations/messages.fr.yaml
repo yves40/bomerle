@@ -6,6 +6,9 @@ lang:
   menufr: Langue
   menuuk: Language
 user:
+  login: Connexion
+  email: Email
+  password: Mot de passe
   passreqtitle: Mot de passe oublié
   passrequest: Demander la réinitialisation
   passreset: Nouveau mot de passe
@@ -110,6 +113,7 @@ buttons:
   add: Ajouter
   modify: Modifier
   cancel: Annuler
+  login: Se connecter
 images:
   errortype: Merci de choisir un format de fichier valide (jpg, jpeg, gif, png)
   errorsize: Taille maximale autorisée dépassée

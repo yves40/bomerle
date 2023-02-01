@@ -6,7 +6,7 @@ $(document).ready(function () {
     // Check knife images
     // -------------------------
     let nbimages = 0;
-    $(".allimages img").each(function (indexInArray, element) {
+    $("img").each(function (indexInArray, element) {
         ++nbimages;
         let url = element.src;
         let filename = url.replace(/^.*[\\\/]/, '');
@@ -17,7 +17,7 @@ $(document).ready(function () {
     // -------------------------
     // Arm click handlers
     // -------------------------
-    $(".allimages a").click(function (event) {
+    $("a").click(function (event) {
         event.preventDefault();
         actionRequest(this);
     });
@@ -25,7 +25,6 @@ $(document).ready(function () {
 })
 // ------------------------------------------------------------- handler 
 function actionRequest(element) {
-    console.log($(element).attr('id'));
     let command = $(element).attr('id').split('-')[0];
     switch(command) {
         case 'left': moveLeft(element);
@@ -46,7 +45,7 @@ function deleteImage(element){
     let url = $(element).attr('href');
     console.log(`Remove image, url: ${url}`);
     $.ajax({
-        type: "method",
+        type: "POST",
         url: url,
         dataType: "json",
         async: false,
@@ -67,19 +66,59 @@ function deleteImage(element){
     });
     
 }
+// -------------------------------------------------------------
+// Handler section
+// -------------------------------------------------------------
+const NOACTION = 0;
+const RIGHTACTION = 1;
+const LEFTACTION = 2;
 // ------------------------------------------------------------- Left handler 
 function moveRight(element) {
-    let knifeid = $(element).attr('id').split('-')[1];
-    let imageid = $(element).attr('id').split('-')[2];
-    let order = $(element).attr('id').split('-')[3];
-    //
-    console.log($props.knifehandler() + `RIGHT: ImageID: ${imageid} knifeID: ${knifeid} Order:${order}`);
+    // Get the selected action element
+    let selectedimageid = $(element).attr('id').split('-')[2];
+    // Build the current image list
+    let imagespayload = [];
+    $(".container img").each(function (indexInArray, theimage) {
+        imagespayload.push(getImageAtributes(theimage, selectedimageid, RIGHTACTION));
+    });
+    moveImage(imagespayload);
+    console.log(`RIGHT : Transmit this list to the json service`);
 }
 // ------------------------------------------------------------- Right handler 
 function moveLeft(element) {
-    let knifeid = $(element).attr('id').split('-')[1];
-    let imageid = $(element).attr('id').split('-')[2];
-    let order = $(element).attr('id').split('-')[3];
-    console.log($props.knifehandler() + `LEFT: ImageID: ${imageid} knifeID: ${knifeid} Order:${order}`);
+    // Get the selected action element
+    let selectedimageid = $(element).attr('id').split('-')[2];
+    // Build the current image list
+    let imagespayload = [];
+    $(".container img").each(function (indexInArray, theimage) {
+        imagespayload.push(getImageAtributes(theimage, selectedimageid, LEFTACTION));
+    });
+    moveImage(imagespayload);
+    console.log(`LEFT : Transmit this list to the json service`);
 }
-
+// ------------------------------------------------------------- Image Data helper
+function getImageAtributes(element, selectedimageid, requestedaction) {
+    let imageid = $(element).attr('data-imageid');
+    let file = $(element).attr('data-imagefile');
+    let knifeid = $(element).attr('data-imageknifeid');
+    let rank = $(element).attr('data-imagerank');
+    let action = NOACTION
+    if(selectedimageid === imageid) {
+        action = requestedaction;
+    }
+    return { imageid: imageid, 
+            file: file,
+            knifeid: knifeid,
+            rank: rank, 
+            action: action
+         }
+}
+// ------------------------------------------------------------- Move the selected image
+function moveImage(imageslist) {
+    console.log(`${JSON.stringify(imageslist)}`);
+    $('.allimages').fadeOut(1000, () => {
+        $('.allimages').fadeIn(1000, () => {
+            console.log('Image moved');
+        })
+    })
+}
