@@ -126,8 +126,7 @@ class AdminControllerKnife extends AbstractController
         int $knifeid,
         int $imageid,
         Uploader $uploader,
-        EntityManagerInterface $emgr,
-        TranslatorInterface $translator)
+        EntityManagerInterface $emgr)
     {
         $loc = $this->locale($request);
         $imagepath = $this->getParameter('knifeimages_directory');  // Defined in services.yaml
@@ -149,6 +148,24 @@ class AdminControllerKnife extends AbstractController
             'message' => 'bootadmin.knives.removephoto called',
             'knifeid' => $knifeid,
             'imageid' => $imageid
+        ], 200);
+    }
+    // --------------------------------------------------------------------------
+    #[Route('/knives/swapphotos/{knifeid?0}/{imagelist?[]}', name: 'bootadmin.knives.swapphotos')]
+    public function swapPhotos(Request $request,
+        int $knifeid,
+        int $imagelist,
+        EntityManagerInterface $emgr)
+    {
+        $loc = $this->locale($request);
+        // $image = $emgr->getRepository(Images::class)->findOneBy([ 'id' => $imageid]);
+        $knife = $emgr->getRepository(Knifes::class)->findOneBy([ 'id' => $knifeid]);
+        $emgr->persist($knife);
+        $emgr->flush();
+        return $this->json([
+            'message' => 'bootadmin.knives.photoswap called',
+            'knifeid' => $knifeid,
+            'imagelist' => $imagelist
         ], 200);
     }
     // --------------------------------------------------------------------------

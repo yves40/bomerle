@@ -116,7 +116,7 @@
                                     {# The shift left icon #}
                                     {% if loop.index != 1 %}
                                         <a id="left-{{knife.id}}-{{image.id}}-{{image.rank}}" 
-                                            href="#">
+                                            href="{{ path('bootadmin.knives.swapphotos') }}">
                                             <ion-icon name="arrow-back-circle-outline"></ion-icon></a>
                                     {% endif %}
                                     {# The delete icon #}
@@ -127,7 +127,7 @@
                                     {# The shit right icon  #}
                                     {% if not loop.last %}
                                         <a id="right-{{knife.id}}-{{image.id}}-{{image.rank}}" 
-                                            href="#">
+                                            href="{{ path('bootadmin.knives.swapphotos') }}">
                                             <ion-icon name="arrow-forward-circle-outline"></ion-icon></a>
                                     {% endif %}                                
                                 </div>

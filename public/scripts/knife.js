@@ -64,8 +64,7 @@ function deleteImage(element){
             feedbackmessage.addClass('yerror').removeClass('ysuccess');
             console.log(xhr.responseJSON.detail);
         }
-    });
-    
+    });    
 }
 // -------------------------------------------------------------
 // Handler section
@@ -138,6 +137,32 @@ function moveImage(imageslist) {
                 return false;   // Job done get out
             }
             return true;
+        });
+        // ----------------------------- Server DB update
+        let payload = {
+            "imglist" : imageslist,
+            "knifeid" : 0
+        }
+        $.ajax({
+            type: "POST",
+            url: url,
+            dataType: "json",
+            data: payload,
+            async: false,
+            success: function (response) {
+                $(".allimages").fadeOut(500, () => {
+                    $(`#imgcard-${imgid}`).remove();
+                    $(".allimages").fadeIn(500, () => {
+                        feedbackmessage.text(`OK ${response.message} for knife ${response.knifeid} image : ${response.imageid}` );
+                        feedbackmessage.addClass('ysuccess').removeClass('yerror');    
+                    });
+                });
+            },
+            error: function (xhr) {
+                feedbackmessage.text(`KO ${xhr.responseJSON.detail}` );
+                feedbackmessage.addClass('yerror').removeClass('ysuccess');
+                console.log(xhr.responseJSON.detail);
+            }
         });
         // $('.allimages').load(location.href + " #refreshzone")
         $('.allimages').fadeIn(500, () => {
