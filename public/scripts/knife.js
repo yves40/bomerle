@@ -17,7 +17,7 @@ $(document).ready(function () {
     // -------------------------
     // Arm click handlers
     // -------------------------
-    $("a").click(function (event) {
+    $("#commandzone a").click(function (event) {
         event.preventDefault();
         actionRequest(this);
     });
@@ -43,6 +43,7 @@ function deleteImage(element){
     let feedbackmessage = $('#feedback');
     feedbackmessage.text('');
     let url = $(element).attr('href');
+    let imgid = $(element).attr('id').split('-')[1];
     console.log(`Remove image, url: ${url}`);
     $.ajax({
         type: "POST",
@@ -51,7 +52,7 @@ function deleteImage(element){
         async: false,
         success: function (response) {
             $(".allimages").fadeOut(500, () => {
-                $(element).parent().remove();
+                $(`#imgcard-${imgid}`).remove();
                 $(".allimages").fadeIn(500, () => {
                     feedbackmessage.text(`OK ${response.message} for knife ${response.knifeid} image : ${response.imageid}` );
                     feedbackmessage.addClass('ysuccess').removeClass('yerror');    
@@ -116,8 +117,8 @@ function getImageAtributes(element, selectedimageid, requestedaction) {
 // ------------------------------------------------------------- Move the selected image
 function moveImage(imageslist) {
     console.log(`${JSON.stringify(imageslist)}`);
-    $('.allimages').fadeOut(1000, () => {
-        imageslist.forEach((element, index) => {
+    $('.allimages').fadeOut(500, () => {
+        imageslist.every((element, index) => {
             if(element.action !== NOACTION) {   
                 let moveto = '';
                 let imagemoved = imageslist[index];
@@ -134,13 +135,12 @@ function moveImage(imageslist) {
                     imageslist[index] = imagetarget;
                     imageslist[index-1] = imagemoved;
                 }
-                // console.log(`have to move image[${index}] ${element.file} to ${moveto}`);
-
-                $(`#img-${imagemoved.imageid}`).remove();
-                $(`#img-${imagetarget.imageid}`).remove();
+                return false;   // Job done get out
             }
+            return true;
         });
-        $('.allimages').fadeIn(1000, () => {
+        // $('.allimages').load(location.href + " #refreshzone")
+        $('.allimages').fadeIn(500, () => {
             console.log('Image moved');
         })
     })
