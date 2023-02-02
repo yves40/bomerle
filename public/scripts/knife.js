@@ -38,6 +38,12 @@ function actionRequest(element) {
                 break;
     }
 }
+// -------------------------------------------------------------
+// Handlers section
+// -------------------------------------------------------------
+const NOACTION = 0;
+const RIGHTACTION = 1;
+const LEFTACTION = 2;
 // ------------------------------------------------------------- Delete handler 
 function deleteImage(element){
     let feedbackmessage = $('#feedback');
@@ -66,14 +72,9 @@ function deleteImage(element){
         }
     });    
 }
-// -------------------------------------------------------------
-// Handler section
-// -------------------------------------------------------------
-const NOACTION = 0;
-const RIGHTACTION = 1;
-const LEFTACTION = 2;
 // ------------------------------------------------------------- Left handler 
 function moveRight(element) {
+    let url = $(element).attr('href');
     // Get the selected action element
     let selectedimageid = $(element).attr('id').split('-')[2];
     // Build the current image list
@@ -81,11 +82,12 @@ function moveRight(element) {
     $(".container img").each(function (indexInArray, theimage) {
         imagespayload.push(getImageAtributes(theimage, selectedimageid, RIGHTACTION));
     });
-    moveImage(imagespayload);
+    moveImage(imagespayload, url);
     console.log(`RIGHT : Transmit this list to the json service`);
 }
 // ------------------------------------------------------------- Right handler 
 function moveLeft(element) {
+    let url = $(element).attr('href');
     // Get the selected action element
     let selectedimageid = $(element).attr('id').split('-')[2];
     // Build the current image list
@@ -93,10 +95,15 @@ function moveLeft(element) {
     $(".container img").each(function (indexInArray, theimage) {
         imagespayload.push(getImageAtributes(theimage, selectedimageid, LEFTACTION));
     });
-    moveImage(imagespayload);
+    moveImage(imagespayload, url);
     console.log(`LEFT : Transmit this list to the json service`);
 }
-// ------------------------------------------------------------- Image Data helper
+// -------------------------------------------------------------
+// Helpers section
+// -------------------------------------------------------------
+
+
+// ------------------------------------------------------------- Retrieve image parameters
 function getImageAtributes(element, selectedimageid, requestedaction) {
     let imageid = $(element).attr('data-imageid');
     let file = $(element).attr('data-imagefile');
@@ -114,8 +121,8 @@ function getImageAtributes(element, selectedimageid, requestedaction) {
          }
 }
 // ------------------------------------------------------------- Move the selected image
-function moveImage(imageslist) {
-    console.log(`${JSON.stringify(imageslist)}`);
+function moveImage(imageslist, url) {
+    let feedbackmessage = $('#feedback');
     $('.allimages').fadeOut(500, () => {
         imageslist.every((element, index) => {
             if(element.action !== NOACTION) {   
@@ -140,8 +147,7 @@ function moveImage(imageslist) {
         });
         // ----------------------------- Server DB update
         let payload = {
-            "imglist" : imageslist,
-            "knifeid" : 0
+            "imagelist" : imageslist
         }
         $.ajax({
             type: "POST",
@@ -151,22 +157,24 @@ function moveImage(imageslist) {
             async: false,
             success: function (response) {
                 $(".allimages").fadeOut(500, () => {
-                    $(`#imgcard-${imgid}`).remove();
+                    // $(`#imgcard-${imgid}`).remove();
                     $(".allimages").fadeIn(500, () => {
-                        feedbackmessage.text(`OK ${response.message} for knife ${response.knifeid} image : ${response.imageid}` );
+                        feedbackmessage.text(`OK ` );
                         feedbackmessage.addClass('ysuccess').removeClass('yerror');    
                     });
                 });
             },
             error: function (xhr) {
-                feedbackmessage.text(`KO ${xhr.responseJSON.detail}` );
-                feedbackmessage.addClass('yerror').removeClass('ysuccess');
-                console.log(xhr.responseJSON.detail);
+                $(".allimages").fadeOut(500, () => { 
+                    feedbackmessage.text(`KO ${xhr.responseJSON.detail}` );
+                    feedbackmessage.addClass('yerror').removeClass('ysuccess');
+                    console.log(xhr.responseJSON.detail);
+                });
             }
         });
         // $('.allimages').load(location.href + " #refreshzone")
-        $('.allimages').fadeIn(500, () => {
-            console.log('Image moved');
-        })
+        // $('.allimages').fadeIn(500, () => {
+        //     console.log('Image moved');
+        // })
     })
 }

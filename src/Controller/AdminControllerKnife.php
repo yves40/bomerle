@@ -2,13 +2,14 @@
 
 namespace App\Controller;
 
-use Exception;
+use Error;
 
+use Exception;
 use App\Entity\Images;
 use App\Entity\Knifes;
 use App\Form\KnifesType;
-use App\Services\Uploader;
 
+use App\Services\Uploader;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -151,22 +152,35 @@ class AdminControllerKnife extends AbstractController
         ], 200);
     }
     // --------------------------------------------------------------------------
-    #[Route('/knives/swapphotos/{knifeid?0}/{imagelist?[]}', name: 'bootadmin.knives.swapphotos')]
+    #[Route('/knives/swapphotos/{imagelist?[]}', name: 'bootadmin.knives.swapphotos')]
     public function swapPhotos(Request $request,
-        int $knifeid,
-        int $imagelist,
+        Array $imagelist,
         EntityManagerInterface $emgr)
     {
+        dd($imagelist);
         $loc = $this->locale($request);
-        // $image = $emgr->getRepository(Images::class)->findOneBy([ 'id' => $imageid]);
-        $knife = $emgr->getRepository(Knifes::class)->findOneBy([ 'id' => $knifeid]);
-        $emgr->persist($knife);
-        $emgr->flush();
-        return $this->json([
-            'message' => 'bootadmin.knives.photoswap called',
-            'knifeid' => $knifeid,
-            'imagelist' => $imagelist
-        ], 200);
+        // $knife = $emgr->getRepository(Knifes::class)->findOneBy([ 'id' => $knifeid]);
+        $repo = $emgr->getRepository(Images::class);
+        $rankindex = 0;
+        try {
+            foreach($imagelist as $key => $value) {
+                $img = $repo->findOneBy([ 'id' => $value->imageid]);
+                $img->setRank(++$rankindex);
+                var_dump($img);
+                $emgr->persist($repo);
+            }
+            $emgr->flush();
+            return $this->json([
+                'message' => 'bootadmin.knives.photoswap OK',
+                'imagelist' => $imagelist
+            ], 200);
+    
+        }
+        catch(Error $e) {
+            return $this->json([
+                'message' => "bootadmin.knives.photoswap ERROR: " + $e->getMessage(),
+            ], 500);
+        }
     }
     // --------------------------------------------------------------------------
     // P R I V A T E     S E R V I C E S 
