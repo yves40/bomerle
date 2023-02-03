@@ -152,34 +152,40 @@ class AdminControllerKnife extends AbstractController
         ], 200);
     }
     // --------------------------------------------------------------------------
-    #[Route('/knives/swapphotos/{imagelist?[]}', name: 'bootadmin.knives.swapphotos')]
+    #[Route('/knives/swapphotos', name: 'bootadmin.knives.swapphotos')]
     public function swapPhotos(Request $request,
-        Array $imagelist,
         EntityManagerInterface $emgr)
     {
-        dd($imagelist);
-        $loc = $this->locale($request);
-        // $knife = $emgr->getRepository(Knifes::class)->findOneBy([ 'id' => $knifeid]);
-        $repo = $emgr->getRepository(Images::class);
-        $rankindex = 0;
+        $trace = [];
         try {
+            $data = file_get_contents("php://input");
+            $payload = json_decode($data, true);
+            $imagelist = $payload['imagedata'];
+
+            $loc = $this->locale($request);
+            $repo = $emgr->getRepository(Images::class);
+            $rankindex = 0;
+
             foreach($imagelist as $key => $value) {
-                $img = $repo->findOneBy([ 'id' => $value->imageid]);
+                array_push($trace, $value['imageid']);
+                $img = $repo->findOneBy([ 'id' => $value['imageid']]);
                 $img->setRank(++$rankindex);
-                var_dump($img);
-                $emgr->persist($repo);
+                $emgr->persist($img);
             }
             $emgr->flush();
             return $this->json([
                 'message' => 'bootadmin.knives.photoswap OK',
+                'trace' => $trace,
                 'imagelist' => $imagelist
-            ], 200);
-    
+            ], 200);    
         }
-        catch(Error $e) {
+        catch(Exception $e) {
             return $this->json([
-                'message' => "bootadmin.knives.photoswap ERROR: " + $e->getMessage(),
-            ], 500);
+                'message' => $e->getMessage(),
+                'data' => $data, 
+                'payload' => $payload,
+                'imagelist' => $imagelist
+            ], 400);
         }
     }
     // --------------------------------------------------------------------------

@@ -12,7 +12,6 @@ $(document).ready(function () {
         let filename = url.replace(/^.*[\\\/]/, '');
         let elemwidth = element.width;
         let elemheight = element.height;
-        console.log(`Image file name : ${filename}`);
     });
     // -------------------------
     // Arm click handlers
@@ -21,7 +20,6 @@ $(document).ready(function () {
         event.preventDefault();
         actionRequest(this);
     });
-    console.log(`Knife initially uses ${nbimages} images`);
 })
 // ------------------------------------------------------------- handler 
 function actionRequest(element) {
@@ -31,8 +29,7 @@ function actionRequest(element) {
                 break;
         case 'right': moveRight(element);
                 break;
-        case 'del': console.log('Delete image ');
-                deleteImage(element);
+        case 'del': deleteImage(element);
                 break;
         default: console.log('Unknown command'); 
                 break;
@@ -83,7 +80,6 @@ function moveRight(element) {
         imagespayload.push(getImageAtributes(theimage, selectedimageid, RIGHTACTION));
     });
     moveImage(imagespayload, url);
-    console.log(`RIGHT : Transmit this list to the json service`);
 }
 // ------------------------------------------------------------- Right handler 
 function moveLeft(element) {
@@ -96,7 +92,6 @@ function moveLeft(element) {
         imagespayload.push(getImageAtributes(theimage, selectedimageid, LEFTACTION));
     });
     moveImage(imagespayload, url);
-    console.log(`LEFT : Transmit this list to the json service`);
 }
 // -------------------------------------------------------------
 // Helpers section
@@ -147,17 +142,18 @@ function moveImage(imageslist, url) {
         });
         // ----------------------------- Server DB update
         let payload = {
-            "imagelist" : imageslist
+            "imagedata" :  imageslist
         }
         $.ajax({
             type: "POST",
             url: url,
             dataType: "json",
-            data: payload,
+            data: JSON.stringify(payload),
+            contentType: 'application/json',
             async: false,
             success: function (response) {
+                reloadImages(imageslist);
                 $(".allimages").fadeOut(500, () => {
-                    // $(`#imgcard-${imgid}`).remove();
                     $(".allimages").fadeIn(500, () => {
                         feedbackmessage.text(`OK ` );
                         feedbackmessage.addClass('ysuccess').removeClass('yerror');    
@@ -166,15 +162,42 @@ function moveImage(imageslist, url) {
             },
             error: function (xhr) {
                 $(".allimages").fadeOut(500, () => { 
+                    console.log(xhr.responseJSON.detail);
                     feedbackmessage.text(`KO ${xhr.responseJSON.detail}` );
                     feedbackmessage.addClass('yerror').removeClass('ysuccess');
-                    console.log(xhr.responseJSON.detail);
                 });
             }
         });
-        // $('.allimages').load(location.href + " #refreshzone")
-        // $('.allimages').fadeIn(500, () => {
-        //     console.log('Image moved');
-        // })
     })
+}
+// ------------------------------------------------------------- Move the selected image
+function reloadImages(imageslist) {
+    console.log(`Reloading this image list ${JSON.stringify(imageslist)}`);
+    $("#refreshzone .row .col-sm").each(function (indexInArray, element) {
+        let elementid = $(element).attr('id')
+        console.log(`Removing image card ${elementid}`);
+        $(element).remove();
+    });
+    imageslist.forEach((imgcard, index) => {
+        // Add the card container
+        let newdiv = document.createElement("div");
+        let command = document.createElement("div");
+        let img = document.createElement("img");
+        newdiv.id = "imgcard-" + imgcard.imageid;
+        newdiv.className = "col-sm";
+        img.src = '/images/knife/' + imgcard.file;
+        img.className = "imagesmall";
+        command.id = "commandzone";
+        command.className = "mt-4";
+        newdiv.appendChild(img);
+        newdiv.appendChild(command);
+        if(index === 0) {
+            console.log('First ****************')
+        }
+        if(index === imageslist.length - 1) {
+            console.log('Last ****************')
+        }
+        $("#refreshzone .row").append(newdiv);
+        console.log(`Added image card ${imgcard.imageid}`);
+    });
 }

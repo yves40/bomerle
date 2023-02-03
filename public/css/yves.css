@@ -11,8 +11,10 @@ button.active.ylink {
   font-size: 1.4rem; }
 
 .imagesmall {
-  max-width: 6rem;
-  max-height: 6rem;
+  width: 10rem;
+  height: 10rem;
+  max-width: 10rem;
+  max-height: 10rem;
   border-radius: 50%; }
 
 .textsmall {
