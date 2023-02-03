@@ -127,12 +127,16 @@ function moveImage(imageslist, url) {
                 if(element.action === RIGHTACTION) {
                     moveto = 'right';
                     imagetarget = imageslist[index+1];
+                    imagetarget.rank = imagemoved.rank;
+                    imagemoved.rank++;
                     imageslist[index] = imagetarget;
                     imageslist[index+1] = imagemoved;
                 }
                 else {
                     moveto = 'left';
                     imagetarget = imageslist[index-1];
+                    imagetarget.rank = imagemoved.rank;
+                    imagemoved.rank--;
                     imageslist[index] = imagetarget;
                     imageslist[index-1] = imagemoved;
                 }
@@ -178,24 +182,44 @@ function reloadImages(imageslist) {
         console.log(`Removing image card ${elementid}`);
         $(element).remove();
     });
+    // Prepare command icons
+    let lefticon = document.createElement("a");
+    let deletebutton = document.createElement("a");
+    let deleteicon = document.createElement("ion-icon");
+    deleteicon.setAttribute('name', 'trash-bin-outline')
+    let righticon = document.createElement("a");
     imageslist.forEach((imgcard, index) => {
         // Add the card container
         let newdiv = document.createElement("div");
         let command = document.createElement("div");
         let img = document.createElement("img");
+        // Outer div
         newdiv.id = "imgcard-" + imgcard.imageid;
         newdiv.className = "col-sm";
+        // Insert image
         img.src = '/images/knife/' + imgcard.file;
         img.className = "imagesmall";
+        img.setAttribute('data-imageid', imgcard.imageid);
+        img.setAttribute('data-imagefile', imgcard.file);
+        img.setAttribute('data-imageknifeid', imgcard.knifeid);
+        img.setAttribute('data-imagerank', imgcard.rank);
+        newdiv.appendChild(img);
+        // Build the command zone icons
+        deletebutton.setAttribute('id', "del-" + imgcard.imageid);
+        deletebutton.setAttribute('href', '/bootadmin/knives/removephoto/' 
+                                                + imgcard.knifeid + '/' 
+                                                + imgcard.imageid);
+        deletebutton.appendChild(deleteicon);
         command.id = "commandzone";
         command.className = "mt-4";
-        newdiv.appendChild(img);
+        command.appendChild(deletebutton);
+        // Insert the whole card
         newdiv.appendChild(command);
-        if(index === 0) {
-            console.log('First ****************')
+        if(index !== 0) {   // Left arrow
+
         }
-        if(index === imageslist.length - 1) {
-            console.log('Last ****************')
+        if(index !== imageslist.length - 1) { // Right arrow
+
         }
         $("#refreshzone .row").append(newdiv);
         console.log(`Added image card ${imgcard.imageid}`);
