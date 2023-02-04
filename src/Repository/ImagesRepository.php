@@ -44,7 +44,9 @@ class ImagesRepository extends ServiceEntityRepository
         $query = $this->createQueryBuilder('s');
         $query->select('MAX(s.rank)');
         $query->where('s.knifes = :val')->setParameter('val', $knife);
-        return $query->getQuery()->getSingleScalarResult();
+        $maxrank = $query->getQuery()->getSingleScalarResult();
+        if ($maxrank === null) $maxrank = 0;
+        return $maxrank;
     }
 
 //    /**
