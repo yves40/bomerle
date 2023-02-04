@@ -8,18 +8,11 @@ $(document).ready(function () {
     let nbimages = 0;
     $("img").each(function (indexInArray, element) {
         ++nbimages;
-        let url = element.src;
-        let filename = url.replace(/^.*[\\\/]/, '');
-        let elemwidth = element.width;
-        let elemheight = element.height;
     });
     // -------------------------
     // Arm click handlers
     // -------------------------
-    $("#commandzone a").click(function (event) {
-        event.preventDefault();
-        actionRequest(this);
-    });
+    armIcons();
 })
 // ------------------------------------------------------------- handler 
 function actionRequest(element) {
@@ -119,13 +112,12 @@ function getImageAtributes(element, selectedimageid, requestedaction) {
 function moveImage(imageslist, url) {
     let feedbackmessage = $('#feedback');
     $('.allimages').fadeOut(500, () => {
-        imageslist.every((element, index) => {
+        for(index = 0; index < imageslist.length; ++index) {
+            let element = imageslist[index];
             if(element.action !== NOACTION) {   
-                let moveto = '';
                 let imagemoved = imageslist[index];
                 let imagetarget = {};
                 if(element.action === RIGHTACTION) {
-                    moveto = 'right';
                     imagetarget = imageslist[index+1];
                     imagetarget.rank = imagemoved.rank;
                     imagemoved.rank++;
@@ -133,17 +125,15 @@ function moveImage(imageslist, url) {
                     imageslist[index+1] = imagemoved;
                 }
                 else {
-                    moveto = 'left';
                     imagetarget = imageslist[index-1];
                     imagetarget.rank = imagemoved.rank;
                     imagemoved.rank--;
                     imageslist[index] = imagetarget;
                     imageslist[index-1] = imagemoved;
                 }
-                return false;   // Job done get out
+                break;
             }
-            return true;
-        });
+        }
         // ----------------------------- Server DB update
         let payload = {
             "imagedata" :  imageslist
@@ -157,46 +147,55 @@ function moveImage(imageslist, url) {
             async: false,
             success: function (response) {
                 reloadImages(imageslist);
-                $(".allimages").fadeOut(500, () => {
-                    $(".allimages").fadeIn(500, () => {
-                        feedbackmessage.text(`OK ` );
-                        feedbackmessage.addClass('ysuccess').removeClass('yerror');    
-                    });
+                $(".allimages").fadeIn(500, () => {
+                    feedbackmessage.text(`OK ` );
+                    feedbackmessage.addClass('ysuccess').removeClass('yerror');    
                 });
             },
             error: function (xhr) {
-                $(".allimages").fadeOut(500, () => { 
+                $(".allimages").fadeIn(500, () => {
                     console.log(xhr.responseJSON.detail);
                     feedbackmessage.text(`KO ${xhr.responseJSON.detail}` );
                     feedbackmessage.addClass('yerror').removeClass('ysuccess');
                 });
             }
         });
-    })
+    });
 }
 // ------------------------------------------------------------- Move the selected image
 function reloadImages(imageslist) {
-    console.log(`Reloading this image list ${JSON.stringify(imageslist)}`);
+    console.log(`********************* Reloading ${imageslist.length} image(s)`);
     $("#refreshzone .row .col-sm").each(function (indexInArray, element) {
         let elementid = $(element).attr('id')
         console.log(`Removing image card ${elementid}`);
         $(element).remove();
     });
     // Prepare command icons
-    let lefticon = document.createElement("a");
+    let lefticonbutton = document.createElement("a");
+    let lefticon = document.createElement("ion-icon");
+    lefticon.setAttribute('name', 'arrow-back-circle-outline');
+
     let deletebutton = document.createElement("a");
     let deleteicon = document.createElement("ion-icon");
     deleteicon.setAttribute('name', 'trash-bin-outline')
-    let righticon = document.createElement("a");
+
+    let righticonbutton = document.createElement("a");
+    let righticon = document.createElement("ion-icon");
+    righticon.setAttribute('name', 'arrow-forward-circle-outline');
+
+    // Images load
     imageslist.forEach((imgcard, index) => {
-        // Add the card container
+        // Build the card container
         let newdiv = document.createElement("div");
-        let command = document.createElement("div");
-        let img = document.createElement("img");
         // Outer div
         newdiv.id = "imgcard-" + imgcard.imageid;
         newdiv.className = "col-sm";
-        // Insert image
+        // The command icon zone
+        let command = document.createElement("div");
+        command.id = "commandzone";
+        command.className = "mt-4";
+        // The image
+        let img = document.createElement("img");
         img.src = '/images/knife/' + imgcard.file;
         img.className = "imagesmall";
         img.setAttribute('data-imageid', imgcard.imageid);
@@ -204,24 +203,44 @@ function reloadImages(imageslist) {
         img.setAttribute('data-imageknifeid', imgcard.knifeid);
         img.setAttribute('data-imagerank', imgcard.rank);
         newdiv.appendChild(img);
-        // Build the command zone icons
+        // Command zone icons
+        // Left icon
+        if(index !== 0) {
+            lefticonbutton.setAttribute('id', "left-" + imgcard.knifeid + "-"
+                                                 + imgcard.imageid + "-"
+                                                 + imgcard.rank);
+            lefticonbutton.setAttribute('href', '/bootadmin/knives/swapphotos');
+            lefticonbutton.appendChild(lefticon);
+            command.appendChild(lefticonbutton);
+        }
+        // Delete icon
         deletebutton.setAttribute('id', "del-" + imgcard.imageid);
         deletebutton.setAttribute('href', '/bootadmin/knives/removephoto/' 
                                                 + imgcard.knifeid + '/' 
                                                 + imgcard.imageid);
         deletebutton.appendChild(deleteicon);
-        command.id = "commandzone";
-        command.className = "mt-4";
         command.appendChild(deletebutton);
-        // Insert the whole card
+        // Right icon
+        if(index !== imageslist.length - 1) { // Right icon
+            righticonbutton.setAttribute('id', "right-" + imgcard.knifeid + "-"
+                                                 + imgcard.imageid + "-"
+                                                 + imgcard.rank);
+            righticonbutton.setAttribute('href', '/bootadmin/knives/swapphotos');
+            righticonbutton.appendChild(righticon);
+            command.appendChild(righticonbutton);
+        }
+        // Insert the icons
         newdiv.appendChild(command);
-        if(index !== 0) {   // Left arrow
-
-        }
-        if(index !== imageslist.length - 1) { // Right arrow
-
-        }
+        // Insert the whole card
         $("#refreshzone .row").append(newdiv);
         console.log(`Added image card ${imgcard.imageid}`);
+    });
+    armIcons();
+}
+// ------------------------------------------------------------- Set up icons handlers
+function armIcons() {
+    $("#commandzone a").click(function (event) {
+        event.preventDefault();
+        actionRequest(this);
     });
 }

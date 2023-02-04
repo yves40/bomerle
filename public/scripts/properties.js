@@ -3,13 +3,14 @@
 //
 //    Dec 26 2022 Initial
 //    Jan 30 2023 Knife images location
+//    Feb 04 2023 WIP on knife images administration
 //----------------------------------------------------------------------------
 const $props = ( () => {
   const allprops = {
-    version : 'bomerle:1.05, Jan 31 2023 ',
+    version : 'bomerle:1.05, Feb 04 2023 ',
     copyright:  'Ratoon software Corporation Inc, Chabreloche France ',
     imagehandler: 'images.js Dec 27 2022, 1.23 ',
-    knifehandler: 'knife.js Jan 30 2023, 1.03 ',
+    knifehandler: 'knife.js Feb 04 2023, 1.04 ',
     knivesimageslocation: '%kernel.project_dir%/public/images/knife'
   }
   let dynprops = {
