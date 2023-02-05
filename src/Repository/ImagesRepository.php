@@ -38,7 +38,7 @@ class ImagesRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
-    // To sort knife images by rank
+    // To get the knife image upper rank when adding images
     public function getMaxRankForKnifeImage(Knifes $knife): int
     {
         $query = $this->createQueryBuilder('s');
