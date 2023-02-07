@@ -157,6 +157,7 @@ function moveImage(imageslist, url) {
 // ------------------------------------------------------------- Move the selected image
 function reloadImages(imageslist) {
     console.log(`********************* Reloading ${imageslist.length} image(s)`);
+    $("#refreshzone").hide();
     // Clear the command zone
     $("#refreshzone .row").remove();
     let divrow = document.createElement('div');
@@ -229,6 +230,7 @@ function reloadImages(imageslist) {
         $("#refreshzone .row").append(newdiv);
         console.log(`Added image card ${imgcard.imageid}`);
     });
+    $("#refreshzone").slideDown(500);
     armIcons();
 }
 // ------------------------------------------------------------- Set up icons handlers
