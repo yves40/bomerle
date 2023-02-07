@@ -88,17 +88,15 @@ function moveLeft(element) {
 }
 // -------------------------------------------------------------
 // Helpers section
-// -------------------------------------------------------------
-
-
-// ------------------------------------------------------------- Retrieve image parameters
+// ------------------------------------------------------------- 
+// Retrieve image parameters and flag the moved image with the requested action
 function getImageAtributes(element, selectedimageid, requestedaction) {
     let imageid = $(element).attr('data-imageid');
     let file = $(element).attr('data-imagefile');
     let knifeid = $(element).attr('data-imageknifeid');
     let rank = $(element).attr('data-imagerank');
     let action = NOACTION
-    if(selectedimageid === imageid) {
+    if(selectedimageid === imageid) {   // Image to be moved ? 
         action = requestedaction;
     }
     return { imageid: imageid, 
