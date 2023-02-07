@@ -7,7 +7,7 @@
 //----------------------------------------------------------------------------
 const $props = ( () => {
   const allprops = {
-    version : 'bomerle:1.05, Feb 04 2023 ',
+    version : 'bomerle:1.06, Feb 07 2023 ',
     copyright:  'Ratoon software Corporation Inc, Chabreloche France ',
     imagehandler: 'images.js Dec 27 2022, 1.23 ',
     knifehandler: 'knife.js Feb 04 2023, 1.04 ',
@@ -36,5 +36,4 @@ const $props = ( () => {
      }
   }
 })();
-
 //  localStorage.setItem('lastlogin', 'yves773340');
