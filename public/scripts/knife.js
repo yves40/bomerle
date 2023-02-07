@@ -111,80 +111,76 @@ function getImageAtributes(element, selectedimageid, requestedaction) {
 // ------------------------------------------------------------- Move the selected image
 function moveImage(imageslist, url) {
     let feedbackmessage = $('#feedback');
-    $('.allimages').fadeOut(500, () => {
-        for(index = 0; index < imageslist.length; ++index) {
-            let element = imageslist[index];
-            if(element.action !== NOACTION) {   
-                let imagemoved = imageslist[index];
-                let imagetarget = {};
-                if(element.action === RIGHTACTION) {
-                    imagetarget = imageslist[index+1];
-                    imagetarget.rank = imagemoved.rank;
-                    imagemoved.rank++;
-                    imageslist[index] = imagetarget;
-                    imageslist[index+1] = imagemoved;
-                }
-                else {
-                    imagetarget = imageslist[index-1];
-                    imagetarget.rank = imagemoved.rank;
-                    imagemoved.rank--;
-                    imageslist[index] = imagetarget;
-                    imageslist[index-1] = imagemoved;
-                }
-                break;
+    for(index = 0; index < imageslist.length; ++index) {
+        let element = imageslist[index];
+        if(element.action !== NOACTION) {   
+            let imagemoved = imageslist[index];
+            let imagetarget = {};
+            if(element.action === RIGHTACTION) {
+                imagetarget = imageslist[index+1];
+                imagetarget.rank = imagemoved.rank;
+                imagemoved.rank++;
+                imageslist[index] = imagetarget;
+                imageslist[index+1] = imagemoved;
             }
-        }
-        // ----------------------------- Server DB update
-        let payload = {
-            "imagedata" :  imageslist
-        }
-        $.ajax({
-            type: "POST",
-            url: url,
-            dataType: "json",
-            data: JSON.stringify(payload),
-            contentType: 'application/json',
-            async: false,
-            success: function (response) {
-                reloadImages(imageslist);
-                $(".allimages").fadeIn(500, () => {
-                    feedbackmessage.text(`OK ` );
-                    feedbackmessage.addClass('ysuccess').removeClass('yerror');    
-                });
-            },
-            error: function (xhr) {
-                $(".allimages").fadeIn(500, () => {
-                    console.log(xhr.responseJSON.detail);
-                    feedbackmessage.text(`KO ${xhr.responseJSON.detail}` );
-                    feedbackmessage.addClass('yerror').removeClass('ysuccess');
-                });
+            else {
+                imagetarget = imageslist[index-1];
+                imagetarget.rank = imagemoved.rank;
+                imagemoved.rank--;
+                imageslist[index] = imagetarget;
+                imageslist[index-1] = imagemoved;
             }
-        });
+            break;
+        }
+    }
+    // ----------------------------- Server DB update
+    reloadImages(imageslist);
+    let payload = {
+        "imagedata" :  imageslist
+    }
+    $.ajax({
+        type: "POST",
+        url: url,
+        dataType: "json",
+        data: JSON.stringify(payload),
+        contentType: 'application/json',
+        async: true,
+        success: function (response) {
+            feedbackmessage.text(`OK ` );
+            feedbackmessage.addClass('ysuccess').removeClass('yerror');    
+        },
+        error: function (xhr) {
+            console.log(xhr.responseJSON.detail);
+            feedbackmessage.text(`KO ${xhr.responseJSON.detail}` );
+            feedbackmessage.addClass('yerror').removeClass('ysuccess');
+        }
     });
 }
 // ------------------------------------------------------------- Move the selected image
 function reloadImages(imageslist) {
     console.log(`********************* Reloading ${imageslist.length} image(s)`);
-    $("#refreshzone .row .col-sm").each(function (indexInArray, element) {
-        let elementid = $(element).attr('id')
-        console.log(`Removing image card ${elementid}`);
-        $(element).remove();
-    });
-    // Prepare command icons
-    let lefticonbutton = document.createElement("a");
-    let lefticon = document.createElement("ion-icon");
-    lefticon.setAttribute('name', 'arrow-back-circle-outline');
-
-    let deletebutton = document.createElement("a");
-    let deleteicon = document.createElement("ion-icon");
-    deleteicon.setAttribute('name', 'trash-bin-outline')
-
-    let righticonbutton = document.createElement("a");
-    let righticon = document.createElement("ion-icon");
-    righticon.setAttribute('name', 'arrow-forward-circle-outline');
+    // Clear the command zone
+    $("#refreshzone .row").remove();
+    let divrow = document.createElement('div');
+    divrow.className = 'row';
+    $("#refreshzone").append(divrow);
 
     // Images load
     imageslist.forEach((imgcard, index) => {
+
+        // Prepare command icons
+        let lefticonbutton = document.createElement("a");
+        let lefticon = document.createElement("ion-icon");
+        lefticon.setAttribute('name', 'arrow-back-circle-outline');
+
+        let deletebutton = document.createElement("a");
+        let deleteicon = document.createElement("ion-icon");
+        deleteicon.setAttribute('name', 'trash-bin-outline')
+
+        let righticonbutton = document.createElement("a");
+        let righticon = document.createElement("ion-icon");
+        righticon.setAttribute('name', 'arrow-forward-circle-outline');
+        
         // Build the card container
         let newdiv = document.createElement("div");
         // Outer div
