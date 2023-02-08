@@ -231,6 +231,7 @@ function swapImages(movingimageid, relatedimageid) {
     let atr2 = $(relatedleft).attr('id');
     // Moving or Related image was topleft
     // The have to rebuild the icon ID
+
     if(atr1 === undefined) {
         atr1 = `left-${imgknifeid1}-${imgid1}-${imgrank1}`
     }
@@ -249,7 +250,7 @@ function swapImages(movingimageid, relatedimageid) {
     $(relateddel).attr('id', atr1);
     atr1 = $(movingright).attr('id');     // RIGHT (Change ID)
     atr2 = $(relatedright).attr('id');
-    // Moving or Related image was topleft
+    // Moving or Related image was topright
     // The have to rebuild the icon ID
     if(atr1 === undefined) {
         atr1 = `right-${imgknifeid1}-${imgid1}-${imgrank1}`
