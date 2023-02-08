@@ -20,13 +20,14 @@ $(document).ready(function () {
         $(element).height("20px").width("20px").attr( { 'object-fit': 'cover', 'object-position': 'center'} );
         $(element).on("load", () => {     // Here we track the end of the wait gif load
             // Will load images with a delay
-            timeoutid = setTimeout( () => {
+            let timeoutid = setTimeout( () => {
                 $(element).off("load");     // Removes event handlers that were attached with .on()
                 element.src = url;
                 let timer = new timeHelper();
                 timer.startTimer();
                 $(element).on("load", () => {
                     timer.stopTimer();
+                    $(element).off("load");
                     $(element).height(elemheight).width(elemwidth);
                     let elapsed = timer.getElapsedString();
                     // Ajust timeout delay for the next image loop
