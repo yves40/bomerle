@@ -165,84 +165,100 @@ function swapImages(movingimageid, relatedimageid) {
     // Manage 2 cards, 2 images and 6 command icons
     let card1 = null;
     let card2 = null;
-    let img1 = img2 = null;
-    let left1, del1, right1, left2, del2, right2 = null;
+    let movingimg = relatedimg = null;
+    let movingleft, movingdel, movingright, relatedleft, relateddel, relatedright = null;
     $(`#imgcard-${movingimageid}`).each((idx, element) => {
-        card1 = element;
+        movingcard = element;
     });
     $(`#imgcard-${relatedimageid}`).each((idx, element) => {
-        card2 = element;
+        relatedcard = element;
     });
     $(`#imgcard-${movingimageid} img`).each((idx, element) => {
-        img1 = element;
+        movingimg = element;
     });
     $(`#imgcard-${relatedimageid} img`).each((idx, element) => {
-        img2 = element;
+        relatedimg = element;
     });
     $(`#imgcard-${movingimageid} a[id^=left]`).each((idx, element) => {
-        left1 = element;
+        movingleft = element;
     });
     $(`#imgcard-${movingimageid} a[id^=del]`).each((idx, element) => {
-        del1 = element;
+        movingdel = element;
     });
     $(`#imgcard-${movingimageid} a[id^=right]`).each((idx, element) => {
-        right1 = element;
+        movingright = element;
     });
     $(`#imgcard-${relatedimageid} a[id^=left]`).each((idx, element) => {
-        left2 = element;
+        relatedleft = element;
     });
     $(`#imgcard-${relatedimageid} a[id^=del]`).each((idx, element) => {
-        del2 = element;
+        relateddel = element;
     });
     $(`#imgcard-${relatedimageid} a[id^=right]`).each((idx, element) => {
-        right2 = element;
+        relatedright = element;
     });
 
     $(card1).hide();
     $(card2).hide();
 
     // Swap images and their data
-    let imgid1 = $(img1).attr('data-imageid');
-    let imgfile1 = $(img1).attr('data-imagefile');
-    let imgknifeid1 = $(img1).attr('data-imageknifeid');
-    let imgrank1 = $(img1).attr('data-imagerank');
+    let imgid1 = $(movingimg).attr('data-imageid');
+    let imgfile1 = $(movingimg).attr('data-imagefile');
+    let imgknifeid1 = $(movingimg).attr('data-imageknifeid');
+    let imgrank1 = $(movingimg).attr('data-imagerank');
 
-    let imgid2 = $(img2).attr('data-imageid');
-    let imgfile2 = $(img2).attr('data-imagefile');
-    let imgknifeid2 = $(img2).attr('data-imageknifeid');
-    let imgrank2 = $(img2).attr('data-imagerank');
+    let imgid2 = $(relatedimg).attr('data-imageid');
+    let imgfile2 = $(relatedimg).attr('data-imagefile');
+    let imgknifeid2 = $(relatedimg).attr('data-imageknifeid');
+    let imgrank2 = $(relatedimg).attr('data-imagerank');
 
-    $(img1).attr('src', '/images/knife/' + imgfile2);
-    $(img1).attr('data-imageid', imgid2);
-    $(img1).attr('data-imagefile', imgfile2);
-    $(img1).attr('data-imageknifeid', imgknifeid2);
-    $(img1).attr('data-imagerank', imgrank2);
+    $(movingimg).attr('src', '/images/knife/' + imgfile2);
+    $(movingimg).attr('data-imageid', imgid2);
+    $(movingimg).attr('data-imagefile', imgfile2);
+    $(movingimg).attr('data-imageknifeid', imgknifeid2);
+    $(movingimg).attr('data-imagerank', imgrank2);
     
-    $(img2).attr('src', '/images/knife/' + imgfile1);
-    $(img2).attr('data-imageid', imgid1);
-    $(img2).attr('data-imagefile', imgfile1);
-    $(img2).attr('data-imageknifeid', imgknifeid1);
-    $(img2).attr('data-imagerank', imgrank1);
+    $(relatedimg).attr('src', '/images/knife/' + imgfile1);
+    $(relatedimg).attr('data-imageid', imgid1);
+    $(relatedimg).attr('data-imagefile', imgfile1);
+    $(relatedimg).attr('data-imageknifeid', imgknifeid1);
+    $(relatedimg).attr('data-imagerank', imgrank1);
     // Swap cards ID
     $(card1).attr('id', `imgcard-${imgid2}`);
     $(card2).attr('id', `imgcard-${imgid1}`);
     // Swap command icons
-    let atr1 = $(left1).attr('id');  // LEFT (change ID)
-    let atr2 = $(left2).attr('id');
-    $(left1).attr('id', atr2);
-    $(left2).attr('id', atr1);
-    atr1 = $(del1).attr('href');     // DEL (change ID and URL)
-    atr2 = $(del2).attr('href');
-    $(del1).attr('href', atr2);
-    $(del2).attr('href', atr1);
-    atr1 = $(del1).attr('id');
-    atr2 = $(del2).attr('id');
-    $(del1).attr('id', atr2);
-    $(del2).attr('id', atr1);
-    atr1 = $(right1).attr('id');     // RIGHT (Change ID)
-    atr2 = $(right2).attr('id');
-    $(right1).attr('id', atr2);
-    $(right2).attr('id', atr1);
+    let atr1 = $(movingleft).attr('id');  // LEFT (change ID)
+    let atr2 = $(relatedleft).attr('id');
+    // Moving or Related image was topleft
+    // The have to rebuild the icon ID
+    if(atr1 === undefined) {
+        atr1 = `left-${imgknifeid1}-${imgid1}-${imgrank1}`
+    }
+    if(atr2 === undefined) {
+        atr2 = `left-${imgknifeid2}-${imgid2}-${imgrank2}`
+    }
+    $(movingleft).attr('id', atr2);
+    $(relatedleft).attr('id', atr1);
+    atr1 = $(movingdel).attr('href');     // DEL (change ID and URL)
+    atr2 = $(relateddel).attr('href');
+    $(movingdel).attr('href', atr2);
+    $(relateddel).attr('href', atr1);
+    atr1 = $(movingdel).attr('id');
+    atr2 = $(relateddel).attr('id');
+    $(movingdel).attr('id', atr2);
+    $(relateddel).attr('id', atr1);
+    atr1 = $(movingright).attr('id');     // RIGHT (Change ID)
+    atr2 = $(relatedright).attr('id');
+    // Moving or Related image was topleft
+    // The have to rebuild the icon ID
+    if(atr1 === undefined) {
+        atr1 = `right-${imgknifeid1}-${imgid1}-${imgrank1}`
+    }
+    if(atr2 === undefined) {
+        atr2 = `right-${imgknifeid2}-${imgid2}-${imgrank2}`
+    }
+    $(movingright).attr('id', atr2);
+    $(relatedright).attr('id', atr1);
 
     // Redisplay cards
     $(`#imgcard-${movingimageid}`).slideDown(1000);
