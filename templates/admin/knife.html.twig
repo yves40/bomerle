@@ -64,6 +64,14 @@
                 type="button" role="tab" aria-controls="profile" 
                 aria-selected="false">{% trans %}admin.manageknives.tab2{% endtrans %}</button>
         </li>
+        <li class="nav-item" role="presentation">
+        <button class="nav-link ylink disabled" 
+                id="knifetitle-tab" 
+                data-bs-toggle="tab" 
+                data-bs-target="#knifetitle" 
+                type="button" role="tab" aria-controls="profile" 
+                aria-selected="false">{{knife.name}}</button>
+        </li>
     </ul>
   
 
@@ -137,6 +145,9 @@
                     <div id="feedback" class="row mt-4"><p></p></div>
                 </div>
             {% endif %}
+        </div>
+        {# I M A G E S --------------------------------------------------------------------------------------------------------- #}
+        <div class="tab-pane mt-4" id="knifetitle" role="tabpanel" aria-labelledby="knifetitle-tab"  align-items="left">
         </div>
     </div>
     {{ form_end(form) }}
