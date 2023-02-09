@@ -163,8 +163,8 @@ function moveImage(imageslist, url) {
 // -------------------------------------------------------------
 function swapImages(movingimageid, relatedimageid) {
     // Manage 2 cards, 2 images and 6 command icons
-    let card1 = null;
-    let card2 = null;
+    let movingcard = null;
+    let relatedcard = null;
     let movingimg = relatedimg = null;
     let movingleft, movingdel, movingright, relatedleft, relateddel, relatedright = null;
     $(`#imgcard-${movingimageid}`).each((idx, element) => {
@@ -198,8 +198,8 @@ function swapImages(movingimageid, relatedimageid) {
         relatedright = element;
     });
 
-    $(card1).hide();
-    $(card2).hide();
+    $(movingcard).hide();
+    $(relatedcard).hide();
 
     // Swap images and their data
     let imgid1 = $(movingimg).attr('data-imageid');
@@ -224,14 +224,12 @@ function swapImages(movingimageid, relatedimageid) {
     $(relatedimg).attr('data-imageknifeid', imgknifeid1);
     $(relatedimg).attr('data-imagerank', imgrank1);
     // Swap cards ID
-    $(card1).attr('id', `imgcard-${imgid2}`);
-    $(card2).attr('id', `imgcard-${imgid1}`);
+    $(movingcard).attr('id', `imgcard-${imgid2}`);
+    $(relatedcard).attr('id', `imgcard-${imgid1}`);
     // Swap command icons
     let atr1 = $(movingleft).attr('id');  // LEFT (change ID)
     let atr2 = $(relatedleft).attr('id');
-    // Moving or Related image was topleft
-    // The have to rebuild the icon ID
-
+    // If Moving or Related image was topleft we have to rebuild the icon ID
     if(atr1 === undefined) {
         atr1 = `left-${imgknifeid1}-${imgid1}-${imgrank1}`
     }
@@ -250,8 +248,7 @@ function swapImages(movingimageid, relatedimageid) {
     $(relateddel).attr('id', atr1);
     atr1 = $(movingright).attr('id');     // RIGHT (Change ID)
     atr2 = $(relatedright).attr('id');
-    // Moving or Related image was topright
-    // The have to rebuild the icon ID
+    // If Moving or Related image was topright we have to rebuild the icon ID
     if(atr1 === undefined) {
         atr1 = `right-${imgknifeid1}-${imgid1}-${imgrank1}`
     }
@@ -261,9 +258,11 @@ function swapImages(movingimageid, relatedimageid) {
     $(movingright).attr('id', atr2);
     $(relatedright).attr('id', atr1);
 
-    // Redisplay cards
-    $(`#imgcard-${movingimageid}`).slideDown(1000);
-    $(`#imgcard-${relatedimageid}`).slideDown(1000);
+    // Redisplay cards  
+    $(movingcard).slideDown(1000);
+    $(relatedcard).slideDown(1000);
+    // $(`#imgcard-${movingimageid}`).slideDown(1000);
+    // $(`#imgcard-${relatedimageid}`).slideDown(1000);
     return;
 }
 // ------------------------------------------------------------- 
