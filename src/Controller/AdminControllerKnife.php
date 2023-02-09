@@ -52,7 +52,7 @@ class AdminControllerKnife extends AbstractController
     }
     // --------------------------------------------------------------------------
     #[Route('/knives/delete/{id}', name: 'bootadmin.knives.delete')]
-    public function DeleteMetal(Request $request,
+    public function Deleteknife(Request $request,
                                 int $id,
                                 EntityManagerInterface $entityManager,
                                 TranslatorInterface $translator
@@ -131,6 +131,7 @@ class AdminControllerKnife extends AbstractController
     {
         $loc = $this->locale($request);
         $imagepath = $this->getParameter('knifeimages_directory');  // Defined in services.yaml
+        $knife = $emgr->getRepository(Knifes::class)->findOneBy([ 'id' => $knifeid]);
         $image = $emgr->getRepository(Images::class)->findOneBy([ 'id' => $imageid]);
         if(empty($image)) {
             return $this->json([
@@ -141,14 +142,23 @@ class AdminControllerKnife extends AbstractController
             $emgr->getRepository(Images::class)->remove($image);
             $uploader->deleteFile($imagepath . '/'. $image->getFilename());
         }
-        $knife = $emgr->getRepository(Knifes::class)->findOneBy([ 'id' => $knifeid]);
         $knife->removeImage($image);    // Shoot image from knife object
         $emgr->persist($knife);
         $emgr->flush();
+        // Reset the rank column after image deletion
+        $imglist = $emgr->getRepository(Images::class)->findKnifeImagesByRank($knife);
+        $rank = 0;
+        foreach($imglist as $key => $oneimage) {
+            $oneimage->setRank(++$rank);
+            $emgr->persist($oneimage);
+        }
+        $emgr->flush();
+
         return $this->json([
             'message' => 'bootadmin.knives.removephoto called',
             'knifeid' => $knifeid,
-            'imageid' => $imageid
+            'imageid' => $imageid,
+            'reordered' => $rank
         ], 200);
     }
     // --------------------------------------------------------------------------

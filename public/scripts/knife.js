@@ -43,15 +43,15 @@ function deleteImage(element){
             $(".allimages").fadeOut(500, () => {
                 $(`#imgcard-${imgid}`).remove();
                 $(".allimages").fadeIn(500, () => {
-                    feedbackmessage.text(`OK ${response.message} for knife ${response.knifeid} image : ${response.imageid}` );
+                    feedbackmessage.text(`OK ${response.message} for knife ${response.knifeid} image : ${response.imageid} Reordered : ${response.reordered}` );
                     feedbackmessage.addClass('ysuccess').removeClass('yerror');    
                 });
             });
         },
         error: function (xhr) {
-            feedbackmessage.text(`KO ${xhr.responseJSON.detail}` );
+            feedbackmessage.text(`KO ${xhr.statusText}` );
             feedbackmessage.addClass('yerror').removeClass('ysuccess');
-            console.log(xhr.responseJSON.detail);
+            console.log(xhr);
         }
     });    
 }
@@ -238,6 +238,7 @@ function swapImages(movingimageid, relatedimageid) {
     }
     $(movingleft).attr('id', atr2);
     $(relatedleft).attr('id', atr1);
+    
     atr1 = $(movingdel).attr('href');     // DEL (change ID and URL)
     atr2 = $(relateddel).attr('href');
     $(movingdel).attr('href', atr2);
@@ -246,6 +247,7 @@ function swapImages(movingimageid, relatedimageid) {
     atr2 = $(relateddel).attr('id');
     $(movingdel).attr('id', atr2);
     $(relateddel).attr('id', atr1);
+
     atr1 = $(movingright).attr('id');     // RIGHT (Change ID)
     atr2 = $(relatedright).attr('id');
     // If Moving or Related image was topright we have to rebuild the icon ID
@@ -261,8 +263,6 @@ function swapImages(movingimageid, relatedimageid) {
     // Redisplay cards  
     $(movingcard).slideDown(1000);
     $(relatedcard).slideDown(1000);
-    // $(`#imgcard-${movingimageid}`).slideDown(1000);
-    // $(`#imgcard-${relatedimageid}`).slideDown(1000);
     return;
 }
 // ------------------------------------------------------------- 

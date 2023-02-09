@@ -49,6 +49,17 @@ class ImagesRepository extends ServiceEntityRepository
         return $maxrank;
     }
 
+    public function findKnifeImagesByRank($knife): array
+    {
+        return $this->createQueryBuilder('i')
+            ->andWhere('i.knifes = :val')
+            ->setParameter('val', $knife)
+            ->orderBy('i.rank', 'ASC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
 //    /**
 //     * @return Images[] Returns an array of Images objects
 //     */
