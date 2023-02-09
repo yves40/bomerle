@@ -10,6 +10,12 @@ button.active.ylink {
   font-weight: bold;
   font-size: 1.4rem; }
 
+button.disabled.ylink {
+  text-decoration: underline; }
+
+button .disabled .ylink {
+  text-decoration: underline; }
+
 .imagesmall {
   width: 8rem;
   height: 8rem;
