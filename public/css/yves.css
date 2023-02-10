@@ -6,15 +6,16 @@
 .ylabel {
   font-weight: bold; }
 
-button.active.ylink {
+button.ylink.disabled {
+  font-weight: bold;
+  font-size: 1.2rem; }
+
+button.ylink.active {
   font-weight: bold;
   font-size: 1.4rem; }
 
-button.disabled.ylink {
-  text-decoration: underline; }
-
-button .disabled .ylink {
-  text-decoration: underline; }
+button.ylink:hover {
+  color: red; }
 
 .imagesmall {
   width: 8rem;

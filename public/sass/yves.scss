@@ -9,20 +9,19 @@
   font-weight: bold;
 }
 
-button.active.ylink {
-    font-weight: bold;
-    font-size: 1.4rem;
-}
-
-button.disabled.ylink {
-  text-decoration: underline;
-}
-
 button {
-  .disabled {
-    .ylink {
-        text-decoration: underline;
-    }
+  &.ylink {
+      &.disabled {
+        font-weight: bold;
+        font-size: 1.2rem;
+      }
+      &.active {
+        font-weight: bold;
+        font-size: 1.4rem;
+      }
+      &:hover {
+        color: red;
+      }
   }
 }
 
