@@ -40,9 +40,10 @@
                          'method': 'POST'
                         }) 
     }}
-        {% if accessoryname == '#' %}
+        {% if knifeconflict != 0 %}
             {% set accessoryname = '' %}
         {% endif %}
+        
         {% if new == "true" %}
             <button type="submit" class="btn btn-primary mb-3">{% trans %}buttons.add{% endtrans %}</button>
         {% else %}
