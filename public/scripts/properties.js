@@ -7,7 +7,7 @@
 //----------------------------------------------------------------------------
 const $props = ( () => {
   const allprops = {
-    version : 'bomerle:1.07, Feb 08 2023 ',
+    version : 'bomerle:1.08, Feb 12 2023 ',
     copyright:  'Ratoon software Corporation Inc, Chabreloche France ',
     imagehandler: 'images.js Dec 27 2022, 1.23 ',
     knifehandler: 'knife.js Feb 08 2023, 1.05 ',
