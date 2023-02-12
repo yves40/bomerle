@@ -2,7 +2,7 @@
 
 namespace App\Security;
 
-use App\Service\DBlogger;
+use App\Services\DBlogger;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Security;

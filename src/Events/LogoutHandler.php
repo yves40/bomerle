@@ -2,7 +2,7 @@
 
 namespace App\Events;
 
-use App\Service\DBlogger;
+use App\Services\DBlogger;
 
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\RedirectResponse;
