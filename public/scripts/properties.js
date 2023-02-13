@@ -4,18 +4,19 @@
 //    Dec 26 2022 Initial
 //    Jan 30 2023 Knife images location
 //    Feb 04 2023 WIP on knife images administration
+//    Feb 13 2023 Image loading delay removed
 //----------------------------------------------------------------------------
 const $props = ( () => {
   const allprops = {
-    version : 'bomerle:1.08, Feb 12 2023 ',
+    version : 'bomerle:1.09, Feb 13 2023 ',
     copyright:  'Ratoon software Corporation Inc, Chabreloche France ',
-    imagehandler: 'images.js Dec 27 2022, 1.23 ',
+    imagehandler: 'images.js Feb 13 2023, 1.25 ',
     knifehandler: 'knife.js Feb 08 2023, 1.05 ',
     knivesimageslocation: '%kernel.project_dir%/public/images/knife'
   }
   let dynprops = {
-    'imageloadingdelay' : 400,
-    'imageloadcount' :0
+    'imageloadcount' :0,
+    'imageavgloadtime' :0
   }
   return {
     version: () => { return allprops.version; },
@@ -23,7 +24,10 @@ const $props = ( () => {
     imagehandler: () => { return allprops.imagehandler; },
     knifehandler: () => { return allprops.knifehandler; },
     knivesimageslocation: () => { return allprops.knivesimageslocation; },
-    imageloadingdelay: () => { return dynprops['imageloadingdelay']; },
+    imageavgloadtime: () => { 
+        console.log(dynprops);
+        return dynprops['imageavgloadtime']; 
+    },
     imageloadcount: () => { return dynprops['imageloadcount']; },
     set: (propertyname, value) => { dynprops[propertyname] = value; },
     get: (propertyname) => { return dynprops[propertyname]; },
@@ -32,6 +36,10 @@ const $props = ( () => {
       let savedprops = sessionStorage.getItem("dynprops");
       if( savedprops !== null) {
         dynprops = JSON.parse(savedprops);
+      }
+      else {
+        sessionStorage.setItem('dynprops', JSON.stringify(dynprops));
+        return dynprops;
       }
      }
   }

@@ -1,6 +1,6 @@
 # Have a look at config/packages/translation.yaml
 app:
-  version: Beaumerle Administration [Fev 2023, 1.51]
+  version: Beaumerle Administration [Feb 2023, 1.51]
   copyright:  'Ratoon software Corporation Inc, Chabreloche France '
 lang:
   menufr: Langue
