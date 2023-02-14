@@ -18,5 +18,84 @@
         <li class="nav-item"><a class="nav-link" href="{{ path('bootadmin.mechanisms', { "new" : "true" } )}}">{% trans %}admin.mechanisms{% endtrans %}</a></li>
         <li class="nav-item"><a class="nav-link" href="{{ path('bootadmin.metals', { "new" : "true" } )}}">{% trans %}admin.metals{% endtrans %}</a></li>                                                                            
     </ul>
+    {# 
+        Check form call context: The form is generic and called for all CRUD ops.
+        When updating, the action must call the update service with an ID
+    #}
+    {% set param = [] %}
+    {% if new == "true" %}  {# Update, or Create, delete ? #}
+        {% set action = 'bootadmin.events.all' %}
+    {% else %}
+        {% set action = 'bootadmin.events.update' %}
+        {% set param = { 'id': id } %}
+    {% endif %}
+    {# Form #}
+    {{ form_start(form, {'attr': {'novalidate': 'novalidate', 'class': 'form'},
+                         'action': path(action, param), 
+                         'method': 'POST'
+                        }) 
+    }}
+        {% if new == "true" %}
+            <button type="submit" class="btn btn-primary mb-3">{% trans %}buttons.add{% endtrans %}</button>
+        {% else %}
+                <button type="submit" 
+                    class="btn btn-primary mb-3">{% trans %}buttons.modify{% endtrans %}</button>
+                <button type="submit" formaction="{{path('bootadmin.accessories', { new: 'abort'})}}" 
+                    class="btn btn-primary mb-3">{% trans %}buttons.cancel{% endtrans %}</button>
+        {% endif %}
 
+        <div class="row align-items-start">
+            <div class="col ylabel">
+                {{ form_row(form.name, { 'label' : 'admin.manageevents.label'|trans,
+                                'value': event.name,
+                                'help': 'admin.manageevents.help'|trans,
+                                }
+                        ) 
+                }}
+            </div>
+            <div class="col ylabel">
+                {{ form_row(form.date, { 'label' : 'admin.manageevents.date'|trans,
+                                        'value': event.date,
+                                        'help': 'admin.manageevents.helpdate'|trans,
+                                        }
+                            ) 
+                }}
+            </div>
+        </div>
+        <div class="row allign-items-start">
+            <div class="col ylabel">
+                {{ form_row(form.address, { 'label' : 'admin.manageevents.address'|trans,
+                                        'value': event.address,
+                                        }
+                            ) 
+                }}
+            </div>
+        </div>
+    {{ form_end(form)}}
+
+    {# List registered events #}
+    <div class="mt-4">
+        <h2 class="mb-4">{{'admin.manageevents.listheader'|trans}}</h2>
+        {% for event in eventslist %}
+        <ul class="list-group">
+                <li class="list-group-item">
+                    <div class="row">
+                        <div class="col-6">{{event.name}}</div>
+                        {% if locale == 'fr' %}
+                            <div class="col-2">{{event.date|date("d/m/Y")}}</div>
+                        {% else %}
+                            <div class="col-2">{{event.date|date("m/d/Y")}}</div>
+                        {% endif %}                        
+
+                        <div class="col-1">
+                            <a href="{{ path('bootadmin.events.delete', {id: event.id}) }}"><i class="fa fa-trash"></i></a>
+                        </div>
+                        <div class="col-1">
+                            <a href="{{ path('bootadmin.events.update', {id: event.id}) }}"><i class="fa fa-pen-to-square"></i></a>
+                        </div>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
 {% endblock %}

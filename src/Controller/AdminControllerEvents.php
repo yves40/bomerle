@@ -39,9 +39,66 @@ class AdminControllerEvents extends AbstractController
         $events = $repo->findAll();
         $event = new Events();
         $form = $this->createForm(EventsType::class, $event);
+        if($new === 'abort') {
+            $new = true;
+        }
+        else {
+            $form->handleRequest($request);
+            if($form->isSubmitted() && ( $form->isValid())){
+                $entityManager->persist($event);
+                $entityManager->flush();
+                $events = $repo->findAll();
+                $event = new Events();
+                $this->addFlash('success', $translator->trans('admin.manageevents.created'));
+            }
+        }
         return $this->render('admin/events.html.twig', [
                 "form" => $form->createView(),
+                "event" => $event,
+                "eventslist" => $events,
                 "locale" =>  $loc,
+                "new" => $new
+            ]
+        );               
+    }
+    // --------------------------------------------------------------------------
+    #[Route('/events/update/{id}', name: 'bootadmin.events.update')]
+    public function updateEvent(Request $request,
+                        int $id,
+                        EntityManagerInterface $entityManager,
+                        TranslatorInterface $translator): Response
+    {
+        $loc = $this->locale($request);
+        $repo = $entityManager->getRepository(Events::class);
+        $events = $repo->findAll();
+        $event = $repo->findOneBy(['id' => $id]);
+        $form = $this->createForm(EventsType::class, $event);
+        return $this->render('admin/events.html.twig', [
+                "form" => $form->createView(),
+                "eventslist" => $events,
+                "event" => $event,
+                "locale" =>  $loc,
+                "new" => false,
+                "id" => $id
+            ]
+        );               
+    }
+    // --------------------------------------------------------------------------
+    #[Route('/events/delete/{id}', name: 'bootadmin.events.delete')]
+    public function deleteEvent(Request $request,
+                        EntityManagerInterface $entityManager,
+                        TranslatorInterface $translator): Response
+    {
+        $loc = $this->locale($request);
+        $repo = $entityManager->getRepository(Events::class);
+        $events = $repo->findAll();
+        $event = new Events();
+        $form = $this->createForm(EventsType::class, $event);
+        return $this->render('admin/events.html.twig', [
+                "form" => $form->createView(),
+                "eventslist" => $events,
+                "locale" =>  $loc,
+                "new" => true
             ]
         );               
     }

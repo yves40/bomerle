@@ -112,6 +112,15 @@ admin:
     checkknife: Edit conflicting knife
   manageevents:
     title: Events
+    label: Event name
+    help: Enter the event name
+    address: Address
+    date: Event date
+    helpdate: Event 1st day
+    listheader: Events you're registered for
+    created: Event added
+    deleted: Event deleted
+    updated: Event updated
   manageusers:
     title: Users
 buttons:

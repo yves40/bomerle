@@ -111,7 +111,16 @@ admin:
     tab2: Images
     checkknife: Editer le couteau en conflit
   manageevents:
-    title: Evènements
+    title: Salons
+    label: 'Nom du salon'
+    help: Entrez le nom de ce salon
+    address: Adresse
+    date: Date du salon
+    helpdate: 1er jour du salon
+    listheader: Evènement auxquels vous participez
+    created: Evènement ajouté
+    deleted: Evènement supprimé
+    updated: Evènement mis à jour
   manageusers:
     title: Utilisateurs
 buttons:
