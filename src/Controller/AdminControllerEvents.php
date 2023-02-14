@@ -36,7 +36,7 @@ class AdminControllerEvents extends AbstractController
     {
         $loc = $this->locale($request);
         $repo = $entityManager->getRepository(Events::class);
-        // $events = $repo->listEvents();
+        $events = $repo->findAll();
         $event = new Events();
         $form = $this->createForm(EventsType::class, $event);
         return $this->render('admin/events.html.twig', [

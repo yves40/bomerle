@@ -36,6 +36,7 @@ class AdminControllerUsers extends AbstractController
     {
         $loc = $this->locale($request);
         $repo = $entityManager->getRepository(Users::class);
+        $users = $repo->findAll();
         $user = new Users();
         $form = $this->createForm(UsersType::class, $user);
         return $this->render('admin/users.html.twig', [
