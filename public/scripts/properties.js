@@ -8,7 +8,7 @@
 //----------------------------------------------------------------------------
 const $props = ( () => {
   const allprops = {
-    version : 'bomerle:1.09, Feb 13 2023 ',
+    version : 'bomerle:1.10, Feb 14 2023 ',
     copyright:  'Ratoon software Corporation Inc, Chabreloche France ',
     imagehandler: 'images.js Feb 13 2023, 1.25 ',
     knifehandler: 'knife.js Feb 08 2023, 1.05 ',
@@ -24,10 +24,7 @@ const $props = ( () => {
     imagehandler: () => { return allprops.imagehandler; },
     knifehandler: () => { return allprops.knifehandler; },
     knivesimageslocation: () => { return allprops.knivesimageslocation; },
-    imageavgloadtime: () => { 
-        console.log(dynprops);
-        return dynprops['imageavgloadtime']; 
-    },
+    imageavgloadtime: () => { return dynprops['imageavgloadtime']; },
     imageloadcount: () => { return dynprops['imageloadcount']; },
     set: (propertyname, value) => { dynprops[propertyname] = value; },
     get: (propertyname) => { return dynprops[propertyname]; },

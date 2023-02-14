@@ -42,6 +42,7 @@ admin:
   events:
     events:  Salons
     list: Liste des salons
+    register: Participation 
   managemetals:
     title: Gestion des métaux
     header: Ajouter
@@ -109,6 +110,10 @@ admin:
     tab1: Données
     tab2: Images
     checkknife: Editer le couteau en conflit
+  manageevents:
+    title: Evènements
+  manageusers:
+    title: Utilisateurs
 buttons:
   add: Ajouter
   modify: Modifier

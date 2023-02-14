@@ -42,6 +42,7 @@ admin:
   events:
     events:  Events
     list: List events
+    register: Register 
   managemetals:
     title: Metals management
     header: Add
@@ -109,6 +110,10 @@ admin:
     tab1: Main data
     tab2: Knife Images
     checkknife: Edit conflicting knife
+  manageevents:
+    title: Events
+  manageusers:
+    title: Users
 buttons:
   add: Add
   modify: Update

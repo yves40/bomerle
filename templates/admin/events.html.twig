@@ -1,0 +1,15 @@
+{% extends 'bootstrap.html.twig' %}
+
+{% block title %}{% trans %}admin.title{% endtrans %}{% endblock %}
+
+{% form_theme form 'bootstrap_5_layout.html.twig' %}
+
+{% block pagetitle %}
+    <h1 class="mt-4">{% trans %}admin.manageevents.title{% endtrans %}</h1>
+{% endblock %}
+
+{% block body %}
+
+    <h1>Hello Events</h1>
+
+{% endblock %}
