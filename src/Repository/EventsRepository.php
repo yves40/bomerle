@@ -2,9 +2,11 @@
 
 namespace App\Repository;
 
+use DateTime;
+
 use App\Entity\Events;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
  * @extends ServiceEntityRepository<Events>
@@ -48,7 +50,29 @@ class EventsRepository extends ServiceEntityRepository
             ;
     }
 
-//    /**
+    public function findFutureEvents(DateTime $currentdate): array
+    {
+        return $this->createQueryBuilder('e')
+            ->andWhere('e.date >= :val')
+            ->setParameter('val', $currentdate)
+            ->orderBy('e.date', 'ASC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+    public function findPreviousEvents(DateTime $currentdate): array
+    {
+        return $this->createQueryBuilder('e')
+            ->andWhere('e.date < :val')
+            ->setParameter('val', $currentdate)
+            ->orderBy('e.date', 'ASC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+
+    //    /**
 //     * @return Events[] Returns an array of Events objects
 //     */
 //    public function findByExampleField($value): array

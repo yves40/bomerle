@@ -117,7 +117,8 @@ admin:
     address: Address
     date: Event date
     helpdate: Event 1st day
-    listheader: Events you're registered for
+    listheader: Event you will attend
+    listbefore: Event you attended
     created: Event added
     deleted: Event deleted
     updated: Event updated

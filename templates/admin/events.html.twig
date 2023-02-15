@@ -40,7 +40,7 @@
         {% else %}
                 <button type="submit" 
                     class="btn btn-primary mb-3">{% trans %}buttons.modify{% endtrans %}</button>
-                <button type="submit" formaction="{{path('bootadmin.accessories', { new: 'abort'})}}" 
+                <button type="submit" formaction="{{path('bootadmin.events.all', { new: 'abort'})}}" 
                     class="btn btn-primary mb-3">{% trans %}buttons.cancel{% endtrans %}</button>
         {% endif %}
 
@@ -73,10 +73,34 @@
         </div>
     {{ form_end(form)}}
 
-    {# List registered events #}
+    {# List registered events, previous and coming #}
     <div class="mt-4">
         <h2 class="mb-4">{{'admin.manageevents.listheader'|trans}}</h2>
-        {% for event in eventslist %}
+        {% for event in events %}
+        <ul class="list-group">
+                <li class="list-group-item">
+                    <div class="row">
+                        <div class="col-6">{{event.name}}</div>
+                        {% if locale == 'fr' %}
+                            <div class="col-2">{{event.date|date("d/m/Y")}}</div>
+                        {% else %}
+                            <div class="col-2">{{event.date|date("m/d/Y")}}</div>
+                        {% endif %}                        
+
+                        <div class="col-1">
+                            <a href="{{ path('bootadmin.events.delete', {id: event.id}) }}"><i class="fa fa-trash"></i></a>
+                        </div>
+                        <div class="col-1">
+                            <a href="{{ path('bootadmin.events.update', {id: event.id}) }}"><i class="fa fa-pen-to-square"></i></a>
+                        </div>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="mt-4">
+        <h2 class="mb-4">{{'admin.manageevents.listbefore'|trans}}</h2>
+        {% for event in eventsbefore %}
         <ul class="list-group">
                 <li class="list-group-item">
                     <div class="row">
