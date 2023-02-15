@@ -64,7 +64,7 @@ class AdminControllerEvents extends AbstractController
                     $event = $repo->findOneBy(['id' => $id]);
                     break;
         }
-        var_dump($event->getDate());
+        // var_dump($event->getDate());
         return $this->render('admin/events.html.twig', [
                 "form" => $form->createView(),
                 "event" => $event,

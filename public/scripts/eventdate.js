@@ -13,22 +13,18 @@ function getDateFields(selector) {
     let twigyear = $(`#${selector}_date_year`);
     let theevent = $(".eventdata");
     let eventobj = $(theevent).data('eventobj');
-    if(eventobj.name !== null) {
-        console.log(`${eventobj.name}`);
-        console.log(`${eventobj.date}`);
-        let datefields = getDayMonthYear(eventobj.date);
-        console.log(datefields);
-        $(twigday).val(datefields.d);
-        $(twigmonth).val(datefields.m);
-        $(twigyear).val(datefields.y);
-    }
-    else {
-        console.log("Clean event");
-    }
+    let datefields = getDayMonthYear(eventobj.date);
+    console.log(datefields);
+    $(twigday).val(datefields.d);
+    $(twigmonth).val(datefields.m);
+    $(twigyear).val(datefields.y);
 }
 // ------------------------------------------------------------------------------
 function getDayMonthYear(thedate) {
     // 2023-02-15T18:59:45+01:00
+    // The date is set to current by the controller before calling 
+    // the form rendering, so we always have one in the proper format
+    // even whe creating a new event
     let onlydate = thedate.split('T')[0];
     let theyear = onlydate.split('-')[0];
     let theday = onlydate.split('-')[2];
