@@ -132,4 +132,6 @@ buttons:
 images:
   errortype: Please choose a valid file format (jpg, jpeg, gif, png)
   errorsize: Maximum allowed size exceeded
+genericmessages:
+  cancel: Operation abandoned
 

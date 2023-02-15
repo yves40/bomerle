@@ -34,6 +34,7 @@ class AdminControllerEvents extends AbstractController
                         EntityManagerInterface $entityManager,
                         TranslatorInterface $translator): Response
     {
+        date_default_timezone_set('Europe/Paris');
         $loc = $this->locale($request);
         $repo = $entityManager->getRepository(Events::class);
         $now = new DateTime();
@@ -41,9 +42,10 @@ class AdminControllerEvents extends AbstractController
         $eventsbefore = $repo->findPreviousEvents($now);
         $event = new Events();
         $form = $this->createForm(EventsType::class, $event);
-        $form->handleRequest($request);
+        var_dump('>> '.$new);
         switch($new) {
             case "true":
+                    $form->handleRequest($request);
                     if($form->isSubmitted() && ( $form->isValid())){
                         $entityManager->persist($event);
                         $entityManager->flush();
@@ -52,13 +54,18 @@ class AdminControllerEvents extends AbstractController
                         $event = new Events();
                         $this->addFlash('success', $translator->trans('admin.manageevents.created'));
                     }
+                    $event->setDate($now);
                     break;
             case "abort":
+                    $new = "true";
+                    $event->setDate($now);
+                    $this->addFlash('success', $translator->trans('genericmessages.cancel'));
                     break;
             case "false":
                     $event = $repo->findOneBy(['id' => $id]);
                     break;
-            }
+        }
+        var_dump('<<     '.$new);
         var_dump($event->getDate());
         return $this->render('admin/events.html.twig', [
                 "form" => $form->createView(),

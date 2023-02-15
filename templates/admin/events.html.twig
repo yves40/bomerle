@@ -54,12 +54,19 @@
                 }}
             </div>
             <div class="col ylabel">
-                {{ form_row(form.date, { 'label' : 'admin.manageevents.date'|trans,
-                                        'value': event.date,
-                                        'help': 'admin.manageevents.helpdate'|trans,
-                                        }
-                            ) 
-                }}
+                {% if locale == 'fr' %}
+                    {{ form_row(form.date, { 'label' : 'admin.manageevents.date'|trans,
+                                            'value': event.date|date("d/m/Y"),
+                                            'help': 'admin.manageevents.helpdate'|trans,
+                                            }
+                                ) }}
+                {% else %}
+                    {{ form_row(form.date, { 'label' : 'admin.manageevents.date'|trans,
+                                            'value': event.date|date("m/d/Y"),
+                                            'help': 'admin.manageevents.helpdate'|trans,
+                                            }
+                                ) }}
+                {% endif %}                
             </div>
         </div>
         <div class="row allign-items-start">
@@ -76,22 +83,22 @@
     {# List registered events, previous and coming #}
     <div class="mt-4">
         <h2 class="mb-4">{{'admin.manageevents.listheader'|trans}}</h2>
-        {% for event in events %}
+        {% for oneevent in events %}
         <ul class="list-group">
                 <li class="list-group-item">
                     <div class="row">
-                        <div class="col-6">{{event.name}}</div>
+                        <div class="col-6">{{oneevent.name}}</div>
                         {% if locale == 'fr' %}
-                            <div class="col-2">{{event.date|date("d/m/Y")}}</div>
+                            <div class="col-2">{{oneevent.date|date("d/m/Y")}}</div>
                         {% else %}
-                            <div class="col-2">{{event.date|date("m/d/Y")}}</div>
+                            <div class="col-2">{{oneevent.date|date("m/d/Y")}}</div>
                         {% endif %}                        
 
                         <div class="col-1">
-                            <a href="{{ path('bootadmin.events.delete', {id: event.id}) }}"><i class="fa fa-trash"></i></a>
+                            <a href="{{ path('bootadmin.events.delete', {id: oneevent.id}) }}"><i class="fa fa-trash"></i></a>
                         </div>
                         <div class="col-1">
-                            <a href="{{ path('bootadmin.events.update', {id: event.id}) }}"><i class="fa fa-pen-to-square"></i></a>
+                            <a href="{{ path('bootadmin.events.update', {id: oneevent.id}) }}"><i class="fa fa-pen-to-square"></i></a>
                         </div>
                     </div>
                 </li>
@@ -100,22 +107,22 @@
     </div>
     <div class="mt-4">
         <h2 class="mb-4">{{'admin.manageevents.listbefore'|trans}}</h2>
-        {% for event in eventsbefore %}
+        {% for oneevent in eventsbefore %}
         <ul class="list-group">
                 <li class="list-group-item">
                     <div class="row">
-                        <div class="col-6">{{event.name}}</div>
+                        <div class="col-6">{{oneevent.name}}</div>
                         {% if locale == 'fr' %}
-                            <div class="col-2">{{event.date|date("d/m/Y")}}</div>
+                            <div class="col-2">{{oneevent.date|date("d/m/Y")}}</div>
                         {% else %}
-                            <div class="col-2">{{event.date|date("m/d/Y")}}</div>
+                            <div class="col-2">{{oneevent.date|date("m/d/Y")}}</div>
                         {% endif %}                        
 
                         <div class="col-1">
-                            <a href="{{ path('bootadmin.events.delete', {id: event.id}) }}"><i class="fa fa-trash"></i></a>
+                            <a href="{{ path('bootadmin.events.delete', {id: oneevent.id}) }}"><i class="fa fa-trash"></i></a>
                         </div>
                         <div class="col-1">
-                            <a href="{{ path('bootadmin.events.update', {id: event.id}) }}"><i class="fa fa-pen-to-square"></i></a>
+                            <a href="{{ path('bootadmin.events.update', {id: oneevent.id}) }}"><i class="fa fa-pen-to-square"></i></a>
                         </div>
                     </div>
                 </li>
