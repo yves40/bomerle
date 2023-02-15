@@ -52,12 +52,14 @@
             <button type="submit" formaction="{{path('bootadmin.accessories', { new: 'abort'})}}" 
                     class="btn btn-primary mb-3">{% trans %}buttons.cancel{% endtrans %}</button>
         {% endif %}
-        {{ form_row(form.name, { 'label' : 'admin.manageaccessories.label'|trans,
-                                'value': accessoryname,
-                                'help': 'admin.manageaccessories.help'|trans,
-                                }
-                    ) 
-        }}
+        <div class="ylabel">
+            {{ form_row(form.name, { 'label' : 'admin.manageaccessories.label'|trans,
+                                    'value': accessoryname,
+                                    'help': 'admin.manageaccessories.help'|trans,
+                                    }
+                        ) 
+            }}
+        </div>
     {{ form_end(form) }}
     {# List existing metals #}
         {% for accessory in accessories %}
@@ -75,4 +77,5 @@
             </li>
         {% endfor %}
     </ul>
+    <link rel="stylesheet" href="{{asset('/css/yves.css')}}">
 {% endblock %}

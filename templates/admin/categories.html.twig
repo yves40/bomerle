@@ -51,12 +51,14 @@
             <button type="submit" formaction="{{path('bootadmin.categories', { new: 'abort'})}}" 
                     class="btn btn-primary mb-3">{% trans %}buttons.cancel{% endtrans %}</button>
         {% endif %}
-        {{ form_row(form.name, { 'label' : 'admin.managecategories.label'|trans,
-                                'value': categoryname,
-                                'help': 'admin.managecategories.help'|trans,
-                                }
-                    ) 
-        }}
+        <div class="ylabel">
+            {{ form_row(form.name, { 'label' : 'admin.managecategories.label'|trans,
+                                    'value': categoryname,
+                                    'help': 'admin.managecategories.help'|trans,
+                                    }
+                        ) 
+            }}
+        </div>
     {{ form_end(form) }}
     {# List existing metals #}
     <ul class="list-group">
@@ -74,4 +76,5 @@
             </li>
         {% endfor %}
     </ul>
+    <link rel="stylesheet" href="{{asset('/css/yves.css')}}">
 {% endblock %}
