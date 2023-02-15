@@ -9,6 +9,12 @@
 {% endblock %}
 
 {% block body %}
+    {# Data to be used by eventdate.js #}
+    <div class="eventdata"
+        {# data-eventname={{event.name}} #}
+        data-eventobj="{{ event|serialize(format = 'json') }}"
+    >
+    </div>
 
     <ul class="nav mb-2">
         <li class="nav-item"><a class="nav-link" href="{{ path('bootadmin.knives.all', { "new" : "true" } )}}">{% trans %}admin.listknives{% endtrans %}</a></li>
@@ -129,4 +135,7 @@
             {% endfor %}
         </ul>
     </div>
+    <link rel="stylesheet" href="{{asset('/css/yves.css')}}">
+    <script src="{{ asset('node_modules/jquery/dist/jquery.min.js')}}"></script>
+    <script src="{{ asset('scripts/eventdate.js')}}"></script>
 {% endblock %}

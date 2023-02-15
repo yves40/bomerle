@@ -42,7 +42,6 @@ class AdminControllerEvents extends AbstractController
         $eventsbefore = $repo->findPreviousEvents($now);
         $event = new Events();
         $form = $this->createForm(EventsType::class, $event);
-        var_dump('>> '.$new);
         switch($new) {
             case "true":
                     $form->handleRequest($request);
@@ -65,7 +64,6 @@ class AdminControllerEvents extends AbstractController
                     $event = $repo->findOneBy(['id' => $id]);
                     break;
         }
-        var_dump('<<     '.$new);
         var_dump($event->getDate());
         return $this->render('admin/events.html.twig', [
                 "form" => $form->createView(),

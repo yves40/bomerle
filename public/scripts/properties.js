@@ -5,13 +5,15 @@
 //    Jan 30 2023 Knife images location
 //    Feb 04 2023 WIP on knife images administration
 //    Feb 13 2023 Image loading delay removed
+//    Feb 15 2023 WIP on date input in TWIG form
 //----------------------------------------------------------------------------
 const $props = ( () => {
   const allprops = {
-    version : 'bomerle:1.10, Feb 14 2023 ',
+    version : 'bomerle:1.11, Feb 15 2023 ',
     copyright:  'Ratoon software Corporation Inc, Chabreloche France ',
     imagehandler: 'images.js Feb 13 2023, 1.25 ',
     knifehandler: 'knife.js Feb 08 2023, 1.05 ',
+    datehandler: 'twigdate.js Feb 15 2023, 1.01 ',
     knivesimageslocation: '%kernel.project_dir%/public/images/knife'
   }
   let dynprops = {
@@ -23,6 +25,7 @@ const $props = ( () => {
     copyright: () => { return allprops.copyright; },
     imagehandler: () => { return allprops.imagehandler; },
     knifehandler: () => { return allprops.knifehandler; },
+    datehandler: () => { return allprops.datehandler; },
     knivesimageslocation: () => { return allprops.knivesimageslocation; },
     imageavgloadtime: () => { return dynprops['imageavgloadtime']; },
     imageloadcount: () => { return dynprops['imageloadcount']; },
