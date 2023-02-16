@@ -34,6 +34,10 @@ function getDateFields(selector) {
         e.preventDefault();
         handleMonthSelection();
     });
+    $(dateUI.twigyear).change(function (e) {  // Also Monitor year selection in case Feb is selected
+        e.preventDefault();
+        handleMonthSelection();
+    });
 }
 // ------------------------------------------------------------------------------
 // Based on previously identified fields, update the list selection with the 
