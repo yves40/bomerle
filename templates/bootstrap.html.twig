@@ -71,6 +71,7 @@
                             {# ----------------------------------------------------------------------------------- #}
                             {# The action menu starts here #}
                             {% if app.user %} 
+                                {#  KNIVES ----------------------------------------------------------------------------------- #}
                                 <div class="sb-sidenav-menu-heading">{% trans %}admin.actions{% endtrans %}</div>
                                 <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseKnives" aria-expanded="false" aria-controls="collapseLayouts">
                                     <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
@@ -80,16 +81,11 @@
                                 <div class="collapse" id="collapseKnives" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                     <nav class="sb-sidenav-menu-nested nav">
                                         {% if is_granted('ROLE_ADMIN') %}
-                                            <a class="nav-link" href="{{ path('bootadmin.knives.all', { "new" : "true" } )}}">{% trans %}admin.listknives{% endtrans %}</a>
-                                            <a class="nav-link" href="{{ path('bootadmin.knives.edit', { "new" : "true" } )}}">{% trans %}admin.addknife{% endtrans %}</a>
-                                            <a class="nav-link" href="{{ path('bootadmin.accessories', { "new" : "true" } )}}">{% trans %}admin.accessories{% endtrans %}</a>
-                                            <a class="nav-link" href="{{ path('bootadmin.categories', { "new" : "true" } )}}">{% trans %}admin.categories{% endtrans %}</a>
-                                            <a class="nav-link" href="{{ path('bootadmin.handles', { "new" : "true" } )}}">{% trans %}admin.handles{% endtrans %}</a>
-                                            <a class="nav-link" href="{{ path('bootadmin.mechanisms', { "new" : "true" } )}}">{% trans %}admin.mechanisms{% endtrans %}</a>
-                                            <a class="nav-link" href="{{ path('bootadmin.metals', { "new" : "true" } )}}">{% trans %}admin.metals{% endtrans %}</a>
+                                            {% include "admin/adminmenu.html.twig" %}
                                         {% endif %}                                
                                     </nav>
                                 </div>
+                                {# EVENTS ----------------------------------------------------------------------------------- #}
                                 <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseEvents" aria-expanded="false" aria-controls="collapseLayouts">
                                     <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
                                     {% trans %}admin.events.events{% endtrans %}
@@ -98,11 +94,11 @@
                                 <div class="collapse" id="collapseEvents" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                     <nav class="sb-sidenav-menu-nested nav">
                                         {% if is_granted('ROLE_ADMIN') %}
-                                            <a class="nav-link" href="{{ path('bootadmin.events.all', { "new" : "true" } )}}">{% trans %}admin.events.list{% endtrans %}</a>
-                                            <a class="nav-link" href="#">{% trans %}admin.events.register{% endtrans %}</a>
+                                            {% include "admin/eventsmenu.html.twig" %}
                                         {% endif %}                                
                                     </nav>
                                 </div>
+                                {# USERS ----------------------------------------------------------------------------------- #}
                                 <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
                                     <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
                                         {% trans %}admin.users{% endtrans %}

@@ -15,14 +15,10 @@
             {% trans %}admin.manageknives.checkknife{% endtrans %}
         </a>
     {% endif %}
-    <ul class="nav mb-2">
-        <li class="nav-item"><a class="nav-link" href="{{ path('bootadmin.knives.all', { "new" : "true" } )}}">{% trans %}admin.listknives{% endtrans %}</a></li>
-        <li class="nav-item"><a class="nav-link" href="{{ path('bootadmin.knives.edit', { "new" : "true" } )}}">{% trans %}admin.addknife{% endtrans %}</a></li>
-        <li class="nav-item"><a class="nav-link" href="{{ path('bootadmin.accessories', { "new" : "true" } )}}">{% trans %}admin.accessories{% endtrans %}</a></li>
-        <li class="nav-item"><a class="nav-link" href="{{ path('bootadmin.handles', { "new" : "true" } )}}">{% trans %}admin.handles{% endtrans %}</a></li>
-        <li class="nav-item"><a class="nav-link" href="{{ path('bootadmin.mechanisms', { "new" : "true" } )}}">{% trans %}admin.mechanisms{% endtrans %}</a></li>
-        <li class="nav-item"><a class="nav-link" href="{{ path('bootadmin.metals', { "new" : "true" } )}}">{% trans %}admin.metals{% endtrans %}</a></li>                                                                            
-    </ul>
+
+    {% include "admin/adminmenu.html.twig" %}
+
+
     {# 
         Check form call context: The form is generic and called for all CRUD ops.
         When updating, the action must call the update service with an ID

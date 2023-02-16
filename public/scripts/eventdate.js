@@ -17,6 +17,10 @@ $(document).ready(function () {
     updateDateFields('eventdata', 'eventobj');  // eventdata is the ID of the div containing object data
                                                 // Look into events.html.twig
     handleMonthSelection();                     // Ensure number of days in the select list is correct
+
+    let theroute = $('#theroute p').text();
+    console.log(theroute);
+
 })
 
 // ------------------------------------------------------------------------------

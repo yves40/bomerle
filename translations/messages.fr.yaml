@@ -41,8 +41,9 @@ admin:
   users: Utilisateurs
   events:
     events:  Salons
-    list: Liste des salons
-    register: Participation 
+    manage: Gérer
+    listnext: Les prochains 
+    listprevious: Déjà faits
   managemetals:
     title: Gestion des métaux
     header: Ajouter

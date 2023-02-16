@@ -28,14 +28,10 @@
     }}
 
 
-    <ul class="nav mb-2">
-        <li class="nav-item"><a class="nav-link" href="{{ path('bootadmin.knives.all', { "new" : "true" } )}}">{% trans %}admin.listknives{% endtrans %}</a></li>
-        <li class="nav-item"><a class="nav-link" href="{{ path('bootadmin.accessories', { "new" : "true" } )}}">{% trans %}admin.accessories{% endtrans %}</a></li>
-        <li class="nav-item"><a class="nav-link" href="{{ path('bootadmin.categories', { "new" : "true" } )}}">{% trans %}admin.categories{% endtrans %}</</li></a>
-        <li class="nav-item"><a class="nav-link" href="{{ path('bootadmin.handles', { "new" : "true" } )}}">{% trans %}admin.handles{% endtrans %}</a></li>
-        <li class="nav-item"><a class="nav-link" href="{{ path('bootadmin.mechanisms', { "new" : "true" } )}}">{% trans %}admin.mechanisms{% endtrans %}</a></li>
-        <li class="nav-item"><a class="nav-link" href="{{ path('bootadmin.metals', { "new" : "true" } )}}">{% trans %}admin.metals{% endtrans %}</a></li>                                                                            
-    </ul>
+
+    {% include "admin/adminmenu.html.twig" %}
+
+
     <div>
         {% if id == 0 %}
             <button type="submit" class="btn btn-primary mb-3">{% trans %}buttons.add{% endtrans %}</button>

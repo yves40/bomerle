@@ -41,8 +41,9 @@ admin:
   users: Registered Users
   events:
     events:  Events
-    list: List events
-    register: Register 
+    manage: Manage
+    listnext: Next events 
+    listprevious: Attended events
   managemetals:
     title: Metals management
     header: Add

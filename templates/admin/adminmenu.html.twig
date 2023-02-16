@@ -1,0 +1,21 @@
+
+
+{# Data to be used by menuhandler.js #}
+<div class="menudata" data-pathinfo="{{app.request.pathinfo}}"></div>
+
+{# <div id="adminpath">
+    <p>{{ app.request.pathinfo }}</p>
+</div> #}
+
+<ul class="nav mb-2">
+    <li class="nav-item"><a class="nav-link" href="{{ path('bootadmin.knives.all', { "new" : "true" } )}}">{% trans %}admin.listknives{% endtrans %}</a></li>
+    <li class="nav-item"><a class="nav-link" href="{{ path('bootadmin.knives.edit', { "new" : "true" } )}}">{% trans %}admin.addknife{% endtrans %}</a></li>
+    <li class="nav-item"><a class="nav-link" href="{{ path('bootadmin.categories', { "new" : "true" } )}}">{% trans %}admin.categories{% endtrans %}</</li></a>
+    <li class="nav-item"><a class="nav-link" href="{{ path('bootadmin.accessories', { "new" : "true" } )}}">{% trans %}admin.accessories{% endtrans %}</</li></a>
+    <li class="nav-item"><a class="nav-link" href="{{ path('bootadmin.handles', { "new" : "true" } )}}">{% trans %}admin.handles{% endtrans %}</a></li>
+    <li class="nav-item"><a class="nav-link" href="{{ path('bootadmin.mechanisms', { "new" : "true" } )}}">{% trans %}admin.mechanisms{% endtrans %}</a></li>
+    <li class="nav-item"><a class="nav-link" href="{{ path('bootadmin.metals', { "new" : "true" } )}}">{% trans %}admin.metals{% endtrans %}</a></li>                                                                            
+</ul>
+<script src="{{ asset('node_modules/jquery/dist/jquery.min.js')}}"></script>
+<script src="{{ asset('scripts/menuhandler.js')}}"></script>
+
