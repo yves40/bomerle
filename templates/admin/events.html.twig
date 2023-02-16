@@ -9,9 +9,8 @@
 {% endblock %}
 
 {% block body %}
-    {# Data to be used by eventdate.js #}
+    {# Data to be used by eventdate.js, pass the whole event object #}
     <div class="eventdata"
-        {# data-eventname={{event.name}} #}
         data-eventobj="{{ event|serialize(format = 'json') }}"
     >
     </div>
