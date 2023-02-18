@@ -109,7 +109,7 @@ class AdminControllerKnife extends AbstractController
             else {
                 $this->addFlash('success', $translator->trans('admin.manageknives.updated'));
             }
-            // return $this->redirectToRoute('bootadmin.knives.all', array( 'new' => "true"));
+            return $this->redirectToRoute('bootadmin.knives.edit', array( 'id' => $knife->getId()));    // Back to knife management screen
         }
         return $this->render('admin/knife.html.twig', [
             "locale" =>  $loc,
