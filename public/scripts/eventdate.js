@@ -17,10 +17,7 @@ $(document).ready(function () {
     updateDateFields('eventdata', 'eventobj');  // eventdata is the ID of the div containing object data
                                                 // Look into events.html.twig
     handleMonthSelection();                     // Ensure number of days in the select list is correct
-
     let theroute = $('#theroute p').text();
-    console.log(theroute);
-
 })
 
 // ------------------------------------------------------------------------------
@@ -79,7 +76,6 @@ function handleMonthSelection() {
         case 6:
         case 9:
         case 11:
-            console.log('30 days month');
             dateUI.day29.show();
             dateUI.day30.show();
             dateUI.day31.hide();
@@ -88,16 +84,13 @@ function handleMonthSelection() {
             dateUI.day30.hide();
             dateUI.day31.hide();
             if(isLeapYear($(dateUI.twigyear).val())) {
-                console.log('29 days month');
                 dateUI.day29.show();
             }
             else {
-                console.log('28 days month');
                 dateUI.day29.hide();
             }
             break;
         default:
-            console.log('31 days month');
             dateUI.day29.show();
             dateUI.day30.show();
             dateUI.day31.show();

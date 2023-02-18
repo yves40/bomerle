@@ -118,8 +118,8 @@ admin:
     address: Adresse
     date: Date du salon
     helpdate: 1er jour du salon
-    listheader: Evènement auxquels vous allez participer
-    listbefore: Evènement auxquels vous avez participé
+    listheader: Evènement(s) auxquel(s) vous allez participer
+    listbefore: Evènement(s) auxquel(s) vous avez participé
     created: Evènement ajouté
     deleted: Evènement supprimé
     updated: Evènement mis à jour

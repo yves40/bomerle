@@ -3,14 +3,16 @@
 */
 $(document).ready(function () {
     let thepath = $('.menudata').data('pathinfo');
-    console.log(thepath);
-    $('li.nav-item a').each(function (index, element) {
-        let path = $(element).attr('href');
-        if(path.includes('?')) {
-            path = path.split('?')[0];
-        }
-        if(thepath.includes(path)){
-            $(this).parent().hide();
+    $('.dynmenu li.nav-item a').each(function (index, element) {
+        let sticky = $(element).hasClass('sticky');
+        if(!sticky) {
+            let path = $(element).attr('href');
+            if(path.includes('?')) {
+                path = path.split('?')[0];
+            }
+            if(thepath.includes(path)){
+                $(this).parent().hide();
+            }
         }
     });
 })

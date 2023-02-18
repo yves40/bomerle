@@ -118,8 +118,8 @@ admin:
     address: Address
     date: Event date
     helpdate: Event 1st day
-    listheader: Event you will attend
-    listbefore: Event you attended
+    listheader: Event(s) you will attend
+    listbefore: Event(s) you attended
     created: Event added
     deleted: Event deleted
     updated: Event updated

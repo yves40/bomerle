@@ -18,6 +18,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 #[Route('/bootadmin')]
 class AdminControllerEvents extends AbstractController
 {
+
+    // --------------------------------------------------------------------------
+    const NEXTEVENTS = 1;
+    const PREVIOUSEVENTS = 2;
+
     private LocaleSwitcher $localeSwitcher;
     // --------------------------------------------------------------------------
     public function __construct(LocaleSwitcher $localeSwitcher)
@@ -27,10 +32,14 @@ class AdminControllerEvents extends AbstractController
     // --------------------------------------------------------------------------
     //      E V E N T S    S E R V I C E S 
     // --------------------------------------------------------------------------
-    #[Route('/events/all/{new?true}/{id?0}', name: 'bootadmin.events.all')]
+    // listall :    0 Yes
+    //              1 Next events
+    //              2 Previous events
+    #[Route('/events/all/{new?true}/{id?0}/{listall?0}', name: 'bootadmin.events.all')]
     public function home(Request $request,
                         $new,
                         $id,
+                        $listall,
                         EntityManagerInterface $entityManager,
                         TranslatorInterface $translator): Response
     {
@@ -64,10 +73,10 @@ class AdminControllerEvents extends AbstractController
                     $event = $repo->findOneBy(['id' => $id]);
                     break;
         }
-        // var_dump($event->getDate());
         return $this->render('admin/events.html.twig', [
                 "form" => $form->createView(),
                 "event" => $event,
+                'listall' => $listall,
                 "events" => $events,
                 "eventsbefore" => $eventsbefore,
                 "locale" =>  $loc,
@@ -99,15 +108,6 @@ class AdminControllerEvents extends AbstractController
         }
         return $this->redirectToRoute('bootadmin.events.all', array( 'new' => "false",
                                                                         'id' => $id));
-        // return $this->render('admin/events.html.twig', [
-        //         "form" => $form->createView(),
-        //         "eventslist" => $events,
-        //         "event" => $event,
-        //         "locale" =>  $loc,
-        //         "new" => false,
-        //         "id" => $id
-        //     ]
-        // );               
     }
     // --------------------------------------------------------------------------
     #[Route('/events/delete/{id}', name: 'bootadmin.events.delete')]
@@ -127,20 +127,26 @@ class AdminControllerEvents extends AbstractController
         catch(Exception $e) {
             $this->addFlash('error', $e->getMessage());
         }
-
-        // $event = new Events();
-        // $form = $this->createForm(EventsType::class, $event);
-        // $events = $repo->findAll();
         return $this->redirectToRoute('bootadmin.events.all', array( 'new' => "true"));
-        // return $this->render('admin/events.html.twig', [
-        //         "form" => $form->createView(),
-        //         "eventslist" => $events,
-        //         "event" => $event,
-        //         "locale" =>  $loc,
-        //         "new" => true
-        //     ]
-        // );               
     }
+    // --------------------------------------------------------------------------
+    #[Route('/events/allnext', name: 'bootadmin.events.allnext')]
+    public function allNextEvents(Request $request,
+                        TranslatorInterface $translator): Response
+    {
+        return $this->redirectToRoute('bootadmin.events.all', array( 'new' => "true",
+                                                                        'id' => 0,
+                                                                        'listall' => $this::NEXTEVENTS));
+    }
+    // --------------------------------------------------------------------------
+    #[Route('/events/allprevious', name: 'bootadmin.events.allprevious')]
+    public function allPreviousEvents(Request $request,
+                        TranslatorInterface $translator): Response
+    {
+        return $this->redirectToRoute('bootadmin.events.all', array( 'new' => "true",
+                                                                        'id' => 0,
+                                                                        'listall' => $this::PREVIOUSEVENTS));
+}
     // --------------------------------------------------------------------------
     // P R I V A T E     S E R V I C E S 
     // --------------------------------------------------------------------------
