@@ -1,6 +1,6 @@
 # Have a look at config/packages/translation.yaml
 app:
-  version: Beaumerle Administration [Feb 2023, 1.52]
+  version: Beaumerle Administration [Feb 2023, 1.53]
   copyright:  'Ratoon software Corporation Inc, Chabreloche France '
 lang:
   menufr: Langue
@@ -17,6 +17,8 @@ user:
   connect: Login
   disconnect: Logout
   anonymous: anonymous
+  menuheader: Users
+  manage: Manage
   list: Show users
   add: Add
 home:
@@ -125,6 +127,11 @@ admin:
     updated: Event updated
   manageusers:
     title: Users
+logs:
+  menuheader: Logs
+  site: Web site logs
+  user: User logs
+# Generic messages
 buttons:
   add: Add
   modify: Update

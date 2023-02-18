@@ -1,6 +1,6 @@
 # Have a look at config/packages/translation.yaml
 app:
-  version: Administration Beaumerle  [Fev, 1.52]
+  version: Administration Beaumerle  [Fev, 1.53]
   copyright:  'Ratoon software Corporation Inc, Chabreloche France '
 lang:
   menufr: Langue
@@ -17,6 +17,8 @@ user:
   connect: Se connecter
   disconnect: Se déconnecter
   anonymous: Anonyme
+  menuheader: Utilisateurs
+  manage: Gérer
   list: Lister
   add: Ajouter un utilisateur
 home:
@@ -38,7 +40,6 @@ admin:
   handles: Manches
   mechanisms: Mécanismes
   metals: Métaux
-  users: Utilisateurs
   events:
     events:  Salons
     manage: Gérer
@@ -125,6 +126,11 @@ admin:
     updated: Evènement mis à jour
   manageusers:
     title: Utilisateurs
+logs:
+  menuheader: Les logs
+  site: Du site WEB
+  user: Des utilisateurs
+# Generic messages
 buttons:
   add: Ajouter
   modify: Modifier
