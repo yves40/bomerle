@@ -477,10 +477,9 @@ class AdminController extends AbstractController
     // --------------------------------------------------------------------------
     // A C C E S S O R I E S     S E R V I C E S 
     // --------------------------------------------------------------------------
-    #[Route('/accessories/home/{new?true}/{accessoryname?}/{id?10000}/{knifeconflict?0}', name: 'bootadmin.accessories')]
+    #[Route('/accessories/home/{new?true}/{id?0}/{knifeconflict?0}', name: 'bootadmin.accessories')]
     public function AdminAccessories(Request $request,
                                 $new,
-                                ?string $accessoryname,
                                 $id,
                                 $knifeconflict,
                                 EntityManagerInterface $entityManager,
@@ -495,6 +494,9 @@ class AdminController extends AbstractController
         */
         $accessory = new Accessories();
         $repo = $entityManager->getRepository(Accessories::class);
+        if($id != 0) { // Edit an existing accessory
+            $accessory = $repo->findOneBy(['id' => $id]);
+        }
         $accessories = $repo->listAccessories();
         $form = $this->createForm(AccessoriesType::class, $accessory);
         if($new === 'abort') {  // The user aborted the modification
@@ -512,8 +514,8 @@ class AdminController extends AbstractController
         return $this->render('admin/accessories.html.twig', [
             "locale" =>  $loc,
             "new" =>  $new,
-            "accessoryname" => $accessoryname,
             "id" => $id,
+            "accessoryname" => $accessory->getName(),
             "knifeconflict" => $knifeconflict,
             "accessories" => $accessories,
             "form" => $form->createView()
@@ -539,7 +541,7 @@ class AdminController extends AbstractController
             $notice = $notice.' : '.$conflicts[0]['name'];
             $this->addFlash('error', $notice);
             return $this->redirectToRoute('bootadmin.accessories', array( 'new' => "true",
-                                                                        'accessoryname' => $accessory->getName(),
+                                                                        'id' => $accessory->getId(),
                                                                         'knifeconflict' => $conflicts[0]['id']));
         }
         $repo->remove($accessory, true);
@@ -566,7 +568,6 @@ class AdminController extends AbstractController
             return $this->redirectToRoute('bootadmin.accessories', array( 'new' => "true"));
         }        
         return $this->redirectToRoute('bootadmin.accessories', array(  'new' => "false",
-                                                                'accessoryname' => $accessory->getName(),
                                                                 'id' => $accessory->getId()
                                                             ));
     }
