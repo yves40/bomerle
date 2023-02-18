@@ -99,16 +99,31 @@
                                     </nav>
                                 </div>
                                 {# USERS ----------------------------------------------------------------------------------- #}
-                                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
+                                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseUsers" aria-expanded="false" aria-controls="collapseLayouts">
                                     <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                                        {% trans %}admin.users{% endtrans %}
+                                        {% trans %}user.menuheader{% endtrans %}
                                     <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                                 </a>
-                                <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                                <div class="collapse" id="collapseUsers" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                     <nav class="sb-sidenav-menu-nested nav">
-                                        <a class="nav-link" href="{{ path('bootadmin.users.all', { "new" : "true" } )}}">{% trans %}user.list{% endtrans %}</a>
                                         {% if is_granted('ROLE_ADMIN') %}
+                                            <a class="nav-link" href="{{ path('bootadmin.users.all', { "new" : "true" } )}}">
+                                                                        {% trans %}user.manage{% endtrans %}</a>
                                             <a class="nav-link" href="#">{% trans %}user.add{% endtrans %}</a>
+                                        {% endif %}                                
+                                    </nav>
+                                </div>
+                                {# LOGS  ----------------------------------------------------------------------------------- #}
+                                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLogs" aria-expanded="false" aria-controls="collapseLayouts">
+                                    <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                                        {% trans %}logs.menuheader{% endtrans %}
+                                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                                </a>
+                                <div class="collapse" id="collapseLogs" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                                    <nav class="sb-sidenav-menu-nested nav">
+                                        {% if is_granted('ROLE_ADMIN') %}
+                                            <a class="nav-link" href="#">{% trans %}logs.user{% endtrans %}</a>
+                                            <a class="nav-link" href="#">{% trans %}logs.site{% endtrans %}</a>
                                         {% endif %}                                
                                     </nav>
                                 </div>
