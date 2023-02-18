@@ -86,10 +86,9 @@ class AdminController extends AbstractController
         @param number $id used when updating or deleting a metal
         @return Response
     */
-    #[Route('/metals/home/{new?true}/{metalname?}/{id?10000}/{knifeconflict?0}', name: 'bootadmin.metals')]
+    #[Route('/metals/home/{new?true}/{id?0}/{knifeconflict?0}', name: 'bootadmin.metals')]
     public function AdminMetals(Request $request,
                                 $new,
-                                ?string $metalname,
                                 $id,
                                 $knifeconflict,
                                 EntityManagerInterface $entityManager,
@@ -100,6 +99,9 @@ class AdminController extends AbstractController
 
         $metal = new Metals();
         $repo = $entityManager->getRepository(Metals::class);
+        if($id != 0 ) { // Edit existing metal ? 
+            $metal = $repo->findOneBy([ 'id' => $id ]);
+        }
         $metals = $repo->listMetals();
         $form = $this->createForm(MetalsType::class, $metal);
         if($new === 'abort') {  // The user aborted the modification
@@ -117,7 +119,7 @@ class AdminController extends AbstractController
         return $this->render('admin/metals.html.twig', [
             "locale" =>  $loc,
             "new" =>  $new,
-            "metalname" => $metalname,
+            "metalname" => $metal->getName(),
             "id" => $id,
             "knifeconflict" => $knifeconflict,
             "metals" => $metals,
@@ -147,7 +149,7 @@ class AdminController extends AbstractController
             $notice = $notice.' : '.$conflicts[0]['name'];
             $this->addFlash('error', $notice);
             return $this->redirectToRoute('bootadmin.metals', array( 'new' => "true", 
-                                                                'metalname' => $metal->getName(),
+                                                                'id' => $metal->getId(),
                                                                 'knifeconflict' => $conflicts[0]['id']));
         }
         $repo->remove($metal, true);
@@ -174,20 +176,17 @@ class AdminController extends AbstractController
             $this->addFlash('success', $translator->trans('admin.managemetals.updated'));
             return $this->redirectToRoute('bootadmin.metals', array( 'new' => "true"));
         }
-        
         return $this->redirectToRoute('bootadmin.metals', 
                             array(  'new' => "false", 
-                                    'metalname' => $metal->getName(),
                                     'id' => $metal->getId()
                                 ));
     }
     // --------------------------------------------------------------------------
     // M E C H A N I S M S     S E R V I C E S 
     // --------------------------------------------------------------------------
-    #[Route('/mechanisms/home/{new?true}/{mechanismname?}/{id?10000}/{knifeconflict?0}', name: 'bootadmin.mechanisms')]
+    #[Route('/mechanisms/home/{new?true}/{id?0}/{knifeconflict?0}', name: 'bootadmin.mechanisms')]
     public function AdminMechanisms(Request $request,
                                 $new,
-                                ?string $mechanismname,
                                 $id,
                                 $knifeconflict,
                                 EntityManagerInterface $entityManager,
@@ -202,6 +201,9 @@ class AdminController extends AbstractController
         */
         $mechanism = new Mechanism();
         $repo = $entityManager->getRepository(Mechanism::class);
+        if ( $id != 0) {
+            $mechanism = $repo->find($id);
+        }
         $mechanisms = $repo->listMechanisms();
         $form = $this->createForm(MechanismType::class, $mechanism);
         if($new === 'abort') {  // The user aborted the modification
@@ -219,7 +221,7 @@ class AdminController extends AbstractController
         return $this->render('admin/mechanisms.html.twig', [
             "locale" =>  $loc,
             "new" =>  $new,
-            "mechanismname" => $mechanismname,
+            "mechanismname" => $mechanism->getName(),
             "id" => $id,
             "knifeconflict" => $knifeconflict,
             "mechanisms" => $mechanisms,
@@ -249,7 +251,7 @@ class AdminController extends AbstractController
                 $notice = $notice.' : '.$conflicts[0]['name'];
                 $this->addFlash('error', $notice);
             return $this->redirectToRoute('bootadmin.mechanisms', array( 'new' => "true",
-                                                                 'mechanismname' => $mechanism->getName(),
+                                                                 'id' => $mechanism->getId(),
                                                                  'knifeconflict' => $conflicts[0]['id']));
         }
         $repo->remove($mechanism, true);
@@ -279,17 +281,15 @@ class AdminController extends AbstractController
         // var_dump($metal->getName(), $metal->getId());die;
         return $this->redirectToRoute('bootadmin.mechanisms', 
                             array(  'new' => "false", 
-                                    'mechanismname' => $mechanism->getName(),
                                     'id' => $mechanism->getId()
                                 ));
     }
     // --------------------------------------------------------------------------
     // H A N D L E S     S E R V I C E S 
     // --------------------------------------------------------------------------
-    #[Route('/handles/home/{new?true}/{handlename?}/{id?10000}/{knifeconflict?0}', name: 'bootadmin.handles')]
+    #[Route('/handles/home/{new?true}/{id?0}/{knifeconflict?0}', name: 'bootadmin.handles')]
     public function AdminHandles(Request $request,
                                 $new,
-                                ?string $handlename,
                                 $id,
                                 $knifeconflict,
                                 EntityManagerInterface $entityManager,
@@ -299,6 +299,9 @@ class AdminController extends AbstractController
         $loc = $this->locale($request); // Set the proper language for translations
         $handle = new Handle();
         $repo = $entityManager->getRepository(Handle::class);
+        if($id != 0) {  // Exisiting handle ?
+            $handle = $repo->find($id);
+        }
         $handles = $repo->listHandles();
         $form = $this->createForm(HandleType::class, $handle);
         if($new === 'abort') {  // The user aborted the modification
@@ -316,7 +319,7 @@ class AdminController extends AbstractController
         return $this->render('admin/handles.html.twig', [
             "locale" =>  $loc,
             "new" =>  $new,
-            "handlename" => $handlename,
+            "handlename" => $handle->getName(),
             "id" => $id,
             "knifeconflict" => $knifeconflict,
             "handles" => $handles,
@@ -346,7 +349,7 @@ class AdminController extends AbstractController
             $notice = $notice.' : '.$conflicts[0]['name'];
             $this->addFlash('error', $notice);
             return $this->redirectToRoute('bootadmin.handles', array( 'new' => "true",
-                                                                'handlename' => $handle->getName(),
+                                                                'id' => $handle->getId(),
                                                                 'knifeconflict' => $conflicts[0]['id']));
         }
         $repo->remove($handle, true);
@@ -374,17 +377,15 @@ class AdminController extends AbstractController
             return $this->redirectToRoute('bootadmin.handles', array( 'new' => "true"));
         }        
         return $this->redirectToRoute('bootadmin.handles', array(  'new' => "false",
-                                                                'handlename' => $handle->getName(),
                                                                 'id' => $handle->getId()
                                                             ));
     }
     // --------------------------------------------------------------------------
     // C A T E G O R I E S     S E R V I C E S 
     // --------------------------------------------------------------------------
-    #[Route('/categories/home/{new?true}/{categoryname?}/{id?10000}/{knifeconflict?0}', name: 'bootadmin.categories')]
+    #[Route('/categories/home/{new?true}/{id?0}/{knifeconflict?0}', name: 'bootadmin.categories')]
     public function AdminCategories(Request $request,
                                 $new,
-                                ?string $categoryname,
                                 $id,
                                 $knifeconflict,
                                 EntityManagerInterface $entityManager,
@@ -399,6 +400,9 @@ class AdminController extends AbstractController
         */
         $category = new Category();
         $repo = $entityManager->getRepository(Category::class);
+        if($id != 0){ // Exisiting Category ? 
+            $category = $repo->find($id);
+        }
         $categories = $repo->listCategories();
         $form = $this->createForm(CategoryType::class, $category);
         if($new === 'abort') {  // The user aborted the modification
@@ -416,7 +420,7 @@ class AdminController extends AbstractController
         return $this->render('admin/categories.html.twig', [
             "locale" =>  $loc,
             "new" =>  $new,
-            "categoryname" => $categoryname,
+            "categoryname" => $category->getName(),
             "id" => $id,
             "knifeconflict" => $knifeconflict,
             "categories" => $categories,
@@ -444,7 +448,7 @@ class AdminController extends AbstractController
             $notice = $notice.' : '.$conflicts[0]['name'];
             $this->addFlash('error', $notice);
             return $this->redirectToRoute('bootadmin.categories', array( 'new' => "true",
-                                                                        'categoryname' => $category->getName(),
+                                                                        'id' => $category->getId(),
                                                                         'knifeconflict' => $conflicts[0]['id']));
         }
         $repo->remove($category, true);
@@ -470,7 +474,6 @@ class AdminController extends AbstractController
             return $this->redirectToRoute('bootadmin.categories', array( 'new' => "true"));
         }        
         return $this->redirectToRoute('bootadmin.categories', array(  'new' => "false",
-                                                                'categoryname' => $category->getName(),
                                                                 'id' => $category->getId()
                                                             ));
     }
