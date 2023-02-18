@@ -12,7 +12,7 @@ let dateUI = {
 $(document).ready(function () {
     $props.load();
     console.log(`[${$props.datehandler()} ]` );
-    // In the events TWIG form, IDs are refixed by events
+    // In the events TWIG form, IDs are prefixed by events
     getDateFields('events');                    // events if the root string for TWIG generated IDs
     updateDateFields('eventdata', 'eventobj');  // eventdata is the ID of the div containing object data
                                                 // Look into events.html.twig

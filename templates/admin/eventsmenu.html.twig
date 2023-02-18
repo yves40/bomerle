@@ -3,10 +3,6 @@
 {# Data to be used by menuhandler.js #}
 <div class="menudata" data-pathinfo="{{app.request.pathinfo}}"></div>
 
-{# <div id="adminpath">
-    <p>{{ app.request.pathinfo }}</p>
-</div> #}
-
 <ul class="nav mb-2">
     <li class="nav-item"><a class="nav-link" href="{{ path('bootadmin.events.all', { "new" : "true" } )}}">{% trans %}admin.events.manage{% endtrans %}</a></li>
     {# <li class="nav-item"><a class="nav-link" href="{{ path('bootadmin.events.all', { "new" : "true",
