@@ -112,6 +112,7 @@ admin:
     tab1: Données
     tab2: Images
     checkknife: Editer le couteau en conflit
+    deleteconfirm: Confirmez la suppression de
   manageevents:
     title: Salons
     label: 'Nom du salon'

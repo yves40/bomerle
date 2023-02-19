@@ -22,7 +22,10 @@
                     <div class="col-3">{{'admin.manageknives.mechanism'|trans}} : {{knife.mechanism}}</div>
                     <div class="col-1">{{'admin.manageknives.stock'|trans}} : {{knife.stock}} </div>
                     <div class="col-1">{{knife.price}} €</div>
-                    <div class="col-1">
+                    <div class="col-1 deleteaction" 
+                            data-knifeid={{knife.id}}
+                            data-knifename="{{knife.name}}"
+                            data-message="{{'admin.manageknives.deleteconfirm'|trans}}">
                         <a href="{{ path('bootadmin.knives.delete', {id: knife.id}) }}"><i class="fa fa-trash"></i></a>
                     </div>
                     <div class="col-1">

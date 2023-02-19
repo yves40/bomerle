@@ -6,6 +6,7 @@ $(document).ready(function () {
     // Arm click handlers
     // -------------------------
     armIcons();
+    armDeleteAlert();
 })
 // ------------------------------------------------------------- handler 
 function actionRequest(element) {
@@ -360,5 +361,21 @@ function armIcons() {
     $("#commandzone a").click(function (event) {
         event.preventDefault();
         actionRequest(this);
+    });
+}
+// ------------------------------------------------------------- Set up icons handlers
+function armDeleteAlert() {
+    $(".deleteaction").click(function (event) {
+        event.preventDefault();
+        console.log(`You decided to delete a knife`);
+        let knifeid = $(this).data('knifeid');
+        let knifename = $(this).data('knifename');
+        let message = $(this).data('message');
+        if (confirm(`${message} ${knifename}`, 'Sure ?')) {
+            txt = "You pressed OK!";
+          } else {
+            txt = "You pressed Cancel!";
+        }
+        console.log(txt); 
     });
 }

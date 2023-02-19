@@ -113,6 +113,7 @@ admin:
     tab1: Main data
     tab2: Knife Images
     checkknife: Edit conflicting knife
+    deleteconfirm: Confirm deletion of
   manageevents:
     title: Events
     label: Event name
