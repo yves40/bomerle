@@ -136,6 +136,7 @@ logs:
 buttons:
   add: Add
   modify: Update
+  confirm: Confirm
   cancel: Abort
   login: Sign In
 images:

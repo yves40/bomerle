@@ -367,15 +367,11 @@ function armIcons() {
 function armDeleteAlert() {
     $(".deleteaction").click(function (event) {
         event.preventDefault();
-        console.log(`You decided to delete a knife`);
         let knifeid = $(this).data('knifeid');
         let knifename = $(this).data('knifename');
-        let message = $(this).data('message');
-        if (confirm(`${message} ${knifename}`, 'Sure ?')) {
-            txt = "You pressed OK!";
-          } else {
-            txt = "You pressed Cancel!";
-        }
-        console.log(txt); 
+        let modalbody = $(".modal-body p");
+        modalbody.text(`${knifename} : ID : ${knifeid}`);
+        $(".modalaction").attr('onclick', 
+                    `window.location.href='/bootadmin/knives/delete/${knifeid}'`);
     });
 }

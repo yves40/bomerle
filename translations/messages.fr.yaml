@@ -135,6 +135,7 @@ logs:
 buttons:
   add: Ajouter
   modify: Modifier
+  confirm: Confirmer
   cancel: Annuler
   login: Se connecter
 images:
