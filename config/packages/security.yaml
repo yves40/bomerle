@@ -28,7 +28,6 @@ security:
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#the-firewall
-
             # https://symfony.com/doc/current/security/impersonating_user.html
             # switch_user: true
     role_hierarchy:
@@ -41,6 +40,7 @@ security:
         - { path: ^/components, roles: ROLE_ADMIN }
         - { path: ^/addevent, roles: ROLE_ADMIN }
         - { path: ^/newsletter, roles: ROLE_ADMIN }
+        - { path: ^/bootadmin, roles: ROLE_ADMIN }
         # - { path: ^/profile, roles: ROLE_USER }
 
 when@test:
