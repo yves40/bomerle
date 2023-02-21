@@ -7,10 +7,11 @@
 //    Feb 13 2023 Image loading delay removed
 //    Feb 15 2023 WIP on date input in TWIG form
 //    Feb 16 2023 WIP on date input in TWIG form
+//    Feb 21 2023 Authentication email stored in client
 //----------------------------------------------------------------------------
 const $props = ( () => {
   const allprops = {
-    version : 'bomerle:1.12, Feb 16 2023 ',
+    version : 'bomerle:1.13, Feb 21 2023 ',
     copyright:  'Ratoon software Corporation Inc, Chabreloche France ',
     imagehandler: 'images.js Feb 13 2023, 1.25 ',
     knifehandler: 'knife.js Feb 08 2023, 1.05 ',
@@ -42,7 +43,9 @@ const $props = ( () => {
         sessionStorage.setItem('dynprops', JSON.stringify(dynprops));
         return dynprops;
       }
-     }
-  }
+     },
+     saveuseremail: (useremail) => { localStorage.setItem('useremail', useremail); },
+     getuseremail: () => { return localStorage.getItem('useremail');}
+    }
 })();
 //  localStorage.setItem('lastlogin', 'yves773340');
