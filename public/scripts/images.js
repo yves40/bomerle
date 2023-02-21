@@ -18,13 +18,14 @@ $(document).ready(function () {
         let elemheight = element.height;
         element.src = "/images/gif/loading.gif";
         $(element).height("20px").width("20px").attr( { 'object-fit': 'cover', 'object-position': 'center'} );
-        $(element).on("load", () => {     // Here we track the end of the wait gif load
-            $(element).off("load");     // Removes event handlers that were attached with .on()
+        $(element).on("load", () => {    // End of the wait gif load
+            $(element).off("load");      // Removes event handlers that were attached with .on()
             element.src = url;
             let timer = new timeHelper();
             timer.startTimer();
-            $(element).on("load", () => {
-                timer.stopTimer();
+            $(element).on("load", (theurl) => {
+                $(element).src = theurl;
+                timer.stopTimer();  // End of the requested image load
                 $(element).off("load");
                 $(element).height(elemheight).width(elemwidth);
                 let elapsed = timer.getElapsedString();
