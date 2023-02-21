@@ -37,9 +37,9 @@
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                         {% if app.user %}
-                            <li><a class="dropdown-item" href="{{ path('app_logout') }}">{% trans %}user.disconnect{% endtrans %}</a></li>
+                            <li><a class="dropdown-item" href="{{ path('bootadmin.logout') }}">{% trans %}user.disconnect{% endtrans %}</a></li>
                         {% else %}
-                            <li><a class="dropdown-item" href="{{ path('app_login') }}">{% trans %}user.connect{% endtrans %}</a></li>
+                            <li><a class="dropdown-item" href="{{ path('bootadmin.login') }}">{% trans %}user.connect{% endtrans %}</a></li>
                         {%  endif %}
                     </ul>
                 </li>

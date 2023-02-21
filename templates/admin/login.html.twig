@@ -8,21 +8,30 @@
 
 {% block body %}
     <form method="post">
-        <div class="row">
-            <div class="col">
-                <label class="mb-4" for="inputEmail">{% trans %}user.email{% endtrans %}</label>
-                <input type="email" name="email" id="inputEmail" class="form-control" autocomplete="email" autofocus>
+        <div class="mx-auto" style="width: 50%;">
+            <div class="row">
+                <div class="col">
+                    <label class="mb-4" for="inputEmail">{% trans %}user.email{% endtrans %}</label>
+                    <input type="email" name="email" id="inputEmail" class="form-control" autocomplete="email" autofocus>
+                </div>
             </div>
-            <div class="col">
-                <label class="mb-4" for="inputPassword">{% trans %}user.password{% endtrans %}</label>
-                <input type="password" name="password" id="inputPassword" class="form-control">
+            <div class="row">
+                <div class="col">
+                    <label class="mb-4 mt-4" for="inputPassword">{% trans %}user.password{% endtrans %}</label>
+                    <input type="password" name="password" id="inputPassword" class="form-control">
+                </div>
             </div>
+            <input type="hidden" name="_csrf_token"
+                value="{{ csrf_token('authenticate') }}"
+            >
+            <button class="btn btn-lg btn-primary mt-4" type="submit">
+                {% trans %}buttons.login{% endtrans %}
+            </button>
+            {# <div class="row mt-4">
+                <viv class="col-2"><a href="#">Accueil</a></viv>
+                <viv class="col-6"><a href="#">Mot de passe oublié</a></viv>
+                <viv class="col-4"><a href="#">Inscription</a></viv>
+            </div> #}
         </div>
-        <input type="hidden" name="_csrf_token"
-            value="{{ csrf_token('authenticate') }}"
-        >
-        <button class="btn btn-lg btn-primary mt-4" type="submit">
-            {% trans %}buttons.login{% endtrans %}
-        </button>
     </form>
 {% endblock %}

@@ -12,9 +12,29 @@ security:
                 class: App\Entity\Users
                 property: email
     firewalls:
+        # Ensure Symfony profiler URLs are not protected
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
+
+        # Add this firewall to provide a second boot handler
+        boot:
+            pattern: ^/securitybootadmin|bootadmin/
+            lazy: true
+            provider: app_user_provider
+            custom_authenticator: App\Security\BootLoginFormAuthenticator
+            logout:
+                path: bootadmin.logout
+                # where to redirect after   logout
+                target: home
+            entry_point: App\Security\BootAuthenticationEntryPoint
+            access_denied_handler: App\Security\AccessDeniedHandler
+            # activate different ways to authenticate
+            # https://symfony.com/doc/current/security.html#the-firewall
+            # https://symfony.com/doc/current/security/impersonating_user.html
+            # switch_user: true
+
+        # This is the default firewall
         main:
             lazy: true
             provider: app_user_provider
@@ -25,11 +45,6 @@ security:
                 target: home
             entry_point: App\Security\AuthenticationEntryPoint
             access_denied_handler: App\Security\AccessDeniedHandler
-
-            # activate different ways to authenticate
-            # https://symfony.com/doc/current/security.html#the-firewall
-            # https://symfony.com/doc/current/security/impersonating_user.html
-            # switch_user: true
     role_hierarchy:
         ROLE_SUPER_ADMIN: [ ROLE_ADMIN, ROLE_ADMIN_USERS, ROLE_ADMIN_SHOP]
         
