@@ -28,13 +28,16 @@
                 {% endif %}                        
                 <!-- user info if connected -->
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle useremail" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         {% if app.user %}
-                            {{ app.user.email }}
+                            {{app.user.email}}
                         {% else %}
                             <i class="fas fa-user fa-fw"></i>
                         {%  endif %}
                     </a>
+                    {% if app.user %}
+                        <script>localStorage.setItem('useremail', '{{app.user.email}}');</script>
+                    {% endif %}                
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                         {% if app.user %}
                             <li><a class="dropdown-item" href="{{ path('bootadmin.logout') }}">{% trans %}user.disconnect{% endtrans %}</a></li>
@@ -58,7 +61,7 @@
                                 {% trans %}home.home{% endtrans %}
                             </a>
                             {% if app.user %}
-                                <a class="nav-link" href="{{ path('app_logout') }}">
+                                <a class="nav-link" href="{{ path('bootadmin.logout') }}">
                                     <div class="sb-nav-link-icon"><i class="fas fa-square-xmark"></i></div>
                                     {% trans %}user.disconnect{% endtrans %}
                                 </a>
