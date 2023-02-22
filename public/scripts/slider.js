@@ -4,6 +4,8 @@ $(document).ready(function () {
     const buttonshow = $("#showslider");
     const slidescontainer = $("#yslider");
     let slides = $(".carousel-inner");
+    let indicators = $(".carousel-indicators");
+
     $(buttonhide).hide();
     $(slidescontainer).hide();
     let imagesArray = getImages($(".sliderdata").data('images'));
@@ -40,11 +42,15 @@ $(document).ready(function () {
     function addImages(imglist) {
         let slides = $("<div>").addClass('carousel-inner');
         $(slidescontainer).append(slides);
-        imglist.forEach( (element, index) => {   
+        imglist.forEach( (element, index) => {
             let item = $("<div>").addClass('carousel-item');
+            let buttonindicator = $("<button>").attr('type', 'button');
+            buttonindicator.attr('data-bs-target', '#yslider').attr('data-bs-slide-to', index); 
             if(index === 0) {
                 $(item).addClass('active');
+                buttonindicator.addClass('active');
             }
+            $(indicators).append(buttonindicator);
             let newimg = $('<img>');
             let imgid = 'slideid-' + $(element).data('imageid');
             let imgsrc = $(element).attr('src');
@@ -58,6 +64,10 @@ $(document).ready(function () {
     // ----------------------------------------------------------------------------
     function removeImages() {
         $('.carousel-inner').remove();
+        $('.carousel-indicators button').each(function (index, element) {
+            // element == this
+            $(this).remove();
+        });
     }
 })
 
