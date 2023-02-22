@@ -59,7 +59,8 @@ $(document).ready(function () {
             let newimg = $('<img>');
             let imgid = 'slideid-' + $(element).data('imageid');
             let imgsrc = $(element).attr('src');
-            $(newimg).attr('id', imgid).attr('src', imgsrc).addClass('d-block').addClass('w-100');;
+            $(newimg).attr('id', imgid).attr('src', imgsrc)
+                            .addClass('w-100').addClass('img-rounded');
             $(item).append(newimg);
             $(slides).append(item);
         });
