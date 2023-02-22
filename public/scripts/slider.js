@@ -44,6 +44,11 @@ $(document).ready(function () {
         $(slidescontainer).append(slides);
         imglist.forEach( (element, index) => {
             let item = $("<div>").addClass('carousel-item');
+            let caption = $("<div>").addClass('carousel-caption');
+            let knifename = $(element).data('knifename');
+            let h3 = $("<div>").text(`${knifename} ${index+1}/${imglist.length}`);
+            caption.append(h3);
+            item.append(caption);
             let buttonindicator = $("<button>").attr('type', 'button');
             buttonindicator.attr('data-bs-target', '#yslider').attr('data-bs-slide-to', index); 
             if(index === 0) {
