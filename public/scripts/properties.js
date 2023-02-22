@@ -8,10 +8,11 @@
 //    Feb 15 2023 WIP on date input in TWIG form
 //    Feb 16 2023 WIP on date input in TWIG form
 //    Feb 21 2023 Authentication email stored in client
+//    Feb 22 2023 Start work on slider
 //----------------------------------------------------------------------------
 const $props = ( () => {
   const allprops = {
-    version : 'bomerle:1.13, Feb 21 2023 ',
+    version : 'bomerle:1.14, Feb 22 2023 ',
     copyright:  'Ratoon software Corporation Inc, Chabreloche France ',
     imagehandler: 'images.js Feb 13 2023, 1.25 ',
     knifehandler: 'knife.js Feb 08 2023, 1.05 ',

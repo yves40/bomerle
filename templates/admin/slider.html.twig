@@ -1,0 +1,46 @@
+
+
+{# Data to be used by menuhandler.js #}
+<div class="sliderdata" data-images="{{imgsource}}"></div>
+
+<div class="mx-auto" style="width: 50%;">
+    <div class="container bg-light">
+        <div class="col-md-12 text-center">
+            <button id="showslider" type="submit" class="btn btn-primary mb-3">{% trans %}buttons.slidershow{% endtrans %}</button>
+            <button id="hideslider" type="submit" class="btn btn-primary mb-3">{% trans %}buttons.sliderclose{% endtrans %}</button>
+        </div>
+    </div>
+</div>
+
+<script src="{{ asset('node_modules/jquery/dist/jquery.min.js')}}"></script>
+<script src="{{ asset('scripts/slider.js')}}"></script>
+
+
+
+{# 
+  <div class="carousel">
+    <button class="carousel-button carousel-button--left is-hidden">
+      <span>&#8678</span>
+    </button>
+    <div class="carousel-container">
+      <ul class="carousel-slides">
+        <li class="carousel-slide current-slide">
+          <img class="carousel-image" src="../public/gallery/knives/100.jpg" alt="100">
+        </li>
+        <li class="carousel-slide">
+          <img class="carousel-image" src="../public/gallery/knives/101.jpg" alt="101">
+        </li>
+        <li class="carousel-slide">
+          <img class="carousel-image" src="../public/gallery/knives/102.jpg" alt="102">
+        </li>
+      </ul>
+    </div>
+    <button class="carousel-button carousel-button--right">
+      <span>&#8680</span>
+    </button>
+    <div class="carousel-nav">
+      <button class="carousel-indicator current-slide"></button>
+      <button class="carousel-indicator"></button>
+      <button class="carousel-indicator"></button>
+    </div>
+  </div> #}

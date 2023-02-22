@@ -138,6 +138,8 @@ buttons:
   confirm: Confirmer
   cancel: Annuler
   login: Se connecter
+  slidershow: Slider
+  sliderclose: Fermer
 images:
   errortype: Merci de choisir un format de fichier valide (jpg, jpeg, gif, png)
   errorsize: Taille maximale autorisée dépassée

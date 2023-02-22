@@ -27,10 +27,7 @@
                         }) 
     }}
 
-
-
     {% include "admin/adminmenu.html.twig" %}
-
 
     <div>
         {% if id == 0 %}
@@ -140,6 +137,7 @@
                     </div> 
                     <div id="feedback" class="row mt-4"><p></p></div>
                 </div>
+                {% include "admin/slider.html.twig" with {imgsource:'refreshzone'} only %}
             {% endif %}
         </div>
         {# I M A G E S --------------------------------------------------------------------------------------------------------- #}
