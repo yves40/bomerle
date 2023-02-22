@@ -38,3 +38,40 @@ legend {
 
 .yerror {
   color: red; }
+
+.yslider {
+  position: relative;
+  width: 60%;
+  aspect-ratio: 1/1;
+  margin: 0 auto; }
+
+.yslidescontainer {
+  background-color: transparent;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  border-radius: 10px;
+  border: 2px red solid; }
+
+.yslides {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  position: relative;
+  width: auto;
+  height: 100%;
+  transition: transform 250ms ease-in; }
+
+.yslide {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  object-fit: cover; }
+
+.yslideimage {
+  width: 100%;
+  height: 100%; }

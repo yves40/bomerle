@@ -2,21 +2,63 @@
 $(document).ready(function () {
     const buttonhide = $("#hideslider");
     const buttonshow = $("#showslider");
+    const slidescontainer = $("#yslider");
+    let slides = $(".carousel-inner");
     $(buttonhide).hide();
+    $(slidescontainer).hide();
+    let imagesArray = getImages($(".sliderdata").data('images'));
     $props.load();
-    let imgsource = $(".sliderdata").data('images');
-    console.log(`Images source to be retrieved from ${imgsource}`);
     console.log($props.version());
     $(buttonshow).click(function (e) { 
         e.preventDefault();
         $(buttonshow).hide();
+        $(slidescontainer).show();
         $(buttonhide).show();
+        addImages(imagesArray);
     });
     $(buttonhide).click(function (e) { 
         e.preventDefault();
         $(buttonshow).show();
+        $(slidescontainer).hide();
         $(buttonhide).hide();
+        removeImages();
     });
+    // ----------------------------------------------------------------------------
+    // Search for images contained in the transmitted DOM source
+    // source is the ID of a containing element
+    // ----------------------------------------------------------------------------
+    function getImages(source) {
+        let thelist = [];
+        $(`#${source} img`).each(function (index, element) {
+            thelist.push(this);
+        });
+        return thelist;
+    }
+    // ----------------------------------------------------------------------------
+    // Add images to the slider
+    // ----------------------------------------------------------------------------
+    function addImages(imglist) {
+        let slides = $("<div>").addClass('carousel-inner');
+        $(slidescontainer).append(slides);
+        imglist.forEach( (element, index) => {   
+            let item = $("<div>").addClass('carousel-item');
+            if(index === 0) {
+                $(item).addClass('active');
+            }
+            let newimg = $('<img>');
+            let imgid = 'slideid-' + $(element).data('imageid');
+            let imgsrc = $(element).attr('src');
+            $(newimg).attr('id', imgid).attr('src', imgsrc).addClass('d-block').addClass('w-100');;
+            $(item).append(newimg);
+            $(slides).append(item);
+        });
+    }
+    // ----------------------------------------------------------------------------
+    // Add images to the slider
+    // ----------------------------------------------------------------------------
+    function removeImages() {
+        $('.carousel-inner').remove();
+    }
 })
 
 // let track = document.querySelector('.carousel-slides');

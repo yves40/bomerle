@@ -11,7 +11,26 @@
         </div>
     </div>
 </div>
+<div id="yslider" class="carousel slide" data-bs-ride="carousel">
 
+  <!-- The slideshow/carousel -->
+  <div class="carousel-inner">
+    {# <div class="carousel-item">
+      <img src="ny.jpg" alt="New York" class="d-block w-100">
+    </div> #}
+  </div>
+
+  <!-- Left and right controls/icons -->
+  <button class="carousel-control-prev" type="button" data-bs-target="#yslider" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon"></span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#yslider" data-bs-slide="next">
+    <span class="carousel-control-next-icon"></span>
+  </button>
+</div>
+
+
+<link rel="stylesheet" href="{{asset('/css/yves.css')}}">
 <script src="{{ asset('node_modules/jquery/dist/jquery.min.js')}}"></script>
 <script src="{{ asset('scripts/slider.js')}}"></script>
 

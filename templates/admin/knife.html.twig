@@ -137,7 +137,6 @@
                     </div> 
                     <div id="feedback" class="row mt-4"><p></p></div>
                 </div>
-                {% include "admin/slider.html.twig" with {imgsource:'refreshzone'} only %}
             {% endif %}
         </div>
         {# I M A G E S --------------------------------------------------------------------------------------------------------- #}
@@ -145,6 +144,9 @@
         </div>
     </div>
     {{ form_end(form) }}
+    <div>
+        {% include "admin/slider.html.twig" with {imgsource:'refreshzone'} only %}
+    </div>
     {# Load manage script  #}
     <link rel="stylesheet" href="{{asset('/css/yves.css')}}">
     <script src="{{ asset('node_modules/jquery/dist/jquery.min.js')}}"></script>
