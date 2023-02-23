@@ -112,6 +112,7 @@ admin:
     updated: Knife updated
     tab1: Main data
     tab2: Knife Images
+    tab3: Slider
     checkknife: Edit conflicting knife
     deleteconfirm: Confirm deletion of
   manageevents:

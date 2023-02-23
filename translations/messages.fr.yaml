@@ -111,6 +111,7 @@ admin:
     updated: Couteau mis à jour
     tab1: Données
     tab2: Images
+    tab3: Slider
     checkknife: Editer le couteau en conflit
     deleteconfirm: Confirmez la suppression de
   manageevents:
