@@ -1,9 +1,9 @@
 // ------------------ Init loop to trap all mouse clicks -------------------------
 $(document).ready(function () {
+    const slideinterval = 5000;
     const buttonhide = $("#hideslider");
     const buttonshow = $("#showslider");
     const slidescontainer = $("#yslider");
-    let slides = $(".carousel-inner");
     let indicators = $(".carousel-indicators");
 
     $(buttonhide).hide();
@@ -44,6 +44,7 @@ $(document).ready(function () {
         $(slidescontainer).append(slides);
         imglist.forEach( (element, index) => {
             let item = $("<div>").addClass('carousel-item');
+            $(item).attr('data-bs-interval', slideinterval);
             let caption = $("<div>").addClass('carousel-caption');
             let knifename = $(element).data('knifename');
             let h3 = $("<div>").text(`${knifename} ${index+1}/${imglist.length}`);
