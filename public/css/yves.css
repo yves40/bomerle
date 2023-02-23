@@ -42,5 +42,17 @@ legend {
 #yslider {
   position: relative;
   width: 80%;
-  aspect-ratio: 1/1;
   margin: 0 auto; }
+  #yslider .responsive {
+    width: 100%;
+    height: auto;
+    border-radius: 10px; }
+
+.sliderpaused {
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: red; }
+
+.sliderrunning {
+  font-size: 1rem;
+  color: darkgray; }

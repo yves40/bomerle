@@ -43,27 +43,35 @@
     {# Nav Tabs --------------------------------------------------------------------------------------------------------- #}
     <ul class="nav nav-tabs" id="myTab" role="tablist">
         <li class="nav-item" role="presentation">
-        <button class="nav-link active ylink" 
-                id="home-tab" data-bs-toggle="tab" 
-                data-bs-target="#home" 
-                type="button" role="tab" aria-controls="home" 
-                aria-selected="true">{% trans %}admin.manageknives.tab1{% endtrans %}</button>
+            <button class="nav-link active ylink" 
+                    id="home-tab" data-bs-toggle="tab" 
+                    data-bs-target="#home" 
+                    type="button" role="tab" aria-controls="home" 
+                    aria-selected="true">{% trans %}admin.manageknives.tab1{% endtrans %}</button>
         </li>
         <li class="nav-item" role="presentation">
-        <button class="nav-link ylink" 
-                id="profile-tab" 
-                data-bs-toggle="tab" 
-                data-bs-target="#profile" 
-                type="button" role="tab" aria-controls="profile" 
-                aria-selected="false">{% trans %}admin.manageknives.tab2{% endtrans %}</button>
+            <button class="nav-link ylink" 
+                    id="images-tab" 
+                    data-bs-toggle="tab" 
+                    data-bs-target="#images" 
+                    type="button" role="tab" aria-controls="profile" 
+                    aria-selected="false">{% trans %}admin.manageknives.tab2{% endtrans %}</button>
         </li>
         <li class="nav-item" role="presentation">
-        <button class="nav-link ylink disabled" 
-                id="knifetitle-tab" 
-                data-bs-toggle="tab" 
-                data-bs-target="#knifetitle" 
-                type="button" role="tab" aria-controls="profile" 
-                aria-selected="false">{{knife.name}}</button>
+            <button class="nav-link ylink" 
+                    id="slider-tab" 
+                    data-bs-toggle="tab" 
+                    data-bs-target="#slider"
+                    type="button" role="tab" aria-controls="profile" 
+                    aria-selected="false">{% trans %}admin.manageknives.tab3{% endtrans %}</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link ylink disabled" 
+                    id="title-tab" 
+                    data-bs-toggle="tab" 
+                    data-bs-target="#title" 
+                    type="button" role="tab" aria-controls="profile" 
+                    aria-selected="false">{{knife.name}}</button>
         </li>
     </ul>
   
@@ -95,7 +103,7 @@
                 </div>
         </div>
         {# I M A G E S --------------------------------------------------------------------------------------------------------- #}
-        <div class="tab-pane mt-4" id="profile" role="tabpanel" aria-labelledby="profile-tab"  align-items="left">
+        <div class="tab-pane mt-4" id="images" role="tabpanel" aria-labelledby="images-tab"  align-items="left">
             <div class="row">
                 <div class="col ylabel">
                     {{ form_row(form.images, { 'label' : 'admin.manageknives.images'|trans}) }}
@@ -140,14 +148,19 @@
                 </div>
             {% endif %}
         </div>
-        {# I M A G E S --------------------------------------------------------------------------------------------------------- #}
-        <div class="tab-pane mt-4" id="knifetitle" role="tabpanel" aria-labelledby="knifetitle-tab"  align-items="left">
+        {# S L I D E R --------------------------------------------------------------------------------------------------------- #}
+        <div class="tab-pane mt-4" id="slider" role="tabpanel" aria-labelledby="slider-tab">
+            <div id="theslider">
+                {% include "admin/slider.html.twig" with { imgsourceid: 'refreshzone', 
+                                                            buttons: 'false',
+                                                            interval: '1500' } only %}
+            </div>
+        </div>
+        {# K N I F E    L A B E L ---------------------------------------------------------------------------------------------- #}
+        <div class="tab-pane mt-4" id="title" role="tabpanel" aria-labelledby="title-tab"  align-items="left">
         </div>
     </div>
     {{ form_end(form) }}
-    <div>
-        {% include "admin/slider.html.twig" with {imgsource:'refreshzone'} only %}
-    </div>
     {# Load manage script  #}
     <link rel="stylesheet" href="{{asset('/css/yves.css')}}">
     <script src="{{ asset('node_modules/jquery/dist/jquery.min.js')}}"></script>

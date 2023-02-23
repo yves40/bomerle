@@ -142,6 +142,9 @@ buttons:
   login: Sign In
   slidershow: Slider
   sliderclose: Close
+mouse:
+  hover: Slider Paused
+  out: Slider Running
 images:
   errortype: Please choose a valid file format (jpg, jpeg, gif, png)
   errorsize: Maximum allowed size exceeded

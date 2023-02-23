@@ -14,10 +14,10 @@ $(document).ready(function () {
     $("img").each(function (indexInArray, element) { 
         let url = element.src;
         let filename = url.replace(/^.*[\\\/]/, '');
-        let elemwidth = element.width;
-        let elemheight = element.height;
+        // let elemwidth = element.width;
+        // let elemheight = element.height;
         element.src = "/images/gif/loading.gif";
-        $(element).height("20px").width("20px").attr( { 'object-fit': 'cover', 'object-position': 'center'} );
+        // $(element).height("20px").width("20px").attr( { 'object-fit': 'cover', 'object-position': 'center'} );
         $(element).on("load", () => {    // End of the wait gif load
             $(element).off("load");      // Removes event handlers that were attached with .on()
             element.src = url;
@@ -27,7 +27,7 @@ $(document).ready(function () {
                 $(element).src = theurl;
                 timer.stopTimer();  // End of the requested image load
                 $(element).off("load");
-                $(element).height(elemheight).width(elemwidth);
+                // $(element).height(elemheight).width(elemwidth);
                 let elapsed = timer.getElapsedString();
                 avgloadtime = (avgloadtime + timer.getElapsed()) / 2;
                 ++totalimagesloaded;
