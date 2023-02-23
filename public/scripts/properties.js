@@ -9,14 +9,16 @@
 //    Feb 16 2023 WIP on date input in TWIG form
 //    Feb 21 2023 Authentication email stored in client
 //    Feb 22 2023 Start work on slider
+//    Feb 23 2023 Work on slider
 //----------------------------------------------------------------------------
 const $props = ( () => {
   const allprops = {
-    version : 'bomerle:1.14, Feb 22 2023 ',
+    version : 'bomerle:1.15, Feb 23 2023 ',
     copyright:  'Ratoon software Corporation Inc, Chabreloche France ',
     imagehandler: 'images.js Feb 13 2023, 1.25 ',
     knifehandler: 'knife.js Feb 08 2023, 1.05 ',
     datehandler: 'twigdate.js Feb 16 2023, 1.02 ',
+    sliderhandler: 'slider.js Feb 23 2023, 1.05 ',
     knivesimageslocation: '%kernel.project_dir%/public/images/knife'
   }
   let dynprops = {
@@ -29,6 +31,7 @@ const $props = ( () => {
     imagehandler: () => { return allprops.imagehandler; },
     knifehandler: () => { return allprops.knifehandler; },
     datehandler: () => { return allprops.datehandler; },
+    sliderhandler: () => { return allprops.sliderhandler; },
     knivesimageslocation: () => { return allprops.knivesimageslocation; },
     imageavgloadtime: () => { return dynprops['imageavgloadtime']; },
     imageloadcount: () => { return dynprops['imageloadcount']; },
