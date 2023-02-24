@@ -49,6 +49,10 @@
   100% {
     opacity: 1; } }
 
+@media screen and (max-width: 400px) {
+  .navbar-brand {
+    display: none; } }
+
 .feedback {
   color: red;
   border: 1px solid blue;

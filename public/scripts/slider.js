@@ -15,7 +15,11 @@ $(document).ready(function () {
     const sliderstatus = $("#sliderstatus p");
     const indicators = $(".carousel-indicators");   // Genuine bootstrap class
     const slideinterval = $(".sliderdata").data('interval');
-    // Initialize
+    // Initialize handlers
+    $(window).resize ( () =>  {
+        let hsize = $(window).width();
+        console.log(`Resized new width : ${hsize}`);
+    });
     $(slidescontainer).hover(
         () => {     // In
             sliderstatus.text(mousehovermsg)
@@ -28,7 +32,7 @@ $(document).ready(function () {
             .removeClass('sliderpaused');
         }
     )
-
+    // Initialize UI
     $(slidescontainer).hide();
     $('.carousel-inner').remove();
     let imagesArray = getImages(imagesdivid);
@@ -75,7 +79,7 @@ $(document).ready(function () {
     // Add images to the slider
     // ----------------------------------------------------------------------------
     function addImages(imglist) {
-        let slides = $("<div>").addClass('carousel-inner').addClass('yinner');
+        let slides = $("<div>").addClass('carousel-inner');
         $(slidescontainer).append(slides);
         imglist.forEach( (element, index) => {
             let item = $("<div>").addClass('carousel-item');
