@@ -141,9 +141,10 @@ buttons:
   login: Se connecter
   slidershow: Slider
   sliderclose: Fermer
-mouse:
+slider:
   hover: Slider en pause
   out: Slider actif
+  zoomof: Cliquer pour fermer
 images:
   errortype: Merci de choisir un format de fichier valide (jpg, jpeg, gif, png)
   errorsize: Taille maximale autorisée dépassée

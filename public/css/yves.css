@@ -41,7 +41,7 @@ legend {
 
 #yslider {
   position: relative;
-  width: 80%;
+  width: 60%;
   margin: 0 auto; }
   #yslider .responsive {
     width: 100%;
@@ -51,8 +51,31 @@ legend {
 .sliderpaused {
   font-size: 1.25rem;
   font-weight: bold;
-  color: red; }
+  color: darkgray; }
 
 .sliderrunning {
-  font-size: 1rem;
+  font-size: 1.25rem;
   color: darkgray; }
+
+.sliderzoomon {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover; }
+  .sliderzoomon h2 {
+    size: 1rem;
+    position: absolute;
+    padding: .8rem;
+    background-color: darkgray;
+    color: white;
+    top: 5%;
+    left: 40%;
+    border-radius: 20px;
+    opacity: 0.4; }
+
+.sliderzoomoff {
+  display: none; }

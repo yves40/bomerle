@@ -98,6 +98,10 @@ $(document).ready(function () {
             $(newimg).attr('id', imgid)
                     .addClass('responsive')
                     .attr('src', imgsrc);
+            $(newimg).click(function (e) { 
+                e.preventDefault();
+                fullscreen(this, indicators);
+            });
             $(item).append(newimg);
             $(slides).append(item);
         });
@@ -114,7 +118,38 @@ $(document).ready(function () {
     }
 })
 
-// // Track window resize
+
+    // --------------------------------------------------------------------------------------
+    // Fullscreen image preview function selecting all required elements
+    // --------------------------------------------------------------------------------------
+    function fullscreen(knifeimage, indicators){
+
+        console.log($(knifeimage).attr('src'));
+        // Remove body scroll bar so user cant scroll up or down
+        $("body").css("overflow", "hidden");
+        // Pass the user clicked image source in preview image source
+        $("#fullscreen").css("background-image", "url(" + $(knifeimage).attr('src') + ")");
+        $("#fullscreen").css("background-color", "#0333");
+        // Show the preview image box and the the light grey background
+        $("#fullscreen").addClass("sliderzoomon")
+                        .removeClass('sliderzoomoff');
+        indicators.hide();
+        $(".slidercontrol").hide();
+        // Wait for the user to close the box
+        $("#fullscreen").click( () => { 
+            $("#fullscreen").removeClass("sliderzoomon")
+                            .addClass('sliderzoomoff');
+            indicators.show();
+            $(".slidercontrol").show();
+            $("body").css("overflow", "auto");
+        });
+    }
+
+
+    //
+//       R E S E R V O I R    C O D E 
+//
+// Track window resize
 // window.onresize =  () =>  {
 //     slideWidth = currentSlideWidth;
 //     // Place photos with the new window size
@@ -124,23 +159,6 @@ $(document).ready(function () {
 //     console.log(`Resized : Current image : ${theimg}`);
 //     moveToSlide(track, currentslide, currentslide);
 // };
-
-// /*
-//       R E S E R V O I R    C O D E 
-
-    
-// setInterval(() => {
-//   let currentSlideWidth = slides[0].getBoundingClientRect().width;
-//   if(currentSlideWidth !== slideWidth) {
-//     slideWidth = currentSlideWidth;
-//     // Place photos with the new window size
-//     slides.forEach( setSlidePosition );
-//     let currentslide = document.getElementsByClassName('current-slide carousel-slide')[0];
-//     let theimg = currentslide.firstElementChild.getAttribute('src');
-//     console.log(`Resized : Current image : ${theimg}`);
-//     moveToSlide(track, currentslide, currentslide);
-//   }
-// }, 500);
 // */
 
 
