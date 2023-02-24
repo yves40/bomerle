@@ -1,3 +1,5 @@
+@import './dad/slider';
+
 .feedback
 {
   color: red;
@@ -46,44 +48,4 @@ legend {
 }
 .yerror {
   color: red;
-}
-#yslider {
-  position: relative;
-  width: 60%;
-  margin: 0 auto;
-  .responsive { 
-    width: 100%;
-    height: auto;
-    border-radius: 10px;
-  }
-}
-.sliderpaused {
-  font-size: 1.25rem;
-  font-weight: bold;
-  color:darkgray;
-}
-.sliderrunning {
-  font-size: 1.25rem;
-  color:darkgray;
-}
-.sliderzoomon {
-  position: absolute;
-  top: 0; left:0; height: 100%; width: 100%;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  h2 {
-    size: 1rem;
-    position: absolute;
-    padding: .8rem;
-    background-color: darkgray;
-    color: white;
-    top: 5%;
-    left: 40%;
-    border-radius: 20px;
-    opacity: 0.4;
-  }
-}
-.sliderzoomoff {
-  display: none;
 }

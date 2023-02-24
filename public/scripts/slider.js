@@ -116,9 +116,6 @@ $(document).ready(function () {
             $(this).remove();
         });
     }
-})
-
-
     // --------------------------------------------------------------------------------------
     // Fullscreen image preview function selecting all required elements
     // --------------------------------------------------------------------------------------
@@ -144,6 +141,9 @@ $(document).ready(function () {
             $("body").css("overflow", "auto");
         });
     }
+})
+
+
 
 
     //
