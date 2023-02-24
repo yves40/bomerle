@@ -18,7 +18,7 @@ const $props = ( () => {
     imagehandler: 'images.js Feb 13 2023, 1.25 ',
     knifehandler: 'knife.js Feb 08 2023, 1.05 ',
     datehandler: 'twigdate.js Feb 16 2023, 1.02 ',
-    sliderhandler: 'slider.js Feb 23 2023, 1.05 ',
+    sliderhandler: 'slider.js Feb 24 2023, 1.06 ',
     knivesimageslocation: '%kernel.project_dir%/public/images/knife'
   }
   let dynprops = {
