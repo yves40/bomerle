@@ -11,7 +11,7 @@ $(document).ready(function () {
     const buttonhideid = 'hideslider';
     const buttonhide = $(`#${buttonhideid}`);
     const buttonshow = $(`#${buttonshowid}`);
-    const slidescontainer = $("#yslider");
+    const slidescontainer = $("#sliderzone");
     const sliderstatus = $("#sliderstatus p");
     const indicators = $(".carousel-indicators");   // Genuine bootstrap class
     const slideinterval = $(".sliderdata").data('interval');
@@ -90,7 +90,7 @@ $(document).ready(function () {
             caption.append(h3);
             item.append(caption);
             let buttonindicator = $("<button>").attr('type', 'button');
-            buttonindicator.attr('data-bs-target', '#yslider').attr('data-bs-slide-to', index); 
+            buttonindicator.attr('data-bs-target', '#sliderzone').attr('data-bs-slide-to', index); 
             if(index === 0) {
                 $(item).addClass('active');
                 buttonindicator.addClass('active');
@@ -100,7 +100,7 @@ $(document).ready(function () {
             let imgid = 'slideid-' + $(element).data('imageid');
             let imgsrc = $(element).attr('src');
             $(newimg).attr('id', imgid)
-                    .addClass('responsive')
+                    .addClass('sliderimage')
                     .attr('src', imgsrc);
             $(newimg).click(function (e) { 
                 e.preventDefault();
