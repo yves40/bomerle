@@ -2,12 +2,9 @@
 @import './dad/const';
 
 @media screen and (max-width: $smallsize) { 
-  .navbar-brand {
+  .appsignature {
     display: none;
   }    
-}
-
-@media screen and (max-width: 400px) { 
 }
 
 .feedback
