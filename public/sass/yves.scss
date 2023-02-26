@@ -1,12 +1,6 @@
 @import './dad/slider';
 @import './dad/const';
 
-@media screen and (max-width: $smallsize) { 
-  .appsignature {
-    display: none;
-  }    
-}
-
 .feedback
 {
   color: red;

@@ -79,10 +79,6 @@
   .sliderimage {
     max-width: 1920px; } }
 
-@media screen and (max-width: 1024px) {
-  .appsignature {
-    display: none; } }
-
 .feedback {
   color: red;
   border: 1px solid blue;

@@ -13,19 +13,11 @@
         </title>
     </head>
     <body>
-        <nav class="navbar navbar-expand navbar-dark bg-dark">
-            <!-- Navbar Brand-->
-            <a class="navbar-brand ps-3 appsignature" href="{{ path('home')}}">{% trans %}app.version{% endtrans %}</a>
+        <nav class="navbar navbar-expand navbar-dark bg-dark me-auto">
             <!-- Sidebar Toggle button -->
             <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i></button>
             <!-- Navbar-->
             <ul class="navbar-nav me-auto me-md-0 me-3 me-lg-4">
-                <!-- lang Toggle -->
-                {% if locale == 'fr' %}
-                    <a href="{{ path('bootadmin.switch', { locale: 'en'}) }}" class="nav-link"><img src="/images/uk16.png" alt=""></a>
-                {% else %}
-                    <a href="{{ path('bootadmin.switch', { locale: 'fr'}) }}" class="nav-link"><img src="/images/fr16.png" alt=""></a>
-                {% endif %}                        
                 <!-- user info if connected -->
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle useremail" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -46,6 +38,12 @@
                         {%  endif %}
                     </ul>
                 </li>
+                <!-- lang Toggle -->
+                {% if locale == 'fr' %}
+                    <a href="{{ path('bootadmin.switch', { locale: 'en'}) }}" class="nav-link"><img src="/images/uk16.png" alt=""></a>
+                {% else %}
+                    <a href="{{ path('bootadmin.switch', { locale: 'fr'}) }}" class="nav-link"><img src="/images/fr16.png" alt=""></a>
+                {% endif %}                        
             </ul>
         </nav>
         <div id="layoutSidenav">
