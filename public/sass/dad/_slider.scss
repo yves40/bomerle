@@ -1,3 +1,5 @@
+@import './const';
+
 #theslider {
     width: 80%;
     margin: auto;
@@ -11,37 +13,6 @@
       border-radius: 10px;
     }
 }
-/* Screen sizes */
-@media screen and (max-width: 600px) { 
-    #theslider {
-        width: 60%;
-        margin: auto;
-    }
-    .sliderimage { 
-        max-width: 1600px;
-        border: red solid 2px;
-    }
-}
-@media screen and (min-width: 1600px) { 
-    #theslider {
-        width: 50%;
-        margin: auto;
-    }
-    .sliderimage { 
-        max-width: 1600px;
-        border: red solid 2px;
-    }
-}
-@media screen and (min-width: 1900px) { 
-    #theslider {
-        width: 40%;
-        margin: auto;
-    }
-    .sliderimage { 
-        max-width: 1900px;
-        border: red solid 2px;
-        }
-}
 .sliderpaused {
     font-size: 1.25rem;
     font-weight: bold;
@@ -51,22 +22,25 @@
     font-size: 1.25rem;
     color:darkgray;
 }
+#fullscreen {
+    background-color: white;
+}
 .sliderzoomon {
     position: absolute;
     top: 0; left:0; height: 100%; width: 100%;
     border-radius: 20px;
     background-position: center;
     background-repeat: no-repeat;
-    background-size: cover;
-    animation-duration: 1.5s;
+    background-size: contain;
+    animation-duration: 1.2s;
     animation-timing-function: linear;
     animation-name: image-fade;
     h2 {
         size: 1rem;
         position: absolute;
         padding: .8rem;
-        background-color: darkgray;
         color: white;
+        background-color: darkgrey;
         top: 5%;
         left: 5%;
         border-radius: 20px;
@@ -79,4 +53,34 @@
 @keyframes image-fade {
     0%   { opacity: 0;}
     100% { opacity: 1;}
+}
+/* Screen less than smallsize ? */
+@media screen and (max-width: $smallsize) { 
+    #theslider {
+        width: calc(100vh/3);
+        margin: auto;
+    }
+    .sliderimage { 
+        max-width: $smallsize;
+    }
+}
+/* Screen between smallsize and bigsize ? */
+@media screen and (min-width: $smallsize) and (max-width: $bigsize) { 
+    #theslider {
+        width: calc(100vh/2);
+        margin: auto;
+    }
+    .sliderimage { 
+        max-width: $mediumsize;
+    }
+}
+/* Screen greater than bigsize ? */
+@media screen and (min-width: $bigsize) { 
+    #theslider {
+        width: calc(100vh/2);
+        margin: auto;
+    }
+    .sliderimage { 
+        max-width: $bigsize;
+    }
 }

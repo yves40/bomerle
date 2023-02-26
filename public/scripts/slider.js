@@ -130,7 +130,6 @@ $(document).ready(function () {
         $("body").css("overflow", "hidden");
         // Pass the user clicked image source in preview image source
         $("#fullscreen").css("background-image", "url(" + $(knifeimage).attr('src') + ")");
-        $("#fullscreen").css("background-color", "#0333");
         // Show the preview image box and the the light grey background
         $("#fullscreen").addClass("sliderzoomon")
                         .removeClass('sliderzoomoff');
