@@ -129,6 +129,19 @@ admin:
     updated: Event updated
   manageusers:
     title: Users
+    email: Email
+    firstname: First name
+    lastname: Last name
+    patronym: First and last name
+    password: password
+    confirmpassword: Password Confirmation
+    address: Address
+    roles: Roles
+    delete: Delete
+    update: Update
+    created: User created
+    updated: User updated
+    cancel: Aborted update
 logs:
   menuheader: Logs
   site: Web site logs

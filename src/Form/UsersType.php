@@ -18,13 +18,13 @@ class UsersType extends AbstractType
         $builder
             ->add('firstname')
             ->add('lastname')
-            ->add('email', null, [ 'attr' => [ 'placeholder' => 'A valid email please']])
+            ->add('email')
             ->add('address')
             ->add('password', PasswordType::class, [ 'attr' => [ 'placeholder' => 'Password 4 to 20 characters']])
             ->add('confirmpassword', PasswordType::class,  [ 'attr' => [ 'placeholder' => 'Password 4 to 20 characters']])
-            ->add('created')
+            // ->add('created')
             ->add('role')
-            ->add('lastlogin')
+            // ->add('lastlogin')
         ;
     }
 

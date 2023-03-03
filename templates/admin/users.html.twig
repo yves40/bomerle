@@ -10,6 +10,90 @@
 
 {% block body %}
 
-    {% include "admin/adminmenu.html.twig" %}
+    {% include "admin/usersmenu.html.twig" %}
+
+    {% set param = [] %}
+    {% if new == "true" %}  {# Update, or Create, delete ? #}
+        {% set action = 'bootadmin.users.all' %}
+    {% else %}
+        {% set action = 'bootadmin.users.update' %}
+        {% set param = { 'id': user.id } %}
+    {% endif %}
+
+    {# Form #}
+    {{ form_start(form, {'attr': {'novalidate': 'novalidate', 'class': 'form'},
+                         'action': path(action, param), 
+                         'method': 'POST'
+                        }) 
+    }}
+    {% if new == "true" %}
+        <button type="submit" class="btn btn-primary mb-3">{% trans %}buttons.add{% endtrans %}</button>
+    {% else %}
+        <button type="submit" 
+            class="btn btn-primary mb-3">{% trans %}buttons.modify{% endtrans %}</button>
+        <button type="submit" formaction="{{path('bootadmin.users.all', { new: 'abort'})}}" 
+            class="btn btn-primary mb-3">{% trans %}buttons.cancel{% endtrans %}</button>
+    {% endif %}
+    <div class="row align-items-start">
+        <div class="col ylabel">
+            {{ form_row( form.email, { 'label' : 'admin.manageusers.email'|trans,
+                                'value': user.email })}}
+        </div>
+        <div class="col ylabel">
+            {{ form_row( form.firstname, { 'label' : 'admin.manageusers.firstname'|trans,
+                                'value': user.firstname })}}
+        </div>
+        <div class="col ylabel">
+            {{ form_row( form.lastname, { 'label' : 'admin.manageusers.lastname'|trans,
+                                'value': user.lastname })}}
+        </div>
+    </div>
+    <div class="row align-items-start">
+        <div class="col ylabel">
+            {{ form_row( form.password, { 'label' : 'admin.manageusers.password'|trans,
+                                'value': user.password })}}
+        </div>
+        <div class="col ylabel">
+            {{ form_row( form.confirmpassword, { 'label' : 'admin.manageusers.confirmpassword'|trans,
+                                'value': user.confirmpassword })}}
+        </div>
+    </div>
+    <div class="row align-items-start">
+        <div class="col ylabel">
+            {{ form_row( form.address, { 'label' : 'admin.manageusers.address'|trans,
+                                'value': user.address })}}
+        </div>
+    </div>
+    <div class="row align-items-start">
+        <div class="col ylabel">
+            {{ form_row( form.role, { 'label' : 'admin.manageusers.roles'|trans,
+                                'value': user.role })}}
+        </div>
+    </div>
+
+    {{ form_end(form)}}
+
+    <div class="mt-4">
+        <div class="row mb-4 ylistheader">
+            <div class="col-4">{{'admin.manageusers.email'|trans}}</div>
+            <div class="col-4">{{'admin.manageusers.patronym'|trans}}</div>
+            <div class="col-2">{{'admin.manageusers.delete'|trans}}</div>
+            <div class="col-2">{{'admin.manageusers.update'|trans}}</div>
+        </div>
+        {% for user in users %}
+            <div class="row">
+                <div class="col-4">{{ user.email}}</div>
+                <div class="col-4">{{ user.firstname}} {{ user.lastname}}</div>
+                <div class="col-2">
+                    <a href="{{ path('bootadmin.users.delete', {id: user.id}) }}"><i class="fa fa-trash"></i></a>
+                </div>
+                <div class="col-2">
+                    <a href="{{ path('bootadmin.users.update', {id: user.id}) }}"><i class="fa fa-pen-to-square"></i></a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+    <link rel="stylesheet" href="{{asset('/css/yves.css')}}">
 
 {% endblock %}

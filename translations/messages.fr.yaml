@@ -128,6 +128,19 @@ admin:
     updated: Evènement mis à jour
   manageusers:
     title: Utilisateurs
+    email: Email
+    firstname: Prénom
+    lastname: Nom
+    patronym: Prénom, nom
+    password: Mot de passe
+    confirmpassword: Confirmation
+    address: Adresse
+    roles: Rôles
+    delete: Supprimer
+    update: Sauvegarder
+    created: Utilisateur ajouté
+    updated: Utilisateur mis à jour
+    cancel: Mise à jour abandonnée
 logs:
   menuheader: Les logs
   site: Du site WEB
