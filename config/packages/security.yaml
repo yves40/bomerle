@@ -55,7 +55,7 @@ security:
         - { path: ^/components, roles: ROLE_ADMIN }
         - { path: ^/addevent, roles: ROLE_ADMIN }
         - { path: ^/newsletter, roles: ROLE_ADMIN }
-        - { path: ^/bootadmin, roles: ROLE_ADMIN }
+        - { path: ^/bootadmin, roles: [ROLE_ADMIN, ADMIN_SITE, ADMIN_USER] }
         # - { path: ^/profile, roles: ROLE_USER }
 
 when@test:

@@ -42,7 +42,7 @@ class AdminControllerUsers extends AbstractController
         date_default_timezone_set('Europe/Paris');
         $loc = $this->locale($request);
         $repo = $entityManager->getRepository(Users::class);
-        $users = $repo->findAll();
+        $users = $repo->findBy([], ['email' => 'ASC']);
         $user = new Users();
         $form = $this->createForm(UsersType::class, $user,
                          ['validation_groups' => ['standard', 'passwordreset']]);
@@ -59,10 +59,16 @@ class AdminControllerUsers extends AbstractController
                     $user->setConfirmpassword($user->getPassword());
                     $user->setCreated(new DateTime('now', new DateTimeZone('Europe/Paris')));
                     $user->setConfirmed(new DateTime('now', new DateTimeZone('Europe/Paris')));
+                    $theroles = [];
+                    $formroles = $form->get('role')->getData();
+                    foreach($formroles as $one) {
+                        array_push($theroles, $one->getName());
+                    }
+                    $user->setRole($theroles);
                     $entityManager->persist($user);
                     $entityManager->flush();
                     $user = new Users();
-                    $users = $repo->findAll();
+                    $users = $repo->findBy([], ['email' => 'ASC']);
                     $this->addFlash('success', $translator->trans('admin.manageusers.created'));
                 }
                 break;
@@ -87,6 +93,7 @@ class AdminControllerUsers extends AbstractController
     #[Route('/users/update/{id}', name: 'bootadmin.users.update')]
     public function updateEvent(Request $request,
                         int $id,
+                        UserPasswordHasherInterface $userPasswordHasher,
                         EntityManagerInterface $entityManager,
                         TranslatorInterface $translator): Response
     {
@@ -97,6 +104,20 @@ class AdminControllerUsers extends AbstractController
                         ['validation_groups' => ['standard', 'passwordreset']]);
         $form->handleRequest($request);
         if($form->isSubmitted() && ( $form->isValid())){
+            $user->setPassword(
+                $userPasswordHasher->hashPassword(
+                    $user,
+                    $form->get('password')->getData()
+                )
+            );
+            $user->setConfirmpassword($user->getPassword());
+            $user->setCreated(new DateTime('now', new DateTimeZone('Europe/Paris')));
+            $user->setConfirmed(new DateTime('now', new DateTimeZone('Europe/Paris')));
+            $theroles = [];
+            foreach($user->getRole() as $one) {
+                array_push($theroles, $one->getName());
+            }
+            $user->setRole($theroles);
             $entityManager->persist($user);
             $entityManager->flush();
             $users = $repo->findAll();
@@ -119,7 +140,7 @@ class AdminControllerUsers extends AbstractController
         try {
             $entityManager->remove($event);
             $entityManager->flush();
-            $this->addFlash('success', $translator->trans('admin.users.deleted'));
+            $this->addFlash('success', $translator->trans('admin.manageusers.deleted'));
         }
         catch(Exception $e) {
             $this->addFlash('error', $e->getMessage());

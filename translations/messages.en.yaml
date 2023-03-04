@@ -136,12 +136,13 @@ admin:
     password: password
     confirmpassword: Password Confirmation
     address: Address
-    roles: Roles
+    roles: Roles sorted by decreasing level ( 100 - 0 )
     delete: Delete
-    update: Update
+    update: Edit
     created: User created
     updated: User updated
-    cancel: Aborted update
+    deleted: User deleted
+    cancel: Canceled update
 logs:
   menuheader: Logs
   site: Web site logs

@@ -135,11 +135,12 @@ admin:
     password: Mot de passe
     confirmpassword: Confirmation
     address: Adresse
-    roles: Rôles
+    roles: Rôles par niveau décroissant ( 100 - 0)
     delete: Supprimer
-    update: Sauvegarder
+    update: Editer
     created: Utilisateur ajouté
     updated: Utilisateur mis à jour
+    deleted: Utilisateur supprimé
     cancel: Mise à jour abandonnée
 logs:
   menuheader: Les logs
