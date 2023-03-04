@@ -3,10 +3,12 @@
 namespace App\Controller;
 
 use Error;
+use DateTime;
+
 use Exception;
+use DateTimeZone;
 
 use App\Entity\Users;
-
 use App\Form\UsersType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,6 +17,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Translation\LocaleSwitcher;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 #[Route('/bootadmin')]
 class AdminControllerUsers extends AbstractController
@@ -32,6 +35,7 @@ class AdminControllerUsers extends AbstractController
     public function home(Request $request,
                         $new,
                         $id,
+                        UserPasswordHasherInterface $userPasswordHasher,
                         EntityManagerInterface $entityManager,
                         TranslatorInterface $translator): Response
     {
@@ -40,22 +44,31 @@ class AdminControllerUsers extends AbstractController
         $repo = $entityManager->getRepository(Users::class);
         $users = $repo->findAll();
         $user = new Users();
-        $form = $this->createForm(UsersType::class, $user);
-        var_dump($new);
+        $form = $this->createForm(UsersType::class, $user,
+                         ['validation_groups' => ['standard', 'passwordreset']]);
         switch($new) {
             case "true":
                 $form->handleRequest($request);
                 if($form->isSubmitted() && $form->isValid()) {
+                    $user->setPassword(
+                        $userPasswordHasher->hashPassword(
+                            $user,
+                            $form->get('password')->getData()
+                        )
+                    );
+                    $user->setConfirmpassword($user->getPassword());
+                    $user->setCreated(new DateTime('now', new DateTimeZone('Europe/Paris')));
+                    $user->setConfirmed(new DateTime('now', new DateTimeZone('Europe/Paris')));
                     $entityManager->persist($user);
                     $entityManager->flush();
                     $user = new Users();
                     $users = $repo->findAll();
-                    $this->addFlash('succes', $translator->trans('admin.manageusers.created'));
+                    $this->addFlash('success', $translator->trans('admin.manageusers.created'));
                 }
                 break;
             case "abort": 
                 $new = true;
-                $this->addFlash('succes', $translator->trans('admin.manageusers.cancel'));
+                $this->addFlash('success', $translator->trans('admin.manageusers.cancel'));
                 break;
             case "false":
                 $user = $repo->findOneBy([ 'id' => $id]);
@@ -79,8 +92,9 @@ class AdminControllerUsers extends AbstractController
     {
         $repo = $entityManager->getRepository(Users::class);
         $user = $repo->findOneBy(['id' => $id]);
-        var_dump($user);
-        $form = $this->createForm(UsersType::class, $user);
+        dd($user);
+        $form = $this->createForm(UsersType::class, $user,
+                        ['validation_groups' => ['standard', 'passwordreset']]);
         $form->handleRequest($request);
         if($form->isSubmitted() && ( $form->isValid())){
             $entityManager->persist($user);
