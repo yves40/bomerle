@@ -59,12 +59,10 @@ class AdminControllerUsers extends AbstractController
                     $user->setConfirmpassword($user->getPassword());
                     $user->setCreated(new DateTime('now', new DateTimeZone('Europe/Paris')));
                     $user->setConfirmed(new DateTime('now', new DateTimeZone('Europe/Paris')));
-                    $theroles = [];
                     $formroles = $form->get('role')->getData();
                     foreach($formroles as $one) {
-                        array_push($theroles, $one->getName());
+                        $user->addRole($one);
                     }
-                    $user->setRole($theroles);
                     $entityManager->persist($user);
                     $entityManager->flush();
                     $user = new Users();
