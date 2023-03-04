@@ -200,7 +200,6 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
         foreach($this->role as $onerole) {
             array_push($theroles, $onerole->getName());
         }
-        // dd($theroles);
         return $theroles;
     }
     /**

@@ -76,6 +76,8 @@ class AdminControllerUsers extends AbstractController
                 break;
             case "false":
                 $user = $repo->findOneBy([ 'id' => $id]);
+                $form = $this->createForm(UsersType::class, $user,
+                    ['validation_groups' => ['standard', 'passwordreset']]);
                 break;
         }
         return $this->render('admin/users.html.twig', [
@@ -97,11 +99,11 @@ class AdminControllerUsers extends AbstractController
     {
         $repo = $entityManager->getRepository(Users::class);
         $user = $repo->findOneBy(['id' => $id]);
-        dd($user);
         $form = $this->createForm(UsersType::class, $user,
                         ['validation_groups' => ['standard', 'passwordreset']]);
         $form->handleRequest($request);
-        if($form->isSubmitted() && ( $form->isValid())){
+        // dd($user);
+        if($form->isSubmitted() && ($form->isValid())){
             $user->setPassword(
                 $userPasswordHasher->hashPassword(
                     $user,
@@ -111,11 +113,10 @@ class AdminControllerUsers extends AbstractController
             $user->setConfirmpassword($user->getPassword());
             $user->setCreated(new DateTime('now', new DateTimeZone('Europe/Paris')));
             $user->setConfirmed(new DateTime('now', new DateTimeZone('Europe/Paris')));
-            $theroles = [];
-            foreach($user->getRole() as $one) {
-                array_push($theroles, $one->getName());
+            $formroles = $form->get('role')->getData();
+            foreach($formroles as $one) {
+                $user->addRole($one);
             }
-            $user->setRole($theroles);
             $entityManager->persist($user);
             $entityManager->flush();
             $users = $repo->findAll();

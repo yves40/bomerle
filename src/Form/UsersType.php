@@ -34,7 +34,8 @@ class UsersType extends AbstractType
                 'query_builder' => function(EntityRepository $er) {
                     return $er->createQueryBuilder('a')
                               ->orderBy('a.level', 'DESC');
-                }]
+                    }
+                ]
             )
         ;
     }
