@@ -17,7 +17,7 @@ security:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
 
-        # Add this firewall to provide a second boot handler
+        # Add this firewall to provide a second handler for bootstrap admin
         boot:
             pattern: ^/securitybootadmin|bootadmin/
             lazy: true
@@ -25,16 +25,11 @@ security:
             custom_authenticator: App\Security\BootLoginFormAuthenticator
             logout:
                 path: bootadmin.logout
-                # where to redirect after   logout
-                target: home
+                # where to redirect after logout
+                target: bootadmin.home
             entry_point: App\Security\BootAuthenticationEntryPoint
             access_denied_handler: App\Security\AccessDeniedHandler
-            # activate different ways to authenticate
-            # https://symfony.com/doc/current/security.html#the-firewall
-            # https://symfony.com/doc/current/security/impersonating_user.html
-            # switch_user: true
-
-        # This is the default firewall
+        # The default firewall
         main:
             lazy: true
             provider: app_user_provider
@@ -45,9 +40,10 @@ security:
                 target: home
             entry_point: App\Security\AuthenticationEntryPoint
             access_denied_handler: App\Security\AccessDeniedHandler
+
+    # Group various administration roles
     role_hierarchy:
-        ROLE_SUPER_ADMIN: [ ROLE_ADMIN, ROLE_ADMIN_USERS, ROLE_ADMIN_SHOP]
-        
+        ROLE_ADMINISTRATOR: [ ROLE_ADMIN_USERS, ROLE_ADMIN, ROLE_ADMIN_SITE ]
 
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
@@ -55,10 +51,10 @@ security:
         - { path: ^/components, roles: ROLE_ADMIN }
         - { path: ^/addevent, roles: ROLE_ADMIN }
         - { path: ^/newsletter, roles: ROLE_ADMIN }
-        - { path: ^/bootadmin, roles: ROLE_ADMIN }
-        - { path: ^/bootadmin, roles: ADMIN_SITE }
-        - { path: ^/bootadmin, roles: ADMIN_USERS }
-        # - { path: ^/profile, roles: ROLE_USER }
+        - { path: ^/bootadmin/users, roles: ROLE_ADMIN_USERS }
+        - { path: ^/bootadmin/events, roles: ROLE_ADMIN_SITE }
+        - { path: ^/bootadmin/knives, roles: ROLE_ADMIN_SITE }
+        - { path: ^/bootadmin/home, roles: ROLE_ANONYMOUS }
 
 when@test:
     security:

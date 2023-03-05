@@ -82,7 +82,7 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $confirmed = null;
 
-    #[ORM\ManyToMany(targetEntity: Roles::class, inversedBy: 'users', cascade: ['persist', 'remove'])]
+    #[ORM\ManyToMany(targetEntity: Roles::class, inversedBy: 'users', cascade: ['persist'])]
     private Collection $role;
 
     public function __construct()

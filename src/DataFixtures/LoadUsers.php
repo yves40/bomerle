@@ -34,9 +34,9 @@ class LoadUsers extends Fixture
         $admin1->setConfirmpassword($this->hasher->hashPassword($admin1, 'manager1'));
         $admin1->setCreated(new DateTime('now', new DateTimeZone('Europe/Paris')));
         $admin1->setConfirmed(new DateTime('now', new DateTimeZone('Europe/Paris')));
-        $role = $repo->findOneBy([ 'name' => 'ROLE_ADMIN'] );
+        $role = $repo->findOneBy([ 'name' => 'ROLE_ADMINISTRATOR'] );
         $admin1->addRole($role);
-        $role = $repo->findOneBy([ 'name' => 'ADMIN_SITE'] );
+        $role = $repo->findOneBy([ 'name' => 'ROLE_ANONYMOUS'] );
         $admin1->addRole($role);
 
         $manager->persist($admin1);
@@ -50,9 +50,9 @@ class LoadUsers extends Fixture
         $admin2->setConfirmpassword($this->hasher->hashPassword($admin2, 'manager1'));
         $admin2->setCreated(new DateTime('now', new DateTimeZone('Europe/Paris')));
         $admin2->setConfirmed(new DateTime('now', new DateTimeZone('Europe/Paris')));
-        $role = $repo->findOneBy([ 'name' => 'ROLE_ADMIN'] );
+        $role = $repo->findOneBy([ 'name' => 'ROLE_ADMIN_USERS'] );
         $admin2->addRole($role);
-        $role = $repo->findOneBy([ 'name' => 'ADMIN_SITE'] );
+        $role = $repo->findOneBy([ 'name' => 'ROLE_ANONYMOUS'] );
         $admin2->addRole($role);
 
         $manager->persist($admin2);
@@ -66,9 +66,9 @@ class LoadUsers extends Fixture
         $admin3->setConfirmpassword($this->hasher->hashPassword($admin3, 'manager1'));
         $admin3->setCreated(new DateTime('now', new DateTimeZone('Europe/Paris')));
         $admin3->setConfirmed(new DateTime('now', new DateTimeZone('Europe/Paris')));
-        $role = $repo->findOneBy([ 'name' => 'ROLE_ADMIN'] );
+        $role = $repo->findOneBy([ 'name' => 'ROLE_ADMIN_SITE'] );
         $admin3->addRole($role);
-        $role = $repo->findOneBy([ 'name' => 'ADMIN_SITE'] );
+        $role = $repo->findOneBy([ 'name' => 'ROLE_ANONYMOUS'] );
         $admin3->addRole($role);
 
         $manager->persist($admin3);
@@ -80,7 +80,7 @@ class LoadUsers extends Fixture
             [ 'fname' => 'Claudine', 'lname' => 'Villeneuve', 'address' => 'Dernier domicile connu' ],
             [ 'fname' => 'Clarence', 'lname' => 'Barensac', 'address' => 'Dernier domicile connu' ],
         ];
-        $role = $repo->findOneBy([ 'name' => 'LOGGED'] );
+        $role = $repo->findOneBy([ 'name' => 'ROLE_ANONYMOUS'] );
         foreach( $fakeusers as $oneuser) {
             $user = new Users();
             $user->setFirstname($oneuser['fname']);

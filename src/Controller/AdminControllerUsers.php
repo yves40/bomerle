@@ -91,45 +91,60 @@ class AdminControllerUsers extends AbstractController
     }
     // --------------------------------------------------------------------------
     #[Route('/users/update/{id}', name: 'bootadmin.users.update')]
-    public function updateEvent(Request $request,
+    public function updateUser(Request $request,
                         int $id,
                         UserPasswordHasherInterface $userPasswordHasher,
                         EntityManagerInterface $entityManager,
                         TranslatorInterface $translator): Response
     {
+        date_default_timezone_set('Europe/Paris');
+        $loc = $this->locale($request);
         $repo = $entityManager->getRepository(Users::class);
         $user = $repo->findOneBy(['id' => $id]);
         $form = $this->createForm(UsersType::class, $user,
                         ['validation_groups' => ['standard', 'passwordreset']]);
-        $form->handleRequest($request);
         // dd($user);
-        if($form->isSubmitted() && ($form->isValid())){
-            $user->setPassword(
-                $userPasswordHasher->hashPassword(
-                    $user,
-                    $form->get('password')->getData()
-                )
-            );
-            $user->setConfirmpassword($user->getPassword());
-            $user->setCreated(new DateTime('now', new DateTimeZone('Europe/Paris')));
-            $user->setConfirmed(new DateTime('now', new DateTimeZone('Europe/Paris')));
-            $formroles = $form->get('role')->getData();
-            foreach($formroles as $one) {
-                $user->addRole($one);
+        if($form->isSubmitted()){
+            $form->handleRequest($request);
+            if($form->isValid()) {
+                $user->setPassword(
+                    $userPasswordHasher->hashPassword(
+                        $user,
+                        $form->get('password')->getData()
+                    )
+                );
+                $user->setConfirmpassword($user->getPassword());
+                $user->setCreated(new DateTime('now', new DateTimeZone('Europe/Paris')));
+                $user->setConfirmed(new DateTime('now', new DateTimeZone('Europe/Paris')));
+                $formroles = $form->get('role')->getData();
+                foreach($formroles as $one) {
+                    $user->addRole($one);
+                }
+                $entityManager->persist($user);
+                $entityManager->flush();
+                $users = $repo->findAll();
+                $user = new Users();
+                $this->addFlash('success', $translator->trans('admin.users.updated'));
+                return $this->redirectToRoute('bootadmin.users.all', array( 'new' => "true"));
             }
-            $entityManager->persist($user);
-            $entityManager->flush();
-            $users = $repo->findAll();
-            $user = new Users();
-            $this->addFlash('success', $translator->trans('admin.users.updated'));
-            return $this->redirectToRoute('bootadmin.users.all', array( 'new' => "true"));
+            else {
+                $users = $repo->findBy([], ['email' => 'ASC']);
+                return $this->render('admin/users.html.twig', [
+                    "form" => $form->createView(),
+                    "locale" =>  $loc,
+                    "users" => $users,
+                    "new" => "false",
+                    "user" => $user
+                ]
+                );               
+            }
         }
         return $this->redirectToRoute('bootadmin.users.all', array( 'new' => "false",
                                                                         'id' => $id));
     }
     // --------------------------------------------------------------------------
     #[Route('/users/delete/{id}', name: 'bootadmin.users.delete')]
-    public function deleteEvent(Request $request,
+    public function deleteUser(Request $request,
                         int $id,
                         EntityManagerInterface $entityManager,
                         TranslatorInterface $translator): Response
