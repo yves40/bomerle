@@ -31,7 +31,7 @@ class AdminControllerUsers extends AbstractController
     // --------------------------------------------------------------------------
     //      U S E R S    S E R V I C E S 
     // --------------------------------------------------------------------------
-    #[Route('/users/all/{new?true}/{id?0}', name: 'bootadmin.users.all')]
+    #[Route('/users/edit/{new?true}/{id?0}', name: 'bootadmin.users.edit')]
     public function home(Request $request,
                         $new,
                         $id,
@@ -80,10 +80,9 @@ class AdminControllerUsers extends AbstractController
                     ['validation_groups' => ['standard', 'passwordreset']]);
                 break;
         }
-        return $this->render('admin/users.html.twig', [
+        return $this->render('admin/usersadd.html.twig', [
                 "form" => $form->createView(),
                 "locale" =>  $loc,
-                "users" => $users,
                 "new" => $new,
                 "user" => $user
             ]
@@ -124,16 +123,31 @@ class AdminControllerUsers extends AbstractController
             $users = $repo->findAll();
             $user = new Users();
             $this->addFlash('success', $translator->trans('admin.manageusers.updated'));
-            return $this->redirectToRoute('bootadmin.users.all', array( 'new' => "true"));
+            return $this->redirectToRoute('bootadmin.users.edit', array( 'new' => "true"));
 
         }
         $users = $repo->findBy([], ['email' => 'ASC']);
-        return $this->render('admin/users.html.twig', [
+        return $this->render('admin/usersadd.html.twig', [
             "form" => $form->createView(),
             "locale" =>  $loc,
             "users" => $users,
             "new" => "false",
             "user" => $user
+        ]);               
+    }
+    // --------------------------------------------------------------------------
+    #[Route('/users/list', name: 'bootadmin.users.list')]
+    public function listUsers(Request $request,
+                        EntityManagerInterface $entityManager,
+                        TranslatorInterface $translator): Response
+    {
+        date_default_timezone_set('Europe/Paris');
+        $loc = $this->locale($request);
+        $repo = $entityManager->getRepository(Users::class);
+        $users = $repo->findBy([], ['email' => 'ASC']);
+        return $this->render('admin/users.html.twig', [
+            "locale" =>  $loc,
+            "users" => $users,
         ]);               
     }
     // --------------------------------------------------------------------------
@@ -153,7 +167,7 @@ class AdminControllerUsers extends AbstractController
         catch(Exception $e) {
             $this->addFlash('error', $e->getMessage());
         }
-        return $this->redirectToRoute('bootadmin.users.all', array( 'new' => "true"));
+        return $this->redirectToRoute('bootadmin.users.edit', array( 'new' => "true"));
     }
     // --------------------------------------------------------------------------
     // P R I V A T E     S E R V I C E S 

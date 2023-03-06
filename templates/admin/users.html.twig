@@ -2,8 +2,6 @@
 
 {% block title %}{% trans %}admin.title{% endtrans %}{% endblock %}
 
-{% form_theme form 'bootstrap_5_layout.html.twig' %}
-
 {% block pagetitle %}
     <h1 class="mt-4">{% trans %}admin.manageusers.title{% endtrans %}</h1>
 {% endblock %}
@@ -12,66 +10,6 @@
 
     {% include "admin/usersmenu.html.twig" %}
 
-    {% set param = [] %}
-    {% if new == "true" %}  {# Update, or Create, delete ? #}
-        {% set action = 'bootadmin.users.all' %}
-    {% else %}
-        {% set action = 'bootadmin.users.update' %}
-        {% set param = { 'id': user.id } %}
-    {% endif %}
-
-    {# Form #}
-    {{ form_start(form, {'attr': {'novalidate': 'novalidate', 'class': 'form'},
-                         'action': path(action, param), 
-                         'method': 'POST'
-                        }) 
-    }}
-    {% if new == "true" %}
-        <button type="submit" class="btn btn-primary mb-3">{% trans %}buttons.add{% endtrans %}</button>
-    {% else %}
-        <button type="submit" 
-            class="btn btn-primary mb-3">{% trans %}buttons.modify{% endtrans %}</button>
-        <button type="submit" formaction="{{path('bootadmin.users.all', { new: 'abort'})}}" 
-            class="btn btn-primary mb-3">{% trans %}buttons.cancel{% endtrans %}</button>
-    {% endif %}
-    <div class="row align-items-start">
-        <div class="col ylabel">
-            {{ form_row( form.email, { 'label' : 'admin.manageusers.email'|trans,
-                                'value': user.email })}}
-        </div>
-        <div class="col ylabel">
-            {{ form_row( form.firstname, { 'label' : 'admin.manageusers.firstname'|trans,
-                                'value': user.firstname })}}
-        </div>
-        <div class="col ylabel">
-            {{ form_row( form.lastname, { 'label' : 'admin.manageusers.lastname'|trans,
-                                'value': user.lastname })}}
-        </div>
-    </div>
-    <div class="row align-items-start">
-        <div class="col ylabel">
-            {{ form_row( form.password, { 'label' : 'admin.manageusers.password'|trans,
-                                'value': user.password })}}
-        </div>
-        <div class="col ylabel">
-            {{ form_row( form.confirmpassword, { 'label' : 'admin.manageusers.confirmpassword'|trans,
-                                'value': user.confirmpassword })}}
-        </div>
-    </div>
-    <div class="row align-items-start">
-        <div class="col ylabel">
-            {{ form_row( form.address, { 'label' : 'admin.manageusers.address'|trans,
-                                'value': user.address })}}
-        </div>
-    </div>
-    <div class="row align-items-start">
-        <div class="col ylabel">
-            {{ form_row( form.role, { 'label' : 'admin.manageusers.roles'|trans,
-                                'value': user.role })}}
-        </div>
-    </div>
-
-    {{ form_end(form)}}
 
     <div class="mt-4">
         <div class="row mb-4 ylistheader">
