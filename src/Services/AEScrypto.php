@@ -2,6 +2,8 @@
 
 namespace App\Services;
 
+use Exception;
+
 class AEScrypto
 {
   // -------------------------------------------------------------------------------------
@@ -44,17 +46,22 @@ class AEScrypto
   // -------------------------------------------------------------------------------------
   public function decrypt (string $encrypted)
   {
-    $parts = explode(':', $encrypted);
-    $hexiv = $parts[0];
-    $data = $parts[1];
-    $iv = hex2bin($hexiv);
-    if ( $decrypted = openssl_decrypt(base64_decode($data), $this->encrypt_method, $this->key, 0, $iv))
-    {
-      return $decrypted;
+    try {
+      $parts = explode(':', $encrypted);
+      $hexiv = $parts[0];
+      $data = $parts[1];
+      $iv = hex2bin($hexiv);
+      if ( $decrypted = openssl_decrypt(base64_decode($data), $this->encrypt_method, $this->key, 0, $iv))
+      {
+        return $decrypted;
+      }
+      else
+      {
+        return false;
+      }
     }
-    else
-    {
-      return false;
+    catch(Exception $ex) {  // probably a non encrypted value
+      return $encrypted;
     }
   }
 }

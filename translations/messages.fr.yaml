@@ -18,7 +18,7 @@ user:
   disconnect: Se déconnecter
   anonymous: Anonyme
   menuheader: Utilisateurs
-  manage: Gérer
+  manage: Lister
   list: Lister
   add: Ajouter un utilisateur
 home:
