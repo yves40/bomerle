@@ -102,45 +102,39 @@ class AdminControllerUsers extends AbstractController
         $repo = $entityManager->getRepository(Users::class);
         $user = $repo->findOneBy(['id' => $id]);
         $form = $this->createForm(UsersType::class, $user,
-                        ['validation_groups' => ['standard', 'passwordreset']]);
-        // dd($user);
-        if($form->isSubmitted()){
-            $form->handleRequest($request);
-            if($form->isValid()) {
-                $user->setPassword(
-                    $userPasswordHasher->hashPassword(
-                        $user,
-                        $form->get('password')->getData()
-                    )
-                );
-                $user->setConfirmpassword($user->getPassword());
-                $user->setCreated(new DateTime('now', new DateTimeZone('Europe/Paris')));
-                $user->setConfirmed(new DateTime('now', new DateTimeZone('Europe/Paris')));
-                $formroles = $form->get('role')->getData();
-                foreach($formroles as $one) {
-                    $user->addRole($one);
-                }
-                $entityManager->persist($user);
-                $entityManager->flush();
-                $users = $repo->findAll();
-                $user = new Users();
-                $this->addFlash('success', $translator->trans('admin.users.updated'));
-                return $this->redirectToRoute('bootadmin.users.all', array( 'new' => "true"));
+                ['validation_groups' => ['standard', 'passwordreset']]);
+        $form->handleRequest($request);
+        // POST or GET ? 
+        if($form->isSubmitted() && $form->isValid()){
+            $user->setPassword(
+                $userPasswordHasher->hashPassword(
+                    $user,
+                    $form->get('password')->getData()
+                )
+            );
+            $user->setConfirmpassword($user->getPassword());
+            $user->setCreated(new DateTime('now', new DateTimeZone('Europe/Paris')));
+            $user->setConfirmed(new DateTime('now', new DateTimeZone('Europe/Paris')));
+            $formroles = $form->get('role')->getData();
+            foreach($formroles as $one) {
+                $user->addRole($one);
             }
-            else {
-                $users = $repo->findBy([], ['email' => 'ASC']);
-                return $this->render('admin/users.html.twig', [
-                    "form" => $form->createView(),
-                    "locale" =>  $loc,
-                    "users" => $users,
-                    "new" => "false",
-                    "user" => $user
-                ]
-                );               
-            }
+            $entityManager->persist($user);
+            $entityManager->flush();
+            $users = $repo->findAll();
+            $user = new Users();
+            $this->addFlash('success', $translator->trans('admin.manageusers.updated'));
+            return $this->redirectToRoute('bootadmin.users.all', array( 'new' => "true"));
+
         }
-        return $this->redirectToRoute('bootadmin.users.all', array( 'new' => "false",
-                                                                        'id' => $id));
+        $users = $repo->findBy([], ['email' => 'ASC']);
+        return $this->render('admin/users.html.twig', [
+            "form" => $form->createView(),
+            "locale" =>  $loc,
+            "users" => $users,
+            "new" => "false",
+            "user" => $user
+        ]);               
     }
     // --------------------------------------------------------------------------
     #[Route('/users/delete/{id}', name: 'bootadmin.users.delete')]
