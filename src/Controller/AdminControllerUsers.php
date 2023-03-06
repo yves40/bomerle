@@ -167,7 +167,7 @@ class AdminControllerUsers extends AbstractController
         catch(Exception $e) {
             $this->addFlash('error', $e->getMessage());
         }
-        return $this->redirectToRoute('bootadmin.users.edit', array( 'new' => "true"));
+        return $this->redirectToRoute('bootadmin.users.list', array( 'new' => "true"));
     }
     // --------------------------------------------------------------------------
     // P R I V A T E     S E R V I C E S 
