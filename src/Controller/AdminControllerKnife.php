@@ -67,7 +67,7 @@ class AdminControllerKnife extends AbstractController
     }
     // --------------------------------------------------------------------------
     #[Route('/knives/edit/{id?0}', name: 'bootadmin.knives.edit')]
-    public function update(Request $request,
+    public function edit(Request $request,
                         int $id,    // If 0 : insert mode
                         EntityManagerInterface $entityManager,
                         Uploader $uploader,
