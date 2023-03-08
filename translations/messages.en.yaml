@@ -20,7 +20,7 @@ user:
   menuheader: Users
   manage: List
   list: Show users
-  add: Add
+  add: Add a user
 home:
   home: Home
   button: Back home page
@@ -139,10 +139,12 @@ admin:
     roles: Roles sorted by decreasing level ( 100 - 0 )
     delete: Delete
     update: Edit
+    resetpwd: Reset password
     created: User created
     updated: User updated
     deleted: User deleted
     cancel: Canceled update
+    passwordreset: Password updated
 logs:
   menuheader: Logs
   site: Web site logs
@@ -156,6 +158,7 @@ buttons:
   login: Sign In
   slidershow: Slider
   sliderclose: Close
+  resetpwd: Reset
 slider:
   hover: Slider Paused
   out: Slider Running

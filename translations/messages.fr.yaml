@@ -138,10 +138,12 @@ admin:
     roles: Rôles par niveau décroissant ( 100 - 0)
     delete: Supprimer
     update: Editer
+    resetpwd: Changer mot de passe
     created: Utilisateur ajouté
     updated: Utilisateur mis à jour
     deleted: Utilisateur supprimé
     cancel: Mise à jour abandonnée
+    passwordreset: Mot de passe mis à jour
 logs:
   menuheader: Les logs
   site: Du site WEB
@@ -155,6 +157,7 @@ buttons:
   login: Se connecter
   slidershow: Slider
   sliderclose: Fermer
+  resetpwd: Reset
 slider:
   hover: Slider en pause
   out: Slider actif

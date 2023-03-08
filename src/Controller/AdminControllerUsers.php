@@ -81,7 +81,7 @@ class AdminControllerUsers extends AbstractController
             }
             return $this->redirectToRoute('bootadmin.users.list');
         }
-        return $this->render('admin/usersadd.html.twig', [
+        return $this->render('admin/usersedit.html.twig', [
             "form" => $form->createView(),
             "locale" =>  $loc,
             "user" => $user,
@@ -112,16 +112,58 @@ class AdminControllerUsers extends AbstractController
                         TranslatorInterface $translator): Response
     {
         $repo = $entityManager->getRepository(Users::class);
-        $event = $repo->findOneBy(['id' => $id]);
+        $user = $repo->findOneBy(['id' => $id]);
         try {
-            $entityManager->remove($event);
+            $entityManager->remove($user);
             $entityManager->flush();
             $this->addFlash('success', $translator->trans('admin.manageusers.deleted'));
         }
         catch(Exception $e) {
             $this->addFlash('error', $e->getMessage());
         }
-        return $this->redirectToRoute('bootadmin.users.list', array( 'new' => "true"));
+        return $this->redirectToRoute('bootadmin.users.list');
+    }
+    // --------------------------------------------------------------------------
+    #[Route('/users/resetpwd/{id}', name: 'bootadmin.users.resetpwd')]
+    public function ResetUserPassword(Request $request,
+                        int $id,
+                        UserPasswordHasherInterface $userPasswordHasher,
+                        EntityManagerInterface $entityManager,
+                        TranslatorInterface $translator): Response
+    {
+        date_default_timezone_set('Europe/Paris');
+        $loc = $this->locale($request);
+        $repo = $entityManager->getRepository(Users::class);
+        $user = $repo->findOneBy(['id' => $id]);
+        $form = $this->createForm(UsersType::class, $user,
+            ['validation_groups' => ['passwordreset']]);
+        $form->remove('email')->remove('firstname')->remove('lastname');
+        $form->remove('address')->remove('role');
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()) { // Form submitted ? 
+            try {
+                $user->setPassword(
+                    $userPasswordHasher->hashPassword($user,
+                        $form->get('password')->getData()
+                    )
+                );
+                $user->setConfirmpassword($user->getPassword());
+                $entityManager->persist($user);
+                $entityManager->flush();
+                $this->addFlash('success', $translator->trans('admin.manageusers.passwordreset'));
+                return $this->redirectToRoute('bootadmin.users.list');
+            }
+            catch(Exception $e) {
+                $this->addFlash('error', $e->getMessage());
+            }
+        }
+        return $this->render('admin/userspwdreset.html.twig', [
+            "form" => $form->createView(),
+            "locale" =>  $loc,
+            "user" => $user,
+            "id" => $id
+            ]
+        );               
     }
     // --------------------------------------------------------------------------
     // P R I V A T E     S E R V I C E S 

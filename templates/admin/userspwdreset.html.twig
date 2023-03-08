@@ -1,0 +1,44 @@
+{% extends 'bootstrap.html.twig' %}
+
+{% block title %}{% trans %}admin.title{% endtrans %}{% endblock %}
+
+{% form_theme form 'bootstrap_5_layout.html.twig' %}
+
+{% block pagetitle %}
+    <h1 class="mt-4">{% trans %}admin.manageusers.title{% endtrans %}</h1>
+{% endblock %}
+
+{% block body %}
+
+    {% include "admin/usersmenu.html.twig" %}
+
+    {% set param = [] %}
+    {% set action = 'bootadmin.users.resetpwd' %}
+    {% set param = { 'id': user.id } %}
+
+    {# Form #}
+    {{ form_start(form, {'attr': {'novalidate': 'novalidate', 'class': 'form'},
+                         'action': path(action, param), 
+                         'method': 'POST'
+                        }) 
+    }}
+    <button type="submit" 
+        class="btn btn-primary mb-3">{% trans %}buttons.resetpwd{% endtrans %}</button>
+    <button type="submit" formaction="{{path('bootadmin.users.list')}}" 
+        class="btn btn-primary mb-3">{% trans %}buttons.cancel{% endtrans %}</button>
+
+    <div class="row align-items-start">
+        <div class="col ylabel">
+            {{ form_row( form.password, { 'label' : 'admin.manageusers.password'|trans,
+                                'value': '' })}}
+        </div>
+        <div class="col ylabel">
+            {{ form_row( form.confirmpassword, { 'label' : 'admin.manageusers.confirmpassword'|trans,
+                                'value': '' })}}
+        </div>
+    </div>
+    {{ form_end(form)}}
+
+    <link rel="stylesheet" href="{{asset('/css/yves.css')}}">
+
+{% endblock %}
