@@ -110,7 +110,7 @@
                                         {% if is_granted('ROLE_ADMIN_USERS') %}
                                             <a class="nav-link" href="{{ path('bootadmin.users.list', { "new" : "true" } )}}">
                                                                         {% trans %}user.manage{% endtrans %}</a>
-                                            <a class="nav-link" href="{{ path('bootadmin.users.edit', { "new" : "true" } )}}">{% trans %}user.add{% endtrans %}</a>
+                                            <a class="nav-link" href="{{ path('bootadmin.users.edit')}}">{% trans %}user.add{% endtrans %}</a>
                                         {% endif %}                                
                                     </nav>
                                 </div>

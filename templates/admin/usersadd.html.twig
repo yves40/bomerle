@@ -13,10 +13,8 @@
     {% include "admin/usersmenu.html.twig" %}
 
     {% set param = [] %}
-    {% if new == "true" %}  {# Update, or Create, delete ? #}
-        {% set action = 'bootadmin.users.edit' %}
-    {% else %}
-        {% set action = 'bootadmin.users.update' %}
+    {% set action = 'bootadmin.users.edit' %}
+    {% if id != 0 %}  {# Update, or Create, delete ? #}
         {% set param = { 'id': user.id } %}
     {% endif %}
 
@@ -26,12 +24,12 @@
                          'method': 'POST'
                         }) 
     }}
-    {% if new == "true" %}
+    {% if id == 0 %}
         <button type="submit" class="btn btn-primary mb-3">{% trans %}buttons.add{% endtrans %}</button>
     {% else %}
         <button type="submit" 
             class="btn btn-primary mb-3">{% trans %}buttons.modify{% endtrans %}</button>
-        <button type="submit" formaction="{{path('bootadmin.users.edit', { new: 'abort'})}}" 
+        <button type="submit" formaction="{{path('bootadmin.users.list')}}" 
             class="btn btn-primary mb-3">{% trans %}buttons.cancel{% endtrans %}</button>
     {% endif %}
     <div class="row align-items-start">
@@ -48,16 +46,20 @@
                                 'value': user.lastname })}}
         </div>
     </div>
-    <div class="row align-items-start">
-        <div class="col ylabel">
-            {{ form_row( form.password, { 'label' : 'admin.manageusers.password'|trans,
-                                'value': user.password })}}
+
+    {% if id == 0 %}    
+        <div class="row align-items-start">
+            <div class="col ylabel">
+                {{ form_row( form.password, { 'label' : 'admin.manageusers.password'|trans,
+                                    'value': user.password })}}
+            </div>
+            <div class="col ylabel">
+                {{ form_row( form.confirmpassword, { 'label' : 'admin.manageusers.confirmpassword'|trans,
+                                    'value': user.confirmpassword })}}
+            </div>
         </div>
-        <div class="col ylabel">
-            {{ form_row( form.confirmpassword, { 'label' : 'admin.manageusers.confirmpassword'|trans,
-                                'value': user.confirmpassword })}}
-        </div>
-    </div>
+    {% endif %}
+    
     <div class="row align-items-start">
         <div class="col ylabel">
             {{ form_row( form.address, { 'label' : 'admin.manageusers.address'|trans,

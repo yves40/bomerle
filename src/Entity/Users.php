@@ -37,7 +37,7 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(length: 45)]
     #[Assert\NotBlank(message: "Merci de renseigner ce champ", groups: ['standard'])]
-    private ?string $lastname = null;
+    private ?string $lastname = '';
 
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank(message: "Merci de renseigner ce champ", groups: ['standard'])]
@@ -102,7 +102,7 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->firstname;
     }
 
-    public function setFirstname(string $firstname): self
+    public function setFirstname(?string $firstname): self
     {
         $this->firstname = $firstname;
 
@@ -114,7 +114,7 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->lastname;
     }
 
-    public function setLastname(string $lastname): self
+    public function setLastname(?string $lastname): self
     {
         $this->lastname = $lastname;
 
@@ -126,7 +126,7 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->email;
     }
 
-    public function setEmail(string $email): self
+    public function setEmail(?string $email): self
     {
         $this->email = $email;
 
@@ -138,7 +138,7 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->address;
     }
 
-    public function setAddress(string $address): self
+    public function setAddress(?string $address): self
     {
         $this->address = $address;
 
@@ -150,7 +150,7 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->password;
     }
 
-    public function setPassword(string $password): self
+    public function setPassword(?string $password): self
     {
         $this->password = $password;
 
@@ -186,7 +186,7 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->confirmpassword;
     }
 
-    public function setConfirmpassword(string $confirmpassword): self
+    public function setConfirmpassword(?string $confirmpassword): self
     {
         $this->confirmpassword = $confirmpassword;
 
