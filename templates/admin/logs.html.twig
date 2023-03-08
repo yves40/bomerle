@@ -16,19 +16,19 @@
         {% for log in logs %}
             <li class="list-group-item pt-0 pb-0">
                 <div class="row mt-1 mb-0 pt-0 pb-0">
-                    <div class="col-6">{{log.message}}</div>
-                    
+                    {% if locale == 'fr' %}
+                        <div class="col-2">{{log.logtime|date("d/m/Y H:i:s")}}</div>
+                    {% else %}
+                        <div class="col-2">{{log.logtime|date("m/d/Y H:i:s")}}</div>
+                    {% endif %}                        
+                    <div class="col-2">{{log.action}}</div>
+                    <div class="col-4">{{log.message}}</div>
                     {% if log.severity > 2 %}
                         <div class="col-2 yerror">{{severitylabels[log.severity]}}</div>
                     {% else %}
                         <div class="col-2">{{severitylabels[log.severity]}}</div>                    
                     {% endif %}
                     
-                    {% if locale == 'fr' %}
-                        <div class="col-4">{{log.logtime|date("d/m/Y H:i:s")}}</div>
-                    {% else %}
-                        <div class="col-4">{{log.logtime|date("m/d/Y H:i:s")}}</div>
-                    {% endif %}                        
                 </div>
             </li>
         {% endfor %}
