@@ -1,6 +1,6 @@
 # Have a look at config/packages/translation.yaml
 app:
-  version: Administration Beaumerle  [Fev, 1.53]
+  version: Administration Beaumerle  [Mar, 1.54]
   copyright:  'Ratoon software Corporation Inc, Chabreloche France '
 lang:
   menufr: Langue
@@ -144,10 +144,14 @@ admin:
     deleted: Utilisateur supprimé
     cancel: Mise à jour abandonnée
     passwordreset: Mot de passe mis à jour
+  managelogs:
+    title: Liste des logs
 logs:
   menuheader: Les logs
   site: Du site WEB
   user: Des utilisateurs
+  all: Tous les logs
+  all100: Plus récents
 # Generic messages
 buttons:
   add: Ajouter
@@ -158,6 +162,7 @@ buttons:
   slidershow: Slider
   sliderclose: Fermer
   resetpwd: Reset
+  home: Accueil
 slider:
   hover: Slider en pause
   out: Slider actif

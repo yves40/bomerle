@@ -145,10 +145,14 @@ admin:
     deleted: User deleted
     cancel: Canceled update
     passwordreset: Password updated
+  managelogs:
+    title: Logs list
 logs:
   menuheader: Logs
   site: Web site logs
   user: User logs
+  all: All logs
+  all100: Newest
 # Generic messages
 buttons:
   add: Add
@@ -159,6 +163,7 @@ buttons:
   slidershow: Slider
   sliderclose: Close
   resetpwd: Reset
+  home: Home
 slider:
   hover: Slider Paused
   out: Slider Running

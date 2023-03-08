@@ -1,0 +1,37 @@
+{% extends 'bootstrap.html.twig' %}
+
+{% block title %}{% trans %}admin.title{% endtrans %}{% endblock %}
+
+{% block pagetitle %}
+    <h1 class="mt-4">{% trans %}admin.managelogs.title{% endtrans %}</h1>
+{% endblock %}
+
+{% block body %}
+
+    {% include "admin/logsmenu.html.twig" %}
+
+    <button type="submit" class="btn btn-primary mb-3">{% trans %}buttons.home{% endtrans %}</button>
+    {# List existing metals #}
+    <ul class="list-group">
+        {% for log in logs %}
+            <li class="list-group-item pt-0 pb-0">
+                <div class="row mt-1 mb-0 pt-0 pb-0">
+                    <div class="col-6">{{log.message}}</div>
+                    
+                    {% if log.severity > 2 %}
+                        <div class="col-2 yerror">{{severitylabels[log.severity]}}</div>
+                    {% else %}
+                        <div class="col-2">{{severitylabels[log.severity]}}</div>                    
+                    {% endif %}
+                    
+                    {% if locale == 'fr' %}
+                        <div class="col-4">{{log.logtime|date("d/m/Y H:i:s")}}</div>
+                    {% else %}
+                        <div class="col-4">{{log.logtime|date("m/d/Y H:i:s")}}</div>
+                    {% endif %}                        
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
+    <link rel="stylesheet" href="{{asset('/css/yves.css')}}">
+{% endblock %}

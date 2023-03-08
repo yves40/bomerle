@@ -60,6 +60,27 @@ class Dblog
         return $this->severity;
     }
 
+    public function getSeverityLabels(): array {
+        return array( 
+            "0" => 'Debug',
+            "1" => 'Informational',
+            "2" => 'Warning',
+            "3" => 'Error',
+            "4" => 'Fatal',
+        );
+    }
+
+    public function getSeverityLabel(int $severity): ?string
+    {
+        switch($severity) {
+            case Dblog::DEBUG: return 'Debug';
+            case Dblog::INFORMATIONAL: return 'Informational';
+            case Dblog::WARNING: return 'Warning';
+            case Dblog::ERROR: return 'Error';
+            case Dblog::FATAL: return 'Fatal';
+        }
+    }
+
     public function setSeverity(int $severity): self
     {
         $this->severity = $severity;

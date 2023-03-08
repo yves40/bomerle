@@ -13,6 +13,7 @@
         </title>
     </head>
     <body>
+        {# The style z-index clause is used to ensure the top menu bar will always be visible #}
         <nav class="navbar navbar-expand navbar-dark bg-dark me-auto sticky-top" style="z-index:1200">
             <!-- Sidebar Toggle button -->
             <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i></button>
@@ -123,6 +124,7 @@
                                 <div class="collapse" id="collapseLogs" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                     <nav class="sb-sidenav-menu-nested nav">
                                         {% if is_granted('ROLE_ADMIN') %}
+                                            <a class="nav-link" href="{{ path('bootadmin.logs.all')}}">{% trans %}logs.all100{% endtrans %}</a>
                                             <a class="nav-link" href="#">{% trans %}logs.user{% endtrans %}</a>
                                             <a class="nav-link" href="#">{% trans %}logs.site{% endtrans %}</a>
                                         {% endif %}                                

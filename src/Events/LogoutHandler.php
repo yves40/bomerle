@@ -25,6 +25,7 @@ class LogoutHandler implements EventSubscriberInterface
 {
 
     private $dblogger;
+    private $applicationmodule = 'LogoutHandler';
 
     // -----------------------------------------------------------------------------------------------------------
     public function __construct( private UrlGeneratorInterface $urlGenerator,
@@ -39,7 +40,7 @@ class LogoutHandler implements EventSubscriberInterface
         return [LogoutEvent::class => 'onLogout'];
     }
     // -----------------------------------------------------------------------------------------------------------
-    public function onLogout(LogoutEvent $event): void
+    public function onLogout(LogoutEvent $event, ): void
     {
         // get the security token of the session that is about to be logged out
         $token = $event->getToken();
@@ -47,16 +48,17 @@ class LogoutHandler implements EventSubscriberInterface
         $request = $event->getRequest();
         // dd($token);
         $email = $token->getUser()->getEmail();
-
         // get the current response, if it is already set by another listener
         $response = $event->getResponse();
-
-        // configure a custom logout response to the homepage
+        // Configure a custom logout response to the homepage
         $response = new RedirectResponse(
-            $this->urlGenerator->generate('home'),
+            $this->urlGenerator->generate('bootadmin.home'),
             RedirectResponse::HTTP_SEE_OTHER
         );
-        $this->dblogger->info($email . ' logged out');
+        $this->dblogger->info($email,
+                            'Logout success',
+                            $this->applicationmodule
+                        );
         $event->setResponse($response);
     }
 }

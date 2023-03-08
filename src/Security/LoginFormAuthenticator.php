@@ -25,6 +25,7 @@ class LoginFormAuthenticator extends AbstractLoginFormAuthenticator
 
     public const LOGIN_ROUTE = 'app_login';
     private $dblogger;
+    private $applicationmodule = 'LoginFormAuthenticator';
 
     // -----------------------------------------------------------------------------------------------------------
     public function __construct(private UrlGeneratorInterface $urlGenerator, private ManagerRegistry $mgr)
@@ -54,14 +55,14 @@ class LoginFormAuthenticator extends AbstractLoginFormAuthenticator
         //     return new RedirectResponse($targetPath);
         // }
         // For example:
-        $this->dblogger->info('User loggin success : ' . $request->request->get('email', ''));
+        $this->dblogger->info($request->request->get('email', ''), 'Authentication success', $this->applicationmodule);
         return new RedirectResponse($this->urlGenerator->generate('home'));
         // throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
     }
     // -----------------------------------------------------------------------------------------------------------
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception): Response
     {
-        $this->dblogger->info('User loggin rejected : ' . $request->request->get('email', ''));
+        $this->dblogger->error($request->request->get('email', ''), 'Authentication failure', $this->applicationmodule);
         $request->getSession()->getFlashBag()->add('error', 'Identifiant ou mot de passe incorrect');
         return new RedirectResponse($this->urlGenerator->generate('app_login'));
     }

@@ -25,7 +25,8 @@ class BootLoginFormAuthenticator extends AbstractLoginFormAuthenticator
 
     public const LOGIN_ROUTE = 'bootadmin.login';
     private $dblogger;
-
+    private $applicationmodule = 'BootLoginFormAuthenticator';
+    
     // -----------------------------------------------------------------------------------------------------------
     public function __construct(private UrlGeneratorInterface $urlGenerator, private ManagerRegistry $mgr)
     {
@@ -53,14 +54,20 @@ class BootLoginFormAuthenticator extends AbstractLoginFormAuthenticator
         // if ($targetPath = $this->getTargetPath($request->getSession(), $firewallName)) {
         //     return new RedirectResponse($targetPath);
         // }
-        $this->dblogger->info('User loggin success : ' . $request->request->get('email', ''));
+        $this->dblogger->info($request->request->get('email', ''),
+                            'Login success',
+                            $this->applicationmodule
+                        );
         return new RedirectResponse($this->urlGenerator->generate('bootadmin.home'));
         // throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
     }
     // -----------------------------------------------------------------------------------------------------------
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception): Response
     {
-        $this->dblogger->info('User loggin rejected : ' . $request->request->get('email', ''));
+        $this->dblogger->error($request->request->get('email', ''),
+                            'Login failure',
+                            $this->applicationmodule
+                        );
         $request->getSession()->getFlashBag()->add('error', 'Identifiant ou mot de passe incorrect');
         return new RedirectResponse($this->urlGenerator->generate(self::LOGIN_ROUTE));
     }
