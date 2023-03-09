@@ -39,7 +39,6 @@ class AdminControllerLogs extends AbstractController
         $logs = $repo->findByDateDesc();
         $dblogentity = new Dblog();
         $severitylabels = $dblogentity->getSeverityLabels();
-        dump($severitylabels);
         return $this->render('admin/logs.html.twig', [
                 "locale" =>  $loc,
                 "logs" => $logs,

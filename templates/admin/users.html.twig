@@ -22,13 +22,19 @@
             <div class="row">
                 <div class="col-4">{{ user.email}}</div>
                 <div class="col-2">
-                    <a href="{{ path('bootadmin.users.delete', {id: user.id}) }}"><i class="fa fa-trash"></i></a>
+                    <a href="{{ path('bootadmin.users.delete', {id: user.id}) }}">
+                        <img class="svgsmall-lightblue" src="/images/svg/trash-bin-outline.svg" alt="delete user"/>
+                    </a>
                 </div>
                 <div class="col-2">
-                    <a href="{{ path('bootadmin.users.edit', {id: user.id}) }}"><i class="fa fa-pen-to-square"></i></a>
+                    <a href="{{ path('bootadmin.users.edit', {id: user.id}) }}">
+                        <img class="svgsmall-lightblue" src="/images/svg/pen-to-square-regular.svg" alt="Edit user" title="Edit user"/>
+                    </a>
                 </div>
                 <div class="col-3">
-                    <a href="{{ path('bootadmin.users.resetpwd', {id: user.id}) }}"><i class="fa fa-key"></i></a>
+                    <a href="{{ path('bootadmin.users.resetpwd', {id: user.id}) }}">
+                        <img class="svgsmall-lightblue" src="/images/svg/unlock-keyhole-solid.svg" alt="Reset password" title="Reset password"/>
+                    </a>
                 </div>
             </div>
         {% endfor %}

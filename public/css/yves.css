@@ -98,6 +98,27 @@ button.ylink.active {
 button.ylink:hover {
   color: red; }
 
+/*
+  How to compute the filter value ???
+  Go to thi site: https://codepen.io/sosuke/pen/Pjoqqp
+  Enter your color code.
+  To know your color code go here : https://htmlcolorcodes.com/
+*/
+.svgsmall-lightblue {
+  width: 18px;
+  height: 18px;
+  filter: invert(44%) sepia(88%) saturate(1176%) hue-rotate(191deg) brightness(100%) contrast(101%); }
+
+.svgsmall-blue {
+  width: 18px;
+  height: 18px;
+  filter: invert(44%) sepia(96%) saturate(6317%) hue-rotate(229deg) brightness(100%) contrast(102%); }
+
+.svgsmall-lightgreen {
+  width: 18px;
+  height: 18px;
+  filter: invert(41%) sepia(98%) saturate(581%) hue-rotate(83deg) brightness(81%) contrast(80%); }
+
 .imagesmall {
   width: 8rem;
   height: 8rem;

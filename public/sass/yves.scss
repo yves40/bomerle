@@ -27,19 +27,42 @@ button {
       }
   }
 }
+/*
+  How to compute the filter value ???
+  Go to thi site: https://codepen.io/sosuke/pen/Pjoqqp
+  Enter your color code.
+  To know your color code go here : https://htmlcolorcodes.com/
+*/
+.svgsmall-lightblue {
+  width: $svgsmall;
+  height:$svgsmall;
+  filter: invert(44%) sepia(88%) saturate(1176%) hue-rotate(191deg) brightness(100%) contrast(101%);
+}
+
+.svgsmall-blue {
+  width: $svgsmall;
+  height:$svgsmall;
+  filter: invert(44%) sepia(96%) saturate(6317%) hue-rotate(229deg) brightness(100%) contrast(102%);
+}
+
+.svgsmall-lightgreen {
+  width: $svgsmall;
+  height:$svgsmall;
+  filter: invert(41%) sepia(98%) saturate(581%) hue-rotate(83deg) brightness(81%) contrast(80%);
+}
 
 .imagesmall { 
-  width: 8rem;
-  height: 8rem;
-  max-width: 8rem;
-  max-height: 8rem;
+  width: $imagesmall;
+  height: $imagesmall;
+  max-width: $imagesmall;
+  max-height: $imagesmall;
   border-radius: 50%;
 }
 .textsmall {
-  font-size: 0.5rem;
+  font-size: $smalltext;
 }
 .textverysmall {
-  font-size: 0.3rem;
+  font-size: $verysmalltext;
 }
 legend {
   font-weight: bold;

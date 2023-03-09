@@ -16,7 +16,9 @@
         {# The style z-index clause is used to ensure the top menu bar will always be visible #}
         <nav class="navbar navbar-expand navbar-dark bg-dark me-auto sticky-top" style="z-index:1200">
             <!-- Sidebar Toggle button -->
-            <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i></button>
+            <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#">
+                <img class="svgsmall-lightgreen" src="/images/svg/bars-solid.svg" alt="Show Hide Menu"/>
+            </button>
             <!-- Navbar-->
             <ul class="navbar-nav me-auto me-md-0 me-3 me-lg-4">
                 <!-- user info if connected -->
@@ -56,29 +58,40 @@
                             {# The general menu starts here #}
                             <div class="sb-sidenav-menu-heading">{% trans %}admin.tools{% endtrans %}</div>
                             <a class="nav-link" href="{{ path('bootadmin.home') }}">
-                                <div class="sb-nav-link-icon"><i class="fas fa-house"></i></div>
+                                <div class="sb-nav-link-icon">
+                                    <img class="svgsmall-lightgreen" src="/images/svg/house-solid.svg" alt="Connect"/>
+                                </div>
                                 {% trans %}home.home{% endtrans %}
                             </a>
                             {% if app.user %}
                                 <a class="nav-link" href="{{ path('bootadmin.logout') }}">
-                                    <div class="sb-nav-link-icon"><i class="fas fa-square-xmark"></i></div>
+                                    <div class="sb-nav-link-icon">
+                                        <img class="svgsmall-lightgreen" src="/images/svg/circle-xmark-regular.svg" alt="Disconnect"/>
+                                    </div>
                                     {% trans %}user.disconnect{% endtrans %}
                                 </a>
                             {% else %}
                                 <a class="nav-link" href="{{ path('bootadmin.login') }}">
-                                    <div class="sb-nav-link-icon"><i class="fas fa-right-to-bracket"></i></div>
+                                    <div class="sb-nav-link-icon">
+                                        <img class="svgsmall-lightgreen" src="/images/svg/arrow-right-from-bracket-solid.svg" alt="Disconnect"/>
+                                    </div>
                                     {% trans %}user.connect{% endtrans %}
                                 </a>
                             {% endif %}
                             {# ----------------------------------------------------------------------------------- #}
                             {# The action menu starts here #}
+                            {# ----------------------------------------------------------------------------------- #}
                             {% if app.user %} 
                                 {#  KNIVES ----------------------------------------------------------------------------------- #}
                                 <div class="sb-sidenav-menu-heading">{% trans %}admin.actions{% endtrans %}</div>
                                 <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseKnives" aria-expanded="false" aria-controls="collapseLayouts">
-                                    <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                                    <div class="sb-nav-link-icon">
+                                        <img class="svgsmall-lightgreen" src="/images/svg/table-columns-solid.svg" alt=""/>
+                                    </div>
                                     {% trans %}admin.knives{% endtrans %}
-                                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                                    <div class="sb-sidenav-collapse-arrow">
+                                        <img class="svgsmall-lightgreen" src="/images/svg/magnifying-glass-solid.svg" alt=""/>
+                                    </div>
                                 </a>
                                 <div class="collapse" id="collapseKnives" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                     <nav class="sb-sidenav-menu-nested nav">
@@ -89,9 +102,13 @@
                                 </div>
                                 {# EVENTS ----------------------------------------------------------------------------------- #}
                                 <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseEvents" aria-expanded="false" aria-controls="collapseLayouts">
-                                    <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                                    <div class="sb-nav-link-icon">
+                                        <img class="svgsmall-lightgreen" src="/images/svg/table-columns-solid.svg" alt=""/>
+                                    </div>
                                     {% trans %}admin.events.events{% endtrans %}
-                                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                                    <div class="sb-sidenav-collapse-arrow">
+                                        <img class="svgsmall-lightgreen" src="/images/svg/magnifying-glass-solid.svg" alt=""/>
+                                    </div>
                                 </a>
                                 <div class="collapse" id="collapseEvents" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                     <nav class="sb-sidenav-menu-nested nav">
@@ -102,9 +119,13 @@
                                 </div>
                                 {# USERS ----------------------------------------------------------------------------------- #}
                                 <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseUsers" aria-expanded="false" aria-controls="collapseLayouts">
-                                    <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                                    <div class="sb-nav-link-icon">
+                                        <img class="svgsmall-lightgreen" src="/images/svg/table-columns-solid.svg" alt=""/>
+                                    </div>
                                         {% trans %}user.menuheader{% endtrans %}
-                                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                                    <div class="sb-sidenav-collapse-arrow">
+                                        <img class="svgsmall-lightgreen" src="/images/svg/magnifying-glass-solid.svg" alt=""/>
+                                    </div>
                                 </a>
                                 <div class="collapse" id="collapseUsers" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                     <nav class="sb-sidenav-menu-nested nav">
@@ -117,9 +138,13 @@
                                 </div>
                                 {# LOGS  ----------------------------------------------------------------------------------- #}
                                 <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLogs" aria-expanded="false" aria-controls="collapseLayouts">
-                                    <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                                    <div class="sb-nav-link-icon">
+                                        <img class="svgsmall-lightgreen" src="/images/svg/table-columns-solid.svg" alt=""/>
+                                    </div>
                                         {% trans %}logs.menuheader{% endtrans %}
-                                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                                    <div class="sb-sidenav-collapse-arrow">
+                                        <img class="svgsmall-lightgreen" src="/images/svg/magnifying-glass-solid.svg" alt=""/>
+                                    </div>
                                 </a>
                                 <div class="collapse" id="collapseLogs" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                     <nav class="sb-sidenav-menu-nested nav">
@@ -184,6 +209,7 @@
     </body>
 
     <link rel="stylesheet" href="{{ asset('css/mini.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/yves.css') }}">
     <link rel="stylesheet" href="{{ asset('node_modules/startbootstrap-sb-admin/dist/css/styles.css') }}">
 
     <script src="{{asset("node_modules/bootstrap/dist/js/bootstrap.bundle.min.js")}}"></script>
