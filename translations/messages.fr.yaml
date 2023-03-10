@@ -152,6 +152,8 @@ logs:
   user: Des utilisateurs
   all: Tous les logs
   all100: Plus récents
+  hide: Cacher tout
+  show: Voir tout
 # Generic messages
 buttons:
   add: Ajouter

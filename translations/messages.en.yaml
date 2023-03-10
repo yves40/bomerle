@@ -153,6 +153,8 @@ logs:
   user: User logs
   all: All logs
   all100: Newest
+  hide: Close all
+  show: See all
 # Generic messages
 buttons:
   add: Add
