@@ -7,11 +7,9 @@ $(document).ready(function () {
     const hideall = $('#hideall');
     const messagezone = $(".msgdetails");
 
-    $(messagezone).hide();
-    zoom.click(function (e) { 
-        e.preventDefault();
-        zoomMessage(this);
-    });
+    hideAll();
+
+    zoom.click(function (e) { e.preventDefault();zoomMessage(this);});
     showall.click( (e) => { e.preventDefault(); showAll()});
     hideall.click( (e) => { e.preventDefault(); hideAll()});
 
