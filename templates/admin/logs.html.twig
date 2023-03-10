@@ -27,8 +27,14 @@
                     {% endif %}
                     <div class="col-3">{{log.useremail}}</div>
                     <div class="col-2">{{log.action}}</div>
-                    <div class="col msgzoom"><img class="svgsmall-lightblue" src="/images/svg/magnifying-glass-solid.svg" alt=""/></div>
-                    <div class="col msgdetails">{{log.message}}</div>
+                    <div class="col msgzoom">
+                        <img class="svgsmall-lightblue" src="/images/svg/magnifying-glass-solid.svg" alt=""/>
+                    </div>
+                    <div class="col msgdetails"
+                        data-visible=false
+                    >
+                        {{log.message}}
+                    </div>
                     
                 </div>
             </li>

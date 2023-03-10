@@ -8,20 +8,24 @@ $(document).ready(function () {
     $(messagezone).hide();
     zoom.click(function (e) { 
         e.preventDefault();
-        if(zoomstate) {
-            zoomstate = false;
-            $(messagezone).hide();
-        }
-        else {
-            zoomstate = true;
-            $(messagezone).show();
-        }
-        console.log(`Message details ${zoomstate}`);
+        zoomMessage(this);
     });;
 
-    $(window).resize ( () =>  {
-        let hsize = $(window).width();
-        console.log(`Resized new width : ${hsize}`);
-    });
+    // ----------------------------------------------------------------------------
+    // Zoom in, zoom out for log message details
+    // ----------------------------------------------------------------------------
+    function zoomMessage(element) {
+        let msgzone = $(element).siblings('.msgdetails');
+        let currentstate = $(msgzone).data('visible');
+        console.log(`Currentstate : ${currentstate}`);
+        if(currentstate) {
+            $(msgzone).data('visible', false);
+            $(msgzone).hide();
+        }
+        else {
+            $(msgzone).data('visible', true);
+            $(msgzone).show();
+        }     
+    }
 })
-// console.log(`[ ${$props.sliderhandler()}  ]` );
+
