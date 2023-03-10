@@ -162,7 +162,7 @@ buttons:
   login: Sign In
   slidershow: Slider
   sliderclose: Close
-  resetpwd: Reset
+  resetpwd: Reset password
   home: Home
 slider:
   hover: Slider Paused

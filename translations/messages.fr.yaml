@@ -161,7 +161,7 @@ buttons:
   login: Se connecter
   slidershow: Slider
   sliderclose: Fermer
-  resetpwd: Reset
+  resetpwd: Reset Password
   home: Accueil
 slider:
   hover: Slider en pause
