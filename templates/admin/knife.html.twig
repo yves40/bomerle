@@ -127,18 +127,21 @@
                                     {% if loop.index != 1 %}
                                         <a id="left-{{knife.id}}-{{image.id}}-{{image.rank}}" 
                                             href="{{ path('bootadmin.knives.swapphotos') }}">
-                                            <ion-icon name="arrow-back-circle-outline"></ion-icon></a>
+                                            <img class="svgsmall-lightblue" src="/images/svg/arrow-back.svg" alt=""/>
+                                        </a>
                                     {% endif %}
                                     {# The delete icon #}
                                     <a id="del-{{image.id}}" 
                                         href="{{ path('bootadmin.knives.removephoto',
                                                 { 'knifeid' : knife.id , 'imageid' : image.id }) }}">
-                                        <ion-icon name="trash-bin-outline"></ion-icon></a>
+                                        <img class="svgsmall-lightblue" src="/images/svg/trash-bin.svg" alt=""/>
+                                    </a>
                                     {# The shit right icon  #}
                                     {% if not loop.last %}
                                         <a id="right-{{knife.id}}-{{image.id}}-{{image.rank}}" 
                                             href="{{ path('bootadmin.knives.swapphotos') }}">
-                                            <ion-icon name="arrow-forward-circle-outline"></ion-icon></a>
+                                            <img class="svgsmall-lightblue" src="/images/svg/arrow-forward.svg" alt=""/>
+                                        </a>
                                     {% endif %}                                
                                 </div>
                             </div>
