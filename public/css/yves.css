@@ -119,6 +119,10 @@ button.ylink:hover {
   height: 18px;
   filter: invert(41%) sepia(98%) saturate(581%) hue-rotate(83deg) brightness(81%) contrast(80%); }
 
+.logs {
+  padding-left: 0;
+  padding-right: 0; }
+
 .imagesmall {
   width: 8rem;
   height: 8rem;
@@ -127,10 +131,10 @@ button.ylink:hover {
   border-radius: 50%; }
 
 .textsmall {
-  font-size: 0.5rem; }
+  font-size: 0.7rem; }
 
 .textverysmall {
-  font-size: 0.3rem; }
+  font-size: 0.5rem; }
 
 legend {
   font-weight: bold; }

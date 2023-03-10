@@ -62,10 +62,14 @@
                 <div class="row">
                     <div class="col-8">{{mechanism.name}}</div>
                     <div class="col-1">
-                        <a href="{{ path('bootadmin.mechanisms.delete', {id: mechanism.id}) }}"><i class="fa fa-trash"></i></a>
+                        <a href="{{ path('bootadmin.mechanisms.delete', {id: mechanism.id}) }}">
+                            <img class="svgsmall-lightblue" src="/images/svg/trash-bin-outline.svg" alt=""/>
+                        </a>
                     </div>
                     <div class="col-1">
-                        <a href="{{ path('bootadmin.mechanisms.update', {id: mechanism.id}) }}"><i class="fa fa-pen-to-square"></i></a>
+                        <a href="{{ path('bootadmin.mechanisms.update', {id: mechanism.id}) }}">
+                            <img class="svgsmall-lightblue" src="/images/svg/pen-to-square-regular.svg" alt="" title=""/>
+                        </a>
                     </div>
                 </div>
             </li>

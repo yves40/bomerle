@@ -38,6 +38,9 @@ class Dblog
     #[ORM\Column(length: 64, nullable: true)]
     private ?string $action = null;
 
+    #[ORM\Column(length: 64, nullable: true)]
+    private ?string $useremail = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -132,6 +135,18 @@ class Dblog
     public function setAction(?string $action): self
     {
         $this->action = $action;
+
+        return $this;
+    }
+
+    public function getUseremail(): ?string
+    {
+        return $this->useremail;
+    }
+
+    public function setUseremail(?string $useremail): self
+    {
+        $this->useremail = $useremail;
 
         return $this;
     }

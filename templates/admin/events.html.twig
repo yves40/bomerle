@@ -122,10 +122,14 @@
                             {% endif %}                        
                             {% if listall == 0 %}
                                 <div class="col-1">
-                                    <a href="{{ path('bootadmin.events.delete', {id: oneevent.id}) }}"><i class="fa fa-trash"></i></a>
+                                    <a href="{{ path('bootadmin.events.delete', {id: oneevent.id}) }}">
+                                        <img class="svgsmall-lightblue" src="/images/svg/trash-bin-outline.svg" alt=""/>
+                                    </a>
                                 </div>
                                 <div class="col-1">
-                                    <a href="{{ path('bootadmin.events.update', {id: oneevent.id}) }}"><i class="fa fa-pen-to-square"></i></a>
+                                    <a href="{{ path('bootadmin.events.update', {id: oneevent.id}) }}">
+                                        <img class="svgsmall-lightblue" src="/images/svg/pen-to-square-regular.svg" alt="" title=""/>
+                                    </a>
                                 </div>
                             {% endif %}
                         </div>

@@ -63,10 +63,14 @@
                 <div class="row">
                     <div class="col-8">{{category.name}}</div>
                     <div class="col-1">
-                        <a href="{{ path('bootadmin.categories.delete', {id: category.id}) }}"><i class="fa fa-trash"></i></a>
+                        <a href="{{ path('bootadmin.categories.delete', {id: category.id}) }}">
+                            <img class="svgsmall-lightblue" src="/images/svg/trash-bin-outline.svg" alt=""/>
+                        </a>
                     </div>
                     <div class="col-1">
-                        <a href="{{ path('bootadmin.categories.update', {id: category.id}) }}"><i class="fa fa-pen-to-square"></i></a>
+                        <a href="{{ path('bootadmin.categories.update', {id: category.id}) }}">
+                            <img class="svgsmall-lightblue" src="/images/svg/pen-to-square-regular.svg" alt="" title=""/>
+                        </a>
                     </div>
                 </div>
             </li>
