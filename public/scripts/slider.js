@@ -41,12 +41,14 @@ $(document).ready(function () {
     if(showbuttons === true) {
         $(buttonhide).hide();
         $(buttonshow).show();
+        $(sliderstatus).hide();
         $(slidescontainer).hide();
         addImages(imagesArray);
         $(buttonshow).click(function (e) { 
             e.preventDefault();
             $(buttonshow).hide();
             $(buttonhide).show();
+            $(sliderstatus).show();
             $(slidescontainer).show();
             addImages(imagesArray);
         });
@@ -54,6 +56,7 @@ $(document).ready(function () {
             e.preventDefault();
             $(buttonshow).show();
             $(buttonhide).hide();
+            $(sliderstatus).hide();
             $(slidescontainer).hide();
             removeImages();
         });
@@ -70,7 +73,7 @@ $(document).ready(function () {
     // ----------------------------------------------------------------------------
     function getImages(source) {
         let thelist = [];
-        $(`#${source} img`).each(function (index, element) {
+        $(`#${source} .imagesmall`).each(function (index, element) {
             thelist.push(this);
         });
         return thelist;
