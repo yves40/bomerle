@@ -79,7 +79,7 @@ function moveLeft(element) {
 // -------------------------------------------------------------
 function buildImagesList(selectedimageid, action) {
     let imagespayload = [];
-    $(".container img").each(function (idx, theimage) {
+    $(".container .imagesmall").each(function (idx, theimage) {
         imagespayload.push(getImageAtributes(theimage, selectedimageid, action));
     });
     return imagespayload;
@@ -174,10 +174,10 @@ function swapImages(movingimageid, relatedimageid) {
     $(`#imgcard-${relatedimageid}`).each((idx, element) => {
         relatedcard = element;
     });
-    $(`#imgcard-${movingimageid} img`).each((idx, element) => {
+    $(`#imgcard-${movingimageid} .imagesmall`).each((idx, element) => {
         movingimg = element;
     });
-    $(`#imgcard-${relatedimageid} img`).each((idx, element) => {
+    $(`#imgcard-${relatedimageid} .imagesmall`).each((idx, element) => {
         relatedimg = element;
     });
     $(`#imgcard-${movingimageid} a[id^=left]`).each((idx, element) => {
