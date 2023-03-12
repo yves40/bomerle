@@ -31,8 +31,8 @@ $(document).ready(function () {
                 let elapsed = timer.getElapsedString();
                 avgloadtime = (avgloadtime + timer.getElapsed()) / 2;
                 ++totalimagesloaded;
-                let timestamp = timer.getTimeMsec();
-                console.log(`${timestamp} Image Index : ${indexInArray} loaded ${filename} in ${elapsed}`)
+                // let timestamp = timer.getTimeMsec();
+                // console.log(`${timestamp} Image Index : ${indexInArray} loaded ${filename} in ${elapsed}`)
                 $props.set('imageavgloadtime', avgloadtime);
                 $props.set('imageloadcount', totalimagesloaded);
                 $props.save();
