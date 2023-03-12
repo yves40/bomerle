@@ -5,19 +5,11 @@
   imgsource is passed by the client page in the include directive.
 #}
 <div class="sliderdata" data-imagesid="{{imgsourceid}}"
-                        data-buttons="{{buttons}}"
+                        data-auto="{{auto}}"
                         data-interval="{{interval}}"
                         data-mousehovermsg="{% trans %}slider.hover{% endtrans %}"
                         data-mouseoutmsg="{% trans %}slider.out{% endtrans %}"
 >
-</div>
-<div class="mx-auto" style="width: 50%;">
-    <div class="container bg-light">
-        <div class="col-md-12 text-center">
-            <button id="showslider" type="submit" class="btn btn-primary mb-3">{% trans %}buttons.slidershow{% endtrans %}</button>
-            <button id="hideslider" type="submit" class="btn btn-primary mb-3">{% trans %}buttons.sliderclose{% endtrans %}</button>
-        </div>
-    </div>
 </div>
 <div class="mx-auto" style="width: 50%;">
   <div id="sliderstatus">

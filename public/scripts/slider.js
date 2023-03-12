@@ -3,18 +3,19 @@ $(document).ready(function () {
     $props.load();
     console.log(`[ ${$props.sliderhandler()}  ]` );
     // Get slider parameters
+    const VERYLONGTIMESLIDER = 60000;
     const imagesdivid = $(".sliderdata").data('imagesid');
-    const showbuttons = $(".sliderdata").data('buttons');
+    const automove = $(".sliderdata").data('auto');
+    let slideinterval = $(".sliderdata").data('interval');
     const mousehovermsg = $(".sliderdata").data('mousehovermsg');
     const mouseoutmsg = $(".sliderdata").data('mouseoutmsg');
-    const buttonshowid = 'showslider';
-    const buttonhideid = 'hideslider';
-    const buttonhide = $(`#${buttonhideid}`);
-    const buttonshow = $(`#${buttonshowid}`);
     const slidescontainer = $("#sliderzone");
     const sliderstatus = $("#sliderstatus p");
     const indicators = $(".carousel-indicators");   // Genuine bootstrap class
-    const slideinterval = $(".sliderdata").data('interval');
+    // Do not want animated slider ? 
+    if(!automove) {
+        slideinterval = VERYLONGTIMESLIDER; // Almost disable auto scroll
+    }
     // Initialize handlers
     $(window).resize ( () =>  {
         let hsize = $(window).width();
@@ -37,36 +38,8 @@ $(document).ready(function () {
     $('.carousel-inner').remove();
     let imagesArray = getImages(imagesdivid);
     sliderstatus.text(mouseoutmsg).addClass('sliderrunning');
-    // Activate
-    if(showbuttons === true) {
-        $(buttonhide).hide();
-        $(buttonshow).show();
-        $(sliderstatus).hide();
-        $(slidescontainer).hide();
-        addImages(imagesArray);
-        $(buttonshow).click(function (e) { 
-            e.preventDefault();
-            $(buttonshow).hide();
-            $(buttonhide).show();
-            $(sliderstatus).show();
-            $(slidescontainer).show();
-            addImages(imagesArray);
-        });
-        $(buttonhide).click(function (e) { 
-            e.preventDefault();
-            $(buttonshow).show();
-            $(buttonhide).hide();
-            $(sliderstatus).hide();
-            $(slidescontainer).hide();
-            removeImages();
-        });
-    }
-    else {
-        $(buttonshow).hide();
-        $(buttonhide).hide();
-        addImages(imagesArray);
-        $(slidescontainer).show();
-    }
+    $(slidescontainer).show();
+    addImages(imagesArray);
     // ----------------------------------------------------------------------------
     // Search for images contained in the transmitted DOM source
     // source is the ID of a containing element
