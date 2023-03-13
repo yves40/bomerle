@@ -98,6 +98,9 @@ button.ylink.active {
 button.ylink:hover {
   color: red; }
 
+#loglist li:nth-child(odd) {
+  background-color: lightgray; }
+
 #commandzone a {
   text-decoration: none; }
 
