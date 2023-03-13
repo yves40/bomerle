@@ -154,6 +154,11 @@ logs:
   all100: Plus récents
   hide: Cacher tout
   show: Voir tout
+  debug: Debug level
+  informational: Informationnel
+  warning: Avertissement
+  error: Erreur
+  fatal: Fatal
 # Generic messages
 buttons:
   add: Ajouter

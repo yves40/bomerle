@@ -1,7 +1,7 @@
 // ------------------ Init loop to trap all mouse clicks -------------------------
 $(document).ready(function () {
     $props.load();
-    let zoomstate = false;
+
     const zoom = $(".msgzoom");
     const showall = $('#showall');
     const hideall = $('#hideall');
@@ -9,10 +9,34 @@ $(document).ready(function () {
 
     hideAll();
 
-    zoom.click(function (e) { e.preventDefault();zoomMessage(this);});
-    showall.click( (e) => { e.preventDefault(); showAll()});
-    hideall.click( (e) => { e.preventDefault(); hideAll()});
+    $('.levelselector').each(function (index, element) {
+        // element == this
+        $(this).click( (e) => { levelSelected(this); });
+    });
 
+    zoom.click(function (e) { e.preventDefault(); zoomMessage(this); });
+    showall.click( (e) => { e.preventDefault(); showAll(); });
+    hideall.click( (e) => { e.preventDefault(); hideAll(); });
+
+    // ----------------------------------------------------------------------------
+    // Level selection
+    // ----------------------------------------------------------------------------
+    function levelSelected(element) {
+        let id = $(element).attr('id');
+        if($(element).prop('checked')) {
+            $(element).remove('checked');
+        }
+        // Now build the selector array
+        let selectors = [];
+        $('.levelselector').each(function (index, scan) {
+            if($(scan).prop('checked')) {
+                console.log(` ID : ${$(scan).attr('id')} ON`);
+            }
+            else{
+                console.log(` ID : ${$(scan).attr('id')} OFF`);
+            }
+        });
+    }
     // ----------------------------------------------------------------------------
     // Zoom in, zoom out for log message details
     // ----------------------------------------------------------------------------

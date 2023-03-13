@@ -10,8 +10,42 @@
 
     {% include "admin/logsmenu.html.twig" %}
 
+
+    <div class="row ms-2">
+        <div class="form-check col">
+            <input class="form-check-input levelselector" type="checkbox" value="" id="debug" checked>
+            <label class="form-check-label" for="debug">
+                {{'logs.debug'|trans}}
+            </label>
+        </div>
+        <div class="form-check col">
+            <input class="form-check-input levelselector" type="checkbox" value="" id="informational" checked>
+            <label class="form-check-label" for="informational">
+                {{'logs.informational'|trans}}
+            </label>
+        </div>
+        <div class="form-check col">
+            <input class="form-check-input levelselector" type="checkbox" value="" id="warning" checked>
+            <label class="form-check-label" for="warning">
+                {{'logs.warning'|trans}}
+            </label>
+        </div>
+        <div class="form-check col">
+            <input class="form-check-input levelselector" type="checkbox" value="" id="error" checked>
+            <label class="form-check-label" for="error">
+                {{'logs.error'|trans}}
+            </label>
+        </div>
+        <div class="form-check col">
+            <input class="form-check-input levelselector" type="checkbox" value="" id="fatal" checked>
+            <label class="form-check-label" for="fatal">
+                {{'logs.fatal'|trans}}
+            </label>
+        </div>
+    </div>
+
     {# List existing metals #}
-    <ul class="list-group">
+    <ul id="loglist" class="list-group">
         {% for log in logs %}
             <li class="list-group-item pt-0 pb-0">
                 <div class="row mt-1 mb-0 pt-0 pb-0 textsmall">
