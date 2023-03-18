@@ -127,6 +127,8 @@ admin:
     created: Event added
     deleted: Event deleted
     updated: Event updated
+    delete: Delete
+    update: Edit
   manageusers:
     title: Users
     email: Email

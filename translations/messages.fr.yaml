@@ -126,6 +126,8 @@ admin:
     created: Evènement ajouté
     deleted: Evènement supprimé
     updated: Evènement mis à jour
+    delete: Supprimer
+    update: Editer
   manageusers:
     title: Utilisateurs
     email: Email
