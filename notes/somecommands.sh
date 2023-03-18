@@ -9,4 +9,5 @@ php bin/console doctrine:migrations:execute DoctrineMigrations\Version2023031809
 # The operation takes place in the version table of the supporting DB
 # Does not take care of the migration file. 
 # Delete it manually otherwise the doctrine status will be wrong
+# Also cleanup any modification in the entity related to the attributes used in the migratioun file
 php bin/console doctrine:migrations:version Version20230318092754 --delete
