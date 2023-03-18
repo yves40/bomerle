@@ -2,6 +2,8 @@
 
 {% block title %}{% trans %}admin.title{% endtrans %}{% endblock %}
 
+{% form_theme form 'bootstrap_5_layout.html.twig' %}
+
 {% block pagetitle %}
     <h1 class="mt-4">{% trans %}admin.managelogs.title{% endtrans %}</h1>
 {% endblock %}
@@ -10,6 +12,21 @@
 
     {% include "admin/logsmenu.html.twig" %}
 
+    {# Form #}
+    {{ form_start(form, {'attr': {'novalidate': 'novalidate', 'class': 'form'},
+                         'method': 'POST'
+                        }) 
+    }}
+        <div class="row">
+            {% if locale == 'fr' %}
+                <div class="col">{{'form.startdate'|date("d/m/Y", "Europe/Paris")}}</div>
+                <div class="col">{{'form.enddate'|date("d/m/Y", "Europe/Paris")}}</div>
+            {% else %}
+                <div class="col">{{'form.startdate'|date("m/d/Y", "Europe/Paris")}}</div>
+                <div class="col">{{'form.enddate'|date("m/d/Y", "Europe/Paris")}}</div>
+            {% endif %}                        
+        </div>
+    {{form_end(form) }}
 
     <div class="row ms-2">
         <div class="form-check col">
@@ -64,12 +81,9 @@
                     <div class="col msgzoom">
                         <img class="svgsmall-lightblue" src="/images/svg/magnifying-glass-solid.svg" alt=""/>
                     </div>
-                    <div class="col msgdetails"
-                        data-visible=false
-                    >
+                    <div class="col msgdetails"data-visible=false>
                         {{log.message}}
                     </div>
-                    
                 </div>
             </li>
         {% endfor %}

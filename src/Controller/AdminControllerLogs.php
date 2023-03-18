@@ -2,9 +2,11 @@
 
 namespace App\Controller;
 
+use DateTime;
+
 use App\Entity\Dblog;
 
-use DateTime;
+use App\Services\DatesHandler;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -12,6 +14,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Translation\LocaleSwitcher;
 use Symfony\Contracts\Translation\TranslatorInterface;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route('/bootadmin')]
@@ -39,7 +42,16 @@ class AdminControllerLogs extends AbstractController
         $logs = $repo->findByDateDesc();
         $dblogentity = new Dblog();
         $severitylabels = $dblogentity->getSeverityLabels();
+
+        $filterdates = new DatesHandler();
+        dump($filterdates);
+        $form = $this->createFormBuilder($filterdates)
+            ->add('startdate', DateType::class)
+            ->add('enddate', DateType::class)
+            ->getForm();
+
         return $this->render('admin/logs.html.twig', [
+                "form" => $form->createView(),
                 "locale" =>  $loc,
                 "logs" => $logs,
                 "severitylabels" =>$severitylabels
