@@ -149,6 +149,8 @@ admin:
     passwordreset: Password updated
   managelogs:
     title: Logs list
+    startdate: Before
+    enddate: After
 logs:
   menuheader: Logs
   site: Web site logs

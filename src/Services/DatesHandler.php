@@ -21,6 +21,6 @@ class DatesHandler
   function setEndDate(DateTime $date) {
     $this->endDate = $date;
   }
-  function getEndDate() : DateTime { return $this->endDate; }
-  function getStartDate(): DateTime { return $this->startDate; }
+  function getEndDate() : string { return $this->endDate->format('d/m/y'); }
+  function getStartDate(): string { return $this->startDate->format('d/m/y'); }
 }

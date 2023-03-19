@@ -15,16 +15,14 @@
     {# Form #}
     {{ form_start(form, {'attr': {'novalidate': 'novalidate', 'class': 'form'},
                          'method': 'POST'
-                        }) 
-    }}
+                        }) }}
         <div class="row">
-            {% if locale == 'fr' %}
-                <div class="col">{{'form.startdate'|date("d/m/Y", "Europe/Paris")}}</div>
-                <div class="col">{{'form.enddate'|date("d/m/Y", "Europe/Paris")}}</div>
-            {% else %}
-                <div class="col">{{'form.startdate'|date("m/d/Y", "Europe/Paris")}}</div>
-                <div class="col">{{'form.enddate'|date("m/d/Y", "Europe/Paris")}}</div>
-            {% endif %}                        
+            <div class="col">
+                {{ form_row(form.startDate, { 'label': 'admin.managelogs.startdate'|trans})}}
+            </div>
+            <div class="col">
+                {{ form_row(form.endDate, { 'label': 'admin.managelogs.enddate'|trans}) }}
+            </div>
         </div>
     {{form_end(form) }}
 
@@ -62,7 +60,7 @@
     </div>
 
     {# List existing metals #}
-    <ul id="loglist" class="list-group">
+    <ul id="loglist" class="list-group mt-4">
         {% for log in logs %}
             <li class="list-group-item pt-0 pb-0">
                 <div class="row mt-1 mb-0 pt-0 pb-0 textsmall">

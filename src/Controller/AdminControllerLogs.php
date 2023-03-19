@@ -5,7 +5,7 @@ namespace App\Controller;
 use DateTime;
 
 use App\Entity\Dblog;
-
+use App\Form\DateRangeType;
 use App\Services\DatesHandler;
 
 use Doctrine\ORM\EntityManagerInterface;
@@ -42,14 +42,8 @@ class AdminControllerLogs extends AbstractController
         $logs = $repo->findByDateDesc();
         $dblogentity = new Dblog();
         $severitylabels = $dblogentity->getSeverityLabels();
-
-        $filterdates = new DatesHandler();
-        dump($filterdates);
-        $form = $this->createFormBuilder($filterdates)
-            ->add('startdate', DateType::class)
-            ->add('enddate', DateType::class)
-            ->getForm();
-
+        $form = $this->createForm(DateRangeType::class);
+        
         return $this->render('admin/logs.html.twig', [
                 "form" => $form->createView(),
                 "locale" =>  $loc,

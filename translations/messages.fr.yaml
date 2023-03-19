@@ -148,6 +148,8 @@ admin:
     passwordreset: Mot de passe mis à jour
   managelogs:
     title: Liste des logs
+    startdate: Avant le
+    enddate: Après le
 logs:
   menuheader: Les logs
   site: Du site WEB
