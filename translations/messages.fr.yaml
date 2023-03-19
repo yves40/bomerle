@@ -150,6 +150,7 @@ admin:
     title: Liste des logs
     startdate: Depuis le
     enddate: Après le
+    searchtextlabel: Texte à chercher
 logs:
   menuheader: Les logs
   site: Du site WEB

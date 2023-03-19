@@ -26,6 +26,35 @@
         </div>
     {{form_end(form) }}
 
+
+    <div class="container-fluid mt-2 mb-2">
+        <div class="row paginationcommands">
+            <div class="col-2">
+                {# The previous page icon #}
+                <a id="previouspage" href="#">
+                    <img class="svgsmall-lightblue" src="/images/svg/arrow-back.svg" alt=""/>
+                </a>
+            </div>
+            <div class="col-8">
+                <p id="zemessage">The message</p>
+            </div>
+            <div class="col-2">
+                {# The next page icon  #}
+                <a id="nextpage" 
+                    href="#">
+                    <img class="svgsmall-lightblue" src="/images/svg/arrow-forward.svg" alt=""/>
+                </a>
+            </div>
+        </div>
+        <div class="row paginationcommands">
+            <label class="mt-1  mb-1" for="searchtext">{% trans %}admin.managelogs.searchtextlabel{% endtrans %}</label>
+            <input id="searchtext" type="text" name="email" id="searchtext"
+                class="form-control" 
+                autocomplete="off" spellcheck="false" autofocus>        
+            </div>
+    </div>
+
+
     <div class="row ms-2">
         <div class="form-check col">
             <input class="form-check-input levelselector" type="checkbox" value="" id="debug" checked>

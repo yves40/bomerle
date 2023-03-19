@@ -38,6 +38,20 @@ button {
   }
 }
 
+.paginationcommands {
+  border: 1px solid lightgray;
+  border-radius: 3px;
+  display: flex;
+  div {
+    margin: auto;
+    text-align: center;
+  }
+  img {
+    width: 40px;
+    height: 40px;
+  }
+}
+
 /*
   How to compute the filter value ???
   Go to thi site: https://codepen.io/sosuke/pen/Pjoqqp

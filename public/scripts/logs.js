@@ -5,6 +5,10 @@ $(document).ready(function () {
     const zoom = $(".msgzoom");
     const showall = $('#showall');
     const hideall = $('#hideall');
+    const nextpage = $('#nextpage');
+    const previouspage = $('#previouspage');
+    const zemessage= $('#zemessage');
+    let pagenum = 1;
 
     hideAll();
 
@@ -16,6 +20,8 @@ $(document).ready(function () {
     zoom.click(function (e) { e.preventDefault(); zoomMessage(this); });
     showall.click( (e) => { e.preventDefault(); showAll(); });
     hideall.click( (e) => { e.preventDefault(); hideAll(); });
+    nextpage.click( (e) => {e.preventDefault(); page(1); });
+    previouspage.click( (e) => {e.preventDefault(); page(-1); });
     // get some info on one or more dates fields.
     let alldatefields = [];
     getDateFields('date_range_startDate');
@@ -46,6 +52,22 @@ $(document).ready(function () {
                 console.log(` ID : ${$(scan).attr('id')} OFF`);
             }
         });
+    }
+    // ----------------------------------------------------------------------------
+    // pagination
+    // ----------------------------------------------------------------------------
+    function page(direction) {
+        switch(direction) {
+            case 1: console.log('Next');
+                    ++pagenum;
+                    break;
+            case -1: console.log('Previous');
+                    --pagenum;
+                    break;
+            default: console.log('Arghhhhh !!!');
+                    break;
+        }
+        $(zemessage).text(`On page ${pagenum}`);
     }
     // ----------------------------------------------------------------------------
     // Zoom in, zoom out for log message details

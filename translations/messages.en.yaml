@@ -151,6 +151,7 @@ admin:
     title: Logs list
     startdate: Since
     enddate: After
+    searchtextlabel: Text to search
 logs:
   menuheader: Logs
   site: Web site logs
