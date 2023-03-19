@@ -148,7 +148,7 @@ admin:
     passwordreset: Mot de passe mis à jour
   managelogs:
     title: Liste des logs
-    startdate: Avant le
+    startdate: Depuis le
     enddate: Après le
 logs:
   menuheader: Les logs

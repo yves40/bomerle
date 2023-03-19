@@ -149,7 +149,7 @@ admin:
     passwordreset: Password updated
   managelogs:
     title: Logs list
-    startdate: Before
+    startdate: Since
     enddate: After
 logs:
   menuheader: Logs

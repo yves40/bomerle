@@ -16,14 +16,18 @@ $(document).ready(function () {
     zoom.click(function (e) { e.preventDefault(); zoomMessage(this); });
     showall.click( (e) => { e.preventDefault(); showAll(); });
     hideall.click( (e) => { e.preventDefault(); hideAll(); });
-
     // get some info on one or more dates fields.
     let alldatefields = [];
-    let startdateUI = getDateFields('date_range_startDate');
-    let enddateUI = getDateFields('date_range_endDate');
-    console.log(startdateUI);
-    console.log(enddateUI);
-
+    getDateFields('date_range_startDate');
+    getDateFields('date_range_endDate');
+    // Set current date for startDate
+    let currentdate = new Date().toISOString();
+    const now = new Date();
+    let enddate = new Date(new Date(now).setDate(now.getDate() + 31)).toISOString();
+    updateDateFields(alldatefields[0], getDayMonthYear(currentdate));
+    handleMonthSelection(alldatefields[0].twigmonth);
+    updateDateFields(alldatefields[1], getDayMonthYear(enddate));
+    handleMonthSelection(alldatefields[1].twigmonth);
     // ----------------------------------------------------------------------------
     // Level selection
     // ----------------------------------------------------------------------------
@@ -102,20 +106,16 @@ $(document).ready(function () {
             handleMonthSelection(this);
         });
         alldatefields.push(dateUI);
-        return dateUI;
+        return;
     }
     // ------------------------------------------------------------------------------
     // Based on previously identified fields, update the list selection with the 
     // event object data
     // ------------------------------------------------------------------------------
-    function updateDateFields(dataselector, objectselector) {
-
-        let eventobj = $(`.${dataselector}`).data(`${objectselector}`);
-        let datefields = getDayMonthYear(eventobj.date);
-
-        $(dateUI.twigday).val(datefields.d);
-        $(dateUI.twigmonth).val(datefields.m);
-        $(dateUI.twigyear).val(datefields.y);
+    function updateDateFields(dateUI, datevalues) {
+        $(dateUI.twigday).val(datevalues.d);
+        $(dateUI.twigmonth).val(datevalues.m);
+        $(dateUI.twigyear).val(datevalues.y);
     }
     // ------------------------------------------------------------------------------
     function getDayMonthYear(thedate) {
@@ -149,6 +149,11 @@ $(document).ready(function () {
                 dateUItarget = val;
             }
         });
+        // Did the action come from the year field ? 
+        // If yes, evaluate the proper month field
+        if(($(element).attr('id')).includes('year')) {
+            element = dateUItarget.twigmonth;
+        }
         switch (parseInt($(element).val())) {
             case 4:
             case 6:
