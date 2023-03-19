@@ -17,10 +17,10 @@
                          'method': 'POST'
                         }) }}
         <div class="row">
-            <div class="col">
+            <div id="before" class="col">
                 {{ form_row(form.startDate, { 'label': 'admin.managelogs.startdate'|trans})}}
             </div>
-            <div class="col">
+            <div id="after" class="col">
                 {{ form_row(form.endDate, { 'label': 'admin.managelogs.enddate'|trans}) }}
             </div>
         </div>
