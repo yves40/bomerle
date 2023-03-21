@@ -36,7 +36,7 @@
                 </a>
             </div>
             <div class="col-8">
-                <p id="zemessage">The message</p>
+                <p id="zemessage"></p>
             </div>
             <div class="col-2">
                 {# The next page icon  #}
@@ -88,8 +88,14 @@
         </div>
     </div>
 
-    {# List existing metals #}
-    <ul id="loglist" class="list-group mt-4">
+    <div class="row mt-2 ylistheader">
+        <div class="col-2">{{'admin.managelogs.eventdate'|trans}}</div>
+        <div class="col-2">{{'admin.managelogs.eventseverity'|trans}}</div>
+        <div class="col-3">{{'admin.managelogs.eventuser'|trans}}</div>
+        <div class="col-2">{{'admin.managelogs.eventaction'|trans}}</div>
+        <div class="col">{{'admin.managelogs.eventmessage'|trans}}</div>
+    </div>
+    <ul id="loglist" class="list-group mt-2">
         {% for log in logs %}
             <li class="list-group-item pt-0 pb-0">
                 <div class="row mt-1 mb-0 pt-0 pb-0 textsmall">

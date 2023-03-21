@@ -16,7 +16,7 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class DblogRepository extends ServiceEntityRepository
 {
-    const RETRIEVEDMAX = 100;
+    const RETRIEVEDMAX = 20;
 
     public function __construct(ManagerRegistry $registry)
     {
@@ -65,7 +65,17 @@ class DblogRepository extends ServiceEntityRepository
             ->getResult()
         ;
     }
-  
+
+    public function getLogEntriesCount(): int
+    {
+        $query = $this->createQueryBuilder('s');
+        $query->select('COUNT(s)');
+        $logcount = $query->getQuery()->getSingleScalarResult();
+        if ($logcount === null) $logcount = 0;
+        return $logcount;
+    }
+
+
 //    public function findOneBySomeField($value): ?Dblog
 //    {
 //        return $this->createQueryBuilder('d')

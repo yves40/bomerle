@@ -9,6 +9,7 @@ $(document).ready(function () {
     const previouspage = $('#previouspage');
     const zemessage= $('#zemessage');
     let pagenum = 1;
+    let logsnumber = 0;
 
     hideAll();
 
@@ -22,6 +23,7 @@ $(document).ready(function () {
     hideall.click( (e) => { e.preventDefault(); hideAll(); });
     nextpage.click( (e) => {e.preventDefault(); page(1); });
     previouspage.click( (e) => {e.preventDefault(); page(-1); });
+    $(previouspage).hide();
     // get some info on one or more dates fields.
     let alldatefields = [];
     getDateFields('date_range_startDate');
@@ -34,6 +36,11 @@ $(document).ready(function () {
     handleMonthSelection(alldatefields[0].twigmonth);
     updateDateFields(alldatefields[1], getDayMonthYear(enddate));
     handleMonthSelection(alldatefields[1].twigmonth);
+    // Get and display the number of logs in the DB table
+    getLogsNumber();
+
+    // End of initialization 
+
     // ----------------------------------------------------------------------------
     // Level selection
     // ----------------------------------------------------------------------------
@@ -59,10 +66,12 @@ $(document).ready(function () {
     function page(direction) {
         switch(direction) {
             case 1: console.log('Next');
-                    ++pagenum;
+                if(pagenum === 1) $(previouspage).show();
+                ++pagenum;
                     break;
             case -1: console.log('Previous');
                     --pagenum;
+                    if(pagenum === 1) $(previouspage).hide();
                     break;
             default: console.log('Arghhhhh !!!');
                     break;
@@ -205,6 +214,21 @@ $(document).ready(function () {
     // ------------------------------------------------------------------------------
     function isLeapYear(year) {
         return 0 == year % 4 && (year % 100 != 0 || year % 400 == 0);
+    }
+    // ------------------------------------------------------------------------------
+    function getLogsNumber() {
+        $.ajax({
+            type: "get",
+            async: true,
+            url: "/bootadmin/logs/getcount",
+            success: function (response) {
+                $(zemessage).text(`Currently ${response.nblogs} logs in the DB`);
+                logsnumber = response.nblogs;
+            },
+            error: function (xhr) {
+                console.log(`KO ${xhr.responseText}` );
+            }
+        });    
     }
 })
 

@@ -151,6 +151,11 @@ admin:
     startdate: Depuis le
     enddate: Après le
     searchtextlabel: Texte à chercher
+    eventdate: Date
+    eventseverity: Type
+    eventuser: Email
+    eventaction: Action
+    eventmessage: Détails
 logs:
   menuheader: Les logs
   site: Du site WEB
