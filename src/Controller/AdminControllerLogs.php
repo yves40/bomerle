@@ -40,7 +40,9 @@ class AdminControllerLogs extends AbstractController
         $loc = $this->locale($request);
         $now = new DateTime();
         $repo = $entityManager->getRepository(Dblog::class);
-        $logs = $repo->findByDateDesc();
+        // findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+        $logs = $repo->findBy([], [ 'logtime' => 'DESC'], 20, 0);
+        // $logs = $repo->findByDateDesc();
         $dblogentity = new Dblog();
         $severitylabels = $dblogentity->getSeverityLabels();
         $form = $this->createForm(DateRangeType::class);
