@@ -8,6 +8,10 @@ $(document).ready(function () {
     const nextpage = $('#nextpage');
     const previouspage = $('#previouspage');
     const zemessage= $('#zemessage');
+    const pagesize = $props.getLogsPageSize();
+    const dateoffset = $props.getLogsDateOffest();
+    const slidingtime = $props.getSlidingTime();
+
     let pagenum = 1;
     let logsnumber = 0;
 
@@ -31,13 +35,17 @@ $(document).ready(function () {
     // Set current date for startDate
     let currentdate = new Date().toISOString();
     const now = new Date();
-    let enddate = new Date(new Date(now).setDate(now.getDate() + 31)).toISOString();
+    let enddate = new Date(new Date(now).setDate(now.getDate()
+                 + $props.getLogsDateOffest())).toISOString();
     updateDateFields(alldatefields[0], getDayMonthYear(currentdate));
     handleMonthSelection(alldatefields[0].twigmonth);
     updateDateFields(alldatefields[1], getDayMonthYear(enddate));
     handleMonthSelection(alldatefields[1].twigmonth);
     // Get and display the number of logs in the DB table
     getLogsNumber();
+    console.log($props.logshandler());
+    console.log(`Pagesize : ${pagesize}`);
+    console.log(`Initial second date will be ${dateoffset} days later`);
 
     // End of initialization 
 
@@ -49,8 +57,6 @@ $(document).ready(function () {
         if($(element).prop('checked')) {
             $(element).remove('checked');
         }
-        // Now build the selector array
-        let selectors = [];
         $('.levelselector').each(function (index, scan) {
             if($(scan).prop('checked')) {
                 console.log(` ID : ${$(scan).attr('id')} ON`);
@@ -65,33 +71,96 @@ $(document).ready(function () {
     // ----------------------------------------------------------------------------
     function page(direction) {
         switch(direction) {
-            case 1: console.log('Next');
+            case 1:
                 if(pagenum === 1) $(previouspage).show();
                 ++pagenum;
-                    break;
-            case -1: console.log('Previous');
+                break;
+            case -1: 
+                if(pagenum !== 1) {
                     --pagenum;
                     if(pagenum === 1) $(previouspage).hide();
-                    break;
-            default: console.log('Arghhhhh !!!');
-                    break;
+                }
+                break;
+            default: 
+                break;
         }
+        $.ajax({
+            type: "GET",
+            url: `/bootadmin/logs/page/${pagenum}`,
+            dataType: "json",
+            async: true,
+            success: function (response) {
+                updatePage(response);
+            },
+            error: (xhr) => {
+                console.log(xhr.responseJSON.detail);
+            }
+        });
         $(zemessage).text(`On page ${pagenum}`);
+    }
+    // ----------------------------------------------------------------------------
+    // Update the list
+    // ----------------------------------------------------------------------------
+    function updatePage(data) {
+        console.log(data);
+        if(data.locale === 'fr') {
+            console.log('Set date in French format');
+        }
+        else {
+            console.log('Set date in English format');
+        }
+        $('#loglist').empty();
+        data.logs.forEach(element => {
+            console.log(element);
+            let newli = $('<li>');
+            $(newli).addClass('list-group-item pt-0 pb-0');
+            let row1 = $('<div>');
+            
+            row1.addClass('row mt-1 mb-0 pt-0 pb-0 textsmall');
+            let datecol = $('<div>').addClass('col-2');
+            let severitycol = $('<div>').addClass('col-2');
+            let mailcol = $('<div>').addClass('col-3');
+            let actioncol = $('<div>').addClass('col-2');
+            let zoomcol = $('<div>').addClass('col msgzoom');
+            $(datecol).text(element.logtime);
+            $(severitycol).text(element.severity);
+            $(mailcol).text(element.useremail);
+            $(actioncol).text(element.action);
+            let image = $('<img>').addClass('svgsmall-lightblue')
+                .attr('src', '/images/svg/magnifying-glass-solid.svg' );
+            $(zoomcol).append(image);
+            $(zoomcol).click(function (e) { e.preventDefault(); zoomMessage(this); });
+            $(row1).append(datecol).append(severitycol).append(mailcol)
+                .append(actioncol).append(zoomcol);
+
+            row2 = $('<div>').addClass('row mt-0 textsmall');
+            detailcol = $('<div>').addClass('col msgdetails mt-0 mb-0');
+            $(detailcol).data('visible', false).hide();
+            let btag = $('<b>');
+            let span = $('<span>');
+            $(span).text(`Log Id: ${element.id} Message: ${element.message}
+                                 Module: ${element.module}` );
+            $(detailcol).append(span);
+            $(row2).append(detailcol);
+
+            $(newli).append(row1).append(row2);
+            $('#loglist').append(newli);
+        });
+        console.log('done');
     }
     // ----------------------------------------------------------------------------
     // Zoom in, zoom out for log message details
     // ----------------------------------------------------------------------------
     function zoomMessage(element) {
-        let msgzone = $(element).siblings('.msgdetails');
+        let msgzone = $(element).parent().parent().find('.msgdetails');
         let currentstate = $(msgzone).data('visible');
-        console.log(`Currentstate : ${currentstate}`);
         if(currentstate) {
             $(msgzone).data('visible', false);
-            $(msgzone).hide();
+            $(msgzone).slideUp(slidingtime);
         }
         else {
             $(msgzone).data('visible', true);
-            $(msgzone).show();
+            $(msgzone).slideDown(slidingtime);
         }     
     }
     // ----------------------------------------------------------------------------
@@ -101,7 +170,7 @@ $(document).ready(function () {
         $('.msgdetails').each(function (index, element) {
             // element == this
             $(this).data('visible', true);
-            $(this).show();            
+            $(this).slideDown(slidingtime);            
         });
     }
     // ----------------------------------------------------------------------------
@@ -111,7 +180,7 @@ $(document).ready(function () {
         $('.msgdetails').each(function (index, element) {
             // element == this
             $(this).data('visible', false);
-            $(this).hide();            
+            $(this).slideUp(slidingtime);            
         });
     }
     // ------------------------------------------------------------------------------
@@ -218,7 +287,7 @@ $(document).ready(function () {
     // ------------------------------------------------------------------------------
     function getLogsNumber() {
         $.ajax({
-            type: "get",
+            type: "GET",
             async: true,
             url: "/bootadmin/logs/getcount",
             success: function (response) {
@@ -226,7 +295,7 @@ $(document).ready(function () {
                 logsnumber = response.nblogs;
             },
             error: function (xhr) {
-                console.log(`KO ${xhr.responseText}` );
+                console.log(`KO **********  ${xhr.responseText}` );
             }
         });    
     }

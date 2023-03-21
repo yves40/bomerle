@@ -38,10 +38,9 @@ class AdminControllerLogs extends AbstractController
     {
         date_default_timezone_set('Europe/Paris');
         $loc = $this->locale($request);
-        $now = new DateTime();
         $repo = $entityManager->getRepository(Dblog::class);
         // findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
-        $logs = $repo->findBy([], [ 'logtime' => 'DESC'], 20, 0);
+        $logs = $repo->findBy([], [ 'logtime' => 'DESC'], $repo::RETRIEVEDMAX, 0);
         // $logs = $repo->findByDateDesc();
         $dblogentity = new Dblog();
         $severitylabels = $dblogentity->getSeverityLabels();
@@ -58,6 +57,30 @@ class AdminControllerLogs extends AbstractController
     // --------------------------------------------------------------------------
     //      J S O N   S E R V I C E S 
     // --------------------------------------------------------------------------
+    // --------------------------------------------------------------------------
+    #[Route('/logs/page/{pagenum?1}', name: 'bootadmin.logs.page')]
+    public function page(Request $request,EntityManagerInterface $emgr, int $pagenum) {
+        date_default_timezone_set('Europe/Paris');
+        $loc = $this->locale($request);
+        try {
+            $repo = $emgr->getRepository(Dblog::class);
+            // findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+            $offset = ($pagenum - 1) * $repo::RETRIEVEDMAX;
+            $logs = $repo->findBy([], [ 'logtime' => 'DESC'], $repo::RETRIEVEDMAX, $offset);
+            return $this->json([
+                'offset' => $offset,
+                'pagenumber' => $pagenum,
+                'logs' => $logs
+            ], 200);
+        }
+        catch(Exception $e) {
+            return $this->json([
+                'message' => 'bootadmin.logs.page ERROR',
+                'errmess' => $e->getMessage(),
+                'locale' => $loc
+            ], 400);
+        }
+    }
     #[Route('/logs/getcount/', name: 'bootadmin.logs.getcount')]
     public function getLogsCount(Request $request,EntityManagerInterface $emgr) {
         try {

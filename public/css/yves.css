@@ -166,3 +166,6 @@ legend {
 .ylistheader {
   background-color: darkgray;
   color: white; }
+
+.msgdetails {
+  font-style: italic; }
