@@ -1,21 +1,32 @@
 /*----------------------------------------------------------------------------
-timeHelper
+    timeHelper
 
     Dec 23 2022     Initial
     Dec 27 2022     Add msec 
+    Mar 22 2023     Add msec 
 
 ----------------------------------------------------------------------------*/
 class timeHelper {
 
     constructor() {
-        this.version = 'timeHelper:1.00, Dec 23 2022';
+        this.version = 'timeHelper:1.02, Mar 22 2023';
         this.months = [ 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec' ];
+        this.monthsfr = [ 'Jan', 'Feb', 'Mar', 'Avr', 'Mai', 'Juin', 'Juil', 'Aout', 'Sep', 'Oct', 'Nov', 'Dec' ];
         this.start = 0;
         this.end = 0;
     }
     getDateTime() {
         let d = new Date();
         return this.months[d.getMonth()] + '-' + d.getDate() + '-' + d.getFullYear() + ' ' 
+                + d.toTimeString().replace(/.*(\d{2}:\d{2}:\d{2}).*/, "$1") ;
+    }
+    getDateTimeFromDate(toconvert, locale='fr') {
+        let d = new Date(toconvert);
+        if(locale === 'fr')
+            return  d.getDate() + '-' + this.monthsfr[d.getMonth()] + '-' + d.getFullYear() + ' ' 
+                + d.toTimeString().replace(/.*(\d{2}:\d{2}:\d{2}).*/, "$1") ;
+        else
+            return this.months[d.getMonth()] + '-' + d.getDate() + '-' + d.getFullYear() + ' ' 
                 + d.toTimeString().replace(/.*(\d{2}:\d{2}:\d{2}).*/, "$1") ;
     }
     getDate() {

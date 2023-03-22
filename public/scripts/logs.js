@@ -111,7 +111,6 @@ $(document).ready(function () {
         }
         $('#loglist').empty();
         data.logs.forEach(element => {
-            console.log(element);
             let newli = $('<li>');
             $(newli).addClass('list-group-item pt-0 pb-0');
             let row1 = $('<div>');
@@ -122,7 +121,9 @@ $(document).ready(function () {
             let mailcol = $('<div>').addClass('col-3');
             let actioncol = $('<div>').addClass('col-2');
             let zoomcol = $('<div>').addClass('col msgzoom');
-            $(datecol).text(element.logtime);
+            let th = new timeHelper();
+            let eventdatetime = th.getDateTimeFromDate(element.logtime, data.locale);
+            $(datecol).text(eventdatetime);
             $(severitycol).text(element.severity);
             $(mailcol).text(element.useremail);
             $(actioncol).text(element.action);
@@ -235,6 +236,12 @@ $(document).ready(function () {
     }
     // ------------------------------------------------------------------------------
     function handleMonthSelection(element) {
+        console.log('Date Changed');
+        
+        // TODO
+        // let ms = Date.parse('2012-01-26T13:51:50.417-07:00');
+        // Compute both dates and verify end if earlier than start
+
         // The ID analysis is based on the current TWIG behaviour !!!
         // It concatenates the name of the entity class and attributes names
         // with _day, _month, _year

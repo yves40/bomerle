@@ -57,11 +57,12 @@ class AdminControllerLogs extends AbstractController
     // --------------------------------------------------------------------------
     //      J S O N   S E R V I C E S 
     // --------------------------------------------------------------------------
-    // --------------------------------------------------------------------------
     #[Route('/logs/page/{pagenum?1}', name: 'bootadmin.logs.page')]
     public function page(Request $request,EntityManagerInterface $emgr, int $pagenum) {
         date_default_timezone_set('Europe/Paris');
-        $loc = $this->locale($request);
+        // $loc = $this->locale($request);
+        // $loc = $this->localeSwitcher->getLocale();
+        $loc = $request->getSession()->get('bootadmin.lang');
         try {
             $repo = $emgr->getRepository(Dblog::class);
             // findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
@@ -70,6 +71,7 @@ class AdminControllerLogs extends AbstractController
             return $this->json([
                 'offset' => $offset,
                 'pagenumber' => $pagenum,
+                'locale' => $loc,
                 'logs' => $logs
             ], 200);
         }
