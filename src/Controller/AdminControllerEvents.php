@@ -2,11 +2,13 @@
 
 namespace App\Controller;
 
-use Exception;
 use DateTime;
+use Exception;
 
 use App\Entity\Events;
 use App\Form\EventsType;
+use App\Services\DBlogger;
+
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -14,6 +16,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Translation\LocaleSwitcher;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 
 #[Route('/bootadmin')]
 class AdminControllerEvents extends AbstractController
@@ -22,12 +25,15 @@ class AdminControllerEvents extends AbstractController
     // --------------------------------------------------------------------------
     const NEXTEVENTS = 1;
     const PREVIOUSEVENTS = 2;
+    const MODULE = 'AdminControllerEvents';
 
     private LocaleSwitcher $localeSwitcher;
+    private DBLogger $dblog;
     // --------------------------------------------------------------------------
-    public function __construct(LocaleSwitcher $localeSwitcher)
+    public function __construct(LocaleSwitcher $localeSwitcher, DBlogger $dblog)
     {
         $this->localeSwitcher = $localeSwitcher;
+        $this->dblog = $dblog;
     }
     // --------------------------------------------------------------------------
     //      E V E N T S    S E R V I C E S 
@@ -59,8 +65,13 @@ class AdminControllerEvents extends AbstractController
                         $entityManager->flush();
                         $events = $repo->findFutureEvents($now);
                         $eventsbefore = $repo->findPreviousEvents($now);
-                        $event = new Events();
                         $this->addFlash('success', $translator->trans('admin.manageevents.created'));
+                        $this->dblog->info($event->getName().' created',
+                                            'Event added',
+                                            self::MODULE,
+                                            $request->getSession()->get('email')
+                                            );
+                        $event = new Events();
                     }
                     $event->setDate($now);
                     break;
@@ -102,6 +113,11 @@ class AdminControllerEvents extends AbstractController
             $entityManager->persist($event);
             $entityManager->flush();
             $events = $repo->findAll();
+            $this->dblog->info($event->getName().' updated',
+                        'Event updated',
+                        self::MODULE,
+                        $request->getSession()->get('email')
+            );
             $event = new Events();
             $this->addFlash('success', $translator->trans('admin.manageevents.updated'));
             return $this->redirectToRoute('bootadmin.events.all', array( 'new' => "true"));
@@ -122,6 +138,11 @@ class AdminControllerEvents extends AbstractController
         try {
             $entityManager->remove($event);
             $entityManager->flush();
+            $this->dblog->info($event->getName().' deleted',
+                        'Event deleted',
+                        self::MODULE,
+                        $request->getSession()->get('email')
+            );
             $this->addFlash('success', $translator->trans('admin.manageevents.deleted'));
         }
         catch(Exception $e) {

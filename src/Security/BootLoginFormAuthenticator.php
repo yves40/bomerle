@@ -54,11 +54,13 @@ class BootLoginFormAuthenticator extends AbstractLoginFormAuthenticator
         // if ($targetPath = $this->getTargetPath($request->getSession(), $firewallName)) {
         //     return new RedirectResponse($targetPath);
         // }
-        $this->dblogger->info($request->request->get('email', ''),  
+        $useremail = $request->request->get('email', '');
+        $this->dblogger->info($useremail,  
                             'Login success',
                             $this->applicationmodule, 
-                            $request->request->get('email', '')
+                            $useremail
                         );
+        $request->getSession()->set('email',$request->request->get('email', ''));
         return new RedirectResponse($this->urlGenerator->generate('bootadmin.home'));
         // throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
     }

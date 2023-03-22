@@ -48,7 +48,6 @@ class LogoutHandler implements EventSubscriberInterface
         $request = $event->getRequest();
         // dd($token);
         $user = $token->getUser();
-        dump($user);
         $email = $user->getEmail();
         // get the current response, if it is already set by another listener
         $response = $event->getResponse();
