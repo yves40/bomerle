@@ -13,17 +13,18 @@
 //----------------------------------------------------------------------------
 const $props = ( () => {
   const allprops = {
-    version : 'bomerle:1.16, Mar 21 2023 ',
+    version : 'bomerle:1.17, Mar 22 2023 ',
     copyright:  'Ratoon software Corporation Inc, Chabreloche France ',
     imagehandler: 'images.js Feb 13 2023, 1.25 ',
     knifehandler: 'knife.js Feb 08 2023, 1.05 ',
     datehandler: 'twigdate.js Feb 16 2023, 1.02 ',
     sliderhandler: 'slider.js Feb 24 2023, 1.06 ',
-    logshandler: 'logs.js Mar 21 2023, 1.06 ',
+    logshandler: 'logs.js Mar 22 2023, 1.07 ',
     knivesimageslocation: '%kernel.project_dir%/public/images/knife',
     logspagesize: 20,
     logspagedateoffset: 31,
-    slidingtime: 300
+    slidingtime: 300,
+    inputprocessingdelay: 1500    // Wait 1.5 sec when the user key in a filter
   }
   let dynprops = {
     'imageloadcount' :0,
@@ -57,7 +58,8 @@ const $props = ( () => {
      getuseremail: () => { return localStorage.getItem('useremail');},
      getLogsPageSize: () => { return allprops.logspagesize; },
      getLogsDateOffest: () => { return allprops.logspagedateoffset; },
-     getSlidingTime: () => { return allprops.slidingtime; }
+     getSlidingTime: () => { return allprops.slidingtime; },
+     getInputDelay: () => { return allprops.inputprocessingdelay; }
     }
 })();
 //  localStorage.setItem('lastlogin', 'yves773340');

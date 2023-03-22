@@ -8,6 +8,7 @@ $(document).ready(function () {
     const nextpage = $('#nextpage');
     const previouspage = $('#previouspage');
     const zemessage= $('#zemessage');
+    const searchtext = $('#searchtext');
     const pagesize = $props.getLogsPageSize();
     const dateoffset = $props.getLogsDateOffest();
     const slidingtime = $props.getSlidingTime();
@@ -21,12 +22,14 @@ $(document).ready(function () {
         // element == this
         $(this).click( (e) => { levelSelected(this); });
     });
-
+    // Some handlers
     zoom.click(function (e) { e.preventDefault(); zoomMessage(this); });
     showall.click( (e) => { e.preventDefault(); showAll(); });
     hideall.click( (e) => { e.preventDefault(); hideAll(); });
     nextpage.click( (e) => {e.preventDefault(); page(1); });
     previouspage.click( (e) => {e.preventDefault(); page(-1); });
+    $(searchtext).keyup(function (e) {e.preventDefault(); searchForText(this);});
+
     $(previouspage).hide();
     // get some info on one or more dates fields.
     let alldatefields = [];
@@ -86,6 +89,12 @@ $(document).ready(function () {
             default: 
                 break;
         }
+        getLogs();
+    }
+    // ----------------------------------------------------------------------------
+    // Request new data based on all criterias
+    // ----------------------------------------------------------------------------
+    function getLogs() {
         $.ajax({
             type: "GET",
             url: `/bootadmin/logs/page/${pagenum}`,
@@ -106,16 +115,9 @@ $(document).ready(function () {
         $(zemessage).text(`On page ${pagenum}`);
     }
     // ----------------------------------------------------------------------------
-    // Update the list
+    // Update the logs list
     // ----------------------------------------------------------------------------
     function updatePage(data) {
-        console.log(data);
-        if(data.locale === 'fr') {
-            console.log('Set date in French format');
-        }
-        else {
-            console.log('Set date in English format');
-        }
         $('#loglist').empty();
         data.logs.forEach(element => {
             let newli = $('<li>');
@@ -157,10 +159,8 @@ $(document).ready(function () {
             row2 = $('<div>').addClass('row mt-0 textsmall');
             detailcol = $('<div>').addClass('col msgdetails mt-0 mb-0');
             $(detailcol).data('visible', false).hide();
-            let btag = $('<b>');
             let span = $('<span>');
-            $(span).text(`Log Id: ${element.id} Message: ${element.message}
-                                 Module: ${element.module}` );
+            $(span).text(`Log Id: ${element.id} Message: ${element.message} Module: ${element.module}` );
             $(detailcol).append(span);
             $(row2).append(detailcol);
 
@@ -309,6 +309,14 @@ $(document).ready(function () {
     // ------------------------------------------------------------------------------
     function isLeapYear(year) {
         return 0 == year % 4 && (year % 100 != 0 || year % 400 == 0);
+    }
+    // ------------------------------------------------------------------------------
+    function searchForText(element) {
+        let timerid;
+        clearTimeout(timerid);
+        timerid = setTimeout(()=> {
+            console.log('Now calling the backend with input : ' + $(element).val());
+        }, $props.getInputDelay());
     }
     // ------------------------------------------------------------------------------
     function getLogsNumber() {
