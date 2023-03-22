@@ -162,8 +162,8 @@ logs:
   user: Des utilisateurs
   all: Tous les logs
   all100: Plus récents
-  hide: Cacher tout
-  show: Voir tout
+  hide: Aucun détail
+  show: Tous les détails
   debug: Debug level
   informational: Informationnel
   warning: Avertissement

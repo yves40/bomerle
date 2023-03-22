@@ -163,8 +163,8 @@ logs:
   user: User logs
   all: All logs
   all100: Newest
-  hide: Close all
-  show: See all
+  hide: No details
+  show: All details
   debug: Debug level
   informational: Informational
   warning: Warning

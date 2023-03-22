@@ -163,6 +163,9 @@ legend {
 .yerror {
   color: red; }
 
+.ywarning {
+  color: orangered; }
+
 .ylistheader {
   background-color: darkgray;
   color: white; }

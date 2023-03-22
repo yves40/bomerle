@@ -22,12 +22,19 @@ class timeHelper {
     }
     getDateTimeFromDate(toconvert, locale='fr') {
         let d = new Date(toconvert);
-        if(locale === 'fr')
-            return  d.getDate() + '-' + this.monthsfr[d.getMonth()] + '-' + d.getFullYear() + ' ' 
-                + d.toTimeString().replace(/.*(\d{2}:\d{2}:\d{2}).*/, "$1") ;
-        else
-            return this.months[d.getMonth()] + '-' + d.getDate() + '-' + d.getFullYear() + ' ' 
-                + d.toTimeString().replace(/.*(\d{2}:\d{2}:\d{2}).*/, "$1") ;
+        let dateformat;
+        if(locale === 'fr') {
+            dateformat = 'dd/mm/yyyy hh:mi:ss';
+        }
+        else { // en, us, uk, ....
+            dateformat = 'mm/dd/yyyy hh:mi:ss';
+        }
+        let formattedDT = dateformat.replace(/dd/i, String(d.getDate()).padStart(2, '0'));
+        formattedDT = formattedDT.replace(/mm/i, String(d.getMonth()+1).padStart(2, '0'));
+        formattedDT = formattedDT.replace(/yyyy/i, d.getFullYear());
+        formattedDT = formattedDT.replace(/hh:mi:ss/i, 
+                            d.toTimeString().replace(/.*(\d{2}:\d{2}:\d{2}).*/, "$1"));
+        return formattedDT;
     }
     getDate() {
         let d = new Date();

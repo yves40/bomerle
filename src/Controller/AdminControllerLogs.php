@@ -83,6 +83,7 @@ class AdminControllerLogs extends AbstractController
             ], 400);
         }
     }
+    // --------------------------------------------------------------------------
     #[Route('/logs/getcount/', name: 'bootadmin.logs.getcount')]
     public function getLogsCount(Request $request,EntityManagerInterface $emgr) {
         try {

@@ -78,7 +78,9 @@ $(document).ready(function () {
             case -1: 
                 if(pagenum !== 1) {
                     --pagenum;
-                    if(pagenum === 1) $(previouspage).hide();
+                    if(pagenum === 1) {
+                        $(previouspage).hide();
+                    } 
                 }
                 break;
             default: 
@@ -90,6 +92,11 @@ $(document).ready(function () {
             dataType: "json",
             async: true,
             success: function (response) {
+                // Check the number of returned lines and manage the next page button
+                if(response.logs.length < pagesize) {
+                    $(nextpage).hide();
+                }
+                else { $(nextpage).show();}
                 updatePage(response);
             },
             error: (xhr) => {
@@ -121,10 +128,23 @@ $(document).ready(function () {
             let mailcol = $('<div>').addClass('col-3');
             let actioncol = $('<div>').addClass('col-2');
             let zoomcol = $('<div>').addClass('col msgzoom');
+            // Some date formatting takes place here...
+            // data.locale is provided by the AdminControllerLogs controller 
+            // in the JSON call
             let th = new timeHelper();
             let eventdatetime = th.getDateTimeFromDate(element.logtime, data.locale);
+            
             $(datecol).text(eventdatetime);
-            $(severitycol).text(element.severity);
+            $(severitycol).text(element.severityLabels[element.severity]);
+            switch(element.severity) {
+                case 2:
+                    $(severitycol).addClass('ywarning');
+                    break;
+                case 3: 
+                case 4: 
+                        $(severitycol).addClass('yerror');
+                        break;
+            }
             $(mailcol).text(element.useremail);
             $(actioncol).text(element.action);
             let image = $('<img>').addClass('svgsmall-lightblue')
@@ -147,7 +167,6 @@ $(document).ready(function () {
             $(newli).append(row1).append(row2);
             $('#loglist').append(newli);
         });
-        console.log('done');
     }
     // ----------------------------------------------------------------------------
     // Zoom in, zoom out for log message details
@@ -298,7 +317,7 @@ $(document).ready(function () {
             async: true,
             url: "/bootadmin/logs/getcount",
             success: function (response) {
-                $(zemessage).text(`Currently ${response.nblogs} logs in the DB`);
+                $(zemessage).text(`Total of ${response.nblogs} logs in the DB`);
                 logsnumber = response.nblogs;
             },
             error: function (xhr) {
