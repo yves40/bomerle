@@ -47,7 +47,9 @@ class LogoutHandler implements EventSubscriberInterface
         // get the current request
         $request = $event->getRequest();
         // dd($token);
-        $email = $token->getUser()->getEmail();
+        $user = $token->getUser();
+        dump($user);
+        $email = $user->getEmail();
         // get the current response, if it is already set by another listener
         $response = $event->getResponse();
         // Configure a custom logout response to the homepage
@@ -57,7 +59,8 @@ class LogoutHandler implements EventSubscriberInterface
         );
         $this->dblogger->info($email,
                             'Logout success',
-                            $this->applicationmodule
+                            $this->applicationmodule,
+                            $email
                         );
         $event->setResponse($response);
     }
