@@ -105,7 +105,7 @@ $(document).ready(function () {
                 console.log(xhr.responseJSON.detail);
             }
         });
-        $(zemessage).text(`On page ${pagenum}`);
+        $(zemessage).text(`Page ${pagenum}`);
     }
     // ----------------------------------------------------------------------------
     // Update the logs list
@@ -328,14 +328,16 @@ $(document).ready(function () {
     }
     // ------------------------------------------------------------------------------
     function newSearchCriterias() {
-        let timerid;
+        let timerid = 0;
+        console.log('========================== ' + timerid)
         clearTimeout(timerid);
         timerid = setTimeout(()=> {
-            buildArguments();
-        }, $props.getInputDelay());
+                                    buildArguments();
+                                }, $props.getInputDelay());
+        console.log('____________________________ ' + timerid)
     }
     // ------------------------------------------------------------------------------
-    function buildArguments() {  
+    function buildArguments(timerid) {  
         // First, consider check boxes
         let levelarray = [];
         $('.levelselector').each(function (index, scan) {
@@ -348,6 +350,10 @@ $(document).ready(function () {
         // Search text now
         let thesearchtext = $(searchtext).val();
         console.log(thesearchtext);
+        // Date fields now
+        alldatefields.forEach(element => {
+            console.log(`${element.selector} Day: ${$(element.twigday).val()}/${$(element.twigmonth).val()}/${$(element.twigyear).val()}` );
+        });
         // Now refresh data
         console.log('Now calling the backend');
     }
