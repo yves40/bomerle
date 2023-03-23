@@ -28,7 +28,7 @@ $(document).ready(function () {
     hideall.click( (e) => { e.preventDefault(); hideAll(); });
     nextpage.click( (e) => {e.preventDefault(); page(1); });
     previouspage.click( (e) => {e.preventDefault(); page(-1); });
-    $(searchtext).keyup(function (e) {e.preventDefault(); searchForText(this);});
+    $(searchtext).keyup(function (e) {e.preventDefault(); newSearchCriterias();});
 
     $(previouspage).hide();
     // get some info on one or more dates fields.
@@ -41,9 +41,9 @@ $(document).ready(function () {
     let enddate = new Date(new Date(now).setDate(now.getDate()
                  + $props.getLogsDateOffest())).toISOString();
     updateDateFields(alldatefields[0], getDayMonthYear(currentdate));
-    handleMonthSelection(alldatefields[0].twigmonth);
+    handleDateSelection(alldatefields[0].twigmonth);
     updateDateFields(alldatefields[1], getDayMonthYear(enddate));
-    handleMonthSelection(alldatefields[1].twigmonth);
+    handleDateSelection(alldatefields[1].twigmonth);
     // Get and display the number of logs in the DB table
     getLogsNumber();
     console.log($props.logshandler());
@@ -60,14 +60,7 @@ $(document).ready(function () {
         if($(element).prop('checked')) {
             $(element).remove('checked');
         }
-        $('.levelselector').each(function (index, scan) {
-            if($(scan).prop('checked')) {
-                console.log(` ID : ${$(scan).attr('id')} ON`);
-            }
-            else{
-                console.log(` ID : ${$(scan).attr('id')} OFF`);
-            }
-        });
+        newSearchCriterias();
     }
     // ----------------------------------------------------------------------------
     // pagination
@@ -238,11 +231,15 @@ $(document).ready(function () {
         dateUI.day31 = $(dateUI.twigday).find('option[value="31"]');
         $(dateUI.twigmonth).change(function (e) {  // Monitor month selection
             e.preventDefault();
-            handleMonthSelection(this);
+            handleDateSelection(this);
         });
-        $(dateUI.twigyear).change(function (e) {  // Also Monitor year selection in case Feb is selected
+        $(dateUI.twigyear).change(function (e) {  // Monitor Year selection
             e.preventDefault();
-            handleMonthSelection(this);
+            handleDateSelection(this);
+        });
+        $(dateUI.twigday).change(function (e) {  // Monitor Day selection
+            e.preventDefault();
+            handleDateSelection(this);
         });
         alldatefields.push(dateUI);
         return;
@@ -273,9 +270,8 @@ $(document).ready(function () {
         }
     }
     // ------------------------------------------------------------------------------
-    function handleMonthSelection(element) {
-        console.log('Date Changed');
-        
+    function handleDateSelection(element) {
+
         // TODO
         // let ms = Date.parse('2012-01-26T13:51:50.417-07:00');
         // Compute both dates and verify end if earlier than start
@@ -324,18 +320,36 @@ $(document).ready(function () {
                 dateUItarget.day31.show();
                 break;
         }
+        newSearchCriterias();
     }
     // ------------------------------------------------------------------------------
     function isLeapYear(year) {
         return 0 == year % 4 && (year % 100 != 0 || year % 400 == 0);
     }
     // ------------------------------------------------------------------------------
-    function searchForText(element) {
+    function newSearchCriterias() {
         let timerid;
         clearTimeout(timerid);
         timerid = setTimeout(()=> {
-            console.log('Now calling the backend with input : ' + $(element).val());
+            buildArguments();
         }, $props.getInputDelay());
+    }
+    // ------------------------------------------------------------------------------
+    function buildArguments() {  
+        // First, consider check boxes
+        let levelarray = [];
+        $('.levelselector').each(function (index, scan) {
+            levelarray.push({ "id":$(scan).attr('id'),
+                              "state": $(scan).prop('checked')
+                            });
+        });
+        console.log('----------------------------------------------------------------------');
+        console.log(JSON.stringify(levelarray));
+        // Search text now
+        let thesearchtext = $(searchtext).val();
+        console.log(thesearchtext);
+        // Now refresh data
+        console.log('Now calling the backend');
     }
     // ------------------------------------------------------------------------------
     function getLogsNumber() {
