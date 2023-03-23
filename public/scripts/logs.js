@@ -159,9 +159,28 @@ $(document).ready(function () {
             row2 = $('<div>').addClass('row mt-0 textsmall');
             detailcol = $('<div>').addClass('col msgdetails mt-0 mb-0');
             $(detailcol).data('visible', false).hide();
+
             let span = $('<span>');
-            $(span).text(`Log Id: ${element.id} Message: ${element.message} Module: ${element.module}` );
+            $(span).text(`Log Id: `).addClass('label');
             $(detailcol).append(span);
+            span = $('<span>');
+            $(span).text(`${element.id}`);
+            $(detailcol).append(span);
+
+            span = $('<span>');
+            $(span).text(` Message : `).addClass('label');
+            $(detailcol).append(span);
+            span = $('<span>');
+            $(span).text(`${element.message}`);
+            $(detailcol).append(span);
+            
+            span = $('<span>');
+            $(span).text(` Module : `).addClass('label');
+            $(detailcol).append(span);
+            span = $('<span>');
+            $(span).text(`${element.module}`);
+            $(detailcol).append(span);
+
             $(row2).append(detailcol);
 
             $(newli).append(row1).append(row2);

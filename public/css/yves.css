@@ -172,3 +172,5 @@ legend {
 
 .msgdetails {
   font-style: italic; }
+  .msgdetails .label {
+    font-weight: bold; }
