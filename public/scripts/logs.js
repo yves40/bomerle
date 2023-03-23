@@ -12,6 +12,8 @@ $(document).ready(function () {
     const pagesize = $props.getLogsPageSize();
     const dateoffset = $props.getLogsDateOffest();
     const slidingtime = $props.getSlidingTime();
+    const nohurry = waitplease(() => buildArguments());
+
 
     let pagenum = 1;
     let logsnumber = 0;
@@ -28,7 +30,7 @@ $(document).ready(function () {
     hideall.click( (e) => { e.preventDefault(); hideAll(); });
     nextpage.click( (e) => {e.preventDefault(); page(1); });
     previouspage.click( (e) => {e.preventDefault(); page(-1); });
-    $(searchtext).keyup(function (e) {e.preventDefault(); newSearchCriterias();});
+    $(searchtext).keyup(function (e) {e.preventDefault(); nohurry();}); // Call DB with delay when user is typing
 
     $(previouspage).hide();
     // get some info on one or more dates fields.
@@ -60,7 +62,7 @@ $(document).ready(function () {
         if($(element).prop('checked')) {
             $(element).remove('checked');
         }
-        newSearchCriterias();
+        nohurry();
     }
     // ----------------------------------------------------------------------------
     // pagination
@@ -320,24 +322,14 @@ $(document).ready(function () {
                 dateUItarget.day31.show();
                 break;
         }
-        newSearchCriterias();
+        nohurry(); // Call DB with delay
     }
     // ------------------------------------------------------------------------------
     function isLeapYear(year) {
         return 0 == year % 4 && (year % 100 != 0 || year % 400 == 0);
     }
     // ------------------------------------------------------------------------------
-    function newSearchCriterias() {
-        let timerid = 0;
-        console.log('========================== ' + timerid)
-        clearTimeout(timerid);
-        timerid = setTimeout(()=> {
-                                    buildArguments();
-                                }, $props.getInputDelay());
-        console.log('____________________________ ' + timerid)
-    }
-    // ------------------------------------------------------------------------------
-    function buildArguments(timerid) {  
+    function buildArguments() {  
         // First, consider check boxes
         let levelarray = [];
         $('.levelselector').each(function (index, scan) {
@@ -371,6 +363,16 @@ $(document).ready(function () {
                 console.log(`KO **********  ${xhr.responseText}` );
             }
         });    
+    }
+    // ------------------------------------------------------------------------------
+    // Delay DB call until user stops typing or selecting checkboxex, list...
+    // ------------------------------------------------------------------------------
+    function waitplease(func, timeout =  $props.getInputDelay()){
+        let timerid;
+        return (...args) => {
+            clearTimeout(timerid);
+            timerid = setTimeout(() => { func.apply(this, args); },  timeout);
+        };
     }
 })
 
