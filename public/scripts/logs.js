@@ -37,11 +37,11 @@ $(document).ready(function () {
     let alldatefields = [];
     getDateFields('date_range_startDate');
     getDateFields('date_range_endDate');
-    // Set current date for startDate
+    // Set current date for startDate and an earlier date for endDate
+    // The offest is spsecified in properties.js
     let currentdate = new Date().toISOString();
     const now = new Date();
-    let enddate = new Date(new Date(now).setDate(now.getDate()
-                 + $props.getLogsDateOffest())).toISOString();
+    let enddate = new Date(new Date(now).setDate(now.getDate() - $props.getLogsDateOffest())).toISOString();
     updateDateFields(alldatefields[0], getDayMonthYear(currentdate));
     handleDateSelection(alldatefields[0].twigmonth);
     updateDateFields(alldatefields[1], getDayMonthYear(enddate));
@@ -50,7 +50,7 @@ $(document).ready(function () {
     getLogsNumber();
     console.log($props.logshandler());
     console.log(`Pagesize : ${pagesize}`);
-    console.log(`Initial second date will be ${dateoffset} days later`);
+    console.log(`Initial second date will be ${dateoffset} days earlier`);
 
     // End of initialization 
 
@@ -219,8 +219,7 @@ $(document).ready(function () {
     }
     // ------------------------------------------------------------------------------
     // Receives a base selector string concatenated with the TWIG generated IDs
-    // Hope these IDs will not change in future versions
-    // Returns an object with all relevant element handlers
+    // Hope these IDs will not change in future versions 
     // ------------------------------------------------------------------------------
     function getDateFields(selector) {
         let dateUI = {};
@@ -322,7 +321,50 @@ $(document).ready(function () {
                 dateUItarget.day31.show();
                 break;
         }
-        nohurry(); // Call DB with delay
+        tuneDates();        // Adjust start and end date UI depending on their values
+        nohurry();          // Call DB with delay
+    }
+    // ------------------------------------------------------------------------------
+    // alldatefields[0] should normally contain the start date
+    // ------------------------------------------------------------------------------
+    function tuneDates() {
+        let startday, startmonth, startyear;    // Other dates cannot be later than start date
+        alldatefields.forEach(element => {
+            if(element.selector.includes('start')) {
+                console.log(`Tuning the START date ${element.selector}`);
+                startday = parseInt($(element.twigday).val()) ;
+                startmonth = parseInt($(element.twigmonth).val());
+                startyear = parseInt($(element.twigyear).val());
+                // Remove years in the future
+                let options = $(element.twigyear).find('option');
+                for ( let i = 0; i < options.length; ++i){
+                    if(parseInt($(options[i]).val()) > startyear) {
+                        console.log(`Will remove ${$(options[i]).val()} `);
+                        $(options[i]).remove();
+                    }
+                }
+                // Remove months in the future
+                options = $(element.twigmonth).find('option');
+                for ( let i = 0; i < options.length; ++i){
+                    if(parseInt($(options[i]).val()) > startmonth) {
+                        console.log(`Will remove ${$(options[i]).val()} `);
+                        $(options[i]).remove();
+                    }
+                }
+                // Remove days in the future
+                options = $(element.twigday).find('option');
+                for ( let i = 0; i < options.length; ++i){
+                    if(parseInt($(options[i]).val()) > startday) {
+                        console.log(`Will remove ${$(options[i]).val()} `);
+                        $(options[i]).remove();
+                    }
+                }
+            }
+            else {
+                console.log(`Tuning the END date ${element.selector}`);
+            }
+            console.log(element);
+        });
     }
     // ------------------------------------------------------------------------------
     function isLeapYear(year) {
