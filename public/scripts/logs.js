@@ -282,20 +282,10 @@ $(document).ready(function () {
             const elementday = $(element.twigday).val();
             refillYears(element.twigyear, today);           // Refill 
             $(element.twigyear).val(elementyear);            // Put it back
+            refillMonths(element.twigmonth, elementyear, today);
+            (element.twigmonth).val(elementmonth);
             refillDays(element.twigday, elementmonth, elementyear, today);
             (element.twigday).val(elementday);            
-            if(parseInt($(element.twigyear).val()) === parseInt(today.y)) { // Current year selected ?
-                // Remove months in the future if on the same year
-                removeAfterMonths(element.twigmonth, parseInt(today.m));
-                if(parseInt($(element.twigmonth).val()) === parseInt(today.m)) {
-                    // Remove days in the future if on the same month and year
-                    removeAfterDays(element.twigday, parseInt(today.d));
-                }
-            }
-            else {  // Earlier year
-                refillMonths(element.twigmonth, today);
-                (element.twigmonth).val(elementmonth);
-            }
         });
         nohurry();          // Call DB with delay
     }
@@ -328,9 +318,14 @@ $(document).ready(function () {
         }
     }
     // ------------------------------------------------------------------------------
-    function refillMonths(element, currentdate) {
+    function refillMonths(element, selectedyear, today) {
         $(element).empty();
-        for(let i = 1; i < 13; ++i) {
+        syear = parseInt(selectedyear);
+        let monthlimit = 13;
+        if(syear === today.y) {
+            monthlimit = today.m + 1;
+        }
+        for(let i = 1; i < monthlimit; ++i) {
             $(element).append($('<option>').val(i).text(timehelper.getMonthLabel(i)));
         }
     }
