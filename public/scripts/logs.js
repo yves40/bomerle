@@ -13,6 +13,7 @@ $(document).ready(function () {
     const dateoffset = $props.getLogsDateOffest();
     const slidingtime = $props.getSlidingTime();
     const nohurry = waitplease(() => buildArguments());
+    const timehelper = new timeHelper();
 
 
     let pagenum = 1;
@@ -325,65 +326,88 @@ $(document).ready(function () {
     // ------------------------------------------------------------------------------
     function tuneDates() {
         let startday, startmonth, startyear;    // Other dates cannot be later than start date
+        let today = getDayMonthYear(new Date().toISOString());
         alldatefields.forEach(element => {
             if(element.selector.includes('start')) {
+                // ----------------------------------------------------------------------
                 // Start date
+                // ----------------------------------------------------------------------
                 console.log(`Tuning the START date ${element.selector}`);
                 startday = parseInt($(element.twigday).val()) ;
                 startmonth = parseInt($(element.twigmonth).val());
                 startyear = parseInt($(element.twigyear).val());
                 // Remove years in the future
-                let options = $(element.twigyear).find('option');
-                for ( let i = 0; i < options.length; ++i){
-                    if(parseInt($(options[i]).val()) > startyear) {
-                        $(options[i]).remove();
+                removeAfterYears(element.twigyear, parseInt(today.y));
+                if(parseInt($(element.twigyear).val()) === parseInt(today.y)) {
+                    // Remove months in the future if on the same year
+                    removeAfterMonths(element.twigmonth, parseInt(today.m));
+                    if(parseInt($(element.twigmonth).val()) === parseInt(today.m)) {
+                        // Remove days in the future if on the same month
+                        removeAfterDays(element.twigday, parseInt(today.d));
                     }
                 }
-                // Remove months in the future
-                options = $(element.twigmonth).find('option');
-                for ( let i = 0; i < options.length; ++i){
-                    if(parseInt($(options[i]).val()) > startmonth) {                        
-                        $(options[i]).remove();
-                    }
-                }
-                // Remove days in the future
-                options = $(element.twigday).find('option');
-                for ( let i = 0; i < options.length; ++i){
-                    if(parseInt($(options[i]).val()) > startday) {
-                        $(options[i]).remove();
-                    }
+                else {  // Refill months and days, we're in a previous year
+                    refillMonths(element.twigmonth);
+                    refillDays(element.twigday);
                 }
             }
             else {
+                // ----------------------------------------------------------------------
                 // Any other date
-                // Can remove years in the future
-                let options = $(element.twigyear).find('option');
-                for ( let i = 0; i < options.length; ++i){
-                    if(parseInt($(options[i]).val()) > startyear) {
-                        $(options[i]).remove();
-                    }
-                }
+                // ----------------------------------------------------------------------
+                // Always remove years in the future
+                removeAfterYears(element.twigyear, startyear);
                 if(parseInt($(element.twigyear).val()) === startyear) {
-                    // Remove months in the future
-                    options = $(element.twigmonth).find('option');
-                    for ( let i = 0; i < options.length; ++i){
-                        if(parseInt($(options[i]).val()) > startmonth) {                        
-                            $(options[i]).remove();
-                        }
-                    }
-                }
-                if(parseInt($(element.twigmonth).val()) === startmonth) {
-                    // Remove days in the future
-                    options = $(element.twigday).find('option');
-                    for ( let i = 0; i < options.length; ++i){
-                        if(parseInt($(options[i]).val()) > startday) {                        
-                            $(options[i]).remove();
-                        }
+                    // Remove months in the future if on the same year
+                    removeAfterMonths(element.twigmonth, startmonth);
+                    if(parseInt($(element.twigmonth).val()) === startmonth) {
+                        // Remove days in the future if on the same year and month
+                        removeAfterDays(element.twigday, startday);
                     }
                 }
             }
-            // console.log(element);
         });
+    }
+    // ------------------------------------------------------------------------------
+    function removeAfterYears(element, startyear) {
+        let options = $(element).find('option');
+        for ( let i = 0; i < options.length; ++i){
+            if(parseInt($(options[i]).val()) > startyear) {
+                $(options[i]).remove();
+            }
+        }
+    }
+    // ------------------------------------------------------------------------------
+    function removeAfterMonths(element, startmonth) {
+        options = $(element).find('option');
+        for ( let i = 0; i < options.length; ++i){
+            if(parseInt($(options[i]).val()) > startmonth) {                        
+                $(options[i]).remove();
+            }
+        }
+}
+    // ------------------------------------------------------------------------------
+    function removeAfterDays(element, startday) {
+        options = $(element.twigday).find('option');
+        for ( let i = 0; i < options.length; ++i){
+            if(parseInt($(options[i]).val()) > startday) {
+                $(options[i]).remove();
+            }
+        }
+    }
+    // ------------------------------------------------------------------------------
+    function refillMonths(element) {
+        $(element).empty();
+        for(let i = 1; i < 13; ++i) {
+            $(element).append($('<option>').val(i).text(timehelper.getMonthLabel(i)));
+        }
+    }
+    // ------------------------------------------------------------------------------
+    function refillDays(element) {
+        $(element).empty();
+        for(let i = 1; i < 32; ++i) {
+            $(element).append($('<option>').val(i).text(i));
+        }
     }
     // ------------------------------------------------------------------------------
     function isLeapYear(year) {
