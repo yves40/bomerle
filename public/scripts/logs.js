@@ -293,7 +293,7 @@ $(document).ready(function () {
         });
         // Did the action come from the year field ? 
         // If yes, evaluate the proper month field
-        if(($(element).attr('id')).includes('year')) {
+        if(($(element).attr('id')).includes('year') || ($(element).attr('id')).includes('day')) {
             element = dateUItarget.twigmonth;
         }
         switch (parseInt($(element).val())) {
@@ -339,15 +339,13 @@ $(document).ready(function () {
                 let options = $(element.twigyear).find('option');
                 for ( let i = 0; i < options.length; ++i){
                     if(parseInt($(options[i]).val()) > startyear) {
-                        console.log(`Will remove ${$(options[i]).val()} `);
                         $(options[i]).remove();
                     }
                 }
                 // Remove months in the future
                 options = $(element.twigmonth).find('option');
                 for ( let i = 0; i < options.length; ++i){
-                    if(parseInt($(options[i]).val()) > startmonth) {
-                        console.log(`Will remove ${$(options[i]).val()} `);
+                    if(parseInt($(options[i]).val()) > startmonth) {                        
                         $(options[i]).remove();
                     }
                 }
@@ -355,13 +353,36 @@ $(document).ready(function () {
                 options = $(element.twigday).find('option');
                 for ( let i = 0; i < options.length; ++i){
                     if(parseInt($(options[i]).val()) > startday) {
-                        console.log(`Will remove ${$(options[i]).val()} `);
                         $(options[i]).remove();
                     }
                 }
             }
             else {
-                console.log(`Tuning the END date ${element.selector}`);
+                // Remove years in the future
+                let options = $(element.twigyear).find('option');
+                for ( let i = 0; i < options.length; ++i){
+                    if(parseInt($(options[i]).val()) > startyear) {
+                        $(options[i]).remove();
+                    }
+                }
+                if(parseInt($(element.twigyear).val()) === startyear) {
+                    // Remove months in the future
+                    options = $(element.twigmonth).find('option');
+                    for ( let i = 0; i < options.length; ++i){
+                        if(parseInt($(options[i]).val()) > startmonth) {                        
+                            $(options[i]).remove();
+                        }
+                    }
+                }
+                if(parseInt($(element.twigmonth).val()) === startmonth) {
+                    // Remove days in the future
+                    options = $(element.twigday).find('option');
+                    for ( let i = 0; i < options.length; ++i){
+                        if(parseInt($(options[i]).val()) > startday) {                        
+                            $(options[i]).remove();
+                        }
+                    }
+                }
             }
             console.log(element);
         });
