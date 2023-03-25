@@ -44,9 +44,8 @@ $(document).ready(function () {
     const now = new Date();
     let enddate = new Date(new Date(now).setDate(now.getDate() - $props.getLogsDateOffest())).toISOString();
     updateDateFields(alldatefields[0], getDayMonthYear(currentdate));
-    handleDateSelection(alldatefields[0].twigmonth);
     updateDateFields(alldatefields[1], getDayMonthYear(enddate));
-    handleDateSelection(alldatefields[1].twigmonth);
+    tuneDates();
     // Get and display the number of logs in the DB table
     getLogsNumber();
     console.log($props.logshandler());
@@ -233,15 +232,15 @@ $(document).ready(function () {
         dateUI.day31 = $(dateUI.twigday).find('option[value="31"]');
         $(dateUI.twigmonth).change(function (e) {  // Monitor month selection
             e.preventDefault();
-            handleDateSelection(this);
+            tuneDates();
         });
         $(dateUI.twigyear).change(function (e) {  // Monitor Year selection
             e.preventDefault();
-            handleDateSelection(this);
+            tuneDates();
         });
         $(dateUI.twigday).change(function (e) {  // Monitor Day selection
             e.preventDefault();
-            handleDateSelection(this);
+            tuneDates();
         });
         alldatefields.push(dateUI);
         return;
@@ -272,109 +271,64 @@ $(document).ready(function () {
         }
     }
     // ------------------------------------------------------------------------------
-    function handleDateSelection(element) {
-
-        // TODO
-        // let ms = Date.parse('2012-01-26T13:51:50.417-07:00');
-        // Compute both dates and verify end if earlier than start
-
-        // The ID analysis is based on the current TWIG behaviour !!!
-        // It concatenates the name of the entity class and attributes names
-        // with _day, _month, _year
-        // Look into DateRange.php to understand.
-        let elementid = $(element).attr('id');
-        let selectorpieces = elementid.split('_');
-        elementid = `${selectorpieces[0]}_${selectorpieces[1]}_${selectorpieces[2]}`;
-        let dateUItarget = {};
-        // Scan the array of date fields
-        alldatefields.forEach( (val) => {
-            if(val.selector === elementid) {
-                dateUItarget = val;
+    // alldatefields[0] must normally contain the start date
+    // which is the most recent and is set by default to now
+    // ------------------------------------------------------------------------------
+    function tuneDates() {
+        let today = getDayMonthYear(new Date().toISOString());
+        alldatefields.forEach(element => {
+            const elementyear = $(element.twigyear).val();   // Save selected values
+            const elementmonth = $(element.twigmonth).val();
+            const elementday = $(element.twigday).val();
+            refillYears(element.twigyear, today);           // Refill 
+            $(element.twigyear).val(elementyear);            // Put it back
+            refillDays(element.twigday, elementmonth, elementyear, today);
+            (element.twigday).val(elementday);            
+            if(parseInt($(element.twigyear).val()) === parseInt(today.y)) { // Current year selected ?
+                // Remove months in the future if on the same year
+                removeAfterMonths(element.twigmonth, parseInt(today.m));
+                if(parseInt($(element.twigmonth).val()) === parseInt(today.m)) {
+                    // Remove days in the future if on the same month and year
+                    removeAfterDays(element.twigday, parseInt(today.d));
+                }
+            }
+            else {  // Earlier year
+                refillMonths(element.twigmonth, today);
+                (element.twigmonth).val(elementmonth);
             }
         });
-        element = dateUItarget.twigmonth;
-        switch (parseInt($(element).val())) {
-            case 4:
-            case 6:
-            case 9:
-            case 11:
-                dateUItarget.day29.show();
-                dateUItarget.day30.show();
-                dateUItarget.day31.hide();
-                break;
-            case 2:
-                dateUItarget.day30.hide();
-                dateUItarget.day31.hide();
-                if(isLeapYear($(dateUItarget.twigyear).val())) {
-                    dateUItarget.day29.show();
-                }
-                else {
-                    dateUItarget.day29.hide();
-                }
-                break;
-            default:
-                dateUItarget.day29.show();
-                dateUItarget.day30.show();
-                dateUItarget.day31.show();
-                break;
-        }
-        tuneDates();        // Adjust start and end date UI depending on their values
         nohurry();          // Call DB with delay
     }
     // ------------------------------------------------------------------------------
-    // alldatefields[0] should normally contain the start date
-    // ------------------------------------------------------------------------------
-    function tuneDates() {
-        let startday, startmonth, startyear;    // Other dates cannot be later than start date
-        let today = getDayMonthYear(new Date().toISOString());
-        alldatefields.forEach(element => {
-            if(element.selector.includes('start')) {
-                // ----------------------------------------------------------------------
-                // Start date
-                // ----------------------------------------------------------------------
-                console.log(`Tuning the START date ${element.selector}`);
-                startday = parseInt($(element.twigday).val()) ;
-                startmonth = parseInt($(element.twigmonth).val());
-                startyear = parseInt($(element.twigyear).val());
-                // Remove years in the future
-                removeAfterYears(element.twigyear, parseInt(today.y));
-                if(parseInt($(element.twigyear).val()) === parseInt(today.y)) {
-                    // Remove months in the future if on the same year
-                    removeAfterMonths(element.twigmonth, parseInt(today.m));
-                    if(parseInt($(element.twigmonth).val()) === parseInt(today.m)) {
-                        // Remove days in the future if on the same month
-                        removeAfterDays(element.twigday, parseInt(today.d));
-                    }
-                }
-                else {  // Refill months and days, we're in a previous year
-                    refillMonths(element.twigmonth);
-                    refillDays(element.twigday);
-                }
-            }
-            else {
-                // ----------------------------------------------------------------------
-                // Any other date
-                // ----------------------------------------------------------------------
-                // Always remove years in the future
-                removeAfterYears(element.twigyear, startyear);
-                if(parseInt($(element.twigyear).val()) === startyear) {
-                    // Remove months in the future if on the same year
-                    removeAfterMonths(element.twigmonth, startmonth);
-                    if(parseInt($(element.twigmonth).val()) === startmonth) {
-                        // Remove days in the future if on the same year and month
-                        removeAfterDays(element.twigday, startday);
-                    }
-                }
-            }
-        });
+    function refillDays(element, selectedmonth, selectedyear, today) {
+        $(element).empty();
+        smonth = parseInt(selectedmonth);
+        syear = parseInt(selectedyear);
+        let daylimit = 31;
+        if( smonth === 2) {
+            if(isLeapYear(selectedyear)) { daylimit = 29; }
+            else { daylimit = 28;}    
+        }
+        // Final check to remove days over current day if year and month are the same
+        if((smonth === today.m)&&(syear === today.y)) {
+            daylimit = today.d;
+        }
+        for(let i = 1; i < daylimit + 1; ++i) {
+            $(element).append($('<option>').val(i).text(i));
+        }
     }
     // ------------------------------------------------------------------------------
-    function removeAfterYears(element, startyear) {
-        let options = $(element).find('option');
-        for ( let i = 0; i < options.length; ++i){
-            if(parseInt($(options[i]).val()) > startyear) {
-                $(options[i]).remove();
-            }
+    function refillMonths(element, currentdate) {
+        $(element).empty();
+        for(let i = 1; i < 13; ++i) {
+            $(element).append($('<option>').val(i).text(timehelper.getMonthLabel(i)));
+        }
+    }
+    // ------------------------------------------------------------------------------
+    function refillYears(element, currentdate) {
+        $(element).empty();
+        for(let i = currentdate.y - 2; i < currentdate.y + 1; ++i) {
+            $(element).append($('<option>').val(i).text(i));
         }
     }
     // ------------------------------------------------------------------------------
@@ -393,20 +347,6 @@ $(document).ready(function () {
             if(parseInt($(options[i]).val()) > startday) {
                 $(options[i]).remove();
             }
-        }
-    }
-    // ------------------------------------------------------------------------------
-    function refillMonths(element) {
-        $(element).empty();
-        for(let i = 1; i < 13; ++i) {
-            $(element).append($('<option>').val(i).text(timehelper.getMonthLabel(i)));
-        }
-    }
-    // ------------------------------------------------------------------------------
-    function refillDays(element) {
-        $(element).empty();
-        for(let i = 1; i < 32; ++i) {
-            $(element).append($('<option>').val(i).text(i));
         }
     }
     // ------------------------------------------------------------------------------
