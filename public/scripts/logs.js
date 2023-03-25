@@ -291,11 +291,7 @@ $(document).ready(function () {
                 dateUItarget = val;
             }
         });
-        // Did the action come from the year field ? 
-        // If yes, evaluate the proper month field
-        if(($(element).attr('id')).includes('year') || ($(element).attr('id')).includes('day')) {
-            element = dateUItarget.twigmonth;
-        }
+        element = dateUItarget.twigmonth;
         switch (parseInt($(element).val())) {
             case 4:
             case 6:
@@ -331,6 +327,7 @@ $(document).ready(function () {
         let startday, startmonth, startyear;    // Other dates cannot be later than start date
         alldatefields.forEach(element => {
             if(element.selector.includes('start')) {
+                // Start date
                 console.log(`Tuning the START date ${element.selector}`);
                 startday = parseInt($(element.twigday).val()) ;
                 startmonth = parseInt($(element.twigmonth).val());
@@ -358,7 +355,8 @@ $(document).ready(function () {
                 }
             }
             else {
-                // Remove years in the future
+                // Any other date
+                // Can remove years in the future
                 let options = $(element.twigyear).find('option');
                 for ( let i = 0; i < options.length; ++i){
                     if(parseInt($(options[i]).val()) > startyear) {
@@ -384,7 +382,7 @@ $(document).ready(function () {
                     }
                 }
             }
-            console.log(element);
+            // console.log(element);
         });
     }
     // ------------------------------------------------------------------------------
