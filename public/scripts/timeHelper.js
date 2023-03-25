@@ -4,16 +4,20 @@
     Dec 23 2022     Initial
     Dec 27 2022     Add msec 
     Mar 22 2023     Add msec 
+    Mar 25 2023     Get months labels
 
 ----------------------------------------------------------------------------*/
 class timeHelper {
 
     constructor() {
-        this.version = 'timeHelper:1.02, Mar 22 2023';
+        this.version = 'timeHelper:1.03, Mar 25 2023';
         this.months = [ 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec' ];
         this.monthsfr = [ 'Jan', 'Feb', 'Mar', 'Avr', 'Mai', 'Juin', 'Juil', 'Aout', 'Sep', 'Oct', 'Nov', 'Dec' ];
         this.start = 0;
         this.end = 0;
+    }
+    getMonthLabel(monthindex, locale='fr') { 
+        if(locale === 'fr') return this.monthsfr[--monthindex]; else return this.months[--monthindex];
     }
     getDateTime() {
         let d = new Date();
