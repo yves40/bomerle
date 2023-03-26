@@ -276,18 +276,44 @@ $(document).ready(function () {
     // ------------------------------------------------------------------------------
     function tuneDates() {
         let today = getDayMonthYear(new Date().toISOString());
-        alldatefields.forEach(element => {
+        let firstdate = {};
+        let notfirstdate = {};
+        let datecollision = false;
+        alldatefields.forEach( (element, index) => {
             const elementyear = $(element.twigyear).val();   // Save selected values
             const elementmonth = $(element.twigmonth).val();
             const elementday = $(element.twigday).val();
+            if(index === 0) {
+                firstdate.d = parseInt(elementday);
+                firstdate.m = parseInt(elementmonth);
+                firstdate.y = parseInt(elementyear);
+                firstdate.date = new Date(elementyear, elementmonth - 1, elementday );
+                firstdate.ms = firstdate.date.getTime();
+            }
+            else {
+                notfirstdate.d = parseInt(elementday);
+                notfirstdate.m = parseInt(elementmonth);
+                notfirstdate.y = parseInt(elementyear);
+                notfirstdate.date = new Date(elementyear, elementmonth - 1, elementday );
+                notfirstdate.ms = notfirstdate.date.getTime();
+            }
             refillYears(element.twigyear, today);           // Refill 
             $(element.twigyear).val(elementyear);            // Put it back
             refillMonths(element.twigmonth, elementyear, today);
             (element.twigmonth).val(elementmonth);
             refillDays(element.twigday, elementmonth, elementyear, today);
             (element.twigday).val(elementday);            
-        });
-        nohurry();          // Call DB with delay
+            // Now verify dates are properly set. The 1st one must be the latest
+            if(firstdate.ms <= notfirstdate.ms) {
+                datecollision = true;
+                console.log('!!!!!!!! date problem here');
+                return false;   // Break the forEach loop
+            }
+    });
+
+        // Call the DB is delay expired
+        if(!datecollision) nohurry();          // Call DB with delay if no problem with dates
+        return;
     }
     // ------------------------------------------------------------------------------
     function refillDays(element, selectedmonth, selectedyear, today) {
@@ -334,24 +360,6 @@ $(document).ready(function () {
         $(element).empty();
         for(let i = currentdate.y - 2; i < currentdate.y + 1; ++i) {
             $(element).append($('<option>').val(i).text(i));
-        }
-    }
-    // ------------------------------------------------------------------------------
-    function removeAfterMonths(element, startmonth) {
-        options = $(element).find('option');
-        for ( let i = 0; i < options.length; ++i){
-            if(parseInt($(options[i]).val()) > startmonth) {                        
-                $(options[i]).remove();
-            }
-        }
-}
-    // ------------------------------------------------------------------------------
-    function removeAfterDays(element, startday) {
-        options = $(element.twigday).find('option');
-        for ( let i = 0; i < options.length; ++i){
-            if(parseInt($(options[i]).val()) > startday) {
-                $(options[i]).remove();
-            }
         }
     }
     // ------------------------------------------------------------------------------
