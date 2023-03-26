@@ -13,13 +13,13 @@
 //----------------------------------------------------------------------------
 const $props = ( () => {
   const allprops = {
-    version : 'bomerle:1.17, Mar 22 2023 ',
+    version : 'bomerle:1.18, Mar 26 2023 ',
     copyright:  'Ratoon software Corporation Inc, Chabreloche France ',
     imagehandler: 'images.js Feb 13 2023, 1.25 ',
     knifehandler: 'knife.js Feb 08 2023, 1.05 ',
     datehandler: 'twigdate.js Feb 16 2023, 1.02 ',
     sliderhandler: 'slider.js Feb 24 2023, 1.06 ',
-    logshandler: 'logs.js Mar 22 2023, 1.07 ',
+    logshandler: 'logs.js Mar 26 2023, 1.08 ',
     knivesimageslocation: '%kernel.project_dir%/public/images/knife',
     logspagesize: 20,
     logspagedateoffset: 31,
