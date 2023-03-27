@@ -306,8 +306,11 @@ $(document).ready(function () {
             // Now verify dates are properly set. The 1st one must be the latest
             if(firstdate.ms <= notfirstdate.ms) {
                 datecollision = true;
-                console.log('!!!!!!!! date problem here');
+                $(zemessage).text('!!!!!!!! date problem here');
                 return false;   // Break the forEach loop
+            }
+            else {
+                $(zemessage).text('!!!!!!!! Will call DB with new date criteria');
             }
     });
 
