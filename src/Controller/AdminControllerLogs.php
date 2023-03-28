@@ -4,14 +4,15 @@ namespace App\Controller;
 
 use DateTime;
 
+use Exception;
 use App\Entity\Dblog;
+use DateTimeInterface;
+
 use App\Form\DateRangeType;
 use App\Services\DatesHandler;
-
-use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\Query\AST\FromClause;
 use Doctrine\ORM\Query\Expr\From;
-use Exception;
+use Doctrine\ORM\Query\AST\FromClause;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -70,22 +71,18 @@ class AdminControllerLogs extends AbstractController
         $payload = json_decode($data, true);
         $allargs = $payload['allargs'];
 
-        // $before = DateTime::createFromFormat('Y-m-d',
-        //                     $beforeParam[2].'-'.
-        //                     $beforeParam['month'].'-'.
-        //                     $beforeParam['day']
-        //                     );
         $beforeParam = $allargs[2]['date'];   // The before date ( ID and date )
         $afterParam = $allargs[3]['date']['day'];    // The since date
-        // $before = DateTime::createFromFormat('Y-m-d', '2023-3-28');
-        $before = DateTime::createFromFormat('Y-m-d', 
+
+        $before = DateTime::createFromFormat(DateTimeInterface::ATOM,
                                 $allargs[2]['date']['year'].'-'
                                 .$allargs[2]['date']['month'].'-'
-                                .$allargs[2]['date']['day']);
-        $after = DateTime::createFromFormat('Y-m-d', 
+                                .$allargs[2]['date']['day'].'T23:59:59+00:00'
+                            );
+        $after = DateTime::createFromFormat(DateTimeInterface::ATOM, 
                                 $allargs[3]['date']['year'].'-'
                                 .$allargs[3]['date']['month'].'-'
-                                .$allargs[3]['date']['day']);
+                                .$allargs[3]['date']['day'].'T00:00:00+00:00');
 
         date_default_timezone_set('Europe/Paris');
         $loc = $request->getSession()->get('bootadmin.lang');
