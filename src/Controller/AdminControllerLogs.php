@@ -9,6 +9,8 @@ use App\Form\DateRangeType;
 use App\Services\DatesHandler;
 
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\Query\AST\FromClause;
+use Doctrine\ORM\Query\Expr\From;
 use Exception;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -58,23 +60,63 @@ class AdminControllerLogs extends AbstractController
     //      J S O N   S E R V I C E S 
     // --------------------------------------------------------------------------
     #[Route('/logs/page/{pagenum?1}', name: 'bootadmin.logs.page')]
-    public function page(Request $request,EntityManagerInterface $emgr, int $pagenum) {
+    public function page(Request $request,
+                    EntityManagerInterface $emgr, 
+                    int $pagenum,
+                    )
+    {
+
+        $data = file_get_contents("php://input");
+        $payload = json_decode($data, true);
+        $allargs = $payload['allargs'];
+
+        // $before = DateTime::createFromFormat('Y-m-d',
+        //                     $beforeParam[2].'-'.
+        //                     $beforeParam['month'].'-'.
+        //                     $beforeParam['day']
+        //                     );
+        $beforeParam = $allargs[2]['date'];   // The before date ( ID and date )
+        $afterParam = $allargs[3]['date']['day'];    // The since date
+        // $before = DateTime::createFromFormat('Y-m-d', '2023-3-28');
+        $before = DateTime::createFromFormat('Y-m-d', 
+                                $allargs[2]['date']['year'].'-'
+                                .$allargs[2]['date']['month'].'-'
+                                .$allargs[2]['date']['day']);
+        $after = DateTime::createFromFormat('Y-m-d', 
+                                $allargs[3]['date']['year'].'-'
+                                .$allargs[3]['date']['month'].'-'
+                                .$allargs[3]['date']['day']);
+
         date_default_timezone_set('Europe/Paris');
-        // $loc = $this->locale($request);
-        // $loc = $this->localeSwitcher->getLocale();
         $loc = $request->getSession()->get('bootadmin.lang');
         try {
             $repo = $emgr->getRepository(Dblog::class);
-            // findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
             $offset = ($pagenum - 1) * $repo::RETRIEVEDMAX;
-            $logs = $repo->findBy([], [ 'logtime' => 'DESC'], $repo::RETRIEVEDMAX, $offset);
+            // findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+            // $logs = $repo->findBy([], [ 'logtime' => 'DESC'], $repo::RETRIEVEDMAX, $offset);
+            $qb = $emgr->createQueryBuilder();
+            $logs = $qb->select('logs')
+                ->from('App\Entity\Dblog', 'logs')
+                ->andWhere('logs.logtime <= :before')
+                ->andWhere('logs.logtime >= :after')
+                ->setParameter('before', $before)
+                ->setParameter('after', $after)
+                ->orderBy('logs.logtime', 'DESC')
+                ->setFirstResult($offset)
+                ->setMaxResults($repo::RETRIEVEDMAX)
+                ->getQuery()
+                ->getResult();
+            
             return $this->json([
                 'offset' => $offset,
                 'pagenumber' => $pagenum,
                 'locale' => $loc,
-                'logs' => $logs
+                'logs' => $logs,
+                'allargs' => $allargs,
+                'before' => $before,
+                'after' => $after
             ], 200);
-        }
+        }   
         catch(Exception $e) {
             return $this->json([
                 'message' => 'bootadmin.logs.page ERROR',

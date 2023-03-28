@@ -12,7 +12,7 @@ $(document).ready(function () {
     const pagesize = $props.getLogsPageSize();
     const dateoffset = $props.getLogsDateOffest();
     const slidingtime = $props.getSlidingTime();
-    const nohurry = waitplease(() => buildArguments());
+    const nohurry = waitplease(() => getLogs());
     const timehelper = new timeHelper();
 
 
@@ -90,21 +90,25 @@ $(document).ready(function () {
     // Request new data based on all criterias
     // ----------------------------------------------------------------------------
     function getLogs() {
+        let arguments = buildArguments();
         $.ajax({
-            type: "GET",
+            type: "POST",
             url: `/bootadmin/logs/page/${pagenum}`,
             dataType: "json",
+            contentType: 'application/json',
             async: true,
+            data: JSON.stringify({ 'allargs' : arguments}),
             success: function (response) {
                 // Check the number of returned lines and manage the next page button
                 if(response.logs.length < pagesize) {
                     $(nextpage).hide();
                 }
                 else { $(nextpage).show();}
+                console.log(response);
                 updatePage(response);
             },
             error: (xhr) => {
-                console.log(xhr.responseJSON.detail);
+                console.log(xhr.responseJSON.errmess);
             }
         });
         $(zemessage).text(`Page ${pagenum}`);
@@ -371,6 +375,8 @@ $(document).ready(function () {
     }
     // ------------------------------------------------------------------------------
     function buildArguments() {  
+        // The arguments to be used for the Ajax call
+        let allargs = [];
         // First, consider check boxes
         let levelarray = [];
         $('.levelselector').each(function (index, scan) {
@@ -378,17 +384,30 @@ $(document).ready(function () {
                               "state": $(scan).prop('checked')
                             });
         });
+        allargs.push( { 'levels': levelarray });
         console.log('----------------------------------------------------------------------');
-        console.log(JSON.stringify(levelarray));
         // Search text now
-        let thesearchtext = $(searchtext).val();
-        console.log(thesearchtext);
+        allargs.push({ 'searchtext' : $(searchtext).val() });
         // Date fields now
         alldatefields.forEach(element => {
-            console.log(`${element.selector} Day: ${$(element.twigday).val()}/${$(element.twigmonth).val()}/${$(element.twigyear).val()}` );
+            let dateid = `${element.selector}`;
+            let day = `${$(element.twigday).val()}`;
+            let month = `${$(element.twigmonth).val()}`;
+            let year = `${$(element.twigyear).val()}`;
+            allargs.push(
+                { 
+                    'dateid' : dateid,
+                    'date' : {
+                        'day' : day,
+                        'month': month,
+                        'year': year
+                    }
+                }  
+            );
         });
         // Now refresh data
-        console.log('Now calling the backend');
+        console.log(allargs);
+        return allargs;
     }
     // ------------------------------------------------------------------------------
     function getLogsNumber() {
