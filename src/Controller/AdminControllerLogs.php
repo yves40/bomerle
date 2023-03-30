@@ -20,6 +20,7 @@ use Symfony\Component\Translation\LocaleSwitcher;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Validator\Constraints\Length;
 
 #[Route('/bootadmin')]
 class AdminControllerLogs extends AbstractController
@@ -71,8 +72,9 @@ class AdminControllerLogs extends AbstractController
         $payload = json_decode($data, true);
         $allargs = $payload['allargs'];
 
-        $beforeParam = $allargs[2]['date'];   // The before date ( ID and date )
-        $afterParam = $allargs[3]['date']['day'];    // The since date
+        $searchtext = $allargs[1]['searchtext'];                   // Any text to search for ?
+        $beforeParam = $allargs[2]['date'];         // The before date ( ID and date )
+        $afterParam = $allargs[3]['date']['day'];   // The since date
 
         $before = DateTime::createFromFormat(DateTimeInterface::ATOM,
                                 $allargs[2]['date']['year'].'-'
@@ -92,7 +94,7 @@ class AdminControllerLogs extends AbstractController
             // findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
             // $logs = $repo->findBy([], [ 'logtime' => 'DESC'], $repo::RETRIEVEDMAX, $offset);
             $qb = $emgr->createQueryBuilder();
-            $logs = $qb->select('logs')
+            $qb->select('logs')
                 ->from('App\Entity\Dblog', 'logs')
                 ->andWhere('logs.logtime <= :before')
                 ->andWhere('logs.logtime >= :after')
@@ -100,9 +102,23 @@ class AdminControllerLogs extends AbstractController
                 ->setParameter('after', $after)
                 ->orderBy('logs.logtime', 'DESC')
                 ->setFirstResult($offset)
-                ->setMaxResults($repo::RETRIEVEDMAX)
-                ->getQuery()
-                ->getResult();
+                ->setMaxResults($repo::RETRIEVEDMAX);
+            $wild = '';
+            if(strlen($searchtext) !== 0 ) {
+                // Add wildcards
+                $wild = '%'.$searchtext.'%';
+                $qb->select('logs')
+                    ->orWhere('logs.message like :msgtext')
+                    ->orWhere('logs.action like :actiontext')
+                    ->orWhere('logs.module like :moduletext')
+                    ->setParameter('msgtext', $wild)
+                    ->setParameter('actiontext', $wild)
+                    ->setParameter('moduletext', $wild)
+                    ;
+            }
+            // Fire    
+            $dql = $qb->getDql();
+            $logs = $qb->getQuery()->getResult();
             
             return $this->json([
                 'offset' => $offset,
@@ -111,7 +127,9 @@ class AdminControllerLogs extends AbstractController
                 'logs' => $logs,
                 'allargs' => $allargs,
                 'before' => $before,
-                'after' => $after
+                'after' => $after,
+                'dql' => $dql,
+                'wild' => $wild
             ], 200);
         }   
         catch(Exception $e) {
