@@ -151,8 +151,7 @@ class AdminControllerLogs extends AbstractController
             if( $critlength !== 0 ) {
                 $levels = substr($levelscriteria, 0, $critlength - 1);
                 $qb->select('logs')
-                ->andWhere('logs.severity in('.$levels.')')
-                // ->setParameter('levels', $levels)                
+                ->andWhere('logs.severity in('.$levels.')') // possible SQL injection here but param not working
                 ;
             }
             // Fire    
