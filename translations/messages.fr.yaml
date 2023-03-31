@@ -165,9 +165,9 @@ logs:
   hide: Aucun détail
   show: Tous les détails
   debug: Debug level
-  informational: Informationnel
-  warning: Avertissement
-  error: Erreur
+  informational: Informational
+  warning: Warning
+  error: Error
   fatal: Fatal
 # Generic messages
 buttons:

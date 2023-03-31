@@ -104,6 +104,7 @@ $(document).ready(function () {
                     $(nextpage).hide();
                 }
                 else { $(nextpage).show();}
+                console.log(response.dql);
                 console.log(response);
                 updatePage(response);
             },

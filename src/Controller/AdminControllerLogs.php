@@ -72,10 +72,8 @@ class AdminControllerLogs extends AbstractController
         $payload = json_decode($data, true);
         $allargs = $payload['allargs'];
 
-        $searchtext = $allargs[1]['searchtext'];                   // Any text to search for ?
-        $beforeParam = $allargs[2]['date'];         // The before date ( ID and date )
-        $afterParam = $allargs[3]['date']['day'];   // The since date
-
+        $searchtext = $allargs[1]['searchtext'];    // Any text to search for ?
+        $requestedlevels = $allargs[0]['levels'];   // Get levels
         $before = DateTime::createFromFormat(DateTimeInterface::ATOM,
                                 $allargs[2]['date']['year'].'-'
                                 .$allargs[2]['date']['month'].'-'
@@ -103,18 +101,59 @@ class AdminControllerLogs extends AbstractController
                 ->orderBy('logs.logtime', 'DESC')
                 ->setFirstResult($offset)
                 ->setMaxResults($repo::RETRIEVEDMAX);
+            // Any search text entered ? 
             $wild = '';
             if(strlen($searchtext) !== 0 ) {
                 // Add wildcards
                 $wild = '%'.$searchtext.'%';
                 $qb->select('logs')
-                    ->orWhere('logs.message like :msgtext')
-                    ->orWhere('logs.action like :actiontext')
-                    ->orWhere('logs.module like :moduletext')
-                    ->setParameter('msgtext', $wild)
-                    ->setParameter('actiontext', $wild)
-                    ->setParameter('moduletext', $wild)
+                    ->andWhere('logs.message like :searchtext or logs.action like :searchtext or logs.module like :searchtext')
+                    ->setParameter('searchtext', $wild)
                     ;
+            }
+            /* 
+                Check requested levels : The received array looks like 
+                    levels: 
+                        0:{id: 'debug', state: true}
+                        1:{id: 'informational', state: true}
+                        2:{id: 'warning', state: true}
+                        3:{id: 'error', state: true}
+                        4:{id: 'fatal', state: true}            
+
+                        const DEBUG = 0;
+                        const INFORMATIONAL = 1;
+                        const WARNING = 2;
+                        const ERROR = 3;
+                        const FATAL = 4;
+            */
+            $levelscriteria = '';
+            foreach($requestedlevels as $level) {
+                $state = $level['state'];
+                switch($level['id']) {
+                    case 'debug':
+                        if($state)$levelscriteria .= '0,';
+                        break;
+                    case 'informational':
+                        if($state)$levelscriteria .= '1,';
+                        break;
+                    case 'warning':
+                        if($state)$levelscriteria .= '2,';
+                        break;
+                    case 'error':
+                        if($state)$levelscriteria .= '3,';
+                        break;
+                    case 'fatal':
+                        if($state)$levelscriteria .= '4,';
+                        break;
+                }
+            }
+            $critlength = strlen($levelscriteria);
+            if( $critlength !== 0 ) {
+                $levels = substr($levelscriteria, 0, $critlength - 1);
+                $qb->select('logs')
+                ->andWhere('logs.severity in('.$levels.')')
+                // ->setParameter('levels', $levels)                
+                ;
             }
             // Fire    
             $dql = $qb->getDql();
@@ -129,7 +168,8 @@ class AdminControllerLogs extends AbstractController
                 'before' => $before,
                 'after' => $after,
                 'dql' => $dql,
-                'wild' => $wild
+                'wild' => $wild,
+                'levels' => $levels
             ], 200);
         }   
         catch(Exception $e) {
