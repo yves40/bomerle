@@ -12,7 +12,7 @@ $(document).ready(function () {
     const pagesize = $props.getLogsPageSize();
     const dateoffset = $props.getLogsDateOffest();
     const slidingtime = $props.getSlidingTime();
-    const nohurry = waitplease(() => getLogs());
+    const nohurry = waitplease(() => { pagenum = 1; $(previouspage).hide(); getLogs(); });
     const timehelper = new timeHelper();
 
 
@@ -301,7 +301,7 @@ $(document).ready(function () {
                 notfirstdate.ms = notfirstdate.date.getTime();
             }
             refillYears(element.twigyear, today);           // Refill 
-            $(element.twigyear).val(elementyear);            // Put it back
+            $(element.twigyear).val(elementyear);           // Put it back
             refillMonths(element.twigmonth, elementyear, today);
             (element.twigmonth).val(elementmonth);
             refillDays(element.twigday, elementmonth, elementyear, today);
@@ -404,7 +404,7 @@ $(document).ready(function () {
             );
         });
         // Now refresh data
-        console.log(allargs);
+        // console.log(allargs);
         return allargs;
     }
     // ------------------------------------------------------------------------------
