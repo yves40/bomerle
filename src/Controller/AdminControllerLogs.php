@@ -43,9 +43,8 @@ class AdminControllerLogs extends AbstractController
         date_default_timezone_set('Europe/Paris');
         $loc = $this->locale($request);
         $repo = $entityManager->getRepository(Dblog::class);
-        // findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
-        $logs = $repo->findBy([], [ 'logtime' => 'DESC'], $repo::RETRIEVEDMAX, 0);
-        // $logs = $repo->findByDateDesc();
+        // $logs = $repo->findBy([], [ 'logtime' => 'DESC'], $repo::RETRIEVEDMAX, 0);
+        $logs = [];
         $dblogentity = new Dblog();
         $severitylabels = $dblogentity->getSeverityLabels();
         $form = $this->createForm(DateRangeType::class);

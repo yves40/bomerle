@@ -23,6 +23,12 @@
             <div id="after" class="col">
                 {{ form_row(form.endDate, { 'label': 'admin.managelogs.enddate'|trans}) }}
             </div>
+            <div class="col">
+                <legend class="col-form-label">
+                    <label class="mt-1  mb-1" for="searchtext">{% trans %}admin.managelogs.searchtextlabel{% endtrans %}</label>
+                    <input id="searchtext" type="text" name="searchtext" class="form-control"  autocomplete="off" spellcheck="false" autofocus>        
+                </legend>
+            </div>
         </div>
     {{form_end(form) }}
 
@@ -46,12 +52,6 @@
                 </a>
             </div>
         </div>
-        <div class="row paginationcommands">
-            <label class="mt-1  mb-1" for="searchtext">{% trans %}admin.managelogs.searchtextlabel{% endtrans %}</label>
-            <input id="searchtext" type="text" name="email"
-                class="form-control" 
-                autocomplete="off" spellcheck="false" autofocus>        
-            </div>
     </div>
 
 
@@ -96,7 +96,7 @@
         <div class="col">{{'admin.managelogs.eventmessage'|trans}}</div>
     </div>
     <ul id="loglist" class="list-group mt-2">
-        {% for log in logs %}
+        {# {% for log in logs %}
             <li class="list-group-item pt-0 pb-0">
                 <div class="row mt-1 mb-0 pt-0 pb-0 textsmall">
                     {% if locale == 'fr' %}
@@ -126,7 +126,7 @@
                     </div>
                 </div>
             </li>
-        {% endfor %}
+        {% endfor %} #}
     </ul>
     <link rel="stylesheet" href="{{asset('/css/yves.css')}}">
     <script src="{{ asset('node_modules/jquery/dist/jquery.min.js')}}"></script>

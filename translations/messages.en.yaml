@@ -165,7 +165,7 @@ logs:
   all100: Newest
   hide: No details
   show: All details
-  debug: Debug level
+  debug: Debug
   informational: Informational
   warning: Warning
   error: Error

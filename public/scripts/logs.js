@@ -46,8 +46,6 @@ $(document).ready(function () {
     updateDateFields(alldatefields[0], getDayMonthYear(currentdate));
     updateDateFields(alldatefields[1], getDayMonthYear(enddate));
     tuneDates();
-    // Get and display the number of logs in the DB table
-    getLogsNumber();
     console.log($props.logshandler());
     console.log(`Pagesize : ${pagesize}`);
     console.log(`Initial second date will be ${dateoffset} days earlier`);
@@ -315,10 +313,9 @@ $(document).ready(function () {
                 return false;   // Break the forEach loop
             }
             else {
-                $(zemessage).text('!!!!!!!! Will call DB with new date criteria');
+                $(zemessage).text('');
             }
-    });
-
+        });
         // Call the DB is delay expired
         if(!datecollision) nohurry();          // Call DB with delay if no problem with dates
         return;
