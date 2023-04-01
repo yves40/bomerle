@@ -309,11 +309,13 @@ $(document).ready(function () {
             // Now verify dates are properly set. The 1st one must be the latest
             if(firstdate.ms <= notfirstdate.ms) {
                 datecollision = true;
-                $(zemessage).text('!!!!!!!! date problem here');
+                $('#before').addClass('yerror');
+                $('#after').addClass('yerror');
                 return false;   // Break the forEach loop
             }
             else {
-                $(zemessage).text('');
+                $('#before').removeClass('yerror');
+                $('#after').removeClass('yerror');
             }
         });
         // Call the DB is delay expired
