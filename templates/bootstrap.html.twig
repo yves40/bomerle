@@ -136,6 +136,24 @@
                                         {% endif %}                                
                                     </nav>
                                 </div>
+                                {# DIAPORAMAS  ------------------------------------------------------------------------------- #}
+                                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseDiapo" aria-expanded="false" aria-controls="collapseLayouts">
+                                    <div class="sb-nav-link-icon">
+                                        <img class="svgsmall-lightgreen" src="/images/svg/table-columns-solid.svg" alt=""/>
+                                    </div>
+                                        {% trans %}diapos.menuheader{% endtrans %}
+                                    <div class="sb-sidenav-collapse-arrow">
+                                        <img class="svgsmall-lightgreen" src="/images/svg/magnifying-glass-solid.svg" alt=""/>
+                                    </div>
+                                </a>
+                                <div class="collapse" id="collapseDiapo" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                                    <nav class="sb-sidenav-menu-nested nav">
+                                        {% if is_granted('ROLE_ADMIN') %}
+                                            <a class="nav-link" href="#">{% trans %}diapos.manage{% endtrans %}</a>
+                                            <a class="nav-link" href="#">{% trans %}diapos.test{% endtrans %}</a>
+                                        {% endif %}                                
+                                    </nav>
+                                </div>
                                 {# LOGS  ----------------------------------------------------------------------------------- #}
                                 <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLogs" aria-expanded="false" aria-controls="collapseLayouts">
                                     <div class="sb-nav-link-icon">

@@ -169,6 +169,10 @@ logs:
   warning: Warning
   error: Error
   fatal: Fatal
+diapos:
+  menuheader: Les diaporamas
+  manage: Gérer
+  test: Tester
 # Generic messages
 buttons:
   add: Ajouter

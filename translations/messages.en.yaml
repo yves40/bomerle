@@ -170,6 +170,10 @@ logs:
   warning: Warning
   error: Error
   fatal: Fatal
+diapos:
+  menuheader: Slideshows
+  manage: Manage
+  test: Test
 # Generic messages
 buttons:
   add: Add
