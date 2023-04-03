@@ -38,8 +38,18 @@
             <div class="col ylabel">{{ form_row(form.daterange, { 'label' : 'admin.manageslides.daterange'|trans,'value': slide.daterange,}) }}</div>
         </div>
         <div class="row align-items-start">
-            <div class="col ylabel"> {{ form_row(form.dateout, { 'label' : 'admin.manageslides.dateout'|trans, 'value': slide.dateout })  }}</div>
-            <div class="col ylabel"> {{ form_row(form.datein, { 'label' : 'admin.manageslides.datein'|trans, 'value': slide.datein })  }}</div>
+            <div class="col ylabel"> {{ form_row(form.dateout, { 'label' : 'admin.manageslides.dateout'|trans,
+                                                                    'value': slide.dateout,
+                                                                    'attr' : { "max": 100 }  
+                                                                })  
+                                        }}
+            </div>
+            <div class="col ylabel"> {{ form_row(form.datein, { 'label' : 'admin.manageslides.datein'|trans,
+                                                                 'value': slide.datein,
+                                                                 'attr': { "max": 200 }  
+                                                                })  
+                                        }}
+            </div>
         </div>
         <div>
             {% if id == 0 %}

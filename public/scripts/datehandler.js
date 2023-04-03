@@ -32,7 +32,8 @@ $(document).ready(function () {
         $("[id$=_day]").each(function (index, element) {
             // This parsing is highly dependent of the current TWIG field ID generation ;-(
             let selectorpieces = $(element).attr('id').split('_');  
-            let selector = `${selectorpieces[0]}_${selectorpieces[1]}_${selectorpieces[2]}`;
+            let selector = `#${selectorpieces[0]}_${selectorpieces[1]}_${selectorpieces[2]}`;
+            console.log(`max : ${$(selector).attr('max')}`);
             getDateFields(selector);
         });
     }
@@ -43,9 +44,9 @@ $(document).ready(function () {
     function getDateFields(selector) {
         let dateUI = {};
         dateUI.selector = selector;
-        dateUI.twigday = $(`#${selector}_day`);
-        dateUI.twigmonth = $(`#${selector}_month`);
-        dateUI.twigyear = $(`#${selector}_year`);
+        dateUI.twigday = $(`${selector}_day`);
+        dateUI.twigmonth = $(`${selector}_month`);
+        dateUI.twigyear = $(`${selector}_year`);
         dateUI.day29 = $(dateUI.twigday).find('option[value="29"]');
         dateUI.day30 = $(dateUI.twigday).find('option[value="30"]');
         dateUI.day31 = $(dateUI.twigday).find('option[value="31"]');
