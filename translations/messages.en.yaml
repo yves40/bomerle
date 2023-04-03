@@ -157,6 +157,17 @@ admin:
     eventuser: Email
     eventaction: Action
     eventmessage: Details
+  manageslides:
+    title: Manage slides show
+    list: List
+    add: Add
+    edit: Edit
+    name: Name
+    description: Description
+    daterange: Date range ? 
+    active: Active ?
+    datein: Show active from (optional)
+    dateout: Show active until (optional)
 logs:
   menuheader: Logs
   site: Web site logs
@@ -172,6 +183,8 @@ logs:
   fatal: Fatal
 diapos:
   menuheader: Slideshows
+  list: List
+  add: Add
   manage: Manage
   test: Test
 # Generic messages

@@ -1,0 +1,38 @@
+{% extends 'bootstrap.html.twig' %}
+
+{% block title %}{% trans %}admin.title{% endtrans %}{% endblock %}
+
+{% form_theme form 'bootstrap_5_layout.html.twig' %}
+
+{% block pagetitle %}
+    <h1 class="mt-4">{% trans %}admin.manageslides.title{% endtrans %}</h1>
+{% endblock %}
+
+{% block body %}
+
+    {% include "admin/slidesmenu.html.twig" %}
+    {# List knives #}
+    <ul class="list-group">
+        {% for slide in allslides %}
+            <li class="list-group-item">
+                <div class="row">
+                    <div class="col">{{slide.name}}</div>
+                    {# <div class="col-1 deleteaction" 
+                            data-knifeid={{knife.id}}
+                            data-knifename="{{knife.name}}"
+                            data-message="{{'admin.manageknives.deleteconfirm'|trans}}"
+                            data-bs-toggle="modal" data-bs-target="#deletionModal">
+                        <a href="{{ path('bootadmin.knives.delete', {id: knife.id}) }}">
+                            <img class="svgsmall-lightblue" src="/images/svg/trash-bin-outline.svg" alt=""/>
+                        </a>
+                    </div>
+                    <div class="col-1">
+                        <a href="{{ path('bootadmin.knives.edit', {id: knife.id}) }}">
+                        <img class="svgsmall-lightblue" src="/images/svg/pen-to-square-regular.svg" alt="" title=""/>                        </a>
+                    </div> #}
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
+    <script src="{{ asset('node_modules/jquery/dist/jquery.min.js')}}"></script>
+{% endblock %}

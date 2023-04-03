@@ -156,6 +156,17 @@ admin:
     eventuser: Email
     eventaction: Action
     eventmessage: Détails
+  manageslides:
+    title: Gestion des diaporamas
+    list: Lister
+    add: Créer
+    edit: Editer
+    name: Nom
+    description: Description
+    daterange: Plage de dates ? 
+    active: Actif ?
+    datein: Show actif à partir (optionnel)
+    dateout: Show actif jusqu'au (optionnel)
 logs:
   menuheader: Les logs
   site: Du site WEB
@@ -171,6 +182,8 @@ logs:
   fatal: Fatal
 diapos:
   menuheader: Les diaporamas
+  list: Lister
+  add: Créer
   manage: Gérer
   test: Tester
 # Generic messages

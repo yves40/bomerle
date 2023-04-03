@@ -1,0 +1,59 @@
+{% extends 'bootstrap.html.twig' %}
+
+{% block title %}{% trans %}admin.title{% endtrans %}{% endblock %}
+
+{% form_theme form 'bootstrap_5_layout.html.twig' %}
+
+{% block pagetitle %}
+    <h1 class="mt-4">{% trans %}admin.manageslides.title{% endtrans %}</h1>
+{% endblock %}
+
+{% block body %}
+
+    {# 
+        Check form call context: The form is generic and called for all CRUD ops.
+        When updating, the action must call the update service with an ID
+    #}
+    {% set param = [] %}
+    {% set action = 'bootadmin.slide.edit' %}
+    {% if id != 0 %}  {# Update, or Create, delete ? #}
+        {% set param = { 'id': id } %}
+    {% endif %}
+
+
+    {{ form_start(form, {'attr': {'novalidate': 'novalidate', 'class': 'form'},
+                        'action': path(action, param), 
+                        'method': 'POST'
+                        }) 
+    }}
+        
+        {% include "admin/slidesmenu.html.twig" %}
+
+        <div class="row align-items-start">
+            <div class="col-4 ylabel"> {{ form_row(form.name, { 'label' : 'admin.manageslides.name'|trans, 'value': slide.name })  }}</div>
+            <div class="col-8 ylabel"> {{ form_row(form.description, { 'label' : 'admin.manageslides.description'|trans, 'value': slide.description })  }}</div>
+        </div>
+        <div class="row">
+            <div class="col ylabel">{{ form_row(form.active, { 'label' : 'admin.manageslides.active'|trans,'value': slide.active,}) }}</div>
+            <div class="col ylabel">{{ form_row(form.daterange, { 'label' : 'admin.manageslides.daterange'|trans,'value': slide.daterange,}) }}</div>
+        </div>
+        <div class="row align-items-start">
+            <div class="col ylabel"> {{ form_row(form.datein, { 'label' : 'admin.manageslides.datein'|trans, 'value': slide.datein })  }}</div>
+            <div class="col ylabel"> {{ form_row(form.dateout, { 'label' : 'admin.manageslides.dateout'|trans, 'value': slide.dateout })  }}</div>
+        </div>
+        <div>
+            {% if id == 0 %}
+                <button type="submit" class="btn btn-primary mb-3">{% trans %}buttons.add{% endtrans %}</button>
+            {% else %}
+                <button type="submit" 
+                        class="btn btn-primary mb-3">{% trans %}buttons.modify{% endtrans %}</button>
+                <button type="submit" formaction="{{path('bootadmin.knives.all')}}" 
+                        class="btn btn-primary mb-3">{% trans %}buttons.cancel{% endtrans %}</button>
+            {% endif %}
+        </div>
+
+    {{ form_end(form) }}
+
+    <script src="{{ asset('node_modules/jquery/dist/jquery.min.js')}}"></script>
+    <script src="{{ asset('scripts/menuhandler.js')}}"></script>
+{% endblock %}
