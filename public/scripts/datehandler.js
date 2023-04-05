@@ -8,18 +8,37 @@ $(document).ready(function () {
     // get some info on one or more dates fields.
     let alldatefields = [];
     searchDateFields();
-    // Set current date for startDate and an earlier date for endDate
-    // The offest is spsecified in properties.js
-    let currentdate = new Date().toISOString();
-    const now = new Date();
-    let enddate = new Date(new Date(now).setDate(now.getDate() - $props.getLogsDateOffest())).toISOString();
     // Now, depending on the number of select date found, set them up
     // The 1st one will always be considered as the most future date
+    let currentdate = new Date().toISOString();
+    let currentyear;
     alldatefields.forEach((element, index) => {
-        if(index === 0)
-            updateDateFields(element, getDayMonthYear(currentdate));
-        else
-            updateDateFields(element, getDayMonthYear(enddate));
+        switch (element.initvalue) {
+            case "today":
+                updateDateFields(element, getDayMonthYear(currentdate));
+                break;
+            case "soy":
+                currentyear = getDayMonthYear(currentdate).y;
+                let soy = new Date(currentyear, 0, 2, 0, 1).toISOString();
+                updateDateFields(element, getDayMonthYear(soy));
+                break;
+            case "eoy":
+                currentyear = getDayMonthYear(currentdate).y;
+                let eoy = new Date(currentyear, 11, 31, 23, 59).toISOString();
+                updateDateFields(element, getDayMonthYear(eoy));
+                break;
+            case "nm":
+                break;
+            case "pm":
+                break;
+            default:
+                updateDateFields(element, getDayMonthYear(currentdate));
+                break;
+        }
+        
+        // let now = new Date();
+        // let enddate = new Date(new Date(now).setDate(now.getDate() - $props.getLogsDateOffest())).toISOString();
+        
     });
     tuneDates();
 
@@ -33,16 +52,37 @@ $(document).ready(function () {
             // This parsing is highly dependent of the current TWIG field ID generation ;-(
             let selectorpieces = $(element).attr('id').split('_');  
             let selector = `#${selectorpieces[0]}_${selectorpieces[1]}_${selectorpieces[2]}`;
-            console.log(`max : ${$(selector).attr('max')}`);
-            getDateFields(selector);
+            //
+            // init is a parameter passed from the TWIG page, used to setup the initial select date value
+            //      Possible values are : 
+            //          today : Today (default)
+            //          soy   : Start Of Year
+            //          eoy   : End Of Year
+            //          nm    : Next Month starting from today
+            //          pm    : Previous Month starting from today
+            // nofuture
+            //          true: means no date can be set beyond the current date
+            //          false: choose any date in the future
+            let initialvalue = $(selector).attr('init');
+            let nofuture = $(selector).attr('nofuture');
+            if(initialvalue === undefined) { initialvalue = 'today'; }
+            if(nofuture === undefined) { 
+                nofuture = true; 
+            }
+            else {
+                nofuture = (nofuture === 'true');   // Convert 
+            }
+            getDateFields(selector, initialvalue, nofuture);    // Pusheds into an array all date fields
         });
     }
     // ------------------------------------------------------------------------------
     // Receives a base selector string concatenated with the TWIG generated IDs
     // Hope these IDs will not change in future versions 
     // ------------------------------------------------------------------------------
-    function getDateFields(selector) {
+    function getDateFields(selector, initialvalue, nofuture) {
         let dateUI = {};
+        dateUI.initvalue = initialvalue;
+        dateUI.nofuture = nofuture;
         dateUI.selector = selector;
         dateUI.twigday = $(`${selector}_day`);
         dateUI.twigmonth = $(`${selector}_month`);
@@ -117,11 +157,11 @@ $(document).ready(function () {
                 notfirstdate.date = new Date(elementyear, elementmonth - 1, elementday );
                 notfirstdate.ms = notfirstdate.date.getTime();
             }
-            refillYears(element.twigyear, today);           // Refill 
+            refillYears(element.twigyear, today, element.nofuture);           // Refill 
             $(element.twigyear).val(elementyear);           // Put it back
-            refillMonths(element.twigmonth, elementyear, today);
+            refillMonths(element.twigmonth, elementyear, today, element.nofuture);
             (element.twigmonth).val(elementmonth);
-            refillDays(element.twigday, elementmonth, elementyear, today);
+            refillDays(element.twigday, elementmonth, elementyear, today, element.nofuture);
             (element.twigday).val(elementday);            
             // Now verify dates are properly set. The 1st one must be the latest
             if(firstdate.ms <= notfirstdate.ms) {
@@ -138,7 +178,7 @@ $(document).ready(function () {
         return;
     }
     // ------------------------------------------------------------------------------
-    function refillDays(element, selectedmonth, selectedyear, today) {
+    function refillDays(element, selectedmonth, selectedyear, today, nofuture) {
         $(element).empty();
         smonth = parseInt(selectedmonth);
         syear = parseInt(selectedyear);
@@ -158,29 +198,39 @@ $(document).ready(function () {
                 daylimit = 31;
         }
         // Final check to remove days over current day if year and month are the same
-        if((smonth === today.m)&&(syear === today.y)) {
-            daylimit = today.d;
+        if(nofuture) {
+            if((smonth === today.m)&&(syear === today.y)) {
+                daylimit = today.d;
+            }
         }
         for(let i = 1; i < daylimit + 1; ++i) {
             $(element).append($('<option>').val(i).text(i));
         }
     }
     // ------------------------------------------------------------------------------
-    function refillMonths(element, selectedyear, today) {
+    function refillMonths(element, selectedyear, today, nofuture) {
         $(element).empty();
         syear = parseInt(selectedyear);
         let monthlimit = 13;
-        if(syear === today.y) {
-            monthlimit = today.m + 1;
+        if(nofuture) {
+            if(syear === today.y) {
+                monthlimit = today.m + 1;
+            }    
         }
         for(let i = 1; i < monthlimit; ++i) {
             $(element).append($('<option>').val(i).text(timehelper.getMonthLabel(i)));
         }
     }
     // ------------------------------------------------------------------------------
-    function refillYears(element, currentdate) {
+    function refillYears(element, currentdate, nofuture) {
         $(element).empty();
-        for(let i = currentdate.y - 2; i < currentdate.y + 1; ++i) {
+        let loweryear = currentdate.y - 2;
+        let upperyear = currentdate.y + 2;
+        if(nofuture) {
+            upperyear = currentdate.y + 1;
+            loweryear = currentdate.y - 2;
+        }
+        for(let i = loweryear; i < upperyear; ++i) {
             $(element).append($('<option>').val(i).text(i));
         }
     }

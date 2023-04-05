@@ -40,13 +40,13 @@
         <div class="row align-items-start">
             <div class="col ylabel"> {{ form_row(form.dateout, { 'label' : 'admin.manageslides.dateout'|trans,
                                                                     'value': slide.dateout,
-                                                                    'attr' : { "max": 100 }  
+                                                                    'attr' : { "init": 'eoy', 'nofuture' : 'false' }  
                                                                 })  
                                         }}
             </div>
             <div class="col ylabel"> {{ form_row(form.datein, { 'label' : 'admin.manageslides.datein'|trans,
                                                                  'value': slide.datein,
-                                                                 'attr': { "max": 200 }  
+                                                                'attr' : { "init": 'soy', 'nofuture' : 'false' }  
                                                                 })  
                                         }}
             </div>
