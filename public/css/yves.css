@@ -174,3 +174,9 @@ legend {
   font-style: italic; }
   .msgdetails .label {
     font-weight: bold; }
+
+.on {
+  color: green; }
+
+.off {
+  color: red; }
