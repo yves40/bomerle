@@ -25,7 +25,7 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     private ?int $id = null;
 
     #[ORM\Column(length: 45)]
-    #[Assert\NotBlank(message: "Merci de renseigner ce champ", groups: ['standard'])]
+    #[Assert\NotBlank(message: "generic.notempty", groups: ['standard'])]
     #[Assert\Length(
         min: 4,
         max: 16,
@@ -36,20 +36,20 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $firstname = null;
 
     #[ORM\Column(length: 45)]
-    #[Assert\NotBlank(message: "Merci de renseigner ce champ", groups: ['standard'])]
+    #[Assert\NotBlank(message: "generic.notempty", groups: ['standard'])]
     private ?string $lastname = '';
 
     #[ORM\Column(length: 255)]
-    #[Assert\NotBlank(message: "Merci de renseigner ce champ", groups: ['standard'])]
+    #[Assert\NotBlank(message: "generic.notempty", groups: ['standard'])]
     #[Assert\Email( message: "{{ value }} n'est pas un email valide." , groups: ['standard'])] 
     private ?string $email = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\NotBlank(message: "Merci de renseigner ce champ", groups: ['standard'])]
+    #[Assert\NotBlank(message: "generic.notempty", groups: ['standard'])]
     private ?string $address = null;
 
     #[ORM\Column(length: 128)]
-    #[Assert\NotBlank(message: "Merci de renseigner ce champ", groups: ['passwordreset'])]
+    #[Assert\NotBlank(message: "generic.notempty", groups: ['passwordreset'])]
     #[Assert\Length(
         min: 4,
         max: 20,
@@ -60,7 +60,7 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $password = null;
 
     #[ORM\Column(length: 128)]
-    #[Assert\NotBlank(message: "Merci de renseigner ce champ", groups: ['passwordreset'])]
+    #[Assert\NotBlank(message: "generic.notempty", groups: ['passwordreset'])]
     #[Assert\Length(
         min: 4,
         max: 20,

@@ -65,32 +65,41 @@ class AdminControllerSlideShow extends AbstractController
     {
         date_default_timezone_set('Europe/Paris');
         $loc = $this->locale($request);
-        $slideshow = new SlideShow();
-        $form = $this->createForm(SlideShowType::class, $slideshow);
         if($id === 0) { // Create ?
+            $slideshow = new SlideShow();
+            $form = $this->createForm(SlideShowType::class, $slideshow);
             $form->handleRequest($request);
             if($form->isSubmitted() && $form->isValid()) {
-                try {
-                    $entityManager->persist($slideshow);
-                    $entityManager->flush();
-                    $this->dblog->info($slideshow->getName().' created',
+                $lowername = strtolower($slideshow->getName());
+                $slideshow->setName($lowername);
+                $entityManager->persist($slideshow);
+                $entityManager->flush();
+                $this->addFlash('success', $lowername.': '.$translator->trans('admin.manageslides.created'));
+                $this->dblog->info($slideshow->getName().' created',
                     'SlideShow CREATION',
                     self::MODULE,
-                        $request->getSession()->get('email')
-                    );
-                    $slideshow = new SlideShow();
-                }
-                catch(Exception $e) {
-                    $this->dblog->error($slideshow->getName().' : Error'.$e->getMessage(),
-                        'SlideShow CREATION',
-                        self::MODULE,
-                        $request->getSession()->get('email')
-                    );       
-                }
+                    $request->getSession()->get('email')
+                );
+                $slideshow = new SlideShow();
             }
         }
-        else{
+        else{   // Read / Update
             $slideshow = $entityManager->getRepository(SlideShow::class)->findOneBy([ 'id' => $id]);
+            $form = $this->createForm(SlideShowType::class, $slideshow);
+            $form->handleRequest($request);
+            if($form->isSubmitted() && $form->isValid()) {
+                $lowername = strtolower($slideshow->getName());
+                $slideshow->setName($lowername);
+                $entityManager->persist($slideshow);
+                $entityManager->flush();
+                $this->addFlash('success', $lowername.': '.$translator->trans('admin.manageslides.updated'));
+                $this->dblog->info($slideshow->getName().' updated',
+                    'SlideShow UPDATE',
+                    self::MODULE,
+                    $request->getSession()->get('email')
+                );
+                $slideshow = new SlideShow();
+            }
         }
         $allshow = $entityManager->getRepository(SlideShow::class)->findBy([], [ 'datein' => 'ASC']);
         return $this->render('admin/slide.html.twig', [
@@ -116,6 +125,13 @@ class AdminControllerSlideShow extends AbstractController
         $slideshow = $repo->findOnebY(['id' => $id ]);
         $entityManager->remove($slideshow);
         $entityManager->flush();
+        $this->addFlash('success', $slideshow->getName().': '.$translator->trans('admin.manageslides.deleted'));
+        $this->dblog->info($slideshow->getName().' deleted',
+            'SlideShow DELETION',
+            self::MODULE,
+            $request->getSession()->get('email')
+        );
+
         //
         $slideshow = new SlideShow();
         $allshow = $entityManager->getRepository(SlideShow::class)->findBy([], [ 'datein' => 'ASC']);

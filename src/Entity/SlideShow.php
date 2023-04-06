@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 #[ORM\Entity(repositoryClass: SlideShowRepository::class)]
-#[UniqueEntity(fields:['name'], message: "Ce slideshow existe déjà")]
+#[UniqueEntity(fields:['name'], message: 'admin.manageslides.alreadyexist')]
 class SlideShow
 {
     #[ORM\Id]
@@ -19,7 +19,8 @@ class SlideShow
     private ?int $id = null;
 
     #[ORM\Column(length: 64)]
-    #[Assert\NotBlank(message: "Merci de renseigner ce champ")]
+    #[Assert\NotBlank(message: "generic.notempty")]
+    #[Assert\Regex('/^\w+$/', message: 'admin.manageslides.singleword')]   
     private ?string $name = null;
 
     #[ORM\Column]
@@ -35,7 +36,7 @@ class SlideShow
     private Collection $slides;
 
     #[ORM\Column(length: 255)]
-    #[Assert\NotBlank(message: "Merci de renseigner ce champ")]
+    #[Assert\NotBlank(message: "generic.notempty")]
     private ?string $description = null;
 
     #[ORM\Column]

@@ -158,16 +158,21 @@ admin:
     eventmessage: Détails
   manageslides:
     title: Gestion des diaporamas
+    listheader: Liste des diaporamas
     list: Lister
     add: Créer
     edit: Editer
-    name: Nom
+    name: Nom ( ID )
+    namehelp: "Pas d'espace, court. Ex: PAGEONE"
     description: Description
     daterange: Plage de dates ? 
     active: Actif ?
     slider: Mode slider ?
     datein: Show actif à partir (optionnel)
     dateout: Show actif jusqu'au (optionnel)
+    created: Show créé
+    updated: Show mis à jour
+    deleted: Show supprimé
 logs:
   menuheader: Les logs
   site: Du site WEB

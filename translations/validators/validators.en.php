@@ -13,4 +13,6 @@ return [
   'accessory.alreadyexist' => 'This accessory already exist',
   'file.upload.type' => 'Please choose a valid file format (jpg, jpeg, gif, png)',
   'file.upload.sizemax' => 'File too big',
+  'admin.manageslides.alreadyexist' =>  'This slide show already exists',
+  'admin.manageslides.singleword'  => 'Single word please',
 ];

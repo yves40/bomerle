@@ -159,16 +159,21 @@ admin:
     eventmessage: Details
   manageslides:
     title: Manage slides show
+    listheader: Slides list
     list: List
     add: Add
     edit: Edit
-    name: Name
+    name: Name ( ID )
+    namehelp: "No space, short. Ex: PAGEONE"
     description: Description
     daterange: Date range ? 
     active: Active ?
     slider: Slider mode ?
     datein: Show active from (optional)
     dateout: Show active until (optional)
+    created: Show created
+    updated: Show updated
+    deleted: Show deleted
 logs:
   menuheader: Logs
   site: Web site logs
