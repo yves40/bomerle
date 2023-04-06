@@ -2,10 +2,12 @@
 
 namespace App\Controller;
 
+use Exception;
 use App\Entity\SlideShow;
+use App\Services\DBlogger;
 use App\Form\SlideShowType;
-use App\Repository\SlideShowRepository;
 
+use App\Repository\SlideShowRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,11 +19,16 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 #[Route('/bootadmin')]
 class AdminControllerSlideShow extends AbstractController
 {
+
     private LocaleSwitcher $localeSwitcher;
+    private DBLogger $dblog;
+    const MODULE = 'AdminControllerSlideShow';
+
     // --------------------------------------------------------------------------
-    public function __construct(LocaleSwitcher $localeSwitcher)
+    public function __construct(LocaleSwitcher $localeSwitcher, DBlogger $dblog)
     {
         $this->localeSwitcher = $localeSwitcher;
+        $this->dblog = $dblog;
     }
     // --------------------------------------------------------------------------
     //      S L I D E  S H O W   S E R V I C E S 
@@ -39,7 +46,7 @@ class AdminControllerSlideShow extends AbstractController
          * 
         */
         $repo = $entityManager->getRepository(SlideShow::class);
-        $allslides = $repo->findAll();
+        $allslides = $repo->findBy([], [ 'datein' => 'ASC']);
         $slide = new SlideShow();
         $form = $this->createForm(SlideShowType::class, $slide);
         return $this->render('admin/slides.html.twig', [
@@ -58,13 +65,67 @@ class AdminControllerSlideShow extends AbstractController
     {
         date_default_timezone_set('Europe/Paris');
         $loc = $this->locale($request);
-        $slide = new SlideShow();
-        $form = $this->createForm(SlideShowType::class, $slide);
+        $slideshow = new SlideShow();
+        $form = $this->createForm(SlideShowType::class, $slideshow);
+        if($id === 0) { // Create ?
+            $form->handleRequest($request);
+            if($form->isSubmitted() && $form->isValid()) {
+                try {
+                    $entityManager->persist($slideshow);
+                    $entityManager->flush();
+                    $this->dblog->info($slideshow->getName().' created',
+                    'SlideShow CREATION',
+                    self::MODULE,
+                        $request->getSession()->get('email')
+                    );
+                    $slideshow = new SlideShow();
+                }
+                catch(Exception $e) {
+                    $this->dblog->error($slideshow->getName().' : Error'.$e->getMessage(),
+                        'SlideShow CREATION',
+                        self::MODULE,
+                        $request->getSession()->get('email')
+                    );       
+                }
+            }
+        }
+        else{
+            $slideshow = $entityManager->getRepository(SlideShow::class)->findOneBy([ 'id' => $id]);
+        }
+        $allshow = $entityManager->getRepository(SlideShow::class)->findBy([], [ 'datein' => 'ASC']);
         return $this->render('admin/slide.html.twig', [
             'form' => $form->createView(),
             'id' => $id,
             'locale' => $loc,
-            'slide' => $slide
+            'slide' => $slideshow,
+            'allslides' => $allshow
+        ]);
+    }
+    // --------------------------------------------------------------------------
+    #[Route('/slides/delete/{id}', name: 'bootadmin.slide.delete')]
+    public function delete(Request $request,
+                    int $id, 
+                    EntityManagerInterface $entityManager,
+                    TranslatorInterface $translator
+                ): Response
+    {
+        date_default_timezone_set('Europe/Paris');
+        $loc = $this->locale($request);
+        //
+        $repo = $entityManager->getRepository(SlideShow::class);
+        $slideshow = $repo->findOnebY(['id' => $id ]);
+        $entityManager->remove($slideshow);
+        $entityManager->flush();
+        //
+        $slideshow = new SlideShow();
+        $allshow = $entityManager->getRepository(SlideShow::class)->findBy([], [ 'datein' => 'ASC']);
+        $form = $this->createForm(SlideShowType::class, $slideshow);
+        return $this->render('admin/slide.html.twig', [
+            'form' => $form->createView(),
+            'id' => 0,
+            'locale' => $loc,
+            'slide' => $slideshow,
+            'allslides' => $allshow
         ]);
     }
     // --------------------------------------------------------------------------

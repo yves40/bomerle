@@ -58,12 +58,15 @@
             {% else %}
                 <button type="submit" 
                         class="btn btn-primary mb-3">{% trans %}buttons.modify{% endtrans %}</button>
-                <button type="submit" formaction="{{path('bootadmin.knives.all')}}" 
+                <button type="submit" formaction="{{path('bootadmin.slideshow.list')}}" 
                         class="btn btn-primary mb-3">{% trans %}buttons.cancel{% endtrans %}</button>
             {% endif %}
         </div>
 
     {{ form_end(form) }}
+
+    {# List slides #}
+    {% include "admin/slideslist.html.twig" %}
 
     <script src="{{ asset('node_modules/jquery/dist/jquery.min.js')}}"></script>
     <script src="{{ asset('scripts/menuhandler.js')}}"></script>
