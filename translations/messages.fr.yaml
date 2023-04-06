@@ -173,6 +173,12 @@ admin:
     created: Show créé
     updated: Show mis à jour
     deleted: Show supprimé
+    activeflag: Show activé
+    inactiveflag: Show désactivé
+    sliderflag: Slider activé
+    nosliderflag: Pas de slider
+    daterangeflag: Plage de dates activée
+    nodaterangeflag: Pas de plage de dates
 logs:
   menuheader: Les logs
   site: Du site WEB

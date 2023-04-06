@@ -27,6 +27,23 @@
                         </a>
                     </div>
                 </div>
+                <div class="row">
+                    {% if slide.active %}
+                        <div class="col">{% trans %}admin.manageslides.activeflag{% endtrans %}</div>
+                    {% else %}
+                        <div class="col">{% trans %}admin.manageslides.inactiveflag{% endtrans %}</div>
+                    {% endif %}
+                    {% if slide.slider %}
+                        <div class="col">{% trans %}admin.manageslides.sliderflag{% endtrans %}</div>
+                    {% else %}
+                        <div class="col">{% trans %}admin.manageslides.nosliderflag{% endtrans %}</div>
+                    {% endif %}
+                    {% if slide.daterange %}
+                        <div class="col">{% trans %}admin.manageslides.daterangeflag{% endtrans %}</div>
+                    {% else %}
+                        <div class="col">{% trans %}admin.manageslides.nodaterangeflag{% endtrans %}</div>
+                    {% endif %}
+                </div>
             </li>
         {% endfor %}
     </ul>
