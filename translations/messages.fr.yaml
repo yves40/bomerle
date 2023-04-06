@@ -165,6 +165,7 @@ admin:
     description: Description
     daterange: Plage de dates ? 
     active: Actif ?
+    slider: Mode slider ?
     datein: Show actif à partir (optionnel)
     dateout: Show actif jusqu'au (optionnel)
 logs:

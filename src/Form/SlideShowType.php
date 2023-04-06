@@ -16,6 +16,7 @@ class SlideShowType extends AbstractType
         $builder
             ->add('name')
             ->add('active')
+            ->add('slider')
             ->add('datein')
             ->add('dateout')
             ->add('description', TextareaType::class)

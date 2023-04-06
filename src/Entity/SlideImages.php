@@ -24,6 +24,9 @@ class SlideImages
     #[ORM\JoinColumn(nullable: false)]
     private ?SlideShow $slideShow = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $legend = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -61,6 +64,18 @@ class SlideImages
     public function setSlideShow(?SlideShow $slideShow): self
     {
         $this->slideShow = $slideShow;
+
+        return $this;
+    }
+
+    public function getLegend(): ?string
+    {
+        return $this->legend;
+    }
+
+    public function setLegend(?string $legend): self
+    {
+        $this->legend = $legend;
 
         return $this;
     }

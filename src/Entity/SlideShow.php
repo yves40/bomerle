@@ -37,6 +37,9 @@ class SlideShow
     #[ORM\Column]
     private ?bool $daterange = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?bool $slider = null;
+
     public function __construct()
     {
         $this->slides = new ArrayCollection();
@@ -145,6 +148,18 @@ class SlideShow
     public function setDaterange(bool $daterange): self
     {
         $this->daterange = $daterange;
+
+        return $this;
+    }
+
+    public function isSlider(): ?bool
+    {
+        return $this->slider;
+    }
+
+    public function setSlider(?bool $slider): self
+    {
+        $this->slider = $slider;
 
         return $this;
     }
