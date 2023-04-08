@@ -31,14 +31,11 @@ $(document).ready(function () {
                 break;
             case "pm":
                 break;
+            case "asis":
             default:
-                updateDateFields(element, getDayMonthYear(currentdate));
+                // Don't change currently set date
                 break;
         }
-        
-        // let now = new Date();
-        // let enddate = new Date(new Date(now).setDate(now.getDate() - $props.getLogsDateOffest())).toISOString();
-        
     });
     tuneDates();
 
@@ -60,30 +57,41 @@ $(document).ready(function () {
             //          eoy   : End Of Year
             //          nm    : Next Month starting from today
             //          pm    : Previous Month starting from today
+            //          asis  : Do not change
             // nofuture
             //          true: means no date can be set beyond the current date
             //          false: choose any date in the future
+            // chronology
+            //          n: Is the date position in the chronology order
+            //          0: Means no matter
+            //          1: is the first i.e Jan 01 2023 
+            //          2: is the second i.e Jun 01 2023 
+            //          3: is the third i.e Sep 01 2023 
+            //          1 must be <= 2 <= 3
             let initialvalue = $(selector).attr('init');
             let nofuture = $(selector).attr('nofuture');
+            let chronoposition = $(selector).attr('chronoposition');
             if(initialvalue === undefined) { initialvalue = 'today'; }
+            if(chronoposition === undefined) { chronoposition = 0; }
             if(nofuture === undefined) { 
                 nofuture = true; 
             }
             else {
                 nofuture = (nofuture === 'true');   // Convert 
             }
-            getDateFields(selector, initialvalue, nofuture);    // Pusheds into an array all date fields
+            getDateFields(selector, initialvalue, nofuture, chronoposition);    // Pushed into an array all date fields
         });
     }
     // ------------------------------------------------------------------------------
     // Receives a base selector string concatenated with the TWIG generated IDs
     // Hope these IDs will not change in future versions 
     // ------------------------------------------------------------------------------
-    function getDateFields(selector, initialvalue, nofuture) {
+    function getDateFields(selector, initialvalue, nofuture, chronoposition) {
         let dateUI = {};
         dateUI.initvalue = initialvalue;
         dateUI.nofuture = nofuture;
         dateUI.selector = selector;
+        dateUI.chronoposition = chronoposition;
         dateUI.twigday = $(`${selector}_day`);
         dateUI.twigmonth = $(`${selector}_month`);
         dateUI.twigyear = $(`${selector}_year`);
@@ -142,7 +150,7 @@ $(document).ready(function () {
         alldatefields.forEach( (element, index) => {
             const elementyear = $(element.twigyear).val();   // Save selected values
             const elementmonth = $(element.twigmonth).val();
-            const elementday = $(element.twigday).val();
+            let elementday = $(element.twigday).val();
             if(index === 0) {
                 firstdate.d = parseInt(elementday);
                 firstdate.m = parseInt(elementmonth);
@@ -161,7 +169,9 @@ $(document).ready(function () {
             $(element.twigyear).val(elementyear);           // Put it back
             refillMonths(element.twigmonth, elementyear, today, element.nofuture);
             (element.twigmonth).val(elementmonth);
-            refillDays(element.twigday, elementmonth, elementyear, today, element.nofuture);
+            let daylimit = refillDays(element.twigday, elementmonth, elementyear, today, element.nofuture);
+            // Check 31 was not selected before switching to a 30 or 28 month
+            if(elementday > daylimit) elementday = daylimit;
             (element.twigday).val(elementday);            
             // Now verify dates are properly set. The 1st one must be the latest
             if(firstdate.ms <= notfirstdate.ms) {
@@ -206,6 +216,7 @@ $(document).ready(function () {
         for(let i = 1; i < daylimit + 1; ++i) {
             $(element).append($('<option>').val(i).text(i));
         }
+        return daylimit;    // To check the currently selected value
     }
     // ------------------------------------------------------------------------------
     function refillMonths(element, selectedyear, today, nofuture) {

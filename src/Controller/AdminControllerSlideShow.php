@@ -98,7 +98,6 @@ class AdminControllerSlideShow extends AbstractController
                     self::MODULE,
                     $request->getSession()->get('email')
                 );
-                $slideshow = new SlideShow();
             }
         }
         $allshow = $entityManager->getRepository(SlideShow::class)->findBy([], [ 'datein' => 'ASC']);

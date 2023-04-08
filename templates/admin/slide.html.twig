@@ -40,19 +40,31 @@
             <div class="col ylabel">{{ form_row(form.slider, { 'label' : 'admin.manageslides.slider'|trans,'value': slide.slider,}) }}</div>
             <div class="col ylabel">{{ form_row(form.daterange, { 'label' : 'admin.manageslides.daterange'|trans,'value': slide.daterange,}) }}</div>
         </div>
+        {# Dates here #}
         <div class="row align-items-start">
+        {% if id == 0 %}    {# New diaporama ? #}
             <div class="col ylabel"> {{ form_row(form.datein, { 'label' : 'admin.manageslides.datein'|trans,
                                                                  'value': slide.datein,
-                                                                'attr' : { "init": 'soy', 'nofuture' : 'false' }  
-                                                                })  
-                                        }}
+                                                                'attr' : { "init": 'soy', 'nofuture' : 'false', 'chronoposition' : '1' }  
+                                                                })}}
             </div>
             <div class="col ylabel"> {{ form_row(form.dateout, { 'label' : 'admin.manageslides.dateout'|trans,
                                                                     'value': slide.dateout,
-                                                                    'attr' : { "init": 'eoy', 'nofuture' : 'false' }  
-                                                                })  
-                                        }}
+                                                                    'attr' : { "init": 'eoy', 'nofuture' : 'false', 'chronoposition' : '2' }  
+                                                                })}}
             </div>
+        {% else %}  {# Existing diapo #}
+            <div class="col ylabel"> {{ form_row(form.datein, { 'label' : 'admin.manageslides.datein'|trans,
+                                                                 'value': slide.datein,
+                                                                'attr' : { "init": 'asis', 'nofuture' : 'false', 'chronoposition' : '1' }  
+                                                                })}}
+            </div>
+            <div class="col ylabel"> {{ form_row(form.dateout, { 'label' : 'admin.manageslides.dateout'|trans,
+                                                                    'value': slide.dateout,
+                                                                    'attr' : { "init": 'asis', 'nofuture' : 'false', 'chronoposition' : '2' }  
+                                                                })}}
+            </div>            
+        {% endif %}
         </div>
         <div class="mt-3">
             {% if id == 0 %}
