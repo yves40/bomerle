@@ -145,7 +145,7 @@ $(document).ready(function () {
     function tuneDates() {
         let today = getDayMonthYear(new Date().toISOString());
         let firstdate = {};
-        let notfirstdate = {};
+        let lastdate = {};
         let datecollision = false;
         alldatefields.forEach( (element, index) => {
             const elementyear = $(element.twigyear).val();   // Save selected values
@@ -159,11 +159,11 @@ $(document).ready(function () {
                 firstdate.ms = firstdate.date.getTime();
             }
             else {
-                notfirstdate.d = parseInt(elementday);
-                notfirstdate.m = parseInt(elementmonth);
-                notfirstdate.y = parseInt(elementyear);
-                notfirstdate.date = new Date(elementyear, elementmonth - 1, elementday );
-                notfirstdate.ms = notfirstdate.date.getTime();
+                lastdate.d = parseInt(elementday);
+                lastdate.m = parseInt(elementmonth);
+                lastdate.y = parseInt(elementyear);
+                lastdate.date = new Date(elementyear, elementmonth - 1, elementday );
+                lastdate.ms = lastdate.date.getTime();
             }
             refillYears(element.twigyear, today, element.nofuture);           // Refill 
             $(element.twigyear).val(elementyear);           // Put it back
@@ -174,7 +174,7 @@ $(document).ready(function () {
             if(elementday > daylimit) elementday = daylimit;
             (element.twigday).val(elementday);            
             // Now verify dates are properly set. The 1st one must be the latest
-            if(firstdate.ms <= notfirstdate.ms) {
+            if(firstdate.ms <= lastdate.ms) {
                 datecollision = true;
                 $('#before').addClass('yerror');
                 $('#after').addClass('yerror');

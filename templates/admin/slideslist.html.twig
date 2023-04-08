@@ -28,25 +28,23 @@
                     </div>
                 </div>
                 <div class="row">
-                    {% if slide.active %}
-                        <div class="col on">{% trans %}admin.manageslides.activeflag{% endtrans %}</div>
-                    {% else %}
-                        <div class="col off">{% trans %}admin.manageslides.inactiveflag{% endtrans %}</div>
-                    {% endif %}
-                </div>
-                <div class="row">
-                    {% if slide.slider %}
-                        <div class="col on">{% trans %}admin.manageslides.sliderflag{% endtrans %}</div>
-                    {% else %}
-                        <div class="col off">{% trans %}admin.manageslides.nosliderflag{% endtrans %}</div>
-                    {% endif %}
-                </div>
-                <div class="row">
-                    {% if slide.daterange %}
-                        <div class="col on">{% trans %}admin.manageslides.daterangeflag{% endtrans %}</div>
-                    {% else %}
-                        <div class="col off">{% trans %}admin.manageslides.nodaterangeflag{% endtrans %}</div>
-                    {% endif %}
+                    <div class="col">
+                        {% if slide.active %}
+                            <span class="on">{% trans %}admin.manageslides.activeflag{% endtrans %} : </span>
+                        {% else %}
+                            <span class="off">{% trans %}admin.manageslides.inactiveflag{% endtrans %} : </span>
+                        {% endif %}
+                        {% if slide.slider %}
+                            <span class="on">{% trans %}admin.manageslides.sliderflag{% endtrans %} : </span>
+                        {% else %}
+                            <span class="off">{% trans %}admin.manageslides.nosliderflag{% endtrans %} : </span>
+                        {% endif %}
+                        {% if slide.daterange %}
+                            <span class="on">{% trans %}admin.manageslides.daterangeflag{% endtrans %}</span>
+                        {% else %}
+                            <span class="off">{% trans %}admin.manageslides.nodaterangeflag{% endtrans %}</span>
+                        {% endif %}
+                    </div>
                 </div>
             </li>
         {% endfor %}
