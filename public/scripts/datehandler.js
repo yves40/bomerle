@@ -170,8 +170,10 @@ $(document).ready(function () {
         // Check dates chronology order
         dateslist.sort( (d1, d2) => parseInt(d1.chronoposition) - parseInt(d2.chronoposition));
         dateslist.forEach( (element, index) => {
-            console.log(`The element chrono is : ${element.chronoposition} / ${element.ms}`);
-            if(parseInt(element.chronoposition) !== 0 && (index !== 0)) {
+            if((index !== 0) && 
+                ( parseInt(element.chronoposition) !== 0) &&
+                (parseInt(dateslist[index-1].chronoposition) !== 0)) 
+            {
                 if(dateslist[index-1].ms > dateslist[index].ms) {
                     $(`${dateslist[index-1].selector} .input-group`).addClass('errordate').removeClass('noerrordate');
                     $(`${dateslist[index].selector} .input-group`).addClass('errordate').removeClass('noerrordate');
