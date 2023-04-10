@@ -180,3 +180,9 @@ legend {
 
 .off {
   color: red; }
+
+.errordate {
+  border: red 1px solid; }
+
+.noerrordate {
+  border: none; }

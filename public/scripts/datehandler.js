@@ -139,50 +139,49 @@ $(document).ready(function () {
         }
     }
     // ------------------------------------------------------------------------------
-    // alldatefields[0] must normally contain the start date
-    // which is the most recent and is set by default to now
+    // This function refills all 3 date fields ( y, m, d ) and then check 
+    // that the chronological dates order, if used,  is valid.
+    // alldatefields contains all the displayed dates.
+    // Each date has a chronology order set to 0 (no order) or 1, 2, 3...
     // ------------------------------------------------------------------------------
     function tuneDates() {
         let today = getDayMonthYear(new Date().toISOString());
-        let firstdate = {};
-        let lastdate = {};
-        let datecollision = false;
+        let dateslist = [];
+        // Check dates fields
         alldatefields.forEach( (element, index) => {
             const elementyear = $(element.twigyear).val();   // Save selected values
             const elementmonth = $(element.twigmonth).val();
             let elementday = $(element.twigday).val();
-            if(index === 0) {
-                firstdate.d = parseInt(elementday);
-                firstdate.m = parseInt(elementmonth);
-                firstdate.y = parseInt(elementyear);
-                firstdate.date = new Date(elementyear, elementmonth - 1, elementday );
-                firstdate.ms = firstdate.date.getTime();
-            }
-            else {
-                lastdate.d = parseInt(elementday);
-                lastdate.m = parseInt(elementmonth);
-                lastdate.y = parseInt(elementyear);
-                lastdate.date = new Date(elementyear, elementmonth - 1, elementday );
-                lastdate.ms = lastdate.date.getTime();
-            }
-            refillYears(element.twigyear, today, element.nofuture);           // Refill 
-            $(element.twigyear).val(elementyear);           // Put it back
+            dateslist.push( { 'date': new Date(elementyear, elementmonth - 1, elementday ),
+                              'ms': new Date(elementyear, elementmonth - 1, elementday ).getTime(),
+                              'chronoposition': element.chronoposition,
+                              'selector': element.selector
+                            }
+                          );
+            refillYears(element.twigyear, today, element.nofuture);   // Refill 
+            $(element.twigyear).val(elementyear);                     // Put it back
             refillMonths(element.twigmonth, elementyear, today, element.nofuture);
             (element.twigmonth).val(elementmonth);
             let daylimit = refillDays(element.twigday, elementmonth, elementyear, today, element.nofuture);
             // Check 31 was not selected before switching to a 30 or 28 month
             if(elementday > daylimit) elementday = daylimit;
             (element.twigday).val(elementday);            
-            // Now verify dates are properly set. The 1st one must be the latest
-            if(firstdate.ms <= lastdate.ms) {
-                datecollision = true;
-                $('#before').addClass('yerror');
-                $('#after').addClass('yerror');
-                return false;   // Break the forEach loop
-            }
-            else {
-                $('#before').removeClass('yerror');
-                $('#after').removeClass('yerror');
+        });
+        // Check dates chronology order
+        dateslist.sort( (d1, d2) => parseInt(d1.chronoposition) - parseInt(d2.chronoposition));
+        dateslist.forEach( (element, index) => {
+            console.log(`The element chrono is : ${element.chronoposition} / ${element.ms}`);
+            if(parseInt(element.chronoposition) !== 0 && (index !== 0)) {
+                if(dateslist[index-1].ms > dateslist[index].ms) {
+                    $(`${dateslist[index-1].selector} .input-group`).addClass('errordate').removeClass('noerrordate');
+                    $(`${dateslist[index].selector} .input-group`).addClass('errordate').removeClass('noerrordate');
+                    $('button').prop('disabled', true);
+                }
+                else { 
+                    $(`${dateslist[index-1].selector} .input-group`).addClass('noerrordate').removeClass('errordate');
+                    $(`${dateslist[index].selector} .input-group`).addClass('noerrordate').removeClass('errordate');
+                    $('button').prop('disabled', false);
+                }
             }
         });
         return;

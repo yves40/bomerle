@@ -123,3 +123,9 @@ legend {
 .off {
   color: $off;
 }
+.errordate {
+  border: red 1px solid;
+}
+.noerrordate {
+  border:none;
+}
