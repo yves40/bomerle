@@ -3,11 +3,12 @@
 namespace App\Form;
 
 use App\Entity\SlideShow;
-
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Validator\Constraints as Assert;
 
 class SlideShowType extends AbstractType
 {
@@ -15,12 +16,32 @@ class SlideShowType extends AbstractType
     {
         $builder
             ->add('name')
+            ->add('description', TextareaType::class)
             ->add('active')
             ->add('slider')
+            ->add('daterange')
             ->add('datein')
             ->add('dateout')
-            ->add('description', TextareaType::class)
-            ->add('daterange')
+            ->add('slides', FileType::class, [
+                'mapped' => false,
+                'required' => true,
+                'multiple' => true,
+                'constraints' => [
+                    new Assert\All(
+                        new Assert\File([
+                            'maxSize' => '8M',
+                            'maxSizeMessage' => 'file.upload.sizemax',
+                            'mimeTypes' => [
+                                'image/jpeg',
+                                'image/jpg',
+                                'image/png',
+                                'image/gif'                                
+                            ],
+                            'mimeTypesMessage' => 'file.upload.type'
+                        ])
+                    )
+                ]
+            ])
         ;
     }
 

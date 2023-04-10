@@ -2,9 +2,10 @@
 
 namespace App\Repository;
 
+use App\Entity\SlideShow;
 use App\Entity\SlideImages;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
  * @extends ServiceEntityRepository<SlideImages>
@@ -39,6 +40,29 @@ class SlideImagesRepository extends ServiceEntityRepository
         }
     }
 
+    // To get the knife image upper rank when adding images
+    public function getMaxRank(SlideShow $slideshow): int
+    {
+        dump($slideshow);
+        $query = $this->createQueryBuilder('s');
+        $query->select('MAX(s.rank)');
+        $query->where('s.slideshow = :val')->setParameter('val', $slideshow);
+        $maxrank = $query->getQuery()->getSingleScalarResult();
+        if ($maxrank === null) $maxrank = 0;
+        return $maxrank;
+    }
+
+    public function findSlideshowImagesByRank($slideshow): array
+    {
+        return $this->createQueryBuilder('i')
+            ->andWhere('i.slideshow = :val')
+            ->setParameter('val', $slideshow)
+            ->orderBy('i.rank', 'ASC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+    
 //    /**
 //     * @return SlideImages[] Returns an array of SlideImages objects
 //     */

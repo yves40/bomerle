@@ -22,7 +22,7 @@ class SlideImages
 
     #[ORM\ManyToOne(inversedBy: 'slides')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?SlideShow $slideShow = null;
+    private ?SlideShow $slideshow = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $legend = null;
@@ -56,14 +56,14 @@ class SlideImages
         return $this;
     }
 
-    public function getSlideShow(): ?SlideShow
+    public function getSlideShow(): ?Slideshow
     {
-        return $this->slideShow;
+        return $this->slideshow;
     }
 
     public function setSlideShow(?SlideShow $slideShow): self
     {
-        $this->slideShow = $slideShow;
+        $this->slideshow = $slideShow;
 
         return $this;
     }

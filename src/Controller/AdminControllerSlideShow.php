@@ -5,8 +5,10 @@ namespace App\Controller;
 use Exception;
 use App\Entity\SlideShow;
 use App\Services\DBlogger;
-use App\Form\SlideShowType;
+use App\Services\Uploader;
 
+use App\Entity\SlideImages;
+use App\Form\SlideShowType;
 use App\Repository\SlideShowRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -59,17 +61,30 @@ class AdminControllerSlideShow extends AbstractController
     #[Route('/slides/edit/{id?0}', name: 'bootadmin.slide.edit')]
     public function edit(Request $request,
                     int $id, 
+                    Uploader $uploader,
                     EntityManagerInterface $entityManager,
                     TranslatorInterface $translator
                 ): Response
     {
         date_default_timezone_set('Europe/Paris');
         $loc = $this->locale($request);
+        $rank = 0;          // Used to order images in the knife photo catalog
         if($id === 0) { // Create ?
             $slideshow = new SlideShow();
             $form = $this->createForm(SlideShowType::class, $slideshow);
             $form->handleRequest($request);
             if($form->isSubmitted() && $form->isValid()) {
+                // Take care of uploaded images
+                $uploadedFiles = $form->get('slides')->getData();
+                $physicalPath = $this->getParameter('slideshowimages_directory');
+                for($i=0; $i < count($uploadedFiles); $i++){
+                    $image = new SlideImages();
+                    $newFileName = $uploader->uploadFile($uploadedFiles[$i], $physicalPath);
+                    $image->setFilename($newFileName);
+                    $image->setRank(++$rank);
+                    $slideshow->addSlide($image);
+                }    
+                // Manage other properties
                 $lowername = strtolower($slideshow->getName());
                 $slideshow->setName($lowername);
                 $entityManager->persist($slideshow);
@@ -85,9 +100,22 @@ class AdminControllerSlideShow extends AbstractController
         }
         else{   // Read / Update
             $slideshow = $entityManager->getRepository(SlideShow::class)->findOneBy([ 'id' => $id]);
+            $slideimages = $entityManager->getRepository(SlideImages::class);
+            $rank = $slideimages->getMaxRank($slideshow);
             $form = $this->createForm(SlideShowType::class, $slideshow);
             $form->handleRequest($request);
             if($form->isSubmitted() && $form->isValid()) {
+                // Take care of uploaded images
+                $uploadedFiles = $form->get('slides')->getData();
+                $physicalPath = $this->getParameter('slideshowimages_directory');
+                for($i=0; $i < count($uploadedFiles); $i++){
+                    $image = new SlideImages();
+                    $newFileName = $uploader->uploadFile($uploadedFiles[$i], $physicalPath);
+                    $image->setFilename($newFileName);
+                    $image->setRank(++$rank);
+                    $slideshow->addSlide($image);
+                }    
+                // Manage other properties
                 $lowername = strtolower($slideshow->getName());
                 $slideshow->setName($lowername);
                 $entityManager->persist($slideshow);

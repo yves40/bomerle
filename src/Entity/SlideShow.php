@@ -32,7 +32,8 @@ class SlideShow
     #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $dateout = null;
 
-    #[ORM\OneToMany(mappedBy: 'slideShow', targetEntity: SlideImages::class, orphanRemoval: true)]
+    #[ORM\OneToMany(mappedBy: 'slideshow', targetEntity: SlideImages::class, cascade: [ 'persist', 'remove'])]
+    #[ORM\OrderBy(['rank' => 'ASC'])]
     private Collection $slides;
 
     #[ORM\Column(length: 255)]
