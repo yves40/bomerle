@@ -133,20 +133,19 @@
                                     {# The shift left icon #}
                                     {% if loop.index != 1 %}
                                         <a id="left-{{slide.id}}-{{image.id}}-{{image.rank}}" 
-                                            href="#">
+                                            href="{{ path('bootadmin.knives.swapphotos') }}">
                                             <img class="svgsmall-lightblue" src="/images/svg/arrow-back.svg" alt=""/>
                                         </a>
                                     {% endif %}
                                     {# The delete icon #}
-                                    <a id="del-{{image.id}}" 
-                                        href="{{ path('bootadmin.slides.removephoto',
-                                                { 'slideid' : slide.id , 'imageid' : image.id }) }}">
+                                    <a id="del-{{slide.id}}-{{image.id}}" 
+                                        href="{{ path('bootadmin.slides.removephoto') }}">
                                         <img class="svgsmall-lightblue" src="/images/svg/trash-bin.svg" alt=""/>
                                     </a>
                                     {# The shit right icon  #}
                                     {% if not loop.last %}
                                         <a id="right-{{slide.id}}-{{image.id}}-{{image.rank}}" 
-                                            href="#">
+                                            href="{{ path('bootadmin.knives.swapphotos') }}">
                                             <img class="svgsmall-lightblue" src="/images/svg/arrow-forward.svg" alt=""/>
                                         </a>
                                     {% endif %}                                
@@ -154,6 +153,7 @@
                             </div>
                         {% endfor %}
                     </div> 
+                    <div id="feedback" class="row mt-4"><p></p></div>
                 </div>
             {% endif %}
         </div>
@@ -172,4 +172,5 @@
     <script src="{{ asset('node_modules/jquery/dist/jquery.min.js')}}"></script>
     <script src="{{ asset('scripts/menuhandler.js')}}"></script>
     <script src="{{ asset('scripts/datehandler.js')}}"></script>
+    <script src="{{ asset('scripts/slideshow.js')}}"></script>
 {% endblock %}
