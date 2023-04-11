@@ -29,6 +29,19 @@
         
         {% include "admin/slidesmenu.html.twig" %}
 
+        <div class="mt-3">
+            {% if id == 0 %}
+                <button type="submit" class="btn btn-primary mb-3">{% trans %}buttons.add{% endtrans %}</button>
+            {% else %}
+                <button type="submit" 
+                        class="btn btn-primary mb-3">{% trans %}buttons.modify{% endtrans %}</button>
+                <button type="submit" formaction="{{path('bootadmin.slideshow.list')}}" 
+                        class="btn btn-primary mb-3">{% trans %}buttons.cancel{% endtrans %}</button>
+            {% endif %}
+        </div>
+
+        
+
         <div class="row align-items-start">
             <div class="col-4 ylabel"> {{ form_row(form.name, { 'label' : 'admin.manageslides.name'|trans, 
                                                                 'value': slide.name,
@@ -65,16 +78,6 @@
                                                                 })}}
             </div>            
         {% endif %}
-        </div>
-        <div class="mt-3">
-            {% if id == 0 %}
-                <button type="submit" class="btn btn-primary mb-3">{% trans %}buttons.add{% endtrans %}</button>
-            {% else %}
-                <button type="submit" 
-                        class="btn btn-primary mb-3">{% trans %}buttons.modify{% endtrans %}</button>
-                <button type="submit" formaction="{{path('bootadmin.slideshow.list')}}" 
-                        class="btn btn-primary mb-3">{% trans %}buttons.cancel{% endtrans %}</button>
-            {% endif %}
         </div>
 
     {{ form_end(form) }}
