@@ -158,6 +158,7 @@ admin:
     eventmessage: Détails
   manageslides:
     title: Gestion des diaporamas
+    images: Gestion des images
     listheader: Liste des diaporamas
     list: Lister
     add: Créer

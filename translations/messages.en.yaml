@@ -159,6 +159,7 @@ admin:
     eventmessage: Details
   manageslides:
     title: Manage slides show
+    images: Manage images
     listheader: Slides list
     list: List
     add: Add
