@@ -54,6 +54,7 @@ class AdminControllerKnife extends AbstractController
     #[Route('/knives/delete/{id}', name: 'bootadmin.knives.delete')]
     public function Deleteknife(Request $request,
                                 int $id,
+                                Uploader $uploader,
                                 EntityManagerInterface $entityManager,
                                 TranslatorInterface $translator
                             ): Response
@@ -61,6 +62,13 @@ class AdminControllerKnife extends AbstractController
         $loc = $this->locale($request); // Set the proper language for translations
         $repo = $entityManager->getRepository(Knifes::class);
         $knife = $repo->find($id);
+        // Cleanup the uploaded files from the file system
+        $images = $knife->getImages();
+        $physicalPath = $this->getParameter('knifeimages_directory');
+        foreach($images as $img) {
+            $uploader->deleteFile($physicalPath.'/'.$img->getFilename());
+        };
+        // Cleanup the DB
         $repo->remove($knife, true);
         $this->addFlash('success', $translator->trans('admin.manageknives.deleted'));
         return $this->redirectToRoute('bootadmin.knives.all', array( 'new' => "true"));

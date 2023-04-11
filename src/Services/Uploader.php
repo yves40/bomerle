@@ -28,6 +28,7 @@ class Uploader {
         return $newFilename;
     } catch (Exception $e) {
         // ... handle exception if something happens during file upload
+        return '';
     }
   }
   // ---------------------------------------------------------------------------------------------

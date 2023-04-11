@@ -43,7 +43,6 @@ class SlideImagesRepository extends ServiceEntityRepository
     // To get the knife image upper rank when adding images
     public function getMaxRank(SlideShow $slideshow): int
     {
-        dump($slideshow);
         $query = $this->createQueryBuilder('s');
         $query->select('MAX(s.rank)');
         $query->where('s.slideshow = :val')->setParameter('val', $slideshow);

@@ -216,5 +216,6 @@ slider:
 images:
   errortype: Merci de choisir un format de fichier valide (jpg, jpeg, gif, png)
   errorsize: Taille maximale autorisée dépassée
+  errorupload: 'Problème avec le(s) fichier(s) : nombre ou taille'
 genericmessages:
   cancel: Opération abandonnée
