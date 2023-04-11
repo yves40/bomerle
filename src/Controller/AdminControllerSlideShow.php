@@ -176,8 +176,7 @@ class AdminControllerSlideShow extends AbstractController
             self::MODULE,
             $request->getSession()->get('email')
         );
-
-        //
+        //  Send back a clean page
         $slideshow = new SlideShow();
         $allshow = $entityManager->getRepository(SlideShow::class)->findBy([], [ 'datein' => 'ASC']);
         $form = $this->createForm(SlideShowType::class, $slideshow);
@@ -192,6 +191,27 @@ class AdminControllerSlideShow extends AbstractController
     // --------------------------------------------------------------------------
     // J S O N    S E R V I C E S 
     // --------------------------------------------------------------------------
+    #[Route('/slides/removephoto/{knifeid?0}/{imageid?0}', name: 'bootadmin.slides.removephoto')]
+    public function removePhoto(Request $request,
+        int $knifeid,
+        int $imageid,
+        Uploader $uploader,
+        EntityManagerInterface $emgr)
+    {
+        $loc = $this->locale($request);
+        $imagepath = $this->getParameter('knifeimages_directory');  // Defined in services.yaml
+        //  Send back a clean page
+        $slideshow = new SlideShow();
+        $allshow = $emgr->getRepository(SlideShow::class)->findBy([], [ 'datein' => 'ASC']);
+        $form = $this->createForm(SlideShowType::class, $slideshow);
+        return $this->render('admin/slide.html.twig', [
+            'form' => $form->createView(),
+            'id' => 0,
+            'locale' => $loc,
+            'slide' => $slideshow,
+            'allslides' => $allshow
+        ]);        
+    }
     // --------------------------------------------------------------------------
     // P R I V A T E     S E R V I C E S 
     // --------------------------------------------------------------------------

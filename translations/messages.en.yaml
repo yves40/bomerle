@@ -159,7 +159,7 @@ admin:
     eventmessage: Details
   manageslides:
     title: Manage slides show
-    images: Manage images
+    imagestab: Choose images
     listheader: Slides list
     list: List
     add: Add
@@ -181,6 +181,8 @@ admin:
     nosliderflag: No slider
     daterangeflag: Date range active
     nodaterangeflag: Date range inactive
+    tab1: Main data
+    tab2: Slide Show Images
 logs:
   menuheader: Logs
   site: Web site logs

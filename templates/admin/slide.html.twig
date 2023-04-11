@@ -47,7 +47,7 @@
                     id="home-tab" data-bs-toggle="tab" 
                     data-bs-target="#home" 
                     type="button" role="tab" aria-controls="home" 
-                    aria-selected="true">{% trans %}admin.manageknives.tab1{% endtrans %}</button>
+                    aria-selected="true">{% trans %}admin.manageslides.tab1{% endtrans %}</button>
         </li>
         <li class="nav-item" role="presentation">
             <button class="nav-link ylink" 
@@ -55,7 +55,7 @@
                     data-bs-toggle="tab" 
                     data-bs-target="#images" 
                     type="button" role="tab" aria-controls="profile" 
-                    aria-selected="false">{% trans %}admin.manageknives.tab2{% endtrans %}</button>
+                    aria-selected="false">{% trans %}admin.manageslides.tab2{% endtrans %}</button>
         </li>
         <li class="nav-item" role="presentation">
             <button class="nav-link ylink disabled" 
@@ -113,9 +113,49 @@
         <div class="tab-pane mt-4" id="images" role="tabpanel" aria-labelledby="images-tab"  align-items="left">
             <div class="row">
                 <div class="col ylabel">
-                    {{ form_row(form.slides, { 'label' : 'admin.manageslides.images'|trans}) }}
+                    {{ form_row(form.slides, { 'label' : 'admin.manageslides.imagestab'|trans}) }}
                 </div>
             </div>
+            {% if slide.slides is defined and slide.slides is not null  %}
+                <div id="refreshzone" class="container text-center allimages">
+                    <div class="row">
+                        {% for image in slide.slides %}
+                            <div id="imgcard-{{image.id}}" class="col-sm">
+                                <img class="imagesmall"
+                                    data-imageid="{{image.id}}"
+                                    data-imagefile="{{image.filename}}"
+                                    data-imageshowid="{{slide.id}}"
+                                    data-imagerank="{{image.rank}}"
+                                    data-showname="{{slide.name}}"
+                                    src="{{asset('images/slideshow/' ~ image.filename)}}" alt="Not loaded"
+                                >
+                                <div id="commandzone" class="mt-4">
+                                    {# The shift left icon #}
+                                    {% if loop.index != 1 %}
+                                        <a id="left-{{slide.id}}-{{image.id}}-{{image.rank}}" 
+                                            href="#">
+                                            <img class="svgsmall-lightblue" src="/images/svg/arrow-back.svg" alt=""/>
+                                        </a>
+                                    {% endif %}
+                                    {# The delete icon #}
+                                    <a id="del-{{image.id}}" 
+                                        href="{{ path('bootadmin.slides.removephoto',
+                                                { 'slideid' : slide.id , 'imageid' : image.id }) }}">
+                                        <img class="svgsmall-lightblue" src="/images/svg/trash-bin.svg" alt=""/>
+                                    </a>
+                                    {# The shit right icon  #}
+                                    {% if not loop.last %}
+                                        <a id="right-{{slide.id}}-{{image.id}}-{{image.rank}}" 
+                                            href="#">
+                                            <img class="svgsmall-lightblue" src="/images/svg/arrow-forward.svg" alt=""/>
+                                        </a>
+                                    {% endif %}                                
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div> 
+                </div>
+            {% endif %}
         </div>
         {# S L I D E   N A M E  ------------------------------------------------------------------------------------------------ #}
         <div class="tab-pane mt-4" id="title" role="tabpanel" aria-labelledby="title-tab"  align-items="left">

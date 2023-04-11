@@ -158,7 +158,7 @@ admin:
     eventmessage: Détails
   manageslides:
     title: Gestion des diaporamas
-    images: Gestion des images
+    imagestab: Sélectionnez vos photos
     listheader: Liste des diaporamas
     list: Lister
     add: Créer
@@ -180,6 +180,8 @@ admin:
     nosliderflag: Pas de slider
     daterangeflag: Plage de dates activée
     nodaterangeflag: Pas de plage de dates
+    tab1: Données
+    tab2: Images du diaporama
 logs:
   menuheader: Les logs
   site: Du site WEB
