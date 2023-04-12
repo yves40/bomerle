@@ -36,26 +36,31 @@ function deleteImage(element){
     const slideshowid = $(element).attr('id').split('-')[1];
     const selectedimageid = $(element).attr('id').split('-')[2];
     console.log(`Delete image, url: ${url} Slide ID : ${slideshowid} image ID: ${selectedimageid}`);
-    // $.ajax({
-    //     type: "POST",
-    //     url: url,
-    //     dataType: "json",
-    //     async: false,
-    //     success: function (response) {
-    //         $(".allimages").fadeOut(500, () => {
-    //             $(`#imgcard-${imgid}`).remove();
-    //             $(".allimages").fadeIn(500, () => {
-    //                 feedbackmessage.text(`OK ${response.message} for knife ${response.showid} image : ${response.imageid} Reordered : ${response.reordered}` );
-    //                 feedbackmessage.addClass('ysuccess').removeClass('yerror');    
-    //             });
-    //         });
-    //     },
-    //     error: function (xhr) {
-    //         feedbackmessage.text(`KO ${xhr.statusText}` );
-    //         feedbackmessage.addClass('yerror').removeClass('ysuccess');
-    //         console.log(xhr);
-    //     }
-    // });    
+    const payload = {
+        "showid" :  slideshowid,
+        "imageid": selectedimageid
+    }
+    $.ajax({
+        type: "POST",
+        url: url,
+        data: JSON.stringify(payload),
+        dataType: "json",
+        async: false,
+        success: function (response) {
+            $(".allimages").fadeOut(500, () => {
+                $(`#imgcard-${imgid}`).remove();
+                $(".allimages").fadeIn(500, () => {
+                    feedbackmessage.text(`OK ${response.message} for slide ${response.showid} image : ${response.imageid} Reordered : ${response.reordered}` );
+                    feedbackmessage.addClass('ysuccess').removeClass('yerror');    
+                });
+            });
+        },
+        error: function (xhr) {
+            feedbackmessage.text(`KO ${xhr.statusText}` );
+            feedbackmessage.addClass('yerror').removeClass('ysuccess');
+            console.log(xhr);
+        }
+    });    
 }
 // ------------------------------------------------------------- Left handler 
 function moveRight(element) {

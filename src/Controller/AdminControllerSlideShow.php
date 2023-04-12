@@ -11,6 +11,7 @@ use App\Entity\SlideImages;
 use App\Form\SlideShowType;
 use App\Repository\SlideShowRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Proxies\__CG__\App\Entity\SlideShow as EntitySlideShow;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -191,27 +192,56 @@ class AdminControllerSlideShow extends AbstractController
     // --------------------------------------------------------------------------
     // J S O N    S E R V I C E S 
     // --------------------------------------------------------------------------
-    #[Route('/slides/removephoto/{slideid?0}/{imageid?0}', name: 'bootadmin.slides.removephoto')]
+    #[Route('/slides/removephoto', name: 'bootadmin.slides.removephoto')]
     public function removePhoto(Request $request,
-        int $slideid,
-        int $imageid,
         Uploader $uploader,
         EntityManagerInterface $emgr)
     {
+        $data = file_get_contents("php://input");
+        $payload = json_decode($data, true);
+        $showid = $payload['showid'];
+        $imageid = $payload['imageid'];
+
         $loc = $this->locale($request);
-        $imagepath = $this->getParameter('knifeimages_directory');  // Defined in services.yaml
-        //  Send back a clean page
-        $slideshow = new SlideShow();
-        $allshow = $emgr->getRepository(SlideShow::class)->findBy([], [ 'datein' => 'ASC']);
-        $form = $this->createForm(SlideShowType::class, $slideshow);
-        return $this->render('admin/slide.html.twig', [
-            'form' => $form->createView(),
-            'id' => 0,
-            'locale' => $loc,
-            'slide' => $slideshow,
-            'allslides' => $allshow
-        ]);        
-    }
+        $imagepath = $this->getParameter('slideshowimages_directory');  // Defined in services.yaml
+
+        try {
+            $slideshow = $emgr->getRepository(SlideShow::class)->findOneBy([ 'id' => $showid]);
+            $image = $emgr->getRepository(SlideImages::class)->findOneBy([ 'id' => $imageid]);
+            if(empty($image)) {
+                return $this->json([
+                    'message' => "Image with ID :" . $imageid . "non trouvée !!" 
+                ], 400);
+            }
+            else {
+                $emgr->getRepository(SlideImages::class)->remove($image);
+                $uploader->deleteFile($imagepath . '/'. $image->getFilename());
+            }
+            $slideshow->removeSlide($image);    // Shoot image from show object
+            $emgr->persist($slideshow);
+            $emgr->flush();
+            // Reset the rank column after image deletion
+            $imglist = $emgr->getRepository(SlideImages::class)->findShowImagesByRank($slideshow);
+            $rank = 0;
+            foreach($imglist as $key => $oneimage) {
+                $oneimage->setRank(++$rank);
+                $emgr->persist($oneimage);
+            }
+            $emgr->flush();
+            return $this->json([
+                'message' => 'bootadmin.slides.photodelete OK',
+                'showid' => $showid,
+                'imageid' => $imageid
+            ], 200);
+        }
+        catch(Exception $e) {
+            return $this->json([
+                'message' => 'bootadmin.slides.photodelete KO',
+                'showid' => $showid,
+                'imageid' => $imageid
+            ], 500);
+        }
+}
     // --------------------------------------------------------------------------
     #[Route('/slides/swapphotos', name: 'bootadmin.slides.swapphotos')]
     public function swapPhotos(Request $request,
