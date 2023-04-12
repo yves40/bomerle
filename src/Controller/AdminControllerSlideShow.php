@@ -191,9 +191,9 @@ class AdminControllerSlideShow extends AbstractController
     // --------------------------------------------------------------------------
     // J S O N    S E R V I C E S 
     // --------------------------------------------------------------------------
-    #[Route('/slides/removephoto/{knifeid?0}/{imageid?0}', name: 'bootadmin.slides.removephoto')]
+    #[Route('/slides/removephoto/{slideid?0}/{imageid?0}', name: 'bootadmin.slides.removephoto')]
     public function removePhoto(Request $request,
-        int $knifeid,
+        int $slideid,
         int $imageid,
         Uploader $uploader,
         EntityManagerInterface $emgr)
@@ -213,7 +213,7 @@ class AdminControllerSlideShow extends AbstractController
         ]);        
     }
     // --------------------------------------------------------------------------
-    #[Route('/knives/swapphotos', name: 'bootadmin.slides.swapphotos')]
+    #[Route('/slides/swapphotos', name: 'bootadmin.slides.swapphotos')]
     public function swapPhotos(Request $request,
         EntityManagerInterface $emgr)
     {
@@ -221,15 +221,17 @@ class AdminControllerSlideShow extends AbstractController
         try {
             $data = file_get_contents("php://input");
             $payload = json_decode($data, true);
-            $imagelist = $payload['imagedata'];
+            $imageslist = $payload['imagedata'];
 
             $loc = $this->locale($request);
-            $repo = $emgr->getRepository(Images::class);
+            $repo = $emgr->getRepository(SlideImages::class);
             $rankindex = 0;
-            dump($imagelist);
-            foreach($imagelist as $key => $value) {
+            foreach($imageslist as $key => $value) {
                 array_push($trace, $value['imageid']);
                 $img = $repo->findOneBy([ 'id' => $value['imageid']]);
+                if($img === null) {
+                    throw new Exception('y a une erreur');
+                }
                 $img->setRank(++$rankindex);
                 $emgr->persist($img);
             }
@@ -237,7 +239,7 @@ class AdminControllerSlideShow extends AbstractController
             return $this->json([
                 'message' => 'bootadmin.knives.photoswap OK',
                 'trace' => $trace,
-                'imagelist' => $imagelist
+                'imageslist' => $imageslist
             ], 200);    
         }
         catch(Exception $e) {
@@ -245,7 +247,7 @@ class AdminControllerSlideShow extends AbstractController
                 'message' => $e->getMessage(),
                 'data' => $data, 
                 'payload' => $payload,
-                'imagelist' => $imagelist
+                'imageslist' => $imageslist
             ], 400);
         }
     }

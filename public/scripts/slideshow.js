@@ -45,7 +45,7 @@ function deleteImage(element){
     //         $(".allimages").fadeOut(500, () => {
     //             $(`#imgcard-${imgid}`).remove();
     //             $(".allimages").fadeIn(500, () => {
-    //                 feedbackmessage.text(`OK ${response.message} for knife ${response.knifeid} image : ${response.imageid} Reordered : ${response.reordered}` );
+    //                 feedbackmessage.text(`OK ${response.message} for knife ${response.showid} image : ${response.imageid} Reordered : ${response.reordered}` );
     //                 feedbackmessage.addClass('ysuccess').removeClass('yerror');    
     //             });
     //         });
@@ -98,7 +98,7 @@ function buildImagesList(selectedimageid, action) {
 function getImageAtributes(element, selectedimageid, requestedaction) {
     let imageid = $(element).attr('data-imageid');
     let file = $(element).attr('data-imagefile');
-    let knifeid = $(element).attr('data-imageknifeid');
+    let showid = $(element).attr('data-imageshowid');
     let rank = $(element).attr('data-imagerank');
     let action = NOACTION
     if(selectedimageid === imageid) {   // Image to be moved ? 
@@ -106,7 +106,7 @@ function getImageAtributes(element, selectedimageid, requestedaction) {
     }
     return { imageid: imageid, 
             file: file,
-            knifeid: knifeid,
+            showid: showid,
             rank: rank, 
             action: action
          }
@@ -143,11 +143,11 @@ function moveImage(imageslist, url) {
         }
     }
     swapImages(movingimageid, relatedimageid);
-    // reloadImages(imageslist);
     // ----------------------------- Server DB update
     let payload = {
         "imagedata" :  imageslist
     }
+    console.log(` imagedata : ${JSON.stringify(payload)}`);
     $.ajax({
         type: "POST",
         url: url,
@@ -212,24 +212,24 @@ function swapImages(movingimageid, relatedimageid) {
     // Swap images and their data
     let imgid1 = $(movingimg).attr('data-imageid');
     let imgfile1 = $(movingimg).attr('data-imagefile');
-    let imgknifeid1 = $(movingimg).attr('data-imageshowid');
+    let imgshowid1 = $(movingimg).attr('data-imageshowid');
     let imgrank1 = $(movingimg).attr('data-imagerank');
 
     let imgid2 = $(relatedimg).attr('data-imageid');
     let imgfile2 = $(relatedimg).attr('data-imagefile');
-    let imgknifeid2 = $(relatedimg).attr('data-imageshowid');
+    let imgshowid2 = $(relatedimg).attr('data-imageshowid');
     let imgrank2 = $(relatedimg).attr('data-imagerank');
 
     $(movingimg).attr('src', '/images/slideshow/' + imgfile2);
     $(movingimg).attr('data-imageid', imgid2);
     $(movingimg).attr('data-imagefile', imgfile2);
-    $(movingimg).attr('data-imageshowid', imgknifeid2);
+    $(movingimg).attr('data-imageshowid', imgshowid2);
     $(movingimg).attr('data-imagerank', imgrank2);
     
     $(relatedimg).attr('src', '/images/slideshow/' + imgfile1);
     $(relatedimg).attr('data-imageid', imgid1);
     $(relatedimg).attr('data-imagefile', imgfile1);
-    $(relatedimg).attr('data-imageshowid', imgknifeid1);
+    $(relatedimg).attr('data-imageshowid', imgshowid1);
     $(relatedimg).attr('data-imagerank', imgrank1);
     // Swap cards ID
     $(movingcard).attr('id', `imgcard-${imgid2}`);
@@ -239,10 +239,10 @@ function swapImages(movingimageid, relatedimageid) {
     let atr2 = $(relatedleft).attr('id');
     // If Moving or Related image was topleft we have to rebuild the icon ID
     if(atr1 === undefined) {
-        atr1 = `left-${imgknifeid1}-${imgid1}-${imgrank1}`
+        atr1 = `left-${imgshowid1}-${imgid1}-${imgrank1}`
     }
     if(atr2 === undefined) {
-        atr2 = `left-${imgknifeid2}-${imgid2}-${imgrank2}`
+        atr2 = `left-${imgshowid2}-${imgid2}-${imgrank2}`
     }
     $(movingleft).attr('id', atr2);
     $(relatedleft).attr('id', atr1);
@@ -260,10 +260,10 @@ function swapImages(movingimageid, relatedimageid) {
     atr2 = $(relatedright).attr('id');
     // If Moving or Related image was topright we have to rebuild the icon ID
     if(atr1 === undefined) {
-        atr1 = `right-${imgknifeid1}-${imgid1}-${imgrank1}`
+        atr1 = `right-${imgshowid1}-${imgid1}-${imgrank1}`
     }
     if(atr2 === undefined) {
-        atr2 = `right-${imgknifeid2}-${imgid2}-${imgrank2}`
+        atr2 = `right-${imgshowid2}-${imgid2}-${imgrank2}`
     }
     $(movingright).attr('id', atr2);
     $(relatedright).attr('id', atr1);
