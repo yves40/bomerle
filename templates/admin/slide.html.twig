@@ -133,7 +133,7 @@
                                     {# The shift left icon #}
                                     {% if loop.index != 1 %}
                                         <a id="left-{{slide.id}}-{{image.id}}-{{image.rank}}" 
-                                            href="{{ path('bootadmin.knives.swapphotos') }}">
+                                            href="{{ path('bootadmin.slides.swapphotos') }}">
                                             <img class="svgsmall-lightblue" src="/images/svg/arrow-back.svg" alt=""/>
                                         </a>
                                     {% endif %}
@@ -145,7 +145,7 @@
                                     {# The shit right icon  #}
                                     {% if not loop.last %}
                                         <a id="right-{{slide.id}}-{{image.id}}-{{image.rank}}" 
-                                            href="{{ path('bootadmin.knives.swapphotos') }}">
+                                            href="{{ path('bootadmin.slides.swapphotos') }}">
                                             <img class="svgsmall-lightblue" src="/images/svg/arrow-forward.svg" alt=""/>
                                         </a>
                                     {% endif %}                                

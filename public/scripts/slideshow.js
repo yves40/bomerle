@@ -65,8 +65,7 @@ function moveRight(element) {
     const selectedimageid = $(element).attr('id').split('-')[2];
     const rank = $(element).attr('id').split('-')[3]
     // Build the current image list and move the image
-    // moveImage(buildImagesList(selectedimageid, RIGHTACTION), url);
-    // buildImagesList(selectedimageid, RIGHTACTION);
+    moveImage(buildImagesList(selectedimageid, RIGHTACTION), url);
     console.log(`Move image Right, url: ${url} Slide ID : ${slideshowid} image ID: ${selectedimageid}/${rank}`);
 }
 // ------------------------------------------------------------- Right handler 
@@ -77,9 +76,202 @@ function moveLeft(element) {
     const selectedimageid = $(element).attr('id').split('-')[2];
     const rank = $(element).attr('id').split('-')[3]
     // Build the current image list
-    // moveImage(buildImagesList(selectedimageid, LEFTACTION), url);
-    // buildImagesList(selectedimageid, LEFTACTION);
+    moveImage(buildImagesList(selectedimageid, LEFTACTION), url);
     console.log(`Move image Left, url: ${url} Slide ID : ${slideshowid} image ID: ${selectedimageid}/${rank}`);
+}
+// -------------------------------------------------------------
+// Helpers section
+// ------------------------------------------------------------- 
+// Build the images refresh list from the DOM
+// -------------------------------------------------------------
+function buildImagesList(selectedimageid, action) {
+    let imagespayload = [];
+    $(".container .imagesmall").each(function (idx, theimage) {
+        imagespayload.push(getImageAtributes(theimage, selectedimageid, action));
+    });
+    return imagespayload;
+}
+// -------------------------------------------------------------
+// Retrieve image parameters and flag the moved image with 
+// the requested action
+// -------------------------------------------------------------
+function getImageAtributes(element, selectedimageid, requestedaction) {
+    let imageid = $(element).attr('data-imageid');
+    let file = $(element).attr('data-imagefile');
+    let knifeid = $(element).attr('data-imageknifeid');
+    let rank = $(element).attr('data-imagerank');
+    let action = NOACTION
+    if(selectedimageid === imageid) {   // Image to be moved ? 
+        action = requestedaction;
+    }
+    return { imageid: imageid, 
+            file: file,
+            knifeid: knifeid,
+            rank: rank, 
+            action: action
+         }
+}
+// ------------------------------------------------------------- Move the selected image
+function moveImage(imageslist, url) {
+    // console.log("Enter move Image");
+    // console.log(imageslist);
+    let feedbackmessage = $('#feedback');
+    let movingimageid = 0;
+    let relatedimageid = 0;
+    for(index = 0; index < imageslist.length; ++index) {
+        let element = imageslist[index];
+        if(element.action !== NOACTION) {   
+            let imagemoved = imageslist[index];
+            let imagetarget = {};
+            if(element.action === RIGHTACTION) {
+                imagetarget = imageslist[index+1];
+                imagetarget.rank = imagemoved.rank;
+                imagemoved.rank++;
+                imageslist[index] = imagetarget;
+                imageslist[index+1] = imagemoved;
+            }
+            else {
+                imagetarget = imageslist[index-1];
+                imagetarget.rank = imagemoved.rank;
+                imagemoved.rank--;
+                imageslist[index] = imagetarget;
+                imageslist[index-1] = imagemoved;
+            }
+            relatedimageid = imagetarget.imageid;
+            movingimageid = element.imageid;
+        break;
+        }
+    }
+    swapImages(movingimageid, relatedimageid);
+    // reloadImages(imageslist);
+    // ----------------------------- Server DB update
+    let payload = {
+        "imagedata" :  imageslist
+    }
+    $.ajax({
+        type: "POST",
+        url: url,
+        dataType: "json",
+        data: JSON.stringify(payload),
+        contentType: 'application/json',
+        async: true,
+        success: function (response) {
+            feedbackmessage.text(`OK ` );
+            feedbackmessage.addClass('ysuccess').removeClass('yerror');    
+        },
+        error: function (xhr) {
+            console.log(xhr.responseJSON.detail);
+            feedbackmessage.text(`KO ${xhr.responseJSON.detail}` );
+            feedbackmessage.addClass('yerror').removeClass('ysuccess');
+        }
+    });
+}
+// -------------------------------------------------------------
+// This method work only on images being moved
+// -------------------------------------------------------------
+function swapImages(movingimageid, relatedimageid) {
+    // Manage 2 cards, 2 images and 6 command icons
+    let movingcard = null;
+    let relatedcard = null;
+    let movingimg = relatedimg = null;
+    let movingleft, movingdel, movingright, relatedleft, relateddel, relatedright = null;
+    $(`#imgcard-${movingimageid}`).each((idx, element) => {
+        movingcard = element;
+    });
+    $(`#imgcard-${relatedimageid}`).each((idx, element) => {
+        relatedcard = element;
+    });
+    $(`#imgcard-${movingimageid} .imagesmall`).each((idx, element) => {
+        movingimg = element;
+    });
+    $(`#imgcard-${relatedimageid} .imagesmall`).each((idx, element) => {
+        relatedimg = element;
+    });
+    $(`#imgcard-${movingimageid} a[id^=left]`).each((idx, element) => {
+        movingleft = element;
+    });
+    $(`#imgcard-${movingimageid} a[id^=del]`).each((idx, element) => {
+        movingdel = element;
+    });
+    $(`#imgcard-${movingimageid} a[id^=right]`).each((idx, element) => {
+        movingright = element;
+    });
+    $(`#imgcard-${relatedimageid} a[id^=left]`).each((idx, element) => {
+        relatedleft = element;
+    });
+    $(`#imgcard-${relatedimageid} a[id^=del]`).each((idx, element) => {
+        relateddel = element;
+    });
+    $(`#imgcard-${relatedimageid} a[id^=right]`).each((idx, element) => {
+        relatedright = element;
+    });
+
+    $(movingcard).hide();
+    $(relatedcard).hide();
+
+    // Swap images and their data
+    let imgid1 = $(movingimg).attr('data-imageid');
+    let imgfile1 = $(movingimg).attr('data-imagefile');
+    let imgknifeid1 = $(movingimg).attr('data-imageshowid');
+    let imgrank1 = $(movingimg).attr('data-imagerank');
+
+    let imgid2 = $(relatedimg).attr('data-imageid');
+    let imgfile2 = $(relatedimg).attr('data-imagefile');
+    let imgknifeid2 = $(relatedimg).attr('data-imageshowid');
+    let imgrank2 = $(relatedimg).attr('data-imagerank');
+
+    $(movingimg).attr('src', '/images/slideshow/' + imgfile2);
+    $(movingimg).attr('data-imageid', imgid2);
+    $(movingimg).attr('data-imagefile', imgfile2);
+    $(movingimg).attr('data-imageshowid', imgknifeid2);
+    $(movingimg).attr('data-imagerank', imgrank2);
+    
+    $(relatedimg).attr('src', '/images/slideshow/' + imgfile1);
+    $(relatedimg).attr('data-imageid', imgid1);
+    $(relatedimg).attr('data-imagefile', imgfile1);
+    $(relatedimg).attr('data-imageshowid', imgknifeid1);
+    $(relatedimg).attr('data-imagerank', imgrank1);
+    // Swap cards ID
+    $(movingcard).attr('id', `imgcard-${imgid2}`);
+    $(relatedcard).attr('id', `imgcard-${imgid1}`);
+    // Swap command icons
+    let atr1 = $(movingleft).attr('id');  // LEFT (change ID)
+    let atr2 = $(relatedleft).attr('id');
+    // If Moving or Related image was topleft we have to rebuild the icon ID
+    if(atr1 === undefined) {
+        atr1 = `left-${imgknifeid1}-${imgid1}-${imgrank1}`
+    }
+    if(atr2 === undefined) {
+        atr2 = `left-${imgknifeid2}-${imgid2}-${imgrank2}`
+    }
+    $(movingleft).attr('id', atr2);
+    $(relatedleft).attr('id', atr1);
+    
+    atr1 = $(movingdel).attr('href');     // DEL (change ID and URL)
+    atr2 = $(relateddel).attr('href');
+    $(movingdel).attr('href', atr2);
+    $(relateddel).attr('href', atr1);
+    atr1 = $(movingdel).attr('id');
+    atr2 = $(relateddel).attr('id');
+    $(movingdel).attr('id', atr2);
+    $(relateddel).attr('id', atr1);
+
+    atr1 = $(movingright).attr('id');     // RIGHT (Change ID)
+    atr2 = $(relatedright).attr('id');
+    // If Moving or Related image was topright we have to rebuild the icon ID
+    if(atr1 === undefined) {
+        atr1 = `right-${imgknifeid1}-${imgid1}-${imgrank1}`
+    }
+    if(atr2 === undefined) {
+        atr2 = `right-${imgknifeid2}-${imgid2}-${imgrank2}`
+    }
+    $(movingright).attr('id', atr2);
+    $(relatedright).attr('id', atr1);
+
+    // Redisplay cards  
+    $(movingcard).slideDown(1000);
+    $(relatedcard).slideDown(1000);
+    return;
 }
 // ------------------------------------------------------------- Set up icons handlers
 function armIcons() {

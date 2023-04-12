@@ -213,6 +213,43 @@ class AdminControllerSlideShow extends AbstractController
         ]);        
     }
     // --------------------------------------------------------------------------
+    #[Route('/knives/swapphotos', name: 'bootadmin.slides.swapphotos')]
+    public function swapPhotos(Request $request,
+        EntityManagerInterface $emgr)
+    {
+        $trace = [];
+        try {
+            $data = file_get_contents("php://input");
+            $payload = json_decode($data, true);
+            $imagelist = $payload['imagedata'];
+
+            $loc = $this->locale($request);
+            $repo = $emgr->getRepository(Images::class);
+            $rankindex = 0;
+            dump($imagelist);
+            foreach($imagelist as $key => $value) {
+                array_push($trace, $value['imageid']);
+                $img = $repo->findOneBy([ 'id' => $value['imageid']]);
+                $img->setRank(++$rankindex);
+                $emgr->persist($img);
+            }
+            $emgr->flush();
+            return $this->json([
+                'message' => 'bootadmin.knives.photoswap OK',
+                'trace' => $trace,
+                'imagelist' => $imagelist
+            ], 200);    
+        }
+        catch(Exception $e) {
+            return $this->json([
+                'message' => $e->getMessage(),
+                'data' => $data, 
+                'payload' => $payload,
+                'imagelist' => $imagelist
+            ], 400);
+        }
+    }
+    // --------------------------------------------------------------------------
     // P R I V A T E     S E R V I C E S 
     // --------------------------------------------------------------------------
     private function locale(Request $request) {
