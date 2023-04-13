@@ -221,7 +221,7 @@ class AdminControllerSlideShow extends AbstractController
             $emgr->persist($slideshow);
             $emgr->flush();
             // Reset the rank column after image deletion
-            $imglist = $emgr->getRepository(SlideImages::class)->findShowImagesByRank($slideshow);
+            $imglist = $emgr->getRepository(SlideImages::class)->findSlideshowImagesByRank($slideshow);
             $rank = 0;
             foreach($imglist as $key => $oneimage) {
                 $oneimage->setRank(++$rank);
@@ -231,7 +231,8 @@ class AdminControllerSlideShow extends AbstractController
             return $this->json([
                 'message' => 'bootadmin.slides.photodelete OK',
                 'showid' => $showid,
-                'imageid' => $imageid
+                'imageid' => $imageid,
+                'reordered' => $rank
             ], 200);
         }
         catch(Exception $e) {

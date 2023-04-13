@@ -48,7 +48,7 @@ function deleteImage(element){
         async: false,
         success: function (response) {
             $(".allimages").fadeOut(500, () => {
-                $(`#imgcard-${imgid}`).remove();
+                $(`#imgcard-${selectedimageid}`).remove();
                 $(".allimages").fadeIn(500, () => {
                     feedbackmessage.text(`OK ${response.message} for slide ${response.showid} image : ${response.imageid} Reordered : ${response.reordered}` );
                     feedbackmessage.addClass('ysuccess').removeClass('yerror');    
