@@ -223,4 +223,11 @@ images:
   errorupload: 'File upload problem: size or number of files'
 genericmessages:
   cancel: Operation abandoned
+  monday: Monday
+  tuesday: Tuesday
+  wednesday: Wednesday
+  thursday: Thursday
+  friday: Friday
+  saturday: Saturday
+  sunday: Sunday
 

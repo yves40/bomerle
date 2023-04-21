@@ -222,3 +222,10 @@ images:
   errorupload: 'Problème avec le(s) fichier(s) : nombre ou taille'
 genericmessages:
   cancel: Opération abandonnée
+  monday: Lundi
+  tuesday: Mardi
+  wednesday: Mercredi
+  thursday: Jeudi
+  friday: Vendredi
+  saturday: Samedi
+  sunday: Dimanche

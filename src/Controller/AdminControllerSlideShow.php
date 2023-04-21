@@ -145,7 +145,7 @@ class AdminControllerSlideShow extends AbstractController
             'id' => $id,
             'locale' => $loc,
             'slide' => $slideshow,
-            'allslides' => $allshow
+            'allslides' => $allshow,
         ]);
     }
     // --------------------------------------------------------------------------

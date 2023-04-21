@@ -9,10 +9,12 @@
 {% endblock %}
 
 {% block body %}
-
+    {# Slides menu #}
     {% include "admin/slidesmenu.html.twig" %}
+    
     {# List slides #}
     {% include "admin/slideslist.html.twig" %}
 
     <script src="{{ asset('node_modules/jquery/dist/jquery.min.js')}}"></script>
+    
 {% endblock %}
