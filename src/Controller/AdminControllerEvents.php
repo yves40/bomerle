@@ -78,7 +78,7 @@ class AdminControllerEvents extends AbstractController
             case "abort":
                     $new = "true";
                     $event->setDate($now);
-                    $this->addFlash('success', $translator->trans('genericmessages.cancel'));
+                    $this->addFlash('success', $translator->trans('generic.cancel'));
                     break;
             case "false":
                     $event = $repo->findOneBy(['id' => $id]);
