@@ -26,15 +26,15 @@ class Knifes
     private ?string $description = null;
 
     #[ORM\Column]
-    #[Assert\NotBlank(message: "generic.notempty")]
+    // #[Assert\NotBlank(message: "generic.notempty")]
     private ?int $stock = null;
 
     #[ORM\Column]
-    #[Assert\NotBlank(message: "generic.notempty")]
+    // #[Assert\NotBlank(message: "generic.notempty")]
     private ?int $weight = null;
 
     #[ORM\Column]
-    #[Assert\NotBlank(message: "generic.notempty")]
+    // #[Assert\NotBlank(message: "generic.notempty")]
     #[Assert\Type(
         type: 'integer', 
         message: "La longueur doit être exprimée en cm, à l'unité près",
@@ -45,7 +45,7 @@ class Knifes
     private ?int $close_lenght = null;
 
     #[ORM\Column]
-    #[Assert\NotBlank(message: "generic.notempty")]
+    // #[Assert\NotBlank(message: "generic.notempty")]
     private ?int $cuttingedge_lenght = null;
 
     #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 2, nullable: true)]
