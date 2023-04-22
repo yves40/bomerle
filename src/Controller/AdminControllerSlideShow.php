@@ -34,7 +34,7 @@ class AdminControllerSlideShow extends AbstractController
         $this->dblog = $dblog;
     }
     // --------------------------------------------------------------------------
-    //      S L I D E  S H O W   S E R V I C E S 
+    //      S L I D E S H O W   S E R V I C E S 
     // --------------------------------------------------------------------------
     #[Route('/slides/list', name: 'bootadmin.slideshow.list')]
     public function list(Request $request,
@@ -49,7 +49,7 @@ class AdminControllerSlideShow extends AbstractController
          * 
         */
         $repo = $entityManager->getRepository(SlideShow::class);
-        $allslides = $repo->findBy([], [ 'datein' => 'ASC']);
+        $allslides = $repo->findBy([], [ 'name' => 'ASC', 'datein' => 'ASC']);
         $slide = new SlideShow();
         $form = $this->createForm(SlideShowType::class, $slide);
         return $this->render('admin/slides.html.twig', [
@@ -139,7 +139,7 @@ class AdminControllerSlideShow extends AbstractController
                 }
             }
         }
-        $allshow = $entityManager->getRepository(SlideShow::class)->findBy([], [ 'datein' => 'ASC']);
+        $allshow = $entityManager->getRepository(SlideShow::class)->findBy([], [ 'name' => 'ASC', 'datein' => 'ASC']);
         return $this->render('admin/slide.html.twig', [
             'form' => $form->createView(),
             'id' => $id,
