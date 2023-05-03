@@ -27,31 +27,8 @@ class Uploader {
         chmod($directoryFolder.'/'.$newFilename, 0644);
         return $newFilename;
     } catch (Exception $e) {
-        // ... handle exception if something happens during file upload
+      $this->getErrorMessage($file);
         return '';
-    }
-  }
-  // ---------------------------------------------------------------------------------------------
-  public function deletePreviousFile(string $directoryFolder, 
-                          string $previousfile) {
-    try {
-      if(file_exists($directoryFolder.'/'.$previousfile)){
-          unlink($directoryFolder.'/'.$previousfile);
-      }
-    }
-    catch(Exception $e) {
-//        $this->logger->error("Cannot remove previous file $directoryFolder.'/'.$previousfile");
-    }
-  }
-  // ---------------------------------------------------------------------------------------------
-  public function deleteFile(string $filepath) {
-    try {
-      if(file_exists($filepath)){
-          unlink($filepath);
-      }
-    }
-    catch(Exception $e) {
-//        $this->logger->error("Cannot remove previous file $directoryFolder.'/'.$previousfile");
     }
   }
 
@@ -75,6 +52,29 @@ class Uploader {
           case UPLOAD_ERR_CANT_WRITE: $message = 'unable to write File on disk'; break;
       }
       return $message;
+  }
+  // ---------------------------------------------------------------------------------------------
+  public function deletePreviousFile(string $directoryFolder, 
+                          string $previousfile) {
+    try {
+      if(file_exists($directoryFolder.'/'.$previousfile)){
+          unlink($directoryFolder.'/'.$previousfile);
+      }
+    }
+    catch(Exception $e) {
+//        $this->logger->error("Cannot remove previous file $directoryFolder.'/'.$previousfile");
+    }
+  }
+  // ---------------------------------------------------------------------------------------------
+  public function deleteFile(string $filepath) {
+    try {
+      if(file_exists($filepath)){
+          unlink($filepath);
+      }
+    }
+    catch(Exception $e) {
+//        $this->logger->error("Cannot remove previous file $directoryFolder.'/'.$previousfile");
+    }
   }
 
 }

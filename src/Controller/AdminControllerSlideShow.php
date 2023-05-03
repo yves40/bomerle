@@ -100,7 +100,13 @@ class AdminControllerSlideShow extends AbstractController
                     $slideshow = new SlideShow();
                 }
                 else {
-                    $this->addFlash('error', $translator->trans('images.errorupload'));
+                    $errors = $form->getErrors(true, false);
+                    dump($errors);
+                    foreach ($errors as $fielderrors) {
+                        foreach($fielderrors as $error) {
+                            $this->addFlash('error', $error->getMessage());
+                        }
+                    }                    
                 }
             }
         }
@@ -135,7 +141,13 @@ class AdminControllerSlideShow extends AbstractController
                     );
                 }
                 else {
-                    $this->addFlash('error', $translator->trans('images.errorupload'));
+                    $errors = $form->getErrors(true, false);
+                    dump($errors);
+                    foreach ($errors as $fielderrors) {
+                        foreach($fielderrors as $error) {
+                            $this->addFlash('error', $error->getMessage());
+                        }
+                    }                    
                 }
             }
         }
