@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 #[ORM\Entity(repositoryClass: SlideShowRepository::class)]
-#[UniqueEntity(fields:['name'], message: 'admin.manageslides.alreadyexist')]
+// #[UniqueEntity(fields:['name'], message: 'admin.manageslides.alreadyexist')]
 class SlideShow
 {
     #[ORM\Id]
