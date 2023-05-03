@@ -28,8 +28,14 @@ $(document).ready(function () {
                 updateDateFields(element, getDayMonthYear(eoy));
                 break;
             case "nm":
+                let nm = new Date();
+                nm.setDate(nm.getDate() + 31);
+                updateDateFields(element, getDayMonthYear(nm.toISOString()));
                 break;
             case "pm":
+                let pm = new Date();
+                pm.setDate(pm.getDate() - 31);
+                updateDateFields(element, getDayMonthYear(pm.toISOString()));
                 break;
             case "asis":
             default:
