@@ -23,6 +23,7 @@ user:
   add: Add a user
 home:
   home: Home
+  public: Public access
   button: Back home page
   subtitle: Made in Chabreloche, France
 admin:  

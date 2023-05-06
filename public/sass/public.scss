@@ -1,0 +1,139 @@
+@import './base/reset';
+@import './utils/variables';
+@import './base/typography';
+@import './base/default';
+@import './components/buttons';
+
+header{
+    width: 100%;
+    position: relative;
+    background-image: url('../images/hero-section-knife.jpg');
+    min-height: 100vh;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    
+    .navigation{
+        width: 100%;
+        height: 80px;
+        font-size: 1.8rem;
+        background: $alternateMenuBackground;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: fixed;
+        transition: .3s;
+        transition-delay: .4s;
+        z-index: 99;
+
+        img{
+            max-width: 70px;
+            padding-top: 10px;
+        }
+
+        &.hidden{
+            transform : translateY(-80px);
+        }
+        
+        span{
+            display: inline-block;
+            padding: 0 20px;
+
+            &::after{
+                content: '';
+                display: block;
+                width: 0px;
+                margin: 3px auto 0 auto;
+                height: 2px;
+                border-radius: 2px;
+                background: $text;
+                transition: width 0.2s ease-out;
+            }
+            &:hover::after{
+                width: 100%;
+            }
+            a{
+                text-decoration: none;
+                color: $text;
+                display: block;
+            }
+        }
+        
+    }
+    .hero-section{
+        width: 50%;
+        height: 100%;
+        color: #f1f1f1;
+        position: absolute;
+        right: 0;
+        top: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 100px 25px;
+        text-align: center;
+
+        .full-title{
+            font-size: 3rem;
+            text-transform: uppercase;
+
+            h1{
+                font-family: $title;
+                font-weight: 700;
+            }
+        }
+        p{
+            margin: 20px;
+            font-family: $main;
+            font-weight: 200;
+        }
+    }
+}
+
+#histoire{
+    display: flex;
+    text-align: center;
+    padding: 70px 25px;
+    min-height: auto;
+
+    .story{
+        width: 50%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        
+        h2{
+            text-align: center;
+        }
+        p{
+            margin: 20px;
+        }
+        .button-homepage{
+            text-transform: none;
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+    }
+    .photos{
+        width: 50%;
+        position: relative;
+
+        img{
+            box-shadow: 0px 20px 40px rgba(0,0,0,.6);
+        }
+
+        img:nth-child(1){
+            max-width: 400px;
+            position: absolute;
+            top: 0px;
+            right: 25px;
+        }
+        img:nth-child(2){
+            max-width: 295px;
+            position: absolute;
+            top: 140px;
+            left: 35px;
+        }
+    }
+}

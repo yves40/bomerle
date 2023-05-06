@@ -181,6 +181,17 @@ section {
         width: 20px;
         left: 80%; } }
 
+.button-homepage {
+  font-family: "Cinzel Decorative", sans-serif;
+  color: #f1f1f1;
+  background: #b48645;
+  width: 70%;
+  line-height: 80px;
+  font-size: 1.8rem;
+  font-weight: 600;
+  text-decoration: none;
+  text-transform: uppercase; }
+
 header {
   width: 100%;
   position: absolute;

@@ -23,6 +23,7 @@ user:
   add: Ajouter un utilisateur
 home:
   home: Accueil
+  public: Accès public
   button: Accueil
   subtitle: Fabrication à Chabreloche, France
 admin:

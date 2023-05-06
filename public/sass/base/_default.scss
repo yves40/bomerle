@@ -1,0 +1,12 @@
+section{
+    min-height: 100vh;
+    font-family: $main;
+    font-weight: 200;
+
+    h1,h2 {
+        font-size: 3rem;
+        font-family: $title;
+        font-weight: 700;
+        text-transform: uppercase;
+    }
+}

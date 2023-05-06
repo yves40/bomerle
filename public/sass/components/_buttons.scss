@@ -169,3 +169,14 @@
             }
     }
 }
+.button-homepage{
+    font-family: $title;
+    color: $alternateText;
+    background: $buttonNext;
+    width: 70%;
+    line-height: 80px;
+    font-size: 1.8rem;
+    font-weight: 600;
+    text-decoration: none;
+    text-transform: uppercase;
+}

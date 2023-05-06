@@ -63,6 +63,12 @@
                                 </div>
                                 {% trans %}home.home{% endtrans %}
                             </a>
+                            <a class="nav-link" href="{{ path('bootadmin.public') }}">
+                                <div class="sb-nav-link-icon">
+                                    <img class="svgsmall-lightgreen" src="/images/svg/house-solid.svg" alt="Connect"/>
+                                </div>
+                                {% trans %}home.public{% endtrans %}
+                            </a>
                             {% if app.user %}
                                 <a class="nav-link" href="{{ path('bootadmin.logout') }}">
                                     <div class="sb-nav-link-icon">
