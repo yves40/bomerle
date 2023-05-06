@@ -2,10 +2,48 @@
 $(document).ready(function () {
     $props.load();
     console.log(`[${$props.version()} ]` );
+
+    // Some variables to handle show/hide
+    const showall = $('#showall');
+    const hideall = $('#hideall');
+    const slidingtime = $props.getSlidingTime();
+    hideAll(slidingtime);
     // -------------------------
     // Arm click handlers
     // -------------------------
+    showall.click( (e) => { e.preventDefault(); showAll(slidingtime); });
+    hideall.click( (e) => { e.preventDefault(); hideAll(slidingtime); });
     armIcons();
+    // ------------------------------------------------------------- Zoom handler 
+    function actionRequest(element) {
+        const theslide = $(element).closest('.list-group-item');
+        theslide.children('.details').toggle(slidingtime);
+    }
+    // ----------------------------------------------------------------------------
+    // Show all messages details
+    // ----------------------------------------------------------------------------
+    function showAll(slidingtime) {
+        $('.details').each(function (index, element) {
+            // element == this
+            $(this).slideDown(slidingtime);            
+        });
+    }
+    // ----------------------------------------------------------------------------
+    // Hide all messages details
+    // ----------------------------------------------------------------------------
+    function hideAll(slidingtime) {
+        $('.details').each(function (index, element) {
+            // element == this
+            $(this).slideUp(slidingtime);            
+        });
+    }
+    // ------------------------------------------------------------- Set up icons handlers
+    function armIcons() {
+        $(".zoom a").click(function (event) {
+            event.preventDefault();
+            actionRequest(this);
+        });
+    }
 })
 // -------------------------------------------------------------
 // Handlers section
@@ -13,20 +51,6 @@ $(document).ready(function () {
 const NOACTION = 0;
 const RIGHTACTION = 1;
 const LEFTACTION = 2;
-// ------------------------------------------------------------- handler 
-function actionRequest(element) {
-    let command = $(element).attr('id').split('-')[0];
-    switch(command) {
-        case 'left': moveLeft(element);
-                break;
-        case 'right': moveRight(element);
-                break;
-        case 'del': deleteImage(element);
-                break;
-        default: console.log('Unknown command'); 
-                break;
-    }
-}
 // ------------------------------------------------------------- Delete handler 
 function deleteImage(element){
     let feedbackmessage = $('#feedback');
@@ -277,11 +301,4 @@ function swapImages(movingimageid, relatedimageid) {
     $(movingcard).slideDown(1000);
     $(relatedcard).slideDown(1000);
     return;
-}
-// ------------------------------------------------------------- Set up icons handlers
-function armIcons() {
-    $("#commandzone a").click(function (event) {
-        event.preventDefault();
-        actionRequest(this);
-    });
 }

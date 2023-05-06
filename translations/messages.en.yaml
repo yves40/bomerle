@@ -202,6 +202,8 @@ diapos:
   add: Add
   manage: Manage
   test: Test
+  hide: No details
+  show: All details
 # Generic messages
 buttons:
   add: Add

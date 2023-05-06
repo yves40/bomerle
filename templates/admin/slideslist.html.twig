@@ -26,44 +26,53 @@
                             <img class="svgsmall-lightblue" src="/images/svg/pen-to-square-regular.svg" alt="" title=""/>                        
                         </a>
                     </div>
-                </div>
-                <div class="row justify-content-start">
-                    <div class="col">
-                        {% if slide.active %}
-                            <span class="on">{% trans %}admin.manageslides.activeflag{% endtrans %} : </span>
-                        {% else %}
-                            <span class="off">{% trans %}admin.manageslides.inactiveflag{% endtrans %} : </span>
-                        {% endif %}
-                        {% if slide.slider %}
-                            <span class="on">{% trans %}admin.manageslides.sliderflag{% endtrans %} : </span>
-                        {% else %}
-                            <span class="off">{% trans %}admin.manageslides.nosliderflag{% endtrans %} : </span>
-                        {% endif %}
-                        {% if slide.daterange %}
-                            <span class="on">{% trans %}admin.manageslides.daterangeflag{% endtrans %}</span>
-                        {% else %}
-                            <span class="off">{% trans %}admin.manageslides.nodaterangeflag{% endtrans %}</span>
-                        {% endif %}
+                    <div class="col zoom">
+                        <a href="#">
+                            <img class="svgsmall-lightblue" src="/images/svg/magnifying-glass-solid.svg" alt=""/>
+                        </a>
                     </div>
                 </div>
-                <div class="row justify-content-start">
-                    <div class="col">
-                        {% if slide.monday %}<span class="on">{% trans %}generic.monday{% endtrans %}-</span>
-                            {% else %}<span class="off">{% trans %}generic.monday{% endtrans %}-</span>{% endif %}
-                        {% if slide.tuesday %}<span class="on">{% trans %}generic.tuesday{% endtrans %}-</span>
-                            {% else %}<span class="off">{% trans %}generic.tuesday{% endtrans %}-</span>{% endif %}
-                        {% if slide.wednesday %}<span class="on">{% trans %}generic.wednesday{% endtrans %}-</span>
-                            {% else %}<span class="off">{% trans %}generic.wednesday{% endtrans %}-</span>{% endif %}
-                        {% if slide.thursday %}<span class="on">{% trans %}generic.thursday{% endtrans %}-</span>
-                            {% else %}<span class="off">{% trans %}generic.thursday{% endtrans %}-</span>{% endif %}
-                        {% if slide.friday %}<span class="on">{% trans %}generic.friday{% endtrans %}-</span>
-                            {% else %}<span class="off">{% trans %}generic.friday{% endtrans %}-</span>{% endif %}
-                        {% if slide.saturday %}<span class="on">{% trans %}generic.saturday{% endtrans %}-</span>
-                            {% else %}<span class="off">{% trans %}generic.saturday{% endtrans %}-</span>{% endif %}
-                        {% if slide.sunday %}<span class="on">{% trans %}generic.sunday{% endtrans %}</span>
-                            {% else %}<span class="off">{% trans %}generic.sunday{% endtrans %}</span>{% endif %}
+                <div class="details">
+                    <div class="row justify-content-start">
+                        <div class="col">
+                            {% if slide.active %}
+                                <span class="on">{% trans %}admin.manageslides.activeflag{% endtrans %} : </span>
+                            {% else %}
+                                <span class="off">{% trans %}admin.manageslides.inactiveflag{% endtrans %} : </span>
+                            {% endif %}
+                            {% if slide.slider %}
+                                <span class="on">{% trans %}admin.manageslides.sliderflag{% endtrans %} : </span>
+                            {% else %}
+                                <span class="off">{% trans %}admin.manageslides.nosliderflag{% endtrans %} : </span>
+                            {% endif %}
+                            {% if slide.daterange %}
+                                <span class="on">{% trans %}admin.manageslides.daterangeflag{% endtrans %}</span>
+                            {% else %}
+                                <span class="off">{% trans %}admin.manageslides.nodaterangeflag{% endtrans %}</span>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="row justify-content-start">
+                        <div class="col">
+                            {% if slide.monday %}<span class="on">{% trans %}generic.monday{% endtrans %}-</span>
+                                {% else %}<span class="off">{% trans %}generic.monday{% endtrans %}-</span>{% endif %}
+                            {% if slide.tuesday %}<span class="on">{% trans %}generic.tuesday{% endtrans %}-</span>
+                                {% else %}<span class="off">{% trans %}generic.tuesday{% endtrans %}-</span>{% endif %}
+                            {% if slide.wednesday %}<span class="on">{% trans %}generic.wednesday{% endtrans %}-</span>
+                                {% else %}<span class="off">{% trans %}generic.wednesday{% endtrans %}-</span>{% endif %}
+                            {% if slide.thursday %}<span class="on">{% trans %}generic.thursday{% endtrans %}-</span>
+                                {% else %}<span class="off">{% trans %}generic.thursday{% endtrans %}-</span>{% endif %}
+                            {% if slide.friday %}<span class="on">{% trans %}generic.friday{% endtrans %}-</span>
+                                {% else %}<span class="off">{% trans %}generic.friday{% endtrans %}-</span>{% endif %}
+                            {% if slide.saturday %}<span class="on">{% trans %}generic.saturday{% endtrans %}-</span>
+                                {% else %}<span class="off">{% trans %}generic.saturday{% endtrans %}-</span>{% endif %}
+                            {% if slide.sunday %}<span class="on">{% trans %}generic.sunday{% endtrans %}</span>
+                                {% else %}<span class="off">{% trans %}generic.sunday{% endtrans %}</span>{% endif %}
+                        </div>
                     </div>
                 </div>
             </li>
         {% endfor %}
     </ul>
+    <script src="{{ asset('scripts/slideshow.js')}}"></script>
+

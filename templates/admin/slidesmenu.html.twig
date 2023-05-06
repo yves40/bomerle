@@ -10,6 +10,8 @@
 <ul class="nav mb-2 dynmenu">
     <li class="nav-item"><a class="nav-link sticky" href="{{ path('bootadmin.slideshow.list', { } )}}">{% trans %}admin.manageslides.list{% endtrans %}</a></li>
     <li class="nav-item"><a class="nav-link" href="{{ path('bootadmin.slide.edit', { } )}}">{% trans %}admin.manageslides.add{% endtrans %}</a></li>
+    <li id="showall" class="nav-item"><a class="nav-link sticky" href="#">{% trans %}diapos.show{% endtrans %}</a></li>
+    <li id="hideall" class="nav-item"><a class="nav-link sticky" href="#">{% trans %}diapos.hide{% endtrans %}</a></li>
 </ul>
 <script src="{{ asset('node_modules/jquery/dist/jquery.min.js')}}"></script>
 <script src="{{ asset('scripts/menuhandler.js')}}"></script>
