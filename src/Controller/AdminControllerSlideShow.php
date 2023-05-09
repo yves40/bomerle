@@ -280,7 +280,7 @@ class AdminControllerSlideShow extends AbstractController
             }
             $emgr->flush();
             return $this->json([
-                'message' => 'bootadmin.knives.photoswap OK',
+                'message' => 'bootadmin.slides.photoswap OK',
                 'trace' => $trace,
                 'imageslist' => $imageslist
             ], 200);    
@@ -292,6 +292,35 @@ class AdminControllerSlideShow extends AbstractController
                 'payload' => $payload,
                 'imageslist' => $imageslist
             ], 400);
+        }
+    }
+    // --------------------------------------------------------------------------
+    #[Route('/slides/getdiapos', name: 'bootadmin.slides.getdiapos')]
+    public function getDiapos(Request $request, EntityManagerInterface $em) {
+        try {
+            $data = file_get_contents("php://input");
+            $payload = json_decode($data, true);
+            $diaponame = $payload['diaponame'];
+
+            $slides = $em->getRepository(SlideShow::class)->findBy([ 'name' => $diaponame]);
+            $diaponum = count($slides) ;
+            $all = [];
+            foreach($slides as $slide) {
+                array_push($all, $slide->getName());
+            }
+            return $this->json([
+                'message' => 'bootadmin.slides.getdiapo OK',
+                'diaponame' => $diaponame,
+                'diaponum' => $diaponum,
+                'slides' => $all
+            ], 200);    
+        }
+        catch(Exception $e) {
+            return $this->json([
+                'message' => 'bootadmin.slides.getdiapo KO',
+                'diaponame' => $diaponame,
+                'error' => $e
+            ], 400);        
         }
     }
     // --------------------------------------------------------------------------
