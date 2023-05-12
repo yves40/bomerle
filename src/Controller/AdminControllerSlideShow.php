@@ -2,21 +2,23 @@
 
 namespace App\Controller;
 
+use stdClass;
 use Exception;
+use ArrayObject;
 use App\Entity\SlideShow;
+
 use App\Services\DBlogger;
 use App\Services\Uploader;
-
 use App\Entity\SlideImages;
 use App\Form\SlideShowType;
 use App\Repository\SlideShowRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Proxies\__CG__\App\Entity\SlideShow as EntitySlideShow;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Translation\LocaleSwitcher;
 use Symfony\Contracts\Translation\TranslatorInterface;
+use Proxies\__CG__\App\Entity\SlideShow as EntitySlideShow;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route('/bootadmin')]
@@ -290,7 +292,7 @@ class AdminControllerSlideShow extends AbstractController
                 'message' => $e->getMessage(),
                 'data' => $data, 
                 'payload' => $payload,
-                'imageslist' => $imageslist
+                // 'imageslist' => $imageslist
             ], 400);
         }
     }
@@ -302,17 +304,34 @@ class AdminControllerSlideShow extends AbstractController
             $payload = json_decode($data, true);
             $diaponame = $payload['diaponame'];
 
-            $slides = $em->getRepository(SlideShow::class)->findBy([ 'name' => $diaponame]);
-            $diaponum = count($slides) ;
+            $slides = $em->getRepository(SlideShow::class)->findBy([ 'name' => $diaponame, 
+                                                                    'active' => true]);
+            $diapocount = count($slides) ;
+            // Send back this data but it's not used for display purpose
             $all = [];
+            $allslides = json_encode($slides);
             foreach($slides as $slide) {
-                array_push($all, $slide->getName());
+                $data = new stdClass();;
+                $data->showname = $slide->getName();
+                $data->slidermode = $slide->isSlider();
+                $data->datein = $slide->getDatein();
+                $data->dateout = $slide->getDateout();
+                array_push($all, $data);
+            }
+            // If more than 1 show eligible, must select one
+            if($diapocount > 1) {
+                $selectedslide = json_encode($this->selectSlideshow($slides)) ;
+            }
+            else {
+                $selectedslide = json_encode($slides[0]);
             }
             return $this->json([
                 'message' => 'bootadmin.slides.getdiapo OK',
                 'diaponame' => $diaponame,
-                'diaponum' => $diaponum,
-                'slides' => $all
+                'diapocount' => $diapocount,
+                'slides' => $all,
+                'selectedslide' => $selectedslide,
+                'allslides' => $allslides
             ], 200);    
         }
         catch(Exception $e) {
@@ -325,6 +344,17 @@ class AdminControllerSlideShow extends AbstractController
     }
     // --------------------------------------------------------------------------
     // P R I V A T E     S E R V I C E S 
+    // --------------------------------------------------------------------------
+    private function selectSlideshow($slides) : SlideShow {
+        date_default_timezone_set('Europe/Paris');
+        // Get current date
+        $currentDate = date('Y-m-d');
+        /**  @var SlideShow $selectedslide */
+        $selectedslide = $slides[0];
+        foreach($slides as $slide) {
+        }   
+        return $selectedslide;
+    }
     // --------------------------------------------------------------------------
     private function locale(Request $request) {
         $session = $request->getSession();

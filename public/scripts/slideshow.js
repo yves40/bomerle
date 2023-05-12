@@ -19,6 +19,20 @@ $(document).ready(function () {
         const theslide = $(element).closest('.list-group-item');
         theslide.children('.details').toggle(slidingtime);
     }
+    // ------------------------------------------------------------- Image move handler 
+    function imageRequest(element) {
+        let command = $(element).attr('id').split('-')[0];
+        switch(command) {
+            case 'left': moveLeft(element);
+                    break;
+            case 'right': moveRight(element);
+                    break;
+            case 'del': deleteImage(element);
+                    break;
+            default: console.log('Unknown command'); 
+                    break;
+        }
+        }
     // ----------------------------------------------------------------------------
     // Show all messages details
     // ----------------------------------------------------------------------------
@@ -42,6 +56,10 @@ $(document).ready(function () {
         $(".zoom a").click(function (event) {
             event.preventDefault();
             actionRequest(this);
+        });
+        $("#commandzone a").click(function (event) {
+            event.preventDefault();
+            imageRequest(this);
         });
     }
 })
@@ -142,8 +160,6 @@ function getImageAtributes(element, selectedimageid, requestedaction) {
 }
 // ------------------------------------------------------------- Move the selected image
 function moveImage(imageslist, url) {
-    // console.log("Enter move Image");
-    // console.log(imageslist);
     let feedbackmessage = $('#feedback');
     let movingimageid = 0;
     let relatedimageid = 0;
@@ -176,7 +192,7 @@ function moveImage(imageslist, url) {
     let payload = {
         "imagedata" :  imageslist
     }
-    console.log(` imagedata : ${JSON.stringify(payload)}`);
+    // console.log(` imagedata : ${JSON.stringify(payload)}`);
     $.ajax({
         type: "POST",
         url: url,
