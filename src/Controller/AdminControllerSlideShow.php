@@ -303,35 +303,57 @@ class AdminControllerSlideShow extends AbstractController
             $data = file_get_contents("php://input");
             $payload = json_decode($data, true);
             $diaponame = $payload['diaponame'];
-
             $slides = $em->getRepository(SlideShow::class)->findBy([ 'name' => $diaponame, 
                                                                     'active' => true]);
-            $diapocount = count($slides) ;
-            // Send back this data but it's not used for display purpose
-            $all = [];
-            $allslides = json_encode($slides);
-            foreach($slides as $slide) {
-                $data = new stdClass();;
-                $data->showname = $slide->getName();
-                $data->slidermode = $slide->isSlider();
-                $data->datein = $slide->getDatein();
-                $data->dateout = $slide->getDateout();
-                array_push($all, $data);
-            }
-            // If more than 1 show eligible, must select one
-            if($diapocount > 1) {
-                $selectedslide = json_encode($this->selectSlideshow($slides)) ;
+            $candidatescount = count($slides) ;
+            /**  @var SlideImages $img */
+            /**  @var SlideShow $selectedslide */
+            // Evaluate slide show validity
+            $selectedslide = $this->selectSlideshow($slides);
+            $images = [];
+            if($selectedslide->getId()) {    // One valid slide show selected ?
+                $slidermode = $selectedslide->isSlider();
+                $daterange = $selectedslide->isDaterange();
+                $datein = $selectedslide->getDatein();
+                $dateout = $selectedslide->getDateout();
+                $monday = $selectedslide->isMonday();
+                $tuesday = $selectedslide->isTuesday();
+                $wednesday = $selectedslide->isWednesday();
+                $thursday = $selectedslide->isThursday();
+                $friday = $selectedslide->isFriday();
+                $saturday = $selectedslide->isSaturday();
+                $sunday = $selectedslide->isSunday();
+                // Slide show selected, get images
+                $imglist = $em->getRepository(SlideImages::class)->findSlideshowImagesByRank($selectedslide);
+                foreach($imglist as $img){
+                    array_push($images, $img->getFilename());
+                }
             }
             else {
-                $selectedslide = json_encode($slides[0]);
+                date_default_timezone_set('Europe/Paris');
+                // Get current date
+                $currentDate = date('Y-m-d');        
+                $slidermode = false;
+                $daterange = false;
+                $datein = $dateout = $currentDate;
+                $monday = $tuesday = $wednesday = $thursday = $friday = $saturday = $sunday = false;
             }
             return $this->json([
                 'message' => 'bootadmin.slides.getdiapo OK',
                 'diaponame' => $diaponame,
-                'diapocount' => $diapocount,
-                'slides' => $all,
-                'selectedslide' => $selectedslide,
-                'allslides' => $allslides
+                'candidatescount' => $candidatescount,
+                'slidermode' => $slidermode,
+                'daterange' => $daterange,
+                'datein' => $datein,
+                'dateout' => $dateout,
+                'Monday' => $monday,
+                'Tuesday' => $tuesday,
+                'Wednesday' => $wednesday,
+                'Thursday' => $thursday,
+                'Friday' => $friday,
+                'Saturday' => $saturday,
+                'Sunday' => $sunday,
+                'images' => $images,
             ], 200);    
         }
         catch(Exception $e) {
@@ -348,12 +370,65 @@ class AdminControllerSlideShow extends AbstractController
     private function selectSlideshow($slides) : SlideShow {
         date_default_timezone_set('Europe/Paris');
         // Get current date
-        $currentDate = date('Y-m-d');
-        /**  @var SlideShow $selectedslide */
-        $selectedslide = $slides[0];
+        $currentDate = date_timestamp_get(date_create());
+        $dayofweek = date('w'); // 0 is sunday
+        /**  @var SlideShow $slide */
+        $selectedslide = new SlideShow();
+        $diffdays= 0;
         foreach($slides as $slide) {
+            if($slide->isDaterange()){   // Have to check date ? 
+                $earlier = $slide->getDatein();
+                $later = $slide->getDateout();
+                if( (date_timestamp_get($earlier)  <= $currentDate) && // Current day within range ?
+                    (date_timestamp_get($later) >= $currentDate) ) {
+                    $diff = $later->diff($earlier)->format("%a");
+                    if($diffdays == 0 || $diffdays > $diff) {           // If multi periods, take the shortest matching
+                        if($this->specificDay($slide)) {    // Any day check ?
+                            if($this->goodDay($slide, $dayofweek)) {
+                                $diffdays = $diff;
+                                $selectedslide = $slide;
+                            }
+                        }
+                        else {
+                            $diffdays = $diff;
+                            $selectedslide = $slide;
+                        }
+                    }
+                }
+            }
+            else {  // No date range
+                if($this->specificDay($slide)) {    // Any day check ?
+                    if($this->goodDay($slide, $dayofweek)) {
+                        $selectedslide = $slide;
+                    }
+                }
+                else {
+                    $selectedslide = $slide;
+                }
+            }
         }   
         return $selectedslide;
+    }
+    // --------------------------------------------------------------------------
+    /**  @var SlideShow $slide */
+    private function specificDay($slide) {
+        return $slide->isMonday() || $slide->isTuesday() 
+                    || $slide->isWednesday() || $slide->isThursday() 
+                    || $slide->isFriday() || $slide->isSaturday() 
+                    || $slide-> isSunday();
+    }
+    // --------------------------------------------------------------------------
+    /**  @var SlideShow $slide */
+    private function goodDay($slide, $dayofweek) {
+        switch($dayofweek) {
+            case 0: return $slide->isSunday();
+            case 1: return $slide->isMonday();
+            case 2: return $slide->isTuesday();
+            case 3: return $slide->isWednesday();
+            case 4: return $slide->isThursday();
+            case 5: return $slide->isFriday();
+            case 6: return $slide->isSaturday();
+        }
     }
     // --------------------------------------------------------------------------
     private function locale(Request $request) {
