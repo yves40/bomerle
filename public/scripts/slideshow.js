@@ -14,55 +14,55 @@ $(document).ready(function () {
     showall.click( (e) => { e.preventDefault(); showAll(slidingtime); });
     hideall.click( (e) => { e.preventDefault(); hideAll(slidingtime); });
     armIcons();
-    // ------------------------------------------------------------- Zoom handler 
-    function actionRequest(element) {
-        const theslide = $(element).closest('.list-group-item');
-        theslide.children('.details').toggle(slidingtime);
-    }
-    // ------------------------------------------------------------- Image move handler 
-    function imageRequest(element) {
-        let command = $(element).attr('id').split('-')[0];
-        switch(command) {
-            case 'left': moveLeft(element);
-                    break;
-            case 'right': moveRight(element);
-                    break;
-            case 'del': deleteImage(element);
-                    break;
-            default: console.log('Unknown command'); 
-                    break;
-        }
-        }
-    // ----------------------------------------------------------------------------
-    // Show all messages details
-    // ----------------------------------------------------------------------------
-    function showAll(slidingtime) {
-        $('.details').each(function (index, element) {
-            // element == this
-            $(this).slideDown(slidingtime);            
-        });
-    }
-    // ----------------------------------------------------------------------------
-    // Hide all messages details
-    // ----------------------------------------------------------------------------
-    function hideAll(slidingtime) {
-        $('.details').each(function (index, element) {
-            // element == this
-            $(this).slideUp(slidingtime);            
-        });
-    }
-    // ------------------------------------------------------------- Set up icons handlers
-    function armIcons() {
-        $(".zoom a").click(function (event) {
-            event.preventDefault();
-            actionRequest(this);
-        });
-        $("#commandzone a").click(function (event) {
-            event.preventDefault();
-            imageRequest(this);
-        });
-    }
 })
+// ------------------------------------------------------------- Zoom handler 
+function actionRequest(element) {
+    const theslide = $(element).closest('.list-group-item');
+    theslide.children('.details').toggle(slidingtime);
+}
+// ------------------------------------------------------------- Image move handler 
+function imageRequest(element) {
+    let command = $(element).attr('id').split('-')[0];
+    switch(command) {
+        case 'left': moveLeft(element);
+                break;
+        case 'right': moveRight(element);
+                break;
+        case 'del': deleteImage(element);
+                break;
+        default: console.log('Unknown command'); 
+                break;
+    }
+}
+// ----------------------------------------------------------------------------
+// Show all messages details
+// ----------------------------------------------------------------------------
+function showAll(slidingtime) {
+    $('.details').each(function (index, element) {
+        // element == this
+        $(this).slideDown(slidingtime);            
+    });
+}
+// ----------------------------------------------------------------------------
+// Hide all messages details
+// ----------------------------------------------------------------------------
+function hideAll(slidingtime) {
+    $('.details').each(function (index, element) {
+        // element == this
+        $(this).slideUp(slidingtime);            
+    });
+}
+// ------------------------------------------------------------- Set up icons handlers
+function armIcons() {
+    $(".zoom a").click(function (event) {
+        event.preventDefault();
+        actionRequest(this);
+    });
+    $("#commandzone a").click(function (event) {
+        event.preventDefault();
+        imageRequest(this);
+    });
+}
 // -------------------------------------------------------------
 // Handlers section
 // -------------------------------------------------------------
