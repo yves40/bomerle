@@ -42,8 +42,9 @@
                             {% endif %}
                             {% if slide.slider %}
                                 <span class="on">{% trans %}admin.manageslides.sliderflag{% endtrans %} : </span>
-                            {% else %}
-                                <span class="off">{% trans %}admin.manageslides.nosliderflag{% endtrans %} : </span>
+                            {% endif %}
+                            {% if slide.gallery %}
+                                <span class="on">{% trans %}admin.manageslides.galleryflag{% endtrans %} : </span>
                             {% endif %}
                             {% if slide.daterange %}
                                 <span class="on">{% trans %}admin.manageslides.daterangeflag{% endtrans %}</span>

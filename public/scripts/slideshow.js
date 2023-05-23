@@ -24,11 +24,11 @@ $(document).ready(function () {
     gallerymode.click( (e) => { manageShowMode('g');  })
     daterange.click( (e)=> { manageDates();  })
     armIcons();
-    // Set default show mode to slider
+    // Set default show mode to slider if new show
     if($(slidename).val() == '') {
         $(slidermode).prop('checked', true);
     }
-    // ----------------------------------------------------------------------------
+// ----------------------------------------------------------------------------
     // Handle show mode actions
     // ----------------------------------------------------------------------------
     function manageShowMode(target) {
@@ -63,12 +63,23 @@ $(document).ready(function () {
             $(days).slideUp(slidingtime);
         }
     }
+    // ------------------------------------------------------------- Zoom handler 
+    function actionRequest(element) {
+        const theslide = $(element).closest('.list-group-item');
+        theslide.children('.details').toggle(slidingtime);
+    }
+    // ------------------------------------------------------------- Set up icons handlers
+    function armIcons() {
+        $(".zoom a").click(function (event) {
+            event.preventDefault();
+            actionRequest(this);
+        });
+        $("#commandzone a").click(function (event) {
+            event.preventDefault();
+            imageRequest(this);
+        });
+    }
 })
-// ------------------------------------------------------------- Zoom handler 
-function actionRequest(element) {
-    const theslide = $(element).closest('.list-group-item');
-    theslide.children('.details').toggle(slidingtime);
-}
 // ------------------------------------------------------------- Image move handler 
 function imageRequest(element) {
     let command = $(element).attr('id').split('-')[0];
@@ -99,17 +110,6 @@ function hideAll(slidingtime) {
     $('.details').each(function (index, element) {
         // element == this
         $(this).slideUp(slidingtime);            
-    });
-}
-// ------------------------------------------------------------- Set up icons handlers
-function armIcons() {
-    $(".zoom a").click(function (event) {
-        event.preventDefault();
-        actionRequest(this);
-    });
-    $("#commandzone a").click(function (event) {
-        event.preventDefault();
-        imageRequest(this);
     });
 }
 // -------------------------------------------------------------

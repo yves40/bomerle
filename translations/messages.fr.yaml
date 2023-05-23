@@ -178,7 +178,8 @@ admin:
     deleted: Show supprimé
     activeflag: Show activé
     inactiveflag: Show désactivé
-    sliderflag: Slider activé
+    sliderflag: Mode slider
+    galleryflag: Mode galerie
     nosliderflag: Pas de slider
     daterangeflag: Plage de dates activée
     nodaterangeflag: Pas de plage de dates
