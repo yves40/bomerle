@@ -6,6 +6,7 @@ $(document).ready(function () {
     // Some variables to handle show/hide
     const showall = $('#showall');
     const hideall = $('#hideall');
+    const slidename = $('#slide_show_name');        // Check existing or new slide show
     const slidermode = $('#slide_show_slider');     // Slider mode check box
     const gallerymode = $('#slide_show_gallery');   // gallery mode check box
     const daterange = $('#slide_show_daterange');   // Date restriction checkbox
@@ -24,18 +25,29 @@ $(document).ready(function () {
     daterange.click( (e)=> { manageDates();  })
     armIcons();
     // Set default show mode to slider
-    $(slidermode).prop('checked', true);
+    if($(slidename).val() == '') {
+        $(slidermode).prop('checked', true);
+    }
     // ----------------------------------------------------------------------------
     // Handle show mode actions
     // ----------------------------------------------------------------------------
     function manageShowMode(target) {
-        console.log(target);
         if(target == 's') { // Action on slider checkbox ?
-                $(gallerymode).prop('checked', false);
+                if($(slidermode).prop('checked')) {
+                    $(gallerymode).prop('checked', false);
+                }
+                else {
+                    $(gallerymode).prop('checked', true);
+                }
         }
         else {              // gallery check
-            $(slidermode).prop('checked', false);
-        }
+            if($(gallerymode).prop('checked')) {
+                $(slidermode).prop('checked', false);
+            }
+            else {
+                $(slidermode).prop('checked', true);
+            }
+    }
     }
     // ----------------------------------------------------------------------------
     // Handle date range activation
