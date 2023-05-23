@@ -21,12 +21,71 @@ $(document).ready(function () {
                 async: false,
                 success: function (response) {
                     console.log(response);
+                    if(response.slidermode) {
+                        buildImagesSlider(response.images, element);
+                    }
+                    else {
+                        buildImagesGallery(response.images, element);
+                    }
                 },
                 error: function (xhr) {
                     console.log(xhr);
                 }
             });    
-                })
+        })
     }
-
+    // ----------------------------------------
+    function buildImagesSlider(allimages, container) {
+        console.log(`Slider for ${allimages.length} images`);
+        console.log(`Container name is ${$(container).attr('name')}`);
+        const template = getSliderTemplate();
+        const div = $("<div>");
+        let span = $("<span>");
+        $(span).text(`Container name is ${$(container).attr('name')}`);
+        $(div).append(span);
+        $(container).append(div);
+    }
+    // ----------------------------------------
+    function buildImagesGallery(allimages, container) {
+        console.log(`Gallery for ${allimages.length} images`);
+        console.log(`Container name is ${$(container).attr('name')}`);
+        const template = geGalleryTemplate();
+        const div = $("<div>");
+        let span = $("<span>");
+        $(span).text(`Container name is ${$(container).attr('name')}`);
+        $(div).append(span);
+        $(container).append(div);
+    }
+    // ----------------------------------------
+    function getSliderTemplate() {
+        $.ajax({
+            url: '/bootadmin/slides/slidertemplate',
+            dataType: 'json',
+            success: function(data) {
+                // 'data' variable contains the HTML content of the file
+                console.log(data);
+                return data;
+            },
+            error: function(xhr, status, error) {
+                console.error(error);
+                return '';
+            }
+        }); 
+    }
+    // ----------------------------------------
+    function getGalleryTemplate() {
+        $.ajax({
+            url: '/bootadmin/slides/slidertemplate',
+            dataType: 'json',
+            success: function(data) {
+                // 'data' variable contains the HTML content of the file
+                console.log(data);
+                return data;
+            },
+            error: function(xhr, status, error) {
+                console.error(error);
+                return '';
+            }
+        }); 
+    }
 })

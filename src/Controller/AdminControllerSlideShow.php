@@ -365,6 +365,14 @@ class AdminControllerSlideShow extends AbstractController
         }
     }
     // --------------------------------------------------------------------------
+    #[Route('/slides/slidertemplate', name: 'bootadmin.slides.slidertemplates')]
+    public function getSliderTemplate(Request $request, EntityManagerInterface $em) {
+        $htmlContent = file_get_contents('templates/framework/Bslider.html');
+        return $this->json([
+            'template' => $htmlContent
+        ]);
+    }
+    // --------------------------------------------------------------------------
     // P R I V A T E     S E R V I C E S 
     // --------------------------------------------------------------------------
     private function selectSlideshow($slides) : SlideShow {
