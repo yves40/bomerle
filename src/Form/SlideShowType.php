@@ -19,6 +19,7 @@ class SlideShowType extends AbstractType
             ->add('description', TextareaType::class)
             ->add('active')
             ->add('slider')
+            ->add('gallery')
             ->add('daterange')
             ->add('datein')
             ->add('dateout')

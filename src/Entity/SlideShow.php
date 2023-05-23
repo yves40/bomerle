@@ -67,6 +67,9 @@ class SlideShow
     #[ORM\Column(nullable: true)]
     private ?bool $sunday = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?bool $gallery = null;
+
     public function __construct()
     {
         $this->slides = new ArrayCollection();
@@ -271,6 +274,18 @@ class SlideShow
     public function setSunday(?bool $sunday): self
     {
         $this->sunday = $sunday;
+
+        return $this;
+    }
+
+    public function isGallery(): ?bool
+    {
+        return $this->gallery;
+    }
+
+    public function setGallery(?bool $gallery): self
+    {
+        $this->gallery = $gallery;
 
         return $this;
     }

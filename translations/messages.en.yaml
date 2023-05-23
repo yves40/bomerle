@@ -171,6 +171,7 @@ admin:
     daterange: Date range ? 
     active: Active ?
     slider: Slider mode ?
+    gallery: Galery mode ?
     datein: Show active from (optional)
     dateout: Show active until (optional)
     created: Show created

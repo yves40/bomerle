@@ -6,14 +6,51 @@ $(document).ready(function () {
     // Some variables to handle show/hide
     const showall = $('#showall');
     const hideall = $('#hideall');
+    const slidermode = $('#slide_show_slider');     // Slider mode check box
+    const gallerymode = $('#slide_show_gallery');   // gallery mode check box
+    const daterange = $('#slide_show_daterange');   // Date restriction checkbox
+    const days = $('.days');                        // Days selection 
+    const thedates = $('.thedates');
     const slidingtime = $props.getSlidingTime();
     hideAll(slidingtime);
+    manageDates();
     // -------------------------
     // Arm click handlers
     // -------------------------
     showall.click( (e) => { e.preventDefault(); showAll(slidingtime); });
     hideall.click( (e) => { e.preventDefault(); hideAll(slidingtime); });
+    slidermode.click( (e) => { manageShowMode('s');  })
+    gallerymode.click( (e) => { manageShowMode('g');  })
+    daterange.click( (e)=> { manageDates();  })
     armIcons();
+    // Set default show mode to slider
+    $(slidermode).prop('checked', true);
+    // ----------------------------------------------------------------------------
+    // Handle show mode actions
+    // ----------------------------------------------------------------------------
+    function manageShowMode(target) {
+        console.log(target);
+        if(target == 's') { // Action on slider checkbox ?
+                $(gallerymode).prop('checked', false);
+        }
+        else {              // gallery check
+            $(slidermode).prop('checked', false);
+        }
+    }
+    // ----------------------------------------------------------------------------
+    // Handle date range activation
+    // ----------------------------------------------------------------------------
+    function manageDates() {
+        console.log($(daterange).prop('checked'));
+        if($(daterange).prop('checked')) {
+            $(thedates).slideDown(slidingtime);
+            $(days).slideDown(slidingtime);
+        }
+        else {
+            $(thedates).slideUp(slidingtime);
+            $(days).slideUp(slidingtime);
+        }
+    }
 })
 // ------------------------------------------------------------- Zoom handler 
 function actionRequest(element) {
