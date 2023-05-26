@@ -50,7 +50,7 @@ $(document).ready(function () {
     function buildImagesGallery(allimages, container) {
         console.log(`Gallery for ${allimages.length} images`);
         console.log(`Container name is ${$(container).attr('name')}`);
-        const template = geGalleryTemplate();
+        const template = getGalleryTemplate();
         const div = $("<div>");
         let span = $("<span>");
         $(span).text(`Container name is ${$(container).attr('name')}`);
