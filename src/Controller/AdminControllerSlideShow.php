@@ -11,6 +11,7 @@ use App\Services\DBlogger;
 use App\Services\Uploader;
 use App\Entity\SlideImages;
 use App\Form\SlideShowType;
+use App\Services\FileHandler;
 use App\Repository\SlideShowRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -366,8 +367,9 @@ class AdminControllerSlideShow extends AbstractController
     }
     // --------------------------------------------------------------------------
     #[Route('/slides/slidertemplate', name: 'bootadmin.slides.slidertemplates')]
-    public function getSliderTemplate(Request $request, EntityManagerInterface $em) {
-        $htmlContent = file_get_contents('templates/framework/Bslider.html');
+    public function getSliderTemplate(Request $request, EntityManagerInterface $em,
+                                FileHandler $fh) {
+        $htmlContent = $fh->getFileContent('templates/framework/Bslider.html');
         return $this->json([
             'template' => $htmlContent
         ]);

@@ -44,6 +44,7 @@ $(document).ready(function () {
         $(span).text(`Container name is ${$(container).attr('name')}`);
         $(div).append(span);
         $(container).append(div);
+        $(div).append(template);
     }
     // ----------------------------------------
     function buildImagesGallery(allimages, container) {
@@ -55,12 +56,14 @@ $(document).ready(function () {
         $(span).text(`Container name is ${$(container).attr('name')}`);
         $(div).append(span);
         $(container).append(div);
+        $(div).append(template);
     }
     // ----------------------------------------
     function getSliderTemplate() {
         $.ajax({
             url: '/bootadmin/slides/slidertemplate',
             dataType: 'json',
+            async: false,
             success: function(data) {
                 // 'data' variable contains the HTML content of the file
                 console.log(data);
