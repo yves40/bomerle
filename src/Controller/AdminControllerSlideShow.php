@@ -340,7 +340,7 @@ class AdminControllerSlideShow extends AbstractController
                 $monday = $tuesday = $wednesday = $thursday = $friday = $saturday = $sunday = false;
             }
             return $this->json([
-                'message' => 'bootadmin.slides.getdiapo OK',
+                'message' => 'bootadmin.slides.getdiapos OK',
                 'diaponame' => $diaponame,
                 'candidatescount' => $candidatescount,
                 'slidermode' => $slidermode,
