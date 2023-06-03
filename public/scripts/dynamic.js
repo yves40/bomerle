@@ -4,7 +4,7 @@
 $(document).ready(function () {
     $props.load();
     console.log(`[${$props.version()} ]` );
-    findDiapoSections();
+    findDiapoSections();    
     // ---------------------------------------- Find a dynamic section in the page
     function findDiapoSections() {
         $('.diapo').each( function (index, element) {
@@ -37,14 +37,21 @@ $(document).ready(function () {
     // ----------------------------------------
     function buildImagesSlider(allimages, container) {
         console.log(`Slider for ${allimages.length} images`);
-        console.log(`Container name is ${$(container).attr('name')}`);
-        const template = getSliderTemplate();
-        const div = $("<div>");
-        let span = $("<span>");
-        $(span).text(`Container name is ${$(container).attr('name')}`);
-        $(div).append(span);
-        $(container).append(div);
-        $(div).append(template);
+        const containername = $(container).attr('name');
+        console.log(`Container name is ${containername}`);
+        const divrefresh = $("<div>").addClass('container').addClass('text-center')
+                                                    .addClass('allimages');
+        $(divrefresh).attr('id', containername + 'zone');
+        const divrow = $('<div></div>').addClass('row');
+        for(let i = 0; i < allimages.length; ++i) {
+            let theimage = $("<img>").addClass('imagesmall')
+                            .attr('src', '/images/slideshow/' + allimages[i]);
+            $(divrow).append(theimage);
+            console.log(allimages[i]);
+        }
+        $(divrefresh).append(divrow);
+        $(container).append(divrefresh);
+        // getSliderTemplate(container);
     }
     // ----------------------------------------
     function buildImagesGallery(allimages, container) {
@@ -59,15 +66,36 @@ $(document).ready(function () {
         $(div).append(template);
     }
     // ----------------------------------------
-    function getSliderTemplate() {
+    function getSliderTemplate(container) {
         $.ajax({
             url: '/bootadmin/slides/slidertemplate',
             dataType: 'json',
             async: false,
             success: function(data) {
                 // 'data' variable contains the HTML content of the file
-                console.log(data);
-                return data;
+                const div = $("<div>");
+                let span = $("<span>");
+                $(span).text(`Container name is ${$(container).attr('name')}`);
+                $(div).append(span);
+                const sliderzone = $("<div>").addClass('carousel').addClass('slide');
+                $(sliderzone).attr('id', 'sliderzone');
+                const inner = $('<div></div>').addClass('carousel-inner');
+                const indicators = $('<div></div>').addClass('carousel-indicators');
+                const spanprev = $('<span></span>').addClass('carousel-control-prev-icon');
+                const spannext = $('<span></span>').addClass('carousel-control-next-icon');
+                const buttonprev = $('<button></button>').addClass('carousel-control-prev').
+                                                            addClass('slidercontrol').
+                                                            append(spanprev);
+                const buttonnext = $('<button></button>').addClass('carousel-control-next').
+                                                            addClass('slidercontrol').
+                                                            append(spannext);
+                $(sliderzone).append(inner)
+                                .append(indicators)
+                                .append(buttonprev)
+                                .append(buttonnext);
+
+                $(div).append(sliderzone);
+                $(container).append(div);
             },
             error: function(xhr, status, error) {
                 console.error(error);
