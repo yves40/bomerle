@@ -199,21 +199,7 @@ $(document).ready(function () {
         $(element).empty();
         smonth = parseInt(selectedmonth);
         syear = parseInt(selectedyear);
-        let daylimit = 31;
-        switch(smonth) {
-            case 4:
-            case 6:
-            case 9:
-            case 11:
-                    daylimit = 30;
-                    break;
-            case 2:
-                if(isLeapYear(selectedyear)) { daylimit = 29; }
-                else { daylimit = 28;}    
-                break;
-            default:
-                daylimit = 31;
-        }
+        let daylimit = new Date(year, month + 1, 0).getDate();
         // Final check to remove days over current day if year and month are the same
         if(nofuture) {
             if((smonth === today.m)&&(syear === today.y)) {
