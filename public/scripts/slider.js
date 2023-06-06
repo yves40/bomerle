@@ -86,16 +86,6 @@ $(document).ready(function () {
             $(slides).append(item);
         });
     }
-    // ----------------------------------------------------------------------------
-    // Add images to the slider
-    // ----------------------------------------------------------------------------
-    function removeImages() {
-        $('.carousel-inner').remove();
-        $('.carousel-indicators button').each(function (index, element) {
-            // element == this
-            $(this).remove();
-        });
-    }
     // --------------------------------------------------------------------------------------
     // Fullscreen image preview function selecting all required elements
     // --------------------------------------------------------------------------------------

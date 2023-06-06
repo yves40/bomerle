@@ -36,22 +36,11 @@ $(document).ready(function () {
     }
     // ----------------------------------------
     function buildImagesSlider(allimages, container) {
+        console.log(`Container name is ${$(container).attr('name')}`);
         console.log(`Slider for ${allimages.length} images`);
-        const containername = $(container).attr('name');
-        console.log(`Container name is ${containername}`);
-        const divrefresh = $("<div>").addClass('container').addClass('text-center')
-                                                    .addClass('allimages');
-        $(divrefresh).attr('id', containername + 'zone');
-        const divrow = $('<div></div>').addClass('row');
-        for(let i = 0; i < allimages.length; ++i) {
-            let theimage = $("<img>").addClass('imagesmall')
-                            .attr('src', '/images/slideshow/' + allimages[i]);
-            $(divrow).append(theimage);
-            console.log(allimages[i]);
-        }
-        $(divrefresh).append(divrow);
-        $(container).append(divrefresh);
-        // getSliderTemplate(container);
+        // get a slider 
+        let slider = new Slider(container);     // Build the slider frame
+        slider.addImages(allimages);
     }
     // ----------------------------------------
     function buildImagesGallery(allimages, container) {

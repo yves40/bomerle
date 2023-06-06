@@ -10,6 +10,7 @@
 //    Feb 21 2023 Authentication email stored in client
 //    Feb 22 2023 Start work on slider
 //    Feb 23 2023 Work on slider
+//    Jun 05 2023 Work on slider class
 //----------------------------------------------------------------------------
 const $props = ( () => {
   const allprops = {
@@ -19,6 +20,7 @@ const $props = ( () => {
     knifehandler: 'knife.js Feb 08 2023, 1.05 ',
     datehandler: 'twigdate.js Feb 16 2023, 1.02 ',
     sliderhandler: 'slider.js Feb 24 2023, 1.06 ',
+    sliderclass: 'slider Class.js Jun 05 2023, 1.00 ',
     logshandler: 'logs.js Mar 26 2023, 1.08 ',
     knivesimageslocation: '%kernel.project_dir%/public/images/knife',
     logspagesize: 20,
@@ -37,6 +39,7 @@ const $props = ( () => {
     knifehandler: () => { return allprops.knifehandler; },
     datehandler: () => { return allprops.datehandler; },
     sliderhandler: () => { return allprops.sliderhandler; },
+    sliderclass: () => { return allprops.sliderclass; },
     logshandler: () => { return allprops.logshandler; },
     knivesimageslocation: () => { return allprops.knivesimageslocation; },
     imageavgloadtime: () => { return dynprops['imageavgloadtime']; },
