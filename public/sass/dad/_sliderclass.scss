@@ -20,13 +20,15 @@
   background-color: white;
   border: 2px green solid;
 }
+
+
 .zoomon {
   position: absolute;
   top: 0; left:0; height: 100%; width: 100%;
   border-radius: 20px;
   background-position: center;
   background-repeat: no-repeat;
-  background-size: contain;
+  background-size: cover;
   animation-duration: 1.2s;
   animation-timing-function: linear;
   animation-name: fadein;

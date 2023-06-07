@@ -106,7 +106,7 @@
   border-radius: 20px;
   background-position: center;
   background-repeat: no-repeat;
-  background-size: contain;
+  background-size: cover;
   animation-duration: 1.2s;
   animation-timing-function: linear;
   animation-name: fadein; }

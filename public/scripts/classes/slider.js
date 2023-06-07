@@ -10,13 +10,15 @@ class Slider {
 
   constructor(container) {
     // Init
-      this.version = 'Slider:1.04, Jun 07 2023 ';
+      this.version = 'Slider:1.05, Jun 07 2023 ';
       this.container = container;
       this.containername = $(container).attr('name');
       this.slideinterval = 2000;
       this.homezone = `${this.containername}-zone`;
       this.indicators = `${this.containername}-indicators`;   // Used to manage inidicators when sliding
       this.sliderarea = `${this.containername}-area`;
+      this.windowx = $(window).width();
+      this.windowy = $(window).height();
 
       console.log(`[ ${$props.sliderclass()}  ]` );
       // Slider parameters
@@ -27,6 +29,12 @@ class Slider {
       }
       this.buildSliderFrame(container);
 
+      // Initialize handlers
+      $(window).resize ( () =>  {
+        this.windowx = $(window).width();
+        this.windowy = $(window).height();
+        console.log(`Resized new width : ${this.windowx}`);
+      });
       // const mousehovermsg = $(".sliderdata").data('mousehovermsg');
       // const mouseoutmsg = $(".sliderdata").data('mouseoutmsg');
       // const sliderstatus = $("#sliderstatus p");
