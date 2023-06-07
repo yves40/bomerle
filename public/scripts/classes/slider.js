@@ -3,13 +3,14 @@
 
     jun 05 2023     Initial
     jun 06 2023     Build the code
+    jun 07 2023     Slider and zoom
 
     ----------------------------------------------------------------------------*/
 class Slider {
 
   constructor(container) {
     // Init
-      this.version = 'Slider:1.03, Jun 06 2023 ';
+      this.version = 'Slider:1.04, Jun 07 2023 ';
       this.container = container;
       this.containername = $(container).attr('name');
       this.slideinterval = 2000;
@@ -65,6 +66,7 @@ class Slider {
 
       $(div).append(sliderzone);
       $(container).append(div);
+      $(container).append($('<div></div>').attr('id', 'fullscreen').addClass('zoomoff'));
   }
   // ------------------------------------------------------------------------------------------------
   addImages(allimages) {
@@ -97,7 +99,20 @@ class Slider {
   }
   // ------------------------------------------------------------------------------------------------
   fullScreen(imagesrc) {
-    console.log(`Clicked on ${imagesrc}`);
+    console.log(`Zoom on ${imagesrc}`);
+    // Remove body scroll bar so user cant scroll up or down
+    // $("body").css("overflow", "hidden");
+    $("#fullscreen").css("background-image", "url(/images/slideshow/" + imagesrc + ")");
+    $("#fullscreen").addClass("zoomon").removeClass('zoomoff');
+    $(`#${this.indicators}`).hide();
+    $(".slidercontrol").hide();
+    // Wait for the user to close the box
+    $("#fullscreen").click( () => { 
+      $("#fullscreen").removeClass("zoomon")
+                      .addClass('zoomoff');
+      $(`#${this.indicators}`).show();
+      $(".slidercontrol").show();
+      $("body").css("overflow", "auto");
+    });
   }
-
 }

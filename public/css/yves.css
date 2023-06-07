@@ -93,8 +93,9 @@
     height: auto;
     border-radius: 10px; }
 
-.fullscreen {
-  background-color: white; }
+#fullscreen {
+  background-color: white;
+  border: 2px green solid; }
 
 .zoomon {
   position: absolute;
