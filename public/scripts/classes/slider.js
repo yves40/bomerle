@@ -48,12 +48,16 @@ class Slider {
       const indicators = $('<div></div>').attr('id', this.indicators).addClass('carousel-indicators');
       const spanprev = $('<span></span>').addClass('carousel-control-prev-icon');
       const spannext = $('<span></span>').addClass('carousel-control-next-icon');
-      const buttonprev = $('<button></button>').addClass('carousel-control-prev').
-                                                  addClass('slidercontrol').
-                                                  append(spanprev);
-      const buttonnext = $('<button></button>').addClass('carousel-control-next').
-                                                  addClass('slidercontrol').
-                                                  append(spannext);
+      const buttonprev = $('<button></button>').addClass('carousel-control-prev')
+                                                  .addClass('slidercontrol')
+                                                  .attr('data-bs-target', `#${this.homezone}`)
+                                                  .attr('data-bs-slide', 'prev')
+                                                  .append(spanprev);
+      const buttonnext = $('<button></button>').addClass('carousel-control-next')
+                                                  .addClass('slidercontrol')
+                                                  .attr('data-bs-target', `#${this.homezone}`)
+                                                  .attr('data-bs-slide', 'next')
+                                                  .append(spannext);
       $(sliderzone).append(inner)
                       .append(indicators)
                       .append(buttonprev)
@@ -71,10 +75,10 @@ class Slider {
       let item = $("<div>").addClass('carousel-item');
       $(item).attr('data-bs-interval', this.slideinterval);
       let caption = $("<div>").addClass('carousel-caption');
-      let h3 = $("<div><h3").text(`${i+1}/${allimages.length}`);
+      let h3 = $("<h5></h5>").text(`${i+1}/${allimages.length}`);
       caption.append(h3);
       let buttonindicator = $("<button>").attr('type', 'button');
-      buttonindicator.attr('data-bs-target', this.sliderarea).attr('data-bs-slide-to', i); 
+      buttonindicator.attr('data-bs-target', `#${this.homezone}` ).attr('data-bs-slide-to', i); 
       if(i === 0) {
         $(item).addClass('active');
         buttonindicator.addClass('active');

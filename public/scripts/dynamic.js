@@ -40,7 +40,7 @@ $(document).ready(function () {
         console.log(`Slider for ${allimages.length} images`);
         // get a slider 
         let slider = new Slider(container);     // Build the slider frame
-        slider.addImages(allimages);
+        slider.addImages(allimages);            // Load images
     }
     // ----------------------------------------
     function buildImagesGallery(allimages, container) {
