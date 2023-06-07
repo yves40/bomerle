@@ -73,16 +73,21 @@ class Slider {
       let caption = $("<div>").addClass('carousel-caption');
       let h3 = $("<div><h3").text(`${i+1}/${allimages.length}`);
       caption.append(h3);
+      let buttonindicator = $("<button>").attr('type', 'button');
+      buttonindicator.attr('data-bs-target', this.sliderarea).attr('data-bs-slide-to', i); 
       if(i === 0) {
         $(item).addClass('active');
-      }      
+        buttonindicator.addClass('active');
+      }
+      const indic = $(`#${this.indicators}`);
+      indic.append(buttonindicator);
       let newimg = $('<img>').addClass('sliderimage').attr('src', "/images/slideshow/"+allimages[i]);
       $(newimg).click( (e) => { // Arrow function mandatory here to use this
         e.preventDefault();
         this.fullScreen(allimages[i]);
       });
-      $(item).append(newimg);
       item.append(caption);
+      $(item).append(newimg);
       $(slides).append(item);      
     }
   }
