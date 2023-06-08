@@ -4,13 +4,14 @@
     jun 05 2023     Initial
     jun 06 2023     Build the code
     jun 07 2023     Slider and zoom
+    jun 08 2023     Slider and zoom, cont
 
     ----------------------------------------------------------------------------*/
 class Slider {
 
   constructor(container) {
     // Init
-      this.version = 'Slider:1.05, Jun 07 2023 ';
+      this.version = 'Slider:1.06, Jun 08 2023 ';
       this.container = container;
       this.containername = $(container).attr('name');
       this.slideinterval = 2000;
@@ -19,6 +20,8 @@ class Slider {
       this.sliderarea = `${this.containername}-area`;
       this.windowx = $(window).width();
       this.windowy = $(window).height();
+      this.zoomactive = false;
+      this.currentzoom = '';
 
       console.log(`[ ${$props.sliderclass()}  ]` );
       // Slider parameters
@@ -31,6 +34,9 @@ class Slider {
 
       // Initialize handlers
       $(window).resize ( () =>  {
+        if(this.zoomactive) {
+          this.fullScreen(this.currentzoom);
+        }
         this.windowx = $(window).width();
         this.windowy = $(window).height();
         console.log(`Resized new width : ${this.windowx}`);
@@ -108,19 +114,30 @@ class Slider {
   // ------------------------------------------------------------------------------------------------
   fullScreen(imagesrc) {
     console.log(`Zoom on ${imagesrc}`);
+    if(!this.zoomactive) {
+      this.zoomactive = true;
+      this.currentzoom = imagesrc;
+    }
     // Remove body scroll bar so user cant scroll up or down
-    // $("body").css("overflow", "hidden");
+    $("body").css("overflow", "hidden");
+    // Position the zoom 
+    const top = window.scrollY;
     $("#fullscreen").css("background-image", "url(/images/slideshow/" + imagesrc + ")");
+    $("#fullscreen").css({'top': top, 'left': 0, 'z-index': 1000});
     $("#fullscreen").addClass("zoomon").removeClass('zoomoff');
+    // Hide a few things
     $(`#${this.indicators}`).hide();
     $(".slidercontrol").hide();
+
     // Wait for the user to close the box
     $("#fullscreen").click( () => { 
+      this.zoomactive = false;
       $("#fullscreen").removeClass("zoomon")
                       .addClass('zoomoff');
       $(`#${this.indicators}`).show();
       $(".slidercontrol").show();
       $("body").css("overflow", "auto");
+      $('.diapo').show();
     });
   }
 }
