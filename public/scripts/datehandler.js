@@ -199,7 +199,7 @@ $(document).ready(function () {
         $(element).empty();
         smonth = parseInt(selectedmonth);
         syear = parseInt(selectedyear);
-        let daylimit = new Date(year, month + 1, 0).getDate();
+        let daylimit = new Date(syear, smonth, 0).getDate();
         // Final check to remove days over current day if year and month are the same
         if(nofuture) {
             if((smonth === today.m)&&(syear === today.y)) {
