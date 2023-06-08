@@ -9,7 +9,6 @@ $(document).ready(function () {
     function findDiapoSections() {
         $('.diapo').each( function (index, element) {
             let name = $(this).attr('name');
-            console.log(`Diapo element : ${name}`)
             const payload = {
                 "diaponame" :  name,
             }
@@ -20,7 +19,7 @@ $(document).ready(function () {
                 dataType: "json",
                 async: false,
                 success: function (response) {
-                    console.log(response);
+                    // console.log(response);
                     if(response.slidermode) {
                         buildImagesSlider(response.images, element);
                     }
@@ -36,8 +35,7 @@ $(document).ready(function () {
     }
     // ----------------------------------------
     function buildImagesSlider(allimages, container) {
-        console.log(`Container name is ${$(container).attr('name')}`);
-        console.log(`Slider for ${allimages.length} images`);
+        console.log(`Container name is ${$(container).attr('name')} for ${allimages.length} images`);
         // get a slider 
         let slider = new Slider(container);     // Build the slider frame
         slider.addImages(allimages);            // Load images

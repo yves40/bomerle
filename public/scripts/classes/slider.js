@@ -22,8 +22,6 @@ class Slider {
       this.windowy = $(window).height();
       this.zoomactive = false;
       this.currentzoom = '';
-
-      console.log(`[ ${$props.sliderclass()}  ]` );
       // Slider parameters
       const VERYLONGTIMESLIDER = 60000;
       const automove = true;        // manage later
@@ -39,7 +37,7 @@ class Slider {
         }
         this.windowx = $(window).width();
         this.windowy = $(window).height();
-        console.log(`Resized new width : ${this.windowx}`);
+        // console.log(`Resized new width : ${this.windowx}`);
       });
       // const mousehovermsg = $(".sliderdata").data('mousehovermsg');
       // const mouseoutmsg = $(".sliderdata").data('mouseoutmsg');
@@ -87,7 +85,7 @@ class Slider {
     // Get the container
     const slides = $(`#${this.sliderarea}`);
     for(let i = 0; i < allimages.length; ++i) {
-      console.log(`${this.version} Adding image ${allimages[i]} to the slider`);
+      // console.log(`${this.version} Adding image ${allimages[i]} to the slider`);
       let item = $("<div>").addClass('carousel-item');
       $(item).attr('data-bs-interval', this.slideinterval);
       let caption = $("<div>").addClass('carousel-caption');
@@ -115,7 +113,6 @@ class Slider {
   }
   // ------------------------------------------------------------------------------------------------
   fullScreen(imagesrc) {
-    console.log(`Zoom on ${imagesrc}`);
     if(!this.zoomactive) {
       this.zoomactive = true;
       this.currentzoom = imagesrc;

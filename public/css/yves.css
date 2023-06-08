@@ -79,10 +79,23 @@
   .sliderimage {
     max-width: 1920px; } }
 
-.sliderframe {
-  margin: auto;
-  border: 1px solid red;
-  width: calc(100vh/3); }
+@media screen and (max-width: 1024px) {
+  .sliderframe {
+    margin: auto;
+    border: 1px solid red;
+    width: calc(100vh/3); } }
+
+@media screen and (min-width: 1024px) and (max-width: 1920px) {
+  .sliderframe {
+    margin: auto;
+    border: 1px solid green;
+    width: calc(100vh/2); } }
+
+@media screen and (min-width: 1920px) {
+  .sliderframe {
+    margin: auto;
+    border: 1px solid blue;
+    width: calc(100vh/2); } }
 
 .sliderarea {
   position: relative;

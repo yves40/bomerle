@@ -1,9 +1,25 @@
 @import './const';
 
-.sliderframe {
+@media screen and (max-width: $smallsize) { 
+  .sliderframe {
     margin: auto;
     border: 1px solid red;
     width: calc(100vh/3);
+  }
+}
+@media screen and (min-width: $smallsize) and (max-width: $bigsize) { 
+  .sliderframe {
+    margin: auto;
+    border: 1px solid green;
+    width: calc(100vh/2);
+  }
+}
+@media screen and (min-width: $bigsize) { 
+  .sliderframe {
+    margin: auto;
+    border: 1px solid blue;
+    width: calc(100vh/2);
+  }
 }
 
 .sliderarea {
