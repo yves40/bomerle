@@ -94,14 +94,16 @@ class Slider {
       let h3 = $("<h5></h5>").text(`${i+1}/${allimages.length}`);
       caption.append(h3);
       let buttonindicator = $("<button>").attr('type', 'button');
-      buttonindicator.attr('data-bs-target', `#${this.homezone}` ).attr('data-bs-slide-to', i); 
+      buttonindicator.attr('data-bs-target', `#${this.homezone}` )
+                        .attr('data-bs-slide-to', i); 
       if(i === 0) {
         $(item).addClass('active');
         buttonindicator.addClass('active');
       }
       const indic = $(`#${this.indicators}`);
       indic.append(buttonindicator);
-      let newimg = $('<img>').addClass('sliderimage').attr('src', "/images/slideshow/"+allimages[i]);
+      let newimg = $('<img>').addClass('sliderimage rounded')
+      .attr('src', "/images/slideshow/"+allimages[i]);
       $(newimg).click( (e) => { // Arrow function mandatory here to use this
         e.preventDefault();
         this.fullScreen(allimages[i]);
