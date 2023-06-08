@@ -82,7 +82,6 @@
 .sliderframe {
   margin: auto;
   border: 1px solid red;
-  border-radius: 10px;
   width: calc(100vh/3); }
 
 .sliderarea {
@@ -90,8 +89,7 @@
   margin: 0 auto; }
   .sliderarea .sliderimage {
     width: 100%;
-    height: auto;
-    border-radius: 10px; }
+    height: auto; }
 
 #fullscreen {
   background-color: white;
