@@ -5,16 +5,17 @@
     jun 06 2023     Build the code
     jun 07 2023     Slider and zoom
     jun 08 2023     Slider and zoom, cont
+    jun 09 2023     Add slider timing set into the UI
 
     ----------------------------------------------------------------------------*/
 class Slider {
 
-  constructor(container) {
+  constructor(container, timing = 2) {
     // Init
-      this.version = 'Slider:1.06, Jun 08 2023 ';
+      this.version = 'Slider:1.07, Jun 09 2023 ';
       this.container = container;
       this.containername = $(container).attr('name');
-      this.slideinterval = 2000;
+      this.slideinterval = timing * 1000;
       this.homezone = `${this.containername}-zone`;
       this.indicators = `${this.containername}-indicators`;   // Used to manage inidicators when sliding
       this.sliderarea = `${this.containername}-area`;

@@ -170,8 +170,9 @@ admin:
     description: Description
     daterange: Date range ? 
     active: Active ?
-    slider: Slider mode ?
-    gallery: Galery mode ?
+    slider: Slider mode
+    timing: Slider delay (sec)
+    gallery: Galery mode
     datein: Show active from (optional)
     dateout: Show active until (optional)
     created: Show created

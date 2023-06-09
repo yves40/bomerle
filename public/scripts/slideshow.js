@@ -12,6 +12,7 @@ $(document).ready(function () {
     const daterange = $('#slide_show_daterange');   // Date restriction checkbox
     const days = $('.days');                        // Days selection 
     const thedates = $('.thedates');
+    const sliderdelay = $('#sliderdelay');
     const slidingtime = $props.getSlidingTime();
     hideAll(slidingtime);
     manageDates();
@@ -33,14 +34,16 @@ $(document).ready(function () {
     // ----------------------------------------------------------------------------
     function manageShowMode(target) {
         if(target == 's') { // Action on slider checkbox ?
-                if($(slidermode).prop('checked')) {
-                    $(gallerymode).prop('checked', false);
-                }
-                else {
-                    $(gallerymode).prop('checked', true);
-                }
+            $(sliderdelay).fadeIn(700);
+            if($(slidermode).prop('checked')) {
+                $(gallerymode).prop('checked', false);
+            }
+            else {
+                $(gallerymode).prop('checked', true);
+            }
         }
         else {              // gallery check
+            $(sliderdelay).fadeOut(700);
             if($(gallerymode).prop('checked')) {
                 $(slidermode).prop('checked', false);
             }

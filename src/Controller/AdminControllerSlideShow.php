@@ -314,6 +314,7 @@ class AdminControllerSlideShow extends AbstractController
             $images = [];
             if($selectedslide->getId()) {    // One valid slide show selected ?
                 $slidermode = $selectedslide->isSlider();
+                $timing = $selectedslide->getTiming();
                 $daterange = $selectedslide->isDaterange();
                 $datein = $selectedslide->getDatein();
                 $dateout = $selectedslide->getDateout();
@@ -344,6 +345,7 @@ class AdminControllerSlideShow extends AbstractController
                 'diaponame' => $diaponame,
                 'candidatescount' => $candidatescount,
                 'slidermode' => $slidermode,
+                'timing' => $timing,
                 'daterange' => $daterange,
                 'datein' => $datein,
                 'dateout' => $dateout,

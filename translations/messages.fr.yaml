@@ -169,8 +169,9 @@ admin:
     description: Description
     daterange: Plage de dates ? 
     active: Actif ?
-    slider: Mode slider ?
-    gallery: Mode Galerie ?
+    slider: Mode slider
+    timing: Délai du slider (sec)
+    gallery: Mode Galerie
     datein: Show actif à partir (optionnel)
     dateout: Show actif jusqu'au (optionnel)
     created: Show créé

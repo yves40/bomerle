@@ -19,12 +19,15 @@ $(document).ready(function () {
                 dataType: "json",
                 async: false,
                 success: function (response) {
-                    // console.log(response);
+                    console.log(response);
                     if(response.slidermode) {
-                        buildImagesSlider(response.images, element);
+                        if(response.timing === null) {
+                            response.timing = 2;
+                        }
+                        buildImagesSlider(response.images, response.timing, element);
                     }
                     else {
-                        buildImagesGallery(response.images, element);
+                        buildImagesGallery(response.images,  element);
                     }
                 },
                 error: function (xhr) {
@@ -34,11 +37,11 @@ $(document).ready(function () {
         })
     }
     // ----------------------------------------
-    function buildImagesSlider(allimages, container) {
+    function buildImagesSlider(allimages, timing, container) {
         console.log(`Container name is ${$(container).attr('name')} for ${allimages.length} images`);
         // get a slider 
-        let slider = new Slider(container);     // Build the slider frame
-        slider.addImages(allimages);            // Load images
+        let slider = new Slider(container, timing);     // Build the slider frame
+        slider.addImages(allimages);                    // Load images
     }
     // ----------------------------------------
     function buildImagesGallery(allimages, container) {

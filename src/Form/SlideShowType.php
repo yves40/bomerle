@@ -23,6 +23,7 @@ class SlideShowType extends AbstractType
             ->add('daterange')
             ->add('datein')
             ->add('dateout')
+            ->add('timing')
             ->add('monday')->add('tuesday')->add('wednesday')
             ->add('thursday')->add('friday')
             ->add('saturday')->add('sunday')

@@ -70,6 +70,9 @@ class SlideShow
     #[ORM\Column(nullable: true)]
     private ?bool $gallery = null;
 
+    #[ORM\Column(type: Types::SMALLINT, nullable: true)]
+    private ?int $timing = null;
+
     public function __construct()
     {
         $this->slides = new ArrayCollection();
@@ -286,6 +289,18 @@ class SlideShow
     public function setGallery(?bool $gallery): self
     {
         $this->gallery = $gallery;
+
+        return $this;
+    }
+
+    public function getTiming(): ?int
+    {
+        return $this->timing;
+    }
+
+    public function setTiming(?int $timing): self
+    {
+        $this->timing = $timing;
 
         return $this;
     }
