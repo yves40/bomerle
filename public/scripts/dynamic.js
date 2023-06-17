@@ -39,21 +39,14 @@ $(document).ready(function () {
     // ----------------------------------------
     function buildImagesSlider(allimages, timing, container) {
         console.log(`Container name is ${$(container).attr('name')} for ${allimages.length} images`);
-        // get a slider 
         let slider = new Slider(container, timing);     // Build the slider frame
         slider.addImages(allimages);                    // Load images
     }
     // ----------------------------------------
     function buildImagesGallery(allimages, container) {
-        console.log(`Gallery for ${allimages.length} images`);
-        console.log(`Container name is ${$(container).attr('name')}`);
-        const template = getGalleryTemplate();
-        const div = $("<div>");
-        let span = $("<span>");
-        $(span).text(`Container name is ${$(container).attr('name')}`);
-        $(div).append(span);
-        $(container).append(div);
-        $(div).append(template);
+        console.log(`Container name is ${$(container).attr('name')} for ${allimages.length} images`);
+        let gallery = new Gallery(container);
+        gallery.addImages(allimages);
     }
     // ----------------------------------------
     function getSliderTemplate(container) {

@@ -137,6 +137,26 @@
   100% {
     opacity: 1; } }
 
+.gallery {
+  max-width: 1000px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2vmin;
+  padding: 0 14px;
+  list-style-type: none; }
+  .gallery li {
+    height: 250px;
+    flex-grow: 1; }
+  .gallery img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; }
+  .gallery ::after {
+    content: "";
+    display: block;
+    flex-grow: 10; }
+
 .feedback {
   color: red;
   border: 1px solid blue;
