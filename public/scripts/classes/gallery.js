@@ -3,14 +3,16 @@
 
     jun 17 2023     Initial
     jun 18 2023     Add div and text to the gallery template
+    jun 19 2023     Get slideshow description text
 
 ----------------------------------------------------------------------------*/
 class Gallery {
 
-    constructor(container) {
+    constructor(container, description) {
         // Init
-        this.version = 'Gallery:1.01, Jun 18 2023 ';
+        this.version = 'Gallery:1.02, Jun 19 2023 ';
         this.container = container;
+        this.description = description;
         this.containername = $(container).attr('name');
         this.gallery = `${this.containername}-zone`;
         this.galleryarea = `${this.containername}-area`;
@@ -20,7 +22,7 @@ class Gallery {
     buildGalleryFrame(container) {
         const galleryzone = $("<div>").addClass('galleryzone');
         const gallerytext = $("<div>").addClass('gallerytext');
-        const spantext = $('<span>').text('Ceci est un texte bidon');
+        const spantext = $('<span>').text(this.description);
         $(gallerytext).append(spantext);
         const gallery = $("<ul>").attr('id', this.gallery).addClass('gallery')
         $(galleryzone).append(gallerytext);

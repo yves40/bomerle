@@ -27,7 +27,7 @@ $(document).ready(function () {
                         buildImagesSlider(response.images, response.timing, element);
                     }
                     else {
-                        buildImagesGallery(response.images,  element);
+                        buildImagesGallery(response.images, response.description,  element);
                     }
                 },
                 error: function (xhr) {
@@ -43,63 +43,9 @@ $(document).ready(function () {
         slider.addImages(allimages);                    // Load images
     }
     // ----------------------------------------
-    function buildImagesGallery(allimages, container) {
+    function buildImagesGallery(allimages, description,  container) {
         console.log(`Container name is ${$(container).attr('name')} for ${allimages.length} images`);
-        let gallery = new Gallery(container);
+        let gallery = new Gallery(container, description);
         gallery.addImages(allimages);
-    }
-    // ----------------------------------------
-    function getSliderTemplate(container) {
-        $.ajax({
-            url: '/bootadmin/slides/slidertemplate',
-            dataType: 'json',
-            async: false,
-            success: function(data) {
-                // 'data' variable contains the HTML content of the file
-                const div = $("<div>");
-                let span = $("<span>");
-                $(span).text(`Container name is ${$(container).attr('name')}`);
-                $(div).append(span);
-                const sliderzone = $("<div>").addClass('carousel').addClass('slide');
-                $(sliderzone).attr('id', 'sliderzone');
-                const inner = $('<div></div>').addClass('carousel-inner');
-                const indicators = $('<div></div>').addClass('carousel-indicators');
-                const spanprev = $('<span></span>').addClass('carousel-control-prev-icon');
-                const spannext = $('<span></span>').addClass('carousel-control-next-icon');
-                const buttonprev = $('<button></button>').addClass('carousel-control-prev').
-                                                            addClass('slidercontrol').
-                                                            append(spanprev);
-                const buttonnext = $('<button></button>').addClass('carousel-control-next').
-                                                            addClass('slidercontrol').
-                                                            append(spannext);
-                $(sliderzone).append(inner)
-                                .append(indicators)
-                                .append(buttonprev)
-                                .append(buttonnext);
-
-                $(div).append(sliderzone);
-                $(container).append(div);
-            },
-            error: function(xhr, status, error) {
-                console.error(error);
-                return '';
-            }
-        }); 
-    }
-    // ----------------------------------------
-    function getGalleryTemplate() {
-        $.ajax({
-            url: '/bootadmin/slides/slidertemplate',
-            dataType: 'json',
-            success: function(data) {
-                // 'data' variable contains the HTML content of the file
-                console.log(data);
-                return data;
-            },
-            error: function(xhr, status, error) {
-                console.error(error);
-                return '';
-            }
-        }); 
     }
 })

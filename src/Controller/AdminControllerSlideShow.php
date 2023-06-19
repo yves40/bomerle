@@ -325,6 +325,7 @@ class AdminControllerSlideShow extends AbstractController
                 $friday = $selectedslide->isFriday();
                 $saturday = $selectedslide->isSaturday();
                 $sunday = $selectedslide->isSunday();
+                $text = $selectedslide->getDescription();
                 // Slide show selected, get images
                 $imglist = $em->getRepository(SlideImages::class)->findSlideshowImagesByRank($selectedslide);
                 foreach($imglist as $img){
@@ -339,10 +340,12 @@ class AdminControllerSlideShow extends AbstractController
                 $daterange = false;
                 $datein = $dateout = $currentDate;
                 $monday = $tuesday = $wednesday = $thursday = $friday = $saturday = $sunday = false;
+                $text = '';
             }
             return $this->json([
                 'message' => 'bootadmin.slides.getdiapos OK',
                 'diaponame' => $diaponame,
+                'description' => $text,
                 'candidatescount' => $candidatescount,
                 'slidermode' => $slidermode,
                 'timing' => $timing,
