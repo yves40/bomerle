@@ -20,7 +20,7 @@ class SlideShow
 
     #[ORM\Column(length: 64)]
     #[Assert\NotBlank(message: "generic.notempty")]
-    #[Assert\Regex('/^\w+$/', message: 'admin.manageslides.singleword')]   
+    #[Assert\Regex( '/^(\w|\w-\w)+$/', message: 'admin.manageslides.singleword')]   
     private ?string $name = null;
 
     #[ORM\Column]
