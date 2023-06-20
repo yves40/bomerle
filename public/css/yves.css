@@ -82,24 +82,20 @@
 @media screen and (max-width: 1024px) {
   .sliderframe {
     margin: auto;
-    border: 1px solid red;
     width: calc(100vh/3); } }
 
 @media screen and (min-width: 1024px) and (max-width: 1920px) {
   .sliderframe {
     margin: auto;
-    border: 1px solid green;
     width: calc(100vh/2); } }
 
 @media screen and (min-width: 1920px) {
   .sliderframe {
     margin: auto;
-    border: 1px solid blue;
     width: calc(100vh/2); } }
 
 .sliderarea {
-  position: relative;
-  margin: 0 auto; }
+  margin: 1em auto; }
   .sliderarea .sliderimage {
     width: 100%;
     height: auto; }

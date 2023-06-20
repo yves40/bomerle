@@ -47,10 +47,7 @@ class Slider {
   }
   // ------------------------------------------------------------------------------------------------
   buildSliderFrame(container) {
-      const div = $("<div>");
-      let span = $("<span>");
-      $(span).text(`Container name is ${this.containername}`);
-      $(div).append(span);
+      // const div = $("<div>");
       const sliderzone = $("<div>").attr('id', this.homezone)
                                           .addClass('carousel')
                                           .addClass('slide')
@@ -77,8 +74,8 @@ class Slider {
                       .append(buttonprev)
                       .append(buttonnext);
 
-      $(div).append(sliderzone);
-      $(container).append(div);
+      $(container).append(sliderzone);
+      // $(container).append(div);
       $(container).append($('<div></div>').attr('id', 'fullscreen').addClass('zoomoff'));
   }
   // ------------------------------------------------------------------------------------------------
@@ -101,7 +98,7 @@ class Slider {
       }
       const indic = $(`#${this.indicators}`);
       indic.append(buttonindicator);
-      let newimg = $('<img>').addClass('sliderimage rounded')
+      let newimg = $('<img>').addClass('sliderimage')
       .attr('src', "/images/slideshow/"+allimages[i]);
       $(newimg).click( (e) => { // Arrow function mandatory here to use this
         e.preventDefault();

@@ -39,6 +39,15 @@ class SlideShowRepository extends ServiceEntityRepository
         }
     }
 
+    public function findDistinctSlideShows(): array
+    {
+        return $this->createQueryBuilder('s')
+        ->select('distinct(s.name) as name')
+        ->orderBy('s.name')
+        ->getQuery()
+        ->getResult();
+    }   
+
 //    /**
 //     * @return SlideShow[] Returns an array of SlideShow objects
 //     */

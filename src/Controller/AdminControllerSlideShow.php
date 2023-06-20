@@ -371,13 +371,31 @@ class AdminControllerSlideShow extends AbstractController
         }
     }
     // --------------------------------------------------------------------------
-    #[Route('/slides/slidertemplate', name: 'bootadmin.slides.slidertemplates')]
-    public function getSliderTemplate(Request $request, EntityManagerInterface $em,
-                                FileHandler $fh) {
-        $htmlContent = $fh->getFileContent('templates/framework/Bslider.html');
-        return $this->json([
-            'template' => $htmlContent
-        ]);
+    #[Route('/slides/getactivediaporamas', name: 'bootadmin.slides.getactivediaporamas')]
+    public function getActiveDiaporamas(Request $request, EntityManagerInterface $em) {
+        try {
+                $active = [];
+                // $slides = $em->getRepository(SlideShow::class)->findBy(['active' => true ],
+                //                                                 array('name' => 'ASC'));
+                $slides = $em->getRepository(SlideShow::class)->findDistinctSlideShows();
+                // if(count($slides) !== 0) {
+                //     /**  @var SlideShow $slide */
+                //     foreach($slides as $slide){
+                //         array_push($active, $slide->getName());
+                //     }
+                // }
+                return $this->json([
+                    'message' => 'bootadmin.slides.getactivediaporamas OK',
+                    'activecount' => count($slides),
+                    'activediaporamas' => $slides
+                ], 200);        
+        }
+        catch(Exception $e) {
+            return $this->json([
+                'message' => 'bootadmin.slides.getactivediaporamas KO',
+                'error' => $e
+            ], 400);        
+        }
     }
     // --------------------------------------------------------------------------
     // P R I V A T E     S E R V I C E S 
@@ -389,39 +407,41 @@ class AdminControllerSlideShow extends AbstractController
         $dayofweek = date('w'); // 0 is sunday
         /**  @var SlideShow $slide */
         $selectedslide = new SlideShow();
-        $diffdays= 0;
-        foreach($slides as $slide) {
-            if($slide->isDaterange()){   // Have to check date ? 
-                $earlier = $slide->getDatein();
-                $later = $slide->getDateout();
-                if( (date_timestamp_get($earlier)  <= $currentDate) && // Current day within range ?
-                    (date_timestamp_get($later) >= $currentDate) ) {
-                    $diff = $later->diff($earlier)->format("%a");
-                    if($diffdays == 0 || $diffdays > $diff) {           // If multi periods, take the shortest matching
-                        if($this->specificDay($slide)) {    // Any day check ?
-                            if($this->goodDay($slide, $dayofweek)) {
+        if(!empty($slides)) {
+            $diffdays= 0;
+            foreach($slides as $slide) {
+                if($slide->isDaterange()){   // Have to check date ? 
+                    $earlier = $slide->getDatein();
+                    $later = $slide->getDateout();
+                    if( (date_timestamp_get($earlier)  <= $currentDate) && // Current day within range ?
+                        (date_timestamp_get($later) >= $currentDate) ) {
+                        $diff = $later->diff($earlier)->format("%a");
+                        if($diffdays == 0 || $diffdays > $diff) {           // If multi periods, take the shortest matching
+                            if($this->specificDay($slide)) {    // Any day check ?
+                                if($this->goodDay($slide, $dayofweek)) {
+                                    $diffdays = $diff;
+                                    $selectedslide = $slide;
+                                }
+                            }
+                            else {
                                 $diffdays = $diff;
                                 $selectedslide = $slide;
                             }
                         }
-                        else {
-                            $diffdays = $diff;
+                    }
+                }
+                else {  // No date range
+                    if($this->specificDay($slide)) {    // Any day check ?
+                        if($this->goodDay($slide, $dayofweek)) {
                             $selectedslide = $slide;
                         }
                     }
-                }
-            }
-            else {  // No date range
-                if($this->specificDay($slide)) {    // Any day check ?
-                    if($this->goodDay($slide, $dayofweek)) {
+                    else {
                         $selectedslide = $slide;
                     }
                 }
-                else {
-                    $selectedslide = $slide;
-                }
-            }
-        }   
+            }       
+        }
         return $selectedslide;
     }
     // --------------------------------------------------------------------------
