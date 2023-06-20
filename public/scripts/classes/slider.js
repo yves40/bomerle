@@ -6,16 +6,18 @@
     jun 07 2023     Slider and zoom
     jun 08 2023     Slider and zoom, cont
     jun 09 2023     Add slider timing set into the UI
+    jun 20 2023     Add slider description into the UI
 
     ----------------------------------------------------------------------------*/
 class Slider {
 
-  constructor(container, timing = 2) {
+  constructor(container, timing = 2, description = '') {
     // Init
-      this.version = 'Slider:1.07, Jun 09 2023 ';
+      this.version = 'Slider:1.08, Jun 20 2023 ';
       this.container = container;
       this.containername = $(container).attr('name');
       this.slideinterval = timing * 1000;
+      this.description = description;
       this.homezone = `${this.containername}-zone`;
       this.indicators = `${this.containername}-indicators`;   // Used to manage inidicators when sliding
       this.sliderarea = `${this.containername}-area`;
@@ -53,6 +55,10 @@ class Slider {
                                           .addClass('slide')
                                           .addClass('sliderframe')
                                           .attr('data-bs-ride', 'carousel');
+      const slidetext = $('<div></div>').addClass('slidertext');
+      const spantitle = $('<span></span>').text(this.description);
+      $(slidetext).append(spantitle);
+
       const inner = $('<div></div>').attr('id', this.sliderarea)
                                     .addClass('carousel-inner')
                                     .addClass('sliderarea');
@@ -69,7 +75,7 @@ class Slider {
                                                   .attr('data-bs-target', `#${this.homezone}`)
                                                   .attr('data-bs-slide', 'next')
                                                   .append(spannext);
-      $(sliderzone).append(inner)
+      $(sliderzone).append(slidetext).append(inner)
                       .append(indicators)
                       .append(buttonprev)
                       .append(buttonnext);

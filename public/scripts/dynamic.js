@@ -42,7 +42,7 @@ $(document).ready(function () {
                         if(response.timing === null) {
                             response.timing = 2;
                         }
-                        buildImagesSlider(response.images, response.timing, diaposection);
+                        buildImagesSlider(response.images, response.timing, response.description, diaposection);
                     }
                     else {
                         buildImagesGallery(response.images, response.description,  diaposection);
@@ -58,9 +58,9 @@ $(document).ready(function () {
         // })
     }
     // ----------------------------------------
-    function buildImagesSlider(allimages, timing, container) {
+    function buildImagesSlider(allimages, timing, description, container) {
         console.log(`Container name is ${$(container).attr('name')} for ${allimages.length} images`);
-        let slider = new Slider(container, timing);     // Build the slider frame
+        let slider = new Slider(container, timing, description);     // Build the slider frame
         slider.addImages(allimages);                    // Load images
     }
     // ----------------------------------------
