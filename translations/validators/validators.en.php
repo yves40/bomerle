@@ -14,5 +14,5 @@ return [
   'file.upload.type' => 'Please choose a valid file format (jpg, jpeg, gif, png)',
   'file.upload.sizemax' => 'File too big',
   'admin.manageslides.alreadyexist' =>  'This slide show already exists',
-  'admin.manageslides.singleword'  => 'Single word please',
+  'admin.manageslides.singleword'  => 'One or two words separated by a hyphen ( 6 key )',
 ];
