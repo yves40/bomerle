@@ -12,20 +12,28 @@
                     {% endif %}                     
                     {% if slide.active %}
                         <div class="col-1">
-                            <img class="svgsmall-lightgreen" src="/images/svg/plug-circle-plus-solid.svg" alt=""/>
+                            <a href="{{ path('bootadmin.slide.edit', {id: slide.id}) }}">
+                                <img class="svgsmall-lightgreen" src="/images/svg/plug-circle-plus-solid.svg" alt=""/>
+                            </a>
                         </div>
                     {% else %}
                         <div class="col-1">
+                            <a href="{{ path('bootadmin.slide.edit', {id: slide.id}) }}">
                             <img class="svgsmall-red" src="/images/svg/plug-circle-minus-solid.svg" alt=""/>                            
+                            </a>
                         </div>
                     {% endif %}
                     {% if slide.daterange %}
                         <div class="col-1">
-                            <img class="svgsmall-lightgreen" src="/images/svg/calendar-days-regular.svg" alt=""/>                            
+                            <a href="{{ path('bootadmin.slide.edit', {id: slide.id}) }}">
+                                <img class="svgsmall-lightgreen" src="/images/svg/calendar-days-regular.svg" alt=""/>                            
+                            </a>
                         </div>
                     {% else %}
                         <div class="col-1">
-                            <img class="svgsmall-red" src="/images/svg/calendar-days-regular.svg" alt=""/>                            
+                            <a href="{{ path('bootadmin.slide.edit', {id: slide.id}) }}">
+                                <img class="svgsmall-red" src="/images/svg/calendar-days-regular.svg" alt=""/>                            
+                            </a>
                         </div>
                     {% endif %}
                     <div class="col-1">
@@ -38,8 +46,10 @@
                             <img class="svgsmall-lightblue" src="/images/svg/magnifying-glass-solid.svg" alt=""/>
                         </a>
                     </div>
-                    <div class="col-1">
-                        <a href="{{ path('bootadmin.slide.delete', {id: slide.id}) }}">
+                    <div class="col-1" data-bs-toggle="modal" data-bs-target="#deletionModal"
+                            data-slidename="{{slide.name}}"
+                        >
+                        <a class="deleteaction" href="{{ path('bootadmin.slide.delete', {id: slide.id}) }}">
                             <img class="svgsmall-red" src="/images/svg/trash-bin-outline.svg" alt=""/>
                         </a>
                     </div>
@@ -92,5 +102,23 @@
             </li>
         {% endfor %}
     </ul>
+    <!-- Modal used for slideshow deletion confirmation -->
+    <div class="modal fade" id="deletionModal" data-bs-backdrop="static" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteModalLabel">{{'admin.manageslides.deleteconfirm'|trans}}</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Will be replaced by slideshow.js handler</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{'buttons.cancel'|trans}}</button>
+                    <button type="button" class="btn btn-primary modalaction">{{'buttons.confirm'|trans}}</button>
+                </div>
+            </div>
+        </div>
+    </div>    
     <script src="{{ asset('scripts/slideshow.js')}}"></script>
 

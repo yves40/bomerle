@@ -4,7 +4,7 @@
     jun 17 2023     Initial
     jun 18 2023     Add div and text to the gallery template
     jun 19 2023     Get slideshow description text
-    jun 21 2023     Implement zoom
+    jun 21 2023     Gallery zoom for the 2nd time !!!
 
 ----------------------------------------------------------------------------*/
 class Gallery {
@@ -21,7 +21,6 @@ class Gallery {
         this.windowy = $(window).height();
         this.zoomactive = false;
         this.currentzoom = '';
-    
         this.buildGalleryFrame(container);
 
         // Initialize handlers
@@ -58,35 +57,35 @@ class Gallery {
             $(newimg).click( (e) => { // Arrow function mandatory here to use this
                 e.preventDefault();
                 this.fullScreen(allimages[i]);
-            });        
+            });
         }
     }
-    // ------------------------------------------------------------------------------------------------
-    fullScreen(imagesrc) {
-        if(!this.zoomactive) {
-        this.zoomactive = true;
-        this.currentzoom = imagesrc;
-        }
-        // Remove body scroll bar so user cant scroll up or down
-        $("body").css("overflow", "hidden");
-        // Position the zoom 
-        const top = window.scrollY;
-        $("#fullscreen").css("background-image", "url(/images/slideshow/" + imagesrc + ")");
-        $("#fullscreen").css({'top': top, 'left': 0, 'z-index': 1000});
-        $("#fullscreen").addClass("zoomon").removeClass('zoomoff');
-        // Hide a few things
-        $(`#${this.indicators}`).hide();
-        $(".slidercontrol").hide();
+  // ------------------------------------------------------------------------------------------------
+  fullScreen(imagesrc) {
+    if(!this.zoomactive) {
+      this.zoomactive = true;
+      this.currentzoom = imagesrc;
+    }
+    // Remove body scroll bar so user cant scroll up or down
+    $("body").css("overflow", "hidden");
+    // Position the zoom 
+    const top = window.scrollY;
+    $("#fullscreen").css("background-image", "url(/images/slideshow/" + imagesrc + ")");
+    $("#fullscreen").css({'top': top, 'left': 0, 'z-index': 1000});
+    $("#fullscreen").addClass("zoomon").removeClass('zoomoff');
+    // Hide a few things
+    $(`#${this.indicators}`).hide();
+    $(".slidercontrol").hide();
 
-        // Wait for the user to close the box
-        $("#fullscreen").click( () => { 
-        this.zoomactive = false;
-        $("#fullscreen").removeClass("zoomon")
-                        .addClass('zoomoff');
-        $(`#${this.indicators}`).show();
-        $(".slidercontrol").show();
-        $("body").css("overflow", "auto");
-        $('.diapo').show();
-        });
-    }
+    // Wait for the user to close the box
+    $("#fullscreen").click( () => { 
+      this.zoomactive = false;
+      $("#fullscreen").removeClass("zoomon")
+                      .addClass('zoomoff');
+      $(`#${this.indicators}`).show();
+      $(".slidercontrol").show();
+      $("body").css("overflow", "auto");
+      $('.diapo').show();
+    });
+  }
 }
