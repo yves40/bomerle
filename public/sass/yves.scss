@@ -145,6 +145,13 @@ legend {
     font-weight: bold;
   }
 }
+.textdetails {
+  font-style: italic;
+  margin: 1em;
+  padding: 1em;
+  border: 1px solid darkgray;
+  border-radius: 5px;
+}
 .on {
   color: $on;
 }
