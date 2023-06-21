@@ -75,7 +75,8 @@ class Slider {
                                                   .attr('data-bs-target', `#${this.homezone}`)
                                                   .attr('data-bs-slide', 'next')
                                                   .append(spannext);
-      $(sliderzone).append(slidetext).append(inner)
+      $(container).append(slidetext);
+      $(sliderzone).append(inner)
                       .append(indicators)
                       .append(buttonprev)
                       .append(buttonnext);

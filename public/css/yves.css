@@ -58,7 +58,7 @@
 /* Screen less than smallsize ? */
 @media screen and (max-width: 1024px) {
   #theslider {
-    width: calc(100vh/3);
+    width: calc(100vh/4);
     margin: auto; }
   .sliderimage {
     max-width: 1024px; } }
@@ -66,7 +66,7 @@
 /* Screen between smallsize and bigsize ? */
 @media screen and (min-width: 1024px) and (max-width: 1920px) {
   #theslider {
-    width: calc(100vh/2);
+    width: calc(100vh/3);
     margin: auto; }
   .sliderimage {
     max-width: 1500px; } }
@@ -82,7 +82,6 @@
 .sliderframe {
   margin: 0 auto;
   padding: 1em;
-  background-color: black;
   max-width: 500px; }
 
 .sliderarea {
@@ -133,12 +132,13 @@
   100% {
     opacity: 1; } }
 
+#thegallery {
+  margin: 1em;
+  background-color: black; }
+
 .galleryzone {
   display: flex;
-  flex-direction: column;
-  margin: 1rem 4rem 1rem 4rem;
-  padding: 1em;
-  background-color: black; }
+  flex-direction: column; }
 
 .gallerytext {
   max-width: 70%;

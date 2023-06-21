@@ -57,7 +57,7 @@
 /* Screen less than smallsize ? */
 @media screen and (max-width: $smallsize) { 
     #theslider {
-        width: calc(100vh/3);
+        width: calc(100vh/4);
         margin: auto;
     }
     .sliderimage { 
@@ -67,7 +67,7 @@
 /* Screen between smallsize and bigsize ? */
 @media screen and (min-width: $smallsize) and (max-width: $bigsize) { 
     #theslider {
-        width: calc(100vh/2);
+        width: calc(100vh/3);
         margin: auto;
     }
     .sliderimage { 
