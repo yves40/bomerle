@@ -46,7 +46,9 @@
                             <img class="svgsmall-lightblue" src="/images/svg/magnifying-glass-solid.svg" alt=""/>
                         </a>
                     </div>
-                    <div class="col-1" data-bs-toggle="modal" data-bs-target="#deletionModal">
+                    <div class="col-1" data-bs-toggle="modal" data-bs-target="#deletionModal"
+                            data-slidename="{{slide.name}}"
+                        >
                         <a class="deleteaction" href="{{ path('bootadmin.slide.delete', {id: slide.id}) }}">
                             <img class="svgsmall-red" src="/images/svg/trash-bin-outline.svg" alt=""/>
                         </a>

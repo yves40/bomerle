@@ -375,8 +375,8 @@ function armDeleteAlert() {
     $(".deleteaction").click(function (event) {
         event.preventDefault();
         let modalbody = $(".modal-body p");
-        modalbody.text(`Sure you want to delete the slideshow ?`);
-        console.log($(this).attr('href'));
+        const slidename = $(this).parent().data('slidename');
+        modalbody.text(`${slidename}`);
         const href = this.href;
         $(".modalaction").attr('onclick', `window.location.href='${href}'`);
     });

@@ -192,16 +192,14 @@ class AdminControllerSlideShow extends AbstractController
             self::MODULE,
             $request->getSession()->get('email')
         );
-        //  Send back a clean page
+        //  Back to the slideshow list
         $slideshow = new SlideShow();
-        $allshow = $entityManager->getRepository(SlideShow::class)->findBy([], [ 'datein' => 'ASC']);
+        $allshow = $repo->findBy([], [ 'datein' => 'ASC']);
         $form = $this->createForm(SlideShowType::class, $slideshow);
-        return $this->render('admin/slide.html.twig', [
+        return $this->render('admin/slides.html.twig', [
             'form' => $form->createView(),
-            'id' => 0,
-            'locale' => $loc,
-            'slide' => $slideshow,
-            'allslides' => $allshow
+            'allslides' => $allshow,
+            'locale' => $loc
         ]);
     }
     // --------------------------------------------------------------------------
