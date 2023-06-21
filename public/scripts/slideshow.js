@@ -76,10 +76,6 @@ $(document).ready(function () {
             event.preventDefault();
             actionRequest(this);
         });
-        $(".zoom a").hover(function (event) {
-            event.preventDefault();
-            console.log('Show me the description');
-        });
         $("#commandzone a").click(function (event) {
             event.preventDefault();
             imageRequest(this);
