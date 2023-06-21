@@ -56,7 +56,6 @@ $(document).ready(function () {
     // Handle date range activation
     // ----------------------------------------------------------------------------
     function manageDates() {
-        console.log($(daterange).prop('checked'));
         if($(daterange).prop('checked')) {
             $(thedates).slideDown(slidingtime);
             $(days).slideDown(slidingtime);
@@ -76,6 +75,10 @@ $(document).ready(function () {
         $(".zoom a").click(function (event) {
             event.preventDefault();
             actionRequest(this);
+        });
+        $(".zoom a").hover(function (event) {
+            event.preventDefault();
+            console.log('Show me the description');
         });
         $("#commandzone a").click(function (event) {
             event.preventDefault();
