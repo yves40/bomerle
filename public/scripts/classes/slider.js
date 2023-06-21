@@ -40,12 +40,7 @@ class Slider {
         }
         this.windowx = $(window).width();
         this.windowy = $(window).height();
-        // console.log(`Resized new width : ${this.windowx}`);
       });
-      // const mousehovermsg = $(".sliderdata").data('mousehovermsg');
-      // const mouseoutmsg = $(".sliderdata").data('mouseoutmsg');
-      // const sliderstatus = $("#sliderstatus p");
-      //
   }
   // ------------------------------------------------------------------------------------------------
   buildSliderFrame(container) {
@@ -82,7 +77,6 @@ class Slider {
                       .append(buttonnext);
 
       $(container).append(sliderzone);
-      // $(container).append(div);
       $(container).append($('<div></div>').attr('id', 'fullscreen').addClass('zoomoff'));
   }
   // ------------------------------------------------------------------------------------------------
