@@ -187,6 +187,7 @@ admin:
     nodaterangeflag: Date range inactive
     tab1: Main data
     tab2: Slide Show Images
+    deleteconfirm: Confirm deletion of
 logs:
   menuheader: Logs
   site: Web site logs
