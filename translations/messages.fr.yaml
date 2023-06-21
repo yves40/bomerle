@@ -186,6 +186,7 @@ admin:
     nodaterangeflag: Pas de plage de dates
     tab1: Données
     tab2: Images du diaporama
+    deleteconfirm: Confirmez la suppression de
 logs:
   menuheader: Les logs
   site: Du site WEB

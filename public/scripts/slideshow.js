@@ -25,6 +25,7 @@ $(document).ready(function () {
     gallerymode.click( (e) => { manageShowMode('g');  })
     daterange.click( (e)=> { manageDates();  })
     armIcons();
+    armDeleteAlert();
     // Set default show mode to slider if new show
     if($(slidename).val() == '') {
         $(slidermode).prop('checked', true);
@@ -368,4 +369,15 @@ function swapImages(movingimageid, relatedimageid) {
     $(movingcard).slideDown(1000);
     $(relatedcard).slideDown(1000);
     return;
+}
+// ------------------------------------------------------------- Set up icons handlers
+function armDeleteAlert() {
+    $(".deleteaction").click(function (event) {
+        event.preventDefault();
+        let modalbody = $(".modal-body p");
+        modalbody.text(`Sure you want to delete the slideshow ?`);
+        console.log($(this).attr('href'));
+        const href = this.href;
+        $(".modalaction").attr('onclick', `window.location.href='${href}'`);
+    });
 }
