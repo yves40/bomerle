@@ -6,33 +6,50 @@
                 <div class="row">
                     <div class="col-2"><h5>{{slide.name}}</h5></div>
                     {% if locale == 'fr' %}
-                        <div class="col">{{slide.datein|date("d/m/Y")}}</div>
+                        <div class="col">{% trans %}generic.du{% endtrans %} {{slide.datein|date("d/m/Y")}} {% trans %}generic.au{% endtrans %} {{slide.dateout|date("d/m/Y")}}</div>
                     {% else %}
-                        <div class="col">{{slide.datein|date("m/d/Y")}}</div>
-                    {% endif %}                        
-                    {% if locale == 'fr' %}
-                        <div class="col">{{slide.dateout|date("d/m/Y")}}</div>
+                        <div class="col">{% trans %}generic.du{% endtrans %} {{slide.datein|date("m/d/Y")}} {% trans %}generic.au{% endtrans %} {{slide.dateout|date("m/d/Y")}}</div>
+                    {% endif %}                     
+                    {% if slide.active %}
+                        <div class="col-1">
+                            <img class="svgsmall-lightgreen" src="/images/svg/plug-circle-plus-solid.svg" alt=""/>
+                        </div>
                     {% else %}
-                        <div class="col">{{slide.dateout|date("m/d/Y")}}</div>
-                    {% endif %}                        
-                    <div class="col ">{{slide.description}}</div>
-                    <div class="col-1">
-                        <a href="{{ path('bootadmin.slide.delete', {id: slide.id}) }}">
-                            <img class="svgsmall-lightblue" src="/images/svg/trash-bin-outline.svg" alt=""/>
-                        </a>
-                    </div>
+                        <div class="col-1">
+                            <img class="svgsmall-red" src="/images/svg/plug-circle-minus-solid.svg" alt=""/>                            
+                        </div>
+                    {% endif %}
+                    {% if slide.daterange %}
+                        <div class="col-1">
+                            <img class="svgsmall-lightgreen" src="/images/svg/calendar-days-regular.svg" alt=""/>                            
+                        </div>
+                    {% else %}
+                        <div class="col-1">
+                            <img class="svgsmall-red" src="/images/svg/calendar-days-regular.svg" alt=""/>                            
+                        </div>
+                    {% endif %}
                     <div class="col-1">
                         <a href="{{ path('bootadmin.slide.edit', {id: slide.id}) }}">
                             <img class="svgsmall-lightblue" src="/images/svg/pen-to-square-regular.svg" alt="" title=""/>                        
                         </a>
                     </div>
-                    <div class="col zoom">
+                    <div class="col-1 zoom">
                         <a href="#">
                             <img class="svgsmall-lightblue" src="/images/svg/magnifying-glass-solid.svg" alt=""/>
                         </a>
                     </div>
+                    <div class="col-1">
+                        <a href="{{ path('bootadmin.slide.delete', {id: slide.id}) }}">
+                            <img class="svgsmall-red" src="/images/svg/trash-bin-outline.svg" alt=""/>
+                        </a>
+                    </div>
                 </div>
                 <div class="details">
+                    <div class="row justify-content-start">
+                        <div class="col">
+                            {{slide.description}}
+                        </div>
+                    </div>
                     <div class="row justify-content-start">
                         <div class="col">
                             {% if slide.active %}

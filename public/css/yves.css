@@ -175,6 +175,21 @@
   border: 1px solid blue;
   border-radius: 5px; }
 
+.bigblue {
+  color: blue;
+  font-size: 2em;
+  margin: 0 auto; }
+
+.biggreen {
+  color: green;
+  font-size: 2em;
+  margin: 0 auto; }
+
+.bigred {
+  color: red;
+  font-size: 2em;
+  margin: 0 auto; }
+
 .ylabel {
   font-weight: bold; }
 
@@ -227,6 +242,11 @@ button.ylink:hover {
   width: 18px;
   height: 18px;
   filter: invert(41%) sepia(98%) saturate(581%) hue-rotate(83deg) brightness(81%) contrast(80%); }
+
+.svgsmall-red {
+  width: 18px;
+  height: 18px;
+  filter: invert(19%) sepia(96%) saturate(6102%) hue-rotate(357deg) brightness(98%) contrast(117%); }
 
 .logs {
   padding-left: 0;
