@@ -15,7 +15,6 @@
                     {% else %}
                         <div class="col">{{slide.dateout|date("m/d/Y")}}</div>
                     {% endif %}                        
-                    <div class="col ">{{slide.description}}</div>
                     <div class="col-1">
                         <a href="{{ path('bootadmin.slide.delete', {id: slide.id}) }}">
                             <img class="svgsmall-lightblue" src="/images/svg/trash-bin-outline.svg" alt=""/>

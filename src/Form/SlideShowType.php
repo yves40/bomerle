@@ -16,7 +16,8 @@ class SlideShowType extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('description', TextareaType::class)
+            ->add('description', TextareaType::class,
+                         ['attr' => ["rows" => 20 ]])
             ->add('active')
             ->add('slider')
             ->add('gallery')

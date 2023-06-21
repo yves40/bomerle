@@ -42,6 +42,9 @@
 
     {# Nav Tabs --------------------------------------------------------------------------------------------------------- #}
     <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item biggreen" role="presentation">
+            <span>{{knife.name}}</span>
+        </li>
         <li class="nav-item" role="presentation">
             <button class="nav-link active ylink" 
                     id="home-tab" data-bs-toggle="tab" 
@@ -64,14 +67,6 @@
                     data-bs-target="#slider"
                     type="button" role="tab" aria-controls="profile" 
                     aria-selected="false">{% trans %}admin.manageknives.tab3{% endtrans %}</button>
-        </li>
-        <li class="nav-item" role="presentation">
-            <button class="nav-link ylink disabled" 
-                    id="title-tab" 
-                    data-bs-toggle="tab" 
-                    data-bs-target="#title" 
-                    type="button" role="tab" aria-controls="profile" 
-                    aria-selected="false">{{knife.name}}</button>
         </li>
     </ul>
   

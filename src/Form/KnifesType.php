@@ -13,6 +13,7 @@ use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class KnifesType extends AbstractType
 {
@@ -20,7 +21,8 @@ class KnifesType extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('description')
+            ->add('description', TextareaType::class,
+                ['attr' => ["rows" => 20 ]])
             ->add('stock')
             ->add('weight')
             ->add('lenght')
