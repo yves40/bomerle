@@ -200,6 +200,10 @@ header {
     transition: .3s;
     transition-delay: .4s;
     z-index: 99; }
+    header .navigation .ylang {
+      font-size: small;
+      font-weight: bold;
+      color: white; }
     header .navigation img {
       max-width: 70px; }
     header .navigation.hidden {

@@ -9,6 +9,8 @@ app:
       atelier: The workshop
       galerie: The gallery
       contact: Contact
+      en: English
+      fr: French
     main:
       name: The Beau Merle workshop
       whatis: The art of<br/>Cutlery

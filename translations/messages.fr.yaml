@@ -9,6 +9,8 @@ app:
       atelier: L'atelier
       galerie: La galerie
       contact: Contact
+      en: Anglais
+      fr: Français
     main:
       name: L'atelier Beau Merle
       whatis: L'art de la<br/>Coutellerie
