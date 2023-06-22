@@ -376,12 +376,6 @@ class AdminControllerSlideShow extends AbstractController
                 // $slides = $em->getRepository(SlideShow::class)->findBy(['active' => true ],
                 //                                                 array('name' => 'ASC'));
                 $slides = $em->getRepository(SlideShow::class)->findDistinctSlideShows();
-                // if(count($slides) !== 0) {
-                //     /**  @var SlideShow $slide */
-                //     foreach($slides as $slide){
-                //         array_push($active, $slide->getName());
-                //     }
-                // }
                 return $this->json([
                     'message' => 'bootadmin.slides.getactivediaporamas OK',
                     'activecount' => count($slides),

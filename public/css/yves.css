@@ -138,7 +138,8 @@
 
 .galleryzone {
   display: flex;
-  flex-direction: column; }
+  flex-direction: column;
+  margin-bottom: 3em; }
 
 .gallerytext {
   max-width: 70%;
