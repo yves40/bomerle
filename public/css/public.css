@@ -199,8 +199,7 @@ header {
     transition-delay: .4s;
     z-index: 99; }
     header .navigation img {
-      max-width: 70px;
-      padding-top: 10px; }
+      max-width: 70px; }
     header .navigation.hidden {
       transform: translateY(-80px); }
     header .navigation span {
