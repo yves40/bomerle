@@ -43,6 +43,7 @@ class SlideShowRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('s')
         ->select('distinct(s.name) as name')
+        ->andWhere('s.active = 1')
         ->orderBy('s.name')
         ->getQuery()
         ->getResult();
