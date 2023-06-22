@@ -34,14 +34,14 @@
                 <h1 class="main-heading">{% trans %}app.public.main.name{% endtrans %}</h1>
                 <h2 class="subtitle">-<br/>{% trans %}app.public.main.whatis{% endtrans %}</h2>
             </div>
-            <div class="htmltemplate" data-templatename='maintext'></div>
+            <div class="htmltemplate" data-templatename='maintext' data-lang={{locale}}></div>
         </div>
     </header>
     <main>
         <section id="histoire">
             <div class="story">
                 <h2>{% trans %}app.public.story.header{% endtrans %}</h2>
-                <div class="htmltemplate" data-templatename='story'></div>
+                <div class="htmltemplate" data-templatename='story' data-lang={{locale}}></div>
             </div>
         </section>
         <section id='thegallery'>

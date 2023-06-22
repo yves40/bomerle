@@ -57,9 +57,11 @@ $(document).ready(function () {
     // ---------------------------------------- Find dynamic html pieces
     function getHtmlTemplates() {
         $(".htmltemplate").each(function (index, element) {
+            const thelang = $(this).data('lang');
+            console.log(thelang);
             // element == this
             const templatename = $(this).data('templatename');
-            $(this).load(`/templates/fr/${templatename}.html`);
+            $(this).load(`/templates/${thelang}/${templatename}.html`);
         });
     }
     // ----------------------------------------
