@@ -43,9 +43,9 @@
                 </li>
                 <!-- lang Toggle -->
                 {% if locale == 'fr' %}
-                    <a href="{{ path('bootadmin.switch', { locale: 'en'}) }}" class="nav-link"><img src="/images/uk16.png" alt=""></a>
+                    <a href="{{ path('bootadmin.switch', { locale: 'en', origin: 'admin' }) }}" class="nav-link"><img src="/images/uk16.png" alt=""></a>
                 {% else %}
-                    <a href="{{ path('bootadmin.switch', { locale: 'fr'}) }}" class="nav-link"><img src="/images/fr16.png" alt=""></a>
+                    <a href="{{ path('bootadmin.switch', { locale: 'fr', origin: 'admin' }) }}" class="nav-link"><img src="/images/fr16.png" alt=""></a>
                 {% endif %}                        
             </ul>
         </nav>

@@ -12,7 +12,9 @@ header{
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
-    
+    .nav-link {
+        margin: 0 1rem;
+    }
     .navigation{
         width: 100%;
         height: 80px;
