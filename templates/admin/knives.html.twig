@@ -17,7 +17,7 @@
         {% for knife in allknives %}
             <li class="list-group-item">
                 <div class="row">
-                    <div class="col">{{knife.name}}</div>
+                    <div class="col">{{knife.name}} ({{knife.images|length}})</div>
                     {# <div class="col-3">{{'admin.manageknives.category'|trans}} : {{knife.category}}</div>
                     <div class="col-3">{{'admin.manageknives.mechanism'|trans}} : {{knife.mechanism}}</div>
                     <div class="col-1">{{'admin.manageknives.stock'|trans}} : {{knife.stock}} </div>
