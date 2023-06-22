@@ -61,6 +61,7 @@ class AdminSecurityController extends AbstractController
         $request->getSession()->set('bootadmin.lang', $locale);
         $this->localeSwitcher->setLocale($locale);
         $fh = new FileHandler();
+        // origin is used to return to the public or administration page
         if($origin == 'public') {
             return $this->render('public.html.twig', [
                 "locale" =>  $this->localeSwitcher->getLocale(),
