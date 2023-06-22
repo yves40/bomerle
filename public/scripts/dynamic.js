@@ -5,7 +5,7 @@ $(document).ready(function () {
     $props.load();
     console.log(`[${$props.version()} ]` );
     getActiveDiaporamas();
-    // findDiapoSections();    
+    getHtmlTemplates();
     // ---------------------------------------- Request the active diaporamas from the DB
     function getActiveDiaporamas() {
         $.ajax({
@@ -53,9 +53,14 @@ $(document).ready(function () {
                 }
             });    
         });
-        // $('.diapo').each( function (index, element) {
-        //     let name = $(this).attr('name');
-        // })
+    }
+    // ---------------------------------------- Find dynamic html pieces
+    function getHtmlTemplates() {
+        $(".htmltemplate").each(function (index, element) {
+            // element == this
+            const templatename = $(this).data('templatename');
+            $(this).load(`/templates/fr/${templatename}.html`);
+        });
     }
     // ----------------------------------------
     function buildImagesSlider(allimages, timing, description, container) {

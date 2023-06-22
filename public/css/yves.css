@@ -172,6 +172,34 @@
     display: block;
     flex-grow: 10; }
 
+.htmltemplate {
+  display: flex;
+  flex-direction: column;
+  margin: 1em;
+  padding: 1em;
+  border-radius: 10px; }
+  .htmltemplate h2 {
+    font-size: 2rem;
+    font-family: Arial, Helvetica, sans-serif;
+    font-style: italic;
+    text-transform: none; }
+  .htmltemplate p {
+    margin: .5rem;
+    font-size: 1rem;
+    font-family: Arial, Helvetica, sans-serif; }
+  .htmltemplate li {
+    font-weight: normal; }
+  .htmltemplate .centeredphoto {
+    text-align: center;
+    margin: .5em 0; }
+    .htmltemplate .centeredphoto img {
+      max-width: 50%;
+      border-radius: 10px; }
+  .htmltemplate .textright {
+    text-align: right; }
+  .htmltemplate .textleft {
+    text-align: left; }
+
 .feedback {
   color: red;
   border: 1px solid blue;
