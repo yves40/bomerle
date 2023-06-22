@@ -20,11 +20,13 @@
             <span><a href="#contact">{% trans %}app.public.menu.contact{% endtrans %}</a></span>            
             <!-- lang Toggle -->
             <span class="ylang">
-                {% if locale == 'fr' %}
-                    <a href="{{ path('bootadmin.switch', { locale: 'en', origin: 'public' }) }}" class="nav-link">{% trans %}app.public.menu.en{% endtrans %}</a>
-                {% else %}
-                    <a href="{{ path('bootadmin.switch', { locale: 'fr', origin: 'public'}) }}" class="nav-link">{% trans %}app.public.menu.fr{% endtrans %}</a>
-                {% endif %}                        
+                        <a href="{{ path('bootadmin.switch', { locale: 'en', origin: 'public' }) }}">
+                            <img src="/images/uk16.png" alt="">
+                        </a>
+                        <span>|</span>
+                        <a href="{{ path('bootadmin.switch', { locale: 'fr', origin: 'public' }) }}">
+                            <img src="/images/fr16.png" alt="">
+                        </a>
             </span>
         </nav>
         <div class="hero-section">

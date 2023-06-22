@@ -201,9 +201,18 @@ header {
     transition-delay: .4s;
     z-index: 99; }
     header .navigation .ylang {
-      font-size: small;
-      font-weight: bold;
+      display: flex;
+      flex-direction: row;
+      font-size: large;
       color: white; }
+      header .navigation .ylang a {
+        margin: 0 .5em; }
+      header .navigation .ylang span {
+        width: 5px;
+        margin: 0;
+        padding: 0; }
+      header .navigation .ylang img {
+        width: 20px; }
     header .navigation img {
       max-width: 70px; }
     header .navigation.hidden {

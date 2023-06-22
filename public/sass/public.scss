@@ -29,9 +29,19 @@ header{
         z-index: 99;
 
         .ylang {
-            font-size: small;
-            font-weight: bold;
+            display: flex;
+            flex-direction: row;
+            font-size: large;
             color: white;
+            a {
+                margin: 0 .5em;
+            }
+            span {
+                width: 5px;
+                margin: 0;
+                padding: 0;
+            }
+            img { width: 20px;}
         }
 
         img{
