@@ -178,62 +178,59 @@ section {
   text-decoration: none;
   text-transform: uppercase; }
 
-header {
+#header {
+  min-height: 80vh;
   width: 100%;
   position: relative;
-  background-image: url("../images/home2.jpg");
-  min-height: 100vh;
+  background-image: linear-gradient(rgba(25, 26, 29, 0.7), rgba(4, 9, 30, 0.7)), url("../images/home2.jpg");
   background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat; }
-  header .navigation {
-    width: 100%;
-    height: 80px;
-    font-size: 1.8rem;
-    background: rgba(241, 241, 241, 0.6);
+  background-size: cover; }
+  #header .navigation {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    position: fixed;
-    transition: .3s;
-    transition-delay: .4s;
-    z-index: 99; }
-    header .navigation .ylang {
-      display: flex;
-      flex-direction: row;
-      font-size: large;
-      color: white; }
-      header .navigation .ylang a {
-        margin: 0 .5em; }
-      header .navigation .ylang span {
-        width: 5px;
-        margin: 0;
+    padding: 2% 6%;
+    justify-content: space-between;
+    align-items: center; }
+    #header .navigation .nav-links {
+      flex: 1;
+      text-align: right; }
+      #header .navigation .nav-links ul {
+        margin-top: 0;
+        margin-bottom: 0; }
+        #header .navigation .nav-links ul li {
+          list-style: none;
+          display: inline-block;
+          padding: 8px 12px;
+          position: relative; }
+          #header .navigation .nav-links ul li ::after {
+            content: '';
+            width: 0%;
+            height: 2px;
+            background: #f44336;
+            display: block;
+            margin: auto;
+            transition: 0.5s; }
+          #header .navigation .nav-links ul li :hover::after {
+            width: 100%; }
+          #header .navigation .nav-links ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 20px; }
+            #header .navigation .nav-links ul li a img {
+              width: 25px; }
+          #header .navigation .nav-links ul li span {
+            font-size: large;
+            color: white;
+            width: 5px;
+            margin: 0;
+            padding: 0; }
+      #header .navigation .nav-links .lang li {
+        margin: 2px 2px;
         padding: 0; }
-      header .navigation .ylang img {
-        width: 20px; }
-    header .navigation img {
-      max-width: 70px; }
-    header .navigation.hidden {
-      transform: translateY(-80px); }
-    header .navigation span {
-      display: inline-block;
-      padding: 0 20px; }
-      header .navigation span::after {
-        content: '';
-        display: block;
-        width: 0px;
-        margin: 3px auto 0 auto;
-        height: 2px;
-        border-radius: 2px;
-        background: #333;
-        transition: width 0.2s ease-out; }
-      header .navigation span:hover::after {
-        width: 100%; }
-      header .navigation span a {
-        text-decoration: none;
-        color: #333;
-        display: block; }
-  header .hero-section {
+    #header .navigation img {
+      margin-left: 2rem; }
+    #header .navigation a img {
+      width: 60px; }
+  #header .hero-section {
     width: 50%;
     height: 60%;
     color: #f1f1f1;
@@ -246,10 +243,10 @@ header {
     align-items: center;
     padding: 100px 25px;
     text-align: center; }
-    header .hero-section .full-title {
+    #header .hero-section .full-title {
       font-size: 3rem;
       text-transform: uppercase; }
-      header .hero-section .full-title h1 {
+      #header .hero-section .full-title h1 {
         font-family: "Cinzel Decorative", sans-serif;
         font-weight: 700; }
 

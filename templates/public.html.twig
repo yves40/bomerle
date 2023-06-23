@@ -11,23 +11,23 @@
     <link rel="stylesheet" href="/css/yves.css">
 </head>
 <body>
-    <header id="accueil">
+    <section id="header">
         <nav class="navigation">
             <a href="#accueil"><img src="/images/logo1.png" alt="Logo Beau Merle"></a>
-            <span><a href="#accueil">{% trans %}app.public.menu.accueil{% endtrans %}</a></span>
-            <span><a href="#histoire">{% trans %}app.public.menu.atelier{% endtrans %}</a></span>
-            <span><a href="#thegallery">{% trans %}app.public.menu.galerie{% endtrans %}</a></span>
-            <span><a href="#contact">{% trans %}app.public.menu.contact{% endtrans %}</a></span>            
-            <!-- lang Toggle -->
-            <span class="ylang">
-                        <a href="{{ path('bootadmin.switch', { locale: 'en', origin: 'public' }) }}">
-                            <img src="/images/uk16.png" alt="">
-                        </a>
-                        <span>|</span>
-                        <a href="{{ path('bootadmin.switch', { locale: 'fr', origin: 'public' }) }}">
-                            <img src="/images/fr16.png" alt="">
-                        </a>
-            </span>
+            <div class="nav-links">
+                <ul>
+                    <li><a href="#accueil">{% trans %}app.public.menu.accueil{% endtrans %}</a></li>
+                    <li><a href="#histoire">{% trans %}app.public.menu.atelier{% endtrans %}</a></li>
+                    <li><a href="#thegallery">{% trans %}app.public.menu.galerie{% endtrans %}</a></li>
+                    <li><a href="#contact">{% trans %}app.public.menu.contact{% endtrans %}</a></li>
+                    <span class="lang">
+                        <li><a href="{{ path('bootadmin.switch', { locale: 'en', origin: 'public' }) }}">en</a></li>
+                        <li><span> | </span></li>          
+                        <li><a href="{{ path('bootadmin.switch', { locale: 'fr', origin: 'public' }) }}">fr</a></li>            
+                    </span>
+                </ul>
+            </div>
+            <img class="svgmedium-white" src="/images/svg/bars-solid.svg" alt="Show Hide Menu"/>
         </nav>
         <div class="hero-section">
             <div class="full-title">
@@ -36,7 +36,7 @@
             </div>
             <div class="htmltemplate" data-templatename='maintext' data-lang={{locale}}></div>
         </div>
-    </header>
+    </section>
     <main>
         <section id="histoire">
             <div class="story">
