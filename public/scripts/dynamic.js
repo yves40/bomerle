@@ -58,7 +58,6 @@ $(document).ready(function () {
     function getHtmlTemplates() {
         $(".htmltemplate").each(function (index, element) {
             const thelang = $(this).data('lang');
-            console.log(thelang);
             // element == this
             const templatename = $(this).data('templatename');
             $(this).load(`/templates/${thelang}/${templatename}.html`);
