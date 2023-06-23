@@ -181,11 +181,13 @@ section {
 header {
   width: 100%;
   position: relative;
-  background-image: url("../images/hero-section-knife.jpg");
+  background-image: url("../images/triple.jpg");
   min-height: 100vh;
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat; }
+  header .nav-link {
+    margin: 0 1rem; }
   header .navigation {
     width: 100%;
     height: 80px;
@@ -198,9 +200,21 @@ header {
     transition: .3s;
     transition-delay: .4s;
     z-index: 99; }
+    header .navigation .ylang {
+      display: flex;
+      flex-direction: row;
+      font-size: large;
+      color: white; }
+      header .navigation .ylang a {
+        margin: 0 .5em; }
+      header .navigation .ylang span {
+        width: 5px;
+        margin: 0;
+        padding: 0; }
+      header .navigation .ylang img {
+        width: 20px; }
     header .navigation img {
-      max-width: 70px;
-      padding-top: 10px; }
+      max-width: 70px; }
     header .navigation.hidden {
       transform: translateY(-80px); }
     header .navigation span {
@@ -223,11 +237,11 @@ header {
         display: block; }
   header .hero-section {
     width: 50%;
-    height: 100%;
+    height: 60%;
     color: #f1f1f1;
     position: absolute;
     right: 0;
-    top: 0;
+    bottom: 0;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -240,10 +254,6 @@ header {
       header .hero-section .full-title h1 {
         font-family: "Cinzel Decorative", sans-serif;
         font-weight: 700; }
-    header .hero-section p {
-      margin: 20px;
-      font-family: "Acme", sans-serif;
-      font-weight: 200; }
 
 #histoire {
   display: flex;
@@ -251,30 +261,7 @@ header {
   padding: 70px 25px;
   min-height: auto; }
   #histoire .story {
-    width: 50%;
+    width: 60%;
     display: flex;
     flex-direction: column;
     align-items: center; }
-    #histoire .story h2 {
-      text-align: center; }
-    #histoire .story p {
-      margin: 20px; }
-    #histoire .story .button-homepage {
-      text-transform: none;
-      font-size: 1.3rem;
-      font-weight: 600; }
-  #histoire .photos {
-    width: 50%;
-    position: relative; }
-    #histoire .photos img {
-      box-shadow: 0px 20px 40px rgba(0, 0, 0, 0.6); }
-    #histoire .photos img:nth-child(1) {
-      max-width: 400px;
-      position: absolute;
-      top: 0px;
-      right: 25px; }
-    #histoire .photos img:nth-child(2) {
-      max-width: 295px;
-      position: absolute;
-      top: 140px;
-      left: 35px; }

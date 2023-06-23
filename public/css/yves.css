@@ -134,12 +134,13 @@
 
 #thegallery {
   margin: 1em;
-  background-color: black; }
+  background: #959595;
+  background: linear-gradient(to bottom left, #959595 0%, #0D0D0D 50%, #010101 50%, #0A0A0A 53%, #4E4E4E 76%, #383838 87%, #1B1B1B 100%); }
 
 .galleryzone {
   display: flex;
   flex-direction: column;
-  margin-bottom: 3em; }
+  padding-bottom: 3em; }
 
 .gallerytext {
   max-width: 70%;
@@ -170,6 +171,34 @@
     content: "";
     display: block;
     flex-grow: 10; }
+
+.htmltemplate {
+  display: flex;
+  flex-direction: column;
+  margin: 1em;
+  padding: 1em;
+  border-radius: 10px; }
+  .htmltemplate h2 {
+    font-size: 2rem;
+    font-family: Arial, Helvetica, sans-serif;
+    font-style: italic;
+    text-transform: none; }
+  .htmltemplate p {
+    margin: .5rem;
+    font-size: 1rem;
+    font-family: Arial, Helvetica, sans-serif; }
+  .htmltemplate li {
+    font-weight: normal; }
+  .htmltemplate .centeredphoto {
+    text-align: center;
+    margin: .5em 0; }
+    .htmltemplate .centeredphoto img {
+      max-width: 50%;
+      border-radius: 10px; }
+  .htmltemplate .textright {
+    text-align: right; }
+  .htmltemplate .textleft {
+    text-align: left; }
 
 .feedback {
   color: red;

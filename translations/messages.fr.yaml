@@ -1,7 +1,23 @@
 # Have a look at config/packages/translation.yaml
 app:
-  version: Administration Beaumerle  [Mar, 1.54]
-  copyright:  'Ratoon software Corporation Inc, Chabreloche France '
+  version: Administration Beaumerle  [Jun, 1.55]
+  copyright: &copy; Ratoon Dev Corporation, 2023
+  location: 63250 Chabreloche, Département du Puy-de-Dôme
+  public:
+    menu:
+      accueil: Accueil
+      atelier: L'atelier
+      galerie: La galerie
+      contact: Contact
+      en: Anglais
+      fr: Français
+    main:
+      name: L'atelier Beau Merle
+      whatis: L'art de la<br/>Coutellerie
+      savoir: En savoir plus...
+    story:
+      header: Beau Merle, une histoire atypique
+      button: Découvrir notre histoire
 lang:
   menufr: Langue
   menuuk: Language

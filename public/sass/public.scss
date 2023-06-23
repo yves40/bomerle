@@ -7,12 +7,14 @@
 header{
     width: 100%;
     position: relative;
-    background-image: url('../images/hero-section-knife.jpg');
+    background-image: url('../images/triple.jpg');
     min-height: 100vh;
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
-    
+    .nav-link {
+        margin: 0 1rem;
+    }
     .navigation{
         width: 100%;
         height: 80px;
@@ -26,9 +28,24 @@ header{
         transition-delay: .4s;
         z-index: 99;
 
+        .ylang {
+            display: flex;
+            flex-direction: row;
+            font-size: large;
+            color: white;
+            a {
+                margin: 0 .5em;
+            }
+            span {
+                width: 5px;
+                margin: 0;
+                padding: 0;
+            }
+            img { width: 20px;}
+        }
+
         img{
             max-width: 70px;
-            padding-top: 10px;
         }
 
         &.hidden{
@@ -62,11 +79,11 @@ header{
     }
     .hero-section{
         width: 50%;
-        height: 100%;
+        height: 60%;
         color: #f1f1f1;
         position: absolute;
         right: 0;
-        top: 0;
+        bottom: 0;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -83,11 +100,6 @@ header{
                 font-weight: 700;
             }
         }
-        p{
-            margin: 20px;
-            font-family: $main;
-            font-weight: 200;
-        }
     }
 }
 
@@ -98,42 +110,9 @@ header{
     min-height: auto;
 
     .story{
-        width: 50%;
+        width: 60%;
         display: flex;
         flex-direction: column;
         align-items: center;
-        
-        h2{
-            text-align: center;
-        }
-        p{
-            margin: 20px;
-        }
-        .button-homepage{
-            text-transform: none;
-            font-size: 1.3rem;
-            font-weight: 600;
-        }
-    }
-    .photos{
-        width: 50%;
-        position: relative;
-
-        img{
-            box-shadow: 0px 20px 40px rgba(0,0,0,.6);
-        }
-
-        img:nth-child(1){
-            max-width: 400px;
-            position: absolute;
-            top: 0px;
-            right: 25px;
-        }
-        img:nth-child(2){
-            max-width: 295px;
-            position: absolute;
-            top: 140px;
-            left: 35px;
-        }
     }
 }
