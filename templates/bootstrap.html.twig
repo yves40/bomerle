@@ -43,9 +43,9 @@
                 </li>
                 <!-- lang Toggle -->
                 {% if locale == 'fr' %}
-                    <a href="{{ path('bootadmin.switch', { locale: 'en'}) }}" class="nav-link"><img src="/images/uk16.png" alt=""></a>
+                    <a href="{{ path('bootadmin.switch', { locale: 'en', origin: 'admin' }) }}" class="nav-link"><img src="/images/uk16.png" alt=""></a>
                 {% else %}
-                    <a href="{{ path('bootadmin.switch', { locale: 'fr'}) }}" class="nav-link"><img src="/images/fr16.png" alt=""></a>
+                    <a href="{{ path('bootadmin.switch', { locale: 'fr', origin: 'admin' }) }}" class="nav-link"><img src="/images/fr16.png" alt=""></a>
                 {% endif %}                        
             </ul>
         </nav>
@@ -215,9 +215,10 @@
                 <footer class="py-4 bg-light mt-auto">
                     <div class="container-fluid px-4">
                         <div class="small">
-                            <div class="text-muted">Copyright &copy; Ratoon Dev Corp, 2023</div>
+                            <div class="text-muted">{% trans %}app.copyright{% endtrans %}</div>
+                            <div class="text-muted">{% trans %}app.version{% endtrans %}</div>
                             <div class="text-muted">
-                                <a class="ya" href="https://www.chabreloche.com/" target="_blank">63250 Chabreloche, Département du Puy-de-Dôme</a>
+                                <a class="ya" href="https://goo.gl/maps/3kf9mBW6Wy8rkYLV6" target="_blank">{% trans %}app.location{% endtrans %}</a>
                             </div>
                         </div>
                     </div>

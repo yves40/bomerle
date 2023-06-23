@@ -55,18 +55,27 @@ class AdminSecurityController extends AbstractController
         throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
     }
     // --------------------------------------------------------------------------
-    #[Route('/switch/{locale}', name: 'bootadmin.switch')]
-    public function switch(Request $request, string $locale): Response
+    #[Route('/switch/{locale}/{origin}', name: 'bootadmin.switch')]
+    public function switch(Request $request, string $locale, string $origin): Response
     {
         $request->getSession()->set('bootadmin.lang', $locale);
         $this->localeSwitcher->setLocale($locale);
         $fh = new FileHandler();
-        $content = $fh->getFileContent('templates/'.$locale.'/adminhome.html');
-        return $this->render('admin/boothome.html.twig', [
-            "locale" =>  $this->localeSwitcher->getLocale(),
-            "page" => $content
-            ]
-        );               
+        // origin is used to return to the public or administration page
+        if($origin == 'public') {
+            return $this->render('public.html.twig', [
+                "locale" =>  $this->localeSwitcher->getLocale(),
+                ]
+            );               
+        }
+        else {
+            $content = $fh->getFileContent('templates/'.$locale.'/adminhome.html');
+            return $this->render('admin/boothome.html.twig', [
+                "locale" =>  $this->localeSwitcher->getLocale(),
+                "page" => $content
+                ]
+            );               
+        }
     }
     // --------------------------------------------------------------------------
     // P R I V A T E     S E R V I C E S 

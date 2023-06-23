@@ -1,0 +1,37 @@
+@import './const';
+
+.htmltemplate {
+    display: flex;
+    flex-direction: column;
+    margin: 1em;
+    padding: 1em;
+    border-radius: 10px;
+    h2 {
+        font-size: 2rem;
+        font-family:Arial, Helvetica, sans-serif;
+        font-style: italic;
+        text-transform: none;
+    }
+    p {
+        margin: .5rem;
+        font-size: 1rem;
+        font-family:Arial, Helvetica, sans-serif;
+    }
+    li {
+        font-weight: normal;
+    }
+    .centeredphoto {
+        text-align: center;
+        margin: .5em 0;
+        img {
+            max-width: 50%;
+            border-radius: 10px;
+        }    
+    }
+    .textright {
+        text-align: right;
+    }
+    .textleft {
+        text-align: left;
+    }
+}

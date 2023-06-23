@@ -14,30 +14,34 @@
     <header id="accueil">
         <nav class="navigation">
             <a href="#accueil"><img src="/images/logo1.png" alt="Logo Beau Merle"></a>
-            <span><a href="#accueil">Accueil</a></span>
-            <span><a href="#histoire">L'Atelier</a></span>
-            <span><a href="#thegallery">Galerie</a></span>
-            <span><a href="#contact">Contact</a></span>            
+            <span><a href="#accueil">{% trans %}app.public.menu.accueil{% endtrans %}</a></span>
+            <span><a href="#histoire">{% trans %}app.public.menu.atelier{% endtrans %}</a></span>
+            <span><a href="#thegallery">{% trans %}app.public.menu.galerie{% endtrans %}</a></span>
+            <span><a href="#contact">{% trans %}app.public.menu.contact{% endtrans %}</a></span>            
+            <!-- lang Toggle -->
+            <span class="ylang">
+                        <a href="{{ path('bootadmin.switch', { locale: 'en', origin: 'public' }) }}">
+                            <img src="/images/uk16.png" alt="">
+                        </a>
+                        <span>|</span>
+                        <a href="{{ path('bootadmin.switch', { locale: 'fr', origin: 'public' }) }}">
+                            <img src="/images/fr16.png" alt="">
+                        </a>
+            </span>
         </nav>
         <div class="hero-section">
             <div class="full-title">
-                <h1 class="main-heading">L'atelier Beau Merle</h1>
-                <h2 class="subtitle">-<br/>L'art de la<br/>Coutellerie</h2>
+                <h1 class="main-heading">{% trans %}app.public.main.name{% endtrans %}</h1>
+                <h2 class="subtitle">-<br/>{% trans %}app.public.main.whatis{% endtrans %}</h2>
             </div>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate quidem consectetur laboriosam? Fuga voluptatibus consequuntur adipisci aperiam quae eos, molestiae ipsa repellat blanditiis? Odio possimus quos quod ducimus reprehenderit voluptatem. Necessitatibus eum molestias maxime sit quae vitae mollitia repellendus quam cupiditate fugiat consequuntur, nemo ab placeat, accusantium impedit magnam possimus suscipit quod ad reiciendis delectus repudiandae? Odio incidunt tempore consequuntur magnam quas? Consequatur soluta quaerat quos rerum cum error explicabo nam aliquid ipsa nemo id enim ipsum at perferendis tempore repellat numquam nobis, dicta animi neque officia. Possimus, a tenetur.</p>
-            <a href="#" class="button-homepage">En savoir plus</a>
+            <div class="htmltemplate" data-templatename='maintext' data-lang={{locale}}></div>
         </div>
     </header>
     <main>
         <section id="histoire">
             <div class="story">
-                <h2>Beau Merle, une histoire atypique</h2>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Est, porro! Sed quaerat temporibus, consequatur assumenda dolorum, magni distinctio voluptate modi iusto nesciunt libero consectetur error. Eius cumque id tempora sit culpa labore quidem. Incidunt suscipit dolor, labore perferendis corporis, sequi eligendi facere quasi totam fuga illo doloremque? Vel expedita, adipisci sit laborum, eius facere saepe ullam inventore eum nihil ipsum voluptatem fuga laboriosam consectetur blanditiis exercitationem unde. Cupiditate dolores aperiam adipisci libero necessitatibus, tempora pariatur accusantium ratione molestias repellendus temporibus, officia ut, vero quos. Natus, doloribus illo ipsum ducimus ab commodi nihil aliquam officia possimus recusandae aperiam praesentium quia, quod, saepe veritatis animi provident quis iusto assumenda illum. Eligendi ad recusandae fugiat facilis sit suscipit iure possimus labore dicta perspiciatis molestiae, cupiditate alias nesciunt quam sed repellat? Deleniti quisquam repellendus architecto, impedit cumque blanditiis, hic enim, minus molestiae ea recusandae. Officiis ipsam esse ullam temporibus nostrum minus aliquid laudantium labore commodi eligendi eum quam vero voluptas quisquam ea quia, debitis est, aperiam pariatur beatae ex aspernatur fuga recusandae. Cum quam atque nulla error! Soluta et dolorem nisi saepe facilis consequatur unde ex, cupiditate ipsam quasi nostrum odio fuga, temporibus voluptatem neque atque iste cumque nam repellendus error quis. Optio, perspiciatis!</p>
-                <a href="#" class="button-homepage">Découvrir notre histoire</a>
-            </div>
-            <div class="photos">
-                <img src="/images/artisanat.jpg" alt="L'artisan en plein travail">
-                <img src="/images/Resized_20220508_144630.jpeg" alt="Vente en salon">
+                <h2>{% trans %}app.public.story.header{% endtrans %}</h2>
+                <div class="htmltemplate" data-templatename='story' data-lang={{locale}}></div>
             </div>
         </section>
         <section id='thegallery'>
