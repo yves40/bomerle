@@ -64,13 +64,13 @@ $(document).ready(function () {
             $(this).load(`/templates/${thelang}/${templatename}.html`);
         });
     }
-    // ----------------------------------------
+    // ---------------------------------------- Activate a slider
     function buildImagesSlider(allimages, timing, description, container) {
         console.log(`Container name is ${$(container).attr('name')} for ${allimages.length} images`);
         let slider = new Slider(container, timing, description);     // Build the slider frame
         slider.addImages(allimages);                    // Load images
     }
-    // ----------------------------------------
+    // ---------------------------------------- Activate a gallery
     function buildImagesGallery(allimages, description,  container) {
         console.log(`Container name is ${$(container).attr('name')} for ${allimages.length} images`);
         let gallery = new Gallery(container, description);
