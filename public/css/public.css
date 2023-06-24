@@ -186,7 +186,13 @@ section {
   background-position: center;
   background-size: cover; }
   #header .navigation {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    height: 5rem;
     display: flex;
+    width: 100vw;
     padding: 2% 6%;
     justify-content: space-between;
     align-items: center;
@@ -215,9 +221,9 @@ section {
           #header .navigation .nav-links ul li a {
             color: white;
             text-decoration: none;
-            font-size: 20px; }
+            font-size: 30px; }
             #header .navigation .nav-links ul li a img {
-              width: 25px; }
+              width: 30px; }
           #header .navigation .nav-links ul li span {
             font-size: large;
             color: white;
@@ -259,7 +265,7 @@ section {
         font-family: Arial, Helvetica, sans-serif;
         font-style: italic; }
 
-@media (max-width: 700px) {
+@media (max-width: 800px) {
   #header .navigation .nav-links ul li {
     display: block; }
   #header .navigation .nav-links {

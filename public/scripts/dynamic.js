@@ -7,16 +7,20 @@ $(document).ready(function () {
     const globalmenu = $('#globalmenu');
     const menuopen = $('#menuopen');
     const menuclose = $('#menuclose');
-    $('#menuopen').click(function (e) { 
+    $(menuopen).click(function (e) { 
         e.preventDefault();
         console.log(`Toggle menu`);
         const currentshift = $('#globalmenu').css('right');
         $('#globalmenu').css('right', '0px');
         $(menuopen).hide();
     });
-    $('#menuclose').click(function (e) { 
+    $(menuclose).click(function (e) { 
         e.preventDefault();
         console.log(`Close menu`);
+        $('#globalmenu').css('right', '-200px');
+        $(menuopen).show();
+    });
+    $('#globalmenu a').click(function (e) { 
         $('#globalmenu').css('right', '-200px');
         $(menuopen).show();
     });

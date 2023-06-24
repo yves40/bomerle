@@ -13,11 +13,11 @@
 <body>
     <section id="header">
         <nav class="navigation">
-            <a href="#accueil"><img src="/images/logo1.png" alt="Logo Beau Merle"></a>
+            <a href="#header"><img src="/images/logo1.png" alt="Logo Beau Merle"></a>
             <div id="globalmenu" class="nav-links">
                 <a class="menuaction" id='menuclose' href="#"><img class="svgmedium-white" src="/images/svg/close-circle-outline.svg" alt="Close Menu"/></a>            
                 <ul>
-                    <li><a href="#accueil">{% trans %}app.public.menu.accueil{% endtrans %}</a></li>
+                    <li><a href="#header">{% trans %}app.public.menu.accueil{% endtrans %}</a></li>
                     <li><a href="#histoire">{% trans %}app.public.menu.atelier{% endtrans %}</a></li>
                     <li><a href="#thegallery">{% trans %}app.public.menu.galerie{% endtrans %}</a></li>
                     <li><a href="#contact">{% trans %}app.public.menu.contact{% endtrans %}</a></li>
@@ -59,7 +59,7 @@
 
 <script src="{{ asset('node_modules/jquery/dist/jquery.min.js')}}"></script>
 <script src="{{ asset('scripts/properties.js')}}"></script>
-<script src="{{ asset('scripts/mainmenu.js')}}"></script>
+{# <script src="{{ asset('scripts/mainmenu.js')}}"></script> #}
 <script src="{{ asset('scripts/dynamic.js')}}"></script>
 <script src="{{ asset('scripts/classes/slider.js')}}"></script>
 <script src="{{ asset('scripts/classes/gallery.js')}}"></script>
