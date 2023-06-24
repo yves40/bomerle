@@ -195,9 +195,9 @@
     .htmltemplate .centeredphoto img {
       max-width: 50%;
       border-radius: 10px; }
-  .htmltemplate .textright {
+  .htmltemplate.textright {
     text-align: right; }
-  .htmltemplate .textleft {
+  .htmltemplate.textleft {
     text-align: left; }
 
 .feedback {
@@ -277,6 +277,11 @@ button.ylink:hover {
   width: 18px;
   height: 18px;
   filter: invert(19%) sepia(96%) saturate(6102%) hue-rotate(357deg) brightness(98%) contrast(117%); }
+
+.svgmedium-white {
+  width: 24px;
+  height: 24px;
+  filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(131deg) brightness(102%) contrast(102%); }
 
 .logs {
   padding-left: 0;

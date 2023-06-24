@@ -11,37 +11,39 @@
     <link rel="stylesheet" href="/css/yves.css">
 </head>
 <body>
-    <header id="accueil">
+    <section id="header">
         <nav class="navigation">
-            <a href="#accueil"><img src="/images/logo1.png" alt="Logo Beau Merle"></a>
-            <span><a href="#accueil">{% trans %}app.public.menu.accueil{% endtrans %}</a></span>
-            <span><a href="#histoire">{% trans %}app.public.menu.atelier{% endtrans %}</a></span>
-            <span><a href="#thegallery">{% trans %}app.public.menu.galerie{% endtrans %}</a></span>
-            <span><a href="#contact">{% trans %}app.public.menu.contact{% endtrans %}</a></span>            
-            <!-- lang Toggle -->
-            <span class="ylang">
-                        <a href="{{ path('bootadmin.switch', { locale: 'en', origin: 'public' }) }}">
-                            <img src="/images/uk16.png" alt="">
-                        </a>
-                        <span>|</span>
-                        <a href="{{ path('bootadmin.switch', { locale: 'fr', origin: 'public' }) }}">
-                            <img src="/images/fr16.png" alt="">
-                        </a>
-            </span>
-        </nav>
-        <div class="hero-section">
-            <div class="full-title">
-                <h1 class="main-heading">{% trans %}app.public.main.name{% endtrans %}</h1>
-                <h2 class="subtitle">-<br/>{% trans %}app.public.main.whatis{% endtrans %}</h2>
+            <a href="#header"><img src="/images/logo1.png" alt="Logo Beau Merle"></a>
+            <div id="globalmenu" class="nav-links">
+                <a class="menuaction" id='menuclose' href="#"><img class="svgmedium-white" src="/images/svg/close-circle-outline.svg" alt="Close Menu"/></a>            
+                <ul>
+                    <li><a href="#header">{% trans %}app.public.menu.accueil{% endtrans %}</a></li>
+                    <li><a href="#histoire">{% trans %}app.public.menu.atelier{% endtrans %}</a></li>
+                    <li><a href="#thegallery">{% trans %}app.public.menu.galerie{% endtrans %}</a></li>
+                    <li><a href="#contact">{% trans %}app.public.menu.contact{% endtrans %}</a></li>
+                    <span class="lang">
+                        <li><a href="{{ path('bootadmin.switch', { locale: 'en', origin: 'public' }) }}">en</a></li>
+                        <li><span> | </span></li>          
+                        <li><a href="{{ path('bootadmin.switch', { locale: 'fr', origin: 'public' }) }}">fr</a></li>            
+                    </span>
+                </ul>
             </div>
-            <div class="htmltemplate" data-templatename='maintext' data-lang={{locale}}></div>
+            <a class="menuaction" id='menuopen' href="#"><img class="svgmedium-white" src="/images/svg/bars-solid.svg" alt="Show Hide Menu"/></a>
+        </nav>
+        <div class="intro">
+            <div class="maintitle textleft">
+                <h1 >{% trans %}app.public.main.name{% endtrans %}</h1><br>
+                <h2 >{% trans %}app.public.main.whatis{% endtrans %}</h2>
+            </div>
+            <div class="htmltemplate textleft" data-templatename='maintext' data-lang={{locale}}>
+            </div>
         </div>
-    </header>
+    </section>
     <main>
         <section id="histoire">
             <div class="story">
                 <h2>{% trans %}app.public.story.header{% endtrans %}</h2>
-                <div class="htmltemplate" data-templatename='story' data-lang={{locale}}></div>
+                <div class="htmltemplate textleft" data-templatename='story' data-lang={{locale}}></div>
             </div>
         </section>
         <section id='thegallery'>
@@ -57,7 +59,7 @@
 
 <script src="{{ asset('node_modules/jquery/dist/jquery.min.js')}}"></script>
 <script src="{{ asset('scripts/properties.js')}}"></script>
-<script src="{{ asset('scripts/mainmenu.js')}}"></script>
+{# <script src="{{ asset('scripts/mainmenu.js')}}"></script> #}
 <script src="{{ asset('scripts/dynamic.js')}}"></script>
 <script src="{{ asset('scripts/classes/slider.js')}}"></script>
 <script src="{{ asset('scripts/classes/gallery.js')}}"></script>
