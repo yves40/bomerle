@@ -3,6 +3,7 @@
 @import './base/typography';
 @import './base/default';
 @import './components/buttons';
+@import './dad/const';
 
 #header {
     min-height: 80vh;
@@ -68,8 +69,8 @@
                 width: 60px;
         }
     }
-    .hero-section{
-        width: 50%;
+    .intro{
+        width: 60vw;
         height: 60%;
         color: #f1f1f1;
         position: absolute;
@@ -80,15 +81,19 @@
         justify-content: center;
         align-items: center;
         padding: 100px 25px;
-        text-align: center;
+        text-align: right;
 
-        .full-title{
-            font-size: 3rem;
-            text-transform: uppercase;
-
-            h1{
-                font-family: $title;
-                font-weight: 700;
+        .maintitle {
+            font-family: $title;
+            font-weight: 700;
+            h1 {
+                font-size: 3rem;
+                text-transform: uppercase;
+            }
+            h2 {
+                font-size: 1.5rem;
+                font-family:$textpolicy;
+                font-style: italic ;
             }
         }
     }
@@ -96,7 +101,6 @@
 
 #histoire{
     display: flex;
-    text-align: center;
     padding: 70px 25px;
     min-height: auto;
 

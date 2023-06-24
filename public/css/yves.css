@@ -195,9 +195,9 @@
     .htmltemplate .centeredphoto img {
       max-width: 50%;
       border-radius: 10px; }
-  .htmltemplate .textright {
+  .htmltemplate.textright {
     text-align: right; }
-  .htmltemplate .textleft {
+  .htmltemplate.textleft {
     text-align: left; }
 
 .feedback {

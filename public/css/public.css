@@ -230,8 +230,8 @@ section {
       margin-left: 2rem; }
     #header .navigation a img {
       width: 60px; }
-  #header .hero-section {
-    width: 50%;
+  #header .intro {
+    width: 60vw;
     height: 60%;
     color: #f1f1f1;
     position: absolute;
@@ -242,17 +242,20 @@ section {
     justify-content: center;
     align-items: center;
     padding: 100px 25px;
-    text-align: center; }
-    #header .hero-section .full-title {
-      font-size: 3rem;
-      text-transform: uppercase; }
-      #header .hero-section .full-title h1 {
-        font-family: "Cinzel Decorative", sans-serif;
-        font-weight: 700; }
+    text-align: right; }
+    #header .intro .maintitle {
+      font-family: "Cinzel Decorative", sans-serif;
+      font-weight: 700; }
+      #header .intro .maintitle h1 {
+        font-size: 3rem;
+        text-transform: uppercase; }
+      #header .intro .maintitle h2 {
+        font-size: 1.5rem;
+        font-family: Arial, Helvetica, sans-serif;
+        font-style: italic; }
 
 #histoire {
   display: flex;
-  text-align: center;
   padding: 70px 25px;
   min-height: auto; }
   #histoire .story {

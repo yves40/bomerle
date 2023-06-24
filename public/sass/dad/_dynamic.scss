@@ -8,14 +8,14 @@
     border-radius: 10px;
     h2 {
         font-size: 2rem;
-        font-family:Arial, Helvetica, sans-serif;
+        font-family:$textpolicy;
         font-style: italic;
         text-transform: none;
     }
     p {
         margin: .5rem;
         font-size: 1rem;
-        font-family:Arial, Helvetica, sans-serif;
+        font-family:$textpolicy;
     }
     li {
         font-weight: normal;
@@ -28,10 +28,10 @@
             border-radius: 10px;
         }    
     }
-    .textright {
+    &.textright {
         text-align: right;
     }
-    .textleft {
+    &.textleft {
         text-align: left;
     }
 }

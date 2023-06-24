@@ -13,7 +13,7 @@ app:
       fr: French
     main:
       name: The Beau Merle workshop
-      whatis: The art of<br/>Cutlery
+      whatis: The art of Cutlery
       savoir: Read more...
     story:
       header: An atypical story

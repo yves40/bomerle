@@ -13,7 +13,7 @@ app:
       fr: Français
     main:
       name: L'atelier Beau Merle
-      whatis: L'art de la<br/>Coutellerie
+      whatis: L'art de la Coutellerie
       savoir: En savoir plus...
     story:
       header: Beau Merle, une histoire atypique
