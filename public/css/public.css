@@ -291,7 +291,8 @@ section {
     #header .navigation .nav-links ul span {
       display: flex;
       flex-direction: row;
-      padding-left: 8px; } }
+      padding-left: 8px;
+      align-items: center; } }
 
 #histoire {
   display: flex;
