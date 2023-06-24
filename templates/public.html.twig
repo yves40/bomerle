@@ -14,7 +14,7 @@
     <section id="header">
         <nav class="navigation">
             <a href="#accueil"><img src="/images/logo1.png" alt="Logo Beau Merle"></a>
-            <div class="nav-links">
+            <div id="globalmenu" class="nav-links">
                 <ul>
                     <li><a href="#accueil">{% trans %}app.public.menu.accueil{% endtrans %}</a></li>
                     <li><a href="#histoire">{% trans %}app.public.menu.atelier{% endtrans %}</a></li>
@@ -27,7 +27,8 @@
                     </span>
                 </ul>
             </div>
-            <img class="svgmedium-white" src="/images/svg/bars-solid.svg" alt="Show Hide Menu"/>
+            <a class="menuaction" id='menutoggler' href="#"><img class="svgmedium-white" src="/images/svg/bars-solid.svg" alt="Show Hide Menu"/></a>
+            <a class="menuaction" id='menuclose' href="#"><img class="svgmedium-white" src="/images/svg/close-circle-outline.svg" alt="Close Menu"/></a>            
         </nav>
         <div class="intro">
             <div class="maintitle textleft">

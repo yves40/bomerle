@@ -68,6 +68,7 @@
         a img {
                 width: 60px;
         }
+        .menuaction { display: none;}
     }
     .intro{
         width: 60vw;
@@ -98,6 +99,34 @@
         }
     }
 }
+// Media queries
+@media(max-width: 700px) {
+    .nav-links ul li {
+        display: block;
+    }
+    .nav-links {
+        position: absolute;
+        background: #f44336;
+        height: 100vh;
+        width: 200px;
+        top: 0;
+        right: -200px;
+        text-align: left;
+        z-index: 2;
+        transition: 1s;
+    }
+    #menutoggler {
+        display: block;
+        color: white;
+        margin: 10px;
+        font-size: 22px;
+        cursor: pointer;
+    }
+    .nav-links ul {
+        padding: 30px;
+    }
+}
+
 
 #histoire{
     display: flex;

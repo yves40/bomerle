@@ -4,6 +4,19 @@
 $(document).ready(function () {
     $props.load();
     console.log(`[${$props.version()} ]` );
+    const globalmenu = $('#globalmenu');
+    const menutoggler = $('#menutoggler');
+    const menuclose = $('#menuclose');
+    $('#menutoggler').click(function (e) { 
+        e.preventDefault();
+        console.log(`Toggle menu`);
+        $(globalmenu).toggle();
+    });
+    $('#menuclose').click(function (e) { 
+        e.preventDefault();
+        console.log(`Close menu`);
+    });
+
     getActiveDiaporamas();
     getHtmlTemplates();
     // ---------------------------------------- Request the active diaporamas from the DB
