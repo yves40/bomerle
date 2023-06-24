@@ -4,6 +4,27 @@
 $(document).ready(function () {
     $props.load();
     console.log(`[${$props.version()} ]` );
+    const globalmenu = $('#globalmenu');
+    const menuopen = $('#menuopen');
+    const menuclose = $('#menuclose');
+    $(menuopen).click(function (e) { 
+        e.preventDefault();
+        console.log(`Toggle menu`);
+        const currentshift = $('#globalmenu').css('right');
+        $('#globalmenu').css('right', '0px');
+        $(menuopen).hide();
+    });
+    $(menuclose).click(function (e) { 
+        e.preventDefault();
+        console.log(`Close menu`);
+        $('#globalmenu').css('right', '-200px');
+        $(menuopen).show();
+    });
+    $('#globalmenu a').click(function (e) { 
+        $('#globalmenu').css('right', '-200px');
+        $(menuopen).show();
+    });
+
     getActiveDiaporamas();
     getHtmlTemplates();
     // ---------------------------------------- Request the active diaporamas from the DB
@@ -58,7 +79,6 @@ $(document).ready(function () {
     function getHtmlTemplates() {
         $(".htmltemplate").each(function (index, element) {
             const thelang = $(this).data('lang');
-            console.log(thelang);
             // element == this
             const templatename = $(this).data('templatename');
             $(this).load(`/templates/${thelang}/${templatename}.html`);
