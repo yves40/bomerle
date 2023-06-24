@@ -5,16 +5,20 @@ $(document).ready(function () {
     $props.load();
     console.log(`[${$props.version()} ]` );
     const globalmenu = $('#globalmenu');
-    const menutoggler = $('#menutoggler');
+    const menuopen = $('#menuopen');
     const menuclose = $('#menuclose');
-    $('#menutoggler').click(function (e) { 
+    $('#menuopen').click(function (e) { 
         e.preventDefault();
         console.log(`Toggle menu`);
-        $(globalmenu).toggle();
+        const currentshift = $('#globalmenu').css('right');
+        $('#globalmenu').css('right', '0px');
+        $(menuopen).hide();
     });
     $('#menuclose').click(function (e) { 
         e.preventDefault();
         console.log(`Close menu`);
+        $('#globalmenu').css('right', '-200px');
+        $(menuopen).show();
     });
 
     getActiveDiaporamas();
