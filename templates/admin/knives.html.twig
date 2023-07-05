@@ -18,10 +18,13 @@
             <li class="list-group-item">
                 <div class="row">
                     <div class="col">{{knife.name}} ({{knife.images|length}})</div>
-                    {# <div class="col-3">{{'admin.manageknives.category'|trans}} : {{knife.category}}</div>
-                    <div class="col-3">{{'admin.manageknives.mechanism'|trans}} : {{knife.mechanism}}</div>
-                    <div class="col-1">{{'admin.manageknives.stock'|trans}} : {{knife.stock}} </div>
-                    <div class="col-1">{{knife.price}} €</div> #}
+                    <div class="col-1">
+                        {% if knife.published == true %}    
+                            <img class="svgsmall-lightgreen" src="/images/svg/plug-circle-plus-solid.svg" alt=""/>
+                        {% else %}
+                            <img class="svgsmall-red" src="/images/svg/plug-circle-minus-solid.svg" alt=""/>
+                        {% endif %}
+                    </div>
                     <div class="col-1">
                         <a href="{{ path('bootadmin.knives.edit', {id: knife.id}) }}">
                         <img class="svgsmall-lightblue" src="/images/svg/pen-to-square-regular.svg" alt="" title=""/>                        </a>

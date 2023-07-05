@@ -109,6 +109,7 @@ admin:
   manageknives:
     title: Knives management
     label: Knife name
+    published: Visible on site
     description: Description
     stock: Stock
     weight: Weight

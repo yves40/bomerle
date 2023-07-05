@@ -21,6 +21,7 @@ class KnifesType extends AbstractType
     {
         $builder
             ->add('name')
+            ->add('published')
             ->add('description', TextareaType::class,
                 ['attr' => ["rows" => 6 ]])
             ->add('stock')

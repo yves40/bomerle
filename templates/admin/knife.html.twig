@@ -76,8 +76,9 @@
         {# M A I N --------------------------------------------------------------------------------------------------------- #}
         <div class="tab-pane active " id="home" role="tabpanel" aria-labelledby="home-tab"  align-items="left">
                 <div class="row align-items-start">
-                    <div class="col ylabel"> {{ form_row(form.name, { 'label' : 'admin.manageknives.label'|trans, 'value': knife.name })  }}</div>
-                    <div class="col ylabel">{{ form_row(form.description, { 'label' : 'admin.manageknives.description'|trans,'value': knife.description,}) }}</div>
+                    <div class="col-3 ylabel"> {{ form_row(form.name, { 'label' : 'admin.manageknives.label'|trans, 'value': knife.name })  }}</div>
+                    <div class="col-2 ylabel"> {{ form_row(form.published, { 'label' : 'admin.manageknives.published'|trans, 'value': knife.published })  }}</div>
+                    <div class="col-7 ylabel">{{ form_row(form.description, { 'label' : 'admin.manageknives.description'|trans,'value': knife.description,}) }}</div>
                 </div>
                 <div class="row align-items-start">
                     <div class="col ylabel">{{ form_row(form.stock, { 'label' : 'admin.manageknives.stock'|trans,'value': knife.stock,})}}</div>
