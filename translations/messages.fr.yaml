@@ -108,6 +108,7 @@ admin:
   manageknives:
     title: Gestion des couteaux
     label: Nom
+    published: Visible sur site
     description: Description
     stock: Stock
     weight: Poids

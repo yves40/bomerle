@@ -79,6 +79,9 @@ class Knifes
     #[ORM\OrderBy(['rank'  => 'ASC'])]
     private Collection $images;
 
+    #[ORM\Column(nullable: true)]
+    private ?bool $published = null;
+
     public function __construct()
     {
         $this->accessories = new ArrayCollection();
@@ -317,5 +320,17 @@ class Knifes
     public function __toString()
     {
         return $this->name;
+    }
+
+    public function isPublished(): ?bool
+    {
+        return $this->published;
+    }
+
+    public function setPublished(?bool $published): self
+    {
+        $this->published = $published;
+
+        return $this;
     }
 }
