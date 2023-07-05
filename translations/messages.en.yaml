@@ -50,7 +50,7 @@ admin:
   tools: Admin Tools
   actions: Actions
   knives: Manage Knives
-  listknives: Show knives
+  listknives: List knives
   addknife: Add a knife
   accessories: Accessories
   categories: Categories
