@@ -51,7 +51,7 @@ class Gallery {
         // Get the container
         const gallery = $(`#${this.gallery}`);
         for(let i = 0; i < allimages.length; ++i) {
-            console.log(`${this.version} Adding image ${allimages[i]} to the gallery`);
+            // console.log(`${this.version} Adding image ${allimages[i]} to the gallery`);
             let newimg = $('<img>').attr('src', "/images/slideshow/"+allimages[i]);
             let theline = $('<li>');
             $(theline).append(newimg);
