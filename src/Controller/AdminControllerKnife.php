@@ -207,6 +207,24 @@ class AdminControllerKnife extends AbstractController
         }
     }
     // --------------------------------------------------------------------------
+    #[Route('/knives/getpublished', name: 'bootadmin.knives.getpublished')]
+    public function getPublished(Request $request, EntityManagerInterface $em) {
+        try {
+                $published = $em->getRepository(Knifes::class)->findPublished();
+                return $this->json([
+                    'message' => 'bootadmin.knives.getpublished OK',
+                    'publishedcount' => count($published),
+                    'published' => $published
+                ], 200);        
+        }
+        catch(Exception $e) {
+            return $this->json([
+                'message' => 'bootadmin.knives.getpublished KO',
+                'error' => $e
+            ], 400);        
+        }
+    }
+    // --------------------------------------------------------------------------
     // P R I V A T E     S E R V I C E S 
     // --------------------------------------------------------------------------
     private function locale(Request $request) {

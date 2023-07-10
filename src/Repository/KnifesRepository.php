@@ -38,6 +38,15 @@ class KnifesRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
+    public function findPublished(): array
+    {
+        return $this->createQueryBuilder('s')
+        ->select('distinct(s.name) as name')
+        ->andWhere('s.published = true')
+        ->orderBy('s.name')
+        ->getQuery()
+        ->getResult();
+    }   
 
 //    /**
 //     * @return Knifes[] Returns an array of Knifes objects
