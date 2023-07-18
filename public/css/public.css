@@ -238,10 +238,7 @@ section {
           position: absolute;
           overflow: auto;
           background: #f44336; }
-        #header .navigation .nav-links ul #catalog:hover #submenu {
-          display: block;
-          position: absolute; }
-          #header .navigation .nav-links ul #catalog:hover #submenu ::after {
+          #header .navigation .nav-links ul #catalog #submenu li ::after {
             content: '';
             width: 0%;
             height: 2px;
@@ -249,8 +246,11 @@ section {
             display: block;
             margin: auto;
             transition: 0.5s; }
-          #header .navigation .nav-links ul #catalog:hover #submenu :hover::after {
+          #header .navigation .nav-links ul #catalog #submenu li :hover::after {
             width: 100%; }
+        #header .navigation .nav-links ul #catalog:hover #submenu {
+          display: block;
+          position: absolute; }
       #header .navigation .nav-links .lang li {
         margin: 2px 2px;
         padding: 0; }

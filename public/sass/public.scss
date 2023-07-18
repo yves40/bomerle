@@ -30,9 +30,9 @@
             ul {
                 margin-top: 0;
                 margin-bottom: 0;
-                li {
+                li { 
                     list-style: none;
-                    display: inline-block;
+                    display: inline-block; 
                     padding: 8px 12px;
                     position: relative; 
                     ::after {
@@ -73,10 +73,7 @@
                         position: absolute;
                         overflow: auto;
                         background: $menubackground;
-                    }
-                    &:hover #submenu {
-                            display: block; 
-                            position: absolute; 
+                        li {
                             ::after {
                                 content: '';
                                 width: 0%;
@@ -88,7 +85,12 @@
                             }
                             :hover::after {
                                 width: 100%;
-                            } 
+                            }        
+                        }
+                    }
+                    &:hover #submenu {
+                            display: block; 
+                            position: absolute; 
                     }
                 }
 
@@ -196,7 +198,7 @@
     .story{
         width: 60%;
         display: flex;
-        flex-direction: column;
+        flex-direction: column; 
         align-items: center;
     }
 }
