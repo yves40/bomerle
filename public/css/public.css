@@ -210,7 +210,8 @@ section {
           position: relative; }
           #header .navigation .nav-links ul li li {
             margin: 0;
-            padding: 0 1rem; }
+            padding: 0 1rem;
+            width: 150px; }
           #header .navigation .nav-links ul li a {
             font-size: .8rem; }
           #header .navigation .nav-links ul li ::after {
@@ -243,7 +244,8 @@ section {
           background: #f44336; }
           #header .navigation .nav-links ul #catalog #submenu li li {
             margin: 0;
-            padding: 0 1rem; }
+            padding: 0 1rem;
+            width: 150px; }
           #header .navigation .nav-links ul #catalog #submenu li a {
             font-size: .8rem; }
           #header .navigation .nav-links ul #catalog #submenu li ::after {

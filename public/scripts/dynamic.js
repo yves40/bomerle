@@ -70,9 +70,9 @@ $(document).ready(function () {
         allpublished.forEach( knife => {
             console.log(`Got a knife to be published ${knife.name}`);
             const li = $("<li></li>") ;
-            const a = $("<a></a>").addClass('dropdown-item').text(knife.name);
+            const a = $("<a></a>").text(knife.name);
             li.append(a);
-            $('#publishedknives').append(li);
+            $('#submenu').append(li);
         })
     }
     // ---------------------------------------- Find a dynamic section in the page
