@@ -20,6 +20,13 @@
                     <li><a href="#header">{% trans %}app.public.menu.accueil{% endtrans %}</a></li>
                     <li><a href="#histoire">{% trans %}app.public.menu.atelier{% endtrans %}</a></li>
                     <li><a href="#thegallery">{% trans %}app.public.menu.galerie{% endtrans %}</a></li>
+                    <li id="catalog"><a href="#">{% trans %}app.public.menu.catalog{% endtrans %}</a>
+                        <ul id="submenu">
+                            <li><a href="#">Un</a></li>
+                            <li><a href="#">Deux</a></li>
+                            <li><a href="#">Trois</a></li>
+                        </ul>
+                    </li>
                     <li><a href="#contact">{% trans %}app.public.menu.contact{% endtrans %}</a></li>
                     <span class="lang">
                         <li><a href="{{ path('bootadmin.switch', { locale: 'en', origin: 'public' }) }}">en</a></li>
@@ -46,7 +53,7 @@
                 <div class="htmltemplate textleft" data-templatename='story' data-lang={{locale}}></div>
             </div>
         </section>
-        <section id="catalog">
+        {# <section id="catalog">
             <div class="dropdown">
                 <a class="btn btn-secondary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 {% trans %}app.public.menu.catalog{% endtrans %}
@@ -55,7 +62,7 @@
                     {# Loaded by dynamic.js searching published knives in the DB #}
                 </ul>
             </div>
-        </section>
+        </section> #}
         <section id='thegallery'>
             {# Loaded by dynamic.js searching active diapos in the DB #}
         </section>

@@ -56,13 +56,42 @@
                         }
                     }
                     span {
-                        font-size: large;
+                        font-size: large; 
                         color: white;
-                        width: 5px;
+                        width: 5px; 
                         margin: 0;
                         padding: 0;
                     }       
                 }
+                #catalog {
+                    ::after {
+                        content: ''; 
+                        width: 0%;
+                    }
+                    #submenu {
+                        display: none;
+                        position: absolute;
+                        overflow: auto;
+                        background: $menubackground;
+                    }
+                    &:hover #submenu {
+                            display: block; 
+                            position: absolute; 
+                            ::after {
+                                content: '';
+                                width: 0%;
+                                height: 2px;
+                                background: white;
+                                display: block;
+                                margin: auto;
+                                transition: 0.5s;                    
+                            }
+                            :hover::after {
+                                width: 100%;
+                            } 
+                    }
+                }
+
             }
             .lang li {
                 margin: 2px 2px;
@@ -126,6 +155,13 @@
                 z-index: 2;
                 transition: 1s;
                 background: $menubackground;
+                ul {
+                    #catalog {
+                        &:hover #submenu {
+                            position: relative;
+                        }
+                    }
+                }
             }
             #menuclose {
                 display: block;
