@@ -35,18 +35,7 @@
                     display: inline-block; 
                     padding: 8px 12px;
                     position: relative; 
-                    ::after {
-                        content: '';
-                        width: 0%;
-                        height: 2px;
-                        background: white;
-                        display: block;
-                        margin: auto;
-                        transition: 0.5s;                    
-                    }
-                    :hover::after {
-                        width: 100%;
-                    } 
+                    @include submenuattr; 
                     a {
                         color: white;
                         text-decoration: none;
@@ -70,22 +59,9 @@
                     }
                     #submenu {
                         display: none;
-                        position: absolute;
-                        overflow: auto;
-                        background: $menubackground;
+                        background: $menubackground; 
                         li {
-                            ::after {
-                                content: '';
-                                width: 0%;
-                                height: 2px;
-                                background: white;
-                                display: block;
-                                margin: auto;
-                                transition: 0.5s;                    
-                            }
-                            :hover::after {
-                                width: 100%;
-                            }        
+                            @include submenuattr;
                         }
                     }
                     &:hover #submenu {
@@ -148,6 +124,7 @@
                 display: block;
             }
             .nav-links {
+                background: $menubackground;
                 position: absolute;
                 height: 80vh;
                 width: 200px;
@@ -156,7 +133,6 @@
                 text-align: left;
                 z-index: 2;
                 transition: 1s;
-                background: $menubackground;
                 ul {
                     #catalog {
                         &:hover #submenu {

@@ -15,3 +15,25 @@ $verysmalltext: 0.5rem;
 $on: green;
 $off: red;
 $menubackground: #f44336;
+
+@mixin submenuattr {
+    li {
+      margin: 0;
+      padding: 0 1rem;      
+    }
+    a {
+      font-size: .8rem;
+    }
+    ::after {
+      content: '';
+      width: 0%;
+      height: 2px;
+      background: white;
+      display: block;
+      margin: auto;
+      transition: 0.5s;                    
+  }
+  :hover::after {
+      width: 100%;
+  } 
+}
