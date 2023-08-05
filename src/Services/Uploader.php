@@ -6,14 +6,14 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 use Exception;
-use FileException;
 
 class Uploader {
 
+  private int $webpratio = 30;  // 1 to 100 : The bigger the less compression
   // ---------------------------------------------------------------------------------------------
   // Cette notation dans le constructeur impose PHP8
   // ---------------------------------------------------------------------------------------------
-  public function __construct(private SluggerInterface $slugger) {} 
+  public function __construct(private SluggerInterface $slugger) { } 
   // ---------------------------------------------------------------------------------------------
   public function uploadFile(UploadedFile $file, string $directoryFolder) {
 
@@ -42,7 +42,7 @@ class Uploader {
     }
     if($image !== null){
       $newFilename = $safeFilename.'-'.uniqid().'.webp';
-      $result = imagewebp($image, $directoryFolder .'/'.$newFilename, 30);
+      $result = imagewebp($image, $directoryFolder .'/'.$newFilename, $this->webpratio);
       imagedestroy($image);
     }
     else {  // No conversion, keep original file
