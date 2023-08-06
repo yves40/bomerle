@@ -20,6 +20,10 @@
                     <li><a href="#header">{% trans %}app.public.menu.accueil{% endtrans %}</a></li>
                     <li><a href="#histoire">{% trans %}app.public.menu.atelier{% endtrans %}</a></li>
                     <li><a href="#thegallery">{% trans %}app.public.menu.galerie{% endtrans %}</a></li>
+                    <li id="catalog"><a href="#">{% trans %}app.public.menu.catalog{% endtrans %}</a>
+                        <ul id="submenu">
+                        </ul>
+                    </li>
                     <li><a href="#contact">{% trans %}app.public.menu.contact{% endtrans %}</a></li>
                     <span class="lang">
                         <li><a href="{{ path('bootadmin.switch', { locale: 'en', origin: 'public' }) }}">en</a></li>
@@ -46,16 +50,25 @@
                 <div class="htmltemplate textleft" data-templatename='story' data-lang={{locale}}></div>
             </div>
         </section>
+        {# <section id="catalog">
+            <div class="dropdown">
+                <a class="btn btn-secondary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                {% trans %}app.public.menu.catalog{% endtrans %}
+                </a>
+                <ul id="publishedknives" class="dropdown-menu">
+                    {# Loaded by dynamic.js searching published knives in the DB #}
+                </ul>
+            </div>
+        </section> #}
         <section id='thegallery'>
-            {# <div class="diapo" name="home"></div>
-            <div class="diapo" name="gallery"></div> #}
+            {# Loaded by dynamic.js searching active diapos in the DB #}
         </section>
     </main>
 </body>
 </html>
 
 <link rel="stylesheet" href="{{ asset('node_modules/bootstrap/dist/css/bootstrap.css') }}">
-<script src="{{asset("node_modules/bootstrap/dist/js/bootstrap.min.js")}}"></script>
+<script src="{{asset("node_modules/bootstrap/dist/js/bootstrap.bundle.js")}}"></script>
 
 <script src="{{ asset('node_modules/jquery/dist/jquery.min.js')}}"></script>
 <script src="{{ asset('scripts/properties.js')}}"></script>

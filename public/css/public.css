@@ -208,6 +208,12 @@ section {
           display: inline-block;
           padding: 8px 12px;
           position: relative; }
+          #header .navigation .nav-links ul li li {
+            margin: 0;
+            padding: 0 1rem;
+            width: 150px; }
+          #header .navigation .nav-links ul li a {
+            font-size: .8rem; }
           #header .navigation .nav-links ul li ::after {
             content: '';
             width: 0%;
@@ -230,6 +236,31 @@ section {
             width: 5px;
             margin: 0;
             padding: 0; }
+        #header .navigation .nav-links ul #catalog ::after {
+          content: '';
+          width: 0%; }
+        #header .navigation .nav-links ul #catalog #submenu {
+          display: none;
+          background: #f44336; }
+          #header .navigation .nav-links ul #catalog #submenu li li {
+            margin: 0;
+            padding: 0 1rem;
+            width: 150px; }
+          #header .navigation .nav-links ul #catalog #submenu li a {
+            font-size: .8rem; }
+          #header .navigation .nav-links ul #catalog #submenu li ::after {
+            content: '';
+            width: 0%;
+            height: 2px;
+            background: white;
+            display: block;
+            margin: auto;
+            transition: 0.5s; }
+          #header .navigation .nav-links ul #catalog #submenu li :hover::after {
+            width: 100%; }
+        #header .navigation .nav-links ul #catalog:hover #submenu {
+          display: block;
+          position: absolute; }
       #header .navigation .nav-links .lang li {
         margin: 2px 2px;
         padding: 0; }
@@ -269,6 +300,7 @@ section {
   #header .navigation .nav-links ul li {
     display: block; }
   #header .navigation .nav-links {
+    background: #f44336;
     position: absolute;
     height: 80vh;
     width: 200px;
@@ -276,8 +308,9 @@ section {
     right: -200px;
     text-align: left;
     z-index: 2;
-    transition: 1s;
-    background: #f44336; }
+    transition: 1s; }
+    #header .navigation .nav-links ul #catalog:hover #submenu {
+      position: relative; }
   #header .navigation #menuclose {
     display: block;
     color: white;

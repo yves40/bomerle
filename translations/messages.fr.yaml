@@ -1,6 +1,6 @@
 # Have a look at config/packages/translation.yaml
 app:
-  version: Administration Beaumerle  [Jun, 1.55]
+  version: Administration Beaumerle  [Jul, 1.56]
   copyright: &copy; Ratoon Dev Corporation, 2023
   location: 63250 Chabreloche, Département du Puy-de-Dôme
   public:
@@ -8,6 +8,7 @@ app:
       accueil: Accueil
       atelier: L'atelier
       galerie: La galerie
+      catalog: Couteaux
       contact: Contact
       en: Anglais
       fr: Français
@@ -253,5 +254,5 @@ generic:
   friday: Vendredi
   saturday: Samedi
   sunday: Dimanche
-  du: Du: 
-  au: Au: 
+  du: Du 
+  au: Au 

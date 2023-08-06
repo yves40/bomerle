@@ -8,6 +8,7 @@ app:
       accueil: Home
       atelier: The workshop
       galerie: The gallery
+      catalog: Knives
       contact: Contact
       en: English
       fr: French
@@ -254,6 +255,6 @@ generic:
   friday: Friday
   saturday: Saturday
   sunday: Sunday
-  du: From:
-  au: To:
+  du: From 
+  au: To 
 

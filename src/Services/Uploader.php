@@ -6,30 +6,58 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 use Exception;
-use FileException;
 
 class Uploader {
 
+  private int $webpratio = 30;  // 1 to 100 : The bigger the less compression
   // ---------------------------------------------------------------------------------------------
   // Cette notation dans le constructeur impose PHP8
   // ---------------------------------------------------------------------------------------------
-  public function __construct(private SluggerInterface $slugger) {} 
+  public function __construct(private SluggerInterface $slugger) { } 
   // ---------------------------------------------------------------------------------------------
   public function uploadFile(UploadedFile $file, string $directoryFolder) {
 
     $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
     // this is needed to safely include the file name as part of the URL
     $safeFilename = $this->slugger->slug($originalFilename);
-    $newFilename = $safeFilename.'-'.uniqid().'.'.$file->guessExtension();
-    // Move the file to the directory where brochures are stored
-    try {
+    // Convert to a webp format
+    // 1    IMAGETYPE_GIF
+    // 2    IMAGETYPE_JPEG
+    // 3    IMAGETYPE_PNG
+    // 6    IMAGETYPE_BMP
+    // 15   IMAGETYPE_WBMP
+    // 16   IMAGETYPE_XBM
+    $file_type = exif_imagetype($file);
+    switch($file_type) {
+      case '2': $image = imagecreatefromjpeg($file);
+                break;
+      case '3':
+                $image = imagecreatefrompng($file);
+                imagepalettetotruecolor($image);
+                imagealphablending($image, true);
+                imagesavealpha($image, true);
+                break;
+      default:  $image = null;
+                break;
+    }
+    if($image !== null){
+      $newFilename = $safeFilename.'-'.uniqid().'.webp';
+      $result = imagewebp($image, $directoryFolder .'/'.$newFilename, $this->webpratio);
+      imagedestroy($image);
+    }
+    else {  // No conversion, keep original file
+      $newFilename = $safeFilename.'-'.uniqid().'.'.$file->guessExtension();
+      // Move the file to the target directory
+      try {
         $file->move( $directoryFolder, $newFilename );
         chmod($directoryFolder.'/'.$newFilename, 0644);
-        return $newFilename;
-    } catch (Exception $e) {
-      $this->getErrorMessage($file);
-        return '';
+      } 
+      catch (Exception $e) {
+          $this->getErrorMessage($file);
+          return '';
+      }
     }
+    return $newFilename;
   }
 
   /*

@@ -5,6 +5,7 @@ $(document).ready(function () {
     $props.load();
     console.log(`[${$props.version()} ]` );
     const globalmenu = $('#globalmenu');
+    const catalogsection = $("#catalog");
     const menuopen = $('#menuopen');
     const menuclose = $('#menuclose');
     $(menuopen).click(function (e) { 
@@ -26,6 +27,7 @@ $(document).ready(function () {
     });
 
     getActiveDiaporamas();
+    getPublishedKnives();
     getHtmlTemplates();
     // ---------------------------------------- Request the active diaporamas from the DB
     function getActiveDiaporamas() {
@@ -42,6 +44,36 @@ $(document).ready(function () {
                 console.log(xhr);
             }
         });    
+    }
+    // ---------------------------------------- Request the active diaporamas from the DB
+    function getPublishedKnives() {
+        $.ajax({
+            type: "POST",
+            url: '/bootadmin/knives/getpublished',
+            dataType: "json",
+            async: false,
+            success: function (response) {
+                console.log(response);
+                $(catalogsection).hide();
+                if(response.publishedcount != 0) {
+                    $(catalogsection).show();
+                    loadPublishedCatalog(response.published);
+                }
+            },
+            error: function (xhr) {
+                console.log(xhr);
+            }
+        });    
+    }
+    // ---------------------------------------- Find a dynamic section in the page
+    function loadPublishedCatalog(allpublished) {
+        allpublished.forEach( knife => {
+            console.log(`Got a knife to be published ${knife.name}`);
+            const li = $("<li></li>") ;
+            const a = $("<a></a>").text(knife.name);
+            li.append(a);
+            $('#submenu').append(li);
+        })
     }
     // ---------------------------------------- Find a dynamic section in the page
     function loadDiapoSections(allactive) {
