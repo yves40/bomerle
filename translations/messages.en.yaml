@@ -257,4 +257,5 @@ generic:
   sunday: Sunday
   du: From 
   au: To 
+  nodaterange: No date constraint
 
