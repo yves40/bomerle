@@ -10,7 +10,7 @@
 <body>
   <nav class="navbar">
     <a class="logo" href="#">Aventure</a>
-    <div class="nav-links">
+    <div class="nav-links mobile-menu">
       <ul>
         <li class="active"><a href="#" >Home</a></li>        
         <li><a href="#">Raids</a></li>        
@@ -25,4 +25,12 @@
   <header></header>
 </div>
 </body>
+<script>
+    const menuHamburger = document.querySelector(".menu-hamburger")
+    const navLinks = document.querySelector(".nav-links")
+    console.log('I am clicked');
+    menuHamburger.addEventListener('click',()=>{
+      navLinks.classList.toggle('mobile-menu')
+    })
+</script>
 </html>
