@@ -12,25 +12,46 @@
     <a class="logo" href="#">Aventure</a>
     <div class="nav-links mobile-menu">
       <ul>
-        <li class="active"><a href="#" >Home</a></li>        
-        <li><a href="#">Raids</a></li>        
-        <li><a href="#">Contact</a></li>        
-        <li><a href="#">Support</a></li>        
-        <li><a href="#">Stash test</a></li>        
-        <li><a href="#">Aide</a></li>        
+        <li class="active"><a class="action" href="#home" >Home</a></li>        
+        <li><a class="action" href="#section1">Section 1</a></li>        
+        <li><a class="action" href="#section2">Section 2</a></li>        
+        <li><a class="action" href="#section3">Section 3</a></li>        
+        <li><a class="action" href="#help">Aide</a></li>        
       </ul>
     </div>
     <img class="menu-hamburger svg-white" src="../images/svg/bars-solid.svg" alt="Show Hide Menu"/>
   </nav>
-  <header></header>
+  <header id="home"></header>
+  <div id="section1" class="news">
+    <h2>Section 1</h2>
+    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sed alias explicabo cupiditate necessitatibus expedita excepturi tenetur vitae odio ipsam animi quia, rem labore libero fugiat fuga impedit qui. Laboriosam est deleniti quos, necessitatibus cupiditate sequi nostrum architecto qui doloribus blanditiis ipsum optio, expedita consequuntur voluptatem atque. Perspiciatis ab eum vel porro laborum, aut, minus vero aliquam blanditiis iusto nisi iste autem. Perferendis blanditiis totam aspernatur impedit veniam, ut deleniti necessitatibus vero saepe aliquam, consequuntur ab in! Iure accusantium architecto aperiam quasi, mollitia voluptatum molestias accusamus totam ut culpa harum illo, necessitatibus labore perferendis, doloremque reiciendis earum eaque nulla similique iusto!</p>
+  </div>
+  <div id="section2" class="news">
+    <h2>Section 2</h2>
+    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sed alias explicabo cupiditate necessitatibus expedita excepturi tenetur vitae odio ipsam animi quia, rem labore libero fugiat fuga impedit qui. Laboriosam est deleniti quos, necessitatibus cupiditate sequi nostrum architecto qui doloribus blanditiis ipsum optio, expedita consequuntur voluptatem atque. Perspiciatis ab eum vel porro laborum, aut, minus vero aliquam blanditiis iusto nisi iste autem. Perferendis blanditiis totam aspernatur impedit veniam, ut deleniti necessitatibus vero saepe aliquam, consequuntur ab in! Iure accusantium architecto aperiam quasi, mollitia voluptatum molestias accusamus totam ut culpa harum illo, necessitatibus labore perferendis, doloremque reiciendis earum eaque nulla similique iusto!</p>
+  </div>
+  <div id="section3" class="news">
+    <h2>Section 3</h2>
+    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sed alias explicabo cupiditate necessitatibus expedita excepturi tenetur vitae odio ipsam animi quia, rem labore libero fugiat fuga impedit qui. Laboriosam est deleniti quos, necessitatibus cupiditate sequi nostrum architecto qui doloribus blanditiis ipsum optio, expedita consequuntur voluptatem atque. Perspiciatis ab eum vel porro laborum, aut, minus vero aliquam blanditiis iusto nisi iste autem. Perferendis blanditiis totam aspernatur impedit veniam, ut deleniti necessitatibus vero saepe aliquam, consequuntur ab in! Iure accusantium architecto aperiam quasi, mollitia voluptatum molestias accusamus totam ut culpa harum illo, necessitatibus labore perferendis, doloremque reiciendis earum eaque nulla similique iusto!</p>
+  </div>
+  <div id="help" class="news">
+    <h2>Un peu d'infos</h2>
+      <p>Pour nous contacter....</p>
+  </div>
 </div>
 </body>
 <script>
-    const menuHamburger = document.querySelector(".menu-hamburger")
-    const navLinks = document.querySelector(".nav-links")
-    console.log('I am clicked');
+    const menuHamburger = document.querySelector(".menu-hamburger");
+    const navLinks = document.querySelector(".nav-links");
+    const menuentries = document.querySelectorAll(".action");
     menuHamburger.addEventListener('click',()=>{
-      navLinks.classList.toggle('mobile-menu')
+      navLinks.classList.toggle('mobile-menu');
+    })
+    menuentries.forEach( (item) => {
+      item.addEventListener('click', () => {
+        console.log('clicked ' + item.innerText);
+        navLinks.classList.toggle('mobile-menu');
+      });
     })
 </script>
 </html>
