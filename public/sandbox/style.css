@@ -70,6 +70,7 @@ header {
   margin-top: 0;
   padding: 10px;
   border-radius: 10px;
+  scroll-margin: 100px;
 }
 .news h2 {
   text-decoration: underline;

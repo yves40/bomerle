@@ -36,6 +36,7 @@
   <div id="help" class="news">
     <h2>Un peu d'infos</h2>
       <p>Pour nous contacter....</p>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio quaerat numquam doloremque optio, beatae repudiandae blanditiis quam dolor qui natus incidunt magni eius minus aut soluta similique perferendis, esse impedit tempora? Assumenda obcaecati incidunt sint asperiores, natus in pariatur illo!</p>
   </div>
   <footer class="footer">
     <img class="menu-hamburger svg-white" src="../images/svg/bars-solid.svg" alt="Show Hide Menu"/>
@@ -53,6 +54,10 @@
       item.addEventListener('click', () => {
         console.log('clicked ' + item.innerText);
         navLinks.classList.toggle('mobile-menu');
+        item.scrollIntoView( {
+          block: 'start',
+          behavior: 'smooth'
+        })
       });
     })
 </script>
