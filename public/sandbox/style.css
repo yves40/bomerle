@@ -67,7 +67,6 @@ header {
 
 /* -------------------- N E W S -------------------- */
 .news {
-  font-size: 1.3em;
   margin-top: 0;
   padding: 10px;
   border-radius: 10px;
@@ -82,26 +81,31 @@ header {
   font-style: italic;
 }
 /* -------------------- C A R D S -------------------- */
-.card {
-  transition: 0.3s;
+.cards {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
   scroll-margin: 100px;
 }
+.card {
+  flex: 1 0 33%;
+}
 .card img {
-  border-radius: 10px; 
+  border-radius: 10px;
+  width: 200px;
 }
-
-/* On mouse-over, add a deeper shadow */
-.card:hover {
-  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+.container p {
+  padding: 10px;
 }
-
-/* Add some padding inside the card container */
-.container {
-  padding: 2px 16px;
-}
-
 /* --------------------  R E S P O N S I V E --------------------*/
 @media screen and (max-width: 800px) {
+  .card {
+    flex: 0 1 50%;
+  }
+  .card img {
+    border-radius: 10px;
+    width: 200px;
+  }  
   .navbar {
     padding: 0;
   }
