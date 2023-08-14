@@ -16,6 +16,7 @@
         <li><a class="action" href="#section1">Section 1</a></li>        
         <li><a class="action" href="#section2">Section 2</a></li>        
         <li><a class="action" href="#section3">Section 3</a></li>        
+        <li><a class="action" href="#card1">Card 1</a></li>        
         <li><a class="action" href="#help">Aide</a></li>        
       </ul>
     </div>
@@ -33,12 +34,22 @@
     <h2>Section 3</h2>
     <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sed alias explicabo cupiditate necessitatibus expedita excepturi tenetur vitae odio ipsam animi quia, rem labore libero fugiat fuga impedit qui. Laboriosam est deleniti quos, necessitatibus cupiditate sequi nostrum architecto qui doloribus blanditiis ipsum optio, expedita consequuntur voluptatem atque. Perspiciatis ab eum vel porro laborum, aut, minus vero aliquam blanditiis iusto nisi iste autem. Perferendis blanditiis totam aspernatur impedit veniam, ut deleniti necessitatibus vero saepe aliquam, consequuntur ab in! Iure accusantium architecto aperiam quasi, mollitia voluptatum molestias accusamus totam ut culpa harum illo, necessitatibus labore perferendis, doloremque reiciendis earum eaque nulla similique iusto!</p>
   </div>
+  <div id="card1" class="card">
+    <img src="../images/artisanat.jpg" alt="Avatar" style="width:100%">
+    <div class="container">
+      <h4><b>Bastoche</b></h4>
+      <p>Coutelier d'art</p>
+    </div>
   <div id="help" class="news">
     <h2>Un peu d'infos</h2>
       <p>Pour nous contacter....</p>
       <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio quaerat numquam doloremque optio, beatae repudiandae blanditiis quam dolor qui natus incidunt magni eius minus aut soluta similique perferendis, esse impedit tempora? Assumenda obcaecati incidunt sint asperiores, natus in pariatur illo!</p>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque saepe voluptates, atque amet commodi quidem magnam labore quasi dolorum qui neque suscipit iste cupiditate omnis assumenda, veniam est. Quisquam recusandae corrupti vitae, repellat ut doloremque atque sed optio assumenda omnis?</p>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque saepe voluptates, atque amet commodi quidem magnam labore quasi dolorum qui neque suscipit iste cupiditate omnis assumenda, veniam est. Quisquam recusandae corrupti vitae, repellat ut doloremque atque sed optio assumenda omnis?</p>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque saepe voluptates, atque amet commodi quidem magnam labore quasi dolorum qui neque suscipit iste cupiditate omnis assumenda, veniam est. Quisquam recusandae corrupti vitae, repellat ut doloremque atque sed optio assumenda omnis?</p>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque saepe voluptates, atque amet commodi quidem magnam labore quasi dolorum qui neque suscipit iste cupiditate omnis assumenda, veniam est. Quisquam recusandae corrupti vitae, repellat ut doloremque atque sed optio assumenda omnis?</p>
   </div>
-  <footer class="footer">
+  </div>  <footer class="footer">
     <img class="menu-hamburger svg-white" src="../images/svg/bars-solid.svg" alt="Show Hide Menu"/>
   </footer>
 </div>
@@ -54,7 +65,7 @@
       item.addEventListener('click', () => {
         console.log('clicked ' + item.innerText);
         navLinks.classList.toggle('mobile-menu');
-        item.scrollIntoView( {
+        item.scrollIntoView( { // Works fine because of scroll-margin: 100px on the target class
           block: 'start',
           behavior: 'smooth'
         })
