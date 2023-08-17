@@ -70,14 +70,13 @@ header {
 .news {
   padding: 10px;
   border-radius: 10px;
-  scroll-margin: 100px;
+  scroll-margin: 70px;
 }
 .news h2 {
-  text-decoration: underline;
-  margin: 10px;
+  margin: 30px 20px;
 }
 .news p {
-  margin: 10px 5px;
+  margin: 30px 20px;
   font-style: italic;
 }
 /* -------------------- C A R D S -------------------- */
@@ -86,7 +85,7 @@ header {
   flex-wrap: wrap;
   justify-content: center;
   gap: 15px;
-  scroll-margin: 100px;
+  scroll-margin: 70px;
 }
 .card {
   width: 300px;
@@ -105,7 +104,7 @@ header {
 .card .card-image img {
   height: 250px;
   width: 250px;
-  border: solid red 2px;
+  border: solid darkgrey 2px;
   border-radius: 50%;
 }
 .card .card-title {
