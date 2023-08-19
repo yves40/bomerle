@@ -68,6 +68,7 @@ header {
   padding: 10px;
   border-radius: 10px;
   scroll-margin: 70px;
+  
   h2 {
     margin: 30px 20px;
   }
@@ -87,43 +88,34 @@ header {
 .card {
   width: 300px;
   height: auto;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  border-radius: 10px;
   padding: 20px;
   transition: all .8s ease-in;
-  > * {
-    padding: 10px;
-  }
   .card-image img {
-    height: 250px;
-    width: 250px;
-    border: solid darkgrey 2px;
+    height: 100px;
+    width: 100px;
+    border: solid darkgrey 3px;
     border-radius: 50%;
+    float: right;
+    shape-outside: circle();
+    margin-left: 2rem;
   }
   .card-title {
     padding: 20px 10px;
-    font-size: 1.5rem;
-
-  }
-  :hover {
-    background: #e84393;
-    color: #fff;
-    box-shadow: 0px 0px 11px 5px #000;
+    font-size: 1.5rem; 
   }
   .card-text {
     line-height: 20px;
-
+    :hover {
+      background: #e84393;
+      color: #fff;
+      box-shadow: 0px 0px 11px 5px #000;
+    }
   }
 }
 /* --------------------  R E S P O N S I V E --------------------*/
 @media screen and (max-width: 800px) {
   .card {
-    flex: 0 1 50%;
     img {
-      border-radius: 10px;
       width: 200px;
     } 
   }
@@ -162,7 +154,7 @@ header {
     justify-content: center;
     align-items: center;
     margin-left: -100%;
-    transition: all .5s ease;
+    transition: all .6s ease;
     &.mobile-menu {
       margin-left: 0;
     }
