@@ -56,12 +56,36 @@ header {
   filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(131deg) brightness(102%) contrast(102%); }
 
 /* -------------------- N E W S -------------------- */
+.allnews {
+  display: flex;
+  flex-wrap: wrap; }
+
 .news {
   padding: 10px;
-  border-radius: 10px;
-  scroll-margin: 70px; }
+  scroll-margin: 70px;
+  width: 100%;
+  color: white; }
+  .news:nth-child(1) {
+    margin-top: 5rem; }
+  .news:nth-child(even) {
+    background-image: url("../images/background-left.jpg");
+    background-size: cover; }
+    .news:nth-child(even) img {
+      float: left; }
+  .news:nth-child(odd) {
+    background-image: url("../images/background-right.jpg");
+    background-size: cover; }
+    .news:nth-child(odd) img {
+      float: right; }
   .news h2 {
-    margin: 30px 20px; }
+    margin: 30px 20px;
+    font-size: 2rem; }
+  .news img {
+    margin: 0 20px;
+    width: 300px;
+    height: 300px;
+    border: solid darkgrey 3px;
+    border-radius: 10px; }
   .news p {
     margin: 30px 20px;
     font-style: italic; }
@@ -72,7 +96,8 @@ header {
   flex-wrap: wrap;
   justify-content: center;
   gap: 15px;
-  scroll-margin: 70px; }
+  scroll-margin: 70px;
+  padding: 20px; }
 
 .card {
   width: 300px;

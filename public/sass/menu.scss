@@ -64,17 +64,46 @@ header {
 }
 
 /* -------------------- N E W S -------------------- */
+.allnews {
+  display: flex;
+  flex-wrap: wrap;
+}
 .news {
   padding: 10px;
-  border-radius: 10px;
   scroll-margin: 70px;
-  
-  h2 {
-    margin: 30px 20px;
+  width: 100%;
+  color: white; 
+  &:nth-child(1) {
+    margin-top: 5rem;
   }
-  p {
+  &:nth-child(even) {
+    background-image: url('../images/background-left.jpg');  
+    background-size: cover;
+    img {
+      float: left;
+    }
+  }
+  &:nth-child(odd) {
+    background-image: url('../images/background-right.jpg'); 
+    background-size: cover;
+    img {
+      float: right;
+    }
+  }
+  h2 { 
+    margin: 30px 20px; 
+    font-size: 2rem;
+  } 
+  img {
+    margin: 0 20px; 
+    width: 300px;
+    height: 300px;
+    border: solid darkgrey 3px; 
+    border-radius: 10px;
+  }
+  p { 
     margin: 30px 20px;
-    font-style: italic;
+    font-style: italic; 
   }
 }
 /* -------------------- C A R D S -------------------- */
@@ -83,7 +112,8 @@ header {
   flex-wrap: wrap;
   justify-content: center;
   gap: 15px;
-  scroll-margin: 70px;
+  scroll-margin: 70px; 
+  padding: 20px; 
 }
 .card {
   width: 300px;
@@ -95,7 +125,7 @@ header {
     width: 100px;
     border: solid darkgrey 3px;
     border-radius: 50%;
-    float: right;
+    float: right; 
     shape-outside: circle();
     margin-left: 2rem;
   }
