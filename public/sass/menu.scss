@@ -9,14 +9,8 @@
 body {
   font-family: 'Courier New', Courier, monospace;
 }
-header {
-  height: 100vh;
-  width: 100vw;
-  background-image: url('../images/homepageimages/enclume.jpg');
-  background-size: cover;
-}
 .navbar {
-  position: fixed;
+  position: fixed; 
   top: 0;
   padding: 50px;
   display: flex;
