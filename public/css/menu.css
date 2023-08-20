@@ -118,7 +118,9 @@ body {
       padding: 10px; }
 
 /* --------------------  R E S P O N S I V E --------------------*/
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 860px) {
+  .news img {
+    margin: 20px 20px; }
   .card img {
     width: 200px; }
   .navbar {
