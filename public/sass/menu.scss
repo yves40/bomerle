@@ -20,7 +20,7 @@ body {
   width: 100%;
   height: $menu-height;
   align-items: center;
-  background: $bg-gradient-black;
+  background: $bg-gradient-green;
   a { 
     color: white;
   }
@@ -195,7 +195,7 @@ body {
       margin-left: 0;
     }
     ul {
-      background-color: darkcyan;
+      background: $bg-gradient-green;
       padding: 20px;
       border-radius: 10px;
     }

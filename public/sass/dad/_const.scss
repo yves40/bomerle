@@ -17,6 +17,8 @@ $on: green;
 $off: red;
 $menubackground: #f44336;
 $bg-gradient-black:  linear-gradient(to bottom left, #959595 0%, #0D0D0D 50%, #010101 50%, #0A0A0A 53%, #4E4E4E 76%, #383838 87%, #1B1B1B 100%);
+$bg-gradient-blue: radial-gradient(circle, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 50%, rgba(0,212,255,1) 100%);
+$bg-gradient-green: radial-gradient(circle, rgba(2,0,36,1) 0%, rgba(9,121,54,1) 100%, rgba(0,212,255,1) 100%);
 $menu-height: 70px;
 
 @mixin submenuattr {
