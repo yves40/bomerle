@@ -31,9 +31,20 @@ body {
     display: flex;
     justify-content: center;
     gap: 20px;
-    li.active a {
-      font-weight: 600;
-      font-style: italic;
+    li a {
+      font-size: 1.2rem;
+      &::after {
+        content: '';
+        width: 0%;
+        height: 2px;
+        background: white;
+        display: block;
+        margin: auto;
+        transition: 0.5s;                    
+      } 
+      &:hover::after {
+        width: 100%;
+      } 
     }
   }
 }

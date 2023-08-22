@@ -27,9 +27,18 @@ body {
     display: flex;
     justify-content: center;
     gap: 20px; }
-    .navbar .nav-links ul li.active a {
-      font-weight: 600;
-      font-style: italic; }
+    .navbar .nav-links ul li a {
+      font-size: 1.2rem; }
+      .navbar .nav-links ul li a::after {
+        content: '';
+        width: 0%;
+        height: 2px;
+        background: white;
+        display: block;
+        margin: auto;
+        transition: 0.5s; }
+      .navbar .nav-links ul li a:hover::after {
+        width: 100%; }
 
 .footer {
   position: fixed;
@@ -118,7 +127,7 @@ body {
       padding: 10px; }
 
 /* --------------------  R E S P O N S I V E --------------------*/
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 850px) {
   .news img {
     margin: 20px 20px; }
   .card img {

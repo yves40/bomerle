@@ -1,7 +1,7 @@
 $smallsize: 1024px;
 $mediumsize: 1500px;
 $bigsize: 1920px;
-$responsive-max-width: 800px;
+$responsive-max-width: 850px;
 
 $maxslideimagewidth: 500px;
 
@@ -38,8 +38,8 @@ $menu-height: 70px;
       display: block;
       margin: auto;
       transition: 0.5s;                    
-  }
-  :hover::after {
-      width: 100%;
-  } 
+    }
+    :hover::after {
+        width: 100%;
+    } 
 }
