@@ -22,8 +22,7 @@ body {
   .navbar a {
     color: white; }
   .navbar .logo {
-    font-size: 2.5em;
-    font-weight: bold; }
+    width: 40px; }
   .navbar .nav-links ul {
     display: flex;
     justify-content: center;
@@ -58,19 +57,20 @@ body {
   padding: 10px;
   scroll-margin: 70px;
   width: 100%;
-  color: white; }
+  color: black; }
   .news:nth-child(1) {
     margin-top: 70px; }
-  .news:nth-child(even) {
+  .news.bgimage {
     background-image: url("../images/background-left.jpg");
-    background-size: cover; }
-    .news:nth-child(even) img {
-      float: left; }
-  .news:nth-child(odd) {
-    background-image: url("../images/background-right.jpg");
-    background-size: cover; }
-    .news:nth-child(odd) img {
-      float: right; }
+    background-size: cover;
+    color: white; }
+  .news.bggradient {
+    background: linear-gradient(to bottom left, #959595 0%, #0D0D0D 50%, #010101 50%, #0A0A0A 53%, #4E4E4E 76%, #383838 87%, #1B1B1B 100%);
+    color: white; }
+  .news:nth-child(even) img {
+    float: left; }
+  .news:nth-child(odd) img {
+    float: right; }
   .news h2 {
     margin: 30px 20px;
     font-size: 2rem; }
@@ -118,7 +118,7 @@ body {
       padding: 10px; }
 
 /* --------------------  R E S P O N S I V E --------------------*/
-@media screen and (max-width: 860px) {
+@media screen and (max-width: 800px) {
   .news img {
     margin: 20px 20px; }
   .card img {

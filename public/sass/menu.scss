@@ -1,3 +1,5 @@
+@import './dad/const';
+
 * {
   margin: 0;
   padding: 0;
@@ -16,15 +18,14 @@ body {
   display: flex;
   justify-content: space-between;
   width: 100%;
-  height: 70px;
+  height: $menu-height;
   align-items: center;
-  background: linear-gradient(to bottom left, #959595 0%, #0D0D0D 50%, #010101 50%, #0A0A0A 53%, #4E4E4E 76%, #383838 87%, #1B1B1B 100%);
+  background: $bg-gradient-black;
   a { 
     color: white;
   }
   .logo {
-    font-size: 2.5em;
-    font-weight: bold;
+      width: 40px;
   } 
   .nav-links ul {
     display: flex;
@@ -64,25 +65,30 @@ body {
 }
 .news {
   padding: 10px;
-  scroll-margin: 70px;
+  scroll-margin: $menu-height;
   width: 100%;
-  color: white; 
+  color: black;
   &:nth-child(1) {
-    margin-top: 70px; 
+    margin-top: $menu-height; 
   }
-  &:nth-child(even) {
+  &.bgimage {
     background-image: url('../images/background-left.jpg');  
     background-size: cover;
-    img {
-      float: left;
-    }
+    color: white; 
+  }
+  &.bggradient {
+    background: linear-gradient(to bottom left, #959595 0%, #0D0D0D 50%, #010101 50%, #0A0A0A 53%, #4E4E4E 76%, #383838 87%, #1B1B1B 100%);
+    color: white; 
+  }
+  &:nth-child(even) {
+      img {
+        float: left;
+      }
   }
   &:nth-child(odd) {
-    background-image: url('../images/background-right.jpg'); 
-    background-size: cover;
-    img {
-      float: right;
-    }
+      img {
+        float: right;
+      }
   }
   h2 { 
     margin: 30px 20px; 
@@ -106,7 +112,7 @@ body {
   flex-wrap: wrap;
   justify-content: center;
   gap: 15px;
-  scroll-margin: 70px; 
+  scroll-margin: $menu-height; 
   padding: 20px; 
 }
 .card {
@@ -138,7 +144,7 @@ body {
   }
 }
 /* --------------------  R E S P O N S I V E --------------------*/
-@media screen and (max-width: 860px) {
+@media screen and (max-width: $responsive-max-width) {
   .news {
     img {
       margin: 20px 20px; 

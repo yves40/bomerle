@@ -1,6 +1,7 @@
 $smallsize: 1024px;
 $mediumsize: 1500px;
 $bigsize: 1920px;
+$responsive-max-width: 800px;
 
 $maxslideimagewidth: 500px;
 
@@ -15,6 +16,8 @@ $verysmalltext: 0.5rem;
 $on: green;
 $off: red;
 $menubackground: #f44336;
+$bg-gradient-black:  linear-gradient(to bottom left, #959595 0%, #0D0D0D 50%, #010101 50%, #0A0A0A 53%, #4E4E4E 76%, #383838 87%, #1B1B1B 100%);
+$menu-height: 70px;
 
 @mixin submenuattr {
     li {
