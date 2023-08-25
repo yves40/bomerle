@@ -8,7 +8,7 @@
   width: 100%;
   color: white; }
   .news:nth-child(1) {
-    margin-top: 70px; }
+    margin-top: 100px; }
   .news:nth-child(even) {
     background-image: url("../images/background-left.jpg");
     background-size: cover; }
@@ -19,9 +19,10 @@
     background-size: cover; }
     .news:nth-child(odd) img {
       float: right; }
+    .news:nth-child(odd) h1 {
+      margin-left: 30px; }
   .news h2 {
-    margin: 30px 20px;
-    font-size: 2rem; }
+    margin: 30px 60px; }
   .news img {
     margin: 0 20px;
     width: 300px;
@@ -61,8 +62,10 @@
         display: block;
         margin: auto;
         transition: 0.5s; }
-      .topmenu .nav-links ul li a:hover::after {
-        width: 100%; }
+      .topmenu .nav-links ul li a:hover {
+        color: white; }
+        .topmenu .nav-links ul li a:hover::after {
+          width: 100%; }
 
 .footer {
   position: fixed;

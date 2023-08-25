@@ -32,9 +32,13 @@
         margin: auto;
         transition: 0.5s;                    
       } 
-      &:hover::after {
-        width: 100%;
-      } 
+      &:hover {
+        // To prevent bootstrap style 
+        color: white; 
+        &::after {
+          width: 100%;
+        }
+      }
     }
   }
 }

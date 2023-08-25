@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="/css/main.css">
 </head>
 <body>
-  <nav class="navbar">
+  <nav class="topmenu">
     <a href="#section0"><img class="logo"  src="../images/logo1.png" alt="Logo Beau Merle"></a>
     <div class="nav-links mobile-menu">
       <ul>
@@ -17,14 +17,14 @@
           <li><a href="#section2">{% trans %}app.public.menu.galerie{% endtrans %}</a></li>
           <li><a href="#section3">{% trans %}app.public.menu.contact{% endtrans %}</a></li>
           <li id="catalog"><a href="#">{% trans %}app.public.menu.catalog{% endtrans %}</a></li>
-
           <li><a href="{{ path('switchlang') }}">en | fr</a></li>
       </ul>
     </div>
   </nav>
   <div class="allnews">
     <div id="section0" class="news bgimage">
-      <h2>{% trans %}app.public.story.header{% endtrans %}</h2>
+      <h1>{% trans %}app.public.main.name{% endtrans %}</h1>
+      <h2 >{% trans %}app.public.main.whatis{% endtrans %}</h2>
       <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate consequuntur quos nisi impedit quasi, dignissimos et quis tempora quibusdam, exercitationem aspernatur ab iusto doloremque quidem dolor placeat suscipit consequatur nemo reiciendis vel! Assumenda quis iusto esse quos, cupiditate nulla possimus maxime necessitatibus. Voluptas consequatur autem consequuntur aspernatur. Voluptate tempore, officiis reprehenderit officia repellat recusandae eligendi! Cumque alias id, cum laboriosam neque laudantium aliquam tempore obcaecati. Eum excepturi autem blanditiis obcaecati officia deleniti similique est porro vitae harum mollitia eveniet qui asperiores modi id molestiae explicabo, odio quasi minima! Quidem fuga nihil recusandae a magnam voluptas culpa sint dolores vel non!</p>
     </div>
     <div id="section1" class="news bggradient">
@@ -89,8 +89,8 @@
 </body>
 
 
-{# <link rel="stylesheet" href="{{ asset('node_modules/bootstrap/dist/css/bootstrap.css') }}"> #}
-{# <script src="{{asset("node_modules/bootstrap/dist/js/bootstrap.bundle.js")}}"></script> #}
+<link rel="stylesheet" href="{{ asset('node_modules/bootstrap/dist/css/bootstrap.css') }}">
+<script src="{{asset("node_modules/bootstrap/dist/js/bootstrap.bundle.js")}}"></script>
 
 <script src="{{ asset('node_modules/jquery/dist/jquery.min.js')}}"></script>
 <script src="{{ asset('scripts/properties.js')}}"></script>
@@ -98,22 +98,4 @@
 <script src="{{ asset('scripts/classes/slider.js')}}"></script>
 <script src="{{ asset('scripts/classes/gallery.js')}}"></script> #}
 
-<script>
-    {# const menuHamburger = document.querySelector(".menu-hamburger"); #}
-    const navLinks = document.querySelector(".nav-links");
-    const menuentries = document.querySelectorAll(".action");
-    {# menuHamburger.addEventListener('click',()=>{
-      navLinks.classList.toggle('mobile-menu');
-    }) #}
-    {# menuentries.forEach( (item) => {
-      item.addEventListener('click', () => {
-        console.log('clicked ' + item.innerText);
-        navLinks.classList.toggle('mobile-menu');
-        item.scrollIntoView( { // Works fine because of scroll-margin: 100px on the target class
-          block: 'start',
-          behavior: 'smooth'
-        })
-      });
-    }) #}
-</script>
 </html>

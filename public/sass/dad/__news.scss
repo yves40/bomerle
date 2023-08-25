@@ -8,7 +8,7 @@
   width: 100%;
   color: white; 
   &:nth-child(1) {
-    margin-top: 70px; 
+    margin-top: 100px; 
   }
   &:nth-child(even) {
     background-image: url('../images/background-left.jpg');  
@@ -23,10 +23,12 @@
     img {
       float: right;
     }
-  }
+  
+  h1 {
+    margin-left: 30px;
+  }}
   h2 { 
-    margin: 30px 20px; 
-    font-size: 2rem;
+    margin: 30px 60px;  
   } 
   img {
     margin: 0 20px; 
