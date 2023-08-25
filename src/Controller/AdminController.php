@@ -53,7 +53,7 @@ class AdminController extends AbstractController
     public function public(Request $request): Response
     {
         $loc = $this->locale($request); // Set the proper language for translations
-        return $this->render('public.html.twig', [
+        return $this->render('main.html.twig', [
             "locale" =>  $this->localeSwitcher->getLocale(),
             ]
         );               

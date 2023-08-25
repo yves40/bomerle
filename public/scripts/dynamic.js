@@ -4,27 +4,23 @@
 $(document).ready(function () {
     $props.load();
     console.log(`[${$props.version()} ]` );
-    const globalmenu = $('#globalmenu');
     const catalogsection = $("#catalog");
-    const menuopen = $('#menuopen');
-    const menuclose = $('#menuclose');
-    $(menuopen).click(function (e) { 
-        e.preventDefault();
-        console.log(`Toggle menu`);
-        const currentshift = $('#globalmenu').css('right');
-        $('#globalmenu').css('right', '0px');
-        $(menuopen).hide();
+    const menuHamburger = $(".menu-hamburger");
+    const navLinks = $(".nav-links");
+
+    $(menuHamburger).on('click', function () {
+        $(navLinks).toggleClass('mobile-menu');
     });
-    $(menuclose).click(function (e) { 
-        e.preventDefault();
-        console.log(`Close menu`);
-        $('#globalmenu').css('right', '-200px');
-        $(menuopen).show();
+    $('nav-links, a').each(function (index, element) {
+        // element == this
+        $(element).on('click', () => {
+            if($(navLinks).hasClass('mobile-menu')) {
+                $(navLinks).toggleClass('mobile-menu');
+            }
+        })
     });
-    $('#globalmenu a').click(function (e) { 
-        $('#globalmenu').css('right', '-200px');
-        $(menuopen).show();
-    });
+
+    const menuentries = document.querySelectorAll(".action");
 
     getActiveDiaporamas();
     getPublishedKnives();
