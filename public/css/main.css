@@ -32,7 +32,7 @@
     margin: 30px 20px;
     font-style: italic; }
 
-.navbar {
+.topmenu {
   position: fixed;
   top: 0;
   padding: 50px;
@@ -42,17 +42,18 @@
   height: 70px;
   align-items: center;
   background: radial-gradient(circle, #020024 0%, #097936 100%, #00d4ff 100%); }
-  .navbar a {
+  .topmenu a {
     color: white; }
-  .navbar .logo {
+  .topmenu .logo {
     width: 40px; }
-  .navbar .nav-links ul {
+  .topmenu .nav-links ul {
     display: flex;
     justify-content: center;
     gap: 20px; }
-    .navbar .nav-links ul li a {
-      font-size: 1.2rem; }
-      .navbar .nav-links ul li a::after {
+    .topmenu .nav-links ul li a {
+      font-size: 1.2rem;
+      text-decoration: none; }
+      .topmenu .nav-links ul li a::after {
         content: '';
         width: 0%;
         height: 2px;
@@ -60,7 +61,7 @@
         display: block;
         margin: auto;
         transition: 0.5s; }
-      .navbar .nav-links ul li a:hover::after {
+      .topmenu .nav-links ul li a:hover::after {
         width: 100%; }
 
 .footer {
@@ -82,18 +83,18 @@
 
 /* --------------------  R E S P O N S I V E --------------------*/
 @media screen and (max-width: 850px) {
-  .navbar {
+  .topmenu {
     padding: 0; }
-    .navbar .logo {
+    .topmenu .logo {
       position: absolute;
       top: 20px;
       left: 20px; }
-    .navbar .nav-links ul {
+    .topmenu .nav-links ul {
       display: flex;
       flex-direction: column;
       gap: 50px;
       align-items: center; }
-      .navbar .nav-links ul li {
+      .topmenu .nav-links ul li {
         font-size: 1.2em; }
   .footer {
     display: block; }
