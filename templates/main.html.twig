@@ -16,7 +16,7 @@
           <li><a href="#section1">{% trans %}app.public.menu.atelier{% endtrans %}</a></li>
           <li><a href="#section2">{% trans %}app.public.menu.galerie{% endtrans %}</a></li>
           <li><a href="#section3">{% trans %}app.public.menu.contact{% endtrans %}</a></li>
-          <li id="catalog"><a href="#">{% trans %}app.public.menu.catalog{% endtrans %}</a></li>
+          <li id="catalog"><a href="#cards">{% trans %}app.public.menu.catalog{% endtrans %}</a></li>
           <li><a href="{{ path('switchlang') }}">en | fr</a></li>
       </ul>
     </div>
@@ -25,58 +25,72 @@
     <div id="section0" class="news bgimage">
       <h1>{% trans %}app.public.main.name{% endtrans %}</h1>
       <h2 >{% trans %}app.public.main.whatis{% endtrans %}</h2>
+      <img src="../images/background-left.jpg" alt="Avatar">
       <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate consequuntur quos nisi impedit quasi, dignissimos et quis tempora quibusdam, exercitationem aspernatur ab iusto doloremque quidem dolor placeat suscipit consequatur nemo reiciendis vel! Assumenda quis iusto esse quos, cupiditate nulla possimus maxime necessitatibus. Voluptas consequatur autem consequuntur aspernatur. Voluptate tempore, officiis reprehenderit officia repellat recusandae eligendi! Cumque alias id, cum laboriosam neque laudantium aliquam tempore obcaecati. Eum excepturi autem blanditiis obcaecati officia deleniti similique est porro vitae harum mollitia eveniet qui asperiores modi id molestiae explicabo, odio quasi minima! Quidem fuga nihil recusandae a magnam voluptas culpa sint dolores vel non!</p>
     </div>
     <div id="section1" class="news bggradient">
-      <h2>Qui suis-je ?</h2>
+    <h1>Là où tout se passe</h1>
+      <h2>L'atelier</h2>
       <img src="../images/artisanat.jpg" alt="Avatar">
       <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sed alias explicabo cupiditate necessitatibus expedita excepturi tenetur vitae odio ipsam animi quia, rem labore libero fugiat fuga impedit qui. Laboriosam est deleniti quos, necessitatibus cupiditate sequi nostrum architecto qui doloribus blanditiis ipsum optio, expedita consequuntur voluptatem atque. Perspiciatis ab eum vel porro laborum, aut, minus vero aliquam blanditiis iusto nisi iste autem. Perferendis blanditiis totam aspernatur impedit veniam, ut deleniti necessitatibus vero saepe aliquam, consequuntur ab in! Iure accusantium architecto aperiam quasi, mollitia voluptatum molestias accusamus totam ut culpa harum illo, necessitatibus labore perferendis, doloremque reiciendis earum eaque nulla similique iusto!</p>
     </div>
     <div id="section2" class="news">
-      <h2>Le coin technique</h2>
+      <h2>Galerie</h2>
+      <p>Quelques réalisations qui devraient vous intéresser</p>
       <img src="../images/hero-section-knife.jpg" alt="Avatar">
       <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum porro a fuga repellat, repellendus officiis dolores soluta nihil, ipsum at, ducimus impedit consectetur repudiandae quaerat ab quo aliquid illum esse excepturi odit! Officiis quidem expedita nobis adipisci, consequuntur dolores inventore mollitia rerum ipsa in necessitatibus porro eum vitae fugit a odio ad! Laudantium enim tempore nulla repellat magni non atque saepe assumenda voluptates molestias? Fugit consequuntur temporibus laborum mollitia architecto dolores distinctio atque veritatis amet necessitatibus odit, dolorum perspiciatis nam itaque nemo nesciunt accusamus illum labore. Facilis ea repellat eaque, modi quis voluptatem dolorum necessitatibus voluptatum temporibus tempore impedit iure ullam id ut expedita delectus doloribus optio laboriosam dicta, quas animi rem et. Esse dolorum cum, aut illum veritatis quos?</p>
     </div>
     <div id="section3" class="news">
-      <h2>Top ventes</h2>
+      <h2>Contacts</h2>
       <img src="../images/knife/collection.jpg" alt="Avatar">
       <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sed alias explicabo cupiditate necessitatibus expedita excepturi tenetur vitae odio ipsam animi quia, rem labore libero fugiat fuga impedit qui. Laboriosam est deleniti quos, necessitatibus cupiditate sequi nostrum architecto qui doloribus blanditiis ipsum optio, expedita consequuntur voluptatem atque. Perspiciatis ab eum vel porro laborum, aut, minus vero aliquam blanditiis iusto nisi iste autem. Perferendis blanditiis totam aspernatur impedit veniam, ut deleniti necessitatibus vero saepe aliquam, consequuntur ab in! Iure accusantium architecto aperiam quasi, mollitia voluptatum molestias accusamus totam ut culpa harum illo, necessitatibus labore perferendis, doloremque reiciendis earum eaque nulla similique iusto!</p>
     </div>
   </div>
   <div id="cards" class="cards">
-    <div id="card1" class="card">
+    <div class="cards-header">
+      <h1>Les dernières créations</h1>
+      <h2>Toutes visibles sur site à Chabreloche !!!</h2>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit, nulla corrupti aliquid nihil alias sunt! Impedit sint quidem minima cupiditate dignissimos eveniet ut sit consequuntur ipsam, assumenda aut! Quae amet sequi sapiente nulla, dolores illum quos sint eveniet beatae illo.</p>
+    </div>
+    <div id="card1" class="cardframe">
       <div class="card-image">
         <img src="../images/artisanat.jpg" alt="Avatar">
       </div>
       <div class="card-title">Bastoche @ work</div>
       <div class="card-text">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Soluta labore vel aut possimus voluptas at eos molestias quisquam, sequi eum in nulla temporibus ut nihil culpa perspiciatis illo enim eveniet! Expedita sint, dolorem odio culpa, vero placeat temporibus molestias aliquam atque nemo velit magnam, quis tempora! Nemo minus doloribus ipsa? Omnis accusantium, at magni mollitia sapiente, beatae consequuntur laboriosam vero excepturi sunt aperiam numquam, autem possimus quisquam? Nam velit ipsum architecto impedit iusto tenetur quo quisquam recusandae quibusdam quidem exercitationem illum ex nihil explicabo eius, quasi minima est deserunt laborum omnis debitis fuga. Laborum nisi tempore beatae expedita, odio voluptates?</div>
     </div>
-    <div id="card2" class="card">
+    <div id="card2" class="cardframe">
       <div class="card-image">
         <img src="../images/bomerlehome.jpg" alt="Avatar">
       </div>
       <div class="card-title">Best seller</div>
       <div class="card-text">Ce couteau a un succès fou !!!</div>
     </div>
-    <div id="card3" class="card">
+    <div id="card3" class="cardframe">
       <div class="card-image">
         <img src="../images/homepageimages/money.jpg" alt="Avatar">
       </div>
       <div class="card-title">Achetez une série</div>
       <div class="card-text">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Soluta labore vel aut possimus voluptas at eos molestias quisquam, sequi eum in nulla temporibus ut nihil culpa perspiciatis illo enim eveniet! Expedita sint, dolorem odio culpa, vero placeat temporibus molestias aliquam atque nemo velit magnam, quis tempora! Nemo minus doloribus ipsa? Omnis accusantium, at magni mollitia sapiente, beatae consequuntur laboriosam vero excepturi sunt aperiam numquam, autem possimus quisquam? Nam velit ipsum architecto impedit iusto tenetur quo quisquam recusandae quibusdam quidem exercitationem illum ex nihil explicabo eius, quasi minima est deserunt laborum omnis debitis fuga. Laborum nisi tempore beatae expedita, odio voluptates?</div>
     </div>
-    <div id="card4" class="card">
+    <div id="card4" class="cardframe">
       <div class="card-image">
         <img src="../images/knife/cuisine.jpg" alt="Avatar">
       </div>
-      <div class="card-title">Cuisinez avec les bons outils</div>
+      <div class="card-title">
+        Cuisinez toujours avec les bons outils professionnels
+      </div>
       <div class="card-text">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Soluta labore vel aut possimus voluptas at eos molestias quisquam, sequi eum in nulla temporibus ut nihil culpa perspiciatis illo enim eveniet! Expedita sint, dolorem odio culpa, vero placeat temporibus molestias aliquam atque nemo velit magnam, quis tempora! Nemo minus doloribus ipsa? Omnis accusantium, at magni mollitia sapiente, beatae consequuntur laboriosam vero excepturi sunt aperiam numquam, autem possimus quisquam? Nam velit ipsum architecto impedit iusto tenetur quo quisquam recusandae quibusdam quidem exercitationem illum ex nihil explicabo eius, quasi minima est deserunt laborum omnis debitis fuga. Laborum nisi tempore beatae expedita, odio voluptates?</div>
     </div>
   </div>
-<div id="help" class="news">
+<div id="help">
     <h2>Un peu d'infos</h2>
       <p>Pour nous contacter....</p>
       <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio quaerat numquam doloremque optio, beatae repudiandae blanditiis quam dolor qui natus incidunt magni eius minus aut soluta similique perferendis, esse impedit tempora? Assumenda obcaecati incidunt sint asperiores, natus in pariatur illo!</p>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque saepe voluptates, atque amet commodi quidem magnam labore quasi dolorum qui neque suscipit iste cupiditate omnis assumenda, veniam est. Quisquam recusandae corrupti vitae, repellat ut doloremque atque sed optio assumenda omnis?</p>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque saepe voluptates, atque amet commodi quidem magnam labore quasi dolorum qui neque suscipit iste cupiditate omnis assumenda, veniam est. Quisquam recusandae corrupti vitae, repellat ut doloremque atque sed optio assumenda omnis?</p>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque saepe voluptates, atque amet commodi quidem magnam labore quasi dolorum qui neque suscipit iste cupiditate omnis assumenda, veniam est. Quisquam recusandae corrupti vitae, repellat ut doloremque atque sed optio assumenda omnis?</p>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque saepe voluptates, atque amet commodi quidem magnam labore quasi dolorum qui neque suscipit iste cupiditate omnis assumenda, veniam est. Quisquam recusandae corrupti vitae, repellat ut doloremque atque sed optio assumenda omnis?</p>
       <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque saepe voluptates, atque amet commodi quidem magnam labore quasi dolorum qui neque suscipit iste cupiditate omnis assumenda, veniam est. Quisquam recusandae corrupti vitae, repellat ut doloremque atque sed optio assumenda omnis?</p>
       <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque saepe voluptates, atque amet commodi quidem magnam labore quasi dolorum qui neque suscipit iste cupiditate omnis assumenda, veniam est. Quisquam recusandae corrupti vitae, repellat ut doloremque atque sed optio assumenda omnis?</p>
       <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque saepe voluptates, atque amet commodi quidem magnam labore quasi dolorum qui neque suscipit iste cupiditate omnis assumenda, veniam est. Quisquam recusandae corrupti vitae, repellat ut doloremque atque sed optio assumenda omnis?</p>
@@ -89,8 +103,8 @@
 </body>
 
 
-<link rel="stylesheet" href="{{ asset('node_modules/bootstrap/dist/css/bootstrap.css') }}">
-<script src="{{asset("node_modules/bootstrap/dist/js/bootstrap.bundle.js")}}"></script>
+{# <link rel="stylesheet" href="{{ asset('node_modules/bootstrap/dist/css/bootstrap.css') }}"> #}
+{# <script src="{{asset("node_modules/bootstrap/dist/js/bootstrap.bundle.js")}}"></script> #}
 
 <script src="{{ asset('node_modules/jquery/dist/jquery.min.js')}}"></script>
 <script src="{{ asset('scripts/properties.js')}}"></script>

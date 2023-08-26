@@ -1,44 +1,42 @@
 .allnews {
   display: flex;
   flex-wrap: wrap;
-}
-.news {
-  padding: 10px;
-  scroll-margin: 70px;
-  width: 100%;
-  color: white; 
-  &:nth-child(1) {
-    margin-top: 100px; 
-  }
-  &:nth-child(even) {
-    background-image: url('../images/background-left.jpg');  
-    background-size: cover;
-    img {
-      float: left;
+  margin-top: 90px;
+  .news {
+    padding: 30px;
+    scroll-margin: 70px; 
+    width: 100%;
+    color: white; 
+    h1 {
+      margin: 1rem;
     }
-  }
-  &:nth-child(odd) {
-    background-image: url('../images/background-right.jpg'); 
-    background-size: cover;
+    h2 {
+      margin: 2rem;  
+    } 
     img {
-      float: right;
+      margin: 0 20px;
+      width: 300px;
+      height: 300px;
+      border: solid darkgrey 3px; 
+      border-radius: 10px;
+    } 
+    p { 
+      margin: 30px 20px;
+      font-style: italic; 
     }
-  
-  h1 {
-    margin-left: 30px;
-  }}
-  h2 { 
-    margin: 30px 60px;  
-  } 
-  img {
-    margin: 0 20px; 
-    width: 300px;
-    height: 300px;
-    border: solid darkgrey 3px; 
-    border-radius: 10px;
-  }
-  p { 
-    margin: 30px 20px;
-    font-style: italic; 
+    &:nth-child(even) { 
+      background-image: url('../images/background-left.jpg');  
+      background-size: cover;
+      img {
+        float: left;
+      }
+    }
+    &:nth-child(odd) {
+      background-image: url('../images/background-right.jpg'); 
+      background-size: cover;
+      img {
+        float: right;
+      }  
+    }
   }
 }

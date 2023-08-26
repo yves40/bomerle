@@ -1,37 +1,35 @@
 .allnews {
   display: flex;
-  flex-wrap: wrap; }
-
-.news {
-  padding: 10px;
-  scroll-margin: 70px;
-  width: 100%;
-  color: white; }
-  .news:nth-child(1) {
-    margin-top: 100px; }
-  .news:nth-child(even) {
-    background-image: url("../images/background-left.jpg");
-    background-size: cover; }
-    .news:nth-child(even) img {
-      float: left; }
-  .news:nth-child(odd) {
-    background-image: url("../images/background-right.jpg");
-    background-size: cover; }
-    .news:nth-child(odd) img {
-      float: right; }
-    .news:nth-child(odd) h1 {
-      margin-left: 30px; }
-  .news h2 {
-    margin: 30px 60px; }
-  .news img {
-    margin: 0 20px;
-    width: 300px;
-    height: 300px;
-    border: solid darkgrey 3px;
-    border-radius: 10px; }
-  .news p {
-    margin: 30px 20px;
-    font-style: italic; }
+  flex-wrap: wrap;
+  margin-top: 90px; }
+  .allnews .news {
+    padding: 30px;
+    scroll-margin: 70px;
+    width: 100%;
+    color: white; }
+    .allnews .news h1 {
+      margin: 1rem; }
+    .allnews .news h2 {
+      margin: 2rem; }
+    .allnews .news img {
+      margin: 0 20px;
+      width: 300px;
+      height: 300px;
+      border: solid darkgrey 3px;
+      border-radius: 10px; }
+    .allnews .news p {
+      margin: 30px 20px;
+      font-style: italic; }
+    .allnews .news:nth-child(even) {
+      background-image: url("../images/background-left.jpg");
+      background-size: cover; }
+      .allnews .news:nth-child(even) img {
+        float: left; }
+    .allnews .news:nth-child(odd) {
+      background-image: url("../images/background-right.jpg");
+      background-size: cover; }
+      .allnews .news:nth-child(odd) img {
+        float: right; }
 
 .topmenu {
   position: fixed;
@@ -127,15 +125,23 @@
   flex-wrap: wrap;
   justify-content: center;
   gap: 15px;
-  scroll-margin: 70px;
+  scroll-margin: 90px;
   padding: 20px; }
+  .cards .cards-header {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+    margin: 1rem 4rem 2rem 4rem;
+    padding-bottom: 2rem;
+    border-bottom: 2px solid gray; }
 
-.card {
+.cardframe {
   width: 300px;
   height: auto;
   padding: 20px;
   transition: all .8s ease-in; }
-  .card .card-image img {
+  .cardframe .card-image img {
     height: 100px;
     width: 100px;
     border: solid darkgrey 3px;
@@ -143,13 +149,14 @@
     float: right;
     shape-outside: circle();
     margin-left: 2rem; }
-  .card .card-title {
+  .cardframe .card-title {
     padding: 20px 10px;
-    font-size: 1.5rem; }
-  .card .card-text {
+    font-size: 1.5rem;
+    min-height: 100px; }
+  .cardframe .card-text {
     line-height: 20px;
     margin-top: 1rem; }
-    .card .card-text:hover {
+    .cardframe .card-text:hover {
       box-shadow: 0px 0px 11px 5px #000;
       transition: all .5s  ease;
       padding: 10px; }
