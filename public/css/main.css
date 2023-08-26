@@ -1,7 +1,7 @@
 .allnews {
   display: flex;
   flex-wrap: wrap;
-  margin-top: 90px; }
+  margin-top: 70px; }
   .allnews .news {
     padding: 30px;
     scroll-margin: 70px;
