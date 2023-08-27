@@ -47,6 +47,9 @@
     display: flex;
     justify-content: center;
     gap: 20px; }
+    .topmenu .nav-links ul ul {
+      display: flex;
+      gap: 2px; }
     .topmenu .nav-links ul li a {
       font-size: 1.2rem;
       text-decoration: none; }
@@ -88,13 +91,6 @@
       position: absolute;
       top: 20px;
       left: 20px; }
-    .topmenu .nav-links ul {
-      display: flex;
-      flex-direction: column;
-      gap: 50px;
-      align-items: center; }
-      .topmenu .nav-links ul li {
-        font-size: 1.2em; }
   .footer {
     display: block; }
     .footer .menu-hamburger {
@@ -114,9 +110,20 @@
     .nav-links.mobile-menu {
       margin-left: 0; }
     .nav-links ul {
+      display: flex;
+      flex-direction: column;
+      gap: 35px;
+      align-items: center;
       background: radial-gradient(circle, #020024 0%, #097936 100%, #00d4ff 100%);
       padding: 20px;
-      border-radius: 10px; } }
+      border-radius: 10px;
+      min-width: 8rem; }
+      .nav-links ul li {
+        font-size: 1.2rem; }
+      .nav-links ul ul {
+        flex-direction: row;
+        gap: 2px;
+        background: transparent; } }
 
 .cards {
   display: flex;

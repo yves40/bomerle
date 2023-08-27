@@ -20,6 +20,10 @@
     display: flex;
     justify-content: center;
     gap: 20px;
+    ul {
+      display: flex;
+      gap: 2px;
+    }
     li a {
       font-size: 1.2rem;
       text-decoration: none;
@@ -72,15 +76,6 @@
       top: 20px;
       left: 20px;
     }
-    .nav-links ul {
-      display: flex;
-      flex-direction: column;
-      gap: 50px;
-      align-items: center;
-      li {
-        font-size: 1.2em;
-      }
-    }
   }
   .footer {
     display: block;
@@ -104,9 +99,22 @@
       margin-left: 0;
     }
     ul {
+      display: flex;
+      flex-direction: column;
+      gap: 35px;
+      align-items: center;
+      li {
+        font-size: 1.2rem;
+      }
       background: $bg-gradient-green;
       padding: 20px;
       border-radius: 10px;
+      min-width: 8rem;
+      ul {
+        flex-direction: row;
+        gap: 2px;
+        background: transparent;
+      }
     }
   }
 }

@@ -17,8 +17,10 @@
           <li><a href="#section2">{% trans %}app.public.menu.galerie{% endtrans %}</a></li>
           <li id="catalog"><a href="#cards">{% trans %}app.public.menu.catalog{% endtrans %}</a></li>
           <li><a href="#section3">{% trans %}app.public.menu.contact{% endtrans %}</a></li>
-          <li><a href="{{ path('public.switchlang') }}">en |</a></li>
-          <li><a href="{{ path('public.switchlang') }}">fr</a></li>
+          <ul>
+            <li><a href="{{ path('public.switchlang') }}">en |</a></li>
+            <li><a href="{{ path('public.switchlang') }}">fr</a></li>
+          </ul>
       </ul>
     </div>
   </nav>
