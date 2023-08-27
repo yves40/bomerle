@@ -22,10 +22,20 @@ class SiteController extends AbstractController
     public function __construct(LocaleSwitcher $localeSwitcher) {
         $this->localeSwitcher = $localeSwitcher;
     }
+    // --------------------------------------------------------------------------
+    #[Route('/main', name: 'public.main')]
+    public function public(Request $request): Response
+    {
+        $loc = $this->locale($request); // Set the proper language for translations
+        return $this->render('main.html.twig', [
+            "locale" =>  $this->localeSwitcher->getLocale(),
+            ]
+        );               
+    }
     // ------------------------------------------------------------------------
     // Very old home page version...
     // ------------------------------------------------------------------------
-    #[Route('/home', name: 'home')]
+    #[Route('/home', name: 'public.home')]
     public function home(
         EntityManagerInterface $entityManager,
         Request $request
@@ -47,7 +57,7 @@ class SiteController extends AbstractController
     // ------------------------------------------------------------------------
     // Public page lang switch handler
     // ------------------------------------------------------------------------
-    #[Route('/switchlang', name: 'switchlang')]
+    #[Route('/switchlang', name: 'public.switchlang')]
     public function switchlang(
         EntityManagerInterface $entityManager,
         Request $request
@@ -66,5 +76,19 @@ class SiteController extends AbstractController
         }
         return $this->render('main.html.twig', [ ]);
     }
-
+    // --------------------------------------------------------------------------
+    // P R I V A T E     S E R V I C E S 
+    // --------------------------------------------------------------------------
+    private function locale(Request $request) {
+        $session = $request->getSession();
+        if($session->has('bootadmin.lang')) {
+            $loc = $session->get('bootadmin.lang');
+        }
+        else {
+            $loc = $this->localeSwitcher->getLocale();
+            $session->set('bootadmin.lang', $loc);
+        }
+        $this->localeSwitcher->setLocale($loc);
+        return $loc;
+    }
 }

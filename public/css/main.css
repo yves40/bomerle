@@ -7,12 +7,10 @@
     scroll-margin: 70px;
     width: 100%;
     color: white; }
-    .allnews .news h1 {
+    .allnews .news h1, .allnews .news h2 {
       margin: 1rem; }
-    .allnews .news h2 {
-      margin: 2rem; }
     .allnews .news img {
-      margin: 0 20px;
+      margin: 20px;
       width: 300px;
       height: 300px;
       border: solid darkgrey 3px;
@@ -135,31 +133,30 @@
     margin: 1rem 4rem 2rem 4rem;
     padding-bottom: 2rem;
     border-bottom: 2px solid gray; }
-
-.cardframe {
-  width: 300px;
-  height: auto;
-  padding: 20px;
-  transition: all .8s ease-in; }
-  .cardframe .card-image img {
-    height: 100px;
-    width: 100px;
-    border: solid darkgrey 3px;
-    border-radius: 50%;
-    float: right;
-    shape-outside: circle();
-    margin-left: 2rem; }
-  .cardframe .card-title {
-    padding: 20px 10px;
-    font-size: 1.5rem;
-    min-height: 100px; }
-  .cardframe .card-text {
-    line-height: 20px;
-    margin-top: 1rem; }
-    .cardframe .card-text:hover {
-      box-shadow: 0px 0px 11px 5px #000;
-      transition: all .5s  ease;
-      padding: 10px; }
+  .cards .cardframe {
+    width: 300px;
+    height: auto;
+    padding: 20px;
+    transition: all .8s ease-in; }
+    .cards .cardframe .card-image img {
+      height: 100px;
+      width: 100px;
+      border: solid darkgrey 3px;
+      border-radius: 50%;
+      float: right;
+      shape-outside: circle();
+      margin-left: 2rem; }
+    .cards .cardframe .card-title {
+      padding: 20px 10px;
+      font-size: 1.5rem;
+      min-height: 100px; }
+    .cards .cardframe .card-text {
+      line-height: 20px;
+      margin-top: 1rem; }
+      .cards .cardframe .card-text:hover {
+        box-shadow: 0px 0px 11px 5px #000;
+        transition: all .5s  ease;
+        padding: 10px; }
 
 /* --------------------  R E S P O N S I V E --------------------*/
 @media screen and (max-width: 800px) {
