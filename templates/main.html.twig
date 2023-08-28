@@ -14,7 +14,7 @@
       <ul>
           <li><a href="#section0">{% trans %}app.public.menu.accueil{% endtrans %}</a></li>
           <li><a href="#section1">{% trans %}app.public.menu.atelier{% endtrans %}</a></li>
-          <li><a href="#section2">{% trans %}app.public.menu.galerie{% endtrans %}</a></li>
+          <li><a href="#thegallery">{% trans %}app.public.menu.galerie{% endtrans %}</a></li>
           <li id="catalog"><a href="#cards">{% trans %}app.public.menu.catalog{% endtrans %}</a></li>
           <li><a href="#section3">{% trans %}app.public.menu.contact{% endtrans %}</a></li>
           <ul>
@@ -25,23 +25,16 @@
     </div>
   </nav>
   <div class="allnews">
-    <div id="section0" class="news bg-img1">
+    <div id="section0" class="news bg-enclume">
       <h1>{% trans %}app.public.main.name{% endtrans %}</h1>
       <h2 >{% trans %}app.public.main.whatis{% endtrans %}</h2>
-      <img src="/images/background-left.jpg" alt="Avatar">
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate consequuntur quos nisi impedit quasi, dignissimos et quis tempora quibusdam, exercitationem aspernatur ab iusto doloremque quidem dolor placeat suscipit consequatur nemo reiciendis vel! Assumenda quis iusto esse quos, cupiditate nulla possimus maxime necessitatibus. Voluptas consequatur autem consequuntur aspernatur. Voluptate tempore, officiis reprehenderit officia repellat recusandae eligendi! Cumque alias id, cum laboriosam neque laudantium aliquam tempore obcaecati. Eum excepturi autem blanditiis obcaecati officia deleniti similique est porro vitae harum mollitia eveniet qui asperiores modi id molestiae explicabo, odio quasi minima! Quidem fuga nihil recusandae a magnam voluptas culpa sint dolores vel non!</p>
+      <div class="htmltemplate textleft" data-templatename='maintext' data-lang={{locale}}></div>
     </div>
-    <div id="section1" class="news bg-img2">
-      <h1>Là où tout se passe</h1>
-      <h2>L'atelier</h2>
+    <div id="section1" class="news bg-thinknife">
+      <div class="htmltemplate textleft" data-templatename='story' data-lang={{locale}}></div>
       <img src="/images/artisanat.jpg" alt="Avatar">
-      <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sed alias explicabo cupiditate necessitatibus expedita excepturi tenetur vitae odio ipsam animi quia, rem labore libero fugiat fuga impedit qui. Laboriosam est deleniti quos, necessitatibus cupiditate sequi nostrum architecto qui doloribus blanditiis ipsum optio, expedita consequuntur voluptatem atque. Perspiciatis ab eum vel porro laborum, aut, minus vero aliquam blanditiis iusto nisi iste autem. Perferendis blanditiis totam aspernatur impedit veniam, ut deleniti necessitatibus vero saepe aliquam, consequuntur ab in! Iure accusantium architecto aperiam quasi, mollitia voluptatum molestias accusamus totam ut culpa harum illo, necessitatibus labore perferendis, doloremque reiciendis earum eaque nulla similique iusto!</p>
     </div>
-    <div id="section2" class="news">
-      <h2>Galerie</h2>
-      <p>Quelques réalisations qui devraient vous intéresser</p>
-      <img src="/images/hero-section-knife.jpg" alt="Avatar">
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum porro a fuga repellat, repellendus officiis dolores soluta nihil, ipsum at, ducimus impedit consectetur repudiandae quaerat ab quo aliquid illum esse excepturi odit! Officiis quidem expedita nobis adipisci, consequuntur dolores inventore mollitia rerum ipsa in necessitatibus porro eum vitae fugit a odio ad! Laudantium enim tempore nulla repellat magni non atque saepe assumenda voluptates molestias? Fugit consequuntur temporibus laborum mollitia architecto dolores distinctio atque veritatis amet necessitatibus odit, dolorum perspiciatis nam itaque nemo nesciunt accusamus illum labore. Facilis ea repellat eaque, modi quis voluptatem dolorum necessitatibus voluptatum temporibus tempore impedit iure ullam id ut expedita delectus doloribus optio laboriosam dicta, quas animi rem et. Esse dolorum cum, aut illum veritatis quos?</p>
+    <div id="thegallery">
     </div>
   </div>
   <div id="cards" class="cards">
