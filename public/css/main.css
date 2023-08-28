@@ -117,7 +117,7 @@
       background: radial-gradient(circle, #020024 0%, #097936 100%, #00d4ff 100%);
       padding: 20px;
       border-radius: 10px;
-      min-width: 8rem; }
+      min-width: fit-content; }
       .nav-links ul li {
         font-size: 1.2rem; }
       .nav-links ul ul {

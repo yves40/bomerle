@@ -57,24 +57,16 @@ class SiteController extends AbstractController
     // ------------------------------------------------------------------------
     // Public page lang switch handler
     // ------------------------------------------------------------------------
-    #[Route('/switchlang', name: 'public.switchlang')]
+    #[Route('/switchlang/{locale}', name: 'public.switchlang')]
     public function switchlang(
-        EntityManagerInterface $entityManager,
-        Request $request
+        Request $request, string $locale
     ): Response
     {
-        $current = $request->getSession()->get('bootadmin.lang');
-        switch($current) {
-            case 'en':
-                $request->getSession()->set('bootadmin.lang', 'fr');
-                $this->localeSwitcher->setLocale('fr');
-                break;
-            case 'fr':
-                $request->getSession()->set('bootadmin.lang', 'en');
-                $this->localeSwitcher->setLocale('en');
-                break;
-        }
-        return $this->render('main.html.twig', [ ]);
+        $request->getSession()->set('bootadmin.lang', $locale);
+        $this->localeSwitcher->setLocale($locale);
+        return $this->render('main.html.twig', [
+                "locale" =>  $this->localeSwitcher->getLocale(),
+            ]);
     }
     // --------------------------------------------------------------------------
     // P R I V A T E     S E R V I C E S 

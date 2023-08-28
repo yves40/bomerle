@@ -109,7 +109,7 @@
       background: $bg-gradient-green;
       padding: 20px;
       border-radius: 10px;
-      min-width: 8rem;
+      min-width: fit-content; 
       ul {
         flex-direction: row;
         gap: 2px;
