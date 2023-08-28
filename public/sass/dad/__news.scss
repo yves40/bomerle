@@ -6,7 +6,6 @@
     padding: 30px;
     scroll-margin: 70px; 
     width: 100%;
-    color: white; 
     h1, h2 {
       margin: 1rem;
     }
@@ -22,18 +21,14 @@
       font-style: italic; 
     }
     &:nth-child(even) { 
-      background-image: url('../images/background-left.jpg');  
-      background-size: cover;
       img {
         float: left;
       }
     }
     &:nth-child(odd) {
-      background-image: url('../images/background-right.jpg'); 
-      background-size: cover;
       img {
         float: right;
-      }  
+      } 
     }
   }
 }

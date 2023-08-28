@@ -5,8 +5,7 @@
   .allnews .news {
     padding: 30px;
     scroll-margin: 70px;
-    width: 100%;
-    color: white; }
+    width: 100%; }
     .allnews .news h1, .allnews .news h2 {
       margin: 1rem; }
     .allnews .news img {
@@ -18,16 +17,10 @@
     .allnews .news p {
       margin: 30px 20px;
       font-style: italic; }
-    .allnews .news:nth-child(even) {
-      background-image: url("../images/background-left.jpg");
-      background-size: cover; }
-      .allnews .news:nth-child(even) img {
-        float: left; }
-    .allnews .news:nth-child(odd) {
-      background-image: url("../images/background-right.jpg");
-      background-size: cover; }
-      .allnews .news:nth-child(odd) img {
-        float: right; }
+    .allnews .news:nth-child(even) img {
+      float: left; }
+    .allnews .news:nth-child(odd) img {
+      float: right; }
 
 .topmenu {
   position: fixed;
@@ -177,3 +170,25 @@
   list-style: none;
   scroll-behavior: smooth !important;
   box-sizing: border-box; }
+
+.bg-img1 {
+  background-image: url("../images/background-left.jpg");
+  background-size: cover;
+  color: white; }
+
+.bg-img2 {
+  background-image: url("../images/background-right.jpg");
+  background-size: cover;
+  color: white; }
+
+.bgr-green {
+  background: radial-gradient(circle, #020024 0%, #097936 100%, #00d4ff 100%);
+  color: white; }
+
+.bgr-black {
+  background: linear-gradient(to bottom left, #959595 0%, #0D0D0D 50%, #010101 50%, #0A0A0A 53%, #4E4E4E 76%, #383838 87%, #1B1B1B 100%);
+  color: white; }
+
+.bgr-blue {
+  background: radial-gradient(circle, #020024 0%, #090979 50%, #00d4ff 100%);
+  color: white; }

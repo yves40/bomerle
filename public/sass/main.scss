@@ -10,5 +10,19 @@
   scroll-behavior: smooth !important;
   box-sizing: border-box; 
 }
+.bg-img1 {
+  background-image: url('../images/background-left.jpg');  
+  background-size: cover;
+  color: white;
+}
+.bg-img2 {
+  background-image: url('../images/background-right.jpg'); 
+  background-size: cover;
+  color: white;
+}
+.bgr-green {  background: $bg-gradient-green; color: white }
+.bgr-black {  background: $bg-gradient-black;  color: white }
+.bgr-blue {  background: $bg-gradient-blue;  color: white } 
+
 
 
