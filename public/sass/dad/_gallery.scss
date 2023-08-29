@@ -1,48 +1,76 @@
+@import './const';
 
 #thegallery {
     background: #959595;
     background: linear-gradient(to bottom left, #959595 0%, #0D0D0D 50%, #010101 50%, #0A0A0A 53%, #4E4E4E 76%, #383838 87%, #1B1B1B 100%);
     scroll-margin: 70px; 
     padding: 30px; 
-}
-
-.galleryzone {
-    display: flex;
-    flex-direction: column; 
-    padding-bottom: 3em;
-}
-
-.gallerytext {
-    max-width: 70%;
-    margin: 0 auto;
-    padding: 1em;
-    color: white;
-    font-family:Arial, Helvetica, sans-serif;
-    font-weight: normal;
-    font-style: italic;
-}
-  
-.gallery{
-    max-width: 70%;
-    margin: 0 auto;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 2vmin;
-    padding: 0 14px;
-    list-style-type: none;
-    li {
-        height: 250px;
-        flex-grow: 1;
+    .galleryzone {
+        display: flex;
+        flex-direction: column; 
+        padding-bottom: 3em;
+        .gallerytext {
+            max-width: 70%;
+            margin: 0 auto;
+            padding: 1em;
+            color: white;
+            font-family:Arial, Helvetica, sans-serif;
+            font-weight: normal;
+            font-style: italic;
+        }
+        .gallery{
+            max-width: 70%;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2vmin;
+            padding: 0 14px;
+            list-style-type: none;
+            li {
+                height: 250px;
+                flex-grow: 1;
+            }
+            img {
+                width: 100%;
+                height: 100%;
+                border-radius: 10px;
+                object-fit: cover;
+            }
+            ::after {
+                content: "";
+                display: block;
+                flex-grow: 10;
+            }
+        }    
     }
-    img {
-        width: 100%;
-        height: 100%;
-        border-radius: 10px;
-        object-fit: cover;
+}
+#fullscreen {
+    background-color: white;
+}  
+.zoomon { 
+    position: absolute;
+    height: 100%; width: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    animation-duration: 1.2s;
+    animation-timing-function: linear;
+    animation-name: fadein;
+    h2 {
+        size: 1rem;
+        position: absolute;
+        padding: .8rem;
+        color: white;
+        background-color: darkgrey;
+        top: 5%;
+        left: 5%;
+        opacity: 0.5;
     }
-    ::after {
-        content: "";
-        display: block;
-        flex-grow: 10;
-    }
-  }
+}
+.zoomoff {
+    display: none;
+}
+@keyframes fadein {
+    0%   { opacity: 0;}
+    100% { opacity: 1;}
+}
