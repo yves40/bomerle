@@ -1,8 +1,9 @@
-@import './dad/_news.scss';
-@import './dad/_menu.scss';
-@import './dad/_cards.scss';
-@import './dad/_gallery.scss';
-@import './dad/_slider.scss';
+@import './dad/news';
+@import './dad/menu';
+@import './dad/cards';
+@import './dad/gallery';
+@import './dad/slider';
+@import './dad/sliderclass';
 
 * {
   margin: 0;

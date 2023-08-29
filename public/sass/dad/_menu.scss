@@ -20,6 +20,10 @@
     display: flex;
     justify-content: center;
     gap: 20px;
+    // // Disable bootstrap styles
+    margin-bottom: 0;
+    margin-top: 0;
+    padding-left: 0; 
     ul {
       display: flex;
       gap: 2px;
