@@ -26,9 +26,16 @@ class Slider {
       this.windowy = $(window).height();
       this.zoomactive = false;
       this.currentzoom = '';
+      this.allimages = [];  // Will be filled bu addImages()
+      this.activeindex = 0;
 
-      // Necessary to call a function from the click handler
-      const handleButtons = this.buttonHandler.bind();
+      // Necessary to call the handler function from the click handler
+      // In the click handler, the element button is passed, using 'this'
+      // Binding buttonhandler with 'this' as parameter gives access to 
+      // the class methods and attributes from within the buttonhandler
+      // Strange isn't it ? 
+      // I hate JS ;-)
+      const handleButtons = this.buttonHandler.bind(this);
 
       // Slider parameters
       const VERYLONGTIMESLIDER = 60000;
@@ -55,6 +62,8 @@ class Slider {
   }
   // ------------------------------------------------------------------------------------------------
   buttonHandler = function manageActiveSlide(buttonelement) {
+    console.log(`Using ${this.allimages.length} images in this slider`);
+    console.log(`Currently active is : ${this.allimages[this.activeindex]}`);
     if(buttonelement.classList.contains('next')) {
       console.log('______ NEXT');
     }
@@ -103,6 +112,8 @@ class Slider {
       $(oneimage).append(newimg);
       $(slides).append(oneimage);      
     }
+    this.activeindex = 0;    
+    this.allimages = allimages; // Save it for later use by buttons handler
   }
   // ------------------------------------------------------------------------------------------------
   fullScreen(imagesrc) {
