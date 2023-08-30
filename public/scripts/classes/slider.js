@@ -43,13 +43,18 @@ class Slider {
       if(!automove) {
         this.slideinterval = VERYLONGTIMESLIDER; // Almost disable auto scroll
       }
+      else {
+        // Auto move
+        this.intervalid = setInterval( () => {
+          this.nextSlide();
+        }, this.slideinterval);
+      }
       this.buildSliderFrame(container);
       $('.carousel-button').each(function (index, button) {
         $(button).on('click', () => {
           handleButtons(this);
         });
       });
-
 
       // Initialize handlers
       $(window).resize ( () =>  {
@@ -62,14 +67,41 @@ class Slider {
   }
   // ------------------------------------------------------------------------------------------------
   buttonHandler = function manageActiveSlide(buttonelement) {
-    console.log(`Using ${this.allimages.length} images in this slider`);
-    console.log(`Currently active is : ${this.allimages[this.activeindex]}`);
+    if(this.intervalid !== 0) {
+      clearInterval(this.intervalid);
+      this.intervalid = 0;
+    }
+    console.log('No more auto sliding');
     if(buttonelement.classList.contains('next')) {
-      console.log('______ NEXT');
+      this.nextSlide();
     }
     else {
-      console.log('______ PREV');
+      this.previousSlide();
     }
+  }
+  // ------------------------------------------------------------------------------------------------
+  nextSlide() {
+    const activeline = $(`#imgid-${this.activeindex}`);
+    ++this.activeindex;
+    const newindex = this.checkBoundaries();
+    $(activeline).removeClass('active');
+    $(`#imgid-${newindex}`).addClass('active');
+  }
+  previousSlide() {
+    const activeline = $(`#imgid-${this.activeindex}`);
+    --this.activeindex;
+    const newindex = this.checkBoundaries();
+    $(activeline).removeClass('active');
+    $(`#imgid-${newindex}`).addClass('active');
+  }
+  checkBoundaries() {
+    if(this.activeindex === this.allimages.length) {
+      this.activeindex = 0;
+    }
+    if(this.activeindex < 0) {
+      this.activeindex = this.allimages.length - 1;
+    }
+    return this.activeindex;
   }
   // ------------------------------------------------------------------------------------------------
   buildSliderFrame(container) {
@@ -94,11 +126,11 @@ class Slider {
   }
   // ------------------------------------------------------------------------------------------------
   addImages(allimages) {
-    console.log(`To be used later : Slide interval ${this.slideinterval}`);
+    console.log(`Slide interval ${this.slideinterval}`);
     // Get the container
     const slides = $(`#${this.sliderarea}`);
     for(let i = 0; i < allimages.length; ++i) {
-      let oneimage = $("<li>").addClass('slide');
+      let oneimage = $("<li>").attr('id', `imgid-${i}`).addClass('slide');
       if(i === 0 ){
         $(oneimage).addClass('active');
       }

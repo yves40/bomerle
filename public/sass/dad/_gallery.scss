@@ -87,6 +87,7 @@
                 position: absolute; 
                 inset: 0;
                 opacity: 0;
+                transition: 1s opacity ease-in-out;
                 &.active {
                     opacity: 1;
                 }

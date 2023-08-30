@@ -25,6 +25,7 @@
 .topmenu {
   position: fixed;
   top: 0;
+  z-index: 10;
   padding: 50px;
   display: flex;
   justify-content: space-between;
@@ -240,7 +241,8 @@
       #thegallery .galleryzone .carousel .slide {
         position: absolute;
         inset: 0;
-        opacity: 0; }
+        opacity: 0;
+        transition: 1s opacity ease-in-out; }
         #thegallery .galleryzone .carousel .slide.active {
           opacity: 1; }
         #thegallery .galleryzone .carousel .slide > img {

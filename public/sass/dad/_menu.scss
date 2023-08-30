@@ -3,6 +3,7 @@
 .topmenu {
   position: fixed; 
   top: 0;
+  z-index: 10;
   padding: 50px;
   display: flex;
   justify-content: space-between;

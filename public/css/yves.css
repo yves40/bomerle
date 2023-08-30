@@ -206,7 +206,8 @@
       #thegallery .galleryzone .carousel .slide {
         position: absolute;
         inset: 0;
-        opacity: 0; }
+        opacity: 0;
+        transition: 1s opacity ease-in-out; }
         #thegallery .galleryzone .carousel .slide.active {
           opacity: 1; }
         #thegallery .galleryzone .carousel .slide > img {
