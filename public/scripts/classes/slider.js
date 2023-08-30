@@ -7,13 +7,14 @@
     jun 08 2023     Slider and zoom, cont
     jun 09 2023     Add slider timing set into the UI
     jun 20 2023     Add slider description into the UI
+    Aug 29 2023     Reorg into single css file
 
     ----------------------------------------------------------------------------*/
 class Slider {
 
   constructor(container, timing = 2, description = '') {
     // Init
-      this.version = 'Slider:1.08, Jun 20 2023 ';
+      this.version = 'Slider:1.12, Aug 30 2023 ';
       this.container = container;
       this.containername = $(container).attr('name');
       this.slideinterval = timing * 1000;
@@ -25,6 +26,10 @@ class Slider {
       this.windowy = $(window).height();
       this.zoomactive = false;
       this.currentzoom = '';
+
+      // Necessary to call a function from the click handler
+      const handleButtons = this.buttonHandler.bind();
+
       // Slider parameters
       const VERYLONGTIMESLIDER = 60000;
       const automove = true;        // manage later
@@ -32,6 +37,12 @@ class Slider {
         this.slideinterval = VERYLONGTIMESLIDER; // Almost disable auto scroll
       }
       this.buildSliderFrame(container);
+      $('.carousel-button').each(function (index, button) {
+        $(button).on('click', () => {
+          handleButtons(this);
+        });
+      });
+
 
       // Initialize handlers
       $(window).resize ( () =>  {
@@ -43,71 +54,54 @@ class Slider {
       });
   }
   // ------------------------------------------------------------------------------------------------
+  buttonHandler = function manageActiveSlide(buttonelement) {
+    if(buttonelement.classList.contains('next')) {
+      console.log('______ NEXT');
+    }
+    else {
+      console.log('______ PREV');
+    }
+  }
+  // ------------------------------------------------------------------------------------------------
   buildSliderFrame(container) {
-      // const div = $("<div>");
-      const sliderzone = $("<div>").attr('id', this.homezone)
-                                          .addClass('carousel')
-                                          .addClass('slide')
-                                          .addClass('sliderframe')
-                                          .attr('data-bs-ride', 'carousel');
-      const slidetext = $('<div></div>').addClass('slidertext');
+    const galleryzone = $("<div>").addClass('galleryzone');
+    const sliderzone = $("<div>").attr('id', this.homezone)
+                                          .addClass('carousel');
+      const slidetext = $('<div></div>').addClass('gallerytext');
       const spantitle = $('<span></span>').text(this.description);
       $(slidetext).append(spantitle);
-
-      const inner = $('<div></div>').attr('id', this.sliderarea)
-                                    .addClass('carousel-inner')
-                                    .addClass('sliderarea');
-      const indicators = $('<div></div>').attr('id', this.indicators).addClass('carousel-indicators');
-      const spanprev = $('<span></span>').addClass('carousel-control-prev-icon');
-      const spannext = $('<span></span>').addClass('carousel-control-next-icon');
-      const buttonprev = $('<button></button>').addClass('carousel-control-prev')
-                                                  .addClass('slidercontrol')
-                                                  .attr('data-bs-target', `#${this.homezone}`)
-                                                  .attr('data-bs-slide', 'prev')
-                                                  .append(spanprev);
-      const buttonnext = $('<button></button>').addClass('carousel-control-next')
-                                                  .addClass('slidercontrol')
-                                                  .attr('data-bs-target', `#${this.homezone}`)
-                                                  .attr('data-bs-slide', 'next')
-                                                  .append(spannext);
-      $(container).append(slidetext);
-      $(sliderzone).append(inner)
-                      .append(indicators)
-                      .append(buttonprev)
-                      .append(buttonnext);
-
-      $(container).append(sliderzone);
+      $(galleryzone).append(slidetext);
+      const ul = $('<ul></ul>').attr('id', this.sliderarea).addClass('sliderarea');
+      const prev = $("<button></button>").addClass('carousel-button').addClass('prev')
+                                        .html('&#8656;');
+      const next = $("<button></button>").addClass('carousel-button').addClass('next')
+                                        .html('&#8658;');
+      $(sliderzone).append(prev);
+      $(sliderzone).append(next);
+      $(sliderzone).append(ul);
+      $(galleryzone).append(sliderzone);
+      $(container).append(galleryzone);
       $(container).append($('<div></div>').attr('id', 'fullscreen').addClass('zoomoff'));
   }
   // ------------------------------------------------------------------------------------------------
   addImages(allimages) {
+    console.log(`To be used later : Slide interval ${this.slideinterval}`);
     // Get the container
     const slides = $(`#${this.sliderarea}`);
     for(let i = 0; i < allimages.length; ++i) {
-      // console.log(`${this.version} Adding image ${allimages[i]} to the slider`);
-      let item = $("<div>").addClass('carousel-item');
-      $(item).attr('data-bs-interval', this.slideinterval);
-      let caption = $("<div>").addClass('carousel-caption');
-      let h3 = $("<h5></h5>").text(`${i+1}/${allimages.length}`);
-      caption.append(h3);
-      let buttonindicator = $("<button>").attr('type', 'button');
-      buttonindicator.attr('data-bs-target', `#${this.homezone}` )
-                        .attr('data-bs-slide-to', i); 
-      if(i === 0) {
-        $(item).addClass('active');
-        buttonindicator.addClass('active');
+      let oneimage = $("<li>").addClass('slide');
+      if(i === 0 ){
+        $(oneimage).addClass('active');
       }
-      const indic = $(`#${this.indicators}`);
-      indic.append(buttonindicator);
+      let h3 = $("<h5></h5>").text(`${i+1}/${allimages.length}`);
       let newimg = $('<img>').addClass('sliderimage')
       .attr('src', "/images/slideshow/"+allimages[i]);
       $(newimg).click( (e) => { // Arrow function mandatory here to use this
         e.preventDefault();
         this.fullScreen(allimages[i]);
       });
-      item.append(caption);
-      $(item).append(newimg);
-      $(slides).append(item);      
+      $(oneimage).append(newimg);
+      $(slides).append(oneimage);      
     }
   }
   // ------------------------------------------------------------------------------------------------

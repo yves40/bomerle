@@ -166,6 +166,9 @@
   .card img {
     width: 200px; } }
 
+*, *::before, *::after {
+  box-sizing: border-box; }
+
 #thegallery {
   background: #959595;
   background: linear-gradient(to bottom left, #959595 0%, #0D0D0D 50%, #010101 50%, #0A0A0A 53%, #4E4E4E 76%, #383838 87%, #1B1B1B 100%);
@@ -203,6 +206,49 @@
         content: "";
         display: block;
         flex-grow: 10; }
+    #thegallery .galleryzone .carousel {
+      width: 400px;
+      height: 400px;
+      position: relative;
+      margin: 0 auto; }
+      #thegallery .galleryzone .carousel > ul {
+        margin: 0;
+        padding: 0;
+        list-style: none; }
+      #thegallery .galleryzone .carousel .carousel-button {
+        position: absolute;
+        background: none;
+        border: none;
+        font-size: 4rem;
+        top: 50%;
+        z-index: 2;
+        transform: translateY(-50%);
+        color: rgba(255, 255, 255, 0.5);
+        cursor: pointer;
+        border-radius: .25rem;
+        padding: 0 .5rem;
+        background-color: rgba(0, 0, 0, 0.1); }
+        #thegallery .galleryzone .carousel .carousel-button:hover, #thegallery .galleryzone .carousel .carousel-button:focus {
+          color: white;
+          background-color: rgba(0, 0, 0, 0.2); }
+        #thegallery .galleryzone .carousel .carousel-button:focus {
+          outline: 1px solid black; }
+        #thegallery .galleryzone .carousel .carousel-button.prev {
+          left: 1rem; }
+        #thegallery .galleryzone .carousel .carousel-button.next {
+          right: 1rem; }
+      #thegallery .galleryzone .carousel .slide {
+        position: absolute;
+        inset: 0;
+        opacity: 0; }
+        #thegallery .galleryzone .carousel .slide.active {
+          opacity: 1; }
+        #thegallery .galleryzone .carousel .slide > img {
+          display: block;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          object-position: center; }
 
 #fullscreen {
   background-color: white; }

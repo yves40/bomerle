@@ -5,13 +5,14 @@
     jun 18 2023     Add div and text to the gallery template
     jun 19 2023     Get slideshow description text
     jun 21 2023     Gallery zoom for the 2nd time !!!
+    Aug 29 2023     Reorg into single css file
 
 ----------------------------------------------------------------------------*/
 class Gallery {
 
     constructor(container, description) {
         // Init
-        this.version = 'Gallery:1.03, Jun 21 2023 ';
+        this.version = 'Gallery:1.04, Aug 29 2023 ';
         this.container = container;
         this.description = description;
         this.containername = $(container).attr('name');

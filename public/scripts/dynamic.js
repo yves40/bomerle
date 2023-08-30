@@ -25,6 +25,7 @@ $(document).ready(function () {
     getActiveDiaporamas();
     getPublishedKnives();
     getHtmlTemplates();
+
     // ---------------------------------------- Request the active diaporamas from the DB
     function getActiveDiaporamas() {
         $.ajax({
