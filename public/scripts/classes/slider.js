@@ -113,10 +113,12 @@ class Slider {
       $(slidetext).append(spantitle);
       $(galleryzone).append(slidetext);
       const ul = $('<ul></ul>').attr('id', this.sliderarea).addClass('sliderarea');
-      const prev = $("<button></button>").addClass('carousel-button').addClass('prev')
-                                        .html('&#8656;');
-      const next = $("<button></button>").addClass('carousel-button').addClass('next')
-                                        .html('&#8658;');
+      const prev = $("<a></a>").addClass('carousel-button prev');
+      const previmage = $("<img>").attr('src', "/images/svg/arrow-back.svg").addClass("svgbig-white");
+      $(prev).append(previmage);
+      const next = $("<a></a>").addClass('carousel-button next');
+      const nextimage = $("<img>").attr('src', "/images/svg/arrow-forward.svg").addClass("svgbig-white");
+      $(next).append(nextimage);
       $(sliderzone).append(prev);
       $(sliderzone).append(next);
       $(sliderzone).append(ul);

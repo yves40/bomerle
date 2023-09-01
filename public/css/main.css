@@ -22,6 +22,43 @@
     .allnews .news:nth-child(odd) img {
       float: right; }
 
+/*
+  How to compute the filter value ???
+  Go to thi site: https://codepen.io/sosuke/pen/Pjoqqp
+  Enter your color code.
+  To know your color code go here : https://htmlcolorcodes.com/
+*/
+.svgsmall-lightblue {
+  text-decoration: none;
+  width: 18px;
+  height: 18px;
+  filter: invert(44%) sepia(88%) saturate(1176%) hue-rotate(191deg) brightness(100%) contrast(101%); }
+
+.svgsmall-blue {
+  width: 18px;
+  height: 18px;
+  filter: invert(44%) sepia(96%) saturate(6317%) hue-rotate(229deg) brightness(100%) contrast(102%); }
+
+.svgsmall-lightgreen {
+  width: 18px;
+  height: 18px;
+  filter: invert(41%) sepia(98%) saturate(581%) hue-rotate(83deg) brightness(81%) contrast(80%); }
+
+.svgsmall-red {
+  width: 18px;
+  height: 18px;
+  filter: invert(19%) sepia(96%) saturate(6102%) hue-rotate(357deg) brightness(98%) contrast(117%); }
+
+.svgmedium-white {
+  width: 24px;
+  height: 24px;
+  filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(131deg) brightness(102%) contrast(102%); }
+
+.svgbig-white {
+  width: 50px;
+  height: 50px;
+  filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(131deg) brightness(102%) contrast(102%); }
+
 .topmenu {
   position: fixed;
   top: 0;
@@ -164,6 +201,43 @@
   .card img {
     width: 200px; } }
 
+/*
+  How to compute the filter value ???
+  Go to thi site: https://codepen.io/sosuke/pen/Pjoqqp
+  Enter your color code.
+  To know your color code go here : https://htmlcolorcodes.com/
+*/
+.svgsmall-lightblue {
+  text-decoration: none;
+  width: 18px;
+  height: 18px;
+  filter: invert(44%) sepia(88%) saturate(1176%) hue-rotate(191deg) brightness(100%) contrast(101%); }
+
+.svgsmall-blue {
+  width: 18px;
+  height: 18px;
+  filter: invert(44%) sepia(96%) saturate(6317%) hue-rotate(229deg) brightness(100%) contrast(102%); }
+
+.svgsmall-lightgreen {
+  width: 18px;
+  height: 18px;
+  filter: invert(41%) sepia(98%) saturate(581%) hue-rotate(83deg) brightness(81%) contrast(80%); }
+
+.svgsmall-red {
+  width: 18px;
+  height: 18px;
+  filter: invert(19%) sepia(96%) saturate(6102%) hue-rotate(357deg) brightness(98%) contrast(117%); }
+
+.svgmedium-white {
+  width: 24px;
+  height: 24px;
+  filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(131deg) brightness(102%) contrast(102%); }
+
+.svgbig-white {
+  width: 50px;
+  height: 50px;
+  filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(131deg) brightness(102%) contrast(102%); }
+
 *, *::before, *::after {
   box-sizing: border-box; }
 
@@ -217,7 +291,6 @@
         position: absolute;
         background: none;
         border: none;
-        font-size: 4rem;
         top: 50%;
         z-index: 2;
         transform: translateY(-50%);
@@ -225,7 +298,10 @@
         cursor: pointer;
         border-radius: .25rem;
         padding: 0 .5rem;
-        background-color: rgba(0, 0, 0, 0.1); }
+        background-color: rgba(0, 0, 0, 0.1);
+        width: 4rem; }
+        #thegallery .galleryzone .carousel .carousel-button img {
+          size: 3rem; }
         #thegallery .galleryzone .carousel .carousel-button:hover, #thegallery .galleryzone .carousel .carousel-button:focus {
           color: white;
           background-color: rgba(0, 0, 0, 0.2); }
