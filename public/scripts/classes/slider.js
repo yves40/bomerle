@@ -8,13 +8,14 @@
     jun 09 2023     Add slider timing set into the UI
     jun 20 2023     Add slider description into the UI
     Aug 29 2023     Reorg into single css file
+    Sep 01 2023     Fix some details
 
     ----------------------------------------------------------------------------*/
 class Slider {
 
   constructor(container, timing = 2, description = '') {
     // Init
-      this.version = 'Slider:1.12, Aug 30 2023 ';
+      this.version = 'Slider:1.3, Sep 01 2023 ';
       this.container = container;
       this.containername = $(container).attr('name');
       this.slideinterval = timing * 1000;
@@ -71,7 +72,6 @@ class Slider {
       clearInterval(this.intervalid);
       this.intervalid = 0;
     }
-    console.log('No more auto sliding');
     if(buttonelement.classList.contains('next')) {
       this.nextSlide();
     }
