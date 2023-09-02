@@ -172,13 +172,13 @@
     padding-bottom: 2rem;
     border-bottom: 2px solid gray; }
   .cards .cardframe {
-    width: 300px;
+    width: 400px;
     height: auto;
     padding: 20px;
     transition: all .8s ease-in; }
     .cards .cardframe .card-image img {
-      height: 100px;
-      width: 100px;
+      height: 200px;
+      width: 200px;
       border: solid darkgrey 3px;
       border-radius: 50%;
       float: right;
@@ -186,8 +186,7 @@
       margin-left: 2rem; }
     .cards .cardframe .card-title {
       padding: 20px 10px;
-      font-size: 1.5rem;
-      min-height: 100px; }
+      font-size: 1.5rem; }
     .cards .cardframe .card-text {
       line-height: 20px;
       margin-top: 1rem; }
