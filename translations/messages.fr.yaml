@@ -167,7 +167,7 @@ admin:
     passwordreset: Mot de passe mis à jour
   managelogs:
     title: Liste des logs
-    startdate: Depuis le
+    startdate: Avant le
     enddate: Après le
     searchtextlabel: Texte à chercher
     eventdate: Date

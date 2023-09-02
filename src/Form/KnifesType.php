@@ -24,11 +24,11 @@ class KnifesType extends AbstractType
             ->add('published')
             ->add('description', TextareaType::class,
                 ['attr' => ["rows" => 6 ]])
-            ->add('stock')
-            ->add('weight')
-            ->add('lenght')
-            ->add('close_lenght')
-            ->add('cuttingedge_lenght')
+            // ->add('stock')
+            // ->add('weight')
+            // ->add('lenght')
+            // ->add('close_lenght')
+            // ->add('cuttingedge_lenght')
             ->add('price')
             ->add('category', null, [
                 'required' => true,

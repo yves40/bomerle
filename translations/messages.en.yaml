@@ -168,7 +168,7 @@ admin:
     passwordreset: Password updated
   managelogs:
     title: Logs list
-    startdate: Since
+    startdate: Before
     enddate: After
     searchtextlabel: Text to search
     eventdate: Date
