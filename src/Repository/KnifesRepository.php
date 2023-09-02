@@ -41,7 +41,7 @@ class KnifesRepository extends ServiceEntityRepository
     public function findPublished(): array
     {
         return $this->createQueryBuilder('s')
-        ->select('distinct(s.name) as name')
+        ->select('distinct(s.name), s.id')
         ->andWhere('s.published = true')
         ->orderBy('s.name')
         ->getQuery()

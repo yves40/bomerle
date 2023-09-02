@@ -225,6 +225,41 @@ class AdminControllerKnife extends AbstractController
         }
     }
     // --------------------------------------------------------------------------
+    #[Route('/knives/getimages/{knifeid?0}', name: 'bootadmin.knives.getimages')]
+    public function getImages(Request $request, 
+                            EntityManagerInterface $em,
+                            ) 
+    {
+        /**  @var Knifes $knife */
+        /** @var Collection $images */
+        $data = file_get_contents("php://input");
+        $payload = json_decode($data, true);
+        $knifeid = $payload['knifeid'];
+        try {
+            $knife = $em->getRepository(Knifes::class)->findOneBy([ 'id' => $knifeid]);
+            $images = $knife->getImages();
+            $filenames = [];
+            foreach($images as $img) {
+                array_push($filenames, $img->getFilename());
+            }
+            // $images = $em->getRepository(Images::class)->findKnifeImagesByRank($knife);
+            return $this->json([
+                'message' => 'bootadmin.knives.getimages KO for knife ID : '. $knifeid,
+                'knifeId' => $knife->getId(),
+                'knifeName' => $knife->getName(),
+                'knifedesc' => $knife->getDescription(),
+                "imagecount" => count($images),
+                "images" => $filenames
+            ], 200);        
+        }
+        catch(Exception $e) {
+            return $this->json([
+                'message' => 'bootadmin.knives.getimages KO for knife ID : '. $knifeid,
+                'error' => $e
+            ], 400);        
+        }
+    }
+    // --------------------------------------------------------------------------
     // P R I V A T E     S E R V I C E S 
     // --------------------------------------------------------------------------
     private function locale(Request $request) {

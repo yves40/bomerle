@@ -4,7 +4,7 @@
 $(document).ready(function () {
     $props.load();
     console.log(`[${$props.version()} ]` );
-    const catalogsection = $("#catalog");
+    const cardsmenu = $("#cardsmenu");
     const menuHamburger = $(".menu-hamburger");
     const navLinks = $(".nav-links");
 
@@ -51,9 +51,9 @@ $(document).ready(function () {
             async: false,
             success: function (response) {
                 console.log(response);
-                $(catalogsection).hide();
+                $(cardsmenu).hide();
                 if(response.publishedcount != 0) {
-                    $(catalogsection).show();
+                    $(cardsmenu).show();
                     loadPublishedCatalog(response.published);
                 }
             },
@@ -64,12 +64,24 @@ $(document).ready(function () {
     }
     // ---------------------------------------- Find a dynamic section in the page
     function loadPublishedCatalog(allpublished) {
+        let cardssection = $('#cards');
         allpublished.forEach( knife => {
-            console.log(`Got a knife to be published ${knife.name}`);
-            const li = $("<li></li>") ;
-            const a = $("<a></a>").text(knife.name);
-            li.append(a);
-            $('#submenu').append(li);
+            const payload = {
+                "knifeid" :  knife.id,
+            }
+            $.ajax({
+                type: "POST",
+                url: '/bootadmin/knives/getimages',
+                data: JSON.stringify(payload),
+                dataType: "json",
+                async: false,
+                success: function (response) {
+                    buildCard(response, cardssection);
+                },
+                error: function (xhr) {
+                    console.log(xhr);
+                }
+            });    
         })
     }
     // ---------------------------------------- Find a dynamic section in the page
@@ -124,5 +136,11 @@ $(document).ready(function () {
         console.log(`Container name is ${$(container).attr('name')} for ${allimages.length} images`);
         let gallery = new Gallery(container, description);
         gallery.addImages(allimages);
+    }
+    // ---------------------------------------- Activate a card
+    function buildCard(response, container ) {
+        let thecard = $('<div>').attr('id', `knifeid-${response.knifeId}`).addClass('cardframe');
+        let card  = new Card(thecard, response);
+        container.append(thecard);
     }
 })
