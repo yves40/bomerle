@@ -384,6 +384,11 @@
       float: left; }
     .infos .infoelement:nth-child(odd) img {
       float: right; }
+    .infos .infoelement button {
+      border: 1px solid darkolivegreen;
+      border-radius: .25em;
+      margin: 1em 0;
+      padding: .5em; }
   .infos .contact {
     display: flex;
     flex-direction: column;
@@ -391,15 +396,20 @@
     .infos .contact label {
       font-weight: lighter; }
     .infos .contact input, .infos .contact textarea {
+      margin: 0;
       padding: .5em;
       border: solid darkolivegreen 2px;
       border-radius: .25em;
       font-weight: lighter; }
-      .infos .contact input:focus, .infos .contact textarea:focus {
-        border: solid darkmagenta 1px; }
     .infos .contact textarea {
       height: 250px;
       overflow-y: scroll; }
+    .infos .contact label {
+      margin: .3em 0; }
+    .infos .contact ul {
+      margin: .4em 0; }
+    .infos .contact li {
+      color: red; }
 
 * {
   margin: 0;

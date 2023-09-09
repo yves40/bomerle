@@ -16,7 +16,7 @@
       margin: 20px;
       width: 250px;
       height: 300px;
-      border: solid darkgrey 3px; 
+      border: solid darkgrey 3px;  
       border-radius: 10px;
     } 
     p { 
@@ -32,6 +32,12 @@
       img {
         float: right;
       } 
+    } 
+    button {
+      border: 1px solid darkolivegreen;
+      border-radius: .25em;
+      margin: 1em 0;
+      padding: .5em;
     }
   }
   .contact{
@@ -42,18 +48,23 @@
       font-weight: lighter;
     }  
     input{
+      margin: 0; 
       padding: .5em; 
-      border: solid darkolivegreen 2px;
+      border: solid darkolivegreen 2px; 
       border-radius: .25em; 
       font-weight: lighter;
-      &:focus {
-        border: solid darkmagenta 1px;
-      }
     }
     textarea{
       @extend input;
       height: 250px;
       overflow-y: scroll;
     }
+    label {
+      margin: .3em 0;
+    }
+    ul {
+      margin: .4em 0;
+    }
+    li { color: red ; } 
   }
 }

@@ -7,6 +7,7 @@ $(document).ready(function () {
     const cardsmenu = $("#cardsmenu");
     const menuHamburger = $(".menu-hamburger");
     const navLinks = $(".nav-links");
+    const infoknife = $('.knife');
 
     $(menuHamburger).on('click', function () {
         $(navLinks).toggleClass('mobile-menu');
@@ -19,8 +20,21 @@ $(document).ready(function () {
             }
         })
     });
-
-    const menuentries = document.querySelectorAll(".action");
+    // Some UI initial state
+    $(infoknife).hide();
+    // Handle the user choice for the object request type
+    $('.object').change( function() {
+        $('select option:selected').each( function(index, element) {
+            if(index == 0){
+                if($(this).val() == 'knife_personalisation' 
+                        || $(this).val() == 'knife_reservation'){
+                    $(infoknife).show();
+                }else{
+                    $(infoknife).hide();
+                }
+            }
+        })
+    })
 
     getActiveDiaporamas();
     getPublishedKnives();

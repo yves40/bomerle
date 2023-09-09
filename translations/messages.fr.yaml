@@ -29,6 +29,7 @@ contact:
   couteau: Quel couteau ?
   message: Précisez votre demande
   button: Envoyer
+  reqtype-info: Je souhaite obtenir des informations
 user:
   login: Connexion
   email: Email

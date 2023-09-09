@@ -9,11 +9,12 @@ use App\Form\NewsletterType;
 use App\Form\ContactType;
 
 use Doctrine\ORM\EntityManagerInterface;
-use SebastianBergmann\Environment\Console;
+
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Translation\LocaleSwitcher;
+use Symfony\Contracts\Translation\TranslatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route('/public')]
@@ -26,10 +27,14 @@ class SiteController extends AbstractController
     }
     // --------------------------------------------------------------------------
     #[Route('/main', name: 'public.main')]
-    public function public(Request $request): Response
+    public function public(Request $request, 
+                TranslatorInterface $translator): Response
     {
         $contact = new Contact();
+
         $formContact = $this->createForm(ContactType::class, $contact);
+        $infogen = $translator->trans('reqtype-info');
+
         $formContact->handleRequest($request);
         $loc = $this->locale($request); // Set the proper language for translations
         return $this->render('main.html.twig', [
