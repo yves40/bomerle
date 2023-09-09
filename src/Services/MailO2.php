@@ -30,7 +30,7 @@ class MailO2
     // To do that we changed the messenger.yaml file located in config/packages
     // This line was modified. 
     //          Symfony\Component\Mailer\Messenger\SendEmailMessage: sync
-    // In that case the above consumer does not hve to be launched ;-)
+    // In that case the above consumer does not have to be launched ;-)
     // ------------------------------------------------------------------------
     $email = (new Email())
         ->from($_ENV["MAIL_FROM"])
