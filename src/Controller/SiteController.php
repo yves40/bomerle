@@ -4,8 +4,10 @@ namespace App\Controller;
 
 use App\Entity\Events;
 use App\Entity\Newsletter;
+use App\Entity\Contact;
 use App\Form\NewsletterType;
-use Psr\Log\LoggerInterface;
+use App\Form\ContactType;
+
 use Doctrine\ORM\EntityManagerInterface;
 use SebastianBergmann\Environment\Console;
 use Symfony\Component\HttpFoundation\Request;
@@ -26,9 +28,13 @@ class SiteController extends AbstractController
     #[Route('/main', name: 'public.main')]
     public function public(Request $request): Response
     {
+        $contact = new Contact();
+        $formContact = $this->createForm(ContactType::class, $contact);
+        $formContact->handleRequest($request);
         $loc = $this->locale($request); // Set the proper language for translations
         return $this->render('main.html.twig', [
             "locale" =>  $this->localeSwitcher->getLocale(),
+            'formcontact' => $formContact->createView(),
             ]
         );               
     }
@@ -64,9 +70,7 @@ class SiteController extends AbstractController
     {
         $request->getSession()->set('bootadmin.lang', $locale);
         $this->localeSwitcher->setLocale($locale);
-        return $this->render('main.html.twig', [
-                "locale" =>  $this->localeSwitcher->getLocale(),
-            ]);
+        return $this->redirectToRoute('public.main');
     }
     // --------------------------------------------------------------------------
     // P R I V A T E     S E R V I C E S 

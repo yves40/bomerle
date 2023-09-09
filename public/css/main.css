@@ -59,6 +59,9 @@
   height: 50px;
   filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(131deg) brightness(102%) contrast(102%); }
 
+.logo {
+  width: 40px; }
+
 .topmenu {
   position: fixed;
   top: 0;
@@ -72,8 +75,6 @@
   background: radial-gradient(circle, #020024 0%, #097936 100%, #00d4ff 100%); }
   .topmenu a {
     color: white; }
-  .topmenu .logo {
-    width: 40px; }
   .topmenu .nav-links ul {
     display: flex;
     justify-content: center;
@@ -356,6 +357,49 @@
     opacity: 0; }
   100% {
     opacity: 1; } }
+
+.infos {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 70px;
+  margin: 2rem;
+  scroll-margin: 70px; }
+  .infos .infoelement {
+    padding: 30px;
+    width: 300px; }
+    .infos .infoelement h1, .infos .infoelement h2, .infos .infoelement h3, .infos .infoelement ul {
+      margin: 1rem; }
+    .infos .infoelement iframe {
+      margin: 20px;
+      width: 250px;
+      height: 300px;
+      border: solid darkgrey 3px;
+      border-radius: 10px; }
+    .infos .infoelement p {
+      margin: 30px 20px;
+      font-style: italic; }
+    .infos .infoelement:nth-child(even) img {
+      float: left; }
+    .infos .infoelement:nth-child(odd) img {
+      float: right; }
+  .infos .contact {
+    display: flex;
+    flex-direction: column;
+    gap: 7px; }
+    .infos .contact label {
+      font-weight: lighter; }
+    .infos .contact input, .infos .contact textarea {
+      padding: .5em;
+      border: solid darkolivegreen 2px;
+      border-radius: .25em;
+      font-weight: lighter; }
+      .infos .contact input:focus, .infos .contact textarea:focus {
+        border: solid darkmagenta 1px; }
+    .infos .contact textarea {
+      height: 250px;
+      overflow-y: scroll; }
 
 * {
   margin: 0;

@@ -1,5 +1,9 @@
 @import './_const.scss';
 
+.logo {
+  width: 40px;
+}  
+
 .topmenu {
   position: fixed; 
   top: 0;
@@ -14,9 +18,6 @@
   a { 
     color: white;
   }
-  .logo {
-      width: 40px;
-  } 
   .nav-links ul {
     display: flex;
     justify-content: center;

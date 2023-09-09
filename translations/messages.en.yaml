@@ -22,6 +22,14 @@ app:
 lang:
   menufr: Langue
   menuuk: Language
+contact:
+  infos: Contact me
+  email: Your email please
+  object: Subject of your request
+  couteau: Which knife?
+  message: Specify your request
+  button: Send
+
 user:
   login: Connection
   email: Email

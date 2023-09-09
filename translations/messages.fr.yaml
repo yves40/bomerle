@@ -22,6 +22,13 @@ app:
 lang:
   menufr: Langue
   menuuk: Language
+contact:
+  infos: Contactez moi
+  email: Votre email SVP
+  object: Objet de votre demande
+  couteau: Quel couteau ?
+  message: Précisez votre demande
+  button: Envoyer
 user:
   login: Connexion
   email: Email

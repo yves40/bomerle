@@ -52,27 +52,37 @@
   </div>
   <div id="infos" class="infos">
     <div class="infoelement">
-      <h3>Nos Services</h3>
-      <ul>
-          <li><a href="#section0">Home</a></li>
-          <li><a href="#thegallery">Galerie</a></li>
-      </ul>
-      <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eius, eligendi!</p>
-    </div>
-    <div class="infoelement">
-      <h3>Coordonnées</h3>
-      <ul>
-          <li>05 55 44 33 22</li>
-          <li>y.t@zero.fr</li>
-      </ul>
+      <h3>{% trans %}contact.infos{% endtrans %}</h3>
+      {{ form_start(formcontact, {'attr': {'novalidate': 'novalidate', 'class': 'form'}}) }}
+          <div class="contact">
+              {{ form_label(formcontact.email, 'contact.email' | trans) }}
+              {{ form_widget(formcontact.email) }}
+              {{ form_errors(formcontact.email) }}
+          </div>
+          <div class="contact object">
+              {{ form_label(formcontact.object, 'contact.object' | trans) }}
+              {{ form_widget(formcontact.object) }}
+              {{ form_errors(formcontact.object) }}
+          </div>                
+          <div class="contact knife">
+              {{ form_label(formcontact.reservation, 'contact.couteau' | trans) }}
+              {{ form_widget(formcontact.reservation) }}
+              {{ form_errors(formcontact.reservation) }}
+          </div>
+          <div class="contact">
+              {{ form_label(formcontact.text, 'contact.message' | trans) }}
+              {{ form_widget(formcontact.text) }}
+              {{ form_errors(formcontact.text) }}
+          </div>
+          <button class="add-button">{% trans %}contact.button{% endtrans %}</button>           
+       {{ form_end(formcontact) }}
     </div>
     <div class="infoelement">
         <h3>L'atelier</h3>
         <p>335 Route de Saint-Thomas, Bras de Fer, 63250 Arconsat - France</p>
-
         <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d22223.601247309492!2d3.6613166626773856!3d45.872306808318406!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47f6a2cd5cd73055%3A0x4093cafcbe5c880!2s63250%20Chabreloche!5e0!3m2!1sfr!2sfr!4v1694103652086!5m2!1sfr!2sfr" width="600" height="450" style="border:0;" 
-                  width="250" height="250" 
-                  style="border:0;" 
+                width="350" height="350" 
+                style="border:0;" 
                 allowfullscreen="" 
                 loading="lazy" 
                 referrerpolicy="no-referrer-when-downgrade">
