@@ -29,7 +29,10 @@ contact:
   couteau: Quel couteau ?
   message: Précisez votre demande ( 10 à 200 ch)
   button: Envoyer
-  reqtype-info: Je souhaite obtenir des informations
+  info: Je souhaite obtenir des informations
+  resa: Je souhaite réserver un couteau
+  perso: Je souhaite personnaliser un couteau
+  other: Autre
 user:
   login: Connexion
   email: Email
