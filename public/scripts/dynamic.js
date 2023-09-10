@@ -8,6 +8,8 @@ $(document).ready(function () {
     const menuHamburger = $(".menu-hamburger");
     const navLinks = $(".nav-links");
     const infoknife = $('.knife');
+    let validEmail = false;
+    let validText = false;
 
     $(menuHamburger).on('click', function () {
         $(navLinks).toggleClass('mobile-menu');
@@ -35,7 +37,15 @@ $(document).ready(function () {
             }
         })
     })
-
+    // Email checker
+    buttonActivation();
+    $("#contact_email").on('keyup', function (event){
+        buttonActivation();
+    })
+    // Message checker
+    $("#contact_text").on('keyup', function (event){
+        buttonActivation();
+    })
     getActiveDiaporamas();
     getPublishedKnives();
     getHtmlTemplates();
@@ -157,4 +167,24 @@ $(document).ready(function () {
         let card  = new Card(thecard, response);
         container.append(thecard);
     }
-})
+    // ---------------------------------------- Can send contact request ?
+    function buttonActivation() {
+        const maregex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        validEmail = maregex.test($("#contact_email").val());
+        const message = $("#contact_text").val();
+        if(message.length < 10 || message.length > 200) {
+            validText = false;
+        }
+        else {
+            validText = true;
+        }
+
+        if(validEmail & validText){
+            $("#requestcontact").addClass('active').removeClass('inactive');
+            // $("#requestcontact").attr('disabled', false);
+        }else{
+            $("#requestcontact").addClass('inactive').removeClass('active');
+            // $("#requestcontact").attr('disabled', true);
+        }  
+    }
+    })

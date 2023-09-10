@@ -9,6 +9,9 @@
   .infoelement {
     padding: 30px;
     width: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     h1, h2, h3, ul {
       margin: 1rem;
     }
@@ -34,25 +37,37 @@
       } 
     } 
     button {
-      border: 1px solid darkolivegreen;
+      color: white;
       border-radius: .25em;
+      width: 5rem; 
       margin: 1em 0;
       padding: .5em;
+      cursor: pointer;
+      &.active {
+        background-color: $enabledbutton;
+      }
+      &.inactive {
+        background-color: $disabledbutton;
+      }
     }
   }
   .contact{
     display: flex; 
-    flex-direction: column; 
+    flex-direction: column;
+    width: 270px;
     gap: 7px;
     label{ 
       font-weight: lighter;
     }  
     input{
       margin: 0; 
-      padding: .5em; 
+      padding: .5em 0; 
       border: solid darkolivegreen 2px; 
       border-radius: .25em; 
       font-weight: lighter;
+    }
+    select {
+      padding: .5em;
     }
     textarea{
       @extend input;

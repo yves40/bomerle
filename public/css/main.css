@@ -368,7 +368,10 @@
   scroll-margin: 70px; }
   .infos .infoelement {
     padding: 30px;
-    width: 300px; }
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; }
     .infos .infoelement h1, .infos .infoelement h2, .infos .infoelement h3, .infos .infoelement ul {
       margin: 1rem; }
     .infos .infoelement iframe {
@@ -385,22 +388,31 @@
     .infos .infoelement:nth-child(odd) img {
       float: right; }
     .infos .infoelement button {
-      border: 1px solid darkolivegreen;
+      color: white;
       border-radius: .25em;
+      width: 5rem;
       margin: 1em 0;
-      padding: .5em; }
+      padding: .5em;
+      cursor: pointer; }
+      .infos .infoelement button.active {
+        background-color: darkgreen; }
+      .infos .infoelement button.inactive {
+        background-color: lightcoral; }
   .infos .contact {
     display: flex;
     flex-direction: column;
+    width: 270px;
     gap: 7px; }
     .infos .contact label {
       font-weight: lighter; }
     .infos .contact input, .infos .contact textarea {
       margin: 0;
-      padding: .5em;
+      padding: .5em 0;
       border: solid darkolivegreen 2px;
       border-radius: .25em;
       font-weight: lighter; }
+    .infos .contact select {
+      padding: .5em; }
     .infos .contact textarea {
       height: 250px;
       overflow-y: scroll; }

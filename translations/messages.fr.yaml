@@ -27,7 +27,7 @@ contact:
   email: Votre email SVP
   object: Objet de votre demande
   couteau: Quel couteau ?
-  message: Précisez votre demande
+  message: Précisez votre demande ( 10 à 200 ch)
   button: Envoyer
   reqtype-info: Je souhaite obtenir des informations
 user:

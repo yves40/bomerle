@@ -27,7 +27,7 @@ contact:
   email: Your email please
   object: Subject of your request
   couteau: Which knife?
-  message: Specify your request
+  message: Specify your request ( 10 to 200 char)
   button: Send
 
 user:
