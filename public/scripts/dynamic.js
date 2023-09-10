@@ -46,6 +46,11 @@ $(document).ready(function () {
     $("#contact_text").on('keyup', function (event){
         buttonActivation();
     })
+    // Button activation for message request
+    $("#requestcontact").on('click', function (event){
+        event.preventDefault();
+        buttonClicked();
+    })
     getActiveDiaporamas();
     getPublishedKnives();
     getHtmlTemplates();
@@ -180,11 +185,14 @@ $(document).ready(function () {
         }
 
         if(validEmail & validText){
-            $("#requestcontact").addClass('active').removeClass('inactive');
-            // $("#requestcontact").attr('disabled', false);
+            $("#requestcontact").addClass('active').removeClass('inactive')
+                    .prop('disabled', false);
         }else{
-            $("#requestcontact").addClass('inactive').removeClass('active');
-            // $("#requestcontact").attr('disabled', true);
+            $("#requestcontact").addClass('inactive').removeClass('active')
+                    .prop('disabled', true);
         }  
     }
-    })
+    function buttonClicked() {
+        console.log($("#contact_email").val());
+    }
+})
