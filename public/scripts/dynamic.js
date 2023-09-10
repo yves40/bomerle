@@ -193,6 +193,18 @@ $(document).ready(function () {
         }  
     }
     function buttonClicked() {
-        console.log($("#contact_email").val());
+        console.log(`Email  : ${$("#contact_email").val()}`);
+        console.log(`Object : ${$('#contact_object option:selected').val()}`);
+        let choosedid = 0;
+        let choosedname = '';
+        switch($('select option:selected').val()) {
+            case 'knife_reservation':
+            case 'knife_personalisation':
+                choosedid = $('#contact_reservation option:selected').val();
+                choosedname = $('#contact_reservation option:selected').html();
+                break;
+        }
+        if(choosedid != 0)
+            console.log(`For knife : ${choosedname} / ${choosedid}`);
     }
 })
