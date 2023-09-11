@@ -36,16 +36,10 @@ class ContactController extends AbstractController
             $email = $contact->getEmail();
             $object = $contact->getObject();
             switch($object){
-                case 'knife_personalisation' :
-                    $message = "Je souhaite personnaliser un couteau";
+                case 'infoknife' :
+                    $message = "Je souhaite avoir des infos sur un couteau";
                     break;
-                case 'knife_reservation' :
-                    $message = "Je souhaite réserver un couteau";
-                    break;
-                case 'other' :
-                    $message = "Autre";
-                    break;
-                case 'information';
+                case 'info';
                     $message = "Je souhaite obtenir des informations";
                     break;
             }

@@ -28,8 +28,7 @@ $(document).ready(function () {
     $('.object').change( function() {
         $('select option:selected').each( function(index, element) {
             if(index == 0){
-                if($(this).val() == 'knife_personalisation' 
-                        || $(this).val() == 'knife_reservation'){
+                if($(this).val() == 'infoknife' ) {
                     $(infoknife).show();
                 }else{
                     $(infoknife).hide();
@@ -198,8 +197,7 @@ $(document).ready(function () {
         let choosedid = 0;
         let choosedname = '';
         switch($('select option:selected').val()) {
-            case 'knife_reservation':
-            case 'knife_personalisation':
+            case 'infoknife':
                 choosedid = $('#contact_reservation option:selected').val();
                 choosedname = $('#contact_reservation option:selected').html();
                 break;

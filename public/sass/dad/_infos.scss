@@ -3,10 +3,10 @@
   flex-wrap: wrap;
   justify-content: center;
   gap: 15px;
-  margin-top: 70px;
-  margin: 2rem;
+  margin: 1rem;
   scroll-margin: 70px; 
-  .infoelement {
+  border-top: 2px solid gray; 
+.infoelement { 
     padding: 30px;
     width: 300px;
     display: flex;
@@ -71,7 +71,7 @@
     }
     textarea{
       @extend input;
-      height: 250px;
+      height: 200px;
       overflow-y: scroll;
     }
     label {

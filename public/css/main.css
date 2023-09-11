@@ -363,9 +363,9 @@
   flex-wrap: wrap;
   justify-content: center;
   gap: 15px;
-  margin-top: 70px;
-  margin: 2rem;
-  scroll-margin: 70px; }
+  margin: 1rem;
+  scroll-margin: 70px;
+  border-top: 2px solid gray; }
   .infos .infoelement {
     padding: 30px;
     width: 300px;

@@ -29,10 +29,9 @@ contact:
   couteau: Quel couteau ?
   message: Précisez votre demande ( 10 à 200 ch)
   button: Envoyer
-  info: Je souhaite obtenir des informations
-  resa: Je souhaite réserver un couteau
-  perso: Je souhaite personnaliser un couteau
-  other: Autre
+  info: Question générale
+  infoknife: Question sur un couteau
+  shop: L'atelier
 user:
   login: Connexion
   email: Email

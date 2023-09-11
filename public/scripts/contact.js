@@ -4,7 +4,7 @@ $(document).ready(function () {
     $('.object').change( function() {
         $('select option:selected').each( function(index, element) {
             if(index == 0){
-                if($(this).val() == 'knife_personalisation' || $(this).val() == 'knife_reservation'){
+                if($(this).val() == 'infoknife' ){
                     $('.knife').removeClass('hidden');
                     $('.knife').addClass('visible');
                 }else{

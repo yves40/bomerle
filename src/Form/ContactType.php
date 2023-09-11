@@ -20,10 +20,8 @@ class ContactType extends AbstractType
             ->add('object', ChoiceType::class, [
                 'choices' => [
                     // '' => 'default',
-                    'contact.info' => 'information',
-                    'contact.resa' => 'knife_reservation',
-                    'contact.perso' => 'knife_personalisation',
-                    'contact.other' => 'other'
+                    'contact.info' => 'info',
+                    'contact.infoknife' => 'infoknife',
                 ],
             ])
             ->add('text', TextareaType::class, [

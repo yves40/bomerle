@@ -29,10 +29,9 @@ contact:
   couteau: Which knife?
   message: Specify your request ( 10 to 200 char)
   button: Send
-  info: I would like to obtain information
-  resa: I want to reserve a knife
-  perso: I want to personalize a knife
-  other: Other request
+  info: General question
+  infoknife: Question about a knife
+  shop: The workshop
 user:
   login: Connection
   email: Email

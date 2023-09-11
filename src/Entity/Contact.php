@@ -27,9 +27,6 @@ class Contact
     #[Assert\NotBlank(message: "Merci de renseigner ce champ")]
     private ?string $text = null;
 
-    // #[ORM\Column(nullable: true)]
-    // private ?int $knife = null;
-
     #[ORM\OneToOne(cascade: ['persist', 'remove'])]
     private ?Knifes $reservation = null;
 
@@ -70,18 +67,6 @@ class Contact
     public function setText(string $text): self
     {
         $this->text = $text;
-
-        return $this;
-    }
-
-    public function getKnife(): ?int
-    {
-        return $this->knife;
-    }
-
-    public function setKnife(?int $knife): self
-    {
-        $this->knife = $knife;
 
         return $this;
     }

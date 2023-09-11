@@ -33,8 +33,6 @@ class SiteController extends AbstractController
         $contact = new Contact();
 
         $formContact = $this->createForm(ContactType::class, $contact);
-        $infogen = $translator->trans('reqtype-info');
-
         $formContact->handleRequest($request);
         $loc = $this->locale($request); // Set the proper language for translations
         return $this->render('main.html.twig', [
