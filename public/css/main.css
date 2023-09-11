@@ -1,11 +1,11 @@
 .allnews {
   display: flex;
   flex-wrap: wrap;
-  margin-top: 70px; }
+  margin-top: 70px;
+  width: 100%; }
   .allnews .news {
     padding: 30px;
-    scroll-margin: 70px;
-    width: 100%; }
+    scroll-margin: 70px; }
     .allnews .news h1, .allnews .news h2 {
       margin: 1rem; }
     .allnews .news img {
@@ -245,7 +245,8 @@
   background: #959595;
   background: linear-gradient(to bottom left, #959595 0%, #0D0D0D 50%, #010101 50%, #0A0A0A 53%, #4E4E4E 76%, #383838 87%, #1B1B1B 100%);
   scroll-margin: 70px;
-  padding: 30px; }
+  padding: 30px;
+  width: 100%; }
   #thegallery .galleryzone {
     display: flex;
     flex-direction: column;
@@ -381,7 +382,7 @@
       border: solid darkgrey 3px;
       border-radius: 10px; }
     .infos .infoelement p {
-      margin: 30px 20px;
+      margin: 0 20px;
       font-style: italic; }
     .infos .infoelement:nth-child(even) img {
       float: left; }
@@ -414,7 +415,7 @@
     .infos .contact select {
       padding: .5em; }
     .infos .contact textarea {
-      height: 250px;
+      height: 200px;
       overflow-y: scroll; }
     .infos .contact label {
       margin: .3em 0; }
