@@ -1,11 +1,11 @@
 .allnews {
   display: flex;
   flex-wrap: wrap;
-  margin-top: 70px;
-  width: 100%; }
+  margin-top: 70px; }
   .allnews .news {
     padding: 30px;
-    scroll-margin: 70px; }
+    scroll-margin: 70px;
+    width: 100%; }
     .allnews .news h1, .allnews .news h2 {
       margin: 1rem; }
     .allnews .news img {
@@ -279,53 +279,6 @@
         content: "";
         display: block;
         flex-grow: 10; }
-    #thegallery .galleryzone .carousel {
-      width: 400px;
-      height: 400px;
-      position: relative;
-      margin: 0 auto; }
-      #thegallery .galleryzone .carousel > ul {
-        margin: 0;
-        padding: 0;
-        list-style: none; }
-      #thegallery .galleryzone .carousel .carousel-button {
-        position: absolute;
-        background: none;
-        border: none;
-        top: 50%;
-        z-index: 2;
-        transform: translateY(-50%);
-        color: rgba(255, 255, 255, 0.5);
-        cursor: pointer;
-        border-radius: .25rem;
-        padding: 0 .5rem;
-        background-color: rgba(0, 0, 0, 0.1);
-        width: 4rem; }
-        #thegallery .galleryzone .carousel .carousel-button img {
-          size: 3rem; }
-        #thegallery .galleryzone .carousel .carousel-button:hover, #thegallery .galleryzone .carousel .carousel-button:focus {
-          color: white;
-          background-color: rgba(0, 0, 0, 0.2); }
-        #thegallery .galleryzone .carousel .carousel-button:focus {
-          outline: 1px solid black; }
-        #thegallery .galleryzone .carousel .carousel-button.prev {
-          left: 1rem; }
-        #thegallery .galleryzone .carousel .carousel-button.next {
-          right: 1rem; }
-      #thegallery .galleryzone .carousel .slide {
-        position: absolute;
-        inset: 0;
-        opacity: 0;
-        transition: 1s opacity ease-in-out; }
-        #thegallery .galleryzone .carousel .slide.active {
-          opacity: 1; }
-        #thegallery .galleryzone .carousel .slide > img {
-          display: block;
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-          object-position: center;
-          border-radius: 10px; }
 
 #fullscreen {
   background-color: white; }
@@ -358,6 +311,154 @@
     opacity: 0; }
   100% {
     opacity: 1; } }
+
+/*
+  How to compute the filter value ???
+  Go to thi site: https://codepen.io/sosuke/pen/Pjoqqp
+  Enter your color code.
+  To know your color code go here : https://htmlcolorcodes.com/
+*/
+.svgsmall-lightblue {
+  text-decoration: none;
+  width: 18px;
+  height: 18px;
+  filter: invert(44%) sepia(88%) saturate(1176%) hue-rotate(191deg) brightness(100%) contrast(101%); }
+
+.svgsmall-blue {
+  width: 18px;
+  height: 18px;
+  filter: invert(44%) sepia(96%) saturate(6317%) hue-rotate(229deg) brightness(100%) contrast(102%); }
+
+.svgsmall-lightgreen {
+  width: 18px;
+  height: 18px;
+  filter: invert(41%) sepia(98%) saturate(581%) hue-rotate(83deg) brightness(81%) contrast(80%); }
+
+.svgsmall-red {
+  width: 18px;
+  height: 18px;
+  filter: invert(19%) sepia(96%) saturate(6102%) hue-rotate(357deg) brightness(98%) contrast(117%); }
+
+.svgmedium-white {
+  width: 24px;
+  height: 24px;
+  filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(131deg) brightness(102%) contrast(102%); }
+
+.svgbig-white {
+  width: 50px;
+  height: 50px;
+  filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(131deg) brightness(102%) contrast(102%); }
+
+.carousel {
+  position: relative;
+  margin: 0 auto; }
+  .carousel > ul {
+    margin: 0;
+    padding: 0;
+    list-style: none; }
+  .carousel .carousel-button {
+    position: absolute;
+    background: none;
+    border: none;
+    top: 50%;
+    z-index: 2;
+    transform: translateY(-50%);
+    color: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    border-radius: .25rem;
+    padding: 0 .5rem;
+    background-color: rgba(0, 0, 0, 0.1);
+    width: 4rem; }
+    .carousel .carousel-button img {
+      size: 3rem; }
+    .carousel .carousel-button:hover, .carousel .carousel-button:focus {
+      color: white;
+      background-color: rgba(0, 0, 0, 0.2); }
+    .carousel .carousel-button:focus {
+      outline: 1px solid black; }
+    .carousel .carousel-button.prev {
+      left: 1rem; }
+    .carousel .carousel-button.next {
+      right: 1rem; }
+  .carousel .slide {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: 1s opacity ease-in-out; }
+    .carousel .slide.active {
+      opacity: 1; }
+    .carousel .slide > img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      border-radius: 10px; }
+
+#fullscreen {
+  background-color: white; }
+
+.sliderzoomon {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  border-radius: 20px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  animation-duration: 1.2s;
+  animation-timing-function: linear;
+  animation-name: image-fade; }
+  .sliderzoomon h2 {
+    size: 1rem;
+    position: absolute;
+    padding: .8rem;
+    color: white;
+    background-color: darkgrey;
+    top: 5%;
+    left: 5%;
+    border-radius: 20px;
+    opacity: 0.4; }
+
+.sliderzoomoff {
+  display: none; }
+
+@keyframes image-fade {
+  0% {
+    opacity: 0; }
+  100% {
+    opacity: 1; } }
+
+/* Screen less than smallsize ? */
+@media screen and (max-width: 850px) {
+  .carousel {
+    width: 300px;
+    height: 300px;
+    margin: auto; }
+  .sliderimage {
+    max-width: 850px; } }
+
+/* Screen between smallsize and bigsize ? */
+@media screen and (min-width: 850px) and (max-width: 1920px) {
+  .carousel {
+    width: 400px;
+    height: 400px;
+    margin: auto; }
+  .sliderimage {
+    width: 100%;
+    height: auto;
+    max-width: 1500px; } }
+
+/* Screen greater than bigsize ? */
+@media screen and (min-width: 1920px) {
+  .carousel {
+    width: 500px;
+    height: 500px;
+    margin: auto; }
+  .sliderimage {
+    max-width: 1920px; } }
 
 .infos {
   display: flex;

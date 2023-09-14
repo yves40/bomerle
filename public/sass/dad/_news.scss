@@ -2,10 +2,10 @@
   display: flex;
   flex-wrap: wrap;
   margin-top: 70px;
-  width: 100%;
   .news {
     padding: 30px;
-    scroll-margin: 70px; 
+    scroll-margin: 70px;
+    width: 100%;
     h1, h2 {
       margin: 1rem;
     }
@@ -20,7 +20,7 @@
       margin: 30px 20px;
       font-style: italic; 
     }
-    &:nth-child(even) { 
+    &:nth-child(even) {
       img {
         float: left;
       }
