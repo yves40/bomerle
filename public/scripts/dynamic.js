@@ -5,6 +5,7 @@ $(document).ready(function () {
     $props.load();
     console.log(`[${$props.version()} ]` );
     const cardsmenu = $("#cardsmenu");
+    const gallerymenu = $("#gallerymenu");
     const menuHamburger = $(".menu-hamburger");
     const navLinks = $(".nav-links");
     const infoknife = $('.knife');
@@ -62,8 +63,12 @@ $(document).ready(function () {
             dataType: "json",
             async: false,
             success: function (response) {
-                console.log(response.activediaporamas);
-                loadDiapoSections(response.activediaporamas);                 
+                console.log(response);
+                $(gallerymenu).hide();
+                if(response.activecount != 0) {
+                    $(gallerymenu).show();
+                    loadDiapoSections(response.activediaporamas);                 
+                }
             },
             error: function (xhr) {
                 console.log(xhr);
