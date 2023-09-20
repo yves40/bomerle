@@ -478,7 +478,7 @@
       margin: 1rem; }
     .infos .infoelement iframe {
       margin: 20px;
-      width: 250px;
+      width: 280px;
       height: 300px;
       border: solid darkgrey 3px;
       border-radius: 10px; }
@@ -517,6 +517,7 @@
       padding: .5em; }
     .infos .contact textarea {
       height: 200px;
+      max-width: 280px;
       overflow-y: scroll; }
     .infos .contact label {
       margin: .3em 0; }

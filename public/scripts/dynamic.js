@@ -197,8 +197,6 @@ $(document).ready(function () {
         }  
     }
     function buttonClicked() {
-        console.log(`Email  : ${$("#contact_email").val()}`);
-        console.log(`Object : ${$('#contact_object option:selected').val()}`);
         let choosedid = 0;
         let choosedname = '';
         switch($('select option:selected').val()) {
@@ -207,7 +205,35 @@ $(document).ready(function () {
                 choosedname = $('#contact_reservation option:selected').html();
                 break;
         }
-        if(choosedid != 0)
+        if(choosedid != 0) {
             console.log(`For knife : ${choosedname} / ${choosedid}`);
+        }
+        // Build the request object
+        if($('#contact_object option:selected').val() === 'infoknife') {
+            chooseid = $('#contact_reservation option:selected').val();
+        }
+        let payload = {
+            'email': $("#contact_email").val(),
+            'infotype': $('#contact_object option:selected').val(),
+            'message': $("#contact_text").val(),
+            'knifeid': choosedid
+        }
+        console.log(`Email  : ${payload.email}`);
+        console.log(`Object : ${payload.infotype}`);
+        console.log(`Subject  : ${payload.message}`);
+        console.log(`Knife ID  : ${payload.knifeid}`);
+        $.ajax({
+            type: "POST",
+            url: '/public/contactrequest',
+            data: JSON.stringify(payload),
+            dataType: "json",
+            async: false,
+            success: function (response) {
+                console.log(response);
+            },
+            error: function (xhr) {
+                console.log(xhr);
+            }
+        });    
     }
 })
