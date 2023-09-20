@@ -85,6 +85,12 @@ class SiteController extends AbstractController
     // J S O N  S E R V I C E S 
     // --------------------------------------------------------------------------
     #[Route('/contactrequest', name: 'public.contactrequest')]
+    /*
+        Had to use a service in order to get a valid repository access
+        This is why the 1st parameter is a DataAccess class
+        It just return a repository
+        Strangely enough, directly injecting an EntityManagerInterface never worked ;-(
+    */
     public function postContactRequest( DataAccess $da, DBlogger $dblog, Request $request )
     {
         try {
