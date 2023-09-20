@@ -100,12 +100,13 @@ class SiteController extends AbstractController
             $payload = json_decode($data, true);
             $knifeid = $payload['knifeid'];
             $message = $payload['message'];
+            $requestor = $payload['email'];
             $knifename = 'No Knife';
             if($knifeid != 0) {
-                $dblog->debug('Create a contact request here', 
+                $dblog->info(substr($message, 0, 100), 
                                 'Contact Request', 
                                 self::MODULE, 
-                                $request->getSession()->get('email'));
+                                $requestor);
                 $repo = $da->getRepository(Knifes::class);
                 $knife = $repo->find($knifeid);
                 $knifename = $knife->getName();
