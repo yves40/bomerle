@@ -46,6 +46,11 @@ $menu-height: 70px;
   height:$svgsmall;
   filter: invert(44%) sepia(96%) saturate(6317%) hue-rotate(229deg) brightness(100%) contrast(102%);
 }
+.svgbig-blue {
+  width: $svgbig;
+  height:$svgbig;
+  filter: invert(44%) sepia(96%) saturate(6317%) hue-rotate(229deg) brightness(100%) contrast(102%);
+}
 
 .svgsmall-lightgreen {
   width: $svgsmall;
