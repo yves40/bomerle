@@ -33,6 +33,8 @@ contact:
   info: Question générale
   infoknife: Question sur un couteau
   shop: L'atelier
+  mailok: Votre demande a été transmise
+  mailko: Votre demande ne peut être transmise actuellement
 user:
   login: Connexion
   email: Email

@@ -70,8 +70,11 @@ class SiteController extends AbstractController
     public function postContactRequest(MailO2 $mailer, 
                                 DataAccess $da,
                                 FileHandler $fh, 
-                                DBlogger $dblog )
+                                DBlogger $dblog,
+                                TranslatorInterface $translator,
+                                Request $request )
     {
+        $this->locale($request);
         try {
             /**  @var Knifes $knife */
             /**  @var KnifesRepository $repo */
@@ -80,7 +83,7 @@ class SiteController extends AbstractController
             $knifeid = $payload['knifeid'];
             $message = $payload['message'];
             $requestor = $payload['email'];
-            $knifename = 'No Knife';
+            $knifename = '';
             $subject = 'Contact Request';
             if($knifeid != 0) {
                 $repo = $da->getRepository(Knifes::class);
@@ -103,7 +106,6 @@ class SiteController extends AbstractController
             */
             $content = $fh->getFileContent('emails/contact-request.html');
             $content = str_replace('{email}', $requestor, $content);
-            $content = str_replace('{object}', $subject, $content);
             $content = str_replace('{text}', $message, $content);
             $content = str_replace('{knife}', $knifename, $content);
 
@@ -116,7 +118,7 @@ class SiteController extends AbstractController
                                 $subject,
                                 $content);
             return $this->json([
-                'message' => 'public.contactrequest OK',
+                'message' => $translator->trans('contact.mailok'),
                 'knifename' => $knifename,
                 'knifeid' => $knifeid,
                 'postedmessage' => $message,
@@ -125,7 +127,7 @@ class SiteController extends AbstractController
         }
         catch(Exception $e) {
             return $this->json([
-                'message' => 'public.contactrequest KO ',
+                'message' => $translator->trans('contact.mailko'),
                 'error' => $e
             ], 400);        
         }

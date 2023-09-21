@@ -33,6 +33,8 @@ contact:
   info: General question
   infoknife: Question about a knife
   shop: The workshop
+  mailok: Your request has been processed
+  mailko: Ooops, unable to send your request right now
 user:
   login: Connection
   email: Email

@@ -226,10 +226,17 @@ $(document).ready(function () {
             dataType: "json",
             async: false,
             success: function (response) {
-                console.log(JSON.stringify(response));
+                console.log(response);
+                $(".feedback").show();
+                $('#feedback').text(response.message)
+                    .css("color",  "green");
             },
             error: function (xhr) {
                 console.log(xhr);
+                $(".feedback").show();
+                $('#feedback').text(response.message)
+                    .css("color",  "red");
+                ;
             }
         });    
     }

@@ -67,8 +67,11 @@
               {{ form_widget(formcontact.text) }}
               {{ form_errors(formcontact.text) }}
           </div>
-          <button id="requestcontact">{% trans %}contact.button{% endtrans %}</button>           
-       {{ form_end(formcontact) }}
+          <button id="requestcontact">{% trans %}contact.button{% endtrans %}</button>
+      {{ form_end(formcontact) }}
+      <div class="feedback" hidden>
+        <p id='feedback'></p>
+      </div>
     </div>
     <div class="infoelement">
         <h3>{% trans %}contact.shop{% endtrans %}</h3>
