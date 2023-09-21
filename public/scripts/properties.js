@@ -11,10 +11,11 @@
 //    Feb 22 2023 Start work on slider
 //    Feb 23 2023 Work on slider
 //    Jun 05 2023 Work on slider class
+//    Sep 21 2023 WIP on email for contact requests
 //----------------------------------------------------------------------------
 const $props = ( () => {
   const allprops = {
-    version : 'bomerle:1.19, May 23 2023 ',
+    version : 'bomerle:1.20, Sep 21 2023 ',
     copyright:  'Ratoon software Corporation Inc, Chabreloche France ',
     imagehandler: 'images.js Feb 13 2023, 1.25 ',
     knifehandler: 'knife.js Feb 08 2023, 1.05 ',
@@ -26,7 +27,8 @@ const $props = ( () => {
     logspagesize: 20,
     logspagedateoffset: 31,
     slidingtime: 300,
-    inputprocessingdelay: 1500    // Wait 1.5 sec when the user key in a filter
+    inputprocessingdelay: 1500,    // Wait 1.5 sec when the user key in a filter
+    administratoremail: 'yves77340@gmail.com'
   }
   let dynprops = {
     'imageloadcount' :0,
@@ -62,7 +64,8 @@ const $props = ( () => {
      getLogsPageSize: () => { return allprops.logspagesize; },
      getLogsDateOffest: () => { return allprops.logspagedateoffset; },
      getSlidingTime: () => { return allprops.slidingtime; },
-     getInputDelay: () => { return allprops.inputprocessingdelay; }
+     getInputDelay: () => { return allprops.inputprocessingdelay; },
+     getAdministratorEmail: () => { return allprops.administratoremail; }
     }
 })();
-//  localStorage.setItem('lastlogin', 'yves773340');
+

@@ -216,7 +216,8 @@ $(document).ready(function () {
             'email': $("#contact_email").val(),
             'infotype': $('#contact_object option:selected').val(),
             'message': $("#contact_text").val(),
-            'knifeid': choosedid
+            'knifeid': choosedid,
+            'adminmail': $props.getAdministratorEmail()
         }
         $.ajax({
             type: "POST",
@@ -225,7 +226,7 @@ $(document).ready(function () {
             dataType: "json",
             async: false,
             success: function (response) {
-                console.log(response);
+                console.log(JSON.stringify(response));
             },
             error: function (xhr) {
                 console.log(xhr);

@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use Exception;
 
-use App\Entity\Events;
 use App\Entity\Knifes;
 use App\Entity\Contact;
 use App\Services\MailO2;
@@ -92,17 +91,28 @@ class SiteController extends AbstractController
                         $subject, 
                         self::MODULE, 
                         $requestor);
-            // Send the email
-            // During Dev op MAIL_ADMIN is set to yves77340@gmail.com
+            /* 
+                Send the email
+                During Dev op MAIL_ADMIN is set to yves77340@gmail.com
+                in .env.local
+                On a Windows platform $_ENV['MAIL_FROM'] sometimes does not work
+                so in this case we get the admin email from properties.js.
+                The value is transmitted in the Ajax request.
+            */
+            $to = $_ENV['MAIL_ADMIN'];
+            if($to == null) {
+                $to = $payload['adminmail'];
+            }
             $mailer->sendEmail($requestor, 
-                                'yves77340@gmail.com', 
+                                $to, 
                                 $subject,
                                 $message);
             return $this->json([
                 'message' => 'public.contactrequest OK',
                 'knifename' => $knifename,
                 'knifeid' => $knifeid,
-                'postedmessage' => $message
+                'postedmessage' => $message,
+                'to' => $to
             ], 200);        
         }
         catch(Exception $e) {
