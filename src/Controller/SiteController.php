@@ -27,6 +27,7 @@ class SiteController extends AbstractController
 {
     private LocaleSwitcher $localeSwitcher;
     const MODULE = 'SiteController';
+    const CONTACTMESSAGEMAXLENGTH = 200;
 
     public function __construct(LocaleSwitcher $localeSwitcher) {
         $this->localeSwitcher = $localeSwitcher;
@@ -103,7 +104,7 @@ class SiteController extends AbstractController
             $requestor = $payload['email'];
             $knifename = 'No Knife';
             if($knifeid != 0) {
-                $dblog->info(substr($message, 0, 100), 
+                $dblog->info(substr($message, 0, self::CONTACTMESSAGEMAXLENGTH).'...', 
                                 'Contact Request', 
                                 self::MODULE, 
                                 $requestor);
