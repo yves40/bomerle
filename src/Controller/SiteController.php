@@ -10,8 +10,9 @@ use App\Services\MailO2;
 use App\Form\ContactType;
 use App\Services\DBlogger;
 use App\Services\DataAccess;
-use App\Repository\KnifesRepository;
+use App\Services\FileHandler;
 
+use App\Repository\KnifesRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -67,7 +68,8 @@ class SiteController extends AbstractController
         Strangely enough, directly injecting an EntityManagerInterface never worked ;-(
     */
     public function postContactRequest(MailO2 $mailer, 
-                                DataAccess $da, 
+                                DataAccess $da,
+                                FileHandler $fh, 
                                 DBlogger $dblog )
     {
         try {
@@ -99,6 +101,12 @@ class SiteController extends AbstractController
                 so in this case we get the admin email from properties.js.
                 The value is transmitted in the Ajax request.
             */
+            $content = $fh->getFileContent('emails/contact-request.html');
+            $content = str_replace('{email}', $requestor, $content);
+            $content = str_replace('{object}', $subject, $content);
+            $content = str_replace('{text}', $message, $content);
+            $content = str_replace('{knife}', $knifename, $content);
+
             $to = $_ENV['MAIL_ADMIN'];
             if($to == null) {
                 $to = $payload['adminmail'];
@@ -106,7 +114,7 @@ class SiteController extends AbstractController
             $mailer->sendEmail($requestor, 
                                 $to, 
                                 $subject,
-                                $message);
+                                $content);
             return $this->json([
                 'message' => 'public.contactrequest OK',
                 'knifename' => $knifename,
