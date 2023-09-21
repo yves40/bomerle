@@ -218,10 +218,6 @@ $(document).ready(function () {
             'message': $("#contact_text").val(),
             'knifeid': choosedid
         }
-        console.log(`Email  : ${payload.email}`);
-        console.log(`Object : ${payload.infotype}`);
-        console.log(`Subject  : ${payload.message}`);
-        console.log(`Knife ID  : ${payload.knifeid}`);
         $.ajax({
             type: "POST",
             url: '/public/contactrequest',

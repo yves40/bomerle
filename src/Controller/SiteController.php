@@ -7,15 +7,12 @@ use Exception;
 use App\Entity\Events;
 use App\Entity\Knifes;
 use App\Entity\Contact;
-use App\Entity\Newsletter;
+use App\Services\MailO2;
 use App\Form\ContactType;
-use App\Form\NewsletterType;
-use App\Services\DataAccess;
 use App\Services\DBlogger;
-
+use App\Services\DataAccess;
 use App\Repository\KnifesRepository;
 
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -49,28 +46,6 @@ class SiteController extends AbstractController
         );               
     }
     // ------------------------------------------------------------------------
-    // Very old home page version...
-    // ------------------------------------------------------------------------
-    #[Route('/home', name: 'public.home')]
-    public function home(
-        EntityManagerInterface $entityManager,
-        Request $request
-    ): Response
-    {
-        $newsletter = new Newsletter();
-        $events = $entityManager->getRepository(Events::class)->listEvents();
-        $form = $this->createForm(NewsletterType::class, $newsletter);
-        $form->handleRequest($request);
-        if($form->isSubmitted() && $form->isValid()){
-            $entityManager->persist($newsletter);
-            $entityManager->flush();
-        }
-        return $this->render('home.html.twig', [
-            'formnewsletter' => $form->createView(),
-            "events" => $events
-            ]);
-    }
-    // ------------------------------------------------------------------------
     // Public page lang switch handler
     // ------------------------------------------------------------------------
     #[Route('/switchlang/{locale}', name: 'public.switchlang')]
@@ -92,7 +67,9 @@ class SiteController extends AbstractController
         It just return a repository
         Strangely enough, directly injecting an EntityManagerInterface never worked ;-(
     */
-    public function postContactRequest( DataAccess $da, DBlogger $dblog, Request $request )
+    public function postContactRequest(MailO2 $mailer, 
+                                DataAccess $da, 
+                                DBlogger $dblog )
     {
         try {
             /**  @var Knifes $knife */
@@ -103,15 +80,24 @@ class SiteController extends AbstractController
             $message = $payload['message'];
             $requestor = $payload['email'];
             $knifename = 'No Knife';
+            $subject = 'Contact Request';
             if($knifeid != 0) {
-                $dblog->info(substr($message, 0, self::CONTACTMESSAGEMAXLENGTH).'...', 
-                                'Contact Request', 
-                                self::MODULE, 
-                                $requestor);
                 $repo = $da->getRepository(Knifes::class);
                 $knife = $repo->find($knifeid);
                 $knifename = $knife->getName();
+                $subject = 'Contact Request for knife '.$knifename;
             }
+            // Debug trace
+            $dblog->info(substr($message, 0, self::CONTACTMESSAGEMAXLENGTH).'...', 
+                        $subject, 
+                        self::MODULE, 
+                        $requestor);
+            // Send the email
+            // During Dev op MAIL_ADMIN is set to yves77340@gmail.com
+            $mailer->sendEmail($requestor, 
+                                'yves77340@gmail.com', 
+                                $subject,
+                                $message);
             return $this->json([
                 'message' => 'public.contactrequest OK',
                 'knifename' => $knifename,
