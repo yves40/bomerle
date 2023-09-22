@@ -57,6 +57,7 @@ $(document).ready(function () {
 
     // ---------------------------------------- Request the active diaporamas from the DB
     function getActiveDiaporamas() {
+        $(gallerymenu).hide();
         $.ajax({
             type: "POST",
             url: '/bootadmin/slides/getactivediaporamas',
@@ -64,7 +65,6 @@ $(document).ready(function () {
             async: false,
             success: function (response) {
                 console.log(response);
-                $(gallerymenu).hide();
                 if(response.activecount != 0) {
                     $(gallerymenu).show();
                     loadDiapoSections(response.activediaporamas);                 
@@ -77,6 +77,7 @@ $(document).ready(function () {
     }
     // ---------------------------------------- Request the active diaporamas from the DB
     function getPublishedKnives() {
+        $(cardsmenu).hide();
         $.ajax({
             type: "POST",
             url: '/bootadmin/knives/getpublished',
@@ -84,7 +85,6 @@ $(document).ready(function () {
             async: false,
             success: function (response) {
                 console.log(response);
-                $(cardsmenu).hide();
                 if(response.publishedcount != 0) {
                     $(cardsmenu).show();
                     loadPublishedCatalog(response.published);
