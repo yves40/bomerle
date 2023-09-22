@@ -62,7 +62,7 @@ $(document).ready(function () {
             type: "POST",
             url: '/bootadmin/slides/getactivediaporamas',
             dataType: "json",
-            async: false,
+            async: true,
             success: function (response) {
                 console.log(response);
                 if(response.activecount != 0) {
@@ -82,7 +82,7 @@ $(document).ready(function () {
             type: "POST",
             url: '/bootadmin/knives/getpublished',
             dataType: "json",
-            async: false,
+            async: true,
             success: function (response) {
                 console.log(response);
                 if(response.publishedcount != 0) {
@@ -107,7 +107,7 @@ $(document).ready(function () {
                 url: '/bootadmin/knives/getimages',
                 data: JSON.stringify(payload),
                 dataType: "json",
-                async: false,
+                async: true,
                 success: function (response) {
                     buildCard(response, cardssection);
                 },
@@ -131,7 +131,7 @@ $(document).ready(function () {
                 url: '/bootadmin/slides/getdiapos',
                 data: JSON.stringify(payload),
                 dataType: "json",
-                async: false,
+                async: true,
                 success: function (response) {
                     if(response.slidermode) {
                         if(response.timing === null) {
@@ -224,7 +224,7 @@ $(document).ready(function () {
             url: '/public/contactrequest',
             data: JSON.stringify(payload),
             dataType: "json",
-            async: false,
+            async: true,
             success: function (response) {
                 console.log(response);
                 $(".feedback").show();
