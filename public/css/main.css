@@ -178,13 +178,13 @@
     padding-bottom: 2rem;
     border-bottom: 2px solid gray; }
   .cards .cardframe {
-    width: 400px;
+    width: 80%;
     height: auto;
     padding: 20px;
     transition: all .8s ease-in; }
     .cards .cardframe .card-image img {
-      height: 200px;
-      width: 200px;
+      height: 120px;
+      width: 120px;
       border: solid darkgrey 3px;
       border-radius: 50%;
       float: right;
