@@ -5,6 +5,7 @@ $(document).ready(function () {
     $props.load();
     console.log(`[${$props.version()} ]` );
     const cardsmenu = $("#cardsmenu");
+    const cards = $('#cards');
     const gallerymenu = $("#gallerymenu");
     const menuHamburger = $(".menu-hamburger");
     const navLinks = $(".nav-links");
@@ -78,6 +79,7 @@ $(document).ready(function () {
     // ---------------------------------------- Request the active diaporamas from the DB
     function getPublishedKnives() {
         $(cardsmenu).hide();
+        $(cards).hide();
         $.ajax({
             type: "POST",
             url: '/bootadmin/knives/getpublished',
@@ -86,8 +88,9 @@ $(document).ready(function () {
             success: function (response) {
                 console.log(response);
                 if(response.publishedcount != 0) {
-                    $(cardsmenu).show();
                     loadPublishedCatalog(response.published);
+                    $(cardsmenu).show();
+                    $(cards).show();
                 }
             },
             error: function (xhr) {
