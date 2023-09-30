@@ -196,6 +196,7 @@ $(document).ready(function () {
                     .prop('disabled', true);
         }  
     }
+    // ---------------------------------------- Send the email
     function buttonClicked() {
         let choosedid = 0;
         let choosedname = '';
