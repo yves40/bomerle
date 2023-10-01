@@ -32,7 +32,8 @@ class Uploader {
       case '2': $image = imagecreatefromjpeg($file);
                 break;
       case '3':
-                $image = imagecreatefrompng($file);
+                // The @ suppress warnings on some files
+                $image = @imagecreatefrompng($file);
                 imagepalettetotruecolor($image);
                 imagealphablending($image, true);
                 imagesavealpha($image, true);
