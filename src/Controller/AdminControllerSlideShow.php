@@ -2,16 +2,13 @@
 
 namespace App\Controller;
 
-use stdClass;
 use Exception;
-use ArrayObject;
 use App\Entity\SlideShow;
 
 use App\Services\DBlogger;
 use App\Services\Uploader;
 use App\Entity\SlideImages;
 use App\Form\SlideShowType;
-use App\Services\FileHandler;
 use App\Repository\SlideShowRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -19,10 +16,9 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Translation\LocaleSwitcher;
 use Symfony\Contracts\Translation\TranslatorInterface;
-use Proxies\__CG__\App\Entity\SlideShow as EntitySlideShow;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-#[Route('/bootadmin')]
+#[Route('/slides')]
 class AdminControllerSlideShow extends AbstractController
 {
 
@@ -39,7 +35,7 @@ class AdminControllerSlideShow extends AbstractController
     // --------------------------------------------------------------------------
     //      S L I D E S H O W   S E R V I C E S 
     // --------------------------------------------------------------------------
-    #[Route('/slides/list', name: 'bootadmin.slideshow.list')]
+    #[Route('/protected/list', name: 'bootadmin.slideshow.list')]
     public function list(Request $request,
                     EntityManagerInterface $entityManager,
                     TranslatorInterface $translator
@@ -62,7 +58,7 @@ class AdminControllerSlideShow extends AbstractController
         ]);
     }
     // --------------------------------------------------------------------------
-    #[Route('/slides/edit/{id?0}', name: 'bootadmin.slide.edit')]
+    #[Route('/protected/edit/{id?0}', name: 'bootadmin.slide.edit')]
     public function edit(Request $request,
                     int $id, 
                     Uploader $uploader,
@@ -164,7 +160,7 @@ class AdminControllerSlideShow extends AbstractController
         ]);
     }
     // --------------------------------------------------------------------------
-    #[Route('/slides/delete/{id}', name: 'bootadmin.slide.delete')]
+    #[Route('/protected/delete/{id}', name: 'bootadmin.slide.delete')]
     public function delete(Request $request,
                     int $id, 
                     Uploader $uploader,
@@ -205,7 +201,7 @@ class AdminControllerSlideShow extends AbstractController
     // --------------------------------------------------------------------------
     // J S O N    S E R V I C E S 
     // --------------------------------------------------------------------------
-    #[Route('/slides/removephoto', name: 'bootadmin.slides.removephoto')]
+    #[Route('/protected/removephoto', name: 'bootadmin.slides.removephoto')]
     public function removePhoto(Request $request,
         Uploader $uploader,
         EntityManagerInterface $emgr)
@@ -257,7 +253,7 @@ class AdminControllerSlideShow extends AbstractController
         }
 }
     // --------------------------------------------------------------------------
-    #[Route('/slides/swapphotos', name: 'bootadmin.slides.swapphotos')]
+    #[Route('/protected/swapphotos', name: 'bootadmin.slides.swapphotos')]
     public function swapPhotos(Request $request,
         EntityManagerInterface $emgr)
     {
@@ -296,7 +292,7 @@ class AdminControllerSlideShow extends AbstractController
         }
     }
     // --------------------------------------------------------------------------
-    #[Route('/slides/getdiapos', name: 'bootadmin.slides.getdiapos')]
+    #[Route('/public/getdiapos', name: 'bootadmin.slides.getdiapos')]
     public function getDiapos(Request $request, EntityManagerInterface $em) {
         try {
             $data = file_get_contents("php://input");
@@ -369,7 +365,7 @@ class AdminControllerSlideShow extends AbstractController
         }
     }
     // --------------------------------------------------------------------------
-    #[Route('/slides/getactivediaporamas', name: 'bootadmin.slides.getactivediaporamas')]
+    #[Route('/public/getactivediaporamas', name: 'slides.public.getactivediaporamas')]
     public function getActiveDiaporamas(Request $request, EntityManagerInterface $em) {
         try {
                 $active = [];

@@ -18,7 +18,7 @@ use Symfony\Component\Translation\LocaleSwitcher;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-#[Route('/bootadmin')]
+#[Route('/knives')]
 class AdminControllerKnife extends AbstractController
 {
     private LocaleSwitcher $localeSwitcher;
@@ -30,7 +30,7 @@ class AdminControllerKnife extends AbstractController
     // --------------------------------------------------------------------------
     //      K N I F E S   S E R V I C E S 
     // --------------------------------------------------------------------------
-    #[Route('/knives/all', name: 'bootadmin.knives.all')]
+    #[Route('/protected/all', name: 'bootadmin.knives.all')]
     public function home(Request $request,
                         EntityManagerInterface $entityManager,
                         TranslatorInterface $translator): Response
@@ -51,7 +51,7 @@ class AdminControllerKnife extends AbstractController
         );               
     }
     // --------------------------------------------------------------------------
-    #[Route('/knives/delete/{id}', name: 'bootadmin.knives.delete')]
+    #[Route('/protected/delete/{id}', name: 'bootadmin.knives.delete')]
     public function Deleteknife(Request $request,
                                 int $id,
                                 Uploader $uploader,
@@ -74,7 +74,7 @@ class AdminControllerKnife extends AbstractController
         return $this->redirectToRoute('bootadmin.knives.all', array( 'new' => "true"));
     }
     // --------------------------------------------------------------------------
-    #[Route('/knives/edit/{id?0}', name: 'bootadmin.knives.edit')]
+    #[Route('/protected/edit/{id?0}', name: 'bootadmin.knives.edit')]
     public function edit(Request $request,
                         int $id,    // If 0 : insert mode
                         EntityManagerInterface $entityManager,
@@ -130,7 +130,7 @@ class AdminControllerKnife extends AbstractController
     // --------------------------------------------------------------------------
     // J S O N    S E R V I C E S 
     // --------------------------------------------------------------------------
-    #[Route('/knives/removephoto/{knifeid?0}/{imageid?0}', name: 'bootadmin.knives.removephoto')]
+    #[Route('/protected/removephoto/{knifeid?0}/{imageid?0}', name: 'bootadmin.knives.removephoto')]
     public function removePhoto(Request $request,
         int $knifeid,
         int $imageid,
@@ -170,7 +170,7 @@ class AdminControllerKnife extends AbstractController
         ], 200);
     }
     // --------------------------------------------------------------------------
-    #[Route('/knives/swapphotos', name: 'bootadmin.knives.swapphotos')]
+    #[Route('/protected/swapphotos', name: 'bootadmin.knives.swapphotos')]
     public function swapPhotos(Request $request,
         EntityManagerInterface $emgr)
     {
@@ -207,7 +207,7 @@ class AdminControllerKnife extends AbstractController
         }
     }
     // --------------------------------------------------------------------------
-    #[Route('/knives/getpublished', name: 'bootadmin.knives.getpublished')]
+    #[Route('/public/getpublished', name: 'bootadmin.knives.getpublished')]
     public function getPublished(Request $request, EntityManagerInterface $em) {
         try {
                 $published = $em->getRepository(Knifes::class)->findPublished();
@@ -225,7 +225,7 @@ class AdminControllerKnife extends AbstractController
         }
     }
     // --------------------------------------------------------------------------
-    #[Route('/knives/getimages/{knifeid?0}', name: 'bootadmin.knives.getimages')]
+    #[Route('/public/getimages/{knifeid?0}', name: 'bootadmin.knives.getimages')]
     public function getImages(Request $request, 
                             EntityManagerInterface $em,
                             ) 

@@ -11,7 +11,7 @@
     <li class="nav-item"><a class="nav-link sticky" href="{{ path('bootadmin.slideshow.list', { } )}}">{% trans %}admin.manageslides.list{% endtrans %}</a></li>
     <li class="nav-item"><a class="nav-link sticky" href="{{ path('bootadmin.slide.edit', { } )}}">{% trans %}admin.manageslides.add{% endtrans %}</a></li>
     
-    {% if app.request.pathinfo == '/bootadmin/slides/list' %}
+    {% if app.request.pathinfo == '/slides/public/list' %}
         <li id="showall" class="nav-item"><a class="nav-link " href="#">{% trans %}diapos.show{% endtrans %}</a></li>
         <li id="hideall" class="nav-item"><a class="nav-link " href="#">{% trans %}diapos.hide{% endtrans %}</a></li>
     {% endif %}

@@ -60,8 +60,8 @@ $(document).ready(function () {
     function getActiveDiaporamas() {
         $(gallerymenu).hide();
         $.ajax({
-            type: "POST",
-            url: '/bootadmin/slides/getactivediaporamas',
+            type: "GET",
+            url: '/slides/public/getactivediaporamas',
             dataType: "json",
             async: true,
             success: function (response) {
@@ -81,8 +81,8 @@ $(document).ready(function () {
         $(cardsmenu).hide();
         $(cards).hide();
         $.ajax({
-            type: "POST",
-            url: '/bootadmin/knives/getpublished',
+            type: "GET",
+            url: '/knives/public/getpublished',
             dataType: "json",
             async: true,
             success: function (response) {
@@ -107,7 +107,7 @@ $(document).ready(function () {
             }
             $.ajax({
                 type: "POST",
-                url: '/bootadmin/knives/getimages',
+                url: '/knives/public/getimages',
                 data: JSON.stringify(payload),
                 dataType: "json",
                 async: true,
@@ -131,7 +131,7 @@ $(document).ready(function () {
             }
             $.ajax({
                 type: "POST",
-                url: '/bootadmin/slides/getdiapos',
+                url: '/slides/public/getdiapos',
                 data: JSON.stringify(payload),
                 dataType: "json",
                 async: true,

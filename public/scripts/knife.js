@@ -332,13 +332,13 @@ function buildCard(imgcard, index, lastimageindex) {
             lefticonbutton.setAttribute('id', "left-" + imgcard.knifeid + "-"
                                                  + imgcard.imageid + "-"
                                                  + imgcard.rank);
-            lefticonbutton.setAttribute('href', '/bootadmin/knives/swapphotos');
+            lefticonbutton.setAttribute('href', '/knives/protected/swapphotos');
             lefticonbutton.appendChild(lefticon);
             command.appendChild(lefticonbutton);
         }
         // Delete icon
         deletebutton.setAttribute('id', "del-" + imgcard.imageid);
-        deletebutton.setAttribute('href', '/bootadmin/knives/removephoto/' 
+        deletebutton.setAttribute('href', '/knives/protected/removephoto/' 
                                                 + imgcard.knifeid + '/' 
                                                 + imgcard.imageid);
         deletebutton.appendChild(deleteicon);
@@ -348,7 +348,7 @@ function buildCard(imgcard, index, lastimageindex) {
             righticonbutton.setAttribute('id', "right-" + imgcard.knifeid + "-"
                                                  + imgcard.imageid + "-"
                                                  + imgcard.rank);
-            righticonbutton.setAttribute('href', '/bootadmin/knives/swapphotos');
+            righticonbutton.setAttribute('href', '/knives/protected/swapphotos');
             righticonbutton.appendChild(righticon);
             command.appendChild(righticonbutton);
         }
@@ -372,6 +372,6 @@ function armDeleteAlert() {
         let modalbody = $(".modal-body p");
         modalbody.text(`${knifename} : ID : ${knifeid}`);
         $(".modalaction").attr('onclick', 
-                    `window.location.href='/bootadmin/knives/delete/${knifeid}'`);
+                    `window.location.href='/knives/protected/delete/${knifeid}'`);
     });
 }
