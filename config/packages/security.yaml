@@ -54,6 +54,7 @@ security:
         - { path: ^/bootadmin/users, roles: ROLE_ADMIN_USERS }
         - { path: ^/bootadmin/events, roles: ROLE_ADMIN_SITE }
         - { path: ^/bootadmin/knives, roles: ROLE_ADMIN_SITE }
+        - { path: ^/bootadmin/slides, roles: ROLE_ADMIN_SITE }
         - { path: ^/bootadmin/home, roles: ROLE_ANONYMOUS }
 
 when@test:
