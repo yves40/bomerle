@@ -8,6 +8,6 @@
   },
   "scripts": {
     "sass": "node-sass --watch sass -o css",
-    "sandbox": "node-sass --watch sandbox -o css"    
+    "sandbox": "node-sass --watch sandbox -o css"
   }
 }
