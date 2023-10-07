@@ -3,8 +3,7 @@
 
 .topmenu {
   .logozone {
-    width: 30%;
-    height:auto;
+    width: 40%;
     .logo {
       width: 40px;
     }  
@@ -85,10 +84,17 @@
 @media screen and (max-width: $responsive-max-width) {
   .topmenu {
     padding: 0;
-    .logo {
-      position: absolute;
-      top: 20px;
-      left: 20px;
+    .logozone {
+      width: 60%;
+      .logo {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+      }
+      .debug {
+        margin-left: 6rem;
+        margin-top: 0; 
+      } 
     }
   }
   .footer {

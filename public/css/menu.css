@@ -169,7 +169,7 @@ body {
       padding: 10px; }
 
 /* --------------------  R E S P O N S I V E --------------------*/
-@media screen and (max-width: 850px) {
+@media screen and (max-width: 910px) {
   .news img {
     margin: 20px 20px; }
   .card img {

@@ -76,8 +76,7 @@
   align-items: center;
   background: radial-gradient(circle, #020024 0%, #097936 100%, #00d4ff 100%); }
   .topmenu .logozone {
-    width: 30%;
-    height: auto; }
+    width: 40%; }
     .topmenu .logozone .logo {
       width: 40px; }
     .topmenu .logozone .debug {
@@ -129,13 +128,18 @@
   filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(131deg) brightness(102%) contrast(102%); }
 
 /* --------------------  R E S P O N S I V E --------------------*/
-@media screen and (max-width: 850px) {
+@media screen and (max-width: 910px) {
   .topmenu {
     padding: 0; }
-    .topmenu .logo {
-      position: absolute;
-      top: 20px;
-      left: 20px; }
+    .topmenu .logozone {
+      width: 60%; }
+      .topmenu .logozone .logo {
+        position: absolute;
+        top: 20px;
+        left: 20px; }
+      .topmenu .logozone .debug {
+        margin-left: 6rem;
+        margin-top: 0; }
   .footer {
     display: block; }
     .footer .menu-hamburger {

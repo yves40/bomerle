@@ -7,8 +7,8 @@ app:
   public:
     menu:
       accueil: Home
-      atelier: The workshop
-      galerie: The gallery
+      atelier: Workshop
+      galerie: Gallery
       catalog: Knives
       contact: Contact
       en: English
