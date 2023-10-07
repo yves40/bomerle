@@ -9,7 +9,14 @@
 </head>
 <body>
   <nav class="topmenu">
-    <a href="#section0"><img class="logo"  src="/images/logo1.png" alt="Logo Beau Merle"></a>
+    <div class="logozone">
+      <a href="#section0"><img class="logo"  src="/images/logo1.png" alt="Logo Beau Merle"></a>
+      {% if devmode == 'dev' %}
+        <div class="debug">
+          {% trans %}app.debugversion{% endtrans %} : {% trans %}app.copyright{% endtrans %}
+        </div>
+      {% endif %}
+    </div>
     <div class="nav-links">
       <ul>
           <li><a href="#section0">{% trans %}app.public.menu.accueil{% endtrans %}</a></li>
@@ -25,11 +32,6 @@
     </div>
   </nav>
   <div class="allnews">
-    {% if devmode == 'dev' %}
-      <div class="news debug bgr-green">
-        {% trans %}app.debugversion{% endtrans %} : {% trans %}app.copyright{% endtrans %}
-      </div>
-    {% endif %}
     <div id="section0" class="news bg-enclume">
       <h1>{% trans %}app.public.main.name{% endtrans %}</h1>
       <h2 >{% trans %}app.public.main.whatis{% endtrans %}</h2>

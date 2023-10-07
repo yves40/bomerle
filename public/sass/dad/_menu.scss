@@ -1,10 +1,19 @@
 @import './_const.scss';
 
-.logo {
-  width: 40px;
-}  
 
 .topmenu {
+  .logozone {
+    width: 30%;
+    height:auto;
+    .logo {
+      width: 40px;
+    }  
+    .debug {
+      margin-top: .4rem;
+      color: white;
+      font-size: .7rem;
+    }
+  }
   position: fixed; 
   top: 0;
   z-index: 10;

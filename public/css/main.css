@@ -21,14 +21,6 @@
       float: left; }
     .allnews .news:nth-child(odd) img {
       float: right; }
-  .allnews .debug {
-    position: fixed;
-    top: 70px;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    color: white;
-    font-size: .7rem; }
 
 /*
   How to compute the filter value ???
@@ -72,9 +64,6 @@
   height: 50px;
   filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(131deg) brightness(102%) contrast(102%); }
 
-.logo {
-  width: 40px; }
-
 .topmenu {
   position: fixed;
   top: 0;
@@ -86,6 +75,15 @@
   height: 70px;
   align-items: center;
   background: radial-gradient(circle, #020024 0%, #097936 100%, #00d4ff 100%); }
+  .topmenu .logozone {
+    width: 30%;
+    height: auto; }
+    .topmenu .logozone .logo {
+      width: 40px; }
+    .topmenu .logozone .debug {
+      margin-top: .4rem;
+      color: white;
+      font-size: .7rem; }
   .topmenu a {
     color: white; }
   .topmenu .nav-links ul {
