@@ -21,6 +21,14 @@
       float: left; }
     .allnews .news:nth-child(odd) img {
       float: right; }
+  .allnews .debug {
+    position: fixed;
+    top: 70px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    color: white;
+    font-size: .7rem; }
 
 /*
   How to compute the filter value ???
@@ -87,21 +95,23 @@
     .topmenu .nav-links ul ul {
       display: flex;
       gap: 2px; }
-    .topmenu .nav-links ul li a {
-      font-size: 1.2rem;
-      text-decoration: none; }
-      .topmenu .nav-links ul li a::after {
-        content: '';
-        width: 0%;
-        height: 2px;
-        background: white;
-        display: block;
-        margin: auto;
-        transition: 0.5s; }
-      .topmenu .nav-links ul li a:hover {
-        color: white; }
-        .topmenu .nav-links ul li a:hover::after {
-          width: 100%; }
+    .topmenu .nav-links ul li {
+      color: white; }
+      .topmenu .nav-links ul li a {
+        font-size: 1.2rem;
+        text-decoration: none; }
+        .topmenu .nav-links ul li a::after {
+          content: '';
+          width: 0%;
+          height: 2px;
+          background: white;
+          display: block;
+          margin: auto;
+          transition: 0.5s; }
+        .topmenu .nav-links ul li a:hover {
+          color: white; }
+          .topmenu .nav-links ul li a:hover::after {
+            width: 100%; }
 
 .footer {
   position: fixed;

@@ -25,6 +25,11 @@
     </div>
   </nav>
   <div class="allnews">
+    {% if devmode == 'dev' %}
+      <div class="news debug bgr-green">
+        {% trans %}app.debugversion{% endtrans %} : {% trans %}app.copyright{% endtrans %}
+      </div>
+    {% endif %}
     <div id="section0" class="news bg-enclume">
       <h1>{% trans %}app.public.main.name{% endtrans %}</h1>
       <h2 >{% trans %}app.public.main.whatis{% endtrans %}</h2>
