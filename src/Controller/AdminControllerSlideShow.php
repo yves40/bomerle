@@ -2,9 +2,10 @@
 
 namespace App\Controller;
 
+use DateTime;
 use Exception;
-use App\Entity\SlideShow;
 
+use App\Entity\SlideShow;
 use App\Services\DBlogger;
 use App\Services\Uploader;
 use App\Entity\SlideImages;
@@ -371,7 +372,8 @@ class AdminControllerSlideShow extends AbstractController
                 $active = [];
                 // $slides = $em->getRepository(SlideShow::class)->findBy(['active' => true ],
                 //                                                 array('name' => 'ASC'));
-                $slides = $em->getRepository(SlideShow::class)->findDistinctSlideShows();
+                $now = new DateTime();
+                $slides = $em->getRepository(SlideShow::class)->findDistinctActiveDiaporamas($now);
                 return $this->json([
                     'message' => 'bootadmin.slides.getactivediaporamas OK',
                     'activecount' => count($slides),

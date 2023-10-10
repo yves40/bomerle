@@ -38,12 +38,14 @@ class SlideShowRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
-
-    public function findDistinctSlideShows(): array
+    // SELECT * FROM `slide_show` WHERE active = 1 and (daterange = 0 or curdate() BETWEEN datein and dateout);
+    public function findDistinctActiveDiaporamas($now): array
     {
         return $this->createQueryBuilder('s')
         ->select('distinct(s.name) as name')
         ->andWhere('s.active = 1')
+        ->setParameter('val', $now)
+        ->andWhere('s.daterange = 0 or :val between s.datein and s.dateout')
         ->orderBy('s.name')
         ->getQuery()
         ->getResult();
