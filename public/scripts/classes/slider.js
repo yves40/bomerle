@@ -51,8 +51,9 @@ class Slider {
         }, this.slideinterval);
       }
       this.buildSliderFrame(container);
-      $('.carousel-button').each(function (index, button) {
-        $(button).on('click', () => {
+      console.log(`******* ${this.sliderarea}`);
+      $(`#${this.homezone} > .carousel-button`).each(function (index, button) {
+          $(button).on('click', () => {
           handleButtons(this);
         });
       });
@@ -147,7 +148,7 @@ class Slider {
       .attr('src', "/images/slideshow/"+allimages[i]);
       $(newimg).click( (e) => { // Arrow function mandatory here to use this
         e.preventDefault();
-        this.fullScreen(allimages[i]);
+        this.fullScreen(this.allimages[this.activeindex]);
       });
       $(oneimage).append(newimg);
       $(slides).append(oneimage);      
