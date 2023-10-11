@@ -81,18 +81,22 @@ class Slider {
   }
   // ------------------------------------------------------------------------------------------------
   nextSlide() {
-    const activeline = $(`#imgid-${this.activeindex}`);
+    const splitter = this.sliderarea.split('-');
+    const imageroot= splitter[0] + splitter[1];
+    const activeline = $(`#${imageroot}-${this.activeindex}`);
     ++this.activeindex;
     const newindex = this.checkBoundaries();
     $(activeline).removeClass('active');
-    $(`#imgid-${newindex}`).addClass('active');
+    $(`#${imageroot}-${newindex}`).addClass('active');
   }
   previousSlide() {
-    const activeline = $(`#imgid-${this.activeindex}`);
+    const splitter = this.sliderarea.split('-');
+    const imageroot= splitter[0] + splitter[1];
+    const activeline = $(`#${imageroot}-${this.activeindex}`);
     --this.activeindex;
     const newindex = this.checkBoundaries();
     $(activeline).removeClass('active');
-    $(`#imgid-${newindex}`).addClass('active');
+    $(`#${imageroot}-${newindex}`).addClass('active');
   }
   checkBoundaries() {
     if(this.activeindex === this.allimages.length) {
@@ -131,8 +135,10 @@ class Slider {
     console.log(`Slide interval ${this.slideinterval}`);
     // Get the container
     const slides = $(`#${this.sliderarea}`);
+    const splitter = this.sliderarea.split('-');
+    const imageroot= splitter[0] + splitter[1];
     for(let i = 0; i < allimages.length; ++i) {
-      let oneimage = $("<li>").attr('id', `imgid-${i}`).addClass('slide');
+      let oneimage = $("<li>").attr('id', `${imageroot}-${i}`).addClass('slide');
       if(i === 0 ){
         $(oneimage).addClass('active');
       }
