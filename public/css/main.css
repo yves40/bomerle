@@ -407,6 +407,19 @@
       left: 1rem; }
     .carousel .carousel-button.next {
       right: 1rem; }
+  .carousel .carousel-indicators {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+    padding: 0;
+    margin-right: 15%;
+    margin-left: 15%;
+    margin-bottom: 1rem;
+    list-style: none; }
   .carousel .slide {
     position: absolute;
     inset: 0;
