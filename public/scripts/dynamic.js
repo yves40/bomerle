@@ -164,8 +164,7 @@ $(document).ready(function () {
     // ---------------------------------------- Activate a slider
     function buildImagesSlider(allimages, timing, description, container) {
         console.log(`Container name is ${$(container).attr('name')} for ${allimages.length} images`);
-        let slider = new Slider(container, timing, description);     // Build the slider frame
-        slider.addImages(allimages);                    // Load images
+        let slider = new Slider(container, timing, description, allimages);     // Build the slider frame
     }
     // ---------------------------------------- Activate a gallery
     function buildImagesGallery(allimages, description,  container) {

@@ -56,6 +56,17 @@
         margin-left: 15%;
         margin-bottom: 1rem;
         list-style: none;
+        &-button {
+            opacity: .5;
+            width: 30px;
+            height: 6px;
+            margin-left: 3px;
+            margin-right: 3px;
+            cursor: pointer;
+            &.active {
+                opacity: 1;
+            }
+        }
     }
     .slide {
         position: absolute; 

@@ -9,13 +9,14 @@
     jun 20 2023     Add slider description into the UI
     Aug 29 2023     Reorg into single css file
     Sep 01 2023     Fix some details
+    Oct 12 2023     Typo. Add indicators to the slider frame
 
     ----------------------------------------------------------------------------*/
 class Slider {
 
-  constructor(container, timing = 2, description = '') {
+  constructor(container, timing = 2, description = '', allimages) {
     // Init
-      this.version = 'Slider:1.3, Sep 01 2023 ';
+      this.version = 'Slider:1.44, Oct 12 2023 ';
       this.container = container;
       this.containername = $(container).attr('name');
       this.slideinterval = timing * 1000;
@@ -27,7 +28,7 @@ class Slider {
       this.windowy = $(window).height();
       this.zoomactive = false;
       this.currentzoom = '';
-      this.allimages = [];  // Will be filled bu addImages()
+      this.allimages = allimages;
       this.activeindex = 0;
 
       // Necessary to call the handler function from the click handler
@@ -37,6 +38,7 @@ class Slider {
       // Strange isn't it ? 
       // I hate JS ;-)
       const handleButtons = this.buttonHandler.bind(this);
+      const handleIndicator = this.indicatorHandler.bind(this);
 
       // Slider parameters
       const VERYLONGTIMESLIDER = 60000;
@@ -51,21 +53,26 @@ class Slider {
         }, this.slideinterval);
       }
       this.buildSliderFrame(container);
-      console.log(`******* ${this.sliderarea}`);
-      $(`#${this.homezone} > .carousel-button`).each(function (index, button) {
-          $(button).on('click', () => {
-          handleButtons(this);
-        });
+      this.addImages(allimages);
+      // Arm handlers
+      $(`#${this.homezone} > .carousel-button`).each(function (index, element) {
+          $(element).on('click', () => {
+            handleButtons(this);
+          })
       });
-
-      // Initialize handlers
-      $(window).resize ( () =>  {
-        if(this.zoomactive) {
-          this.fullScreen(this.currentzoom);
-        }
-        this.windowx = $(window).width();
-        this.windowy = $(window).height();
+      $(`#${this.homezone} > .carousel-indicators-button`).each(function (index, element) {
+          $(element).on('click', () => {
+            handleIndicator(this);
+          })
       });
+    // Initialize handlers
+    $(window).resize ( () =>  {
+      if(this.zoomactive) {
+        this.fullScreen(this.currentzoom);
+      }
+      this.windowx = $(window).width();
+      this.windowy = $(window).height();
+    });
   }
   // ------------------------------------------------------------------------------------------------
   buttonHandler = function manageActiveSlide(buttonelement) {
@@ -79,6 +86,10 @@ class Slider {
     else {
       this.previousSlide();
     }
+  }
+  // ------------------------------------------------------------------------------------------------
+  indicatorHandler = function manageActiveIndicator(buttonelement) {
+    console.log(buttonelement)
   }
   // ------------------------------------------------------------------------------------------------
   nextSlide() {
@@ -113,29 +124,41 @@ class Slider {
     const galleryzone = $("<div>").addClass('galleryzone');
     const sliderzone = $("<div>").attr('id', this.homezone)
                                           .addClass('carousel');
-      const slidetext = $('<div></div>').addClass('gallerytext');
-      const spantitle = $('<span></span>').text(this.description);
-      $(slidetext).append(spantitle);
-      $(galleryzone).append(slidetext);
-      const ul = $('<ul></ul>').attr('id', this.sliderarea).addClass('sliderarea');
-      const prev = $("<a></a>").addClass('carousel-button prev');
-      const previmage = $("<img>").attr('src', "/images/svg/arrow-back.svg").addClass("svgbig-white");
-      $(prev).append(previmage);
-      const next = $("<a></a>").addClass('carousel-button next');
-      const nextimage = $("<img>").attr('src', "/images/svg/arrow-forward.svg").addClass("svgbig-white");
-      $(next).append(nextimage);
-      $(sliderzone).append(prev);
-      $(sliderzone).append(next);
-      $(sliderzone).append(ul);
-      $(galleryzone).append(sliderzone);
-      $(container).append(galleryzone);
-      $(container).append($('<div></div>').attr('id', 'fullscreen').addClass('zoomoff'));
+    const slidetext = $('<div></div>').addClass('gallerytext');
+    const spantitle = $('<span></span>').text(this.description);
+    $(slidetext).append(spantitle);
+    $(galleryzone).append(slidetext);
+    const ul = $('<ul></ul>').attr('id', this.sliderarea).addClass('sliderarea');
+    const prev = $("<a></a>").addClass('carousel-button prev');
+    const previmage = $("<img>").attr('src', "/images/svg/arrow-back.svg").addClass("svgbig-white");
+    $(prev).append(previmage);
+    const next = $("<a></a>").addClass('carousel-button next');
+    const nextimage = $("<img>").attr('src', "/images/svg/arrow-forward.svg").addClass("svgbig-white");
+    $(next).append(nextimage);
+    $(sliderzone).append(prev);
+    $(sliderzone).append(next);
+    $(sliderzone).append(ul);
+    $(galleryzone).append(sliderzone);
+    $(container).append(galleryzone);
+    $(container).append($('<div></div>').attr('id', 'fullscreen').addClass('zoomoff'));
   }
   // ------------------------------------------------------------------------------------------------
   addImages(allimages) {
     console.log(`Slide interval ${this.slideinterval}`);
     // Get the container
     const slides = $(`#${this.sliderarea}`);
+    const sliderzone = $(`#${this.homezone}`);
+    // Add the indicators
+    const indicators = $("<div>").addClass('carousel-indicators');
+    for(let i = 0; i < allimages.length; ++i) {
+      let buttonindic = $('<button>').addClass('carousel-indicators-button')
+        .attr('type', 'button')
+        .attr('data-imageindex', `${i}`);
+      if (i == 0) $(buttonindic).addClass('active');
+      $(indicators).append(buttonindic);
+    }
+    $(sliderzone).append(indicators);
+    // Add images
     const splitter = this.sliderarea.split('-');
     const imageroot= splitter[0] + splitter[1];
     for(let i = 0; i < allimages.length; ++i) {
