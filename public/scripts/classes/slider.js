@@ -10,13 +10,14 @@
     Aug 29 2023     Reorg into single css file
     Sep 01 2023     Fix some details
     Oct 12 2023     Typo. Add indicators to the slider frame
+    Oct 14 2023     Indicators to the slider frame
 
     ----------------------------------------------------------------------------*/
 class Slider {
 
   constructor(container, timing = 2, description = '', allimages) {
     // Init
-      this.version = 'Slider:1.44, Oct 12 2023 ';
+      this.version = 'Slider:1.45, Oct 14 2023 ';
       this.container = container;
       this.containername = $(container).attr('name');
       this.slideinterval = timing * 1000;
@@ -33,12 +34,12 @@ class Slider {
 
       // Necessary to call the handler function from the click handler
       // In the click handler, the element button is passed, using 'this'
-      // Binding buttonhandler with 'this' as parameter gives access to 
-      // the class methods and attributes from within the buttonhandler
+      // Binding PrevNextHandler with 'this' as parameter gives access to 
+      // the class methods and attributes from within the PrevNextHandler
       // Strange isn't it ? 
       // I hate JS ;-)
-      const handleButtons = this.buttonHandler.bind(this);
-      const handleIndicator = this.indicatorHandler.bind(this);
+      const handlePrevNext = this.PrevNextHandler.bind(this);
+      const handleDirectAccess = this.DirectAccessHandler.bind(this);
 
       // Slider parameters
       const VERYLONGTIMESLIDER = 60000;
@@ -57,25 +58,24 @@ class Slider {
       // Arm handlers
       $(`#${this.homezone} > .carousel-button`).each(function (index, element) {
           $(element).on('click', () => {
-            handleButtons(this);
+            handlePrevNext(this);
           })
       });
-      $(`#${this.homezone} > .carousel-indicators-button`).each(function (index, element) {
-          $(element).on('click', () => {
-            handleIndicator(this);
-          })
+      const indicators = $(`#${this.homezone} > .carousel-indicators`);
+      $(indicators).children().on('click', () => {
+            handleDirectAccess(this);
       });
-    // Initialize handlers
-    $(window).resize ( () =>  {
-      if(this.zoomactive) {
-        this.fullScreen(this.currentzoom);
-      }
-      this.windowx = $(window).width();
-      this.windowy = $(window).height();
-    });
+      // Some other handlers
+      $(window).resize ( () =>  {
+        if(this.zoomactive) {
+          this.fullScreen(this.currentzoom);
+        }
+        this.windowx = $(window).width();
+        this.windowy = $(window).height();
+      });
   }
   // ------------------------------------------------------------------------------------------------
-  buttonHandler = function manageActiveSlide(buttonelement) {
+  PrevNextHandler = function manageActiveSlide(buttonelement) {
     if(this.intervalid !== 0) {
       clearInterval(this.intervalid);
       this.intervalid = 0;
@@ -88,7 +88,7 @@ class Slider {
     }
   }
   // ------------------------------------------------------------------------------------------------
-  indicatorHandler = function manageActiveIndicator(buttonelement) {
+  DirectAccessHandler = function manageActiveIndicator(buttonelement) {
     console.log(buttonelement)
   }
   // ------------------------------------------------------------------------------------------------
