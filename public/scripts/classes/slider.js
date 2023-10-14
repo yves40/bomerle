@@ -31,6 +31,7 @@ class Slider {
       this.currentzoom = '';
       this.allimages = allimages;
       this.activeindex = 0;
+      this.directaccess = -1;
 
       // Necessary to call the handler function from the click handler
       // In the click handler, the element button is passed, using 'this'
@@ -64,6 +65,7 @@ class Slider {
       const indicators = $(`#${this.homezone} > .carousel-indicators`);
       $(indicators).children().on('click', (event) => {
             handleDirectAccess(this);
+            this.directaccess = $(event.target).data('imageindex');
             console.log($(event.target).data('imageindex'));
       });
       // Some other handlers
@@ -89,8 +91,9 @@ class Slider {
     }
   }
   // ------------------------------------------------------------------------------------------------
-  DirectAccessHandler = function manageActiveIndicator(buttonelement) {
-    console.log(buttonelement)
+  DirectAccessHandler = function manageActiveIndicator(sliderobject) {
+    console.log(`Requesting access to image ${this.directaccess}`);
+    console.log(sliderobject)
   }
   // ------------------------------------------------------------------------------------------------
   nextSlide() {
