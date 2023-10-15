@@ -86,6 +86,7 @@ class Slider {
     this.activeindex = newindex;
     $(activeline).removeClass('active');
     $(`#${imageroot}-${newindex}`).addClass('active');
+    this.updateActiveButton();
   }
   // ------------------------------------------------------------------------------------------------
   nextSlide() {
@@ -96,7 +97,9 @@ class Slider {
     const newindex = this.checkBoundaries();
     $(activeline).removeClass('active');
     $(`#${imageroot}-${newindex}`).addClass('active');
+    this.updateActiveButton();
   }
+  // ------------------------------------------------------------------------------------------------
   previousSlide() {
     const splitter = this.sliderarea.split('-');
     const imageroot= splitter[0] + splitter[1];
@@ -105,7 +108,18 @@ class Slider {
     const newindex = this.checkBoundaries();
     $(activeline).removeClass('active');
     $(`#${imageroot}-${newindex}`).addClass('active');
+    this.updateActiveButton();
   }
+  // ------------------------------------------------------------------------------------------------
+  updateActiveButton() {
+    const indicatorslist = $(`#${this.homezone} > .carousel-indicators`).children();
+    for(let i = 0; i < indicatorslist.length; ++i){
+      $(indicatorslist[i]).removeClass('active');
+    };
+    $(indicatorslist[this.activeindex]).addClass('active');
+    // console.log(indicatorslist);
+  }
+  // ------------------------------------------------------------------------------------------------
   checkBoundaries() {
     if(this.activeindex === this.allimages.length) {
       this.activeindex = 0;
