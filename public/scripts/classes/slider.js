@@ -64,9 +64,8 @@ class Slider {
       });
       const indicators = $(`#${this.homezone} > .carousel-indicators`);
       $(indicators).children().on('click', (event) => {
-            handleDirectAccess(this);
             this.directaccess = $(event.target).data('imageindex');
-            console.log($(event.target).data('imageindex'));
+            handleDirectAccess(this);
       });
       // Some other handlers
       $(window).resize ( () =>  {
