@@ -1,0 +1,6 @@
+POST http://127.0.0.1:8000/knives/public/getimages
+Content-Type: application/json
+
+{
+  "knifeid": "12"
+}
