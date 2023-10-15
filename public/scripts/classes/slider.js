@@ -10,14 +10,19 @@
     Aug 29 2023     Reorg into single css file
     Sep 01 2023     Fix some details
     Oct 12 2023     Typo. Add indicators to the slider frame
-    Oct 14 2023     Indicators to the slider frame
+    Oct 14 2023     Indicators to the slider frame.
+    Oct 15 2023     Indicators to the slider frame..
 
     ----------------------------------------------------------------------------*/
 class Slider {
 
-  constructor(container, timing = 2, description = '', allimages) {
+  // slidertype is used to generate images location.
+  // As the slider can display diaporama images or knife images
+  // and the location is /images/slideshow or /images/knife
+  // Two accepted values : SHOW (the default) and KNIFE
+  constructor(container, timing = 2, description = '', allimages, slidertype = 'SHOW') {
     // Init
-      this.version = 'Slider:1.46, Oct 15 2023 ';
+      this.version = 'Slider:1.47, Oct 15 2023 ';
       this.container = container;
       this.containername = $(container).attr('name');
       this.slideinterval = timing * 1000;
@@ -31,7 +36,18 @@ class Slider {
       this.currentzoom = '';
       this.allimages = allimages;
       this.activeindex = 0;
+      this.slidertype = slidertype;
+      this.imagespath = "";
 
+      // Manage the web path used to load images, depending on slidertype
+      switch (this.slidertype) {
+        case 'SHOW':  this.imagespath = "/images/slideshow/";
+                      break;
+        case 'KNIFE': this.imagespath = "/images/knife/";
+                      break;
+        default:      this.imagespath = "/images/slideshow/";
+                      break;
+      }
       // Slider parameters
       const VERYLONGTIMESLIDER = 60000;
       const automove = true;        // manage later
@@ -178,7 +194,7 @@ class Slider {
       }
       let h3 = $("<h5></h5>").text(`${i+1}/${allimages.length}`);
       let newimg = $('<img>').addClass('sliderimage')
-      .attr('src', "/images/slideshow/"+allimages[i]);
+          .attr('src', this.imagespath+allimages[i]);
       $(newimg).click( (e) => { // Arrow function mandatory here to use this
         e.preventDefault();
         this.fullScreen(this.allimages[this.activeindex]);
@@ -199,7 +215,8 @@ class Slider {
     $("body").css("overflow", "hidden");
     // Position the zoom 
     const top = window.scrollY;
-    $("#fullscreen").css("background-image", "url(/images/slideshow/" + imagesrc + ")");
+    // $("#fullscreen").css("background-image", "url(/images/slideshow/" + imagesrc + ")");
+    $("#fullscreen").css("background-image", `url(${this.imagespath}${imagesrc})`);
     $("#fullscreen").css({'top': top, 'left': 0, 'z-index': 1000});
     $("#fullscreen").addClass("zoomon").removeClass('zoomoff');
     // Hide a few things
