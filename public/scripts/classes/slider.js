@@ -17,7 +17,7 @@ class Slider {
 
   constructor(container, timing = 2, description = '', allimages) {
     // Init
-      this.version = 'Slider:1.45, Oct 14 2023 ';
+      this.version = 'Slider:1.46, Oct 15 2023 ';
       this.container = container;
       this.containername = $(container).attr('name');
       this.slideinterval = timing * 1000;
@@ -31,16 +31,6 @@ class Slider {
       this.currentzoom = '';
       this.allimages = allimages;
       this.activeindex = 0;
-      this.directaccess = -1;
-
-      // Necessary to call the handler function from the click handler
-      // In the click handler, the element button is passed, using 'this'
-      // Binding PrevNextHandler with 'this' as parameter gives access to 
-      // the class methods and attributes from within the PrevNextHandler
-      // Strange isn't it ? 
-      // I hate JS ;-)
-      const handlePrevNext = this.PrevNextHandler.bind(this);
-      const handleDirectAccess = this.DirectAccessHandler.bind(this);
 
       // Slider parameters
       const VERYLONGTIMESLIDER = 60000;
@@ -57,15 +47,12 @@ class Slider {
       this.buildSliderFrame(container);
       this.addImages(allimages);
       // Arm handlers
-      $(`#${this.homezone} > .carousel-button`).each(function (index, element) {
-          $(element).on('click', () => {
-            handlePrevNext(this);
-          })
-      });
+      $(`#${this.homezone} > .carousel-button`).children().on('click', (event) => {
+            this.manageActiveSlide(event);
+      })
       const indicators = $(`#${this.homezone} > .carousel-indicators`);
       $(indicators).children().on('click', (event) => {
-            this.directaccess = $(event.target).data('imageindex');
-            handleDirectAccess(this);
+            this.manageActiveIndicator(event);
       });
       // Some other handlers
       $(window).resize ( () =>  {
@@ -77,12 +64,13 @@ class Slider {
       });
   }
   // ------------------------------------------------------------------------------------------------
-  PrevNextHandler = function manageActiveSlide(buttonelement) {
+  manageActiveSlide(event) {
     if(this.intervalid !== 0) {
       clearInterval(this.intervalid);
       this.intervalid = 0;
     }
-    if(buttonelement.classList.contains('next')) {
+    const parent = $(event.target).parent();
+    if($(parent).hasClass('next')) {
       this.nextSlide();
     }
     else {
@@ -90,9 +78,14 @@ class Slider {
     }
   }
   // ------------------------------------------------------------------------------------------------
-  DirectAccessHandler = function manageActiveIndicator(sliderobject) {
-    console.log(`Requesting access to image ${this.directaccess}`);
-    console.log(sliderobject)
+  manageActiveIndicator(event) {
+    const newindex = $(event.target).data('imageindex');
+    const splitter = this.sliderarea.split('-');
+    const imageroot= splitter[0] + splitter[1];
+    const activeline = $(`#${imageroot}-${this.activeindex}`);
+    this.activeindex = newindex;
+    $(activeline).removeClass('active');
+    $(`#${imageroot}-${newindex}`).addClass('active');
   }
   // ------------------------------------------------------------------------------------------------
   nextSlide() {
