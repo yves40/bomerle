@@ -32,12 +32,13 @@
       }
       // ---------------------------------------------------------------------
       Zoom(event) {
-        const cardscontainer = $(event.target).closest('.cards');
+        const globalfullscreen = $('#globalfullscreen');
+        // const cardscontainer = $(event.target).closest('.cards');
         const framecontainer = $(event.target).closest('.cardframe');
         const splitter = $(framecontainer).attr('id').split('-');
-        const slidescontainer = $("<div>").attr('name', `zoomer-${splitter[1]}`)
-                  .addClass('diapo');
-        $(cardscontainer).append(slidescontainer);
+        // const slidescontainer = $("<div>").attr('name', `zoomer-${splitter[1]}`)
+        //           .addClass('diapo');
+        // $(cardscontainer).append(slidescontainer);
         // Hello Mr Ajax
         const payload = {
           "knifeid" :  `${splitter[1]}`,
@@ -50,9 +51,19 @@
             async: true,
             success: function (response) {
               console.log(`Got ${response.imagecount} images for ${response.knifeName}`);
-              let slider = new Slider(slidescontainer, 5, response.knifedesc, 
+              // Remove body scroll bar so user cant scroll up or down
+              $("body").css("overflow", "hidden");
+              const top = window.scrollY;
+              $(globalfullscreen).css({'top': top, 'left': 0, 'z-index': 1000}).show();
+              let slider = new Slider(globalfullscreen, 5, response.knifedesc, 
                                                         response.images,
                                                         'KNIFE');
+              $(globalfullscreen).click(function (e) { 
+                e.preventDefault();
+                $(globalfullscreen).empty();
+                $(globalfullscreen).hide();
+                $("body").css("overflow", "auto");
+              });
             },
             error: function (xhr) {
               console.log(xhr);

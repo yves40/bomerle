@@ -10,6 +10,7 @@ $(document).ready(function () {
     const menuHamburger = $(".menu-hamburger");
     const navLinks = $(".nav-links");
     const infoknife = $('.knife');
+    $('#globalfullscreen').hide();
     let validEmail = false;
     let validText = false;
 
