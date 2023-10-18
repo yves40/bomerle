@@ -8,19 +8,15 @@
 
       constructor(container, data) {
         // Init
-          this.version = 'Card:1.0, Sep 02 2023 ';
+          this.version = 'Card:1.1, Oct 18 2023 ';
           this.container = container;
           this.data = data;
           this.loadCard(container, data);
       }
       loadCard(container, data) {
-        // console.log(`Build the card for knife : ${this.data.knifeName}`);
-        // console.log(`Description is : ${this.data.knifedesc}`);
-        // console.log(`Knife currently has : ${this.data.imagecount}`);
-        // console.log(`First image is  : ${this.data.images[0]}`);
-        const cardimage = $("<div></div>").addClass('card-image');
-        const cardtitle = $("<div></div>").addClass('card-title').html(this.data.knifeName);
-        const cardtext = $("<div></div>").addClass('card-text').html(this.data.knifedesc);
+        const cardimage = $("<div></div>").addClass('cardframe__image');
+        const cardtitle = $("<div></div>").addClass('cardframe__title').html(this.data.knifeName);
+        const cardtext = $("<div></div>").addClass('cardframe__text').html(this.data.knifedesc);
         const img = $("<img>").attr('src', `/images/knife/${this.data.images[0]}`);
         $(img).on('click', (event) => {
           this.Zoom(event);
@@ -33,12 +29,17 @@
       // ---------------------------------------------------------------------
       Zoom(event) {
         const globalfullscreen = $('#globalfullscreen');
-        // const cardscontainer = $(event.target).closest('.cards');
+        const closebutton = $('<button>').text('Close');
+        const zoomframe = $("<div></div>").addClass('cards').addClass('cardframe')
+                                        .addClass('cardframe__zoom');
+        const title = $("<div></div>").addClass('cardframe__title').html(this.data.knifeName);
+        const sliderdiv = $("<div></div>"); // To inject the slider 
+        $(zoomframe).append(title).append(sliderdiv).append(closebutton);
+        $(globalfullscreen).append(zoomframe);
+
         const framecontainer = $(event.target).closest('.cardframe');
         const splitter = $(framecontainer).attr('id').split('-');
-        // const slidescontainer = $("<div>").attr('name', `zoomer-${splitter[1]}`)
-        //           .addClass('diapo');
-        // $(cardscontainer).append(slidescontainer);
+
         // Hello Mr Ajax
         const payload = {
           "knifeid" :  `${splitter[1]}`,
@@ -54,11 +55,12 @@
               // Remove body scroll bar so user cant scroll up or down
               $("body").css("overflow", "hidden");
               const top = window.scrollY;
-              $(globalfullscreen).css({'top': top, 'left': 0, 'z-index': 1000}).show();
-              let slider = new Slider(globalfullscreen, 5, response.knifedesc, 
+              $(globalfullscreen).css({'top': top, 'left': 0, 'z-index': 1000})
+                            .show();
+              let slider = new Slider(sliderdiv, 5, response.knifedesc, 
                                                         response.images,
                                                         'KNIFE');
-              $(globalfullscreen).click(function (e) { 
+              $(closebutton).click(function (e) { 
                 e.preventDefault();
                 $(globalfullscreen).empty();
                 $(globalfullscreen).hide();
