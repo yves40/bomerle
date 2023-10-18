@@ -195,8 +195,14 @@
     padding: 20px;
     transition: all .8s ease-in; }
     .cards .cardframe__zoom {
-      background-color: darkgray;
-      color: white; }
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      background: radial-gradient(circle, #020024 0%, #097936 100%, #00d4ff 100%);
+      color: white;
+      justify-content: center;
+      align-items: center;
+      border-radius: 10px; }
     .cards .cardframe__image img {
       height: 120px;
       width: 120px;
@@ -207,7 +213,7 @@
       margin-left: 2rem; }
     .cards .cardframe__title {
       padding: 20px 10px;
-      font-size: 2.5rem; }
+      font-size: 2rem; }
     .cards .cardframe__text {
       line-height: 20px;
       font-style: italic;

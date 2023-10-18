@@ -20,21 +20,27 @@
     padding: 20px;
     transition: all .8s ease-in;
     &__zoom {
-      background-color: darkgray;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      background: $bg-gradient-green;
       color: white;
+      justify-content: center;
+      align-items: center;
+      border-radius: 10px;
     }
     &__image img {
       height: 120px;
       width: 120px;
       border: solid darkgrey 3px;
-      border-radius: 50%;
+      border-radius: 50%; 
       float: right; 
       shape-outside: circle();
       margin-left: 2rem; 
     }
     &__title {
       padding: 20px 10px;
-      font-size: 2.5rem; 
+      font-size: 2rem; 
     } 
     &__text {
       line-height: 20px;

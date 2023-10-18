@@ -12,6 +12,7 @@
           this.container = container;
           this.data = data;
           this.loadCard(container, data);
+          this.mandatorydelay = 10; // When card zoom on a slider, delay is forced
       }
       loadCard(container, data) {
         const cardimage = $("<div></div>").addClass('cardframe__image');
@@ -30,12 +31,13 @@
       Zoom(event) {
         const globalfullscreen = $('#globalfullscreen');
         const closebutton = $('<button>').text('Close');
-        const zoomframe = $("<div></div>").addClass('cards').addClass('cardframe')
-                                        .addClass('cardframe__zoom');
+        const zoomframe = $("<div></div>").addClass('cardframe')
+                    .addClass('cardframe__zoom');
         const title = $("<div></div>").addClass('cardframe__title').html(this.data.knifeName);
+        const text = $("<div></div>").addClass('cardframe__text').html(this.data.knifedesc);
         const sliderdiv = $("<div></div>"); // To inject the slider 
-        $(zoomframe).append(title).append(sliderdiv).append(closebutton);
-        $(globalfullscreen).append(zoomframe);
+        $(zoomframe).append(title).append(text).append(sliderdiv).append(closebutton);
+        $(globalfullscreen).addClass('cards').append(zoomframe);
 
         const framecontainer = $(event.target).closest('.cardframe');
         const splitter = $(framecontainer).attr('id').split('-');
@@ -57,11 +59,12 @@
               const top = window.scrollY;
               $(globalfullscreen).css({'top': top, 'left': 0, 'z-index': 1000})
                             .show();
-              let slider = new Slider(sliderdiv, 5, response.knifedesc, 
-                                                        response.images,
-                                                        'KNIFE');
+              let slider = new Slider(sliderdiv, 10, null, 
+                                response.images,
+                                'KNIFE');
               $(closebutton).click(function (e) { 
                 e.preventDefault();
+                $(globalfullscreen).removeClass('cards');
                 $(globalfullscreen).empty();
                 $(globalfullscreen).hide();
                 $("body").css("overflow", "auto");
