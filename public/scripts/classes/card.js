@@ -30,7 +30,9 @@
       // ---------------------------------------------------------------------
       Zoom(event) {
         const globalfullscreen = $('#globalfullscreen');
-        const closebutton = $('<button>').text('Close');
+        const closeimg = $('<img>').attr('src', '/images/svg/close-circle-outline.svg')
+                                  .addClass('svgbig-white');
+        const closebutton = $('<a>').append(closeimg);
         const zoomframe = $("<div></div>").addClass('cardframe')
                     .addClass('cardframe__zoom');
         const title = $("<div></div>").addClass('cardframe__title').html(this.data.knifeName);
