@@ -17,13 +17,9 @@ $(document).ready(function () {
     $(menuHamburger).on('click', function () {
         $(navLinks).toggleClass('mobile-menu');
     });
-    $('nav-links, a').each(function (index, element) {
-        // element == this
-        $(element).on('click', () => {
-            if($(navLinks).hasClass('mobile-menu')) {
-                $(navLinks).toggleClass('mobile-menu');
-            }
-        })
+    $(`.nav-links, .mobile-menu` ).on('click', (element) => {
+        console.log(element);
+        $(navLinks).toggleClass('mobile-menu');
     });
     // Some UI initial state
     $(infoknife).hide();
