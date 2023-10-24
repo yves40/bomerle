@@ -225,8 +225,20 @@
 
 /* --------------------  R E S P O N S I V E --------------------*/
 @media screen and (max-width: 800px) {
-  .card img {
-    width: 200px; } }
+  #globalfullscreen .cardframe__zoom {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    background: radial-gradient(circle, #020024 0%, #097936 100%, #00d4ff 100%);
+    color: white;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px; }
+  #globalfullscreen .cardframe__title {
+    margin-top: 2rem; }
+  #globalfullscreen .cardframe__text {
+    display: none; } }
 
 /*
   How to compute the filter value ???

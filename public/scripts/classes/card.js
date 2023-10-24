@@ -37,7 +37,7 @@
                     .addClass('cardframe__zoom');
         const title = $("<div></div>").addClass('cardframe__title').html(this.data.knifeName);
         const text = $("<div></div>").addClass('cardframe__text').html(this.data.knifedesc);
-        const sliderdiv = $("<div></div>"); // To inject the slider 
+        const sliderdiv = $("<div></div>").attr('name', 'cardzoom'); // To inject the slider 
         $(zoomframe).append(title).append(text).append(sliderdiv).append(closebutton);
         $(globalfullscreen).addClass('cards').append(zoomframe);
 

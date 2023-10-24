@@ -56,9 +56,26 @@
 }
 /* --------------------  R E S P O N S I V E --------------------*/
 @media screen and (max-width: 800px) {
-  .card {
-    img {
-      width: 200px;
-    } 
+  #globalfullscreen {
+    .cardframe {
+      &__zoom {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+        background: $bg-gradient-green;
+        color: white;
+        justify-content: center;
+        align-items: center;
+        border-radius: 10px;  
+      }
+    }   
+    .cardframe__title {
+      margin-top: 2rem;
+    }
+    .cardframe__text {
+      display: none;
+    }
+
   }
 }
