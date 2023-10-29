@@ -217,7 +217,7 @@ class Slider {
     const top = window.scrollY;
     // $("#fullscreen").css("background-image", "url(/images/slideshow/" + imagesrc + ")");
     $("#fullscreen").css("background-image", `url(${this.imagespath}${imagesrc})`);
-    $("#fullscreen").css({'top': top, 'left': 0, 'z-index': 1000});
+    $("#fullscreen").css({'top': top, 'left': 0, 'z-index': 2000});
     $("#fullscreen").addClass("zoomon").removeClass('zoomoff');
     // Hide a few things
     $(`#${this.indicators}`).hide();
