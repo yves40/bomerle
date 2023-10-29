@@ -7,37 +7,54 @@
 </head>
 <body>
     <div class="cameras">
-        <div class="realtimevideo">
-            <h1 class="realtimevideo--h1">Hossegor terrasse</h1>
-            <iframe class="realtimevideo--image" src="http://88.183.212.133:8089/videostream.cgi?user=yves&amp;pwd=akhenaton1" frameborder="0"></iframe>
-        </div>
-        <div class="realtimevideo">
-            <h1 class="realtimevideo--h1">Hossegor Cuisine</h1>
-            <iframe class="realtimevideo--image" src="http://88.183.212.133:8090/videostream.cgi" frameborder="0"></iframe>
-        </div>
-        <div class="realtimevideo">
-            <h1 class="realtimevideo--h1">Hossegor local piscine</h1>
-            <iframe class="realtimevideo--image" src="http://88.183.212.133:8091/videostream.cgi?user=yves&amp;pwd=akhenaton1" frameborder="0"></iframe>
+        <div class="videocard">
+            <h1 class="videocard--h1">Hossegor local piscine</h1>
+            <div class="video">
+                <iframe class="video--image" 
+                        src="http://88.183.212.133:8091/videostream.cgi?user=yves&amp;pwd=akhenaton1" 
+                        frameborder="0" allowfullscreen>
+                </iframe>
+            </div>
         </div>    
+        <div class="videocard">
+            <h1 class="videocard--h1">Hossegor terrasse</h1>
+            <div class="video">
+                <iframe class="video--image" src="http://88.183.212.133:8089/videostream.cgi?user=yves&amp;pwd=akhenaton1" frameborder="0"></iframe>
+            </div>
+        </div>
+        <div class="videocard">
+            <h1 class="videocard--h1">Hossegor Cuisine</h1>
+            <div class="video">
+                <iframe class="video--image" src="http://88.183.212.133:8090/videostream.cgi" frameborder="0"></iframe>
+            </div>
+        </div>
     </div>
 </body>
 </html>
 <style>
-    .realtimevideo {
-        margin: 1rem 2rem;
+    .videocard {
         display: flex;
         flex-direction: column;
-        width: 80%;
+        width: 60%;
         align-items: center;
         justify-content: center;
-        border: red 2px solid;
+        background-color: black;
+        color: white;
+        padding: 1rem;
     }
-    .realtimevideo--h1 {
+    .videocard--h1 {
         font-size: 1.3rem;
+        font-style: italic;
     }
-    .realtimevideo--image {
-        padding: 2rem;
+    .video {
+        border-radius: var(--border-radius);
+        overflow: hidden;
+    }
+    .video--image {
         width: 640px;
         height: 480px;
+    }
+    :root{
+        --border-radius: 3rem !important;
     }
 </style>
