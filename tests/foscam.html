@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="cameras">
+        <div class="realtimevideo">
+            <h1 class="realtimevideo--h1">Hossegor terrasse</h1>
+            <iframe class="realtimevideo--image" src="http://88.183.212.133:8089/videostream.cgi?user=yves&amp;pwd=akhenaton1" frameborder="0"></iframe>
+        </div>
+        <div class="realtimevideo">
+            <h1 class="realtimevideo--h1">Hossegor Cuisine</h1>
+            <iframe class="realtimevideo--image" src="http://88.183.212.133:8090/videostream.cgi" frameborder="0"></iframe>
+        </div>
+        <div class="realtimevideo">
+            <h1 class="realtimevideo--h1">Hossegor local piscine</h1>
+            <iframe class="realtimevideo--image" src="http://88.183.212.133:8091/videostream.cgi?user=yves&amp;pwd=akhenaton1" frameborder="0"></iframe>
+        </div>    
+    </div>
+</body>
+</html>
+<style>
+    .realtimevideo {
+        margin: 1rem 2rem;
+        display: flex;
+        flex-direction: column;
+        width: 80%;
+        align-items: center;
+        justify-content: center;
+        border: red 2px solid;
+    }
+    .realtimevideo--h1 {
+        font-size: 1.3rem;
+    }
+    .realtimevideo--image {
+        padding: 2rem;
+        width: 640px;
+        height: 480px;
+    }
+</style>
