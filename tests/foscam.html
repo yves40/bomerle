@@ -8,6 +8,12 @@
 <body>
     <div class="cameras">
         <div class="videocard">
+            <h1 class="videocard--h1">Hossegor terrasse</h1>
+            <div class="video">
+                <iframe class="video--image" src="http://88.183.212.133:8089/videostream.cgi?user=yves&amp;pwd=akhenaton1" frameborder="0"></iframe>
+            </div>
+        </div>
+        <div class="videocard">
             <h1 class="videocard--h1">Hossegor local piscine</h1>
             <div class="video">
                 <iframe class="video--image" 
@@ -16,12 +22,6 @@
                 </iframe>
             </div>
         </div>    
-        <div class="videocard">
-            <h1 class="videocard--h1">Hossegor terrasse</h1>
-            <div class="video">
-                <iframe class="video--image" src="http://88.183.212.133:8089/videostream.cgi?user=yves&amp;pwd=akhenaton1" frameborder="0"></iframe>
-            </div>
-        </div>
         <div class="videocard">
             <h1 class="videocard--h1">Hossegor Cuisine</h1>
             <div class="video">
@@ -49,8 +49,6 @@
     .video {
         border-radius: var(--border-radius);
         overflow: hidden;
-        float: left;
-        position: relative;
     }
     .video--image {
         border: white 1px solid;
