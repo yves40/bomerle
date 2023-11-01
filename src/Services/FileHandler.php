@@ -28,5 +28,14 @@ class FileHandler {
         return $content;
     }
 
-
+    public function getFilesList($directory) {
+        $list = scandir($directory, SCANDIR_SORT_DESCENDING);
+        $filteredarray = [];
+        foreach($list as $file) {
+            if(!is_dir($file)) {
+                array_push($filteredarray, $file);
+            }
+        }
+        return $filteredarray;
+    }
 }
