@@ -32,7 +32,7 @@ class FileHandler {
         $list = scandir($directory, SCANDIR_SORT_DESCENDING);
         $filteredarray = [];
         foreach($list as $file) {
-            if(!is_dir($file)) {
+            if(!is_dir($directory.'/'.$file)) {
                 array_push($filteredarray, $file);
             }
         }
