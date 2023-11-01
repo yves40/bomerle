@@ -259,6 +259,8 @@ slider:
 images:
   menuheader: Images
   list: Uploaded files
+  listheaderknifes: File list for knifes
+  listheaderslides: File list for slideshow
   errortype: Please choose a valid file format (jpg, jpeg, gif, png)
   errorsize: Maximum allowed size exceeded
   errorupload: 'File upload problem: size or number of files'

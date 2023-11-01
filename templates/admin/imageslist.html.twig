@@ -1,0 +1,23 @@
+
+    <h2 class="mt-3 mb-3">{% trans %}images.list{% endtrans %}</h2>
+    <h3>Seen by {{app.user}}</h3>
+    <ul class="list-group">
+        <h3>{% trans %}images.listheaderknifes{% endtrans %}</h3>
+        {% for kfile in klist %}
+            <li class="list-group-item mb-1 pb-1">
+                <div class="row">
+                    <div class="col-2"><h5>{{kfile}}</h5></div>
+                </div>
+            </li>
+        {% endfor %}
+        <h3>{% trans %}images.listheaderslides{% endtrans %}</h3>
+        {% for sfile in slist %}
+            <li class="list-group-item mb-1 pb-1">
+                <div class="row">
+                    <div class="col-2"><h5>{{sfile}}</h5></div>
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
+    <script src="{{ asset('scripts/slideshow.js')}}"></script>
+

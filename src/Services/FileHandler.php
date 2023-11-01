@@ -7,6 +7,8 @@ use Exception;
 class FileHandler {
 
     private string $filename;
+    public const EXCLUDE_DIR = 1;
+    public const INCLUDE_DIR = 0;
 
     public function __construct()  { }
 
@@ -28,12 +30,24 @@ class FileHandler {
         return $content;
     }
 
-    public function getFilesList($directory) {
-        $list = scandir($directory, SCANDIR_SORT_DESCENDING);
+    public function getFilesList($directory, $dirflag = self::EXCLUDE_DIR ) {
+        $list = scandir($directory, SCANDIR_SORT_ASCENDING);
         $filteredarray = [];
+        $formattedsize = 0;
         foreach($list as $file) {
-            if(!is_dir($directory.'/'.$file)) {
-                array_push($filteredarray, $file);
+            if($dirflag) {
+                if(is_file($directory.'/'.$file)) {
+                    $fsize = filesize($directory.'/'.$file);
+                    $formattedsize = number_format($fsize, 0, ',', '.');
+                    array_push($filteredarray, $file . ' Size: '. $formattedsize);
+                }
+            } 
+            else {
+                if(is_file($directory.'/'.$file)) {
+                    $fsize = filesize($directory.'/'.$file);
+                    $formattedsize = number_format($fsize, 0, ',', '.');
+                }
+                array_push($filteredarray, $file . ' Size: '. $formattedsize);
             }
         }
         return $filteredarray;

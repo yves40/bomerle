@@ -9,13 +9,13 @@
 </style>
 
 <div class="example-wrapper">
-    <h1>File list for knifes</h1>
+    <h1>{% trans %}images.listheaderknifes{% endtrans %}</h1>
     <ul>
         {% for kfile in klist %}
             <li>{{kfile}}</li>
         {% endfor %}
     </ul>
-    <h1>File list for slideshow</h1>
+    <h1>{% trans %}images.listheaderslides{% endtrans %}</h1>
     <ul>
         {% for sfile in slist %}
             <li>{{sfile}}</li>
