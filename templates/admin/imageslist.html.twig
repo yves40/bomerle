@@ -33,9 +33,13 @@
                         <div class="col-1">
                                 <a href="#"><img class="svgsmall-red" src="/images/svg/thumbs-down-regular.svg" alt=""/></a>
                         </div>
-                    <div class="col-1">
-                            <a href="#"><img class="svgsmall-lightgreen" src="/images/svg/arrow-right-from-bracket-solid.svg" alt=""/></a>
-                    </div>
+                        {% if kfile.id != 0 %}
+                            <div class="col-1">
+                                    <a href="{{ path('bootadmin.images.convert', {id: kfile.id, 'imagefor': 'knife'}) }}">
+                                        <img class="svgsmall-lightgreen" src="/images/svg/arrow-right-from-bracket-solid.svg" alt=""/>
+                                    </a>
+                            </div>
+                        {% endif %}
                     {% endif %}
                 </div>
             </li>
@@ -74,9 +78,13 @@
                         <div class="col-1">
                                 <a href="#"><img class="svgsmall-red" src="/images/svg/thumbs-down-regular.svg" alt=""/></a>
                         </div>
-                        <div class="col-1">
-                                <a href="#"><img class="svgsmall-lightgreen" src="/images/svg/arrow-right-from-bracket-solid.svg" alt=""/></a>
-                        </div>
+                        {% if sfile.id != 0 %}
+                            <div class="col-1">
+                                    <a href="{{ path('bootadmin.images.convert', {id: sfile.id, 'imagefor': 'slide'}) }}">
+                                        <img class="svgsmall-lightgreen" src="/images/svg/arrow-right-from-bracket-solid.svg" alt=""/>
+                                    </a>
+                            </div>
+                        {% endif %}
                     {% endif %}
                 </div>
             </li>

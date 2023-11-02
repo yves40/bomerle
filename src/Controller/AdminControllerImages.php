@@ -28,7 +28,7 @@ class AdminControllerImages extends AbstractController
         $this->localeSwitcher = $localeSwitcher;
         $this->dblog = $dblog;
     }
-
+    // --------------------------------------------------------------------------
     #[Route('/protected/list', name: 'bootadmin.images.list')]
     public function index(Request $request,
                                 EntityManagerInterface $entityManager,
@@ -44,7 +44,6 @@ class AdminControllerImages extends AbstractController
         $sdirlist = $fh->getFilesList($slideshowimagesloc, FileHandler::EXCLUDE_DIR);
         $kdirlist = $this->checkUsage($kdirlist, $entityManager->getRepository(Images::class));   // Are these images really used by knives or slideshow ? 
         $sdirlist = $this->checkUsage($sdirlist, $entityManager->getRepository(SlideImages::class));
-        dump($sdirlist);
         return $this->render('admin/images.html.twig', [
             'knifeloc' => $knifeimagesloc,
             'slideloc' => $slideshowimagesloc,
@@ -52,6 +51,46 @@ class AdminControllerImages extends AbstractController
             'slist' => $sdirlist,
             'locale' => $loc
         ]);
+    }
+    // --------------------------------------------------------------------------
+    #[Route('/protected/convert/{id?0}/{imagefor}', name: 'bootadmin.images.convert')]
+    public function convertImage(Request $request,
+                                int $id,
+                                string $imagefor,    // Image for a knife or slide ?
+                                EntityManagerInterface $entityManager,
+                                ParameterBagInterface $params): Response
+    {
+        date_default_timezone_set('Europe/Paris');
+        $loc = $this->locale($request);
+        $knifeimagesloc = $params->get('knifeimages_directory');
+        $slideshowimagesloc = $params->get('slideshowimages_directory');
+        $fh = new FileHandler();
+        /**
+         * @var Images $image
+         */
+        switch($imagefor) {
+            case 'knife':
+                $repo = $entityManager->getRepository(Images::class);
+                $image = $repo->find($id);
+                $convertedname = $fh->convertToWebp($knifeimagesloc, $image->getFilename());
+                if($convertedname != null) {
+                    $image->setFilename($convertedname);
+                    $entityManager->persist($image);
+                    $entityManager->flush();
+                }
+                break;
+            case 'slide':
+                $repo = $entityManager->getRepository(SlideImages::class);
+                $image = $repo->find($id);
+                $convertedname = $fh->convertToWebp($slideshowimagesloc, $image->getFilename());
+                if($convertedname != null) {
+                    $image->setFilename($convertedname);
+                    $entityManager->persist($image);
+                    $entityManager->flush();
+                }
+                break;
+        }
+        return $this->redirectToRoute('bootadmin.images.list');
     }
     // --------------------------------------------------------------------------
     private function checkUsage($imagelist, $repo) {
