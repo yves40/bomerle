@@ -1,13 +1,11 @@
 
-    <h2 class="mt-3 mb-3">{% trans %}images.list{% endtrans %}</h2>
-    {# <h3>Seen by {{app.user}}</h3> #}
     <ul class="list-group">
-        <h3>{% trans %}images.listheaderknifes{% endtrans %}</h3>
+        <h2 class="mt-3 mb-3">{% trans %}images.listheaderknifes{% endtrans %}</h2>
         {% for kfile in klist %}
             <li class="list-group-item mb-1 pb-1">
                 <div class="row">
                     <div class="col-6"><h5>{{kfile.name}}</h5></div>
-                    <div class="col-3"><h5>{{kfile.size}}</h5></div>
+                    <div class="col-3">{{kfile.size}}</div>
                     <div class="col-1">
                             <a href="#"><img class="svgsmall-lightgreen" src="/images/svg/arrow-right-from-bracket-solid.svg" alt=""/></a>
                     </div>
@@ -23,12 +21,12 @@
                 </div>
             </li>
         {% endfor %}
-        <h3>{% trans %}images.listheaderslides{% endtrans %}</h3>
+        <h2 class="mt-3 mb-3">{% trans %}images.listheaderslides{% endtrans %}</h2>
         {% for sfile in slist %}
             <li class="list-group-item mb-1 pb-1">
                 <div class="row">
                     <div class="col-6"><h5>{{sfile.name}}</h5></div>
-                    <div class="col-3"><h5>{{sfile.size}}</h5></div>
+                    <div class="col-3">{{sfile.size}}</div>
                     <div class="col-1">
                             <a href="#"><img class="svgsmall-lightgreen" src="/images/svg/arrow-right-from-bracket-solid.svg" alt=""/></a>
                     </div>
