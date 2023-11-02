@@ -61,7 +61,16 @@ class SlideImagesRepository extends ServiceEntityRepository
             ->getResult()
         ;
     }
-    
+
+    public function findImage($name) : array {
+        return $this->createQueryBuilder('i')
+            ->andWhere('i.filename = :val')
+            ->setParameter('val', $name)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
 //    /**
 //     * @return SlideImages[] Returns an array of SlideImages objects
 //     */

@@ -2,11 +2,13 @@
 
 namespace App\Controller;
 
-use App\Entity\SlideShow;
-use App\Form\SlideShowType;
+use App\Entity\Images;
 use App\Services\DBlogger;
+use App\Entity\SlideImages;
+
 use App\Services\FileHandler;
 
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -28,15 +30,21 @@ class AdminControllerImages extends AbstractController
     }
 
     #[Route('/protected/list', name: 'bootadmin.images.list')]
-    public function index(Request $request, ParameterBagInterface $params): Response
+    public function index(Request $request,
+                                EntityManagerInterface $entityManager,
+                                ParameterBagInterface $params): Response
     {
         date_default_timezone_set('Europe/Paris');
         $loc = $this->locale($request);
         $knifeimagesloc = $params->get('knifeimages_directory');
         $slideshowimagesloc = $params->get('slideshowimages_directory');
         $fh = new FileHandler();
+        // get all physical files in directories
         $kdirlist = $fh->getFilesList($knifeimagesloc, FileHandler::EXCLUDE_DIR);
         $sdirlist = $fh->getFilesList($slideshowimagesloc, FileHandler::EXCLUDE_DIR);
+        $kdirlist = $this->checkUsage($kdirlist, $entityManager->getRepository(Images::class));   // Are these images really used by knives or slideshow ? 
+        $sdirlist = $this->checkUsage($sdirlist, $entityManager->getRepository(SlideImages::class));
+        dump($sdirlist);
         return $this->render('admin/images.html.twig', [
             'knifeloc' => $knifeimagesloc,
             'slideloc' => $slideshowimagesloc,
@@ -44,6 +52,20 @@ class AdminControllerImages extends AbstractController
             'slist' => $sdirlist,
             'locale' => $loc
         ]);
+    }
+    // --------------------------------------------------------------------------
+    private function checkUsage($imagelist, $repo) {
+        
+        foreach($imagelist as $key => $img) {
+            $usedimages = $repo->findImage($img['name']);   // Check image is used by a knife or slideshow
+            if(empty($usedimages)) {
+                $imagelist[$key]['used'] = false;
+            }
+            else {
+                $imagelist[$key]['used'] = true;
+            }
+        }
+        return $imagelist;
     }
     // --------------------------------------------------------------------------
     private function locale(Request $request) {

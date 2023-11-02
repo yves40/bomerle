@@ -19,7 +19,7 @@ security:
 
         # Add this firewall to provide a second handler for bootstrap admin
         boot:
-            pattern: ^/securitybootadmin|bootadmin|slides/protected|knives/protected/
+            pattern: ^/securitybootadmin|bootadmin|slides/protected|knives/protected/|adminimages/protected/
             lazy: true
             provider: app_user_provider
             custom_authenticator: App\Security\BootLoginFormAuthenticator

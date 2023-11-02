@@ -59,6 +59,15 @@ class ImagesRepository extends ServiceEntityRepository
             ->getResult()
         ;
     }
+    
+    public function findImage($name) : array {
+        return $this->createQueryBuilder('i')
+            ->andWhere('i.filename = :val')
+            ->setParameter('val', $name)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 
 //    /**
 //     * @return Images[] Returns an array of Images objects
