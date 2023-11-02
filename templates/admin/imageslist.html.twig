@@ -1,14 +1,21 @@
 
     <ul class="list-group">
         <h2 class="mt-3 mb-3">{% trans %}images.listheaderknifes{% endtrans %}</h2>
+        {# Header du tableau #}
+        <li class="list-group-item mb-3 active">
+            <div class="row">
+                <div class="col-6">{% trans %}images.filename{% endtrans %}</div>
+                <div class="col-3">{% trans %}images.size{% endtrans %}</div>
+                <div class="col-1">{% trans %}images.used{% endtrans %}</div>
+                <div class="col-1">{% trans %}images.format{% endtrans %}</div>
+                <div class="col-1">{% trans %}images.convert{% endtrans %}</div>
+            </div>
+        </li>
         {% for kfile in klist %}
             <li class="list-group-item mb-1 pb-1">
                 <div class="row">
                     <div class="col-6"><h5>{{kfile.name}}</h5></div>
                     <div class="col-3">{{kfile.size}}</div>
-                    <div class="col-1">
-                            <a href="#"><img class="svgsmall-lightgreen" src="/images/svg/arrow-right-from-bracket-solid.svg" alt=""/></a>
-                    </div>
                     {% if kfile.used %}
                         <div class="col-1">
                                 <a href="#"><img class="svgsmall-lightgreen" src="/images/svg/plug-circle-plus-solid.svg" alt=""/></a>
@@ -18,18 +25,38 @@
                                 <a href="#"><img class="svgsmall-red" src="/images/svg/plug-circle-minus-solid.svg" alt=""/></a>
                         </div>                        
                     {% endif %}
+                    {% if kfile.extension == 'webp' %}
+                        <div class="col-1">
+                                <a href="#"><img class="svgsmall-lightgreen" src="/images/svg/thumbs-up-regular.svg" alt=""/></a>
+                        </div>
+                    {% else %}
+                        <div class="col-1">
+                                <a href="#"><img class="svgsmall-red" src="/images/svg/thumbs-down-regular.svg" alt=""/></a>
+                        </div>
+                    <div class="col-1">
+                            <a href="#"><img class="svgsmall-lightgreen" src="/images/svg/arrow-right-from-bracket-solid.svg" alt=""/></a>
+                    </div>
+                    {% endif %}
                 </div>
             </li>
         {% endfor %}
         <h2 class="mt-3 mb-3">{% trans %}images.listheaderslides{% endtrans %}</h2>
+        {# Header du tableau #}
+        <li class="list-group-item mb-3 active">
+            <div class="row">
+                <div class="col-6">{% trans %}images.filename{% endtrans %}</div>
+                <div class="col-3">{% trans %}images.size{% endtrans %}</div>
+                <div class="col-1">{% trans %}images.used{% endtrans %}</div>
+                <div class="col-1">{% trans %}images.format{% endtrans %}</div>
+                <div class="col-1">{% trans %}images.convert{% endtrans %}</div>
+            </div>
+        </li>
+        {# Liste des fichiers #}
         {% for sfile in slist %}
             <li class="list-group-item mb-1 pb-1">
                 <div class="row">
                     <div class="col-6"><h5>{{sfile.name}}</h5></div>
                     <div class="col-3">{{sfile.size}}</div>
-                    <div class="col-1">
-                            <a href="#"><img class="svgsmall-lightgreen" src="/images/svg/arrow-right-from-bracket-solid.svg" alt=""/></a>
-                    </div>
                     {% if sfile.used %}
                         <div class="col-1">
                                 <a href="#"><img class="svgsmall-lightgreen" src="/images/svg/plug-circle-plus-solid.svg" alt=""/></a>
@@ -38,6 +65,18 @@
                         <div class="col-1">
                                 <a href="#"><img class="svgsmall-red" src="/images/svg/plug-circle-minus-solid.svg" alt=""/></a>
                         </div>                        
+                    {% endif %}
+                    {% if sfile.extension == 'webp' %}
+                        <div class="col-1">
+                                <a href="#"><img class="svgsmall-lightgreen" src="/images/svg/thumbs-up-regular.svg" alt=""/></a>
+                        </div>
+                    {% else %}
+                        <div class="col-1">
+                                <a href="#"><img class="svgsmall-red" src="/images/svg/thumbs-down-regular.svg" alt=""/></a>
+                        </div>
+                        <div class="col-1">
+                                <a href="#"><img class="svgsmall-lightgreen" src="/images/svg/arrow-right-from-bracket-solid.svg" alt=""/></a>
+                        </div>
                     {% endif %}
                 </div>
             </li>

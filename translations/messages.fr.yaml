@@ -263,6 +263,11 @@ images:
   errortype: Merci de choisir un format de fichier valide (jpg, jpeg, gif, png)
   errorsize: Taille maximale autorisée dépassée
   errorupload: 'Problème avec le(s) fichier(s) : nombre ou taille'
+  filename: Nom du fichier
+  size: Taille (octets)
+  used: Utilisé
+  format: Format optimum
+  convert: Convertir
 generic:
   cancel: Opération abandonnée
   monday: Lundi

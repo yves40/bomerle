@@ -58,11 +58,14 @@ class AdminControllerImages extends AbstractController
         
         foreach($imagelist as $key => $img) {
             $usedimages = $repo->findImage($img['name']);   // Check image is used by a knife or slideshow
+            // dump($usedimages);
             if(empty($usedimages)) {
                 $imagelist[$key]['used'] = false;
+                $imagelist[$key]['id'] = 0;
             }
             else {
                 $imagelist[$key]['used'] = true;
+                $imagelist[$key]['id'] = $usedimages[0]->getId();
             }
         }
         return $imagelist;

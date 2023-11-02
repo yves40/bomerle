@@ -37,9 +37,12 @@ class FileHandler {
         foreach($list as $file) {
             if($dirflag) {
                 if(is_file($directory.'/'.$file)) {
+                    $extension = pathinfo($directory.'/'.$file, PATHINFO_EXTENSION);
                     $fsize = filesize($directory.'/'.$file);
                     $formattedsize = number_format($fsize, 0, ',', '.');
-                    $fobj = [ 'name' => $file, 'size' => $formattedsize];
+                    $fobj = [ 'name' => $file, 
+                                'size' => $formattedsize,
+                                'extension' => $extension];
                     array_push($filteredarray, $fobj);
                 }
             } 
