@@ -14,7 +14,7 @@ use Symfony\Component\Translation\LocaleSwitcher;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
-#[Route('/uploadedimages')]
+#[Route('/adminimages')]
 class AdminControllerImages extends AbstractController
 {
     private LocaleSwitcher $localeSwitcher;
@@ -32,10 +32,6 @@ class AdminControllerImages extends AbstractController
     {
         date_default_timezone_set('Europe/Paris');
         $loc = $this->locale($request);
-
-        $slide = new SlideShow();
-        $form = $this->createForm(SlideShowType::class, $slide);
-
         $knifeimagesloc = $params->get('knifeimages_directory');
         $slideshowimagesloc = $params->get('slideshowimages_directory');
         $fh = new FileHandler();
@@ -46,7 +42,6 @@ class AdminControllerImages extends AbstractController
             'slideloc' => $slideshowimagesloc,
             'klist' => $kdirlist,
             'slist' => $sdirlist,
-            'form' => $form->createView(),
             'locale' => $loc
         ]);
     }
