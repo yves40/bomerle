@@ -94,19 +94,26 @@ class AdminControllerImages extends AbstractController
     }
     // --------------------------------------------------------------------------
     private function checkUsage($imagelist, $repo) {
-        
         foreach($imagelist as $key => $img) {
             $usedimages = $repo->findImage($img['name']);   // Check image is used by a knife or slideshow
-            // dump($usedimages);
             if(empty($usedimages)) {
                 $imagelist[$key]['used'] = false;
                 $imagelist[$key]['id'] = 0;
+                $imagelist[$key]['relatedobject'] = 'None';
             }
             else {
                 $imagelist[$key]['used'] = true;
                 $imagelist[$key]['id'] = $usedimages[0]->getId();
+                $imagelist[$key]['class'] = 'none';
+                if(get_class($repo) == 'App\Repository\ImagesRepository'){
+                    $imagelist[$key]['relatedobject'] = $usedimages[0]->getKnifes()->getName();
+                }
+                else {
+                    $imagelist[$key]['relatedobject'] = $usedimages[0]->getSlideshow()->getName();
+                }
             }
         }
+        dump($imagelist);
         return $imagelist;
     }
     // --------------------------------------------------------------------------

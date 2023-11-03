@@ -14,7 +14,7 @@
         {% for kfile in klist %}
             <li class="list-group-item mb-1 pb-1">
                 <div class="row">
-                    <div class="col-6"><h5>{{kfile.name}}</h5></div>
+                    <div class="col-6"><h5>{{kfile.name}} ({{kfile.relatedobject}})</h5></div>
                     <div class="col-3">{{kfile.size}}</div>
                     {% if kfile.used %}
                         <div class="col-1">
@@ -59,7 +59,7 @@
         {% for sfile in slist %}
             <li class="list-group-item mb-1 pb-1">
                 <div class="row">
-                    <div class="col-6"><h5>{{sfile.name}}</h5></div>
+                    <div class="col-6"><h5>{{sfile.name}} ({{sfile.relatedobject}})</h5></div>
                     <div class="col-3">{{sfile.size}}</div>
                     {% if sfile.used %}
                         <div class="col-1">
