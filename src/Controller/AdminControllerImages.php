@@ -113,7 +113,6 @@ class AdminControllerImages extends AbstractController
                 }
             }
         }
-        dump($imagelist);
         return $imagelist;
     }
     // --------------------------------------------------------------------------
