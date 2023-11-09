@@ -7,29 +7,32 @@
     <link rel="stylesheet" href="../css/foscam.css">
 </head>
 <body>
+    <div class="videocard test">Test video stream</div>
+    <button class="videocard__button">Set 2</button>
+    <button class="videocard__button--green">Green</button>
+    <div class="videocard">
+        <div class="video--169">
+            <iframe class="video__iframe" 
+                src="https://www.youtube.com/embed/B_6ocZsNSQY" frameborder="0"></iframe>
+        </div>
+        <div class="video--169">
+            <iframe class="video__iframe" 
+                src="https://www.youtube.com/embed/bpvKTJEBObM" frameborder="0"></iframe>
+        </div>
+    </div>
     <div class="cameras">
-        <div class="videocard test">Test</div>
         <div class="videocard">
-            <button class="videocard__button">Set 2</button>
-            <button class="videocard__button--green">Green</button>
-            <h1 class="videocard--h1">Hossegor terrasse</h1>
-            <div class="video">
-                <iframe class="video--image" src="http://88.183.212.133:8089/videostream.cgi?user=yves&amp;pwd=akhenaton1" frameborder="0"></iframe>
+            <h1 class="videocard--h1">Cuisine</h1>
+                <div class="video--43">
+                <iframe class="video__iframe" 
+                    src="http://88.183.212.133:8090/videostream.cgi?user=yves&amp;pwd=akhenaton1"></iframe>
             </div>
         </div>
         <div class="videocard">
-            <h1 class="videocard--h1">Hossegor local piscine</h1>
-            <div class="video">
-                <iframe class="video--image" 
-                        src="http://88.183.212.133:8091/videostream.cgi?user=yves&amp;pwd=akhenaton1" 
-                        frameborder="0" allowfullscreen>
-                </iframe>
-            </div>
-        </div>    
-        <div class="videocard">
-            <h1 class="videocard--h1">Hossegor Cuisine</h1>
-            <div class="video">
-                <iframe class="video--image" src="http://88.183.212.133:8090/videostream.cgi" frameborder="0"></iframe>
+            <h1 class="videocard--h1">Terrasse RECO </h1>
+            <div class="video--43">
+                <iframe class="video__iframe" 
+                src="http://88.183.212.133:8089/videostream.cgi?user=yves&amp;pwd=akhenaton1"></iframe>
             </div>
         </div>
     </div>
