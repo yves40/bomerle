@@ -5,9 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="../css/foscam.css">
+    <script src="../node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="./foscam.js"></script>
 </head>
 <body>
-    <div class="videocard test">Test video stream</div>
+    <div class="videocard banner">Test video stream</div>
     <button class="videocard__button">Set 2</button>
     <button class="videocard__button--green">Green</button>
     <div class="videocard">
@@ -24,21 +26,21 @@
         <div class="videocard">
             <h1 class="videocard--h1">Terrasse special iframe tag</h1>
                 <div class="video--43">
-                    <iframe class="video__iframe" 
+                    <iframe class="video__iframe" width="640px" height="480px"
                     src="http://88.183.212.133:8089/videostream.cgi?user=yves&amp;pwd=akhenaton1"></iframe>
                 </div>
         </div>
         <div class="videocard">
             <h1 class="videocard--h1">Terrasse RECO</h1>
             <div class="video--43">
-                <iframe class="video__iframe" 
+                <iframe  width="640px" height="480px"
                 src="http://88.183.212.133:8089/videostream.cgi?user=yves&amp;pwd=akhenaton1"></iframe>
             </div>
         </div>
         <div class="videocard">
             <h1 class="videocard--h1">Cuisine</h1>
                 <div class="video--43">
-                <iframe class="video__iframe" 
+                <iframe width="640px" height="480px"
                     src="http://88.183.212.133:8090/videostream.cgi?user=yves&amp;pwd=akhenaton1"></iframe>
             </div>
         </div>
