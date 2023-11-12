@@ -6,18 +6,21 @@
     <title>Document</title>
     <link rel="stylesheet" href="../css/foscam.css">
     <script src="../node_modules/jquery/dist/jquery.min.js"></script>
-    <script src="../scripts/jquery.fitvids.js"></script>
+    <script src="./foscam.js"></script>
     <!-- 
+        <script src="../scripts/jquery.fitvids.js"></script>
     -->
 </head>
-<script>
+<!-- 
+    <script>
     $(document).ready(function(){
-      // Target your .container, .wrapper, .post, etc.
-      $(".cameras").fitVids({ customSelector: "iframe[src^='http://88.183.212.133']"});
-      console.log(`fitvid armed....`);
-      // Selectors are comma separated, just like CSS
+        // Target your .container, .wrapper, .post, etc.
+        $(".cameras").fitVids({ customSelector: "iframe[src^='http://88.183.212.133']"});
+        console.log(`fitvid armed....`);
+        // Selectors are comma separated, just like CSS
     });
-</script>
+    </script>
+-->
 <body>
     <div class="videocard banner">Test video stream</div>
     <button class="videocard__button">Set 2</button>
@@ -36,7 +39,7 @@
         <div class="videocard">
             <h1 class="videocard--h1">Terrasse RECO</h1>
             <div class="video--43">
-                <iframe class="video__iframe"
+                <iframe
                     src="http://88.183.212.133:8089/videostream.cgi?user=yves&amp;pwd=akhenaton1">
                 </iframe>
             </div>
@@ -44,7 +47,7 @@
         <div class="videocard">
             <h1 class="videocard--h1">Cuisine</h1>
             <div class="video--43">
-                <iframe class="video__iframe"
+                <iframe
                     src="http://88.183.212.133:8090/videostream.cgi?user=yves&amp;pwd=akhenaton1">
                 </iframe>
             </div>

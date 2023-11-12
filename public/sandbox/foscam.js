@@ -4,17 +4,19 @@ $(document).ready(function () {
 
     const $allVideos = $("iframe[src^='http://88.183.212.133']");
     // The element that is fluid width
-    const videocards = $(".videocard");
+    const videocards = $(".video--43");
     const card = videocards[0];
     console.log(videocards);
 
     $allVideos.each(function() {
-        let h = parseInt(this.height);
-        let w = parseInt(this.width);
-        $(this).data('aspectRatio', h / w)
-            // and remove the hard coded width/height
-            .removeAttr('height')
-            .removeAttr('width');
+        const parent = $(this).parent();
+        let h = parseInt($(parent).height());
+        let w = parseInt($(parent).width());
+        // $(this).data('aspectRatio', h / w)
+        //     // and remove the hard coded width/height
+        //     .removeAttr('height')
+        //     .removeAttr('width');
+        $(this).attr('height', h).attr('width', w);
         console.log(`aspect ratio set to ${h/w}`);
     });
 
@@ -24,10 +26,11 @@ $(document).ready(function () {
         const newWidth = $(card).width();
         // Resize all videos according to their own aspect ratio
         $allVideos.each(function() {  
-            var $el = $(this);
-            $el
-                .width(newWidth)
-                .height(newWidth * $el.data('aspectRatio'));  
+            const parent = $(this).parent();
+            let h = parseInt($(parent).height());
+            let w = parseInt($(parent).width());
+            $(this).attr('height', h).attr('width', w);
+            console.log(`aspect ratio set to ${h/w}`);                
         });
     // Kick off one resize to fix all videos on page load
     }).resize();
