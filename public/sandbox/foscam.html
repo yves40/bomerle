@@ -5,7 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="../css/foscam.css">
+    <script src="../node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="../scripts/jquery.fitvids.js"></script>
+    <!-- 
+    -->
 </head>
+<script>
+    $(document).ready(function(){
+      // Target your .container, .wrapper, .post, etc.
+      $(".cameras").fitVids({ customSelector: "iframe[src^='http://88.183.212.133']"});
+      console.log(`fitvid armed....`);
+      // Selectors are comma separated, just like CSS
+    });
+</script>
 <body>
     <div class="videocard banner">Test video stream</div>
     <button class="videocard__button">Set 2</button>
@@ -21,7 +33,6 @@
         </div>
     </div>
     <div class="cameras">
-
         <div class="videocard">
             <h1 class="videocard--h1">Terrasse RECO</h1>
             <div class="video--43">
@@ -30,16 +41,14 @@
                 </iframe>
             </div>
         </div>
-
         <div class="videocard">
             <h1 class="videocard--h1">Cuisine</h1>
-                <div class="video--43">
+            <div class="video--43">
                 <iframe class="video__iframe"
                     src="http://88.183.212.133:8090/videostream.cgi?user=yves&amp;pwd=akhenaton1">
                 </iframe>
             </div>
         </div>
     </div>
-
 </body>
 </html>
