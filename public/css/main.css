@@ -1,26 +1,34 @@
-.allnews {
-  display: flex;
-  flex-wrap: wrap;
-  margin-top: 70px; }
-  .allnews .news {
-    padding: 30px;
-    scroll-margin: 70px;
-    width: 100%; }
-    .allnews .news h1, .allnews .news h2 {
-      margin: 1rem; }
-    .allnews .news img {
-      margin: 20px;
-      width: 300px;
-      height: 300px;
-      border: solid darkgrey 3px;
-      border-radius: 10px; }
-    .allnews .news p {
-      margin: 30px 20px;
-      font-style: italic; }
-    .allnews .news:nth-child(even) img {
-      float: left; }
-    .allnews .news:nth-child(odd) img {
-      float: right; }
+.bg-knifeleft {
+  background-image: url("../images/background-left.jpg");
+  background-size: cover;
+  color: white; }
+
+.bg-kniferight {
+  background-image: url("../images/background-right.jpg");
+  background-size: cover;
+  color: white; }
+
+.bg-enclume {
+  background-image: url("../images/enclume.jpg");
+  background-size: cover;
+  color: white; }
+
+.bg-thinknife {
+  background-image: url("../images/home-knife.jpg");
+  background-size: cover;
+  color: white; }
+
+.bgr-green {
+  background: radial-gradient(circle, #020024 0%, #097936 100%, #00d4ff 100%);
+  color: white; }
+
+.bgr-black {
+  background: linear-gradient(to bottom left, #959595 0%, #0D0D0D 50%, #010101 50%, #0A0A0A 53%, #4E4E4E 76%, #383838 87%, #1B1B1B 100%);
+  color: white; }
+
+.bgr-blue {
+  background: radial-gradient(circle, #020024 0%, #090979 50%, #00d4ff 100%);
+  color: white; }
 
 /*
   How to compute the filter value ???
@@ -63,6 +71,30 @@
   width: 50px;
   height: 50px;
   filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(131deg) brightness(102%) contrast(102%); }
+
+.allnews {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 70px; }
+  .allnews .news {
+    padding: 30px;
+    scroll-margin: 70px;
+    width: 100%; }
+    .allnews .news h1, .allnews .news h2 {
+      margin: 1rem; }
+    .allnews .news img {
+      margin: 20px;
+      width: 300px;
+      height: 300px;
+      border: solid darkgrey 3px;
+      border-radius: 10px; }
+    .allnews .news p {
+      margin: 30px 20px;
+      font-style: italic; }
+    .allnews .news:nth-child(even) img {
+      float: left; }
+    .allnews .news:nth-child(odd) img {
+      float: right; }
 
 .topmenu {
   position: fixed;
@@ -240,6 +272,38 @@
   #globalfullscreen .cardframe__text {
     display: none; } }
 
+.bg-knifeleft {
+  background-image: url("../images/background-left.jpg");
+  background-size: cover;
+  color: white; }
+
+.bg-kniferight {
+  background-image: url("../images/background-right.jpg");
+  background-size: cover;
+  color: white; }
+
+.bg-enclume {
+  background-image: url("../images/enclume.jpg");
+  background-size: cover;
+  color: white; }
+
+.bg-thinknife {
+  background-image: url("../images/home-knife.jpg");
+  background-size: cover;
+  color: white; }
+
+.bgr-green {
+  background: radial-gradient(circle, #020024 0%, #097936 100%, #00d4ff 100%);
+  color: white; }
+
+.bgr-black {
+  background: linear-gradient(to bottom left, #959595 0%, #0D0D0D 50%, #010101 50%, #0A0A0A 53%, #4E4E4E 76%, #383838 87%, #1B1B1B 100%);
+  color: white; }
+
+.bgr-blue {
+  background: radial-gradient(circle, #020024 0%, #090979 50%, #00d4ff 100%);
+  color: white; }
+
 /*
   How to compute the filter value ???
   Go to thi site: https://codepen.io/sosuke/pen/Pjoqqp
@@ -355,6 +419,38 @@
     opacity: 0; }
   100% {
     opacity: 1; } }
+
+.bg-knifeleft {
+  background-image: url("../images/background-left.jpg");
+  background-size: cover;
+  color: white; }
+
+.bg-kniferight {
+  background-image: url("../images/background-right.jpg");
+  background-size: cover;
+  color: white; }
+
+.bg-enclume {
+  background-image: url("../images/enclume.jpg");
+  background-size: cover;
+  color: white; }
+
+.bg-thinknife {
+  background-image: url("../images/home-knife.jpg");
+  background-size: cover;
+  color: white; }
+
+.bgr-green {
+  background: radial-gradient(circle, #020024 0%, #097936 100%, #00d4ff 100%);
+  color: white; }
+
+.bgr-black {
+  background: linear-gradient(to bottom left, #959595 0%, #0D0D0D 50%, #010101 50%, #0A0A0A 53%, #4E4E4E 76%, #383838 87%, #1B1B1B 100%);
+  color: white; }
+
+.bgr-blue {
+  background: radial-gradient(circle, #020024 0%, #090979 50%, #00d4ff 100%);
+  color: white; }
 
 /*
   How to compute the filter value ???
@@ -607,38 +703,17 @@
   scroll-behavior: smooth !important;
   box-sizing: border-box; }
 
-.bg-knifeleft {
-  background-image: url("../images/background-left.jpg");
-  background-size: cover;
-  color: white; }
+#mvp {
+  margin: 0 auto;
+  width: 80%;
+  max-width: 70vw; }
 
-.bg-kniferight {
-  background-image: url("../images/background-right.jpg");
-  background-size: cover;
-  color: white; }
+@media screen and (max-width: 850px) {
+  #mvp {
+    width: 90%;
+    max-width: 90vw; } }
 
-.bg-enclume {
-  background-image: url("../images/enclume.jpg");
-  background-size: cover;
-  color: white; }
-
-.bg-thinknife {
-  background-image: url("../images/home-knife.jpg");
-  background-size: cover;
-  color: white; }
-
-.bgr-green {
-  background: radial-gradient(circle, #020024 0%, #097936 100%, #00d4ff 100%);
-  color: white; }
-
-.bgr-black {
-  background: linear-gradient(to bottom left, #959595 0%, #0D0D0D 50%, #010101 50%, #0A0A0A 53%, #4E4E4E 76%, #383838 87%, #1B1B1B 100%);
-  color: white; }
-
-.bgr-blue {
-  background: radial-gradient(circle, #020024 0%, #090979 50%, #00d4ff 100%);
-  color: white; }
-
+/* Screen greater than bigsize ? */
 #globalfullscreen {
   position: absolute;
   display: flex;

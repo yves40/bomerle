@@ -1,3 +1,4 @@
+@import './dad/const.scss';
 @import './dad/news';
 @import './dad/menu';
 @import './dad/cards';
@@ -11,32 +12,25 @@
   text-decoration: none;
   list-style: none;
   scroll-behavior: smooth !important;
-  box-sizing: border-box; 
+  box-sizing: border-box;
+  // background-color: black;
 }
-.bg-knifeleft {
-  background-image: url('../images/background-left.jpg');  
-  background-size: cover;
-  color: white;
-}
-.bg-kniferight {
-  background-image: url('../images/background-right.jpg'); 
-  background-size: cover;
-  color: white;
-}
-.bg-enclume {
-  background-image: url('../images/enclume.jpg'); 
-  background-size: cover;
-  color: white;
-}
-.bg-thinknife {
-  background-image: url('../images/home-knife.jpg'); 
-  background-size: cover;
-  color: white;
-}
-.bgr-green {  background: $bg-gradient-green; color: white }
-.bgr-black {  background: $bg-gradient-black;  color: white }
-.bgr-blue {  background: $bg-gradient-blue;  color: white } 
 
+#mvp {
+  // border: red 2px solid;
+  margin: 0 auto;
+  width: 80%;
+  max-width: 70vw;
+}
+@media screen and (max-width: $smallsize) { 
+  #mvp {
+    width: 90%;
+    max-width: 90vw;
+  }
+}
+/* Screen greater than bigsize ? */
+@media screen and (min-width: $bigsize) { 
+  }
 #globalfullscreen {
   position: absolute;
   display: flex;

@@ -31,67 +31,69 @@
       </ul>
     </div>
   </nav>
-  <div class="allnews">
-    <div id="section0" class="news bg-enclume">
-      <h1>{% trans %}app.public.main.name{% endtrans %}</h1>
-      <h2 >{% trans %}app.public.main.whatis{% endtrans %}</h2>
-      <div class="htmltemplate textleft" data-templatename='maintext' data-lang={{locale}}></div>
-    </div>
-    <div id="section1" class="news bg-thinknife">
-      <div class="htmltemplate textleft" data-templatename='story' data-lang={{locale}}></div>
-    </div>
-    <div id="thegallery">
-    </div>
-  </div>
-  <div id="cards" class="cards">
-    <div class="cards-header">
-      <div class="htmltemplate textleft" data-templatename='cardsheader' data-lang={{locale}}></div>
-    </div>
-  </div>
-  <div id="infos" class="infos">
-    <div class="infoelement">
-      <h3>{% trans %}contact.infos{% endtrans %}</h3>
-      {{ form_start(formcontact, {'attr': {'novalidate': 'novalidate', 'class': 'form'}}) }}
-          <div class="contact">
-              {{ form_label(formcontact.email, 'contact.email' | trans) }}
-              {{ form_widget(formcontact.email) }}
-              {{ form_errors(formcontact.email) }}
-          </div>
-          <div class="contact object">
-              {{ form_label(formcontact.object, 'contact.object' | trans) }}
-              {{ form_widget(formcontact.object) }}
-              {{ form_errors(formcontact.object) }}
-          </div>                
-          <div class="contact knife">
-              {{ form_label(formcontact.reservation, 'contact.couteau' | trans) }}
-              {{ form_widget(formcontact.reservation) }}
-              {{ form_errors(formcontact.reservation) }}
-          </div>
-          <div class="contact">
-              {{ form_label(formcontact.text, 'contact.message' | trans) }}
-              {{ form_widget(formcontact.text) }}
-              {{ form_errors(formcontact.text) }}
-          </div>
-          <button id="requestcontact">{% trans %}contact.button{% endtrans %}</button>
-      {{ form_end(formcontact) }}
-      <div class="feedback" hidden>
-        <p id='feedback'></p>
+  <div id="mvp">
+    <div class="allnews">
+      <div id="section0" class="news bg-enclume">
+        <h1>{% trans %}app.public.main.name{% endtrans %}</h1>
+        <h2 >{% trans %}app.public.main.whatis{% endtrans %}</h2>
+        <div class="htmltemplate textleft" data-templatename='maintext' data-lang={{locale}}></div>
+      </div>
+      <div id="section1" class="news bg-thinknife">
+        <div class="htmltemplate textleft" data-templatename='story' data-lang={{locale}}></div>
+      </div>
+      <div id="thegallery">
       </div>
     </div>
-    <div class="infoelement">
-        <h3>{% trans %}contact.shop{% endtrans %}</h3>
-        <p>335 Route de Saint-Thomas, Bras de Fer, 63250 Arconsat - France</p>
-        <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d8335.20455949551!2d3.697428155338033!3d45.87975863223886!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47f6a39f16d585a5%3A0x8c6e73b6d1676394!2sCoutellerie%20d&#39;art%20%2F%20Beau%20merle!5e1!3m2!1sfr!2sfr!4v1694419775554!5m2!1sfr!2sfr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
-                width="350" height="350" 
-                style="border:0;" 
-                allowfullscreen="" 
-                loading="lazy" 
-                referrerpolicy="no-referrer-when-downgrade">
-        </iframe>
+    <div id="cards" class="cards">
+      <div class="cards-header">
+        <div class="htmltemplate textleft" data-templatename='cardsheader' data-lang={{locale}}></div>
+      </div>
     </div>
-    <div class="infoelement">
-          <h3>{% trans %}contact.social{% endtrans %}</h3>
-          <a href="#"><img class="svgbig-blue" src="/images/svg/logo-facebook.svg" /></a>
+    <div id="infos" class="infos">
+      <div class="infoelement">
+        <h3>{% trans %}contact.infos{% endtrans %}</h3>
+        {{ form_start(formcontact, {'attr': {'novalidate': 'novalidate', 'class': 'form'}}) }}
+            <div class="contact">
+                {{ form_label(formcontact.email, 'contact.email' | trans) }}
+                {{ form_widget(formcontact.email) }}
+                {{ form_errors(formcontact.email) }}
+            </div>
+            <div class="contact object">
+                {{ form_label(formcontact.object, 'contact.object' | trans) }}
+                {{ form_widget(formcontact.object) }}
+                {{ form_errors(formcontact.object) }}
+            </div>                
+            <div class="contact knife">
+                {{ form_label(formcontact.reservation, 'contact.couteau' | trans) }}
+                {{ form_widget(formcontact.reservation) }}
+                {{ form_errors(formcontact.reservation) }}
+            </div>
+            <div class="contact">
+                {{ form_label(formcontact.text, 'contact.message' | trans) }}
+                {{ form_widget(formcontact.text) }}
+                {{ form_errors(formcontact.text) }}
+            </div>
+            <button id="requestcontact">{% trans %}contact.button{% endtrans %}</button>
+        {{ form_end(formcontact) }}
+        <div class="feedback" hidden>
+          <p id='feedback'></p>
+        </div>
+      </div>
+      <div class="infoelement">
+          <h3>{% trans %}contact.shop{% endtrans %}</h3>
+          <p>335 Route de Saint-Thomas, Bras de Fer, 63250 Arconsat - France</p>
+          <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d8335.20455949551!2d3.697428155338033!3d45.87975863223886!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47f6a39f16d585a5%3A0x8c6e73b6d1676394!2sCoutellerie%20d&#39;art%20%2F%20Beau%20merle!5e1!3m2!1sfr!2sfr!4v1694419775554!5m2!1sfr!2sfr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+                  width="350" height="350" 
+                  style="border:0;" 
+                  allowfullscreen="" 
+                  loading="lazy" 
+                  referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
+      </div>
+      <div class="infoelement">
+            <h3>{% trans %}contact.social{% endtrans %}</h3>
+            <a href="#"><img class="svgbig-blue" src="/images/svg/logo-facebook.svg" /></a>
+      </div>
     </div>
   </div>
   <footer class="footer">
