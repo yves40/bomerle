@@ -4,7 +4,7 @@ $(document).ready(function () {
 
     const $allVideos = $("iframe[src^='http://88.183.212.133']");
     // The element that is fluid width
-    const videocards = $(".video--43");
+    const videocards = $(".video-43");
     const card = videocards[0];
     console.log(videocards);
 
@@ -12,12 +12,10 @@ $(document).ready(function () {
         const parent = $(this).parent();
         let h = parseInt($(parent).height());
         let w = parseInt($(parent).width());
-        // $(this).data('aspectRatio', h / w)
-        //     // and remove the hard coded width/height
-        //     .removeAttr('height')
-        //     .removeAttr('width');
-        $(this).attr('height', h).attr('width', w);
-        console.log(`aspect ratio set to ${h/w}`);
+        const ratio = w/h;
+        console.log(`padding-top set to ${ratio}%`);
+        $(parent).addClass('fluid-vids').css('padding-top', `${ratio}%`);
+        $(this).removeAttr('height').removeAttr('width');
     });
 
     // When the window is resized
@@ -29,8 +27,10 @@ $(document).ready(function () {
             const parent = $(this).parent();
             let h = parseInt($(parent).height());
             let w = parseInt($(parent).width());
-            $(this).attr('height', h).attr('width', w);
-            console.log(`aspect ratio set to ${h/w}`);                
+            const ratio = w/h;
+            console.log(`padding-top set to ${ratio}%`);
+            $(parent).addClass('fluid-vids').css('padding-top', `${ratio}%`);
+            $(this).removeAttr('height').removeAttr('width');
         });
     // Kick off one resize to fix all videos on page load
     }).resize();
