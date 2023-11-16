@@ -13,7 +13,6 @@
   list-style: none;
   scroll-behavior: smooth !important;
   box-sizing: border-box;
-  // background-color: black;
 }
 
 #mvp {
@@ -24,6 +23,7 @@
 }
 @media screen and (max-width: $smallsize) { 
   #mvp {
+    border: red solid 3px; 
     width: 90%;
     max-width: 90vw;
   }

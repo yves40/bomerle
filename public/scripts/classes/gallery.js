@@ -37,8 +37,8 @@ class Gallery {
     buildGalleryFrame(container) {
         const galleryzone = $("<div>").addClass('galleryzone');
         const gallerytext = $("<div>").addClass('gallerytext');
-        const spantext = $('<span>').text(this.description);
-        $(gallerytext).append(spantext);
+        const text = $('<p>').text(this.description);
+        $(gallerytext).append(text);
         const gallery = $("<ul>").attr('id', this.gallery).addClass('gallery')
         $(galleryzone).append(gallerytext);
         $(galleryzone).append(gallery);

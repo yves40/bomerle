@@ -17,7 +17,7 @@
       loadCard(container, data) {
         const cardimage = $("<div></div>").addClass('cardframe__image');
         const cardtitle = $("<div></div>").addClass('cardframe__title').html(this.data.knifeName);
-        const cardtext = $("<div></div>").addClass('cardframe__text').html(this.data.knifedesc);
+        const cardtext = $("<p>").addClass('cardframe__text').html(this.data.knifedesc);
         const img = $("<img>").attr('src', `/images/knife/${this.data.images[0]}`);
         $(img).on('click', (event) => {
           this.Zoom(event);

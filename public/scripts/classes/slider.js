@@ -151,8 +151,8 @@ class Slider {
     const sliderzone = $("<div>").attr('id', this.homezone)
                                           .addClass('carousel');
     const slidetext = $('<div></div>').addClass('gallerytext');
-    const spantitle = $('<span></span>').text(this.description);
-    $(slidetext).append(spantitle);
+    const title = $('<p>').text(this.description);
+    $(slidetext).append(title);
     $(galleryzone).append(slidetext);
     const ul = $('<ul></ul>').attr('id', this.sliderarea).addClass('sliderarea');
     const prev = $("<a></a>").addClass('carousel-button prev');
