@@ -45,6 +45,22 @@ class SiteController extends AbstractController
             ]
         );               
     }
+    // --------------------------------------------------------------------------
+    #[Route('/test', name: 'test.main')]
+    public function test(Request $request, 
+                TranslatorInterface $translator): Response
+    {
+        $contact = new Contact();
+
+        $formContact = $this->createForm(ContactType::class, $contact);
+        $formContact->handleRequest($request);
+        $loc = $this->locale($request); // Set the proper language for translations
+        return $this->render('newmain.html.twig', [
+            "locale" =>  $this->localeSwitcher->getLocale(),
+            'formcontact' => $formContact->createView(),
+            ]
+        );               
+    }
     // ------------------------------------------------------------------------
     // Public page lang switch handler
     // ------------------------------------------------------------------------
