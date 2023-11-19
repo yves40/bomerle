@@ -73,11 +73,9 @@
   filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(131deg) brightness(102%) contrast(102%); }
 
 .allnews {
-  display: flex;
-  flex-wrap: wrap;
   margin-top: 70px; }
   .allnews .news {
-    padding: 30px;
+    padding: 10rem;
     scroll-margin: 70px;
     width: 100%; }
     .allnews .news h1, .allnews .news h2 {
@@ -703,16 +701,95 @@
   scroll-behavior: smooth !important;
   box-sizing: border-box; }
 
-#mvp {
-  margin: 0 auto;
-  width: 80%;
-  max-width: 70vw; }
+body {
+  background: #f0ead2;
+  font-family: "Raleway", sans-serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column; }
+  body .hero-section {
+    width: 100%;
+    height: 100vh;
+    background-image: url(../images/homepageimages/enclume.jpg);
+    background-position: center;
+    background-size: cover;
+    background-attachment: fixed;
+    position: relative;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center; }
+    @media screen and (min-width: 900px) {
+      body .hero-section {
+        background-image: url(../images/homepageimages/artisanat.jpg); } }
+    body .hero-section .hero-title {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      transform: translateY(-25%);
+      padding: 25px;
+      color: #adc178;
+      overflow: hidden; }
+      @media screen and (min-width: 900px) {
+        body .hero-section .hero-title {
+          width: 50%;
+          align-items: flex-end;
+          padding-right: 200px;
+          transform: translateY(0%); } }
+      body .hero-section .hero-title h1 {
+        font-family: "Cinzel Decorative", sans-serif;
+        font-size: 3rem;
+        font-weight: 600;
+        padding-bottom: 30px;
+        text-align: center;
+        display: inline-block;
+        width: 100%;
+        text-shadow: 4px 3px 0px rgba(173, 193, 120, 0.3), 0px 0px 3px rgba(173, 193, 120, 0.3), 0px 0px 9px rgba(173, 193, 120, 0.4);
+        transform: translateX(100%);
+        opacity: 0;
+        transition: all .5s ease-out; }
+        body .hero-section .hero-title h1.visible {
+          transform: translateX(0%);
+          opacity: 1; }
+        @media screen and (min-width: 900px) {
+          body .hero-section .hero-title h1 {
+            text-align: right;
+            font-size: 6rem; } }
+      body .hero-section .hero-title h2 {
+        font-size: 2.5rem;
+        font-weight: 600;
+        line-height: 2.5;
+        text-align: right;
+        display: inline-block;
+        width: 100%;
+        transform: translateX(-100%);
+        opacity: 0;
+        transition: all .5s ease-out; }
+        body .hero-section .hero-title h2.visible {
+          transform: translateX(0%);
+          opacity: 1; }
+        @media screen and (min-width: 900px) {
+          body .hero-section .hero-title h2 {
+            font-size: 5rem; } }
+      body .hero-section .hero-title p {
+        font-size: 1.5rem;
+        line-height: 1.4;
+        text-align: right;
+        display: inline-block;
+        width: 100%;
+        opacity: 0;
+        transition: all .5s ease-out; }
+        body .hero-section .hero-title p.visible {
+          opacity: 1; }
+        @media screen and (min-width: 900px) {
+          body .hero-section .hero-title p {
+            font-size: 2.5rem; } }
 
-@media screen and (max-width: 850px) {
-  #mvp {
-    border: red solid 3px;
-    width: 90%;
-    max-width: 90vw; } }
+#mvp {
+  width: 100%; }
+  #mvp > p {
+    font-size: 1.2rem; }
 
 /* Screen greater than bigsize ? */
 #globalfullscreen {
