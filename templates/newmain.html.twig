@@ -21,7 +21,7 @@
       <div class="nav-links">
         <ul>
             <li><a href="#hero">{% trans %}app.public.menu.accueil{% endtrans %}</a></li>
-            <li><a href="#section1">{% trans %}app.public.menu.atelier{% endtrans %}</a></li>
+            <li><a href="#allnews">{% trans %}app.public.menu.atelier{% endtrans %}</a></li>
             <li id="gallerymenu"><a href="#thegallery">{% trans %}app.public.menu.galerie{% endtrans %}</a></li>
             <li id="cardsmenu"><a href="#cards">{% trans %}app.public.menu.catalog{% endtrans %}</a></li>
             <li><a href="#infos">{% trans %}app.public.menu.contact{% endtrans %}</a></li>
@@ -41,13 +41,16 @@
     </div>
 </header>
 <main>
-    <div class="allnews">
-      <div id="section1" class="news bg-thinknife">
-        <div class="htmltemplate textleft" data-templatename='story' data-lang={{locale}}></div>
+    <div id="allnews" class="allnews">
+      <div id="atelier" class="news ">
+        <div class="htmltemplate" data-templatename='atelier' data-lang={{locale}}></div>
+      </div>
+      <div id="mastory" class="news">
+        <div class="htmltemplate" data-templatename='story' data-lang={{locale}}></div>
       </div>
       <div id="thegallery">
       </div>
-    </div>
+    </div> 
     <div id="cards" class="cards">
       <div class="cards-header">
         <div class="htmltemplate textleft" data-templatename='cardsheader' data-lang={{locale}}></div>

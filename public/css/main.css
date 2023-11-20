@@ -73,24 +73,60 @@
   filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(131deg) brightness(102%) contrast(102%); }
 
 .allnews {
-  transform: translateY(70px); }
-  .allnews .news {
-    padding: 10rem;
-    transform: translateY(-70px);
+  scroll-margin: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-image: url(../images/home-knife.jpg);
+  background-position: center;
+  background-attachment: fixed;
+  color: white; }
+  .allnews h1 {
+    font-family: "Arial, Helvetica, sans-serif";
+    font-size: 1.5rem;
+    font-weight: 600;
+    padding: 2rem 0;
     width: 100%; }
-    .allnews .news h1, .allnews .news h2 {
-      margin: 1rem; }
+    @media screen and (min-width: 1024px) {
+      .allnews h1 {
+        font-size: 3rem; } }
+  .allnews h2 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    padding-bottom: 2rem;
+    line-height: 1.5rem;
+    display: inline-block;
+    width: 100%; }
+    @media screen and (min-width: 1024px) {
+      .allnews h2 {
+        font-size: 2rem; } }
+  .allnews p {
+    font-size: 1rem;
+    line-height: 1.4rem;
+    text-align: right;
+    width: 100%; }
+    @media screen and (min-width: 1024px) {
+      .allnews p {
+        font-size: 1.5rem;
+        line-height: 2rem; } }
+  .allnews .news {
+    width: 80%;
+    margin-bottom: 5rem; }
+    .allnews .news p {
+      text-align: left; }
     .allnews .news img {
       margin: 20px;
       width: 300px;
       height: 300px;
       border: solid darkgrey 3px;
       border-radius: 10px; }
-    .allnews .news p {
-      margin: 30px 20px;
-      font-style: italic; }
+    .allnews .news:nth-child(even) h1, .allnews .news:nth-child(even) h2 {
+      text-align: left; }
     .allnews .news:nth-child(even) img {
       float: left; }
+    .allnews .news:nth-child(odd) h1, .allnews .news:nth-child(odd) h2 {
+      text-align: right; }
     .allnews .news:nth-child(odd) img {
       float: right; }
 
@@ -102,7 +138,7 @@
   display: flex;
   justify-content: space-between;
   width: 100%;
-  height: 70px;
+  height: 100px;
   align-items: center;
   background: radial-gradient(circle, #020024 0%, #097936 100%, #00d4ff 100%); }
   .topmenu .logozone {
@@ -209,7 +245,7 @@
   flex-wrap: wrap;
   justify-content: center;
   gap: 15px;
-  scroll-margin: 70px;
+  scroll-margin: 100px;
   padding: 20px; }
   .cards .cards-header {
     display: flex;
@@ -350,7 +386,7 @@
 #thegallery {
   background: #959595;
   background: linear-gradient(to bottom left, #959595 0%, #0D0D0D 50%, #010101 50%, #0A0A0A 53%, #4E4E4E 76%, #383838 87%, #1B1B1B 100%);
-  transform: translateY(-70px);
+  scroll-margin: 100px;
   padding: 30px;
   width: 100%; }
   #thegallery .galleryzone {
@@ -631,7 +667,7 @@
   justify-content: center;
   gap: 15px;
   margin: 1rem;
-  scroll-margin: 70px;
+  scroll-margin: 100px;
   border-top: 2px solid gray; }
   .infos .infoelement {
     padding: 30px;
@@ -708,8 +744,8 @@ body {
   flex-direction: column; }
   body .hero-section {
     width: 100%;
-    margin-top: 70px;
-    scroll-margin: 70px;
+    margin-top: 100px;
+    scroll-margin: 100px;
     min-height: 100vh;
     background-image: url(../images/homepageimages/money.jpg);
     background-position: center;
@@ -755,14 +791,14 @@ body {
             font-size: 2rem; } }
       body .hero-section .hero-title p {
         font-size: 1rem;
-        line-height: 1.2rem;
+        line-height: 1.4rem;
         text-align: right;
         display: inline-block;
         width: 100%; }
         @media screen and (min-width: 1024px) {
           body .hero-section .hero-title p {
             font-size: 1.5rem;
-            line-height: 1.5rem; } }
+            line-height: 2rem; } }
 
 #globalfullscreen {
   position: absolute;

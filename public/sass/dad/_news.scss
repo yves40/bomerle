@@ -1,11 +1,49 @@
 .allnews {
-  transform: translateY($menu-height);
-  .news {
-    padding: 10rem;
-    transform: translateY(-$menu-height);
+  scroll-margin: $menu-height;
+  display: flex;  
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-image: url(../images/home-knife.jpg);
+  background-position: center;
+  background-attachment: fixed;
+  color: white;
+  h1{
+    font-family: $title;
+    font-size: 1.5rem;
+    font-weight: 600;
+    padding: 2rem 0;
     width: 100%;
-    h1, h2 {
-      margin: 1rem;
+    @include for-desktop{
+        font-size: 3rem;
+    }
+  }
+  h2{
+      font-size: 1.2rem;
+      font-weight: 600;
+      padding-bottom: 2rem ;
+      line-height: 1.5rem;
+      display: inline-block;
+      width: 100%;
+      @include for-desktop{
+          font-size: 2rem;
+      }
+  }
+  p{
+    font-size: 1rem;
+    line-height: 1.4rem;
+    text-align: right;
+    width: 100%;
+    @include for-desktop{
+        font-size: 1.5rem;
+        line-height: 2rem;
+    }
+  }
+  .news {
+    width: 80%;
+    margin-bottom: 5rem;
+    p {
+      text-align: left;
     }
     img {
       margin: 20px;
@@ -14,16 +52,18 @@
       border: solid darkgrey 3px; 
       border-radius: 10px;
     } 
-    p { 
-      margin: 30px 20px;
-      font-style: italic; 
-    }
     &:nth-child(even) {
+      h1, h2 {
+        text-align: left;
+      }
       img {
         float: left;
       }
     }
     &:nth-child(odd) {
+      h1, h2 {
+        text-align: right;
+      }
       img {
         float: right;
       } 

@@ -90,7 +90,7 @@ body {
   display: flex;
   justify-content: space-between;
   width: 100%;
-  height: 70px;
+  height: 100px;
   align-items: center;
   background: radial-gradient(circle, #020024 0%, #097936 100%, #00d4ff 100%); }
   .navbar a {
@@ -138,11 +138,11 @@ body {
 
 .news {
   padding: 10px;
-  scroll-margin: 70px;
+  scroll-margin: 100px;
   width: 100%;
   color: black; }
   .news:nth-child(1) {
-    margin-top: 70px; }
+    margin-top: 100px; }
   .news.bgimage {
     background-image: url("../images/background-left.jpg");
     background-size: cover;
@@ -173,7 +173,7 @@ body {
   flex-wrap: wrap;
   justify-content: center;
   gap: 15px;
-  scroll-margin: 70px;
+  scroll-margin: 100px;
   padding: 20px; }
 
 .card {
