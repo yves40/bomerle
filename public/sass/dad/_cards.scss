@@ -3,7 +3,7 @@
   flex-wrap: wrap;
   justify-content: center;
   gap: 15px;
-  scroll-margin: 90px; 
+  scroll-margin: $menu-height; 
   padding: 20px;
   .cards-header {
     display: flex;

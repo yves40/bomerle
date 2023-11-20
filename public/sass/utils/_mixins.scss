@@ -1,10 +1,33 @@
-@mixin for-tablet {
-    @media screen and (min-width: 600px){
+@mixin for-mobile {
+    @media screen and (max-width: 1024px){
         @content;
     }
 }
 @mixin for-desktop{
-    @media screen and (min-width:900px){
+    @media screen and (min-width:1024px){
         @content;
     }
 }
+@mixin submenuattr {
+    li {
+      margin: 0;
+      padding: 0 1rem;      
+      width: 150px; 
+    }
+    a {
+      font-size: .8rem;
+    }
+    ::after {
+      content: '';
+      width: 0%;
+      height: 2px;
+      background: white;
+      display: block;
+      margin: auto;
+      transition: 0.5s;                    
+    }
+    :hover::after {
+        width: 100%;
+    } 
+}
+

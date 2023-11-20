@@ -79,7 +79,7 @@
 }
 
 /* --------------------  R E S P O N S I V E --------------------*/
-@media screen and (max-width: $responsive-max-width) {
+@include for-mobile {
   .topmenu {
     padding: 0;
     .logozone { 

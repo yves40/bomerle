@@ -11,7 +11,7 @@
 <header>
     <nav class="topmenu">
       <div class="logozone">
-        <a href="#section0"><img class="logo"  src="/images/logo1.png" alt="Logo Beau Merle"></a>
+        <a href="#hero"><img class="logo"  src="/images/logo1.png" alt="Logo Beau Merle"></a>
         {% if devmode == 'dev' %}
           <div class="debug">
             {% trans %}app.debugversion{% endtrans %} : {% trans %}app.copyright{% endtrans %}
@@ -20,7 +20,7 @@
       </div>
       <div class="nav-links">
         <ul>
-            <li><a href="#section0">{% trans %}app.public.menu.accueil{% endtrans %}</a></li>
+            <li><a href="#hero">{% trans %}app.public.menu.accueil{% endtrans %}</a></li>
             <li><a href="#section1">{% trans %}app.public.menu.atelier{% endtrans %}</a></li>
             <li id="gallerymenu"><a href="#thegallery">{% trans %}app.public.menu.galerie{% endtrans %}</a></li>
             <li id="cardsmenu"><a href="#cards">{% trans %}app.public.menu.catalog{% endtrans %}</a></li>
@@ -32,10 +32,10 @@
         </ul>
       </div>
     </nav>
-    <div class="hero-section">
+    <div id="hero" class="hero-section">
       <div class="hero-title">
         <h1>{% trans %}app.public.main.name{% endtrans %}</h1>
-        <h2 >{% trans %}app.public.main.whatis{% endtrans %}</h2>
+        <h2>{% trans %}app.public.main.whatis{% endtrans %}</h2>
         <div class="htmltemplate textleft" data-templatename='maintext' data-lang={{locale}}></div>
       </div>
     </div>

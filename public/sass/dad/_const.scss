@@ -1,8 +1,8 @@
+// Some sizes
 $smallsize: 850px;
 $mediumsize: 1500px;
 $bigsize: 1920px; 
-$responsive-max-width: 910px;
-
+$responsive-max-width: 1024px;
 $maxslideimagewidth: 500px;
 
 $sliderimgsmall: 300px;
@@ -14,20 +14,22 @@ $svgmedium: 24px;
 $svgbig: 50px;
 $imagesmall: 8rem;
 
+$menu-height: 70px;
+
+// fonts
+$title: "Arial, Helvetica, sans-serif";
+$main: "Arial, Helvetica, sans-serif";
 $textpolicy: Arial, Helvetica, sans-serif;
 $smalltext: 0.7rem;
 $verysmalltext: 0.5rem;
 
 // Colors
 $background: #f0ead2;
-$primaryText: #adc178;
+$primaryText: white;
 $secondaryText: #6c584c;
 $light: #dde5b6;
 $lightDark: #333;
 $dark: #222;
-// fonts
-$title: "Cinzel Decorative", sans-serif;
-$main: "Raleway", sans-serif;
 
 $on: green;
 $off: red;
@@ -37,7 +39,6 @@ $menubackground: #f44336;
 $bg-gradient-black:  linear-gradient(to bottom left, #959595 0%, #0D0D0D 50%, #010101 50%, #0A0A0A 53%, #4E4E4E 76%, #383838 87%, #1B1B1B 100%);
 $bg-gradient-blue: radial-gradient(circle, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 50%, rgba(0,212,255,1) 100%);
 $bg-gradient-green: radial-gradient(circle, rgba(2,0,36,1) 0%, rgba(9,121,54,1) 100%, rgba(0,212,255,1) 100%);
-$menu-height: 70px;
 
 .bg-knifeleft {
   background-image: url('../images/background-left.jpg');  
@@ -109,27 +110,4 @@ $menu-height: 70px;
   width: $svgbig;
   height:$svgbig;
   filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(131deg) brightness(102%) contrast(102%);
-}
-
-@mixin submenuattr {
-    li {
-      margin: 0;
-      padding: 0 1rem;      
-      width: 150px; 
-    }
-    a {
-      font-size: .8rem;
-    }
-    ::after {
-      content: '';
-      width: 0%;
-      height: 2px;
-      background: white;
-      display: block;
-      margin: auto;
-      transition: 0.5s;                    
-    }
-    :hover::after {
-        width: 100%;
-    } 
 }

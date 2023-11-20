@@ -158,7 +158,7 @@
   filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(131deg) brightness(102%) contrast(102%); }
 
 /* --------------------  R E S P O N S I V E --------------------*/
-@media screen and (max-width: 910px) {
+@media screen and (max-width: 1024px) {
   .topmenu {
     padding: 0; }
     .topmenu .logozone {
@@ -209,7 +209,7 @@
   flex-wrap: wrap;
   justify-content: center;
   gap: 15px;
-  scroll-margin: 90px;
+  scroll-margin: 70px;
   padding: 20px; }
   .cards .cards-header {
     display: flex;
@@ -703,14 +703,15 @@
 
 body {
   background: #f0ead2;
-  font-family: "Raleway", sans-serif;
+  font-family: "Arial, Helvetica, sans-serif";
   min-height: 100vh;
   display: flex;
   flex-direction: column; }
   body .hero-section {
     width: 100%;
-    height: 100vh;
-    background-image: url(../images/homepageimages/enclume.jpg);
+    height: 100svh;
+    scroll-margin: 70px;
+    background-image: url(../images/homepageimages/money.jpg);
     background-position: center;
     background-size: cover;
     background-attachment: fixed;
@@ -718,73 +719,53 @@ body {
     display: flex;
     justify-content: flex-end;
     align-items: center; }
-    @media screen and (min-width: 900px) {
+    @media screen and (min-width: 1024px) {
       body .hero-section {
-        background-image: url(../images/homepageimages/artisanat.jpg); } }
+        background-image: url(../images/homepageimages/enclume.jpg); } }
     body .hero-section .hero-title {
       width: 100%;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      transform: translateY(-25%);
       padding: 25px;
-      color: #adc178;
+      color: white;
       overflow: hidden; }
-      @media screen and (min-width: 900px) {
+      @media screen and (min-width: 1024px) {
         body .hero-section .hero-title {
-          width: 50%;
-          align-items: flex-end;
-          padding-right: 200px;
-          transform: translateY(0%); } }
+          width: 60%;
+          max-width: 1024px; } }
       body .hero-section .hero-title h1 {
-        font-family: "Cinzel Decorative", sans-serif;
-        font-size: 3rem;
+        font-family: "Arial, Helvetica, sans-serif";
+        font-size: 2rem;
         font-weight: 600;
         padding-bottom: 30px;
-        text-align: center;
+        text-align: right;
         display: inline-block;
-        width: 100%;
-        text-shadow: 4px 3px 0px rgba(173, 193, 120, 0.3), 0px 0px 3px rgba(173, 193, 120, 0.3), 0px 0px 9px rgba(173, 193, 120, 0.4);
-        transform: translateX(100%);
-        opacity: 0;
-        transition: all .5s ease-out; }
-        body .hero-section .hero-title h1.visible {
-          transform: translateX(0%);
-          opacity: 1; }
-        @media screen and (min-width: 900px) {
+        width: 100%; }
+        @media screen and (min-width: 1024px) {
           body .hero-section .hero-title h1 {
             text-align: right;
-            font-size: 6rem; } }
+            font-size: 3rem; } }
       body .hero-section .hero-title h2 {
-        font-size: 2.5rem;
+        font-size: 1.5rem;
         font-weight: 600;
         line-height: 2.5;
         text-align: right;
         display: inline-block;
-        width: 100%;
-        transform: translateX(-100%);
-        opacity: 0;
-        transition: all .5s ease-out; }
-        body .hero-section .hero-title h2.visible {
-          transform: translateX(0%);
-          opacity: 1; }
-        @media screen and (min-width: 900px) {
+        width: 100%; }
+        @media screen and (min-width: 1024px) {
           body .hero-section .hero-title h2 {
-            font-size: 5rem; } }
+            font-size: 2rem; } }
       body .hero-section .hero-title p {
-        font-size: 1.5rem;
+        font-size: 1.2rem;
         line-height: 1.4;
         text-align: right;
         display: inline-block;
-        width: 100%;
-        opacity: 0;
-        transition: all .5s ease-out; }
-        body .hero-section .hero-title p.visible {
-          opacity: 1; }
-        @media screen and (min-width: 900px) {
+        width: 100%; }
+        @media screen and (min-width: 1024px) {
           body .hero-section .hero-title p {
-            font-size: 2.5rem; } }
+            font-size: 1.5rem; } }
 
 #mvp {
   width: 100%; }

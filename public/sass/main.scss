@@ -1,5 +1,5 @@
-@import './utils/mixins';
 @import './dad/const.scss';
+@import './utils/mixins';
 @import './dad/news';
 @import './dad/menu';
 @import './dad/cards';
@@ -18,14 +18,15 @@
 
 body {
   background: $background;
-  font-family: $main;
+  font-family: $main; 
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   .hero-section {
     width: 100%;
-    height: 100vh;
-    background-image: url(../images/homepageimages/enclume.jpg);
+    height: 100svh;
+    scroll-margin: $menu-height;
+    background-image: url(../images/homepageimages/money.jpg);
     background-position: center;
     background-size: cover;
     background-attachment: fixed; 
@@ -34,8 +35,8 @@ body {
     justify-content: flex-end;
     align-items: center;
 
-    @include for-desktop{
-      background-image: url(../images/homepageimages/artisanat.jpg);
+    @include for-desktop {
+      background-image: url(../images/homepageimages/enclume.jpg);
     }
 
     .hero-title{
@@ -44,78 +45,47 @@ body {
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      transform: translateY(-25%);
       padding: 25px;
       color: $primaryText;
       overflow: hidden;
 
       @include for-desktop{
-          width: 50%;
-          align-items: flex-end;
-          padding-right: 200px;
-          transform: translateY(0%);
+          width: 60%;
+          max-width: $responsive-max-width;
       }
 
       h1{
           font-family: $title;
-          font-size: 3rem;
+          font-size: 2rem;
           font-weight: 600;
           padding-bottom: 30px;
-          text-align: center;
+          text-align: right;
           display: inline-block;
           width: 100%;
-          text-shadow: 4px 3px 0px rgba(173,193,120, .3),
-                       0px 0px 3px rgba(173,193,120, .3),
-                       0px 0px 9px rgba(173,193,120, .4);
-          transform: translateX(100%);
-          opacity: 0;
-          transition: all .5s ease-out;
-          
-          &.visible{
-              transform: translateX(0%);
-              opacity: 1;
-          }
-
           @include for-desktop{
               text-align: right;
-              font-size: 6rem;
+              font-size: 3rem;
           }
       }
       h2{
-          font-size: 2.5rem;
+          font-size: 1.5rem;
           font-weight: 600;
           line-height: 2.5;
           text-align: right;
           display: inline-block;
           width: 100%;
-          transform: translateX(-100%);
-          opacity: 0;
-          transition: all .5s ease-out;
-
-          &.visible{
-              transform: translateX(0%);
-              opacity: 1;
-          }
-          
           @include for-desktop{
-              font-size: 5rem;
+              font-size: 2rem;
           }
       }
       p{
-          font-size: 1.5rem;
+          font-size: 1.2rem;
           line-height: 1.4;
           text-align: right;
           display: inline-block;
           width: 100%;
-          opacity: 0;
-          transition: all .5s ease-out;
-
-          &.visible{
-              opacity: 1;
-          }
-
           @include for-desktop{
-              font-size: 2.5rem;
+              font-size: 1.5rem;
           }
       }
     }

@@ -282,22 +282,6 @@ section {
           display: inline-block;
           padding: 8px 12px;
           position: relative; }
-          #header .navigation .nav-links ul li li {
-            margin: 0;
-            padding: 0 1rem;
-            width: 150px; }
-          #header .navigation .nav-links ul li a {
-            font-size: .8rem; }
-          #header .navigation .nav-links ul li ::after {
-            content: '';
-            width: 0%;
-            height: 2px;
-            background: white;
-            display: block;
-            margin: auto;
-            transition: 0.5s; }
-          #header .navigation .nav-links ul li :hover::after {
-            width: 100%; }
           #header .navigation .nav-links ul li a {
             color: white;
             text-decoration: none;
@@ -316,22 +300,6 @@ section {
         #header .navigation .nav-links ul #catalog #submenu {
           display: none;
           background: #f44336; }
-          #header .navigation .nav-links ul #catalog #submenu li li {
-            margin: 0;
-            padding: 0 1rem;
-            width: 150px; }
-          #header .navigation .nav-links ul #catalog #submenu li a {
-            font-size: .8rem; }
-          #header .navigation .nav-links ul #catalog #submenu li ::after {
-            content: '';
-            width: 0%;
-            height: 2px;
-            background: white;
-            display: block;
-            margin: auto;
-            transition: 0.5s; }
-          #header .navigation .nav-links ul #catalog #submenu li :hover::after {
-            width: 100%; }
         #header .navigation .nav-links ul #catalog:hover #submenu {
           display: block;
           position: absolute; }
@@ -360,7 +328,7 @@ section {
     padding: 100px 25px;
     text-align: right; }
     #header .intro .maintitle {
-      font-family: "Cinzel Decorative", sans-serif;
+      font-family: "Arial, Helvetica, sans-serif";
       font-weight: 700; }
       #header .intro .maintitle h1 {
         font-size: 3rem;
