@@ -73,10 +73,10 @@
   filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(131deg) brightness(102%) contrast(102%); }
 
 .allnews {
-  margin-top: 70px; }
+  transform: translateY(70px); }
   .allnews .news {
     padding: 10rem;
-    scroll-margin: 70px;
+    transform: translateY(-70px);
     width: 100%; }
     .allnews .news h1, .allnews .news h2 {
       margin: 1rem; }
@@ -350,7 +350,7 @@
 #thegallery {
   background: #959595;
   background: linear-gradient(to bottom left, #959595 0%, #0D0D0D 50%, #010101 50%, #0A0A0A 53%, #4E4E4E 76%, #383838 87%, #1B1B1B 100%);
-  scroll-margin: 70px;
+  transform: translateY(-70px);
   padding: 30px;
   width: 100%; }
   #thegallery .galleryzone {
@@ -704,13 +704,13 @@
 body {
   background: #f0ead2;
   font-family: "Arial, Helvetica, sans-serif";
-  min-height: 100vh;
   display: flex;
   flex-direction: column; }
   body .hero-section {
     width: 100%;
-    height: 100svh;
+    margin-top: 70px;
     scroll-margin: 70px;
+    min-height: 100vh;
     background-image: url(../images/homepageimages/money.jpg);
     background-position: center;
     background-size: cover;
@@ -723,12 +723,8 @@ body {
       body .hero-section {
         background-image: url(../images/homepageimages/enclume.jpg); } }
     body .hero-section .hero-title {
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      padding: 25px;
+      width: 80%;
+      padding: 1rem;
       color: white;
       overflow: hidden; }
       @media screen and (min-width: 1024px) {
@@ -737,20 +733,20 @@ body {
           max-width: 1024px; } }
       body .hero-section .hero-title h1 {
         font-family: "Arial, Helvetica, sans-serif";
-        font-size: 2rem;
+        font-size: 1.5rem;
         font-weight: 600;
-        padding-bottom: 30px;
+        padding: 2rem 0;
         text-align: right;
-        display: inline-block;
         width: 100%; }
         @media screen and (min-width: 1024px) {
           body .hero-section .hero-title h1 {
             text-align: right;
             font-size: 3rem; } }
       body .hero-section .hero-title h2 {
-        font-size: 1.5rem;
+        font-size: 1.2rem;
         font-weight: 600;
-        line-height: 2.5;
+        padding-bottom: 2rem;
+        line-height: 1.5rem;
         text-align: right;
         display: inline-block;
         width: 100%; }
@@ -758,21 +754,16 @@ body {
           body .hero-section .hero-title h2 {
             font-size: 2rem; } }
       body .hero-section .hero-title p {
-        font-size: 1.2rem;
-        line-height: 1.4;
+        font-size: 1rem;
+        line-height: 1.2rem;
         text-align: right;
         display: inline-block;
         width: 100%; }
         @media screen and (min-width: 1024px) {
           body .hero-section .hero-title p {
-            font-size: 1.5rem; } }
+            font-size: 1.5rem;
+            line-height: 1.5rem; } }
 
-#mvp {
-  width: 100%; }
-  #mvp > p {
-    font-size: 1.2rem; }
-
-/* Screen greater than bigsize ? */
 #globalfullscreen {
   position: absolute;
   display: flex;

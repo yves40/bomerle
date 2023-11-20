@@ -1,8 +1,8 @@
 .allnews {
-  margin-top: 70px;
+  transform: translateY($menu-height);
   .news {
     padding: 10rem;
-    scroll-margin: $menu-height;
+    transform: translateY(-$menu-height);
     width: 100%;
     h1, h2 {
       margin: 1rem;
