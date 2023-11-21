@@ -4,9 +4,10 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-image: url(../images/home-knife.jpg);
+  background-image: url(../images/tools.jpg);
   background-position: center;
   background-attachment: fixed;
+  background-size: contain;
   color: white;
   h1{
     font-family: $title;
@@ -32,7 +33,7 @@
   p{
     font-size: 1rem; 
     line-height: 1.4rem;
-    text-align: right;
+    text-align: left;
     width: 100%;
     @include for-desktop{
         font-size: 1.5rem;
@@ -40,19 +41,24 @@
     }
   }
   .cards-header {
-    display: flex;
-    flex-direction: column;
-    gap: 20px; 
-    width: 100%; 
-    margin: 1rem 4rem 2rem 4rem;  
+    width: 80%; 
+    margin: 2rem;  
     padding-bottom: 2rem;
     border-bottom: 2px solid gray; 
+    @include for-desktop {
+      width: 60%;
+      max-width: $responsive-max-width;
+    }
   }
   .cardframe {
     width: 80%; 
     height: auto;
     padding: 20px;
     transition: all .8s ease-in;
+    @include for-desktop {
+      width: 60%;
+      max-width: $responsive-max-width;
+    }
     &__zoom {
       display: flex;
       flex-direction: column;
@@ -70,20 +76,26 @@
       border-radius: 50%; 
       float: right; 
       shape-outside: circle();
-      margin-left: 2rem; 
+      margin-left: 2rem;
+      @include for-desktop {
+        height: 300px;
+        width: 300px;
+      }
     }
     &__title {
       padding: 20px 10px;
       font-size: 2rem; 
     } 
     &__text {
-      line-height: 20px;
-      font-style: italic;
-      margin-top: 1rem; 
-      &:hover {
-        box-shadow: 0px 0px 11px 5px #000;
-        transition: all .5s  ease;
-        padding: 10px;
+      line-height: 1.3rem;
+      padding: 2rem;
+      background-color: rgba(34, 7, 7, .5);
+      @include for-desktop {
+        &:hover {
+          box-shadow: 0px 0px 11px 5px #cec5c5;
+          transition: all .5s  ease;
+          padding: 4rem;
+        }
       }
     }
   }

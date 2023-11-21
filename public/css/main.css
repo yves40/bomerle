@@ -113,7 +113,7 @@
         line-height: 2rem; } }
   .allnews .news {
     width: 80%;
-    margin-bottom: 5rem; }
+    margin-bottom: 2.5rem; }
     .allnews .news p {
       text-align: left; }
     .allnews .news img {
@@ -247,9 +247,10 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-image: url(../images/home-knife.jpg);
+  background-image: url(../images/tools.jpg);
   background-position: center;
   background-attachment: fixed;
+  background-size: contain;
   color: white; }
   .cards h1 {
     font-family: "Arial, Helvetica, sans-serif";
@@ -273,25 +274,30 @@
   .cards p {
     font-size: 1rem;
     line-height: 1.4rem;
-    text-align: right;
+    text-align: left;
     width: 100%; }
     @media screen and (min-width: 1024px) {
       .cards p {
         font-size: 1.5rem;
         line-height: 2rem; } }
   .cards .cards-header {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    width: 100%;
-    margin: 1rem 4rem 2rem 4rem;
+    width: 80%;
+    margin: 2rem;
     padding-bottom: 2rem;
     border-bottom: 2px solid gray; }
+    @media screen and (min-width: 1024px) {
+      .cards .cards-header {
+        width: 60%;
+        max-width: 1024px; } }
   .cards .cardframe {
     width: 80%;
     height: auto;
     padding: 20px;
     transition: all .8s ease-in; }
+    @media screen and (min-width: 1024px) {
+      .cards .cardframe {
+        width: 60%;
+        max-width: 1024px; } }
     .cards .cardframe__zoom {
       display: flex;
       flex-direction: column;
@@ -309,17 +315,22 @@
       float: right;
       shape-outside: circle();
       margin-left: 2rem; }
+      @media screen and (min-width: 1024px) {
+        .cards .cardframe__image img {
+          height: 300px;
+          width: 300px; } }
     .cards .cardframe__title {
       padding: 20px 10px;
       font-size: 2rem; }
     .cards .cardframe__text {
-      line-height: 20px;
-      font-style: italic;
-      margin-top: 1rem; }
-      .cards .cardframe__text:hover {
-        box-shadow: 0px 0px 11px 5px #000;
-        transition: all .5s  ease;
-        padding: 10px; }
+      line-height: 1.3rem;
+      padding: 2rem;
+      background-color: rgba(34, 7, 7, 0.5); }
+      @media screen and (min-width: 1024px) {
+        .cards .cardframe__text:hover {
+          box-shadow: 0px 0px 11px 5px #cec5c5;
+          transition: all .5s  ease;
+          padding: 4rem; } }
 
 /* --------------------  R E S P O N S I V E --------------------*/
 @media screen and (max-width: 850px) {
