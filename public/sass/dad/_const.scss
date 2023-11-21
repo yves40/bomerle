@@ -101,6 +101,12 @@ $bg-gradient-green: radial-gradient(circle, rgba(2,0,36,1) 0%, rgba(9,121,54,1) 
   filter: invert(19%) sepia(96%) saturate(6102%) hue-rotate(357deg) brightness(98%) contrast(117%);
 }
 
+.svgbig-red {
+  width: $svgbig;
+  height:$svgbig;
+  filter: invert(19%) sepia(96%) saturate(6102%) hue-rotate(357deg) brightness(98%) contrast(117%);
+}
+
 .svgmedium-white {
   width: $svgmedium;
   height:$svgmedium;
