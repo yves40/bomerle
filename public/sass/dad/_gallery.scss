@@ -1,27 +1,35 @@
 @import './const';
+@import '../utils/mixins';
 
 *, *::before, *::after {
     box-sizing: border-box;
 }
 
 #thegallery {
-    background: #959595;
-    background: linear-gradient(to bottom left, #959595 0%, #0D0D0D 50%, #010101 50%, #0A0A0A 53%, #4E4E4E 76%, #383838 87%, #1B1B1B 100%);
     scroll-margin: $menu-height;
-    padding: 30px; 
-    width: 100%;
+    display: flex;  
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-image: url(../images/home5.jpg);
+    background-position: center;
+    background-attachment: fixed;
+    background-size: cover;
+    color: white;
     .galleryzone {
-        display: flex;
-        flex-direction: column; 
         padding-bottom: 3em;
-        .gallerytext {
-            max-width: 70%;
+        p{
+            font-size: 1rem;
+            line-height: 1.4rem;
+            text-align: justify;
+            width: 80%;
             margin: 0 auto;
             padding: 1em;
-            color: white;
-            font-family:Arial, Helvetica, sans-serif;
-            font-weight: normal;
-            font-style: italic;
+            @include for-desktop{
+                font-size: 1.5rem;
+                line-height: 2rem;
+                max-width: 60%;
+            }
         }
         .gallery{ 
             max-width: 70%;
@@ -29,7 +37,6 @@
             display: flex;
             flex-wrap: wrap;
             gap: 2vmin;
-            padding: 0 14px;
             list-style-type: none;
             li { 
                 height: 250px;
@@ -39,6 +46,7 @@
                 width: 100%;
                 height: 100%;
                 border-radius: 10px;
+                border: solid 1px white;
                 object-fit: cover;
             }
             ::after {

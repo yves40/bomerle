@@ -150,7 +150,7 @@ class Slider {
     const galleryzone = $("<div>").addClass('galleryzone');
     const sliderzone = $("<div>").attr('id', this.homezone)
                                           .addClass('carousel');
-    const slidetext = $('<div></div>').addClass('gallerytext');
+    const slidetext = $('<div></div>');
     const title = $('<p>').text(this.description);
     $(slidetext).append(title);
     $(galleryzone).append(slidetext);

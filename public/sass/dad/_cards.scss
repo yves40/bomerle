@@ -1,10 +1,44 @@
 .cards {
-  display: flex;
-  flex-wrap: wrap;
+  scroll-margin: $menu-height;
+  display: flex;  
+  flex-direction: column;
   justify-content: center;
-  gap: 15px;
-  scroll-margin: $menu-height; 
-  padding: 20px;
+  align-items: center;
+  background-image: url(../images/home-knife.jpg);
+  background-position: center;
+  background-attachment: fixed;
+  color: white;
+  h1{
+    font-family: $title;
+    font-size: 1.5rem;
+    font-weight: 600;
+    padding: 2rem 0;
+    width: 100%;
+    @include for-desktop{
+        font-size: 3rem;
+    }
+  }
+  h2{
+      font-size: 1.2rem;
+      font-weight: 600;
+      padding-bottom: 2rem ;
+      line-height: 1.5rem;
+      display: inline-block;
+      width: 100%;
+      @include for-desktop{
+          font-size: 2rem;
+      }
+  }
+  p{
+    font-size: 1rem; 
+    line-height: 1.4rem;
+    text-align: right;
+    width: 100%;
+    @include for-desktop{
+        font-size: 1.5rem;
+        line-height: 2rem;
+    }
+  }
   .cards-header {
     display: flex;
     flex-direction: column;
