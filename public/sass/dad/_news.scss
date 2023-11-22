@@ -43,6 +43,9 @@
   .news {
     width: 80%;
     margin-bottom: 2.5rem;
+    @include for-desktop {
+      max-width: $responsive-max-width;
+    }
     p {
       text-align: left;
     }
