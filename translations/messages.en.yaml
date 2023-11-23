@@ -38,6 +38,8 @@ contact:
   shop: The workshop
   mailok: Your request has been processed
   mailko: Ooops, unable to send your request right now
+  shopaddress1: 335 Route de Saint-Thomas, Bras de Fer
+  shopaddress2: 63250 Arconsat - France
 user:
   login: Connection
   email: Email

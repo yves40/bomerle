@@ -1,16 +1,21 @@
 .infos {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column; 
   justify-content: center;
-  gap: 15px;
-  margin: 1rem;
+  align-items: center;
+  margin-bottom: 5rem;
+  @include for-desktop {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  gap: 1rem;
   scroll-margin: $menu-height; 
   border-top: 2px solid gray; 
-.infoelement { 
-    margin: 30px;
-    width: 33%;
+  .infoelement { 
+    margin: .5rem;
+    width: 80%;
     display: flex;
-    flex-direction: column;
+    flex-direction: column; 
     align-items: center;
     @include for-desktop {
       width: 25%;
@@ -23,13 +28,22 @@
         font-size: 1.3rem;
       }
     }
+    &__details {
+      display: flex;
+      flex-direction: column;
+      gap: .7em;
+      a {
+        color: $lightDark;
+        text-decoration: none;
+      }
+    }
     h1, h2, h3, ul {
       margin: 1rem;
     }
     iframe { 
       margin: 20px;
-      width: 280px;
-      height: 300px;
+      width: 200px;
+      height: 200px;
       border: solid darkgrey 3px;  
       border-radius: 10px;
     } 

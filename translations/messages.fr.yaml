@@ -38,6 +38,8 @@ contact:
   shop: L'atelier
   mailok: Votre demande a été transmise
   mailko: Votre demande ne peut être transmise actuellement
+  shopaddress1: 335 Route de Saint-Thomas, Bras de Fer
+  shopaddress2: 63250 Arconsat - France
 user:
   login: Connexion
   email: Email
