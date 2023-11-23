@@ -260,7 +260,7 @@
   background-image: url(../images/tools.jpg);
   background-position: center;
   background-attachment: fixed;
-  background-size: contain;
+  background-size: cover;
   color: white; }
   .cards h1 {
     font-family: "Arial, Helvetica, sans-serif";
@@ -324,8 +324,7 @@
       border: solid darkgrey 3px;
       border-radius: 50%;
       float: right;
-      shape-outside: circle();
-      margin-left: 2rem; }
+      margin: .7rem; }
       @media screen and (min-width: 1024px) {
         .cards .cardframe__image img {
           height: 300px;
@@ -451,7 +450,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-image: url(../images/home5.jpg);
+  background-image: url(../images/home4.jpg);
   background-position: center;
   background-attachment: fixed;
   background-size: cover;
@@ -751,7 +750,9 @@
   @media screen and (min-width: 1024px) {
     .infos {
       flex-direction: row;
-      flex-wrap: wrap; } }
+      flex-wrap: wrap;
+      margin: 0 auto;
+      max-width: 1024px; } }
   .infos .infoelement {
     margin: .5rem;
     width: 80%;
@@ -760,7 +761,8 @@
     align-items: center; }
     @media screen and (min-width: 1024px) {
       .infos .infoelement {
-        width: 25%; } }
+        width: 25%;
+        height: 30svh; } }
     .infos .infoelement__data {
       display: flex;
       align-items: center; }
@@ -846,7 +848,7 @@ body {
     margin-top: 100px;
     scroll-margin: 100px;
     min-height: 100vh;
-    background-image: url(../images/homepageimages/money.jpg);
+    background-image: url(../images/SHEFFIELD-2.jpeg);
     background-position: center;
     background-size: cover;
     background-attachment: fixed;

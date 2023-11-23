@@ -8,7 +8,7 @@
   background-image: url(../images/tools.jpg);
   background-position: center;
   background-attachment: fixed;
-  background-size: contain;
+  background-size: cover;
   color: white;
   h1{
     font-family: $title;
@@ -77,8 +77,7 @@
       border: solid darkgrey 3px;
       border-radius: 50%; 
       float: right; 
-      shape-outside: circle();
-      margin-left: 2rem;
+      margin: .7rem;
       @include for-desktop {
         height: 300px;
         width: 300px;
