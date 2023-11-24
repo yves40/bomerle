@@ -18,27 +18,24 @@
     width: 80%;
     display: flex;
     flex-direction: column; 
-    align-items: start;
+    align-items: center;
     @include for-desktop { 
-      width: 25%;
+      align-items: start;
+      width: 30%;
       height: 30svh;
+    }
+    a {
+      color: $lightDark;
+      text-decoration: none;
     }
     &__data {
       display: flex;
       align-items: center;
-      a {
-        color: $lightDark;
-        text-decoration: none;
-      }
     }
     &__details {
       display: flex;
       flex-direction: column;
       gap: .7em;
-      a {
-        color: $lightDark;
-        text-decoration: none;
-      }
     }
     h1, h2, h3, ul {
       margin: 1rem 0;
@@ -51,7 +48,6 @@
       border-radius: 10px;
     } 
     p { 
-      margin: 0 20px;
       font-style: italic; 
     } 
     &:nth-child(even) { 
