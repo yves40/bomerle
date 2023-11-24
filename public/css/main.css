@@ -758,7 +758,7 @@
     width: 80%;
     display: flex;
     flex-direction: column;
-    align-items: center; }
+    align-items: start; }
     @media screen and (min-width: 1024px) {
       .infos .infoelement {
         width: 25%;
@@ -766,9 +766,9 @@
     .infos .infoelement__data {
       display: flex;
       align-items: center; }
-      .infos .infoelement__data span {
-        margin: 0 1rem;
-        font-size: 1.3rem; }
+      .infos .infoelement__data a {
+        color: #333;
+        text-decoration: none; }
     .infos .infoelement__details {
       display: flex;
       flex-direction: column;
@@ -777,7 +777,7 @@
         color: #333;
         text-decoration: none; }
     .infos .infoelement h1, .infos .infoelement h2, .infos .infoelement h3, .infos .infoelement ul {
-      margin: 1rem; }
+      margin: 1rem 0; }
     .infos .infoelement iframe {
       margin: 20px;
       width: 200px;
