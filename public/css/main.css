@@ -777,7 +777,7 @@
     .infos .infoelement h1, .infos .infoelement h2, .infos .infoelement h3, .infos .infoelement ul {
       margin: 1rem 0; }
     .infos .infoelement iframe {
-      margin: 20px;
+      margin: 20px 0;
       width: 200px;
       height: 200px;
       border: solid darkgrey 3px;
