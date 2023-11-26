@@ -1,3 +1,15 @@
+@import url("https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Acme&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Englebert&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Acme&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Englebert&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Acme&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Englebert&display=swap");
 .bg-knifeleft {
   background-image: url("../images/background-left.jpg");
   background-size: cover;
@@ -89,7 +101,7 @@
   background-size: cover;
   color: white; }
   .allnews h1 {
-    font-family: "Arial, Helvetica, sans-serif";
+    font-family: "Cinzel Decorative", sans-serif;
     font-size: 1.5rem;
     font-weight: 600;
     padding: 2rem 0;
@@ -263,7 +275,7 @@
   background-size: cover;
   color: white; }
   .cards h1 {
-    font-family: "Arial, Helvetica, sans-serif";
+    font-family: "Cinzel Decorative", sans-serif;
     font-size: 1.5rem;
     font-weight: 600;
     padding: 2rem 0;
@@ -282,6 +294,7 @@
       .cards h2 {
         font-size: 2rem; } }
   .cards p {
+    font-family: "Indie Flower", sans-serif;
     font-size: 1rem;
     line-height: 1.4rem;
     text-align: left;
@@ -775,7 +788,9 @@
       flex-direction: column;
       gap: .7em; }
     .infos .infoelement h1, .infos .infoelement h2, .infos .infoelement h3, .infos .infoelement ul {
-      margin: 1rem 0; }
+      margin: 1rem 0;
+      font-size: 1.7rem;
+      font-family: "Acme, sans-serif"; }
     .infos .infoelement iframe {
       margin: 20px 0;
       width: 200px;
@@ -837,7 +852,7 @@
 
 body {
   background: #f0ead2;
-  font-family: "Arial, Helvetica, sans-serif";
+  font-family: "Arial, Helvetica", sans-serif;
   display: flex;
   flex-direction: column; }
   body .hero-section {
@@ -859,15 +874,17 @@ body {
     body .hero-section .hero-title {
       width: 80%;
       padding: 1rem;
+      margin-right: 1rem;
       color: white;
       overflow: hidden; }
       @media screen and (min-width: 1024px) {
         body .hero-section .hero-title {
           width: 60%;
+          margin-right: 2rem;
           max-width: 1024px; } }
       body .hero-section .hero-title h1 {
-        font-family: "Arial, Helvetica, sans-serif";
-        font-size: 1.5rem;
+        font-family: "Cinzel Decorative", sans-serif;
+        font-size: 2rem;
         font-weight: 600;
         padding: 2rem 0;
         text-align: right;
@@ -877,7 +894,8 @@ body {
             text-align: right;
             font-size: 3rem; } }
       body .hero-section .hero-title h2 {
-        font-size: 1.2rem;
+        font-family: "Englebert", sans-serif;
+        font-size: 1.5rem;
         font-weight: 600;
         padding-bottom: 2rem;
         line-height: 1.5rem;
@@ -886,16 +904,17 @@ body {
         width: 100%; }
         @media screen and (min-width: 1024px) {
           body .hero-section .hero-title h2 {
-            font-size: 2rem; } }
+            font-size: 2.5rem; } }
       body .hero-section .hero-title p {
-        font-size: 1rem;
+        font-family: "Indie Flower", sans-serif;
+        font-size: 1.5rem;
         line-height: 1.4rem;
         text-align: right;
         display: inline-block;
         width: 100%; }
         @media screen and (min-width: 1024px) {
           body .hero-section .hero-title p {
-            font-size: 1.5rem;
+            font-size: 2rem;
             line-height: 2rem; } }
 
 #globalfullscreen {

@@ -42,17 +42,19 @@ body {
     .hero-title{
       width: 80%;
       padding: 1rem;
+      margin-right: 1rem;
       color: $primaryText;
       overflow: hidden;
 
       @include for-desktop{
           width: 60%;
+          margin-right: 2rem;
           max-width: $responsive-max-width;
       }
 
       h1{
-          font-family: $title;
-          font-size: 1.5rem;
+          font-family: $herotitle;
+          font-size: 2rem;
           font-weight: 600;
           padding: 2rem 0;
           text-align: right;
@@ -63,7 +65,8 @@ body {
           }
       }
       h2{
-          font-size: 1.2rem;
+          font-family: $heroh2;
+          font-size: 1.5rem;
           font-weight: 600;
           padding-bottom: 2rem ;
           line-height: 1.5rem;
@@ -71,17 +74,18 @@ body {
           display: inline-block;
           width: 100%;
           @include for-desktop{
-              font-size: 2rem;
+              font-size: 2.5rem;
           }
       }
       p{
-          font-size: 1rem;
+          font-family: $herop;
+          font-size: 1.5rem;
           line-height: 1.4rem;
           text-align: right;
           display: inline-block;
           width: 100%;
           @include for-desktop{
-              font-size: 1.5rem;
+              font-size: 2rem;
               line-height: 2rem;
           }
       }

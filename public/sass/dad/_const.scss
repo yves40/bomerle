@@ -17,16 +17,25 @@ $imagesmall: 8rem;
 $menu-height: 100px;
 
 // fonts
-$title: "Arial, Helvetica, sans-serif";
-$main: "Arial, Helvetica, sans-serif";
-$textpolicy: Arial, Helvetica, sans-serif;
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Acme&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Englebert&display=swap");
+
+$title: "Cinzel Decorative", sans-serif;
+$herotitle: "Cinzel Decorative", sans-serif;
+$heroh2: "Englebert", sans-serif;
+$herop: "Indie Flower", sans-serif; 
+
+$main: "Arial, Helvetica", sans-serif;
+$textpolicy: "Arial, Helvetica", sans-serif;
 $smalltext: 0.7rem;
 $verysmalltext: 0.5rem;
 
 // Colors
 $background: #f0ead2;
 $primaryText: white;
-$secondaryText: #6c584c;
+$secondaryText: #6c584c; 
 $light: #dde5b6;
 $lightDark: #333;
 $dark: #222;
