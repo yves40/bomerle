@@ -31,7 +31,7 @@ contact:
   email: Votre email SVP
   object: Objet de votre demande
   couteau: Quel couteau ?
-  message: Précisez votre demande ( 10 à 200 ch)
+  message: Précisez votre demande
   button: Envoyer
   info: Question générale
   infoknife: Question sur un couteau
@@ -40,7 +40,7 @@ contact:
   mailko: Votre demande ne peut être transmise actuellement
   shopaddress1: 335 Route de Saint-Thomas, Bras de Fer
   shopaddress2: 63250 Arconsat - France
-  nav: Informations
+  nav: Retour
 user:
   login: Connexion
   email: Email

@@ -83,6 +83,9 @@ body {
           line-height: 1.4rem;
           text-align: right;
           display: inline-block;
+          padding: 1rem;
+          background-color: rgba(34, 7, 7, .3);
+          border-radius: 10px;
           width: 100%;
           @include for-desktop{
               font-size: 2rem;

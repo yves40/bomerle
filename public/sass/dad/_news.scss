@@ -20,7 +20,8 @@
     }
   }
   h2{
-      font-size: 1.2rem;
+      font-family: $heroh2;
+      font-size: 1.5rem;
       font-weight: 600;
       padding-bottom: 2rem ;
       line-height: 1.5rem;
@@ -49,6 +50,7 @@
     }
     p {
       text-align: left;
+      font-family: $herop;
     }
     img {
       margin: 20px;

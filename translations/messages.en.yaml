@@ -31,7 +31,7 @@ contact:
   email: Your email please
   object: Subject of your request
   couteau: Which knife?
-  message: Specify your request ( 10 to 200 char)
+  message: Specify your request
   button: Send
   info: General question
   infoknife: Question about a knife
@@ -40,7 +40,7 @@ contact:
   mailko: Ooops, unable to send your request right now
   shopaddress1: 335 Route de Saint-Thomas, Bras de Fer
   shopaddress2: 63250 Arconsat - France
-  nav: Informations
+  nav: Back
 user:
   login: Connection
   email: Email
