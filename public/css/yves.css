@@ -218,17 +218,19 @@
     padding: 0;
     margin-right: 15%;
     margin-left: 15%;
-    margin-bottom: 1rem;
+    margin-bottom: 2rem;
     list-style: none; }
     .carousel .carousel-indicators-button {
       opacity: .5;
-      width: 30px;
-      height: 6px;
+      border-radius: 50%;
+      width: 15px;
+      height: 15px;
       margin-left: 3px;
       margin-right: 3px;
       cursor: pointer; }
       .carousel .carousel-indicators-button.active {
-        opacity: 1; }
+        opacity: 1;
+        background-color: green; }
   .carousel .slide {
     margin: 1rem 0;
     position: absolute;
@@ -547,6 +549,7 @@
     #thegallery .galleryzone p {
       font-family: "Indie Flower", sans-serif;
       background-color: rgba(34, 7, 7, 0.3);
+      border-radius: 10px;
       font-size: 1rem;
       line-height: 1.4rem;
       text-align: justify;
@@ -557,7 +560,6 @@
           font-size: 1.5rem;
           line-height: 2rem; } }
     #thegallery .galleryzone .gallery {
-      max-width: 70%;
       margin: 0 auto;
       display: flex;
       flex-wrap: wrap;

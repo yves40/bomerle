@@ -28,6 +28,7 @@
         p{
             font-family: $herop;
             background-color: rgba(34, 7, 7, .3);
+            border-radius: 10px;
             font-size: 1rem;
             line-height: 1.4rem;
             text-align: justify;
@@ -39,7 +40,6 @@
             }
         }
         .gallery{ 
-            max-width: 70%;
             margin: 0 auto;
             display: flex;
             flex-wrap: wrap;
