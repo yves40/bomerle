@@ -665,15 +665,19 @@
     padding: 0;
     margin-right: 15%;
     margin-left: 15%;
-    margin-bottom: 1rem;
+    margin-bottom: 2rem;
     list-style: none; }
     .carousel .carousel-indicators-button {
       opacity: .5;
-      width: 30px;
-      height: 6px;
+      width: 20px;
+      height: 10px;
       margin-left: 3px;
       margin-right: 3px;
       cursor: pointer; }
+      @media screen and (min-width: 1024px) {
+        .carousel .carousel-indicators-button {
+          width: 30px;
+          height: 6px; } }
       .carousel .carousel-indicators-button.active {
         opacity: 1; }
   .carousel .slide {
