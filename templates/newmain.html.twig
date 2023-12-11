@@ -25,7 +25,7 @@
             <li><a href="#allnews">{% trans %}app.public.menu.atelier{% endtrans %}</a></li>
             <li id="gallerymenu"><a href="#thegallery">{% trans %}app.public.menu.galerie{% endtrans %}</a></li>
             <li id="cardsmenu"><a href="#cards">{% trans %}app.public.menu.catalog{% endtrans %}</a></li>
-            <li><a href="#infos">{% trans %}app.public.menu.contact{% endtrans %}</a></li>
+            <li><a href="#contactrequest">{% trans %}app.public.menu.contact{% endtrans %}</a></li>
             <ul>
               <li><a href="{{ path('public.switchlang', { locale: 'en' }) }}">en |</a></li>
               <li><a href="{{ path('public.switchlang', { locale: 'fr' }) }}">fr</a></li>
@@ -91,7 +91,7 @@
             <p>{% trans %}contact.shopaddress2{% endtrans %}, </p>
           </div>
       </div>
-      <div class="infoelement">
+      <div id="contactinrequest" class="infoelement">
         <h3>{% trans %}contact.infos{% endtrans %}</h3>
         {{ form_start(formcontact, {'attr': {'novalidate': 'novalidate', 'class': 'form'}}) }}
             <div class="contact">
@@ -114,7 +114,7 @@
                 {{ form_widget(formcontact.text) }}
                 {{ form_errors(formcontact.text) }}
             </div>
-            <button id="requestcontact">{% trans %}contact.button{% endtrans %}</button>
+            <button id="contactrequest">{% trans %}contact.button{% endtrans %}</button>
         {{ form_end(formcontact) }}
         <div class="feedback" hidden>
           <p id='feedback'></p>
