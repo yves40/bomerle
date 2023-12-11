@@ -71,18 +71,18 @@ class Gallery {
     $("body").css("overflow", "hidden");
     // Position the zoom 
     const top = window.scrollY;
-    $("#fullscreen").css("background-image", "url(/images/slideshow/" + imagesrc + ")");
-    $("#fullscreen").css({'top': top, 'left': 0, 'z-index': 1000});
-    $("#fullscreen").addClass("zoomon").removeClass('zoomoff');
+    $("#globalfullscreen").css("background-image", "url(/images/slideshow/" + imagesrc + ")");
+    $("#globalfullscreen").css({'top': top, 'left': 0, 'z-index': 1000});
+    $("#globalfullscreen").addClass("zoomon").removeClass('zoomoff').show();
     // Hide a few things
     $(`#${this.indicators}`).hide();
     $(".slidercontrol").hide();
 
     // Wait for the user to close the box
-    $("#fullscreen").click( () => { 
+    $("#globalfullscreen").click( () => { 
       this.zoomactive = false;
-      $("#fullscreen").removeClass("zoomon")
-                      .addClass('zoomoff');
+      $("#globalfullscreen").removeClass("zoomon")
+                      .addClass('zoomoff').hide();
       $(`#${this.indicators}`).show();
       $(".slidercontrol").show();
       $("body").css("overflow", "auto");
