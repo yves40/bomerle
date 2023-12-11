@@ -139,6 +139,11 @@
     .allnews .news p {
       text-align: left;
       font-family: "Indie Flower", sans-serif; }
+      .allnews .news p a {
+        color: lightblue; }
+        .allnews .news p a:hover {
+          font-size: 3rem;
+          transition: all .5s ease; }
     .allnews .news img {
       margin: 20px;
       width: 300px;
