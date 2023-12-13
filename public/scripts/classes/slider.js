@@ -216,18 +216,19 @@ class Slider {
     // Position the zoom 
     const top = window.scrollY;
     // $("#fullscreen").css("background-image", "url(/images/slideshow/" + imagesrc + ")");
-    $("#globalfullscreen").css("background-image", `url(${this.imagespath}${imagesrc})`);
-    $("#globalfullscreen").css({'top': top, 'left': 0, 'z-index': 2000});
-    $("#globalfullscreen").addClass("zoomon").removeClass('zoomoff').show();
+    $("#zoomer").css("background-image", `url(${this.imagespath}${imagesrc})`);
+    $("#zoomer").css({'top': top, 'left': 0, 'z-index': 2000});
+    $("#zoomer").addClass("zoomon").removeClass('zoomoff').show();
     // Hide a few things
     $(`#${this.indicators}`).hide();
     $(".slidercontrol").hide();
 
     // Wait for the user to close the box
-    $("#globalfullscreen").click( () => { 
+    $("#zoomer").click( () => { 
       this.zoomactive = false;
-      $("#globalfullscreen").removeClass("zoomon")
-                      .addClass('zoomoff').hide();
+      $("#zoomer").removeClass("zoomon")
+                      .addClass('zoomoff').hide()
+                      .css("background-image", 'none');
       $(`#${this.indicators}`).show();
       $(".slidercontrol").show();
       $("body").css("overflow", "auto");

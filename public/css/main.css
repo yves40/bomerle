@@ -522,13 +522,13 @@
 
 .zoomon {
   position: absolute;
-  height: 90%;
-  width: 90%;
+  height: 100%;
+  width: 100%;
   border: 1px red solid;
   border-radius: 10px;
   background-position: center;
   background-repeat: no-repeat;
-  background-size: contain;
+  background-size: cover;
   animation-duration: 1.2s;
   animation-timing-function: linear;
   animation-name: fadein; }
