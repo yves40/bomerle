@@ -46,7 +46,7 @@ $(document).ready(function () {
         buttonActivation();
     })
     // Button activation for message request
-    $("#requestcontact").on('click', function (event){
+    $("#contactrequest").on('click', function (event){
         event.preventDefault();
         buttonClicked();
     })
@@ -189,10 +189,10 @@ $(document).ready(function () {
         }
 
         if(validEmail & validText){
-            $("#requestcontact").addClass('active').removeClass('inactive')
+            $("#contactrequest").addClass('active').removeClass('inactive')
                     .prop('disabled', false);
         }else{
-            $("#requestcontact").addClass('inactive').removeClass('active')
+            $("#contactrequest").addClass('inactive').removeClass('active')
                     .prop('disabled', true);
         }  
     }
@@ -228,16 +228,29 @@ $(document).ready(function () {
             async: true,
             success: function (response) {
                 console.log(response);
-                $(".feedback").show();
+                // $(".feedback").show();
                 $('#feedback').text(response.message)
                     .css("color",  "green");
+                $('#contact_email').val('');
+                $('#contact_text').val('');
+                $('#contact_object').val('info');
+                $(infoknife).hide();
+                $("#contactrequest").addClass('inactive').removeClass('active')
+                    .prop('disabled', true);
+                // Erase feedback after 5 s
+                setTimeout(() => {
+                    $('#feedback').text('');
+                }, 5000);
             },
             error: function (xhr) {
                 console.log(xhr);
-                $(".feedback").show();
+                // $(".feedback").show();
                 $('#feedback').text(response.message)
                     .css("color",  "red");
                 ;
+                setTimeout(() => {
+                    $('#feedback').val('');
+                }, 5000);
             }
         });    
     }

@@ -823,7 +823,13 @@
       .infos .infoelement button.active {
         background-color: darkgreen; }
       .infos .infoelement button.inactive {
-        background-color: lightcoral; }
+        background-color: #a60606; }
+    .infos .infoelement .feedback {
+      color: green;
+      height: 2rem;
+      width: 90%;
+      padding-top: 2rem;
+      padding-bottom: 5rem; }
   .infos .contact {
     display: flex;
     flex-direction: column;

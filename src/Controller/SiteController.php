@@ -145,7 +145,7 @@ class SiteController extends AbstractController
             return $this->json([
                 'message' => $translator->trans('contact.mailko'),
                 'error' => $e
-            ], 400);        
+            ], 500);        
         }
     }
     // --------------------------------------------------------------------------
