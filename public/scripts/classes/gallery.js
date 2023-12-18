@@ -86,7 +86,7 @@ class Gallery {
       $(`#${this.indicators}`).show();
       $(".slidercontrol").show();
       $("body").css("overflow", "auto");
-      $('.diapo').show();
+      // $('.diapo').show();
     });
   }
 }

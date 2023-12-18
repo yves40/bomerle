@@ -30,15 +30,12 @@
       // ---------------------------------------------------------------------
       Zoom(event) {
         const globalfullscreen = $('#globalfullscreen');
-        const closeimg = $('<img>').attr('src', '/images/svg/close-circle-outline.svg')
-                                  .addClass('svgbig-white');
-        const closebutton = $('<a>').append(closeimg);
         const zoomframe = $("<div></div>").addClass('cardframe')
                     .addClass('cardframe__zoom');
         const title = $("<div></div>").addClass('cardframe__title').html(this.data.knifeName);
         const text = $("<div></div>").addClass('cardframe__text').html(this.data.knifedesc);
         const sliderdiv = $("<div></div>").attr('name', 'cardzoom'); // To inject the slider 
-        $(zoomframe).append(title).append(text).append(sliderdiv).append(closebutton);
+        $(zoomframe).append(title).append(text).append(sliderdiv);
         $(globalfullscreen).addClass('cards').append(zoomframe);
 
         const framecontainer = $(event.target).closest('.cardframe');
@@ -60,17 +57,17 @@
               $("body").css("overflow", "hidden");
               const top = window.scrollY;
               $(globalfullscreen).css({'top': top, 'left': 0, 'z-index': 1000})
-                            .show();
+                            .show()
+                            .click( (e) => {
+                              e.preventDefault();
+                              $(globalfullscreen).removeClass('cards');
+                              $(globalfullscreen).empty();
+                              $(globalfullscreen).hide();
+                              $("body").css("overflow", "auto");
+                            });
               let slider = new Slider(sliderdiv, 10, null, 
                                 response.images,
                                 'KNIFE');
-              $(closebutton).click(function (e) { 
-                e.preventDefault();
-                $(globalfullscreen).removeClass('cards');
-                $(globalfullscreen).empty();
-                $(globalfullscreen).hide();
-                $("body").css("overflow", "auto");
-              });
             },
             error: function (xhr) {
               console.log(xhr);

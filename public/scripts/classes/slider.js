@@ -26,6 +26,7 @@ class Slider {
       this.container = container;
       this.containername = $(container).attr('name');
       this.slideinterval = timing * 1000;
+      this.intervalid = 0;
       this.description = description;
       this.homezone = `${this.containername}-zone`;
       this.indicators = `${this.containername}-indicators`;   // Used to manage inidicators when sliding
@@ -64,11 +65,13 @@ class Slider {
       this.addImages(allimages);
       // Arm handlers
       $(`#${this.homezone} > .carousel-button`).children().on('click', (event) => {
-            this.manageActiveSlide(event);
+        event.stopPropagation();
+        this.manageActiveSlide(event);
       })
       const indicators = $(`#${this.homezone} > .carousel-indicators`);
       $(indicators).children().on('click', (event) => {
-            this.manageActiveIndicator(event);
+        event.stopPropagation();
+        this.manageActiveIndicator(event);
       });
       // Some other handlers
       $(window).resize ( () =>  {
@@ -106,6 +109,9 @@ class Slider {
   }
   // ------------------------------------------------------------------------------------------------
   nextSlide() {
+    if(this.intervalid !== 0) {
+      console.log(`Automatic next slide for interval ID ${this.intervalid}`);
+    }
     const splitter = this.sliderarea.split('-');
     const imageroot= splitter[0] + splitter[1];
     const activeline = $(`#${imageroot}-${this.activeindex}`);
@@ -170,7 +176,7 @@ class Slider {
   }
   // ------------------------------------------------------------------------------------------------
   addImages(allimages) {
-    console.log(`Slide interval ${this.slideinterval}`);
+    console.log(`Slide interval ${this.slideinterval} for interval ID: ${this.intervalid}` );
     // Get the container
     const slides = $(`#${this.sliderarea}`);
     const sliderzone = $(`#${this.homezone}`);
@@ -224,7 +230,7 @@ class Slider {
     $(".slidercontrol").hide();
 
     // Wait for the user to close the box
-    $("#zoomer").click( () => { 
+    $("#zoomer").click( (e) => { 
       this.zoomactive = false;
       $("#zoomer").removeClass("zoomon")
                       .addClass('zoomoff').hide()
@@ -232,7 +238,7 @@ class Slider {
       $(`#${this.indicators}`).show();
       $(".slidercontrol").show();
       $("body").css("overflow", "auto");
-      $('.diapo').show();
+      // $('.diapo').show();
     });
   }
 }

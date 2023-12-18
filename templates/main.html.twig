@@ -6,52 +6,92 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Beau Merle</title>
   <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Cinzel">
 </head>
 <body>
-  <nav class="topmenu">
-    <div class="logozone">
-      <a href="#section0"><img class="logo"  src="/images/logo1.png" alt="Logo Beau Merle"></a>
-      {% if devmode == 'dev' %}
-        <div class="debug">
-          {% trans %}app.debugversion{% endtrans %} : {% trans %}app.copyright{% endtrans %}
-        </div>
-      {% endif %}
-    </div>
-    <div class="nav-links">
-      <ul>
-          <li><a href="#section0">{% trans %}app.public.menu.accueil{% endtrans %}</a></li>
-          <li><a href="{{ path('test.main') }}">{% trans %}app.public.menu.test{% endtrans %}</a></li>
-          <li><a href="#section1">{% trans %}app.public.menu.atelier{% endtrans %}</a></li>
-          <li id="gallerymenu"><a href="#thegallery">{% trans %}app.public.menu.galerie{% endtrans %}</a></li>
-          <li id="cardsmenu"><a href="#cards">{% trans %}app.public.menu.catalog{% endtrans %}</a></li>
-          <li><a href="#infos">{% trans %}app.public.menu.contact{% endtrans %}</a></li>
-          <ul>
-            <li><a href="{{ path('public.switchlang', { locale: 'en' }) }}">en |</a></li>
-            <li><a href="{{ path('public.switchlang', { locale: 'fr' }) }}">fr</a></li>
-          </ul>
-      </ul>
-    </div>
-  </nav>
-  <div id="mvp">
-    <div class="allnews">
-      <div id="section0" class="news bg-enclume">
+<header>
+    <nav class="topmenu">
+      <div class="logozone">
+        <a href="#hero"><img class="logo"  src="/images/logo1.png" alt="Logo Beau Merle"></a>
+        {% if devmode == 'dev' %}
+          <div class="debug">
+            {% trans %}app.debugversion{% endtrans %} : {% trans %}app.copyright{% endtrans %}
+          </div>
+        {% endif %}
+      </div>
+      <div class="nav-links">
+        <ul>
+            <li><a href="#hero">{% trans %}app.public.menu.accueil{% endtrans %}</a></li>
+            <li><a href="#allnews">{% trans %}app.public.menu.atelier{% endtrans %}</a></li>
+            <li id="gallerymenu"><a href="#thegallery">{% trans %}app.public.menu.galerie{% endtrans %}</a></li>
+            <li id="cardsmenu"><a href="#cards">{% trans %}app.public.menu.catalog{% endtrans %}</a></li>
+            <li><a href="#contactrequest">{% trans %}app.public.menu.contact{% endtrans %}</a></li>
+            <ul>
+              <li><a href="{{ path('public.switchlang', { locale: 'en' }) }}">en |</a></li>
+              <li><a href="{{ path('public.switchlang', { locale: 'fr' }) }}">fr</a></li>
+            </ul>
+        </ul>
+      </div>
+    </nav>
+    <div id="hero" class="hero-section">
+      <div class="hero-title">
         <h1>{% trans %}app.public.main.name{% endtrans %}</h1>
-        <h2 >{% trans %}app.public.main.whatis{% endtrans %}</h2>
+        <h2>{% trans %}app.public.main.whatis{% endtrans %}</h2>
         <div class="htmltemplate textleft" data-templatename='maintext' data-lang={{locale}}></div>
       </div>
-      <div id="section1" class="news bg-thinknife">
-        <div class="htmltemplate textleft" data-templatename='story' data-lang={{locale}}></div>
+    </div>
+</header>
+<main>
+    <div id="allnews" class="allnews">
+      <div id="atelier" class="news ">
+        <div class="htmltemplate" data-templatename='atelier' data-lang={{locale}}></div>
       </div>
-      <div id="thegallery">
+      <div id="mastory" class="news">
+        <div class="htmltemplate" data-templatename='story' data-lang={{locale}}></div>
       </div>
+    </div> 
+    <div id="thegallery">
     </div>
     <div id="cards" class="cards">
       <div class="cards-header">
-        <div class="htmltemplate textleft" data-templatename='cardsheader' data-lang={{locale}}></div>
+        <div class="htmltemplate" data-templatename='cardsheader' data-lang={{locale}}></div>
       </div>
     </div>
     <div id="infos" class="infos">
       <div class="infoelement">
+        <h3>{% trans %}contact.nav{% endtrans %}</h3>
+        <div class="infoelement__details">
+          <a href="#hero">{% trans %}app.public.menu.accueil{% endtrans %}</a>
+          <a href="#allnews">{% trans %}app.public.menu.atelier{% endtrans %}</a>
+        </div>
+      </div>
+      <div class="infoelement">
+            <h3>{% trans %}contact.social{% endtrans %}</h3>
+            <div class="infoelement__data">           
+              <a href="https://www.facebook.com/BastosSchlass/" 
+                target="_blank">Facebook</a>
+            </div>
+            <h3>{% trans %}contact.video{% endtrans %}</h3>
+            <div class="infoelement__details">
+              <a href="https://www.youtube.com/watch?v=bpvKTJEBObM\0026list=PLZx0qkIFIprEAGVKJeJmadxVZ3C5X183x" 
+                target="_blank">Interview</a>
+              <a href="https://www.youtube.com/watch?v=NX_ZiX4ibbM" 
+                target="_blank">La Brise</a>
+              <a href="https://www.youtube.com/watch?v=jcOUWlB0QXw" 
+                target="_blank">Le Langres</a>
+            </div>
+      </div>
+      <div class="infoelement">
+          <h3>{% trans %}contact.shop{% endtrans %}</h3>
+          <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d8335.20455949551!2d3.697428155338033!3d45.87975863223886!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47f6a39f16d585a5%3A0x8c6e73b6d1676394!2sCoutellerie%20d&#39;art%20%2F%20Beau%20merle!5e1!3m2!1sfr!2sfr!4v1694419775554!5m2!1sfr!2sfr" 
+                  allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
+          <div class="infoelement__details">
+            <p>{% trans %}contact.shopaddress1{% endtrans %}, </p>
+            <p>{% trans %}contact.shopaddress2{% endtrans %}, </p>
+          </div>
+      </div>
+      <div id="contactinrequest" class="infoelement">
         <h3>{% trans %}contact.infos{% endtrans %}</h3>
         {{ form_start(formcontact, {'attr': {'novalidate': 'novalidate', 'class': 'form'}}) }}
             <div class="contact">
@@ -74,35 +114,19 @@
                 {{ form_widget(formcontact.text) }}
                 {{ form_errors(formcontact.text) }}
             </div>
-            <button id="requestcontact">{% trans %}contact.button{% endtrans %}</button>
+            <button id="contactrequest">{% trans %}contact.button{% endtrans %}</button>
         {{ form_end(formcontact) }}
-        <div class="feedback" hidden>
+        <div class="feedback">
           <p id='feedback'></p>
         </div>
       </div>
-      <div class="infoelement">
-          <h3>{% trans %}contact.shop{% endtrans %}</h3>
-          <p>335 Route de Saint-Thomas, Bras de Fer, 63250 Arconsat - France</p>
-          <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d8335.20455949551!2d3.697428155338033!3d45.87975863223886!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47f6a39f16d585a5%3A0x8c6e73b6d1676394!2sCoutellerie%20d&#39;art%20%2F%20Beau%20merle!5e1!3m2!1sfr!2sfr!4v1694419775554!5m2!1sfr!2sfr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
-                  width="350" height="350" 
-                  style="border:0;" 
-                  allowfullscreen="" 
-                  loading="lazy" 
-                  referrerpolicy="no-referrer-when-downgrade">
-          </iframe>
-      </div>
-      <div class="infoelement">
-            <h3>{% trans %}contact.social{% endtrans %}</h3>
-            <a href="https://www.facebook.com/BastosSchlass/" target="_blank">
-              <img class="svgbig-blue" src="/images/svg/logo-facebook.svg" />
-            </a>
-      </div>
-    </div>
-  </div>
+    </div> 
+</main>
   <footer class="footer">
       <img class="menu-hamburger svg-white" src="/images/svg/bars-solid.svg" alt="Show Hide Menu"/>
   </footer>
   <div id="globalfullscreen"></div>
+  <div id="zoomer"></div>
 </body>
 <script src="{{ asset('node_modules/jquery/dist/jquery.min.js')}}"></script>
 <script src="{{ asset('scripts/properties.js')}}"></script>
