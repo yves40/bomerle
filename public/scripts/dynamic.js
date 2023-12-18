@@ -220,6 +220,12 @@ $(document).ready(function () {
             'knifeid': choosedid,
             'adminmail': $props.getAdministratorEmail()
         }
+        let ticker = '>';
+        $('#feedback').text(ticker).css("color",  "yellow");
+        let tid = setTimeout(() => {
+            ticker = ticker + '>';
+            $('#feedback').text(ticker);
+        }, 1000);
         $.ajax({
             type: "POST",
             url: '/public/contactrequest',
@@ -227,8 +233,8 @@ $(document).ready(function () {
             dataType: "json",
             async: true,
             success: function (response) {
+                clearTimeout(tid);
                 console.log(response);
-                // $(".feedback").show();
                 $('#feedback').text(response.message)
                     .css("color",  "green");
                 $('#contact_email').val('');
@@ -237,14 +243,13 @@ $(document).ready(function () {
                 $(infoknife).hide();
                 $("#contactrequest").addClass('inactive').removeClass('active')
                     .prop('disabled', true);
-                // Erase feedback after 5 s
                 setTimeout(() => {
                     $('#feedback').text('');
                 }, 5000);
             },
             error: function (xhr) {
+                clearTimeout(tid);
                 console.log(xhr);
-                // $(".feedback").show();
                 $('#feedback').text(response.message)
                     .css("color",  "red");
                 ;
