@@ -70,6 +70,18 @@ class Slider {
         this.windowx = $(window).width();
         this.windowy = $(window).height();
       });
+      // Manage slides timer
+      if(this.isSliderVisible($(`#${this.homezone}`))) {
+        this.startSlider();
+      }
+      $(window).scroll( () => {
+        if(($(`#${this.homezone}`).length > 0) &&  this.isSliderVisible($(`#${this.homezone}`))) {
+          this.startSlider();
+        }
+        else {
+          this.stopSlider();
+        }
+      })
   }
   // ------------------------------------------------------------------------------------------------
   manageActiveSlide(event) {
@@ -160,13 +172,6 @@ class Slider {
     $(container).append(galleryzone);
     $(container).append($('<div></div>').attr('id', 'fullscreen').addClass('zoomoff'));
     this.startSlider();
-    // Auto slide ops
-    $(sliderzone).on('mouseenter', () => {
-      this.startSlider();
-    })
-    $(sliderzone).on('mouseleave', () => {
-      this.stopSlider();
-    })
   }
   // ------------------------------------------------------------------------------------------------
   addImages(allimages) {
@@ -234,18 +239,50 @@ class Slider {
       // $('.diapo').show();
     });
   }
+  // ------------------------------------------------------------------------------------------------
   // Slider automatic display set/reset
+  // ------------------------------------------------------------------------------------------------
   startSlider() {
     if(this.intervalid === 0) {
       this.intervalid = setInterval( () => {
         this.nextSlide();
       }, this.slideinterval);
-      console.log(`Mouse in : Delay for slides set to ${this.slideinterval} with interval ID: ${this.intervalid}` );
+      console.log(`##VISIBLE## ${this.homezone} : Delay for slides set to ${this.slideinterval} with interval ID: ${this.intervalid}` );
     }
   }
   stopSlider() {
-    console.log(`Mouse out : Stop slideware with interval ID: ${this.intervalid}` );
-    clearInterval(this.intervalid);
-    this.intervalid = 0;
+    if(this.intervalid !== 0) {
+      console.log(`##HIDDEN## ${this.homezone} : Stop slideware with interval ID: ${this.intervalid}` );
+      clearInterval(this.intervalid);
+      this.intervalid = 0;
+    }
+  }
+  // ------------------------------------------------------------------------------------------------
+  // Slider element screen position evaluation
+  // ------------------------------------------------------------------------------------------------
+  isSliderVisible(el) {
+    var windowHeight = $(window).height();
+    var scrollTop = $(window).scrollTop();
+    var elementTop = el.offset().top;
+    var elementBottom = elementTop + el.height();
+
+    return (elementTop >= scrollTop && elementTop <= (scrollTop + windowHeight)) ||
+           (elementBottom >= scrollTop && elementBottom <= (scrollTop + windowHeight));
+  }  
+  getBoundingClientRect(el) {
+    let offset = el.offset();
+    let width = el.width();
+    let height = el.height();
+    let windowHeight = $(window).height();
+    let scrollTop = $(window).scrollTop();
+
+    return {
+      top: offset.top,
+      left: offset.left,
+      bottom: offset.top + height,
+      right: offset.left + width,
+      width: width,
+      height: height
+    };
   }
 }
