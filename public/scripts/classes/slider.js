@@ -12,6 +12,7 @@
     Oct 12 2023     Typo. Add indicators to the slider frame
     Oct 14 2023     Indicators to the slider frame.
     Oct 15 2023     Indicators to the slider frame..
+    Dec 20 2023     Fix timer problem
 
     ----------------------------------------------------------------------------*/
 class Slider {
@@ -22,7 +23,7 @@ class Slider {
   // Two accepted values : SHOW (the default) and KNIFE
   constructor(container, timing = 2, description = '', allimages, slidertype = 'SHOW') {
     // Init
-      this.version = 'Slider:1.47, Oct 15 2023 ';
+      this.version = 'Slider:1.50, Dec 20 2023 ';
       this.container = container;
       this.containername = $(container).attr('name');
       this.slideinterval = timing * 1000;
@@ -48,18 +49,6 @@ class Slider {
                       break;
         default:      this.imagespath = "/images/slideshow/";
                       break;
-      }
-      // Slider parameters
-      const VERYLONGTIMESLIDER = 60000;
-      const automove = true;        // manage later
-      if(!automove) {
-        this.slideinterval = VERYLONGTIMESLIDER; // Almost disable auto scroll
-      }
-      else {
-        // Auto move
-        this.intervalid = setInterval( () => {
-          this.nextSlide();
-        }, this.slideinterval);
       }
       this.buildSliderFrame(container);
       this.addImages(allimages);
@@ -109,9 +98,6 @@ class Slider {
   }
   // ------------------------------------------------------------------------------------------------
   nextSlide() {
-    if(this.intervalid !== 0) {
-      console.log(`Automatic next slide for interval ID ${this.intervalid}`);
-    }
     const splitter = this.sliderarea.split('-');
     const imageroot= splitter[0] + splitter[1];
     const activeline = $(`#${imageroot}-${this.activeindex}`);
@@ -173,10 +159,17 @@ class Slider {
     $(galleryzone).append(sliderzone);
     $(container).append(galleryzone);
     $(container).append($('<div></div>').attr('id', 'fullscreen').addClass('zoomoff'));
+    this.startSlider();
+    // Auto slide ops
+    $(sliderzone).on('mouseenter', () => {
+      this.startSlider();
+    })
+    $(sliderzone).on('mouseleave', () => {
+      this.stopSlider();
+    })
   }
   // ------------------------------------------------------------------------------------------------
   addImages(allimages) {
-    console.log(`Slide interval ${this.slideinterval} for interval ID: ${this.intervalid}` );
     // Get the container
     const slides = $(`#${this.sliderarea}`);
     const sliderzone = $(`#${this.homezone}`);
@@ -240,5 +233,19 @@ class Slider {
       $("body").css("overflow", "auto");
       // $('.diapo').show();
     });
+  }
+  // Slider automatic display set/reset
+  startSlider() {
+    if(this.intervalid === 0) {
+      this.intervalid = setInterval( () => {
+        this.nextSlide();
+      }, this.slideinterval);
+      console.log(`Mouse in : Delay for slides set to ${this.slideinterval} with interval ID: ${this.intervalid}` );
+    }
+  }
+  stopSlider() {
+    console.log(`Mouse out : Stop slideware with interval ID: ${this.intervalid}` );
+    clearInterval(this.intervalid);
+    this.intervalid = 0;
   }
 }

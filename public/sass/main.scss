@@ -105,4 +105,12 @@ body {
   width: 100%;
   height: 100%;
 }
-
+#cardzoom {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(4px); 
+  width: 100%;
+  height: 100%;
+}

@@ -798,7 +798,8 @@
       text-decoration: none; }
     .infos .infoelement__data {
       display: flex;
-      align-items: center; }
+      flex-direction: column;
+      gap: .7em; }
     .infos .infoelement__details {
       display: flex;
       flex-direction: column;
@@ -937,6 +938,15 @@ body {
             line-height: 2rem; } }
 
 #globalfullscreen {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(4px);
+  width: 100%;
+  height: 100%; }
+
+#cardzoom {
   position: absolute;
   display: flex;
   justify-content: center;

@@ -11,6 +11,7 @@ $(document).ready(function () {
     const navLinks = $(".nav-links");
     const infoknife = $('.knife');
     $('#globalfullscreen').hide();
+    $('#cardzoom').hide();
     $('#zoomer').hide();
     let validEmail = false;
     let validText = false;
@@ -19,7 +20,6 @@ $(document).ready(function () {
         $(navLinks).toggleClass('mobile-menu');
     });
     $(`.nav-links, .mobile-menu` ).on('click', (element) => {
-        console.log(element);
         $(navLinks).toggleClass('mobile-menu');
     });
     // Some UI initial state

@@ -29,14 +29,14 @@
       }
       // ---------------------------------------------------------------------
       Zoom(event) {
-        const globalfullscreen = $('#globalfullscreen');
-        const zoomframe = $("<div></div>").addClass('cardframe')
+        const cardzoom = $('#cardzoom');
+        const zoomframe = $("<div></div>").addClass('cardframe') 
                     .addClass('cardframe__zoom');
         const title = $("<div></div>").addClass('cardframe__title').html(this.data.knifeName);
         const text = $("<div></div>").addClass('cardframe__text').html(this.data.knifedesc);
         const sliderdiv = $("<div></div>").attr('name', 'cardzoom'); // To inject the slider 
         $(zoomframe).append(title).append(text).append(sliderdiv);
-        $(globalfullscreen).addClass('cards').append(zoomframe);
+        $(cardzoom).addClass('cards').append(zoomframe);
 
         const framecontainer = $(event.target).closest('.cardframe');
         const splitter = $(framecontainer).attr('id').split('-');
@@ -56,13 +56,13 @@
               // Remove body scroll bar so user cant scroll up or down
               $("body").css("overflow", "hidden");
               const top = window.scrollY;
-              $(globalfullscreen).css({'top': top, 'left': 0, 'z-index': 1000})
+              $(cardzoom).css({'top': top, 'left': 0, 'z-index': 1000})
                             .show()
                             .click( (e) => {
                               e.preventDefault();
-                              $(globalfullscreen).removeClass('cards');
-                              $(globalfullscreen).empty();
-                              $(globalfullscreen).hide();
+                              $(cardzoom).removeClass('cards');
+                              $(cardzoom).empty();
+                              $(cardzoom).hide();
                               $("body").css("overflow", "auto");
                             });
               let slider = new Slider(sliderdiv, 10, null, 
