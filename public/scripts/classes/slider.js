@@ -70,10 +70,6 @@ class Slider {
         this.windowx = $(window).width();
         this.windowy = $(window).height();
       });
-      // Manage slides timer
-      if(this.isSliderVisible($(`#${this.homezone}`))) {
-        this.startSlider();
-      }
       $(window).scroll( () => {
         if(($(`#${this.homezone}`).length > 0) &&  this.isSliderVisible($(`#${this.homezone}`))) {
           this.startSlider();
