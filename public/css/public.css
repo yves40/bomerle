@@ -279,7 +279,7 @@ section {
     padding: 2% 6%;
     justify-content: space-between;
     align-items: center;
-    background: #f44336; }
+    background: #26160f; }
     #header .navigation .nav-links {
       flex: 1;
       text-align: right; }
@@ -308,7 +308,7 @@ section {
           width: 0%; }
         #header .navigation .nav-links ul #catalog #submenu {
           display: none;
-          background: #f44336; }
+          background: #26160f; }
         #header .navigation .nav-links ul #catalog:hover #submenu {
           display: block;
           position: absolute; }
@@ -351,7 +351,7 @@ section {
   #header .navigation .nav-links ul li {
     display: block; }
   #header .navigation .nav-links {
-    background: #f44336;
+    background: #26160f;
     position: absolute;
     height: 80vh;
     width: 200px;
