@@ -178,7 +178,7 @@
   .topmenu .logozone {
     width: 40%; }
     .topmenu .logozone .logo {
-      width: 40px; }
+      width: 50px; }
     .topmenu .logozone .debug {
       margin-top: .4rem;
       color: white;
@@ -950,6 +950,9 @@ body {
           body .hero-section .hero-title p {
             font-size: 2rem;
             line-height: 2rem; } }
+        body .hero-section .hero-title p a {
+          color: white;
+          font-size: 3rem; }
 
 #globalfullscreen {
   position: absolute;
