@@ -3,8 +3,10 @@
 namespace App\Form;
 
 use App\Entity\Category;
+use Doctrine\ORM\EntityRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
@@ -16,7 +18,17 @@ class CategoryType extends AbstractType
             ->add('name')
             ->add('fullname')
             ->add('description', TextareaType::class,
-            ['attr' => ["rows" => 6 ]])
+            ['attr' => ["rows" => 10 ]])
+            ->add('relatedcategories', EntityType::class, [
+                'expanded' => true,
+                'multiple' => true,
+                'required' => false,
+                'class' => Category::class,
+                'query_builder' => function(EntityRepository $er) {
+                    return $er->createQueryBuilder('a')
+                              ->orderBy('a.name', 'ASC');
+                }
+            ])
         ;
     }
 

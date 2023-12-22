@@ -67,13 +67,20 @@
         </div>
         <div class="row align-items-start">
             <div class="col ylabel">
+                    {{
+                        form_row(form.description, { 'label' : 'admin.managecategories.description'|trans,
+                            'value': categorydescription,
+                            'help': 'admin.managecategories.helpdescription'|trans,
+                        }) 
+                    }}
+            </div>
+            <div class="col">
                 {{
-                    form_row(form.description, { 'label' : 'admin.managecategories.description'|trans,
-                        'value': categorydescription,
-                        'help': 'admin.managecategories.helpdescription'|trans,
+                    form_row(form.relatedcategories, { 'label' : 'admin.managecategories.related'|trans,
+                        'value': relatedcategories,
                     }) 
                 }}
-            </div>
+        </div>
         </div>
     {{ form_end(form) }}
     {# List existing metals #}
@@ -81,7 +88,8 @@
         {% for category in categories %}
             <li class="list-group-item">
                 <div class="row">
-                    <div class="col-8">{{category.name}}</div>
+                    <div class="col-4">{{category.name}}</div>
+                    <div class="col-4">{{category.fullname}}</div>
                     <div class="col-1">
                         <a href="{{ path('bootadmin.categories.delete', {id: category.id}) }}">
                             <img class="svgsmall-lightblue" src="/images/svg/trash-bin-outline.svg" alt=""/>

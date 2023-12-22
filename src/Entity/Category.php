@@ -31,9 +31,13 @@ class Category
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $fullname = null;
 
+    #[ORM\ManyToMany(targetEntity: self::class, fetch: "EAGER")]
+    private Collection $relatedcategories;
+
     public function __construct()
     {
         $this->knifes = new ArrayCollection();
+        $this->relatedcategories = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -108,6 +112,30 @@ class Category
     public function setFullname(?string $fullname): static
     {
         $this->fullname = $fullname;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, self>
+     */
+    public function getRelatedcategories(): Collection
+    {
+        return $this->relatedcategories;
+    }
+
+    public function addRelatedcategory(self $relatedcategory): static
+    {
+        if (!$this->relatedcategories->contains($relatedcategory)) {
+            $this->relatedcategories->add($relatedcategory);
+        }
+
+        return $this;
+    }
+
+    public function removeRelatedcategory(self $relatedcategory): static
+    {
+        $this->relatedcategories->removeElement($relatedcategory);
 
         return $this;
     }

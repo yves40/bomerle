@@ -116,6 +116,7 @@ admin:
     fullname: Description courte
     helpfullname: Description synthétique
     description: Description
+    related: Liée avec
     helpdescription: Description complète
     isused: Cette catégorie est utilisée par au moins un couteau
     created: Catégorie ajoutée

@@ -423,6 +423,7 @@ class AdminController extends AbstractController
             "categoryname" => $category->getName(),
             "categoryfullname" => $category->getFullname(),
             "categorydescription" => $category->getDescription(),
+            "relatedcategories" => $category->getRelatedcategories(),
             "id" => $id,
             "knifeconflict" => $knifeconflict,
             "categories" => $categories,

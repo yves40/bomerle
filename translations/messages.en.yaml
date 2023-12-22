@@ -117,6 +117,7 @@ admin:
     fullname: Short description
     helpfullname: Just a short description
     description: Description
+    related: Similar to
     helpdescription: Full description
     isused: This Category is used by at least one knife
     created: Category added
