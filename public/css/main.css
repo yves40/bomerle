@@ -900,9 +900,12 @@ body {
       overflow: hidden; }
       @media screen and (min-width: 1024px) {
         body .hero-section .hero-title {
-          width: 60%;
           margin-right: 2rem;
           max-width: 1024px; } }
+      body .hero-section .hero-title .htmltemplate:nth-child(1) img {
+        float: right; }
+      body .hero-section .hero-title .htmltemplate:nth-child(1) h1, body .hero-section .hero-title .htmltemplate:nth-child(1) h2, body .hero-section .hero-title .htmltemplate:nth-child(1) p {
+        text-align: left; }
       body .hero-section .hero-title img {
         width: 200px;
         height: 200px;
@@ -930,7 +933,6 @@ body {
         padding-bottom: 2rem;
         line-height: 1.5rem;
         text-align: right;
-        display: inline-block;
         width: 100%; }
         @media screen and (min-width: 1024px) {
           body .hero-section .hero-title h2 {
