@@ -22,6 +22,9 @@ body {
   display: flex;
   flex-direction: column;
   .hero-section {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
     width: 100%;
     margin-top: $menu-height;
     scroll-margin: $menu-height;
@@ -30,10 +33,6 @@ body {
     background-position: center;
     background-size: cover;
     background-attachment: fixed; 
-    position: relative;
-    display: flex;
-    justify-content: flex-end; 
-    align-items: center;
 
     @include for-desktop {
       background-image: url(../images/homepageimages/enclume.jpg);
@@ -51,7 +50,17 @@ body {
           margin-right: 2rem;
           max-width: $responsive-max-width;
       }
-
+      img {
+        width: 200px;
+        height: 200px;
+        float: left;
+        margin: 1rem;
+        border-radius: 10px;
+        @include for-desktop {
+          width: 300px;
+          height: 300px;
+        }
+      }
       h1{
           font-family: $herotitle;
           font-size: 2rem;
@@ -60,7 +69,6 @@ body {
           text-align: right;
           width: 100%;
           @include for-desktop{
-              text-align: right;
               font-size: 3rem;
           }
       }
@@ -82,7 +90,6 @@ body {
           font-size: 1.5rem;
           line-height: 1.4rem;
           text-align: right;
-          display: inline-block;
           padding: 1rem;
           background-color: rgba(34, 7, 7, .3);
           border-radius: 10px;

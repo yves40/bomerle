@@ -1,5 +1,11 @@
 
 .topmenu {
+  #homelink {
+    margin: 1rem;
+    @include for-desktop {
+      display: none;
+    }
+  }
   .logozone {
     width: 40%;
     .logo {
@@ -20,7 +26,7 @@
   width: 100%;
   height: $menu-height;
   align-items: center;
-  background: $bg-gradient-green;
+  background: $background;
   a { 
     color: white;
   }
@@ -64,7 +70,7 @@
   bottom: 0;
   width:100%;
   height: 60px; 
-  background: $bg-gradient-green;
+  background: $background;
   .menu-hamburger {
     display: none;
     position: absolute;
@@ -124,7 +130,7 @@
       li {
         font-size: 1.2rem;
       }
-      background: $bg-gradient-green;
+      background: $background;
       padding: 20px;
       border-radius: 10px;
       min-width: fit-content; 

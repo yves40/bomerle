@@ -709,12 +709,13 @@
     font-family: "Arial, Helvetica", sans-serif; }
   .htmltemplate li {
     font-weight: normal; }
-  .htmltemplate .centeredphoto {
-    text-align: center;
-    margin: .5em 0; }
-    .htmltemplate .centeredphoto img {
-      max-width: 50%;
-      border-radius: 10px; }
+  .htmltemplate img {
+    margin: 20px;
+    width: 300px;
+    height: 300px;
+    float: left;
+    border: solid darkgrey 3px;
+    border-radius: 10px; }
   .htmltemplate.textright {
     text-align: right; }
   .htmltemplate.textleft {

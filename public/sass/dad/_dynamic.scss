@@ -20,14 +20,14 @@
     li {
         font-weight: normal;
     }
-    .centeredphoto {
-        text-align: center;
-        margin: .5em 0;
-        img {
-            max-width: 50%;
-            border-radius: 10px;
-        }    
-    }
+    img {
+        margin: 20px;
+        width: 300px;
+        height: 300px;
+        float: left;
+        border: solid darkgrey 3px; 
+        border-radius: 10px;
+    } 
     &.textright {
         text-align: right;
     }

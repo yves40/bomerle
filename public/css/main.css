@@ -169,7 +169,12 @@
   width: 100%;
   height: 100px;
   align-items: center;
-  background: radial-gradient(circle, #020024 0%, #097936 100%, #00d4ff 100%); }
+  background: #1a1917; }
+  .topmenu #homelink {
+    margin: 1rem; }
+    @media screen and (min-width: 1024px) {
+      .topmenu #homelink {
+        display: none; } }
   .topmenu .logozone {
     width: 40%; }
     .topmenu .logozone .logo {
@@ -211,7 +216,7 @@
   bottom: 0;
   width: 100%;
   height: 60px;
-  background: radial-gradient(circle, #020024 0%, #097936 100%, #00d4ff 100%); }
+  background: #1a1917; }
   .footer .menu-hamburger {
     display: none;
     position: absolute;
@@ -258,7 +263,7 @@
       flex-direction: column;
       gap: 35px;
       align-items: center;
-      background: radial-gradient(circle, #020024 0%, #097936 100%, #00d4ff 100%);
+      background: #1a1917;
       padding: 20px;
       border-radius: 10px;
       min-width: fit-content; }
@@ -873,6 +878,9 @@ body {
   display: flex;
   flex-direction: column; }
   body .hero-section {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
     width: 100%;
     margin-top: 100px;
     scroll-margin: 100px;
@@ -880,11 +888,7 @@ body {
     background-image: url(../images/SHEFFIELD-2.jpeg);
     background-position: center;
     background-size: cover;
-    background-attachment: fixed;
-    position: relative;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center; }
+    background-attachment: fixed; }
     @media screen and (min-width: 1024px) {
       body .hero-section {
         background-image: url(../images/homepageimages/enclume.jpg); } }
@@ -899,6 +903,16 @@ body {
           width: 60%;
           margin-right: 2rem;
           max-width: 1024px; } }
+      body .hero-section .hero-title img {
+        width: 200px;
+        height: 200px;
+        float: left;
+        margin: 1rem;
+        border-radius: 10px; }
+        @media screen and (min-width: 1024px) {
+          body .hero-section .hero-title img {
+            width: 300px;
+            height: 300px; } }
       body .hero-section .hero-title h1 {
         font-family: "Cinzel Decorative", sans-serif;
         font-size: 2rem;
@@ -908,7 +922,6 @@ body {
         width: 100%; }
         @media screen and (min-width: 1024px) {
           body .hero-section .hero-title h1 {
-            text-align: right;
             font-size: 3rem; } }
       body .hero-section .hero-title h2 {
         font-family: "Englebert", sans-serif;
@@ -927,7 +940,6 @@ body {
         font-size: 1.5rem;
         line-height: 1.4rem;
         text-align: right;
-        display: inline-block;
         padding: 1rem;
         background-color: rgba(34, 7, 7, 0.3);
         border-radius: 10px;
