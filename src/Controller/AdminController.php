@@ -421,6 +421,8 @@ class AdminController extends AbstractController
             "locale" =>  $loc,
             "new" =>  $new,
             "categoryname" => $category->getName(),
+            "categoryfullname" => $category->getFullname(),
+            "categorydescription" => $category->getDescription(),
             "id" => $id,
             "knifeconflict" => $knifeconflict,
             "categories" => $categories,

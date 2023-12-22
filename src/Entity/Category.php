@@ -25,6 +25,12 @@ class Category
     #[Assert\NotBlank(message: "category.selectone")]
     private Collection $knifes;
 
+    #[ORM\Column(length: 1024, nullable: true)]
+    private ?string $description = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $fullname = null;
+
     public function __construct()
     {
         $this->knifes = new ArrayCollection();
@@ -80,5 +86,29 @@ class Category
     public function __toString()
     {
         return $this->name;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(?string $description): static
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    public function getFullname(): ?string
+    {
+        return $this->fullname;
+    }
+
+    public function setFullname(?string $fullname): static
+    {
+        $this->fullname = $fullname;
+
+        return $this;
     }
 }
