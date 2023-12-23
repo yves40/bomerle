@@ -17,7 +17,8 @@
         {% for knife in allknives %}
             <li class="list-group-item">
                 <div class="row">
-                    <div class="col">{{knife.name}} ({{knife.images|length}})</div>
+                    <div class="col-3">{{knife.name}} ({{knife.images|length}})</div>
+                    <div class="col-3">{{knife.category.name}}</div>
                     <div class="col-1">
                         {% if knife.published == true %}    
                             <img class="svgsmall-lightgreen" src="/images/svg/plug-circle-plus-solid.svg" alt=""/>
