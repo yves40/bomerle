@@ -18,6 +18,12 @@
             <li class="list-group-item">
                 <div class="row">
                     <div class="col-3">{{knife.name}} ({{knife.images|length}})</div>
+                    <div class="col-1">
+                        <a href="{{ path('bootadmin.categories.update', {id: knife.category.id}) }}" 
+                            title="Tooltip">
+                            <img class="svgsmall-lightblue" src="/images/svg/share-social-outline.svg" alt="" title=""/>
+                        </a>
+                    </div>
                     <div class="col-3">{{knife.category.name}}</div>
                     <div class="col-1">
                         {% if knife.published == true %}    
@@ -28,7 +34,8 @@
                     </div>
                     <div class="col-1">
                         <a href="{{ path('bootadmin.knives.edit', {id: knife.id}) }}">
-                        <img class="svgsmall-lightblue" src="/images/svg/pen-to-square-regular.svg" alt="" title=""/>                        </a>
+                            <img class="svgsmall-lightblue" src="/images/svg/pen-to-square-regular.svg" alt="" title=""/>
+                        </a>
                     </div>
                     <div class="col-1 deleteaction" 
                             data-knifeid={{knife.id}}
