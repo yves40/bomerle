@@ -18,13 +18,10 @@
             <li class="list-group-item">
                 <div class="row">
                     <div class="col-3">{{knife.name}} ({{knife.images|length}})</div>
-                    <div class="col-1">
-                        <a href="{{ path('bootadmin.categories.update', {id: knife.category.id}) }}" 
-                            title="Tooltip">
-                            <img class="svgsmall-lightblue" src="/images/svg/share-social-outline.svg" alt="" title=""/>
-                        </a>
+                    <div class="col-3">
+                        <a class="nav-link" 
+                            href="{{ path('bootadmin.categories.update', {id: knife.category.id}) }}">{{knife.category.name}}</a>
                     </div>
-                    <div class="col-3">{{knife.category.name}}</div>
                     <div class="col-1">
                         {% if knife.published == true %}    
                             <img class="svgsmall-lightgreen" src="/images/svg/plug-circle-plus-solid.svg" alt=""/>
