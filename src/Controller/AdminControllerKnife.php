@@ -214,23 +214,30 @@ class AdminControllerKnife extends AbstractController
         try {
             /** @var KnifesRepository $repo */
             $repo = $em->getRepository(Knifes::class);
-            $catrepo = $em->getRepository(Category::class);
+            // Cannot directly send back $published as the knife object 
+            // contains an object attribute for Category
+            // So rebuild a dedicated array for the client
             $published = $repo->findPublished();
             $categories = [];
+            $knives = [];
             /** @var Knifes $one */
             foreach($published as $key => $one) {
-                $k = $repo->find($one['id']);
-                $cname = $k->getCategory()->getName();
-                $cid = $k->getCategory()->getId();
-                $published[$key]['catname'] = $cname;
-                $published[$key]['catid'] = $cid;
-                array_push($categories, $cname);
+                $knives[$key]['id'] = $one->getId();
+                $knives[$key]['knifename'] = $one->getName();
+                $knives[$key]['catname'] = $one->getCategory()->getName();
+                $knives[$key]['catid'] = $one->getCategory()->getId();
+                $categories[$key]['catname'] = $one->getCategory()->getName();
+                $categories[$key]['catid'] = $one->getCategory()->getId();
             }
+            dump($categories, $knives);
+            // $dedup = array_unique($categories);
+            // dump($dedup);
             return $this->json([
                 'message' => 'bootadmin.knives.getpublished OK',
                 'publishedcount' => count($published),
-                'published' => $published,
-                'categories' => $categories
+                'knives' => $knives,
+                'categories' =>  $categories,
+                'relatedcategories' => count($categories)
             ], 200);        
     }
         catch(Exception $e) {

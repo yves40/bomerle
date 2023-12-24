@@ -86,7 +86,8 @@ $(document).ready(function () {
             success: function (response) {
                 console.log(response);
                 if(response.publishedcount != 0) {
-                    loadPublishedCatalog(response.published);
+                    loadCategoriesCatalog(response.categories);
+                    loadPublishedCatalog(response.knives);
                     $(cardsmenu).show();
                     $(cards).show();
                 }
@@ -96,7 +97,14 @@ $(document).ready(function () {
             }
         });    
     }
-    // ---------------------------------------- Find a dynamic section in the page
+    // ---------------------------------------- 
+    function loadCategoriesCatalog(categories) {
+        console.log(`Used Categories in published knives`);
+        categories.forEach( category => {
+            console.log(`${category.catname}`);
+        })
+    }
+    // ----------------------------------------
     function loadPublishedCatalog(allpublished) {
         let cardssection = $('#cards');
         allpublished.forEach( knife => {
