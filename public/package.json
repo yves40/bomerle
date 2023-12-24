@@ -7,7 +7,7 @@
     "startbootstrap-sb-admin": "^7.0.5"
   },
   "scripts": {
-    "sass": "node-sass --watch sass -o css",
+    "sass": "node-sass --watch sass sass/dad -o css",
     "sandbox": "node-sass --watch sandbox -o css"
   }
 }

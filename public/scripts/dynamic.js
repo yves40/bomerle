@@ -6,6 +6,7 @@ $(document).ready(function () {
     console.log(`[${$props.version()} ]` );
     const cardsmenu = $("#cardsmenu");
     const cards = $('#cards');
+    const categorysection = $('#categories');
     const gallerymenu = $("#gallerymenu");
     const menuHamburger = $(".menu-hamburger");
     const navLinks = $(".nav-links");
@@ -85,8 +86,10 @@ $(document).ready(function () {
             async: true,
             success: function (response) {
                 console.log(response);
-                if(response.publishedcount != 0) {
-                    loadCategoriesCatalog(response.categories);
+                if(response.categoriescount != 0) {
+                    loadCategoriesCatalog(categorysection, response.categories);
+                }
+                if(response.knivescount != 0) {
                     loadPublishedCatalog(response.knives);
                     $(cardsmenu).show();
                     $(cards).show();
@@ -98,11 +101,41 @@ $(document).ready(function () {
         });    
     }
     // ---------------------------------------- 
-    function loadCategoriesCatalog(categories) {
-        console.log(`Used Categories in published knives`);
-        categories.forEach( category => {
-            console.log(`${category.catname}`);
+    function loadCategoriesCatalog(container, categories) {
+        const dedup = [...new Map(categories.map((m) => [m.catid, m])).values()];
+        console.log(`${dedup.length} categories used in published knives`);
+        dedup.forEach( category => {
+            const payload = {
+                'catid': category.catid,
+                'single': true
+            }
+            $.ajax({
+                type: "POST",
+                url: '/knives/public/categoryimages',
+                dataType: "json",
+                async: true,
+                data: JSON.stringify(payload),
+                success: function (response) {
+                    console.log(response);
+                    AddCategory(container, response, category)
+                },
+                error: function (xhr) {
+                    console.log(xhr);
+                }
+            });    
+    
         })
+    }
+    // ----------------------------------------
+    function AddCategory(container, response, category) {
+        const div = $('<div></div>').addClass('catcard');
+        const h2 = $('<h2>').text(category.catname).addClass('heroh2');
+        const p = $('<p>').text(category.catfullname).addClass('herop');
+        const img = $('<img>').attr('src', `/images/knife/${response.filenames}`);
+        $(div).append(h2);
+        $(div).append(p);
+        $(div).append(img);
+        $(container).append(div);
     }
     // ----------------------------------------
     function loadPublishedCatalog(allpublished) {

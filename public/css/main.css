@@ -867,6 +867,65 @@
     .infos .contact li {
       color: red; }
 
+#categories {
+  scroll-margin: 100px;
+  padding: 3rem 0;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  background-image: url(../../images/home5.jpg);
+  background-position: center;
+  background-attachment: fixed;
+  background-size: cover;
+  color: white; }
+  #categories img {
+    width: 150px;
+    height: 150px;
+    border-radius: 10px; }
+    @media screen and (min-width: 1024px) {
+      #categories img {
+        width: 300px;
+        height: 300px; } }
+  #categories h1 {
+    font-family: "Cinzel Decorative", sans-serif;
+    font-size: 2rem;
+    font-weight: 600;
+    padding: 2rem 0;
+    text-align: right;
+    width: 100%; }
+    @media screen and (min-width: 1024px) {
+      #categories h1 {
+        font-size: 3rem; } }
+  #categories h2 {
+    font-family: "Gideon Roman", sans-serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    padding-bottom: 2rem;
+    line-height: 1.5rem;
+    text-align: right;
+    width: 100%; }
+    @media screen and (min-width: 1024px) {
+      #categories h2 {
+        font-size: 2.5rem; } }
+  #categories p {
+    font-family: "Gideon Roman", sans-serif;
+    font-size: 1rem;
+    line-height: 1.4rem;
+    text-align: right;
+    padding: 1rem;
+    background-color: rgba(34, 7, 7, 0.3);
+    border-radius: 10px;
+    width: 100%; }
+    @media screen and (min-width: 1024px) {
+      #categories p {
+        font-size: 1.5rem;
+        line-height: 2rem; } }
+    #categories p a {
+      color: white;
+      font-size: 3rem; }
+
 * {
   margin: 0;
   padding: 0;

@@ -227,22 +227,57 @@ class AdminControllerKnife extends AbstractController
                 $knives[$key]['catname'] = $one->getCategory()->getName();
                 $knives[$key]['catid'] = $one->getCategory()->getId();
                 $categories[$key]['catname'] = $one->getCategory()->getName();
+                $categories[$key]['catfullname'] = $one->getCategory()->getFullname();
                 $categories[$key]['catid'] = $one->getCategory()->getId();
             }
-            dump($categories, $knives);
             // $dedup = array_unique($categories);
-            // dump($dedup);
             return $this->json([
                 'message' => 'bootadmin.knives.getpublished OK',
-                'publishedcount' => count($published),
                 'knives' => $knives,
+                'knivescount' => count($published),
                 'categories' =>  $categories,
-                'relatedcategories' => count($categories)
+                'categoriescount' => count($categories)
             ], 200);        
     }
         catch(Exception $e) {
             return $this->json([
                 'message' => 'bootadmin.knives.getpublished KO',
+                'error' => $e
+            ], 500);        
+        }
+    }
+    // --------------------------------------------------------------------------
+    #[Route('/public/categoryimages', name: 'bootadmin.knives.categoryimages')]
+    public function getCategoryImages(Request $request, EntityManagerInterface $em) {
+        $data = file_get_contents("php://input");
+        $payload = json_decode($data, true);
+        $categoryid = $payload['catid'];
+        $single = $payload['single'];
+
+        /*
+            select filename from images where knifes_id 
+                in ( SELECT id FROM `knifes` WHERE category_id = 19) LIMIT 1;
+        */
+        try {
+            /** @var KnifeRepository $repoknife */
+            $repoknife = $em->getRepository(Knifes::class);
+            $oneknife = $repoknife->findBy(['category' => $categoryid ],[], 1);
+            $images = $oneknife[0]->getImages();
+            $filenames = [];
+            foreach($images as $img) {
+                array_push($filenames, $img->getFilename());
+            }
+            return $this->json([
+                'message' => 'bootadmin.knives.categoryimages OK',
+                'catid' => $categoryid,
+                'single' => $single,
+                'knife' => $oneknife[0]->getName(),
+                'filenames' => $filenames[0]
+            ], 200);        
+    }
+        catch(Exception $e) {
+            return $this->json([
+                'message' => 'bootadmin.knives.categoryimages KO',
                 'error' => $e
             ], 500);        
         }
