@@ -221,6 +221,9 @@ class AdminControllerKnife extends AbstractController
             foreach($published as $key => $one) {
                 $k = $repo->find($one['id']);
                 $cname = $k->getCategory()->getName();
+                $cid = $k->getCategory()->getId();
+                $published[$key]['catname'] = $cname;
+                $published[$key]['catid'] = $cid;
                 array_push($categories, $cname);
             }
             return $this->json([
@@ -234,7 +237,7 @@ class AdminControllerKnife extends AbstractController
             return $this->json([
                 'message' => 'bootadmin.knives.getpublished KO',
                 'error' => $e
-            ], 400);        
+            ], 500);        
         }
     }
     // --------------------------------------------------------------------------
