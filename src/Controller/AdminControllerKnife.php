@@ -7,8 +7,9 @@ use Error;
 use Exception;
 use App\Entity\Images;
 use App\Entity\Knifes;
-use App\Form\KnifesType;
+use App\Entity\Category;
 
+use App\Form\KnifesType;
 use App\Services\Uploader;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -211,13 +212,24 @@ class AdminControllerKnife extends AbstractController
     #[Route('/public/getpublished', name: 'bootadmin.knives.getpublished')]
     public function getPublished(Request $request, EntityManagerInterface $em) {
         try {
-                $published = $em->getRepository(Knifes::class)->findPublished();
-                return $this->json([
-                    'message' => 'bootadmin.knives.getpublished OK',
-                    'publishedcount' => count($published),
-                    'published' => $published
-                ], 200);        
-        }
+            /** @var KnifesRepository $repo */
+            $repo = $em->getRepository(Knifes::class);
+            $catrepo = $em->getRepository(Category::class);
+            $published = $repo->findPublished();
+            $categories = [];
+            /** @var Knifes $one */
+            foreach($published as $key => $one) {
+                $k = $repo->find($one['id']);
+                $cname = $k->getCategory()->getName();
+                array_push($categories, $cname);
+            }
+            return $this->json([
+                'message' => 'bootadmin.knives.getpublished OK',
+                'publishedcount' => count($published),
+                'published' => $published,
+                'categories' => $categories
+            ], 200);        
+    }
         catch(Exception $e) {
             return $this->json([
                 'message' => 'bootadmin.knives.getpublished KO',
@@ -231,7 +243,7 @@ class AdminControllerKnife extends AbstractController
                             EntityManagerInterface $em,
                             ) 
     {
-        /**  @var Knifes $knife */
+        /** @var Knifes $knife */
         /** @var Collection $images */
         $data = file_get_contents("php://input");
         $payload = json_decode($data, true);

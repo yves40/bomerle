@@ -43,27 +43,12 @@ class KnifesRepository extends ServiceEntityRepository
     }
     public function findPublished(): array
     {
-        $sql ='select k.name, k.id, c.name, k.description
-                from knifes k, category c 
-                    where k.published = true
-                    	and c.id = k.category_id order by k.name';
-        $rsm = new ResultSetMapping($this->getEntityManager());
-        $rsm->addEntityResult(Knifes::class, 'k');
-        $rsm->addJoinedEntityResult(Category::class, 'c', 'k', 'category');
-        $rsm->addFieldResult('k', 'name', 'name');
-        $rsm->addFieldResult('k', 'id', 'id');
-        $rsm->addFieldResult('c', 'name', 'name');
-        $rsm->addFieldResult('k', 'description', 'description');
-        // $rsm->addFieldResult('c', 'category_id', 'category');
-        $query = $this->getEntityManager()->createNativeQuery($sql, $rsm);
-        return $query->getArrayResult();
-        
-        // return $this->createQueryBuilder('s')
-        // ->select('distinct(s.name), s.id')
-        // ->andWhere('s.published = true')
-        // ->orderBy('s.name')
-        // ->getQuery()
-        // ->getResult();
+        return $this->createQueryBuilder('s')
+            ->select('distinct(s.name), s.id')
+            ->andWhere('s.published = true')
+            ->orderBy('s.name')
+            ->getQuery()
+            ->getResult();
     }   
 
 //    /**
