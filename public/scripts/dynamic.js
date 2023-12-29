@@ -103,6 +103,8 @@ $(document).ready(function () {
     // ---------------------------------------- 
     function loadCategoriesCatalog(container, categories) {
         const dedup = [...new Map(categories.map((m) => [m.catid, m])).values()];
+        const catzone = $('<div></div>').addClass('catzone');
+        $(container).append(catzone);
         console.log(`${dedup.length} categories used in published knives`);
         dedup.forEach( category => {
             const payload = {
@@ -117,7 +119,7 @@ $(document).ready(function () {
                 data: JSON.stringify(payload),
                 success: function (response) {
                     console.log(response);
-                    AddCategory(container, response, category)
+                    AddCategory(catzone, response, category)
                 },
                 error: function (xhr) {
                     console.log(xhr);

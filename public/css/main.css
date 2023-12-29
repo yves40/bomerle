@@ -359,8 +359,11 @@
           width: 300px; } }
     .cards .cardframe__title {
       padding: 20px 10px;
-      font-size: 3rem;
+      font-size: 2rem;
       font-family: "Gideon Roman", sans-serif; }
+      @media screen and (min-width: 1024px) {
+        .cards .cardframe__title {
+          font-size: 3rem; } }
     .cards .cardframe__text {
       line-height: 1.3rem;
       padding: .5rem;
@@ -485,7 +488,6 @@
   background-size: cover;
   color: white; }
   #thegallery .galleryzone {
-    padding-bottom: 3em;
     padding: 0 2em 3em 2em; }
     @media screen and (min-width: 1024px) {
       #thegallery .galleryzone {
@@ -871,53 +873,65 @@
   scroll-margin: 100px;
   padding: 3rem 0;
   display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
   background-image: url(../../images/home5.jpg);
   background-position: center;
   background-attachment: fixed;
   background-size: cover;
-  color: white; }
+  color: white;
+  justify-content: center; }
+  #categories .catzone {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: .8rem 0; }
+    @media screen and (min-width: 1024px) {
+      #categories .catzone {
+        flex-direction: row;
+        flex-wrap: wrap;
+        max-width: 1024px; } }
+    #categories .catzone .catcard {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      row-gap: 1rem;
+      width: 32%; }
   #categories img {
-    width: 150px;
-    height: 150px;
-    border-radius: 10px; }
+    width: 250px;
+    height: 250px;
+    border-radius: 10px;
+    margin: .5rem; }
     @media screen and (min-width: 1024px) {
       #categories img {
-        width: 300px;
-        height: 300px; } }
+        width: 80%;
+        height: auto; } }
   #categories h1 {
     font-family: "Cinzel Decorative", sans-serif;
     font-size: 2rem;
     font-weight: 600;
-    padding: 2rem 0;
-    text-align: right;
-    width: 100%; }
+    padding: 1rem 0; }
     @media screen and (min-width: 1024px) {
       #categories h1 {
         font-size: 3rem; } }
   #categories h2 {
     font-family: "Gideon Roman", sans-serif;
-    font-size: 1.5rem;
+    font-size: 2rem;
     font-weight: 600;
-    padding-bottom: 2rem;
-    line-height: 1.5rem;
-    text-align: right;
-    width: 100%; }
+    padding: 1rem 0;
+    line-height: 1.5rem; }
     @media screen and (min-width: 1024px) {
       #categories h2 {
         font-size: 2.5rem; } }
   #categories p {
     font-family: "Gideon Roman", sans-serif;
-    font-size: 1rem;
+    font-size: 1.5rem;
     line-height: 1.4rem;
-    text-align: right;
     padding: 1rem;
     background-color: rgba(34, 7, 7, 0.3);
     border-radius: 10px;
-    width: 100%; }
+    width: 50%;
+    text-align: center; }
     @media screen and (min-width: 1024px) {
       #categories p {
         font-size: 1.5rem;
@@ -955,7 +969,7 @@ body {
       body .hero-section {
         background-image: url(../images/homepageimages/enclume.jpg); } }
     body .hero-section .hero-title {
-      width: 80%;
+      width: 95%;
       padding: 1rem;
       margin-right: 1rem;
       color: white;

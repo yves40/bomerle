@@ -32,7 +32,6 @@
 }
 @mixin galleryzone {
   .galleryzone {
-    padding-bottom: 3em;
     padding: 0 2em 3em 2em;
     @include for-desktop {
         padding: 0 5em 3em 5em;

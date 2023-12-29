@@ -86,8 +86,11 @@
     }
     &__title {
       padding: 20px 10px;
-      font-size: 3rem;
-      font-family: $heroh2; 
+      font-size: 2rem;
+      font-family: $heroh2;
+      @include for-desktop {
+        font-size: 3rem;
+      }
     } 
     &__text {
       line-height: 1.3rem;
