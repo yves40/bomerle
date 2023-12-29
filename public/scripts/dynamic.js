@@ -114,27 +114,26 @@ $(document).ready(function () {
         const catzone = $('<div></div>').addClass('catzone');
         $(container).append(catzone);
         console.log(`${dedup.length} categories used in published knives`);
-        dedup.forEach( category => {
+        for(let idx = 0; idx < dedup.length; ++idx) {
             const payload = {
-                'catid': category.catid,
+                'catid': dedup[idx].catid,
                 'single': true
             }
             $.ajax({
                 type: "POST",
                 url: '/knives/public/categoryimages',
                 dataType: "json",
-                async: true,
+                async: false,
                 data: JSON.stringify(payload),
                 success: function (response) {
                     console.log(response);
-                    AddCategory(catzone, response, category)
+                    AddCategory(catzone, response, dedup[idx]);
                 },
                 error: function (xhr) {
                     console.log(xhr);
                 }
             });    
-    
-        })
+        }
     }
     // ----------------------------------------
     function AddCategory(container, response, category) {

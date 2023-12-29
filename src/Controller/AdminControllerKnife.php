@@ -261,7 +261,7 @@ class AdminControllerKnife extends AbstractController
         try {
             /** @var KnifeRepository $repoknife */
             $repoknife = $em->getRepository(Knifes::class);
-            $oneknife = $repoknife->findBy(['category' => $categoryid ],[], 1);
+            $oneknife = $repoknife->findBy(['category' => $categoryid ], [], 1);
             $images = $oneknife[0]->getImages();
             $filenames = [];
             foreach($images as $img) {
