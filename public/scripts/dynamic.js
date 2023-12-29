@@ -19,10 +19,11 @@ $(document).ready(function () {
     $('#zoomer').hide();
     $(infoknife).hide();
     $(gallerymenu).hide();
-    $(gallerysection).hide();
     $(cardsmenu).hide();
     $(categoriesmenu).hide();
+    $(gallerysection).hide();
     $(cardsection).hide();
+    $(categorysection).hide();
 
     let validEmail = false;
     let validText = false;
@@ -93,13 +94,14 @@ $(document).ready(function () {
             success: function (response) {
                 console.log(response);
                 if(response.categoriescount != 0) {
+                    $(categoriesmenu).show();
+                    $(categorysection).show();
                     loadCategoriesCatalog(categorysection, response.categories);
                 }
                 if(response.knivescount != 0) {
                     loadPublishedCatalog(response.knives);
                     $(cardsmenu).show();
                     $(cardsection).show();
-                    $(categoriesmenu).show();
                 }
             },
             error: function (xhr) {
