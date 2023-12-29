@@ -15,6 +15,7 @@
         align-items: center;
         margin: .8rem 0;
         @include for-desktop {
+            align-items: flex-start;
             flex-direction: row; 
             flex-wrap: wrap;   
             max-width: $responsive-max-width;
@@ -25,7 +26,11 @@
             justify-content: center;
             align-items: center;
             row-gap: 1rem;
-            width: 32%;
+            width: 70%;
+            margin-bottom: 2rem;
+            @include for-desktop {
+                width: 32%;
+            }
         }
     }
     img {
@@ -64,11 +69,14 @@
         padding: 1rem;
         background-color: rgba(34, 7, 7, .3);
         border-radius: 10px;
+        border-bottom: 2px solid white;
         width: 50%;
         text-align: center;
         @include for-desktop{
-            font-size: 1.5rem;
+            font-size: 2rem;
             line-height: 2rem;
+            min-height: 15rem;
+            min-width: 15rem;
         }
         a {
           color: white;

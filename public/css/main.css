@@ -887,6 +887,7 @@
     margin: .8rem 0; }
     @media screen and (min-width: 1024px) {
       #categories .catzone {
+        align-items: flex-start;
         flex-direction: row;
         flex-wrap: wrap;
         max-width: 1024px; } }
@@ -896,7 +897,11 @@
       justify-content: center;
       align-items: center;
       row-gap: 1rem;
-      width: 32%; }
+      width: 70%;
+      margin-bottom: 2rem; }
+      @media screen and (min-width: 1024px) {
+        #categories .catzone .catcard {
+          width: 32%; } }
   #categories img {
     width: 250px;
     height: 250px;
@@ -930,12 +935,15 @@
     padding: 1rem;
     background-color: rgba(34, 7, 7, 0.3);
     border-radius: 10px;
+    border-bottom: 2px solid white;
     width: 50%;
     text-align: center; }
     @media screen and (min-width: 1024px) {
       #categories p {
-        font-size: 1.5rem;
-        line-height: 2rem; } }
+        font-size: 2rem;
+        line-height: 2rem;
+        min-height: 15rem;
+        min-width: 15rem; } }
     #categories p a {
       color: white;
       font-size: 3rem; }

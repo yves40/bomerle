@@ -9,6 +9,7 @@ app:
       accueil: Home
       test: Test
       atelier: Workshop
+      categories: Styles
       galerie: Gallery
       catalog: Knives
       contact: Contact
