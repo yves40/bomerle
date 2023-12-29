@@ -5,15 +5,25 @@ $(document).ready(function () {
     $props.load();
     console.log(`[${$props.version()} ]` );
     const cardsmenu = $("#cardsmenu");
-    const cards = $('#cards');
-    const categorysection = $('#categories');
+    const cardsection = $('#cards');
     const gallerymenu = $("#gallerymenu");
+    const gallerysection = $('#thegallery');
+    const categoriesmenu = $('#categoriesmenu');
+    const categorysection = $('#categories');
     const menuHamburger = $(".menu-hamburger");
     const navLinks = $(".nav-links");
     const infoknife = $('.knife');
+    // Initial state of UI
     $('#globalfullscreen').hide();
     $('#cardzoom').hide();
     $('#zoomer').hide();
+    $(infoknife).hide();
+    $(gallerymenu).hide();
+    $(gallerysection).hide();
+    $(cardsmenu).hide();
+    $(categoriesmenu).hide();
+    $(cardsection).hide();
+
     let validEmail = false;
     let validText = false;
 
@@ -23,8 +33,6 @@ $(document).ready(function () {
     $(`.nav-links, .mobile-menu` ).on('click', (element) => {
         $(navLinks).toggleClass('mobile-menu');
     });
-    // Some UI initial state
-    $(infoknife).hide();
     // Handle the user choice for the object request type
     $('.object').change( function() {
         $('select option:selected').each( function(index, element) {
@@ -57,7 +65,6 @@ $(document).ready(function () {
 
     // ---------------------------------------- Request the active diaporamas from the DB
     function getActiveDiaporamas() {
-        $(gallerymenu).hide();
         $.ajax({
             type: "GET",
             url: '/slides/public/getactivediaporamas',
@@ -67,6 +74,7 @@ $(document).ready(function () {
                 console.log(response);
                 if(response.activecount != 0) {
                     $(gallerymenu).show();
+                    $('#thegallery').show();
                     loadDiapoSections(response.activediaporamas);                 
                 }
             },
@@ -77,8 +85,6 @@ $(document).ready(function () {
     }
     // ---------------------------------------- Request the active diaporamas from the DB
     function getPublishedKnives() {
-        $(cardsmenu).hide();
-        $(cards).hide();
         $.ajax({
             type: "GET",
             url: '/knives/public/getpublished',
@@ -92,7 +98,8 @@ $(document).ready(function () {
                 if(response.knivescount != 0) {
                     loadPublishedCatalog(response.knives);
                     $(cardsmenu).show();
-                    $(cards).show();
+                    $(cardsection).show();
+                    $(categoriesmenu).show();
                 }
             },
             error: function (xhr) {
@@ -148,7 +155,6 @@ $(document).ready(function () {
     }
     // ----------------------------------------
     function loadPublishedCatalog(allpublished) {
-        let cardssection = $('#cards');
         allpublished.forEach( knife => {
             const payload = {
                 "knifeid" :  knife.id,
@@ -160,7 +166,7 @@ $(document).ready(function () {
                 dataType: "json",
                 async: true,
                 success: function (response) {
-                    buildCard(response, cardssection);
+                    buildCard(response, cardsection);
                 },
                 error: function (xhr) {
                     console.log(xhr);
