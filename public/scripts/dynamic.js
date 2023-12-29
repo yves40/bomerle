@@ -102,7 +102,15 @@ $(document).ready(function () {
     }
     // ---------------------------------------- 
     function loadCategoriesCatalog(container, categories) {
-        const dedup = [...new Map(categories.map((m) => [m.catid, m])).values()];
+        const dedup = [...new Map(categories.map((m) => [m.catid, m])).values()]
+            .sort( (cat1, cat2) => {
+                let x = cat1.catname.toLowerCase();
+                let y = cat2.catname.toLowerCase();
+                if (x < y) {return -1;}
+                if (x > y) {return 1;}
+                return 0;
+            });
+
         const catzone = $('<div></div>').addClass('catzone');
         $(container).append(catzone);
         console.log(`${dedup.length} categories used in published knives`);
