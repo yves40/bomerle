@@ -229,6 +229,7 @@ class AdminControllerKnife extends AbstractController
                 $categories[$key]['catname'] = $one->getCategory()->getName();
                 $categories[$key]['catfullname'] = $one->getCategory()->getFullname();
                 $categories[$key]['catid'] = $one->getCategory()->getId();
+                $categories[$key]['catdesc'] = $one->getCategory()->getDescription();
             }
             // $dedup = array_unique($categories);
             return $this->json([
@@ -261,18 +262,28 @@ class AdminControllerKnife extends AbstractController
         try {
             /** @var KnifeRepository $repoknife */
             $repoknife = $em->getRepository(Knifes::class);
-            $oneknife = $repoknife->findBy(['category' => $categoryid ], [], 1);
-            $images = $oneknife[0]->getImages();
             $filenames = [];
-            foreach($images as $img) {
-                array_push($filenames, $img->getFilename());
+            if($single) {
+                $oneknife = $repoknife->findBy(['category' => $categoryid ], [], 1);
+                $images = $oneknife[0]->getImages();
+                foreach($images as $img) {
+                    array_push($filenames, $img->getFilename());
+                }
+            }
+            else {
+                $knives = $repoknife->findBy(['category' => $categoryid ]);
+                foreach($knives as $knife) {
+                    $images = $knife->getImages();
+                    foreach($images as $img) {
+                        array_push($filenames, $img->getFilename());
+                    }
+                }
             }
             return $this->json([
                 'message' => 'bootadmin.knives.categoryimages OK',
                 'catid' => $categoryid,
                 'single' => $single,
-                'knife' => $oneknife[0]->getName(),
-                'filenames' => $filenames[0]
+                'filenames' => $filenames
             ], 200);        
     }
         catch(Exception $e) {

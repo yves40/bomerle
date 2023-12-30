@@ -991,8 +991,8 @@ body {
       body .hero-section .hero-title .htmltemplate:nth-child(1) h1, body .hero-section .hero-title .htmltemplate:nth-child(1) h2, body .hero-section .hero-title .htmltemplate:nth-child(1) p {
         text-align: left; }
       body .hero-section .hero-title img {
-        width: 200px;
-        height: 200px;
+        width: 50%;
+        height: auto;
         float: left;
         margin: 1rem;
         border-radius: 10px; }

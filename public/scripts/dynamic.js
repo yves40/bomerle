@@ -10,6 +10,7 @@ $(document).ready(function () {
     const gallerysection = $('#thegallery');
     const categoriesmenu = $('#categoriesmenu');
     const categorysection = $('#categories');
+    const categoryslider = $('#categoryslider');
     const menuHamburger = $(".menu-hamburger");
     const navLinks = $(".nav-links");
     const infoknife = $('.knife');
@@ -24,6 +25,7 @@ $(document).ready(function () {
     $(gallerysection).hide();
     $(cardsection).hide();
     $(categorysection).hide();
+    $(categoryslider).hide();
 
     let validEmail = false;
     let validText = false;
@@ -149,11 +151,41 @@ $(document).ready(function () {
         const div = $('<div></div>').addClass('catcard');
         const h2 = $('<h2>').text(category.catname).addClass('heroh2');
         const p = $('<p>').text(category.catfullname).addClass('herop');
-        const img = $('<img>').attr('src', `/images/knife/${response.filenames}`);
+        const img = $('<img>').attr('src', `/images/knife/${response.filenames[0]}`)
+                                .attr('data-catid', category.catid)
+                                .attr('data-catname', category.catname)
+                                .attr('data-catdesc', category.catdesc);
+        $(img).on('click', (event) => {
+            event.preventDefault();
+            zoomCategory(event.target);
+        })
         $(div).append(h2);
         $(div).append(p);
         $(div).append(img);
         $(container).append(div);
+    }
+    // ----------------------------------------
+    function zoomCategory(targetcategory) {
+        console.log(`${$(targetcategory).data('catname')}\
+                         catid:  ${$(targetcategory).data('catid')}`);
+        const payload = {
+            'catid': $(targetcategory).data('catid'),
+            'single': false
+        }
+        $.ajax({
+            type: "POST",
+            url: '/knives/public/categoryimages',
+            dataType: "json",
+            async: false,
+            data: JSON.stringify(payload),
+            success: function (response) {
+                console.log(response);
+                // $(categoryslider).show();
+            },
+            error: function (xhr) {
+                console.log(xhr);
+            }
+        });    
     }
     // ----------------------------------------
     function loadPublishedCatalog(allpublished) {
