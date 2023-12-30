@@ -33,7 +33,7 @@
 @mixin galleryzone {
   .galleryzone {
     padding: 0 2em 3em 2em;
-    @include for-desktop {
+    @include for-desktop { 
         padding: 0 5em 3em 5em;
         width: 100%; 
         max-width: $responsive-max-width;

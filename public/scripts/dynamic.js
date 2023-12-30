@@ -137,7 +137,6 @@ $(document).ready(function () {
                 async: false,
                 data: JSON.stringify(payload),
                 success: function (response) {
-                    console.log(response);
                     AddCategory(catzone, response, dedup[idx]);
                 },
                 error: function (xhr) {
@@ -149,8 +148,7 @@ $(document).ready(function () {
     // ----------------------------------------
     function AddCategory(container, response, category) {
         const div = $('<div></div>').addClass('catcard');
-        const h2 = $('<h2>').text(category.catname).addClass('heroh2');
-        const p = $('<p>').text(category.catfullname).addClass('herop');
+        const h2 = $('<h2>').text(category.catfullname).addClass('heroh2');
         const img = $('<img>').attr('src', `/images/knife/${response.filenames[0]}`)
                                 .attr('data-catid', category.catid)
                                 .attr('data-catname', category.catname)
@@ -160,7 +158,6 @@ $(document).ready(function () {
             zoomCategory(event.target);
         })
         $(div).append(h2);
-        $(div).append(p);
         $(div).append(img);
         $(container).append(div);
     }
@@ -179,8 +176,22 @@ $(document).ready(function () {
             async: false,
             data: JSON.stringify(payload),
             success: function (response) {
-                console.log(response);
-                // $(categoryslider).show();
+                const h2 = $('<h2>').text($(targetcategory).data('catname'))
+                    .addClass('heroh2');
+                const p = $('<p>').text($(targetcategory).attr('data-catdesc'));
+                $(categoryslider).append(h2).append(p);
+                let slider = new Slider($(categoryslider), 10, '',
+                     response.filenames, 'KNIFE');
+                $("body").css("overflow", "hidden");
+                $(categoryslider).css({'top': window.scrollY,
+                    'left': 0, 'z-index': 1000})
+                    .show()
+                    .on('click', (event) => {
+                        event.preventDefault();
+                        $(categoryslider).empty();
+                        $(categoryslider).hide();
+                        $("body").css("overflow", "auto");
+                    });
             },
             error: function (xhr) {
                 console.log(xhr);
