@@ -10,7 +10,8 @@ $(document).ready(function () {
     const gallerysection = $('#thegallery');
     const categoriesmenu = $('#categoriesmenu');
     const categorysection = $('#categories');
-    const categoryslider = $('#categoryslider');
+    const categoryslider = $('#categoryslider');    // 1st gallery zoom test
+    const categorygallery = $('#categorygallery');  // 2nd gallery zoom implementation
     const menuHamburger = $(".menu-hamburger");
     const navLinks = $(".nav-links");
     const infoknife = $('.knife');
@@ -155,14 +156,20 @@ $(document).ready(function () {
                                 .attr('data-catdesc', category.catdesc);
         $(img).on('click', (event) => {
             event.preventDefault();
-            zoomCategory(event.target);
+            // zoomCategory(event.target, 'SLIDER');
+            zoomCategory(event.target, 'GALLERY');
+            window.location = '#categorygallery';
         })
         $(div).append(h2);
         $(div).append(img);
         $(container).append(div);
     }
-    // ----------------------------------------
-    function zoomCategory(targetcategory) {
+    /** ----------------------------------------
+     * @param targetcategory : The category UI object 
+     * @param zoomode : 'SLIDER' or 'GALLERY'
+     *                   Drives the way category photos are displayed
+     ---------------------------------------- */
+    function zoomCategory(targetcategory, zoomstyle = 'GALLERY') {
         console.log(`${$(targetcategory).data('catname')}\
                          catid:  ${$(targetcategory).data('catid')}`);
         const payload = {
@@ -176,27 +183,58 @@ $(document).ready(function () {
             async: false,
             data: JSON.stringify(payload),
             success: function (response) {
-                const h2 = $('<h2>').text($(targetcategory).data('catname'))
-                    .addClass('heroh2');
-                const p = $('<p>').text($(targetcategory).attr('data-catdesc'));
-                $(categoryslider).append(h2).append(p);
-                let slider = new Slider($(categoryslider), 10, '',
-                     response.filenames, 'KNIFE');
-                $("body").css("overflow", "hidden");
-                $(categoryslider).css({'top': window.scrollY,
-                    'left': 0, 'z-index': 1000})
-                    .show()
-                    .on('click', (event) => {
-                        event.preventDefault();
-                        $(categoryslider).empty();
-                        $(categoryslider).hide();
-                        $("body").css("overflow", "auto");
-                    });
+                if(zoomstyle === 'SLIDER') {
+                    buildSlider(targetcategory, response);
+                }
+                else {
+                    buildGallery(targetcategory, response);
+                }
             },
             error: function (xhr) {
                 console.log(xhr);
             }
         });    
+    }
+    /** 
+     *  @var targetcategory : The category UI object 
+     *  @var response : Images files list from the json call
+     **/
+    function buildSlider(targetcategory, response) {
+        const h2 = $('<h2>').text($(targetcategory).data('catname'))
+                            .addClass('heroh2');
+        const p = $('<p>').text($(targetcategory).attr('data-catdesc'));
+        $(categoryslider).append(h2).append(p);
+        let slider = new Slider($(categoryslider), 10, '',
+            response.filenames, 'KNIFE');
+        $("body").css("overflow", "hidden");
+        $(categoryslider).css({'top': window.scrollY,
+            'left': 0, 'z-index': 1000})
+            .show()
+            .on('click', (event) => {
+                event.preventDefault();
+                $(categoryslider).empty();
+                $(categoryslider).hide();
+                $("body").css("overflow", "auto");
+            });
+    }
+    /** 
+     *  @var targetcategory : The category UI object 
+     *  @var response : Images files list from the json call
+     **/
+    function buildGallery(targetcategory, response) {
+        const h2 = $('<h2>').text($(targetcategory).data('catname'))
+                            .addClass('heroh2');
+        const p = $('<p>').text($(targetcategory).attr('data-catdesc'));
+        $(categorygallery).append(h2).append(p);
+        let gallery = new Gallery($(categorygallery),'');
+        gallery.addImages(response.filenames, 'KNIFE');
+        $(categorygallery).show()
+            .on('click', (event) => {
+                event.preventDefault();
+                $(categorygallery).empty();
+                $(categorygallery).hide();
+                window.location = '#categories';
+            });
     }
     // ----------------------------------------
     function loadPublishedCatalog(allpublished) {

@@ -36,29 +36,33 @@ class Gallery {
     // ------------------------------------------------------------------------------------------------
     buildGalleryFrame(container) {
         const galleryzone = $("<div>").addClass('galleryzone');
-        const gallerytext = $("<div>");
-        const text = $('<p>').text(this.description);
-        $(gallerytext).append(text);
+        if(this.description.length !== 0) {
+          const gallerytext = $("<div>");
+          const text = $('<p>').text(this.description);
+          $(gallerytext).append(text);
+          $(galleryzone).append(gallerytext);
+        }
         const gallery = $("<ul>").attr('id', this.gallery).addClass('gallery')
-        $(galleryzone).append(gallerytext);
         $(galleryzone).append(gallery);
         $(container).append(galleryzone);
         $(container).append($('<div></div>').attr('id', 'fullscreen').addClass('zoomoff'));
     }
     // ------------------------------------------------------------------------------------------------
-    addImages(allimages) {
+    addImages(allimages, imagetype = 'SLIDESHOW') {
         // Get the container
         const gallery = $(`#${this.gallery}`);
         for(let i = 0; i < allimages.length; ++i) {
-            // console.log(`${this.version} Adding image ${allimages[i]} to the gallery`);
-            let newimg = $('<img>').attr('src', "/images/slideshow/"+allimages[i]);
-            let theline = $('<li>');
-            $(theline).append(newimg);
-            $(gallery).append(theline);
-            $(newimg).click( (e) => { // Arrow function mandatory here to use this
-                e.preventDefault();
-                this.fullScreen(allimages[i]);
-            });
+          let newimg = $('<img>').attr('src', "/images/knife/"+allimages[i]);
+          if(imagetype === 'SLIDESHOW') {
+            newimg = $('<img>').attr('src', "/images/slideshow/"+allimages[i]);
+          }
+          let theline = $('<li>');
+          $(theline).append(newimg);
+          $(gallery).append(theline);
+          $(newimg).click( (e) => { // Arrow function mandatory here to use this
+              e.preventDefault();
+              this.fullScreen(allimages[i]);
+          });
         }
     }
   // ------------------------------------------------------------------------------------------------
