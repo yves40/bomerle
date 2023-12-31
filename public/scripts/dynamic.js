@@ -224,12 +224,17 @@ $(document).ready(function () {
     function buildGallery(targetcategory, response) {
         const h2 = $('<h2>').text($(targetcategory).data('catname'))
                             .addClass('heroh2');
+        const close = $('<img>').attr('src','/images/svg/close-outline.svg')
+                                .addClass('svgbig-white')
+                                .css({ 'margin-bottom' : '2rem',
+                                        'margin-top' : 0,
+                                        'cursor': 'pointer' });
         const p = $('<p>').text($(targetcategory).attr('data-catdesc'));
-        $(categorygallery).append(h2).append(p);
+        $(categorygallery).append(h2).append(close).append(p);
         let gallery = new Gallery($(categorygallery),'');
         gallery.addImages(response.filenames, 'KNIFE');
-        $(categorygallery).show()
-            .on('click', (event) => {
+        $(categorygallery).show();
+        $(close).on('click', (event) => {
                 event.preventDefault();
                 $(categorygallery).empty();
                 $(categorygallery).hide();

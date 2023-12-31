@@ -59,10 +59,12 @@ class Gallery {
           let theline = $('<li>');
           $(theline).append(newimg);
           $(gallery).append(theline);
-          $(newimg).click( (e) => { // Arrow function mandatory here to use this
-              e.preventDefault();
-              this.fullScreen(allimages[i]);
-          });
+          if(imagetype === 'SLIDESHOW') {
+            $(newimg).click( (e) => { // Arrow function mandatory here to use this
+                e.preventDefault();
+                this.fullScreen(allimages[i]);
+            });
+          }
         }
     }
   // ------------------------------------------------------------------------------------------------

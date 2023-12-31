@@ -164,8 +164,10 @@ body {
   color: white;
   scroll-margin: $menu-height;
   h2 {
+    margin-top: 3rem;
+    border-top: solid white 2px;
     font-size: 4rem;
-    padding: 4rem;
+    padding: 2rem;
   }
   p {
     width: 50%;

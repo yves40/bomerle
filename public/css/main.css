@@ -534,7 +534,6 @@
   position: absolute;
   height: 100%;
   width: 100%;
-  border: 1px red solid;
   border-radius: 10px;
   background-position: center;
   background-repeat: no-repeat;
@@ -884,7 +883,9 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin: .8rem 0; }
+    margin: .8rem 0;
+    padding-top: 3rem;
+    border-top: solid white 2px; }
     @media screen and (min-width: 1024px) {
       #categories .catzone {
         align-items: flex-start;
@@ -1084,8 +1085,10 @@ body {
   color: white;
   scroll-margin: 100px; }
   #categorygallery h2 {
+    margin-top: 3rem;
+    border-top: solid white 2px;
     font-size: 4rem;
-    padding: 4rem; }
+    padding: 2rem; }
   #categorygallery p {
     width: 50%;
     max-width: 1024px;
