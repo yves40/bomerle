@@ -26,7 +26,7 @@ $(document).ready(function () {
     $(gallerysection).hide();
     $(cardsection).hide();
     $(categorysection).hide();
-    $(categoryslider).hide();
+    $(categoryslider).hide().attr('name', 'dynamic');
 
     let validEmail = false;
     let validText = false;
@@ -157,11 +157,11 @@ $(document).ready(function () {
                                 .attr('data-catdesc', category.catdesc);
         $(img).on('click', (event) => {
             event.preventDefault();
-            // zoomCategory(event.target, 'SLIDER');
             if (categorygalleryactive) {
                 $(categorygallery).empty().hide();
                 categorygalleryactive = false;
             }
+            // zoomCategory(event.target, 'SLIDER');
             zoomCategory(event.target, 'GALLERY');
         })
         $(div).append(h2);
@@ -174,8 +174,6 @@ $(document).ready(function () {
      *                   Drives the way category photos are displayed
      ---------------------------------------- */
     function zoomCategory(targetcategory, zoomstyle = 'GALLERY') {
-        console.log(`${$(targetcategory).data('catname')}\
-                         catid:  ${$(targetcategory).data('catid')}`);
         const payload = {
             'catid': $(targetcategory).data('catid'),
             'single': false
@@ -243,19 +241,56 @@ $(document).ready(function () {
         window.location = '#categorygallery';
         $(categorygallery).fadeIn(2000);
         categorygalleryactive = true;
-        $(categorygallery).on('click', (event) => {
-                event.preventDefault();
+        $(categorygallery).off('mousedown').on('mousedown', (event) => {
+            event.preventDefault();
+            if(event.target.nodeName !== 'IMG') {   // Close the gallery zoom?
                 $(categorygallery).fadeOut(800, () => {
                     $(categorygallery).empty();
                     window.location = '#categories';
                 });
+            }
+            else{
+                console.log(`Now display photos for ${$(event.target).data('knifeid')}`);
+                const payload = {
+                    "knifeid" :  $(event.target).data('knifeid'),
+                }
+                $.ajax({
+                    type: "POST",
+                    url: '/knives/public/getimages',
+                    data: JSON.stringify(payload),
+                    dataType: "json",
+                    async: true,
+                    success: function (response) {
+                        displayKnifeSlider(response.knifeName,
+                                                response.knifedesc,
+                                                response.images);
+                    },
+                    error: function (xhr) {
+                        console.log(xhr);
+                    }
+                });    
+    
+            }
         });
-        $('#categorygallery > .galleryzone').find('img').each( (index, value, ) => {
-            $(value).on('click', (event) => {
+    }
+    // ----------------------------------------
+    function displayKnifeSlider(knifename, knifedesc, knifeimages) {
+        const h2 = $('<h2>').text(knifename)
+                    .addClass('heroh2');
+        const p = $('<p>').text(knifedesc);
+        $(categoryslider).append(h2).append(p);
+        let slider = new Slider($(categoryslider), 10, '',
+            knifeimages, 'KNIFE');
+        $("body").css("overflow", "hidden");
+        $(categoryslider).css({'top': window.scrollY,
+            'left': 0, 'z-index': 1000})
+            .show()
+            .on('click', (event) => {
                 event.preventDefault();
-                console.log($(event.target).data('knifeid'));
-            })
-        })
+                $(categoryslider).empty();
+                $(categoryslider).hide();
+                $("body").css("overflow", "auto");
+            });
     }
     // ----------------------------------------
     function loadPublishedCatalog(allpublished) {
