@@ -163,7 +163,6 @@ $(document).ready(function () {
                 categorygalleryactive = false;
             }
             zoomCategory(event.target, 'GALLERY');
-            window.location = '#categorygallery';
         })
         $(div).append(h2);
         $(div).append(img);
@@ -240,13 +239,17 @@ $(document).ready(function () {
         $(categorygallery).append(container);
         let gallery = new Gallery($(categorygallery),'');
         gallery.addImages(response.filenames, 'KNIFE');
+        window.location = '#categorygallery';
         $(categorygallery).show();
         categorygalleryactive = true;
         $(categorygallery).on('click', (event) => {
                 event.preventDefault();
-                $(categorygallery).empty();
-                $(categorygallery).hide();
-                window.location = '#categories';
+                $(categorygallery).slideUp(600, 'swing', () => {
+                    $(categorygallery).empty();
+                    setTimeout( () => {
+                        window.location = '#categories';
+                    }, 2000);
+                });
             });
     }
     // ----------------------------------------
