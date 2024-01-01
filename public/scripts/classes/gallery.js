@@ -52,9 +52,12 @@ class Gallery {
         // Get the container
         const gallery = $(`#${this.gallery}`);
         for(let i = 0; i < allimages.length; ++i) {
-          let newimg = $('<img>').attr('src', "/images/knife/"+allimages[i]);
+          let newimg;
           if(imagetype === 'SLIDESHOW') {
             newimg = $('<img>').attr('src', "/images/slideshow/"+allimages[i]);
+          }
+          else {
+            newimg = $('<img>').attr('src', "/images/knife/"+allimages[i]);
           }
           let theline = $('<li>');
           $(theline).append(newimg);
