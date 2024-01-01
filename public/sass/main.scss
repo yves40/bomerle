@@ -155,29 +155,39 @@ body {
   }
 }
 #categorygallery {
+  width: 100%;
+  color: white;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 80%;
-  color: white;
   scroll-margin: $menu-height;
-  h2 {
-    margin-top: 3rem;
-    border-top: solid white 2px;
-    font-size: 4rem;
-    padding: 2rem;
-  }
-  p {
-    width: 100%;
-    margin-bottom: 2rem;
-  }
-  @include for-desktop {
-    p {
+  @include galleryzone;
+  #gallerycontainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+    @include for-desktop {
       width: 70%;
-      max-width: $responsive-max-width;
+    }
+    h2 {
+      margin-top: 3rem;
+      border-top: solid white 2px;
+      font-size: 4rem;
+      padding: 2rem;
+    }
+    p {
+      width: 100%;
+      margin-bottom: 2rem;
+    }
+    @include for-desktop {
+      p {
+        width: 70%;
+        max-width: $responsive-max-width;
+      }
     }
   }
-  @include galleryzone;
 }

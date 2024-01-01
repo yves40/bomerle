@@ -227,6 +227,7 @@ $(document).ready(function () {
      *  @var response : Images files list from the json call
      **/
     function buildGallery(targetcategory, response) {
+        const container = $('<div>').attr('id', 'gallerycontainer');
         const h2 = $('<h2>').text($(targetcategory).data('catname'))
                             .addClass('heroh2');
         const close = $('<img>').attr('src','/images/svg/close-outline.svg')
@@ -235,12 +236,13 @@ $(document).ready(function () {
                                         'margin-top' : 0,
                                         'cursor': 'pointer' });
         const p = $('<p>').text($(targetcategory).attr('data-catdesc'));
-        $(categorygallery).append(h2).append(close).append(p);
+        $(container).append(h2).append(p);
+        $(categorygallery).append(container);
         let gallery = new Gallery($(categorygallery),'');
         gallery.addImages(response.filenames, 'KNIFE');
         $(categorygallery).show();
         categorygalleryactive = true;
-        $(close).on('click', (event) => {
+        $(categorygallery).on('click', (event) => {
                 event.preventDefault();
                 $(categorygallery).empty();
                 $(categorygallery).hide();
