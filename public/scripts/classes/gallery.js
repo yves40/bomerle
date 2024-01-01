@@ -48,7 +48,7 @@ class Gallery {
         $(container).append($('<div></div>').attr('id', 'fullscreen').addClass('zoomoff'));
     }
     // ------------------------------------------------------------------------------------------------
-    addImages(allimages, imagetype = 'SLIDESHOW') {
+    addImages(allimages, imagetype = 'SLIDESHOW', associatedknivesids = null) {
         // Get the container
         const gallery = $(`#${this.gallery}`);
         for(let i = 0; i < allimages.length; ++i) {
@@ -58,6 +58,11 @@ class Gallery {
           }
           else {
             newimg = $('<img>').attr('src', "/images/knife/"+allimages[i]);
+          }
+          if(associatedknivesids) { // In some cases it's usefull to store the associated 
+                                    // Knifeid. When clicking on the image, we can get all 
+                                    // images for this knife, in a slide ;-)
+            $(newimg).attr('data-knifeid', associatedknivesids[i]);
           }
           let theline = $('<li>');
           $(theline).append(newimg);

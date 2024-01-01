@@ -187,6 +187,7 @@ $(document).ready(function () {
             async: false,
             data: JSON.stringify(payload),
             success: function (response) {
+                console.log(response);
                 if(zoomstyle === 'SLIDER') {
                     buildSlider(targetcategory, response);
                 }
@@ -238,19 +239,17 @@ $(document).ready(function () {
         $(container).append(h2).append(p);
         $(categorygallery).append(container);
         let gallery = new Gallery($(categorygallery),'');
-        gallery.addImages(response.filenames, 'KNIFE');
+        gallery.addImages(response.filenames, 'KNIFE', response.knivesid);
         window.location = '#categorygallery';
-        $(categorygallery).show();
+        $(categorygallery).fadeIn(2000);
         categorygalleryactive = true;
         $(categorygallery).on('click', (event) => {
                 event.preventDefault();
-                $(categorygallery).slideUp(600, 'linear', () => {
+                $(categorygallery).fadeOut(800, () => {
                     $(categorygallery).empty();
-                    setTimeout( () => {
-                        window.location = '#categories';
-                    }, 2000);
+                    window.location = '#categories';
                 });
-            });
+        });
     }
     // ----------------------------------------
     function loadPublishedCatalog(allpublished) {

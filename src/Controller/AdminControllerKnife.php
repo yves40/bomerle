@@ -263,6 +263,7 @@ class AdminControllerKnife extends AbstractController
             /** @var KnifeRepository $repoknife */
             $repoknife = $em->getRepository(Knifes::class);
             $filenames = [];
+            $knivesid = [];
             if($single) {
                 $oneknife = $repoknife->findBy(['category' => $categoryid ], [], 1);
                 $images = $oneknife[0]->getImages();
@@ -276,6 +277,7 @@ class AdminControllerKnife extends AbstractController
                     $images = $knife->getImages();
                     foreach($images as $img) {
                         array_push($filenames, $img->getFilename());
+                        array_push($knivesid, $knife->getID());
                     }
                 }
             }
@@ -283,7 +285,8 @@ class AdminControllerKnife extends AbstractController
                 'message' => 'bootadmin.knives.categoryimages OK',
                 'catid' => $categoryid,
                 'single' => $single,
-                'filenames' => $filenames
+                'filenames' => $filenames,
+                'knivesid' => $knivesid
             ], 200);        
     }
         catch(Exception $e) {
