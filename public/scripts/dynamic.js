@@ -230,7 +230,7 @@ $(document).ready(function () {
         const h2 = $('<h2>').text($(targetcategory).data('catname'))
                             .addClass('heroh2');
         const close = $('<img>').attr('src','/images/svg/close-outline.svg')
-                                .addClass('svgbig-white')
+                                .addClass('svglarge-white')
                                 .css({ 'margin-bottom' : '2rem',
                                         'margin-top' : 0,
                                         'cursor': 'pointer' });

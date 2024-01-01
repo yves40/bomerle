@@ -12,6 +12,7 @@ $sliderimgbig: 500px;
 $svgsmall: 18px;
 $svgmedium: 24px;
 $svgbig: 50px;
+$svglarge: 80px;
 $imagesmall: 8rem;
 
 $menu-height: 100px;
@@ -125,5 +126,10 @@ $bg-gradient-green: radial-gradient(circle, rgba(2,0,36,1) 0%, rgba(9,121,54,1) 
 .svgbig-white {
   width: $svgbig;
   height:$svgbig;
+  filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(131deg) brightness(102%) contrast(102%);
+}
+.svglarge-white {
+  width: $svglarge;
+  height:$svglarge;
   filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(131deg) brightness(102%) contrast(102%);
 }

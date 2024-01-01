@@ -92,6 +92,11 @@
   height: 50px;
   filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(131deg) brightness(102%) contrast(102%); }
 
+.svglarge-white {
+  width: 80px;
+  height: 80px;
+  filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(131deg) brightness(102%) contrast(102%); }
+
 .allnews {
   scroll-margin: 100px;
   display: flex;
@@ -346,6 +351,8 @@
       justify-content: center;
       align-items: center;
       border-radius: 10px; }
+      .cards .cardframe__zoom .cardframe__text {
+        display: none; }
     .cards .cardframe__image img {
       height: 120px;
       width: 120px;
@@ -470,6 +477,11 @@
 .svgbig-white {
   width: 50px;
   height: 50px;
+  filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(131deg) brightness(102%) contrast(102%); }
+
+.svglarge-white {
+  width: 80px;
+  height: 80px;
   filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(131deg) brightness(102%) contrast(102%); }
 
 *, *::before, *::after {
@@ -639,6 +651,11 @@
   height: 50px;
   filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(131deg) brightness(102%) contrast(102%); }
 
+.svglarge-white {
+  width: 80px;
+  height: 80px;
+  filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(131deg) brightness(102%) contrast(102%); }
+
 .carousel {
   position: relative;
   margin: 0 auto; }
@@ -684,16 +701,19 @@
     margin-bottom: 2rem;
     list-style: none; }
     .carousel .carousel-indicators-button {
-      opacity: .5;
-      border-radius: 50%;
-      width: 15px;
+      opacity: .6;
+      width: 20px;
       height: 15px;
+      border-radius: 4px;
       margin-left: 3px;
       margin-right: 3px;
       cursor: pointer; }
+      @media screen and (min-width: 1024px) {
+        .carousel .carousel-indicators-button {
+          height: 10px; } }
       .carousel .carousel-indicators-button.active {
         opacity: 1;
-        background-color: green; }
+        background-color: white; }
   .carousel .slide {
     margin: 1rem 0;
     position: absolute;
@@ -1081,7 +1101,7 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 66%;
+  width: 80%;
   color: white;
   scroll-margin: 100px; }
   #categorygallery h2 {
@@ -1090,9 +1110,12 @@ body {
     font-size: 4rem;
     padding: 2rem; }
   #categorygallery p {
-    width: 50%;
-    max-width: 1024px;
+    width: 100%;
     margin-bottom: 2rem; }
+  @media screen and (min-width: 1024px) {
+    #categorygallery p {
+      width: 70%;
+      max-width: 1024px; } }
   #categorygallery .galleryzone {
     padding: 0 2em 3em 2em; }
     @media screen and (min-width: 1024px) {

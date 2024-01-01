@@ -91,7 +91,7 @@ class Gallery {
     $("#globalfullscreen").click( () => { 
       this.zoomactive = false;
       $("#globalfullscreen").removeClass("zoomon")
-                      .addClass('zoomoff').hide();
+                      .addClass('zoomoff').hide().empty();
       $(`#${this.indicators}`).show();
       $(".slidercontrol").show();
       $("body").css("overflow", "auto");

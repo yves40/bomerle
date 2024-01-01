@@ -160,7 +160,7 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 66%;
+  width: 80%;
   color: white;
   scroll-margin: $menu-height;
   h2 {
@@ -170,9 +170,14 @@ body {
     padding: 2rem;
   }
   p {
-    width: 50%;
-    max-width: $responsive-max-width;
+    width: 100%;
     margin-bottom: 2rem;
+  }
+  @include for-desktop {
+    p {
+      width: 70%;
+      max-width: $responsive-max-width;
+    }
   }
   @include galleryzone;
 }
