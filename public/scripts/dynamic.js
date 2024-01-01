@@ -250,6 +250,12 @@ $(document).ready(function () {
                     window.location = '#categories';
                 });
         });
+        $('#categorygallery > .galleryzone').find('img').each( (index, value, ) => {
+            $(value).on('click', (event) => {
+                event.preventDefault();
+                console.log($(event.target).data('knifeid'));
+            })
+        })
     }
     // ----------------------------------------
     function loadPublishedCatalog(allpublished) {
