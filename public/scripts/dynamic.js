@@ -244,7 +244,7 @@ $(document).ready(function () {
         categorygalleryactive = true;
         $(categorygallery).on('click', (event) => {
                 event.preventDefault();
-                $(categorygallery).slideUp(600, 'swing', () => {
+                $(categorygallery).slideUp(600, 'linear', () => {
                     $(categorygallery).empty();
                     setTimeout( () => {
                         window.location = '#categories';
