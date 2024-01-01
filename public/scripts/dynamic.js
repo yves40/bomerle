@@ -30,6 +30,7 @@ $(document).ready(function () {
 
     let validEmail = false;
     let validText = false;
+    let categorygalleryactive = false;
 
     $(menuHamburger).on('click', function () {
         $(navLinks).toggleClass('mobile-menu');
@@ -157,6 +158,10 @@ $(document).ready(function () {
         $(img).on('click', (event) => {
             event.preventDefault();
             // zoomCategory(event.target, 'SLIDER');
+            if (categorygalleryactive) {
+                $(categorygallery).empty().hide();
+                categorygalleryactive = false;
+            }
             zoomCategory(event.target, 'GALLERY');
             window.location = '#categorygallery';
         })
@@ -234,6 +239,7 @@ $(document).ready(function () {
         let gallery = new Gallery($(categorygallery),'');
         gallery.addImages(response.filenames, 'KNIFE');
         $(categorygallery).show();
+        categorygalleryactive = true;
         $(close).on('click', (event) => {
                 event.preventDefault();
                 $(categorygallery).empty();
