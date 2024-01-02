@@ -289,7 +289,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-image: url(../images/tools.jpg);
+  background-image: url(../images/BastosBG4.webp);
   background-position: center;
   background-attachment: fixed;
   background-size: cover;
@@ -990,13 +990,13 @@ body {
     margin-top: 100px;
     scroll-margin: 100px;
     min-height: 100vh;
-    background-image: url(../images/SHEFFIELD-2.jpeg);
+    background-image: url(../images/BastosBG2.webp);
     background-position: center;
     background-size: cover;
     background-attachment: fixed; }
     @media screen and (min-width: 1024px) {
       body .hero-section {
-        background-image: url(../images/homepageimages/enclume.jpg); } }
+        background-image: url(../images/BastosBG2.webp); } }
     body .hero-section .hero-title {
       width: 95%;
       padding: 1rem;
