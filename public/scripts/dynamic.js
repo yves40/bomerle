@@ -198,10 +198,14 @@ $(document).ready(function () {
                 // Update the card section with deduplicated knives list
                 const dedupkniveslist = sortedUnique(response.knivesid);
                 console.log(`Now update the card section with these knives ${dedupkniveslist}`);
+                let activeknives = [];
                 dedupkniveslist.forEach(knifeId => {
                     knifeincard = allcategoriesknives.find((knife) => knife.id === knifeId);
                     console.log(`Add ${knifeincard.knifename} with ID ${knifeincard.id} to the card section`);
+                    activeknives.push(knifeincard);
                 });
+                $(cardsection).show();
+                loadPublishedCatalog(activeknives);
             },
             error: function (xhr) {
                 console.log(xhr);
@@ -262,6 +266,7 @@ $(document).ready(function () {
             if(event.target.nodeName !== 'IMG') {   // Close the gallery zoom?
                 $(categorygallery).fadeOut(800, () => {
                     $(categorygallery).empty();
+                    $(cardsection).empty().hide();
                     window.location = '#categories';
                 });
             }
