@@ -15,6 +15,7 @@ $(document).ready(function () {
     const menuHamburger = $(".menu-hamburger");
     const navLinks = $(".nav-links");
     const infoknife = $('.knife');
+    let allcategoriesknives = [];
     // Initial state of UI
     $('#globalfullscreen').hide();
     $('#cardzoom').hide();
@@ -65,7 +66,7 @@ $(document).ready(function () {
         buttonClicked();
     })
     getActiveDiaporamas();
-    getPublishedKnives();
+    getPublishedKnives()
     getHtmlTemplates();
 
     // ---------------------------------------- Request the active diaporamas from the DB
@@ -101,12 +102,14 @@ $(document).ready(function () {
                     $(categoriesmenu).show();
                     $(categorysection).show();
                     loadCategoriesCatalog(categorysection, response.categories);
+                    allcategoriesknives = response.knives;
                 }
-                if(response.knivescount != 0) {
-                    loadPublishedCatalog(response.knives);
-                    $(cardsmenu).show();
-                    $(cardsection).show();
-                }
+                // // Disabled on Jan 02 2024 by Ratoon
+                // if(response.knivescount != 0) {
+                //     loadPublishedCatalog(response.knives);
+                //     $(cardsmenu).show();
+                //     $(cardsection).show();
+                // }
             },
             error: function (xhr) {
                 console.log(xhr);
@@ -192,11 +195,24 @@ $(document).ready(function () {
                 else {
                     buildGallery(targetcategory, response);
                 }
+                // Update the card section with deduplicated knives list
+                const dedupkniveslist = sortedUnique(response.knivesid);
+                console.log(`Now update the card section with these knives ${dedupkniveslist}`);
+                dedupkniveslist.forEach(knifeId => {
+                    knifeincard = allcategoriesknives.find((knife) => knife.id === knifeId);
+                    console.log(`Add ${knifeincard.knifename} with ID ${knifeincard.id} to the card section`);
+                });
             },
             error: function (xhr) {
                 console.log(xhr);
             }
         });    
+    }
+    //----------------------------------------------------------------
+    function sortedUnique(thearray) {
+        return thearray.sort().filter(function(item, pos, ary) {
+            return !pos || item != ary[pos - 1];
+        });
     }
     /** 
      *  @var targetcategory : The category UI object 
