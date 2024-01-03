@@ -433,9 +433,11 @@ $(document).ready(function () {
     }
     // ---------------------------------------- Activate a card
     function buildCard(response, container ) {
-        let thecard = $('<div>').attr('id', `knifeid-${response.knifeId}`).addClass('cardframe');
+        let thecard = $('<div>').attr('id', `knifeid-${response.knifeId}`)
+                                    .addClass('cardframe');
         let card  = new Card(thecard, response);
         container.append(thecard);
+        $(thecard).find('img').attr('data-knifeid', response.knifeId);
     }
     // ---------------------------------------- Can send contact request ?
     function buttonActivation() {
