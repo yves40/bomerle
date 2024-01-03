@@ -5,7 +5,6 @@ $(document).ready(function () {
     $props.load();
     console.log(`[${$props.version()} ]` );
     const cardsmenu = $("#cardsmenu");
-    const cardsection = $('#cards');
     const cardsgallery = $('#cardsgallery');
     const gallerymenu = $("#gallerymenu");
     const gallerysection = $('#thegallery');
@@ -26,7 +25,6 @@ $(document).ready(function () {
     $(cardsmenu).hide();
     $(categoriesmenu).hide();
     $(gallerysection).hide();
-    $(cardsection).hide();
     $(cardsgallery).hide();
     $(categorysection).hide();
     $(categoryslider).hide().attr('name', 'dynamic');
@@ -107,12 +105,6 @@ $(document).ready(function () {
                     loadCategoriesCatalog(categorysection, response.categories);
                     allcategoriesknives = response.knives;
                 }
-                // // Disabled on Jan 02 2024 by Ratoon
-                // if(response.knivescount != 0) {
-                //     loadPublishedCatalog(response.knives);
-                //     $(cardsmenu).show();
-                //     $(cardsection).show();
-                // }
             },
             error: function (xhr) {
                 console.log(xhr);
