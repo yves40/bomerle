@@ -290,8 +290,7 @@ $(document).ready(function () {
                     error: function (xhr) {
                         console.log(xhr);
                     }
-                });    
-    
+                });        
             }
         });
     }
@@ -349,11 +348,34 @@ $(document).ready(function () {
                 }
             });    
         })
-        $(cardsgallery).on('mousedown', function () {            
-            $(cardsgallery).fadeOut(800, () => {
-                $(cardsgallery).empty().hide().attr('data-catid', 0);
-                window.location = '#categories';
-            });
+        $(cardsgallery).off('mousedown').on('mousedown', (event) => {
+            event.preventDefault();
+            if(event.target.nodeName !== 'IMG') {   // Close the gallery ?
+                $(cardsgallery).fadeOut(800, () => {
+                    $(cardsgallery).empty().hide().attr('data-catid', 0);
+                    window.location = '#categories';
+                });
+            }
+            else {
+                const payload = {
+                    "knifeid" :  $(event.target).data('knifeid'),
+                }
+                $.ajax({
+                    type: "POST",
+                    url: '/knives/public/getimages',
+                    data: JSON.stringify(payload),
+                    dataType: "json",
+                    async: true,
+                    success: function (response) {
+                        displayKnifeSlider(response.knifeName,
+                                                response.knifedesc,
+                                                response.images);
+                    },
+                    error: function (xhr) {
+                        console.log(xhr);
+                    }
+                });        
+            }
         });
         return true;
     }
