@@ -6,6 +6,7 @@ $(document).ready(function () {
     console.log(`[${$props.version()} ]` );
     const cardsmenu = $("#cardsmenu");
     const cardsection = $('#cards');
+    const cardsgallery = $('#cardsgallery');
     const gallerymenu = $("#gallerymenu");
     const gallerysection = $('#thegallery');
     const categoriesmenu = $('#categoriesmenu');
@@ -26,12 +27,14 @@ $(document).ready(function () {
     $(categoriesmenu).hide();
     $(gallerysection).hide();
     $(cardsection).hide();
+    $(cardsgallery).hide();
     $(categorysection).hide();
     $(categoryslider).hide().attr('name', 'dynamic');
 
     let validEmail = false;
     let validText = false;
     let categorygalleryactive = false;
+    let cardsgalleryactive = false;
 
     $(menuHamburger).on('click', function () {
         $(navLinks).toggleClass('mobile-menu');
@@ -164,8 +167,13 @@ $(document).ready(function () {
                 $(categorygallery).empty().hide();
                 categorygalleryactive = false;
             }
+            if(cardsgalleryactive) {
+                $(cardsgallery).empty().hide();
+                cardsgalleryactive = false;
+            }
             // zoomCategory(event.target, 'SLIDER');
-            zoomCategory(event.target, 'GALLERY');
+            // zoomCategory(event.target, 'GALLERY');
+            zoomCategory(event.target);
         })
         $(div).append(h2);
         $(div).append(img);
@@ -173,10 +181,10 @@ $(document).ready(function () {
     }
     /** ----------------------------------------
      * @param targetcategory : The category UI object 
-     * @param zoomode : 'SLIDER' or 'GALLERY'
+     * @param zoomode : 'NOTHING' or 'SLIDER' or 'GALLERY'
      *                   Drives the way category photos are displayed
      ---------------------------------------- */
-    function zoomCategory(targetcategory, zoomstyle = 'GALLERY') {
+    function zoomCategory(targetcategory, zoomstyle = 'NOTHING') {
         const payload = {
             'catid': $(targetcategory).data('catid'),
             'single': false
@@ -188,13 +196,13 @@ $(document).ready(function () {
             async: false,
             data: JSON.stringify(payload),
             success: function (response) {
-                console.log(response);
-                if(zoomstyle === 'SLIDER') {
-                    buildSlider(targetcategory, response);
+                switch(zoomstyle) {
+                    case 'SLIDER': buildSlider(targetcategory, response);
+                                    break;
+                    case 'GALLERY': buildGallery(targetcategory, response);
+                                    break;
                 }
-                else {
-                    buildGallery(targetcategory, response);
-                }
+                // --------------------------------------------------------
                 // Update the card section with deduplicated knives list
                 const dedupkniveslist = sortedUnique(response.knivesid);
                 console.log(`Now update the card section with these knives ${dedupkniveslist}`);
@@ -204,8 +212,10 @@ $(document).ready(function () {
                     console.log(`Add ${knifeincard.knifename} with ID ${knifeincard.id} to the card section`);
                     activeknives.push(knifeincard);
                 });
-                $(cardsection).show();
                 loadPublishedCatalog(activeknives);
+                window.location = '#cardsgallery';
+                cardsgalleryactive = true;
+                $(cardsgallery).show().fadeIn(2000);
             },
             error: function (xhr) {
                 console.log(xhr);
@@ -266,7 +276,7 @@ $(document).ready(function () {
             if(event.target.nodeName !== 'IMG') {   // Close the gallery zoom?
                 $(categorygallery).fadeOut(800, () => {
                     $(categorygallery).empty();
-                    $(cardsection).empty().hide();
+                    $(cardsgallery).empty().hide();
                     window.location = '#categories';
                 });
             }
@@ -315,6 +325,7 @@ $(document).ready(function () {
     }
     // ----------------------------------------
     function loadPublishedCatalog(allpublished) {
+        $(cardsgallery).append($('<div>').attr('id', 'cardscontainer'));
         allpublished.forEach( knife => {
             const payload = {
                 "knifeid" :  knife.id,
@@ -326,14 +337,20 @@ $(document).ready(function () {
                 dataType: "json",
                 async: true,
                 success: function (response) {
-                    buildCard(response, cardsection);
+                    buildCard(response, $('#cardscontainer'));
                 },
                 error: function (xhr) {
                     console.log(xhr);
                 }
             });    
         })
-    }
+        $(cardsgallery).on('mousedown', function () {            
+            $(cardsgallery).fadeOut(800, () => {
+                $(cardsgallery).empty().hide();
+                window.location = '#categories';
+            });
+        });
+}
     // ---------------------------------------- Find a dynamic section in the page
     function loadDiapoSections(allactive) {
         let gallerysection = $('#thegallery');

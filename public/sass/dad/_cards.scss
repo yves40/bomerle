@@ -59,7 +59,6 @@
     transition: all .8s ease-in;
     @include for-desktop {
       padding: 2rem;
-      width: 60%;
       max-width: $responsive-max-width;
     }
     &__zoom {

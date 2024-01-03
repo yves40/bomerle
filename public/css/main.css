@@ -340,7 +340,6 @@
     @media screen and (min-width: 1024px) {
       .cards .cardframe {
         padding: 2rem;
-        width: 60%;
         max-width: 1024px; } }
     .cards .cardframe__zoom {
       display: flex;
@@ -1162,5 +1161,76 @@ body {
       margin-bottom: 2rem; }
     @media screen and (min-width: 1024px) {
       #categorygallery #gallerycontainer p {
+        width: 70%;
+        max-width: 1024px; } }
+
+#cardsgallery {
+  width: 100%;
+  color: white;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  scroll-margin: 100px; }
+  #cardsgallery .galleryzone {
+    padding: 0 2em 3em 2em; }
+    @media screen and (min-width: 1024px) {
+      #cardsgallery .galleryzone {
+        padding: 0 5em 3em 5em;
+        width: 100%;
+        max-width: 1024px; } }
+    #cardsgallery .galleryzone p {
+      font-family: "Gideon Roman", sans-serif;
+      background-color: rgba(34, 7, 7, 0.3);
+      border-radius: 10px;
+      font-size: 1rem;
+      line-height: 1.4rem;
+      text-align: justify;
+      margin: 1rem auto;
+      padding: 1em; }
+      @media screen and (min-width: 1024px) {
+        #cardsgallery .galleryzone p {
+          font-size: 1.5rem;
+          line-height: 2rem; } }
+    #cardsgallery .galleryzone .gallery {
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2vmin;
+      list-style-type: none; }
+      #cardsgallery .galleryzone .gallery li {
+        height: 250px;
+        flex-grow: 1; }
+      #cardsgallery .galleryzone .gallery img {
+        width: 100%;
+        height: 100%;
+        border-radius: 10px;
+        border: solid 1px white;
+        object-fit: cover; }
+      #cardsgallery .galleryzone .gallery ::after {
+        content: "";
+        display: block;
+        flex-grow: 10; }
+  #cardsgallery #cardscontainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+    margin-bottom: 50svh; }
+    @media screen and (min-width: 1024px) {
+      #cardsgallery #cardscontainer {
+        width: 70%; } }
+    #cardsgallery #cardscontainer h2 {
+      margin-top: 3rem;
+      border-top: solid white 2px;
+      font-size: 4rem;
+      padding: 2rem; }
+    #cardsgallery #cardscontainer p {
+      width: 100%;
+      margin-bottom: 2rem; }
+    @media screen and (min-width: 1024px) {
+      #cardsgallery #cardscontainer p {
         width: 70%;
         max-width: 1024px; } }

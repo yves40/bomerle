@@ -46,76 +46,73 @@
   <div id="categoryslider"></div>
   <div id="categorygallery"></div>
   <div id="thegallery"></div>
-    <div id="cards" class="cards">
-      <div class="cards-header">
-        <div class="htmltemplate" data-templatename='cardsheader' data-lang={{locale}}></div>
+  <div id="cards" class="cards"></div>
+  <div id="cardsgallery" class="cards"></div>
+  <div id="infos" class="infos">
+    <div class="infoelement">
+      <h3>{% trans %}contact.nav{% endtrans %}</h3>
+      <div class="infoelement__details">
+        <a href="#hero">{% trans %}app.public.menu.accueil{% endtrans %}</a>
+        <a href="#allnews">{% trans %}app.public.menu.atelier{% endtrans %}</a>
       </div>
     </div>
-    <div id="infos" class="infos">
-      <div class="infoelement">
-        <h3>{% trans %}contact.nav{% endtrans %}</h3>
-        <div class="infoelement__details">
-          <a href="#hero">{% trans %}app.public.menu.accueil{% endtrans %}</a>
-          <a href="#allnews">{% trans %}app.public.menu.atelier{% endtrans %}</a>
-        </div>
-      </div>
-      <div class="infoelement">
-            <h3>{% trans %}contact.social{% endtrans %}</h3>
-            <div class="infoelement__data">           
-              <a href="https://www.facebook.com/BastosSchlass/" 
-                target="_blank">Facebook</a>
-              <a href="https://www.instagram.com/couteaux_bastos/" 
-                target="_blank">Instagram</a>
-            </div>
-            <h3>{% trans %}contact.video{% endtrans %}</h3>
-            <div class="infoelement__details">
-              <a href="https://www.youtube.com/watch?v=bpvKTJEBObM\0026list=PLZx0qkIFIprEAGVKJeJmadxVZ3C5X183x" 
-                target="_blank">Interview</a>
-              <a href="https://www.youtube.com/watch?v=NX_ZiX4ibbM" 
-                target="_blank">La Brise</a>
-              <a href="https://www.youtube.com/watch?v=jcOUWlB0QXw" 
-                target="_blank">Le Langres</a>
-            </div>
-      </div>
-      <div class="infoelement">
-          <h3>{% trans %}contact.shop{% endtrans %}</h3>
-          <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d8335.20455949551!2d3.697428155338033!3d45.87975863223886!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47f6a39f16d585a5%3A0x8c6e73b6d1676394!2sCoutellerie%20d&#39;art%20%2F%20Beau%20merle!5e1!3m2!1sfr!2sfr!4v1694419775554!5m2!1sfr!2sfr" 
-                  allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
-          </iframe>
-          <div class="infoelement__details">
-            <p>{% trans %}contact.shopaddress1{% endtrans %}, </p>
-            <p>{% trans %}contact.shopaddress2{% endtrans %}, </p>
+    <div class="infoelement">
+          <h3>{% trans %}contact.social{% endtrans %}</h3>
+          <div class="infoelement__data">           
+            <a href="https://www.facebook.com/BastosSchlass/" 
+              target="_blank">Facebook</a>
+            <a href="https://www.instagram.com/couteaux_bastos/" 
+              target="_blank">Instagram</a>
           </div>
-      </div>
-      <div id="contactinrequest" class="infoelement">
-        <h3>{% trans %}contact.infos{% endtrans %}</h3>
-        {{ form_start(formcontact, {'attr': {'novalidate': 'novalidate', 'class': 'form'}}) }}
-            <div class="contact">
-                {{ form_label(formcontact.email, 'contact.email' | trans) }}
-                {{ form_widget(formcontact.email) }}
-                {{ form_errors(formcontact.email) }}
-            </div>
-            <div class="contact object">
-                {{ form_label(formcontact.object, 'contact.object' | trans) }}
-                {{ form_widget(formcontact.object) }}
-                {{ form_errors(formcontact.object) }}
-            </div>                
-            <div class="contact knife">
-                {{ form_label(formcontact.reservation, 'contact.couteau' | trans) }}
-                {{ form_widget(formcontact.reservation) }}
-                {{ form_errors(formcontact.reservation) }}
-            </div>
-            <div class="contact">
-                {{ form_label(formcontact.text, 'contact.message' | trans) }}
-                {{ form_widget(formcontact.text) }}
-                {{ form_errors(formcontact.text) }}
-            </div>
-            <button id="contactrequest">{% trans %}contact.button{% endtrans %}</button>
-        {{ form_end(formcontact) }}
-        <div class="feedback">
-          <p id='feedback'></p>
+          <h3>{% trans %}contact.video{% endtrans %}</h3>
+          <div class="infoelement__details">
+            <a href="https://www.youtube.com/watch?v=bpvKTJEBObM\0026list=PLZx0qkIFIprEAGVKJeJmadxVZ3C5X183x" 
+              target="_blank">Interview</a>
+            <a href="https://www.youtube.com/watch?v=NX_ZiX4ibbM" 
+              target="_blank">La Brise</a>
+            <a href="https://www.youtube.com/watch?v=jcOUWlB0QXw" 
+              target="_blank">Le Langres</a>
+          </div>
+    </div>
+    <div class="infoelement">
+        <h3>{% trans %}contact.shop{% endtrans %}</h3>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d8335.20455949551!2d3.697428155338033!3d45.87975863223886!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47f6a39f16d585a5%3A0x8c6e73b6d1676394!2sCoutellerie%20d&#39;art%20%2F%20Beau%20merle!5e1!3m2!1sfr!2sfr!4v1694419775554!5m2!1sfr!2sfr" 
+                allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+        <div class="infoelement__details">
+          <p>{% trans %}contact.shopaddress1{% endtrans %}, </p>
+          <p>{% trans %}contact.shopaddress2{% endtrans %}, </p>
         </div>
+    </div>
+    <div id="contactinrequest" class="infoelement">
+      <h3>{% trans %}contact.infos{% endtrans %}</h3>
+      {{ form_start(formcontact, {'attr': {'novalidate': 'novalidate', 'class': 'form'}}) }}
+          <div class="contact">
+              {{ form_label(formcontact.email, 'contact.email' | trans) }}
+              {{ form_widget(formcontact.email) }}
+              {{ form_errors(formcontact.email) }}
+          </div>
+          <div class="contact object">
+              {{ form_label(formcontact.object, 'contact.object' | trans) }}
+              {{ form_widget(formcontact.object) }}
+              {{ form_errors(formcontact.object) }}
+          </div>                
+          <div class="contact knife">
+              {{ form_label(formcontact.reservation, 'contact.couteau' | trans) }}
+              {{ form_widget(formcontact.reservation) }}
+              {{ form_errors(formcontact.reservation) }}
+          </div>
+          <div class="contact">
+              {{ form_label(formcontact.text, 'contact.message' | trans) }}
+              {{ form_widget(formcontact.text) }}
+              {{ form_errors(formcontact.text) }}
+          </div>
+          <button id="contactrequest">{% trans %}contact.button{% endtrans %}</button>
+      {{ form_end(formcontact) }}
+      <div class="feedback">
+        <p id='feedback'></p>
       </div>
+    </div>
     </div> 
 </main>
   <footer class="footer">
