@@ -32,7 +32,6 @@ $(document).ready(function () {
     let validEmail = false;
     let validText = false;
     let categorygalleryactive = false;
-    let cardsgalleryactive = false;
 
     $(menuHamburger).on('click', function () {
         $(navLinks).toggleClass('mobile-menu');
@@ -159,10 +158,6 @@ $(document).ready(function () {
                 $(categorygallery).empty().hide();
                 categorygalleryactive = false;
             }
-            if(cardsgalleryactive) {
-                $(cardsgallery).empty().hide();
-                cardsgalleryactive = false;
-            }
             // zoomCategory(event.target, 'SLIDER');
             // zoomCategory(event.target, 'GALLERY');
             zoomCategory(event.target);
@@ -177,8 +172,9 @@ $(document).ready(function () {
      *                   Drives the way category photos are displayed
      ---------------------------------------- */
     function zoomCategory(targetcategory, zoomstyle = 'NOTHING') {
+        const categoryid = $(targetcategory).data('catid');
         const payload = {
-            'catid': $(targetcategory).data('catid'),
+            'catid': categoryid,
             'single': false
         }
         $.ajax({
@@ -204,10 +200,10 @@ $(document).ready(function () {
                     console.log(`Add ${knifeincard.knifename} with ID ${knifeincard.id} to the card section`);
                     activeknives.push(knifeincard);
                 });
-                loadPublishedCatalog(activeknives);
+                if(loadPublishedCatalog(activeknives, categoryid)) {
+                    $(cardsgallery).show().fadeIn(2000);
+                }
                 window.location = '#cardsgallery';
-                cardsgalleryactive = true;
-                $(cardsgallery).show().fadeIn(2000);
             },
             error: function (xhr) {
                 console.log(xhr);
@@ -316,7 +312,18 @@ $(document).ready(function () {
             });
     }
     // ----------------------------------------
-    function loadPublishedCatalog(allpublished) {
+    function loadPublishedCatalog(allpublished, categoryid) {
+        // Track double click activation
+        let displayedcateoryid = parseInt($(cardsgallery).attr('data-catid'));
+        console.log(`*** Current : ${displayedcateoryid} requested : ${categoryid}`);
+        if( !isNaN(displayedcateoryid) && displayedcateoryid === categoryid) {
+            console.log(`Category ${categoryid} already display`);
+            return false;
+        }
+        else {
+            console.log(`Category ${categoryid} display`);
+            $(cardsgallery).empty().attr('data-catid', categoryid);
+        }
         $(cardsgallery).append($('<div>').attr('id', 'cardscontainer'));
         allpublished.forEach( knife => {
             const payload = {
@@ -338,11 +345,12 @@ $(document).ready(function () {
         })
         $(cardsgallery).on('mousedown', function () {            
             $(cardsgallery).fadeOut(800, () => {
-                $(cardsgallery).empty().hide();
+                $(cardsgallery).empty().hide().attr('data-catid', 0);
                 window.location = '#categories';
             });
         });
-}
+        return true;
+    }
     // ---------------------------------------- Find a dynamic section in the page
     function loadDiapoSections(allactive) {
         let gallerysection = $('#thegallery');

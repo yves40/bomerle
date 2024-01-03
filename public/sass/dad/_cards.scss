@@ -15,7 +15,7 @@
     font-size: 1.5rem;
     font-weight: 600;
     padding: 2rem 0;
-    width: 100%;
+    width: 100%; 
     @include for-desktop{
         font-size: 3rem;
     }
@@ -75,15 +75,15 @@
       }
     }
     &__image img {
-      height: 120px;
-      width: 120px;
+      height: auto;
+      width: 55%;
       border: solid darkgrey 3px;
       border-radius: 50%; 
       float: right; 
       margin: .7rem;
       @include for-desktop {
-        height: 300px;
-        width: 300px;
+        height: auto;
+        width: 50%;
       }
     }
     &__title {

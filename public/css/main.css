@@ -353,16 +353,16 @@
       .cards .cardframe__zoom .cardframe__text {
         display: none; }
     .cards .cardframe__image img {
-      height: 120px;
-      width: 120px;
+      height: auto;
+      width: 55%;
       border: solid darkgrey 3px;
       border-radius: 50%;
       float: right;
       margin: .7rem; }
       @media screen and (min-width: 1024px) {
         .cards .cardframe__image img {
-          height: 300px;
-          width: 300px; } }
+          height: auto;
+          width: 50%; } }
     .cards .cardframe__title {
       padding: 20px 10px;
       font-size: 2rem;
@@ -799,16 +799,16 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-bottom: 5rem;
   padding-top: 2rem;
   color: white;
+  margin: 0 auto;
+  padding-bottom: 60svh;
   gap: 1rem;
   scroll-margin: 100px;
   border-top: 2px solid gray; }
   @media screen and (min-width: 1024px) {
     .infos {
       flex-direction: row;
-      margin: 0 auto;
       max-width: 1024px; } }
   .infos .infoelement {
     margin: .5rem;
@@ -889,7 +889,6 @@
 
 #categories {
   scroll-margin: 100px;
-  padding: 3rem 0;
   display: flex;
   background-image: url(../../images/home5.jpg);
   background-position: center;
@@ -899,17 +898,17 @@
   justify-content: center; }
   #categories .catzone {
     display: flex;
-    flex-direction: column;
+    align-items: flex-start;
+    flex-direction: row;
+    flex-wrap: wrap;
     justify-content: center;
     align-items: center;
     margin: .8rem 0;
-    padding-top: 3rem;
+    padding-top: 1.5rem;
     border-top: solid white 2px; }
     @media screen and (min-width: 1024px) {
       #categories .catzone {
-        align-items: flex-start;
-        flex-direction: row;
-        flex-wrap: wrap;
+        padding-top: 3rem;
         max-width: 1024px; } }
     #categories .catzone .catcard {
       display: flex;
@@ -917,14 +916,14 @@
       justify-content: center;
       align-items: center;
       row-gap: 1rem;
-      width: 70%;
-      margin-bottom: 2rem; }
+      width: 45%; }
       @media screen and (min-width: 1024px) {
         #categories .catzone .catcard {
+          margin-bottom: 2rem;
           width: 32%; } }
   #categories img {
-    width: 250px;
-    height: 250px;
+    width: 90%;
+    height: auto;
     border-radius: 10px;
     margin: .5rem; }
     @media screen and (min-width: 1024px) {
@@ -941,9 +940,9 @@
         font-size: 3rem; } }
   #categories h2 {
     font-family: "Gideon Roman", sans-serif;
-    font-size: 2rem;
+    font-size: 1.2rem;
     font-weight: 600;
-    padding: 1rem 0;
+    padding: 1rem 0 .5rem 0;
     line-height: 1.5rem; }
     @media screen and (min-width: 1024px) {
       #categories h2 {
@@ -1217,11 +1216,12 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 80%;
+    width: 100%;
     margin-bottom: 50svh; }
     @media screen and (min-width: 1024px) {
       #cardsgallery #cardscontainer {
-        width: 70%; } }
+        width: 70%;
+        max-width: 1024px; } }
     #cardsgallery #cardscontainer h2 {
       margin-top: 3rem;
       border-top: solid white 2px;

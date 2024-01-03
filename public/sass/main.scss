@@ -206,10 +206,11 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 80%;
+    width: 100%;
     margin-bottom: 50svh;
     @include for-desktop {
       width: 70%;
+      max-width: $responsive-max-width;
     }
     h2 {
       margin-top: 3rem;

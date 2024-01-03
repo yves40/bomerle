@@ -3,12 +3,12 @@
   flex-direction: column; 
   justify-content: center;
   align-items: center;
-  margin-bottom: 5rem;
   padding-top: 2rem;
   color: white;
-  @include for-desktop {
+  margin: 0 auto;
+  padding-bottom: 60svh;
+  @include for-desktop { 
     flex-direction: row;
-    margin: 0 auto;
     max-width: $responsive-max-width;
   }
   gap: 1rem;
