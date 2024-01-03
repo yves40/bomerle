@@ -213,19 +213,20 @@ body {
       max-width: $responsive-max-width;
     }
     h2 {
-      margin-top: 3rem;
+      margin: 2rem 0 2rem 0;
       border-top: solid white 2px;
-      font-size: 4rem;
+      border-bottom: solid white 2px;
+      font-size: 2rem;
       padding: 2rem;
+      @include for-desktop {
+        font-size: 4rem;
+      }
     }
     p {
-      width: 100%;
-      margin-bottom: 2rem;
-    }
-    @include for-desktop {
-      p {
-        width: 70%;
-        max-width: $responsive-max-width;
+      width: 85%;
+      margin-bottom: 1rem;
+      @include for-desktop {
+          max-width: $responsive-max-width;
       }
     }
   }

@@ -371,11 +371,12 @@
         .cards .cardframe__title {
           font-size: 3rem; } }
     .cards .cardframe__text {
-      line-height: 1.3rem;
+      line-height: 1.6rem;
       padding: .5rem;
       background-color: rgba(34, 7, 7, 0.3); }
       @media screen and (min-width: 1024px) {
         .cards .cardframe__text {
+          line-height: 1.8rem;
           padding: 2rem; }
           .cards .cardframe__text:hover {
             box-shadow: 0px 0px 11px 5px #cec5c5;
@@ -1223,14 +1224,18 @@ body {
         width: 70%;
         max-width: 1024px; } }
     #cardsgallery #cardscontainer h2 {
-      margin-top: 3rem;
+      margin: 2rem 0 2rem 0;
       border-top: solid white 2px;
-      font-size: 4rem;
-      padding: 2rem; }
+      border-bottom: solid white 2px;
+      font-size: 2rem;
+      padding: 2rem;
+      margin: 2rem; }
+      @media screen and (min-width: 1024px) {
+        #cardsgallery #cardscontainer h2 {
+          font-size: 4rem; } }
     #cardsgallery #cardscontainer p {
-      width: 100%;
-      margin-bottom: 2rem; }
-    @media screen and (min-width: 1024px) {
-      #cardsgallery #cardscontainer p {
-        width: 70%;
-        max-width: 1024px; } }
+      width: 85%;
+      margin-bottom: 1rem; }
+      @media screen and (min-width: 1024px) {
+        #cardsgallery #cardscontainer p {
+          max-width: 1024px; } }

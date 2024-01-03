@@ -173,6 +173,8 @@ $(document).ready(function () {
      ---------------------------------------- */
     function zoomCategory(targetcategory, zoomstyle = 'NOTHING') {
         const categoryid = $(targetcategory).data('catid');
+        const catname = $(targetcategory).data('catname');
+        const catdesc = $(targetcategory).data('catdesc');
         const payload = {
             'catid': categoryid,
             'single': false
@@ -200,7 +202,8 @@ $(document).ready(function () {
                     console.log(`Add ${knifeincard.knifename} with ID ${knifeincard.id} to the card section`);
                     activeknives.push(knifeincard);
                 });
-                if(loadPublishedCatalog(activeknives, categoryid)) {
+                if(loadPublishedCatalog(activeknives, categoryid,
+                                    catname, catdesc)) {
                     $(cardsgallery).show().fadeIn(2000);
                 }
                 window.location = '#cardsgallery';
@@ -312,8 +315,9 @@ $(document).ready(function () {
             });
     }
     // ----------------------------------------
-    function loadPublishedCatalog(allpublished, categoryid) {
-        // Track double click activation
+    function loadPublishedCatalog(allpublished, categoryid,
+            catname, catdesc) {
+        // Track double click or double request
         let displayedcateoryid = parseInt($(cardsgallery).attr('data-catid'));
         console.log(`*** Current : ${displayedcateoryid} requested : ${categoryid}`);
         if( !isNaN(displayedcateoryid) && displayedcateoryid === categoryid) {
@@ -325,6 +329,8 @@ $(document).ready(function () {
             $(cardsgallery).empty().attr('data-catid', categoryid);
         }
         $(cardsgallery).append($('<div>').attr('id', 'cardscontainer'));
+        $('#cardscontainer').append($('<h2>').text(catname))
+        $('#cardscontainer').append($('<p>').text(catdesc))
         allpublished.forEach( knife => {
             const payload = {
                 "knifeid" :  knife.id,
