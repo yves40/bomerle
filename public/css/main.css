@@ -1228,8 +1228,7 @@ body {
       border-top: solid white 2px;
       border-bottom: solid white 2px;
       font-size: 2rem;
-      padding: 2rem;
-      margin: 2rem; }
+      padding: 2rem; }
       @media screen and (min-width: 1024px) {
         #cardsgallery #cardscontainer h2 {
           font-size: 4rem; } }
