@@ -726,8 +726,7 @@
   overflow: hidden;
   background-color: #1a1917; }
   .zoomon__image {
-    width: 80svw;
-    height: 80svw; }
+    width: 80svw; }
     .zoomon__image img {
       width: 100%;
       height: auto;
