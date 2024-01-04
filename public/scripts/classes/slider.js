@@ -214,7 +214,7 @@ class Slider {
     // Position the zoom 
     const top = window.scrollY;
     // // Remove body scroll bar so user cant scroll up or down
-    $("body").css("overflow", "hidden");
+    // $("body").css("overflow", "hidden");
     // $("#zoomer").css({ "background-image" : `url(${this.imagespath}${imagesrc}`,
     $("#zoomer").css({ 'top': top, 'left': 0, 'z-index': 2000 } )
             .addClass("zoomon").removeClass('zoomoff');

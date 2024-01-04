@@ -270,7 +270,7 @@ $(document).ready(function () {
         const p = $('<p>').text(knifedesc);
         $(categoryslider).append(h2).append(p);
         let slider = new Slider($(categoryslider), 10, '', knifeimages, 'KNIFE');
-        $("body").css("overflow", "hidden");
+        // $("body").css("overflow", "hidden");
         $(categoryslider).css({'top': window.scrollY,
             'left': 0, 'z-index': 1000})
             .show()
