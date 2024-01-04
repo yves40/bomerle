@@ -211,13 +211,18 @@ class Slider {
       this.zoomactive = true;
       this.currentzoom = imagesrc;
     }
-    // Remove body scroll bar so user cant scroll up or down
-    $("body").css("overflow", "hidden");
     // Position the zoom 
     const top = window.scrollY;
-    $("#zoomer").css({ "background-image" : `url(${this.imagespath}${imagesrc}`,
-            'top': top, 'left': 0, 'z-index': 2000 } )
-            .addClass("zoomon").removeClass('zoomoff').show();
+    // // Remove body scroll bar so user cant scroll up or down
+    $("body").css("overflow", "hidden");
+    // $("#zoomer").css({ "background-image" : `url(${this.imagespath}${imagesrc}`,
+    $("#zoomer").css({ 'top': top, 'left': 0, 'z-index': 2000 } )
+            .addClass("zoomon").removeClass('zoomoff');
+    $("#zoomer").append($('<div>').attr('id', 'zoomer__image')
+                                .addClass('zoomon__image')
+                                .append($('<img>').attr('src', `${this.imagespath}${imagesrc}`))
+                        );
+    $("#zoomer").show()
     // Hide a few things
     $(`#${this.indicators}`).hide();
     $(".slidercontrol").hide();
@@ -226,9 +231,8 @@ class Slider {
     $("#zoomer").click( (e) => { 
       e.preventDefault();
       this.zoomactive = false;
-      $("#zoomer").removeClass("zoomon")
-                      .addClass('zoomoff').hide()
-                      .css("background-image", 'none');
+      $("#zoomer").empty().removeClass("zoomon")
+                      .addClass('zoomoff').hide();
       $(`#${this.indicators}`).show();
       $(".slidercontrol").show();
       $("body").css("overflow", "auto");

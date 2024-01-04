@@ -5,11 +5,9 @@
 .carousel { 
     position: relative;  
     margin: 0 auto;
-    width: 80vw;
-    height: 80vw;
+    width: 60vw;
+    height: 60vh;
     @include for-desktop {
-        width: 60vw;
-        height: 60vw;
         max-width: $responsive-max-width;
         max-height: $responsive-max-width;
     }

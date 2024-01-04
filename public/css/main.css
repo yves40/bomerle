@@ -492,12 +492,10 @@
 .carousel {
   position: relative;
   margin: 0 auto;
-  width: 80vw;
-  height: 80vw; }
+  width: 60vw;
+  height: 60vh; }
   @media screen and (min-width: 1024px) {
     .carousel {
-      width: 60vw;
-      height: 60vw;
       max-width: 1024px;
       max-height: 1024px; } }
   .carousel > ul {
@@ -716,16 +714,24 @@
   background-color: white; }
 
 .zoomon {
-  display: block;
+  display: flex;
   position: absolute;
   height: 100%;
   width: 100%;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: contain;
+  justify-content: center;
+  align-items: center;
   animation-duration: 1.2s;
   animation-timing-function: linear;
-  animation-name: fadein; }
+  animation-name: fadein;
+  overflow: hidden;
+  background-color: #1a1917; }
+  .zoomon__image {
+    width: 80svw;
+    height: 80svw; }
+    .zoomon__image img {
+      width: 100%;
+      height: auto;
+      border-radius: 20px; }
   .zoomon h2 {
     size: 1rem;
     position: absolute;
@@ -1110,8 +1116,7 @@ body {
       width: 95%;
       padding: 1rem;
       margin-right: 1rem;
-      color: white;
-      overflow: hidden; }
+      color: white; }
       @media screen and (min-width: 1024px) {
         body .hero-section .hero-title {
           margin-right: 2rem;

@@ -31,16 +31,26 @@
 
 
 .zoomon {
-  display: block;
+  display: flex;
   position: absolute;
   height: 100%; 
   width: 100%;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: contain;
+  justify-content: center;
+  align-items: center;
   animation-duration: 1.2s;
   animation-timing-function: linear;
   animation-name: fadein;
+  overflow: hidden;
+  background-color: $background;
+  &__image {
+    width: 80svw;
+    height: 80svw;
+    img {
+      width: 100%;
+      height: auto;
+      border-radius: 20px;
+    }
+  }
   h2 {
       size: 1rem;
       position: absolute;

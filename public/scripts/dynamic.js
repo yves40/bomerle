@@ -276,10 +276,12 @@ $(document).ready(function () {
             .show()
             .on('click', (event) => {
                 event.preventDefault();
-                knifeslideractive = false;
-                $(categoryslider).empty();
-                $(categoryslider).hide();
-                $("body").css("overflow", "auto");
+                if(event.target.nodeName !== 'IMG') {   // Close the gallery zoom?
+                    knifeslideractive = false;
+                    $(categoryslider).empty();
+                    $(categoryslider).hide();
+                    $("body").css("overflow", "auto");
+                }
             });
     }
     /** -------------------------------------------------------------
