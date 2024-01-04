@@ -13,6 +13,11 @@
 @import url("https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Englebert&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Gideon+Roman&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Acme&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Englebert&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Gideon+Roman&display=swap");
 .bg-knifeleft {
   background-image: url("../images/background-left.jpg");
   background-size: cover;
@@ -484,178 +489,6 @@
   height: 80px;
   filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(131deg) brightness(102%) contrast(102%); }
 
-*, *::before, *::after {
-  box-sizing: border-box; }
-
-#thegallery {
-  scroll-margin: 100px;
-  padding: 3rem 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background-image: url(../images/home4.jpg);
-  background-position: center;
-  background-attachment: fixed;
-  background-size: cover;
-  color: white; }
-  #thegallery .galleryzone {
-    padding: 0 2em 3em 2em; }
-    @media screen and (min-width: 1024px) {
-      #thegallery .galleryzone {
-        padding: 0 5em 3em 5em;
-        width: 100%;
-        max-width: 1024px; } }
-    #thegallery .galleryzone p {
-      font-family: "Gideon Roman", sans-serif;
-      background-color: rgba(34, 7, 7, 0.3);
-      border-radius: 10px;
-      font-size: 1rem;
-      line-height: 1.4rem;
-      text-align: justify;
-      margin: 1rem auto;
-      padding: 1em; }
-      @media screen and (min-width: 1024px) {
-        #thegallery .galleryzone p {
-          font-size: 1.5rem;
-          line-height: 2rem; } }
-    #thegallery .galleryzone .gallery {
-      margin: 0 auto;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 2vmin;
-      list-style-type: none; }
-      #thegallery .galleryzone .gallery li {
-        height: 250px;
-        flex-grow: 1; }
-      #thegallery .galleryzone .gallery img {
-        width: 100%;
-        height: 100%;
-        border-radius: 10px;
-        border: solid 1px white;
-        object-fit: cover; }
-      #thegallery .galleryzone .gallery ::after {
-        content: "";
-        display: block;
-        flex-grow: 10; }
-
-#fullscreen {
-  background-color: #1a1917; }
-
-.zoomon {
-  position: absolute;
-  height: 100%;
-  width: 100%;
-  border-radius: 10px;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  animation-duration: 1.2s;
-  animation-timing-function: linear;
-  animation-name: fadein; }
-  .zoomon h2 {
-    size: 1rem;
-    position: absolute;
-    padding: .8rem;
-    color: white;
-    background-color: darkgrey;
-    top: 5%;
-    left: 5%;
-    opacity: 0.5; }
-
-.zoomoff {
-  display: none; }
-
-@keyframes fadein {
-  0% {
-    opacity: 0; }
-  100% {
-    opacity: 1; } }
-
-.bg-knifeleft {
-  background-image: url("../images/background-left.jpg");
-  background-size: cover;
-  color: white; }
-
-.bg-kniferight {
-  background-image: url("../images/background-right.jpg");
-  background-size: cover;
-  color: white; }
-
-.bg-enclume {
-  background-image: url("../images/enclume.jpg");
-  background-size: cover;
-  color: white; }
-
-.bg-thinknife {
-  background-image: url("../images/home-knife.jpg");
-  background-size: cover;
-  color: white; }
-
-.bgr-green {
-  background: radial-gradient(circle, #020024 0%, #097936 100%, #00d4ff 100%);
-  color: white; }
-
-.bgr-black {
-  background: linear-gradient(to bottom left, #959595 0%, #0D0D0D 50%, #010101 50%, #0A0A0A 53%, #4E4E4E 76%, #383838 87%, #1B1B1B 100%);
-  color: white; }
-
-.bgr-blue {
-  background: radial-gradient(circle, #020024 0%, #090979 50%, #00d4ff 100%);
-  color: white; }
-
-/*
-  How to compute the filter value ???
-  Go to thi site: https://codepen.io/sosuke/pen/Pjoqqp
-  Enter your color code.
-  To know your color code go here : https://htmlcolorcodes.com/
-*/
-.svgsmall-lightblue {
-  text-decoration: none;
-  width: 18px;
-  height: 18px;
-  filter: invert(44%) sepia(88%) saturate(1176%) hue-rotate(191deg) brightness(100%) contrast(101%); }
-
-.svgsmall-blue {
-  width: 18px;
-  height: 18px;
-  filter: invert(44%) sepia(96%) saturate(6317%) hue-rotate(229deg) brightness(100%) contrast(102%); }
-
-.svgbig-blue {
-  width: 50px;
-  height: 50px;
-  filter: invert(44%) sepia(96%) saturate(6317%) hue-rotate(229deg) brightness(100%) contrast(102%); }
-
-.svgsmall-lightgreen {
-  width: 18px;
-  height: 18px;
-  filter: invert(41%) sepia(98%) saturate(581%) hue-rotate(83deg) brightness(81%) contrast(80%); }
-
-.svgsmall-red {
-  width: 18px;
-  height: 18px;
-  filter: invert(19%) sepia(96%) saturate(6102%) hue-rotate(357deg) brightness(98%) contrast(117%); }
-
-.svgbig-red {
-  width: 50px;
-  height: 50px;
-  filter: invert(19%) sepia(96%) saturate(6102%) hue-rotate(357deg) brightness(98%) contrast(117%); }
-
-.svgmedium-white {
-  width: 24px;
-  height: 24px;
-  filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(131deg) brightness(102%) contrast(102%); }
-
-.svgbig-white {
-  width: 50px;
-  height: 50px;
-  filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(131deg) brightness(102%) contrast(102%); }
-
-.svglarge-white {
-  width: 80px;
-  height: 80px;
-  filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(131deg) brightness(102%) contrast(102%); }
-
 .carousel {
   position: relative;
   margin: 0 auto;
@@ -769,6 +602,292 @@
   display: none; }
 
 @keyframes image-fade {
+  0% {
+    opacity: 0; }
+  100% {
+    opacity: 1; } }
+
+.bg-knifeleft {
+  background-image: url("../images/background-left.jpg");
+  background-size: cover;
+  color: white; }
+
+.bg-kniferight {
+  background-image: url("../images/background-right.jpg");
+  background-size: cover;
+  color: white; }
+
+.bg-enclume {
+  background-image: url("../images/enclume.jpg");
+  background-size: cover;
+  color: white; }
+
+.bg-thinknife {
+  background-image: url("../images/home-knife.jpg");
+  background-size: cover;
+  color: white; }
+
+.bgr-green {
+  background: radial-gradient(circle, #020024 0%, #097936 100%, #00d4ff 100%);
+  color: white; }
+
+.bgr-black {
+  background: linear-gradient(to bottom left, #959595 0%, #0D0D0D 50%, #010101 50%, #0A0A0A 53%, #4E4E4E 76%, #383838 87%, #1B1B1B 100%);
+  color: white; }
+
+.bgr-blue {
+  background: radial-gradient(circle, #020024 0%, #090979 50%, #00d4ff 100%);
+  color: white; }
+
+/*
+  How to compute the filter value ???
+  Go to thi site: https://codepen.io/sosuke/pen/Pjoqqp
+  Enter your color code.
+  To know your color code go here : https://htmlcolorcodes.com/
+*/
+.svgsmall-lightblue {
+  text-decoration: none;
+  width: 18px;
+  height: 18px;
+  filter: invert(44%) sepia(88%) saturate(1176%) hue-rotate(191deg) brightness(100%) contrast(101%); }
+
+.svgsmall-blue {
+  width: 18px;
+  height: 18px;
+  filter: invert(44%) sepia(96%) saturate(6317%) hue-rotate(229deg) brightness(100%) contrast(102%); }
+
+.svgbig-blue {
+  width: 50px;
+  height: 50px;
+  filter: invert(44%) sepia(96%) saturate(6317%) hue-rotate(229deg) brightness(100%) contrast(102%); }
+
+.svgsmall-lightgreen {
+  width: 18px;
+  height: 18px;
+  filter: invert(41%) sepia(98%) saturate(581%) hue-rotate(83deg) brightness(81%) contrast(80%); }
+
+.svgsmall-red {
+  width: 18px;
+  height: 18px;
+  filter: invert(19%) sepia(96%) saturate(6102%) hue-rotate(357deg) brightness(98%) contrast(117%); }
+
+.svgbig-red {
+  width: 50px;
+  height: 50px;
+  filter: invert(19%) sepia(96%) saturate(6102%) hue-rotate(357deg) brightness(98%) contrast(117%); }
+
+.svgmedium-white {
+  width: 24px;
+  height: 24px;
+  filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(131deg) brightness(102%) contrast(102%); }
+
+.svgbig-white {
+  width: 50px;
+  height: 50px;
+  filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(131deg) brightness(102%) contrast(102%); }
+
+.svglarge-white {
+  width: 80px;
+  height: 80px;
+  filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(131deg) brightness(102%) contrast(102%); }
+
+.sliderframe {
+  margin: 0 auto;
+  padding: 1em;
+  max-width: 500px; }
+
+.sliderarea {
+  margin: 2em auto; }
+  .sliderarea .sliderimage {
+    width: 100%;
+    height: auto;
+    margin-bottom: 2em; }
+
+.slidertext {
+  max-width: 70%;
+  margin: 0 auto;
+  padding: 1em;
+  color: white;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: normal;
+  font-style: italic; }
+
+#fullscreen {
+  background-color: white; }
+
+.zoomon {
+  display: block;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  animation-duration: 1.2s;
+  animation-timing-function: linear;
+  animation-name: fadein; }
+  .zoomon h2 {
+    size: 1rem;
+    position: absolute;
+    padding: .8rem;
+    color: white;
+    background-color: darkgrey;
+    top: 5%;
+    left: 5%;
+    opacity: 0.5; }
+
+.zoomoff {
+  display: none; }
+
+@keyframes fadein {
+  0% {
+    opacity: 0; }
+  100% {
+    opacity: 1; } }
+
+.bg-knifeleft {
+  background-image: url("../images/background-left.jpg");
+  background-size: cover;
+  color: white; }
+
+.bg-kniferight {
+  background-image: url("../images/background-right.jpg");
+  background-size: cover;
+  color: white; }
+
+.bg-enclume {
+  background-image: url("../images/enclume.jpg");
+  background-size: cover;
+  color: white; }
+
+.bg-thinknife {
+  background-image: url("../images/home-knife.jpg");
+  background-size: cover;
+  color: white; }
+
+.bgr-green {
+  background: radial-gradient(circle, #020024 0%, #097936 100%, #00d4ff 100%);
+  color: white; }
+
+.bgr-black {
+  background: linear-gradient(to bottom left, #959595 0%, #0D0D0D 50%, #010101 50%, #0A0A0A 53%, #4E4E4E 76%, #383838 87%, #1B1B1B 100%);
+  color: white; }
+
+.bgr-blue {
+  background: radial-gradient(circle, #020024 0%, #090979 50%, #00d4ff 100%);
+  color: white; }
+
+/*
+  How to compute the filter value ???
+  Go to thi site: https://codepen.io/sosuke/pen/Pjoqqp
+  Enter your color code.
+  To know your color code go here : https://htmlcolorcodes.com/
+*/
+.svgsmall-lightblue {
+  text-decoration: none;
+  width: 18px;
+  height: 18px;
+  filter: invert(44%) sepia(88%) saturate(1176%) hue-rotate(191deg) brightness(100%) contrast(101%); }
+
+.svgsmall-blue {
+  width: 18px;
+  height: 18px;
+  filter: invert(44%) sepia(96%) saturate(6317%) hue-rotate(229deg) brightness(100%) contrast(102%); }
+
+.svgbig-blue {
+  width: 50px;
+  height: 50px;
+  filter: invert(44%) sepia(96%) saturate(6317%) hue-rotate(229deg) brightness(100%) contrast(102%); }
+
+.svgsmall-lightgreen {
+  width: 18px;
+  height: 18px;
+  filter: invert(41%) sepia(98%) saturate(581%) hue-rotate(83deg) brightness(81%) contrast(80%); }
+
+.svgsmall-red {
+  width: 18px;
+  height: 18px;
+  filter: invert(19%) sepia(96%) saturate(6102%) hue-rotate(357deg) brightness(98%) contrast(117%); }
+
+.svgbig-red {
+  width: 50px;
+  height: 50px;
+  filter: invert(19%) sepia(96%) saturate(6102%) hue-rotate(357deg) brightness(98%) contrast(117%); }
+
+.svgmedium-white {
+  width: 24px;
+  height: 24px;
+  filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(131deg) brightness(102%) contrast(102%); }
+
+.svgbig-white {
+  width: 50px;
+  height: 50px;
+  filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(131deg) brightness(102%) contrast(102%); }
+
+.svglarge-white {
+  width: 80px;
+  height: 80px;
+  filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(131deg) brightness(102%) contrast(102%); }
+
+*, *::before, *::after {
+  box-sizing: border-box; }
+
+#thegallery {
+  scroll-margin: 100px;
+  padding: 3rem 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-image: url(../images/home4.jpg);
+  background-position: center;
+  background-attachment: fixed;
+  background-size: cover;
+  color: white; }
+  #thegallery .galleryzone {
+    padding: 0 2em 3em 2em; }
+    @media screen and (min-width: 1024px) {
+      #thegallery .galleryzone {
+        padding: 0 5em 3em 5em;
+        width: 100%;
+        max-width: 1024px; } }
+    #thegallery .galleryzone p {
+      font-family: "Gideon Roman", sans-serif;
+      background-color: rgba(34, 7, 7, 0.3);
+      border-radius: 10px;
+      font-size: 1rem;
+      line-height: 1.4rem;
+      text-align: justify;
+      margin: 1rem auto;
+      padding: 1em; }
+      @media screen and (min-width: 1024px) {
+        #thegallery .galleryzone p {
+          font-size: 1.5rem;
+          line-height: 2rem; } }
+    #thegallery .galleryzone .gallery {
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2vmin;
+      list-style-type: none; }
+      #thegallery .galleryzone .gallery li {
+        height: 250px;
+        flex-grow: 1; }
+      #thegallery .galleryzone .gallery img {
+        width: 100%;
+        height: 100%;
+        border-radius: 10px;
+        border: solid 1px white;
+        object-fit: cover; }
+      #thegallery .galleryzone .gallery ::after {
+        content: "";
+        display: block;
+        flex-grow: 10; }
+
+#fullscreen {
+  background-color: #1a1917; }
+
+@keyframes fadein {
   0% {
     opacity: 0; }
   100% {

@@ -418,6 +418,7 @@
   background-color: white; }
 
 .zoomon {
+  display: block;
   position: absolute;
   height: 100%;
   width: 100%;
@@ -587,30 +588,6 @@
 
 #fullscreen {
   background-color: #1a1917; }
-
-.zoomon {
-  position: absolute;
-  height: 100%;
-  width: 100%;
-  border-radius: 10px;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  animation-duration: 1.2s;
-  animation-timing-function: linear;
-  animation-name: fadein; }
-  .zoomon h2 {
-    size: 1rem;
-    position: absolute;
-    padding: .8rem;
-    color: white;
-    background-color: darkgrey;
-    top: 5%;
-    left: 5%;
-    opacity: 0.5; }
-
-.zoomoff {
-  display: none; }
 
 @keyframes fadein {
   0% {

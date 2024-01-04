@@ -232,7 +232,6 @@ class Slider {
       $(`#${this.indicators}`).show();
       $(".slidercontrol").show();
       $("body").css("overflow", "auto");
-      // $('.diapo').show();
     });
   }
   // ------------------------------------------------------------------------------------------------

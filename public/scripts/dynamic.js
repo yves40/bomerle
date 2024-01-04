@@ -32,6 +32,7 @@ $(document).ready(function () {
     let validEmail = false;
     let validText = false;
     let categorygalleryactive = false;
+    let knifeslideractive = false;
 
     $(menuHamburger).on('click', function () {
         $(navLinks).toggleClass('mobile-menu');
@@ -268,14 +269,14 @@ $(document).ready(function () {
                     .addClass('heroh2');
         const p = $('<p>').text(knifedesc);
         $(categoryslider).append(h2).append(p);
-        let slider = new Slider($(categoryslider), 10, '',
-                                    knifeimages, 'KNIFE');
+        let slider = new Slider($(categoryslider), 10, '', knifeimages, 'KNIFE');
         $("body").css("overflow", "hidden");
         $(categoryslider).css({'top': window.scrollY,
             'left': 0, 'z-index': 1000})
             .show()
             .on('click', (event) => {
                 event.preventDefault();
+                knifeslideractive = false;
                 $(categoryslider).empty();
                 $(categoryslider).hide();
                 $("body").css("overflow", "auto");
@@ -339,24 +340,27 @@ $(document).ready(function () {
                 });
             }
             else {
-                const payload = {
-                    "knifeid" :  $(event.target).data('knifeid'),
-                }
-                $.ajax({
-                    type: "POST",
-                    url: '/knives/public/getimages',
-                    data: JSON.stringify(payload),
-                    dataType: "json",
-                    async: true,
-                    success: function (response) {
-                        displayKnifeSlider(response.knifeName,
-                                                response.knifedesc,
-                                                response.images);
-                    },
-                    error: function (xhr) {
-                        console.log(xhr);
+                if(!knifeslideractive) {
+                    knifeslideractive = true;                    
+                    const payload = {
+                        "knifeid" :  $(event.target).data('knifeid'),
                     }
-                });        
+                    $.ajax({
+                        type: "POST",
+                        url: '/knives/public/getimages',
+                        data: JSON.stringify(payload),
+                        dataType: "json",
+                        async: true,
+                        success: function (response) {
+                            displayKnifeSlider(response.knifeName,
+                                                    response.knifedesc,
+                                                    response.images);
+                        },
+                        error: function (xhr) {
+                            console.log(xhr);
+                        }
+                    });        
+                }
             }
         });
         return true;
