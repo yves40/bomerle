@@ -371,7 +371,7 @@
         .cards .cardframe__title {
           font-size: 3rem; } }
     .cards .cardframe__text {
-      line-height: 1.6rem;
+      line-height: 1.2rem;
       padding: .5rem;
       background-color: rgba(34, 7, 7, 0.3); }
       @media screen and (min-width: 1024px) {
@@ -658,7 +658,15 @@
 
 .carousel {
   position: relative;
-  margin: 0 auto; }
+  margin: 0 auto;
+  width: 80vw;
+  height: 80vw; }
+  @media screen and (min-width: 1024px) {
+    .carousel {
+      width: 60vw;
+      height: 60vw;
+      max-width: 1024px;
+      max-height: 1024px; } }
   .carousel > ul {
     margin: 0;
     padding: 0;
@@ -765,35 +773,6 @@
     opacity: 0; }
   100% {
     opacity: 1; } }
-
-/* Screen less than smallsize ? */
-@media screen and (max-width: 850px) {
-  .carousel {
-    width: 300px;
-    height: 300px;
-    margin: auto; }
-  .sliderimage {
-    max-width: 850px; } }
-
-/* Screen between smallsize and bigsize ? */
-@media screen and (min-width: 850px) and (max-width: 1920px) {
-  .carousel {
-    width: 400px;
-    height: 400px;
-    margin: auto; }
-  .sliderimage {
-    width: 100%;
-    height: auto;
-    max-width: 1500px; } }
-
-/* Screen greater than bigsize ? */
-@media screen and (min-width: 1920px) {
-  .carousel {
-    width: 500px;
-    height: 500px;
-    margin: auto; }
-  .sliderimage {
-    max-width: 1920px; } }
 
 .infos {
   display: flex;
@@ -968,6 +947,18 @@
       color: white;
       font-size: 3rem; }
 
+#categoryslider h2 {
+  font-size: 2rem; }
+
+#categoryslider p {
+  display: none; }
+
+@media screen and (min-width: 1024px) {
+  #categoryslider h2 {
+    font-size: 4rem; }
+  #categoryslider p {
+    display: block; } }
+
 * {
   margin: 0;
   padding: 0;
@@ -1087,8 +1078,11 @@ body {
   height: 100%;
   color: white; }
   #categoryslider h2 {
-    font-size: 4rem;
+    font-size: 2rem;
     padding: 4rem; }
+    @media screen and (min-width: 1024px) {
+      #categoryslider h2 {
+        font-size: 4rem; } }
   #categoryslider p {
     width: 50%;
     max-width: 1024px;

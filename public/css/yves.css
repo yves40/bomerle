@@ -193,7 +193,15 @@
 
 .carousel {
   position: relative;
-  margin: 0 auto; }
+  margin: 0 auto;
+  width: 80vw;
+  height: 80vw; }
+  @media screen and (min-width: 1024px) {
+    .carousel {
+      width: 60vw;
+      height: 60vw;
+      max-width: 1024px;
+      max-height: 1024px; } }
   .carousel > ul {
     margin: 0;
     padding: 0;
@@ -236,12 +244,16 @@
     margin-bottom: 2rem;
     list-style: none; }
     .carousel .carousel-indicators-button {
-      opacity: .5;
-      width: 15px;
+      opacity: .6;
+      width: 20px;
       height: 15px;
+      border-radius: 4px;
       margin-left: 3px;
       margin-right: 3px;
       cursor: pointer; }
+      @media screen and (min-width: 1024px) {
+        .carousel .carousel-indicators-button {
+          height: 10px; } }
       .carousel .carousel-indicators-button.active {
         opacity: 1;
         background-color: white; }
@@ -296,35 +308,6 @@
     opacity: 0; }
   100% {
     opacity: 1; } }
-
-/* Screen less than smallsize ? */
-@media screen and (max-width: 850px) {
-  .carousel {
-    width: 300px;
-    height: 300px;
-    margin: auto; }
-  .sliderimage {
-    max-width: 850px; } }
-
-/* Screen between smallsize and bigsize ? */
-@media screen and (min-width: 850px) and (max-width: 1920px) {
-  .carousel {
-    width: 400px;
-    height: 400px;
-    margin: auto; }
-  .sliderimage {
-    width: 100%;
-    height: auto;
-    max-width: 1500px; } }
-
-/* Screen greater than bigsize ? */
-@media screen and (min-width: 1920px) {
-  .carousel {
-    width: 500px;
-    height: 500px;
-    margin: auto; }
-  .sliderimage {
-    max-width: 1920px; } }
 
 .bg-knifeleft {
   background-image: url("../images/background-left.jpg");

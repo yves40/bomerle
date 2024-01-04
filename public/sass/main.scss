@@ -145,8 +145,11 @@ body {
   height: 100%;
   color: white;
   h2 {
-    font-size: 4rem;
+    font-size: 2rem;
     padding: 4rem;
+    @include for-desktop {
+      font-size: 4rem;
+    }
   }
   p {
     width: 50%;

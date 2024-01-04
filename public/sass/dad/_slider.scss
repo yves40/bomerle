@@ -1,13 +1,22 @@
 @import './const';
+@import '../utils/mixins';
 
 
 .carousel { 
     position: relative;  
     margin: 0 auto;
+    width: 80vw;
+    height: 80vw;
+    @include for-desktop {
+        width: 60vw;
+        height: 60vw;
+        max-width: $responsive-max-width;
+        max-height: $responsive-max-width;
+    }
     > ul{
         margin: 0;
         padding: 0;
-        list-style: none;
+        list-style: none; 
     }
     .carousel-button {
         position: absolute;
@@ -123,40 +132,4 @@
 @keyframes image-fade {
     0%   { opacity: 0;}
     100% { opacity: 1;}
-}
-/* Screen less than smallsize ? */
-@media screen and (max-width: $smallsize) { 
-    .carousel {
-        width: $sliderimgsmall; 
-        height: $sliderimgsmall;
-        margin: auto;
-    }
-    .sliderimage { 
-        max-width: $smallsize;
-    }
-}
-/* Screen between smallsize and bigsize ? */
-@media screen and (min-width: $smallsize) and (max-width: $bigsize) { 
-    .carousel{
-        width: $sliderimgmedium; 
-        height: $sliderimgmedium;
-        margin: auto;
-    }
-    .sliderimage { 
-        width: 100%;
-        height: auto;
-        max-width: $mediumsize;
-    }
-}
-/* Screen greater than bigsize ? */
-@media screen and (min-width: $bigsize) { 
-    .carousel {
-        width: $sliderimgbig; 
-        height: $sliderimgbig;
-        // width: calc(100vh/2);
-        margin: auto;
-    }
-    .sliderimage { 
-        max-width: $bigsize;
-    }
 }
