@@ -69,47 +69,6 @@ $(document).ready(function () {
     getPublishedKnives()
     getHtmlTemplates();
 
-    // ---------------------------------------- Request the active diaporamas from the DB
-    function getActiveDiaporamas() {
-        $.ajax({
-            type: "GET",
-            url: '/slides/public/getactivediaporamas',
-            dataType: "json",
-            async: true,
-            success: function (response) {
-                console.log(response);
-                if(response.activecount != 0) {
-                    $(gallerymenu).show();
-                    $('#thegallery').show();
-                    loadDiapoSections(response.activediaporamas);                 
-                }
-            },
-            error: function (xhr) {
-                console.log(xhr);
-            }
-        });    
-    }
-    // ---------------------------------------- Request the active diaporamas from the DB
-    function getPublishedKnives() {
-        $.ajax({
-            type: "GET",
-            url: '/knives/public/getpublished',
-            dataType: "json",
-            async: true,
-            success: function (response) {
-                console.log(response);
-                if(response.categoriescount != 0) {
-                    $(categoriesmenu).show();
-                    $(categorysection).show();
-                    loadCategoriesCatalog(categorysection, response.categories);
-                    allcategoriesknives = response.knives;
-                }
-            },
-            error: function (xhr) {
-                console.log(xhr);
-            }
-        });    
-    }
     // ---------------------------------------- 
     function loadCategoriesCatalog(container, categories) {
         const dedup = [...new Map(categories.map((m) => [m.catid, m])).values()]
@@ -213,13 +172,7 @@ $(document).ready(function () {
             }
         });    
     }
-    //----------------------------------------------------------------
-    function sortedUnique(thearray) {
-        return thearray.sort().filter(function(item, pos, ary) {
-            return !pos || item != ary[pos - 1];
-        });
-    }
-    /** 
+    /** -------------------------------------------------------------
      *  @var targetcategory : The category UI object 
      *  @var response : Images files list from the json call
      **/
@@ -241,7 +194,7 @@ $(document).ready(function () {
                 $("body").css("overflow", "auto");
             });
     }
-    /** 
+    /** -------------------------------------------------------------
      *  @var targetcategory : The category UI object 
      *  @var response : Images files list from the json call
      **/
@@ -294,7 +247,7 @@ $(document).ready(function () {
             }
         });
     }
-    // ----------------------------------------
+    // -------------------------------------------------------------
     function displayKnifeSlider(knifename, knifedesc, knifeimages) {
         const h2 = $('<h2>').text(knifename)
                     .addClass('heroh2');
@@ -316,6 +269,7 @@ $(document).ready(function () {
     // ----------------------------------------
     function loadPublishedCatalog(allpublished, categoryid,
             catname, catdesc) {
+        // -------------------------------------------------------------
         // Track double click or double request
         let displayedcateoryid = parseInt($(cardsgallery).attr('data-catid'));
         console.log(`*** Current : ${displayedcateoryid} requested : ${categoryid}`);
@@ -327,10 +281,13 @@ $(document).ready(function () {
             console.log(`Category ${categoryid} display`);
             $(cardsgallery).empty().attr('data-catid', categoryid);
         }
+        // -------------------------------------------------------------
+        // Build the cards gallery
         $(cardsgallery).append($('<div>').attr('id', 'cardscontainer'));
         $('#cardscontainer').append($('<h2>').text(catname))
         $('#cardscontainer').append($('<p>').text(catdesc))
-        allpublished.forEach( knife => {
+
+        allpublished.forEach( knife => {    // Cards loop
             const payload = {
                 "knifeid" :  knife.id,
             }
@@ -379,47 +336,6 @@ $(document).ready(function () {
         });
         return true;
     }
-    // ---------------------------------------- Find a dynamic section in the page
-    function loadDiapoSections(allactive) {
-        let gallerysection = $('#thegallery');
-        allactive.forEach(diapo => {
-            let diaposection = $('<div>').addClass('diapo').attr('name', diapo.name);
-            $(gallerysection).append(diaposection);
-            const payload = {
-                "diaponame" :  diapo.name,
-            }
-            $.ajax({
-                type: "POST",
-                url: '/slides/public/getdiapos',
-                data: JSON.stringify(payload),
-                dataType: "json",
-                async: true,
-                success: function (response) {
-                    if(response.slidermode) {
-                        if(response.timing === null) {
-                            response.timing = 2;
-                        }
-                        buildImagesSlider(response.images, response.timing, response.description, diaposection);
-                    }
-                    else {
-                        buildImagesGallery(response.images, response.description,  diaposection);
-                    }
-                },
-                error: function (xhr) {
-                    console.log(xhr);
-                }
-            });    
-        });
-    }
-    // ---------------------------------------- Find dynamic html pieces
-    function getHtmlTemplates() {
-        $(".htmltemplate").each(function (index, element) {
-            const thelang = $(this).data('lang');
-            // element == this
-            const templatename = $(this).data('templatename');
-            $(this).load(`/templates/${thelang}/${templatename}.html`);
-        });
-    }
     // ---------------------------------------- Activate a slider
     function buildImagesSlider(allimages, timing, description, container) {
         console.log(`Container name is ${$(container).attr('name')} for ${allimages.length} images`);
@@ -437,6 +353,7 @@ $(document).ready(function () {
                                     .addClass('cardframe');
         let card  = new Card(thecard, response);
         container.append(thecard);
+        // Set a knife ID for future zoom
         $(thecard).find('img').attr('data-knifeid', response.knifeId);
     }
     // ---------------------------------------- Can send contact request ?
@@ -521,5 +438,102 @@ $(document).ready(function () {
                 }, 5000);
             }
         });    
+    }
+    /** ---------------------------------------------------------------
+     *  data getters
+     */
+    // ---------------------------------------- 
+    // Request the active diaporamas from the DB
+    function getActiveDiaporamas() {
+        $.ajax({
+            type: "GET",
+            url: '/slides/public/getactivediaporamas',
+            dataType: "json",
+            async: true,
+            success: function (response) {
+                console.log(response);
+                if(response.activecount != 0) {
+                    $(gallerymenu).show();
+                    $('#thegallery').show();
+                    loadDiapoSections(response.activediaporamas);                 
+                }
+            },
+            error: function (xhr) {
+                console.log(xhr);
+            }
+        });    
+    }
+    // ---------------------------------------- 
+    // Request the active knives from the DB
+    function getPublishedKnives() {
+        $.ajax({
+            type: "GET",
+            url: '/knives/public/getpublished',
+            dataType: "json",
+            async: true,
+            success: function (response) {
+                console.log(response);
+                if(response.categoriescount != 0) {
+                    $(categoriesmenu).show();
+                    $(categorysection).show();
+                    loadCategoriesCatalog(categorysection, response.categories);
+                    allcategoriesknives = response.knives;
+                }
+            },
+            error: function (xhr) {
+                console.log(xhr);
+            }
+        });    
+    }
+    // ---------------------------------------- 
+    // Find dynamic html pieces
+    function getHtmlTemplates() {
+        $(".htmltemplate").each(function (index, element) {
+            const thelang = $(this).data('lang');
+            // element == this
+            const templatename = $(this).data('templatename');
+            $(this).load(`/templates/${thelang}/${templatename}.html`);
+        });
+    }
+    // ---------------------------------------- 
+    // Find and load active diaporamas in the page
+    function loadDiapoSections(allactive) {
+        let gallerysection = $('#thegallery');
+        allactive.forEach(diapo => {
+            let diaposection = $('<div>').addClass('diapo').attr('name', diapo.name);
+            $(gallerysection).append(diaposection);
+            const payload = {
+                "diaponame" :  diapo.name,
+            }
+            $.ajax({
+                type: "POST",
+                url: '/slides/public/getdiapos',
+                data: JSON.stringify(payload),
+                dataType: "json",
+                async: true,
+                success: function (response) {
+                    if(response.slidermode) {
+                        if(response.timing === null) {
+                            response.timing = 2;
+                        }
+                        buildImagesSlider(response.images, response.timing, response.description, diaposection);
+                    }
+                    else {
+                        buildImagesGallery(response.images, response.description,  diaposection);
+                    }
+                },
+                error: function (xhr) {
+                    console.log(xhr);
+                }
+            });    
+        });
+    }
+    //----------------------------------------------------------------
+    // Utilities
+    //----------------------------------------------------------------
+    function sortedUnique(thearray) {
+        return thearray.sort().filter(function(item, pos, ary) {
+            return !pos || item != ary[pos - 1];
+        });
     }
 })
