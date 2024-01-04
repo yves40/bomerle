@@ -6,7 +6,6 @@
   padding-top: 2rem;
   color: white;
   margin: 0 auto;
-  padding-bottom: 60svh;
   @include for-desktop { 
     flex-direction: row;
     max-width: $responsive-max-width;
