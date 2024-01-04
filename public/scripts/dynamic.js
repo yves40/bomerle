@@ -69,7 +69,14 @@ $(document).ready(function () {
     getPublishedKnives()
     getHtmlTemplates();
 
-    // ---------------------------------------- 
+    /** --------------------------------------------------------
+     * @param container
+     *      div element used to load all categories 
+     *      The categories list depends of published knives
+     * @param categories
+     *      The categories list, related to published knives
+     *      It's built by getPublishedKnives()
+    */
     function loadCategoriesCatalog(container, categories) {
         const dedup = [...new Map(categories.map((m) => [m.catid, m])).values()]
             .sort( (cat1, cat2) => {
@@ -82,7 +89,6 @@ $(document).ready(function () {
 
         const catzone = $('<div></div>').addClass('catzone');
         $(container).append(catzone);
-        console.log(`${dedup.length} categories used in published knives`);
         for(let idx = 0; idx < dedup.length; ++idx) {
             const payload = {
                 'catid': dedup[idx].catid,
@@ -92,7 +98,7 @@ $(document).ready(function () {
                 type: "POST",
                 url: '/knives/public/categoryimages',
                 dataType: "json",
-                async: false,
+                async: true,
                 data: JSON.stringify(payload),
                 success: function (response) {
                     AddCategory(catzone, response, dedup[idx]);
@@ -103,7 +109,12 @@ $(document).ready(function () {
             });    
         }
     }
-    // ----------------------------------------
+    // --------------------------------------------------------
+    /** 
+     * @param container <div> to be used for loading category cards 
+     * @param response json data for the category images
+     * @param category The category object
+     */
     function AddCategory(container, response, category) {
         const div = $('<div></div>').addClass('catcard');
         const h2 = $('<h2>').text(category.catfullname).addClass('heroh2');
@@ -125,11 +136,11 @@ $(document).ready(function () {
         $(div).append(img);
         $(container).append(div);
     }
-    /** ----------------------------------------
-     * @param targetcategory : The category UI object 
+    /** --------------------------------------------------------
+     * @param targetcategory : The category DOM element 
      * @param zoomode : 'NOTHING' or 'SLIDER' or 'GALLERY'
      *                   Drives the way category photos are displayed
-     ---------------------------------------- */
+    */
     function zoomCategory(targetcategory, zoomstyle = 'NOTHING') {
         const categoryid = $(targetcategory).data('catid');
         const catname = $(targetcategory).data('catname');
@@ -142,7 +153,7 @@ $(document).ready(function () {
             type: "POST",
             url: '/knives/public/categoryimages',
             dataType: "json",
-            async: false,
+            async: true,
             data: JSON.stringify(payload),
             success: function (response) {
                 switch(zoomstyle) {
@@ -173,8 +184,8 @@ $(document).ready(function () {
         });    
     }
     /** -------------------------------------------------------------
-     *  @var targetcategory : The category UI object 
-     *  @var response : Images files list from the json call
+     *  @param targetcategory : The category UI object 
+     *  @param response : Images files list from the json call
      **/
     function buildSlider(targetcategory, response) {
         const h2 = $('<h2>').text($(targetcategory).data('catname'))
@@ -195,8 +206,8 @@ $(document).ready(function () {
             });
     }
     /** -------------------------------------------------------------
-     *  @var targetcategory : The category UI object 
-     *  @var response : Images files list from the json call
+     *  @param targetcategory : The category UI object 
+     *  @param response : Images files list from the json call
      **/
     function buildGallery(targetcategory, response) {
         const container = $('<div>').attr('id', 'gallerycontainer');
@@ -247,14 +258,18 @@ $(document).ready(function () {
             }
         });
     }
-    // -------------------------------------------------------------
+    /** -------------------------------------------------------------
+     * @param knifename     The knife name
+     * @param knifedesc     Description
+     * @param knifeimages   Related images
+     */
     function displayKnifeSlider(knifename, knifedesc, knifeimages) {
         const h2 = $('<h2>').text(knifename)
                     .addClass('heroh2');
         const p = $('<p>').text(knifedesc);
         $(categoryslider).append(h2).append(p);
         let slider = new Slider($(categoryslider), 10, '',
-            knifeimages, 'KNIFE');
+                                    knifeimages, 'KNIFE');
         $("body").css("overflow", "hidden");
         $(categoryslider).css({'top': window.scrollY,
             'left': 0, 'z-index': 1000})
@@ -266,7 +281,17 @@ $(document).ready(function () {
                 $("body").css("overflow", "auto");
             });
     }
-    // ----------------------------------------
+    /** -------------------------------------------------------------
+     * @param {*} allpublished List of published knives for a given category
+     * @param {*} categoryid The category ID to which the knives belong
+     * @param {*} catname Category name
+     * @param {*} catdesc Category full description
+     *                    These 2 strings are displayed in the zoomed
+     *                    category header
+     * @returns 
+     *          false if the category is already displayed
+     *          true if the category has been displayed
+     */
     function loadPublishedCatalog(allpublished, categoryid,
             catname, catdesc) {
         // -------------------------------------------------------------
@@ -336,18 +361,33 @@ $(document).ready(function () {
         });
         return true;
     }
-    // ---------------------------------------- Activate a slider
+    /**
+     * Build and display a slider 
+     * @param {*} allimages Associated images
+     * @param {*} timing  Delay when automatic sliding is active
+     * @param {*} description A short slider description displayed above the images
+     * @param {*} container The target element where the slider will be instanciated
+     */
     function buildImagesSlider(allimages, timing, description, container) {
         console.log(`Container name is ${$(container).attr('name')} for ${allimages.length} images`);
         let slider = new Slider(container, timing, description, allimages);     // Build the slider frame
     }
-    // ---------------------------------------- Activate a gallery
+    /**
+     * Build and display a gallery of images
+     * @param {*} allimages Associated images
+     * @param {*} description A short gallery description displayed above the images
+     * @param {*} container The target element where the gallery will be instanciated
+     */
     function buildImagesGallery(allimages, description,  container) {
         console.log(`Container name is ${$(container).attr('name')} for ${allimages.length} images`);
         let gallery = new Gallery(container, description);
         gallery.addImages(allimages);
     }
-    // ---------------------------------------- Activate a card
+    /**
+     * Build a single card to be displayed in a parent element
+     * @param {*} response json data containing some knife information
+     * @param {*} container The target element where the card will be displayed
+     */
     function buildCard(response, container ) {
         let thecard = $('<div>').attr('id', `knifeid-${response.knifeId}`)
                                     .addClass('cardframe');
@@ -356,7 +396,107 @@ $(document).ready(function () {
         // Set a knife ID for future zoom
         $(thecard).find('img').attr('data-knifeid', response.knifeId);
     }
-    // ---------------------------------------- Can send contact request ?
+    // ---------------------------------------------------------------
+    //  data getters
+    // ---------------------------------------------------------------
+    /**
+     * Request the active diaporamas from the DB
+     */
+    function getActiveDiaporamas() {
+        $.ajax({
+            type: "GET",
+            url: '/slides/public/getactivediaporamas',
+            dataType: "json",
+            async: true,
+            success: function (response) {
+                console.log(response);
+                if(response.activecount != 0) {
+                    $(gallerymenu).show();
+                    $('#thegallery').show();
+                    loadDiapoSections(response.activediaporamas);                 
+                }
+            },
+            error: function (xhr) {
+                console.log(xhr);
+            }
+        });    
+    }
+    /**
+     * Request the active knives from the DB
+     */
+    function getPublishedKnives() {
+        $.ajax({
+            type: "GET",
+            url: '/knives/public/getpublished',
+            dataType: "json",
+            async: true,
+            success: function (response) {
+                console.log(response);
+                if(response.categoriescount != 0) {
+                    $(categoriesmenu).show();
+                    $(categorysection).show();
+                    loadCategoriesCatalog(categorysection, response.categories);
+                    allcategoriesknives = response.knives;
+                }
+            },
+            error: function (xhr) {
+                console.log(xhr);
+            }
+        });    
+    }
+    /**
+     * Find dynamic html pieces
+     */
+    function getHtmlTemplates() {
+        $(".htmltemplate").each(function (index, element) {
+            const thelang = $(this).data('lang');
+            // element == this
+            const templatename = $(this).data('templatename');
+            $(this).load(`/templates/${thelang}/${templatename}.html`);
+        });
+    }
+    /**
+     * Find and load active diaporamas in the page
+     * @param {*} allactive The diaporamas list to be displayed
+     */
+    function loadDiapoSections(allactive) {
+        let gallerysection = $('#thegallery');
+        allactive.forEach(diapo => {
+            let diaposection = $('<div>').addClass('diapo').attr('name', diapo.name);
+            $(gallerysection).append(diaposection);
+            const payload = {
+                "diaponame" :  diapo.name,
+            }
+            $.ajax({
+                type: "POST",
+                url: '/slides/public/getdiapos',
+                data: JSON.stringify(payload),
+                dataType: "json",
+                async: true,
+                success: function (response) {
+                    if(response.slidermode) {
+                        if(response.timing === null) {
+                            response.timing = 2;
+                        }
+                        buildImagesSlider(response.images, response.timing, response.description, diaposection);
+                    }
+                    else {
+                        buildImagesGallery(response.images, response.description,  diaposection);
+                    }
+                },
+                error: function (xhr) {
+                    console.log(xhr);
+                }
+            });    
+        });
+    }
+    //----------------------------------------------------------------
+    // Utilities
+    //----------------------------------------------------------------
+    /**
+     * Fields checker used to activate a send button when the proper data
+     * has been entered
+     */
     function buttonActivation() {
         const maregex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         validEmail = maregex.test($("#contact_email").val());
@@ -376,7 +516,9 @@ $(document).ready(function () {
                     .prop('disabled', true);
         }  
     }
-    // ---------------------------------------- Send the email
+    /**
+     * Buils and send a contact email
+     */
     function buttonClicked() {
         let choosedid = 0;
         let choosedname = '';
@@ -439,98 +581,11 @@ $(document).ready(function () {
             }
         });    
     }
-    /** ---------------------------------------------------------------
-     *  data getters
+    /**
+     * Sort knives ID
+     * @param {*} thearray Some numeric data to be sorted
+     * @returns the sorted array
      */
-    // ---------------------------------------- 
-    // Request the active diaporamas from the DB
-    function getActiveDiaporamas() {
-        $.ajax({
-            type: "GET",
-            url: '/slides/public/getactivediaporamas',
-            dataType: "json",
-            async: true,
-            success: function (response) {
-                console.log(response);
-                if(response.activecount != 0) {
-                    $(gallerymenu).show();
-                    $('#thegallery').show();
-                    loadDiapoSections(response.activediaporamas);                 
-                }
-            },
-            error: function (xhr) {
-                console.log(xhr);
-            }
-        });    
-    }
-    // ---------------------------------------- 
-    // Request the active knives from the DB
-    function getPublishedKnives() {
-        $.ajax({
-            type: "GET",
-            url: '/knives/public/getpublished',
-            dataType: "json",
-            async: true,
-            success: function (response) {
-                console.log(response);
-                if(response.categoriescount != 0) {
-                    $(categoriesmenu).show();
-                    $(categorysection).show();
-                    loadCategoriesCatalog(categorysection, response.categories);
-                    allcategoriesknives = response.knives;
-                }
-            },
-            error: function (xhr) {
-                console.log(xhr);
-            }
-        });    
-    }
-    // ---------------------------------------- 
-    // Find dynamic html pieces
-    function getHtmlTemplates() {
-        $(".htmltemplate").each(function (index, element) {
-            const thelang = $(this).data('lang');
-            // element == this
-            const templatename = $(this).data('templatename');
-            $(this).load(`/templates/${thelang}/${templatename}.html`);
-        });
-    }
-    // ---------------------------------------- 
-    // Find and load active diaporamas in the page
-    function loadDiapoSections(allactive) {
-        let gallerysection = $('#thegallery');
-        allactive.forEach(diapo => {
-            let diaposection = $('<div>').addClass('diapo').attr('name', diapo.name);
-            $(gallerysection).append(diaposection);
-            const payload = {
-                "diaponame" :  diapo.name,
-            }
-            $.ajax({
-                type: "POST",
-                url: '/slides/public/getdiapos',
-                data: JSON.stringify(payload),
-                dataType: "json",
-                async: true,
-                success: function (response) {
-                    if(response.slidermode) {
-                        if(response.timing === null) {
-                            response.timing = 2;
-                        }
-                        buildImagesSlider(response.images, response.timing, response.description, diaposection);
-                    }
-                    else {
-                        buildImagesGallery(response.images, response.description,  diaposection);
-                    }
-                },
-                error: function (xhr) {
-                    console.log(xhr);
-                }
-            });    
-        });
-    }
-    //----------------------------------------------------------------
-    // Utilities
-    //----------------------------------------------------------------
     function sortedUnique(thearray) {
         return thearray.sort().filter(function(item, pos, ary) {
             return !pos || item != ary[pos - 1];
