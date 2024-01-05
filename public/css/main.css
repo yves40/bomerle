@@ -515,8 +515,6 @@
     padding: 0 .5rem;
     background-color: rgba(0, 0, 0, 0.1);
     width: 4rem; }
-    .carousel .carousel-button img {
-      size: 3rem; }
     .carousel .carousel-button:hover, .carousel .carousel-button:focus {
       color: white;
       background-color: rgba(0, 0, 0, 0.2); }
@@ -729,6 +727,7 @@
   .zoomon__image {
     display: flex;
     justify-content: center;
+    max-width: 1024px;
     width: 80svw;
     height: 80svh; }
     .zoomon__image img {
@@ -1077,18 +1076,6 @@
       color: white;
       font-size: 3rem; }
 
-#categoryslider h2 {
-  font-size: 2rem; }
-
-#categoryslider p {
-  display: none; }
-
-@media screen and (min-width: 1024px) {
-  #categoryslider h2 {
-    font-size: 4rem; }
-  #categoryslider p {
-    display: block; } }
-
 * {
   margin: 0;
   padding: 0;
@@ -1204,8 +1191,9 @@ body {
   align-items: center;
   backdrop-filter: blur(4px);
   width: 100%;
-  height: 100%;
-  color: white; }
+  min-height: 100svh;
+  color: white;
+  margin-top: 100px; }
   #categoryslider h2 {
     font-size: 2rem;
     padding: 4rem; }
@@ -1213,6 +1201,7 @@ body {
       #categoryslider h2 {
         font-size: 4rem; } }
   #categoryslider p {
+    display: none;
     width: 50%;
     max-width: 1024px;
     margin-bottom: 2rem; }

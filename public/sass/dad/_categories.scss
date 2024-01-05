@@ -85,19 +85,3 @@
         }
     }
 }
-#categoryslider {
-    h2 {
-        font-size: 2rem;
-    }
-    p { 
-        display: none;
-    }
-    @include for-desktop {
-        h2 {
-            font-size: 4rem;
-        }
-        p {
-            display: block;
-        }
-    }
-}

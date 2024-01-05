@@ -45,6 +45,7 @@
   &__image {
     display: flex;
     justify-content: center;
+    max-width: $responsive-max-width;
     width: 80svw;
     height: 80svh;
     img {

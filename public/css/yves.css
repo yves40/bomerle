@@ -217,8 +217,6 @@
     padding: 0 .5rem;
     background-color: rgba(0, 0, 0, 0.1);
     width: 4rem; }
-    .carousel .carousel-button img {
-      size: 3rem; }
     .carousel .carousel-button:hover, .carousel .carousel-button:focus {
       color: white;
       background-color: rgba(0, 0, 0, 0.2); }
@@ -431,6 +429,7 @@
   .zoomon__image {
     display: flex;
     justify-content: center;
+    max-width: 1024px;
     width: 80svw;
     height: 80svh; }
     .zoomon__image img {
