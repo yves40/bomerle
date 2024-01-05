@@ -79,6 +79,9 @@
         }
     }
     .slide {
+        display: flex;
+        align-items: center;
+        justify-content: center;
         margin: 1rem 0;
         position: absolute; 
         inset: 0;
@@ -92,9 +95,10 @@
             max-width: 100%;
             max-height: 100%;
             height: auto;
+            width: auto;
             object-fit: contain;
             object-position: center; 
-            border-radius: 10px;
+            border-radius: 20px;
         }
     }
 }  
