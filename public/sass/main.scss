@@ -212,6 +212,7 @@ body {
     justify-content: center;
     align-items: center;
     width: 100%;
+    background-color: rgba(34, 7, 7, .6);
     margin-bottom: 50svh;
     @include for-desktop {
       width: 70%;
