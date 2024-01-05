@@ -377,8 +377,7 @@
           font-size: 3rem; } }
     .cards .cardframe__text {
       line-height: 1.2rem;
-      padding: .5rem;
-      background-color: rgba(34, 7, 7, 0.3); }
+      padding: .5rem; }
       @media screen and (min-width: 1024px) {
         .cards .cardframe__text {
           line-height: 1.8rem;
