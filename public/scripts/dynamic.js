@@ -157,12 +157,17 @@ $(document).ready(function () {
         const categoryid = $(targetcategory).data('catid');
         const catname = $(targetcategory).data('catname');
         const catdesc = $(targetcategory).data('catdesc');
-        const catrelated = $(targetcategory).data('related').split(',');
-
-        for( let idx = 0; idx < catrelated.length; ++idx) {
-            console.log(`******** ${catrelated[idx]}`);
-        };
-
+        let catrelated = [];
+        try {
+            catrelated = $(targetcategory).data('related').split(',');
+        }
+        catch(error ) {
+            // Any associated category ?
+            let singleassoc = $(targetcategory).data('related');
+            if(singleassoc.length !== 0) {
+                catrelated[0] = singleassoc;
+            }
+        }
         const payload = {
             'catid': categoryid,
             'single': false
@@ -171,7 +176,7 @@ $(document).ready(function () {
             type: "POST",
             url: '/knives/public/categoryimages',
             dataType: "json",
-            async: true,
+            async: false,
             data: JSON.stringify(payload),
             success: function (response) {
                 switch(zoomstyle) {
@@ -193,7 +198,7 @@ $(document).ready(function () {
                     console.log(`Add ${knifeincard.knifename} with ID ${knifeincard.id} to the card section`);
                     activeknives.push(knifeincard);
                 });
-                if(loadPublishedCatalog(activeknives, categoryid,catname, catdesc)) {
+                if(loadPublishedCatalog(activeknives, categoryid,catname, catdesc, catrelated)) {
                     $(cardsgallery).show().fadeIn(2000);
                 }
                 window.location = '#cardsgallery';
@@ -315,7 +320,7 @@ $(document).ready(function () {
      *          true if the category has been displayed
      */
     function loadPublishedCatalog(allpublished, categoryid,
-            catname, catdesc) {
+            catname, catdesc, catrelated) {
         // -------------------------------------------------------------
         // Track double click or double request
         let displayedcateoryid = parseInt($(cardsgallery).attr('data-catid'));
@@ -333,7 +338,26 @@ $(document).ready(function () {
         $(cardsgallery).append($('<div>').attr('id', 'cardscontainer'));
         $('#cardscontainer').append($('<h2>').text(catname))
         $('#cardscontainer').append($('<p>').text(catdesc))
-
+        // Add in the header the image of any related category
+        let relcatcontainer = $('<div>').attr('id', 'relatedcategories').addClass('related');
+        for( let idx = 0; idx < catrelated.length; ++idx) {
+            /**
+             * Search for associated categories. This association will be ignored if  
+             * the associated category is currently not used by by any knife !!!!!
+            */
+           allcategoriesimage.find( (current, index) => {
+               if(current.catid === parseInt(catrelated[idx])) {
+                   console.log(`************ ${catname} is associated to : ${current.catname} with ${current.catphoto}`);
+                   let relcard = $('<div>').addClass('relatedcard');
+                   $(relcard).append($('<img>').attr('src',  `/images/knife/${current.catphoto}`));
+                   $(relcatcontainer).append(relcard);
+                }    
+            });    
+        };
+        if($(relcatcontainer).children().length > 0)   {
+            $(relcatcontainer).prepend($('<p>').text('Vous aimerez aussi'));
+            $('#cardscontainer').append(relcatcontainer);
+        }      
         allpublished.forEach( knife => {    // Cards loop
             const payload = {
                 "knifeid" :  knife.id,
