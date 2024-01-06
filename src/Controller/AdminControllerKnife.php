@@ -275,6 +275,7 @@ class AdminControllerKnife extends AbstractController
                 foreach($images as $img) {
                     array_push($filenames, $img->getFilename());
                 }
+                array_push($knivesid, $oneknife[0]->getID());
             }
             else {
                 $knives = $repoknife->findBy(['category' => $categoryid ]);

@@ -132,7 +132,10 @@ $(document).ready(function () {
         allcategoriesimage.push({
             'catid': category.catid,
             'catname': category.catname,
-            'catphoto': response.filenames[0]
+            'catdesc': category.catdesc,
+            'catphoto': response.filenames[0],
+            'knifeid': response.knivesid[0],
+            'related': relatedcategories
         });
         $(img).on('click', (event) => {
             event.preventDefault();
@@ -320,7 +323,7 @@ $(document).ready(function () {
      *          true if the category has been displayed
      */
     function loadPublishedCatalog(allpublished, categoryid,
-            catname, catdesc, catrelated) {
+                                    catname, catdesc, catrelated) {
         // -------------------------------------------------------------
         // Track double click or double request
         let displayedcateoryid = parseInt($(cardsgallery).attr('data-catid'));
@@ -350,12 +353,29 @@ $(document).ready(function () {
                    console.log(`************ ${catname} is associated to : ${current.catname} with ${current.catphoto}`);
                    let relcard = $('<div>').addClass('relatedcard');
                    $(relcard).append($('<p>').text(current.catname))
-                            .append($('<img>').attr('src',  `/images/knife/${current.catphoto}`));
+                            .append($('<img>').attr('src',  `/images/knife/${current.catphoto}`))
+                            .attr('data-catname', current.catname)
+                            .attr('data-catdesc', current.catdesc)
+                            .attr('data-catid', current.catid)
+                            .attr('data-knifeid', current.knifeid)
+                            .attr('data-related', current.related);
                    $(relcatcontainer).append(relcard);
                    $(relcard).on('click', (event) => {
-                    event.preventDefault();
-                    console.log(`***** ${event.target.nodeName}`);
-                    return 1;
+                        event.preventDefault();
+                        let target = event.target;
+                        console.log(`***** ${event.target.nodeName}`);
+                        // Check the image or the paragraph have not been clicked
+                        // If so, switch to parent DIV, which holds the data
+                        if((event.target.nodeName === 'P')||
+                                (event.target.nodeName === 'IMG')){
+                            target = $(event.target).parent();
+                        }
+                        $(cardsgallery).fadeOut(800, () => {
+                            $(cardsgallery).empty();
+                            window.location = '#categories';
+                        });
+                        // Now find a simple way to reload the category zoom
+                        zoomCategory(target);
                    })
                 }    
             });    

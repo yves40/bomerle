@@ -1376,7 +1376,7 @@ body {
           margin-bottom: 0;
           height: 40px; }
         #cardsgallery #cardscontainer .related .relatedcard img {
-          border-radius: 20px;
+          border-radius: 50%;
           width: 80%;
           height: auto; }
     #cardsgallery #cardscontainer h2 {
