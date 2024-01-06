@@ -260,10 +260,15 @@ class AdminControllerKnife extends AbstractController
                 in ( SELECT id FROM `knifes` WHERE category_id = 19) LIMIT 1;
         */
         try {
-            /** @var KnifeRepository $repoknife */
+            /** 
+             * @var KnifeRepository $repoknife 
+             * @var CategoryRepository $repocat  
+             * */
             $repoknife = $em->getRepository(Knifes::class);
+            $repocat = $em->getRepository(Category::class);
             $filenames = [];
             $knivesid = [];
+            $relatedcategories = [];
             if($single) {
                 $oneknife = $repoknife->findBy(['category' => $categoryid ], [], 1);
                 $images = $oneknife[0]->getImages();
@@ -281,9 +286,18 @@ class AdminControllerKnife extends AbstractController
                     }
                 }
             }
+            // Get related categories ( 0 to n )
+            $cats = $repocat->findBy(['id' => $categoryid], []);
+            foreach($cats as $onecat) {
+                $rel = $onecat->getRelatedcategories();
+                foreach($rel as $one) {
+                    array_push($relatedcategories, $one->getId());
+                }
+            }
             return $this->json([
                 'message' => 'bootadmin.knives.categoryimages OK',
                 'catid' => $categoryid,
+                'relatedcategories' => $relatedcategories,
                 'single' => $single,
                 'filenames' => $filenames,
                 'knivesid' => $knivesid

@@ -15,7 +15,10 @@ $(document).ready(function () {
     const menuHamburger = $(".menu-hamburger");
     const navLinks = $(".nav-links");
     const infoknife = $('.knife');
+    
     let allcategoriesknives = [];
+    let allcategoriesimage = [];
+
     // Initial state of UI
     $('#globalfullscreen').hide();
     $('#cardzoom').hide();
@@ -102,7 +105,8 @@ $(document).ready(function () {
                 async: true,
                 data: JSON.stringify(payload),
                 success: function (response) {
-                    AddCategory(catzone, response, dedup[idx]);
+                    AddCategory(catzone, response, dedup[idx], 
+                                response.relatedcategories);
                 },
                 error: function (xhr) {
                     console.log(xhr);
@@ -115,14 +119,21 @@ $(document).ready(function () {
      * @param container <div> to be used for loading category cards 
      * @param response json data for the category images
      * @param category The category object
+     * @param relatedcategories Categories tied to this one (0 to n)
      */
-    function AddCategory(container, response, category) {
+    function AddCategory(container, response, category, relatedcategories) {
         const div = $('<div></div>').addClass('catcard');
         const h2 = $('<h2>').text(category.catfullname).addClass('heroh2');
         const img = $('<img>').attr('src', `/images/knife/${response.filenames[0]}`)
                                 .attr('data-catid', category.catid)
                                 .attr('data-catname', category.catname)
-                                .attr('data-catdesc', category.catdesc);
+                                .attr('data-catdesc', category.catdesc)
+                                .attr('data-related', relatedcategories);
+        allcategoriesimage.push({
+            'catid': category.catid,
+            'catname': category.catname,
+            'catphoto': response.filenames[0]
+        });
         $(img).on('click', (event) => {
             event.preventDefault();
             if (categorygalleryactive) {
@@ -146,6 +157,12 @@ $(document).ready(function () {
         const categoryid = $(targetcategory).data('catid');
         const catname = $(targetcategory).data('catname');
         const catdesc = $(targetcategory).data('catdesc');
+        const catrelated = $(targetcategory).data('related').split(',');
+
+        for( let idx = 0; idx < catrelated.length; ++idx) {
+            console.log(`******** ${catrelated[idx]}`);
+        };
+
         const payload = {
             'catid': categoryid,
             'single': false
@@ -164,7 +181,10 @@ $(document).ready(function () {
                                     break;
                 }
                 // --------------------------------------------------------
+                // Get the related categories and display a small link 
+                // in the card section header
                 // Update the card section with deduplicated knives list
+                // images and descriptions
                 const dedupkniveslist = sortedUnique(response.knivesid);
                 console.log(`Now update the card section with these knives ${dedupkniveslist}`);
                 let activeknives = [];
@@ -173,8 +193,7 @@ $(document).ready(function () {
                     console.log(`Add ${knifeincard.knifename} with ID ${knifeincard.id} to the card section`);
                     activeknives.push(knifeincard);
                 });
-                if(loadPublishedCatalog(activeknives, categoryid,
-                                    catname, catdesc)) {
+                if(loadPublishedCatalog(activeknives, categoryid,catname, catdesc)) {
                     $(cardsgallery).show().fadeIn(2000);
                 }
                 window.location = '#cardsgallery';
