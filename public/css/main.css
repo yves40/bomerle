@@ -1351,22 +1351,30 @@ body {
       align-items: center;
       width: 100%;
       max-width: 1024px; }
+      @media screen and (min-width: 1024px) {
+        #cardsgallery #cardscontainer .related {
+          max-width: 1024px; } }
       #cardsgallery #cardscontainer .related p {
         width: 85%;
         margin-bottom: 1rem;
         text-align: center;
         font-weight: 600;
-        color: brown; }
-        @media screen and (min-width: 1024px) {
-          #cardsgallery #cardscontainer .related p {
-            max-width: 1024px; } }
+        color: brown;
+        margin-bottom: 0; }
       #cardsgallery #cardscontainer .related .relatedcard {
         display: flex;
         flex-direction: column;
         width: 25%;
         justify-content: center;
         align-items: center;
-        row-gap: 1rem; }
+        row-gap: 1rem;
+        cursor: pointer; }
+        #cardsgallery #cardscontainer .related .relatedcard p {
+          color: white;
+          font-size: .9rem;
+          font-weight: normal;
+          margin-bottom: 0;
+          height: 40px; }
         #cardsgallery #cardscontainer .related .relatedcard img {
           border-radius: 20px;
           width: 80%;

@@ -349,8 +349,14 @@ $(document).ready(function () {
                if(current.catid === parseInt(catrelated[idx])) {
                    console.log(`************ ${catname} is associated to : ${current.catname} with ${current.catphoto}`);
                    let relcard = $('<div>').addClass('relatedcard');
-                   $(relcard).append($('<img>').attr('src',  `/images/knife/${current.catphoto}`));
+                   $(relcard).append($('<p>').text(current.catname))
+                            .append($('<img>').attr('src',  `/images/knife/${current.catphoto}`));
                    $(relcatcontainer).append(relcard);
+                   $(relcard).on('click', (event) => {
+                    event.preventDefault();
+                    console.log(`***** ${event.target.nodeName}`);
+                    return 1;
+                   })
                 }    
             });    
         };
