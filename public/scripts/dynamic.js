@@ -102,7 +102,7 @@ $(document).ready(function () {
                 type: "POST",
                 url: '/knives/public/categoryimages',
                 dataType: "json",
-                async: true,
+                async: false,
                 data: JSON.stringify(payload),
                 success: function (response) {
                     AddCategory(catzone, response, dedup[idx], 
