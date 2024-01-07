@@ -33,7 +33,8 @@ const $props = ( () => {
   }
   let dynprops = {
     'imageloadcount' :0,
-    'imageavgloadtime' :0
+    'imageavgloadtime' :0,
+    'applang': 'fr'
   }
   return {
     version: () => { return allprops.version; },
@@ -47,6 +48,7 @@ const $props = ( () => {
     knivesimageslocation: () => { return allprops.knivesimageslocation; },
     imageavgloadtime: () => { return dynprops['imageavgloadtime']; },
     imageloadcount: () => { return dynprops['imageloadcount']; },
+    applang: () => { return dynprops['applang']; },
     set: (propertyname, value) => { dynprops[propertyname] = value; },
     get: (propertyname) => { return dynprops[propertyname]; },
     save: () => { sessionStorage.setItem('dynprops', JSON.stringify(dynprops)); },

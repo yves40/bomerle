@@ -26,8 +26,8 @@
             <li id="gallerymenu"><a href="#thegallery">{% trans %}app.public.menu.galerie{% endtrans %}</a></li>
             <li><a href="#contactrequest">{% trans %}app.public.menu.contact{% endtrans %}</a></li>
             <ul>
-              <li><a href="{{ path('public.switchlang', { locale: 'en' }) }}">en |</a></li>
-              <li><a href="{{ path('public.switchlang', { locale: 'fr' }) }}">fr</a></li>
+              <li><a href="{{ path('public.switchlang', { locale: 'en' }) }}" class="langselector" data-lang="en">en |</a></li>
+              <li><a href="{{ path('public.switchlang', { locale: 'fr' }) }}" class="langselector" data-lang="fr">fr</a></li>
             </ul>
         </ul>
       </div>
@@ -121,6 +121,7 @@
 </body>
 <script src="{{ asset('node_modules/jquery/dist/jquery.min.js')}}"></script>
 <script src="{{ asset('scripts/properties.js')}}"></script>
+<script src="{{ asset('scripts/translations/labels.js')}}"></script>
 <script src="{{ asset('scripts/dynamic.js')}}"></script>
 <script src="{{ asset('scripts/classes/slider.js')}}"></script>
 <script src="{{ asset('scripts/classes/gallery.js')}}"></script>

@@ -4,6 +4,7 @@
 $(document).ready(function () {
     $props.load();
     console.log(`[${$props.version()} ]` );
+
     const cardsmenu = $("#cardsmenu");
     const cardsgallery = $('#cardsgallery');
     const gallerymenu = $("#gallerymenu");
@@ -37,6 +38,13 @@ $(document).ready(function () {
     let categorygalleryactive = false;
     let knifeslideractive = false;
 
+    // various handlers
+    $('.langselector').on('click', (event) => {
+        const choice = $(event.target).data('lang');
+        console.log(`Switch lang to ${choice}`);
+        $props.set('applang', choice);
+        $props.save();
+    })
     $(menuHamburger).on('click', function () {
         $(navLinks).toggleClass('mobile-menu');
     });
@@ -382,7 +390,7 @@ $(document).ready(function () {
             });    
         };
         if($(relcatcontainer).children().length > 0)   {
-            $(relcatcontainer).prepend($('<p>').text('Vous aimerez aussi'));
+            $(relcatcontainer).prepend($('<p>').text($labels.get('interested')));
             $('#cardscontainer').append(relcatcontainer);
         }      
         allpublished.forEach( knife => {    // Cards loop
