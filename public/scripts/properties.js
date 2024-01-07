@@ -12,10 +12,11 @@
 //    Feb 23 2023 Work on slider
 //    Jun 05 2023 Work on slider class
 //    Sep 21 2023 WIP on email for contact requests
+//    Jan 07 2024 Some tests 
 //----------------------------------------------------------------------------
 const $props = ( () => {
   const allprops = {
-    version : 'bomerle:1.21, Oct 07 2023 ',
+    version : 'bomerle:1.22, Jan 07 2024 ',
     copyright:  'Ratoon software Corporation Inc, Chabreloche France ',
     imagehandler: 'images.js Feb 13 2023, 1.25 ',
     knifehandler: 'knife.js Feb 08 2023, 1.05 ',
