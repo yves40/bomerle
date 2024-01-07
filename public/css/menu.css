@@ -87,6 +87,9 @@
   height: 80px;
   filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(131deg) brightness(102%) contrast(102%); }
 
+.svg-white {
+  filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(131deg) brightness(102%) contrast(102%); }
+
 * {
   margin: 0;
   padding: 0;

@@ -156,13 +156,13 @@ class Slider {
     $(galleryzone).append(slidetext);
     const ul = $('<ul></ul>').attr('id', this.sliderarea).addClass('sliderarea');
     const prev = $("<a></a>").addClass('carousel-button prev');
-    const previmage = $("<img>").attr('src', "/images/svg/arrow-back.svg").addClass("svgbig-white");
+    const previmage = $("<img>").attr('src', "/images/svg/arrow-back.svg").addClass("svg-white");
     $(prev).append(previmage);
     const next = $("<a></a>").addClass('carousel-button next');
-    const nextimage = $("<img>").attr('src', "/images/svg/arrow-forward.svg").addClass("svgbig-white");
+    const nextimage = $("<img>").attr('src', "/images/svg/arrow-forward.svg").addClass("svg-white");
     $(next).append(nextimage);
-    $(sliderzone).append(prev);
-    $(sliderzone).append(next);
+    $(ul).append(prev);
+    $(ul).append(next);
     $(sliderzone).append(ul);
     $(galleryzone).append(sliderzone);
     $(container).append(galleryzone);
@@ -183,7 +183,7 @@ class Slider {
       if (i == 0) $(buttonindic).addClass('active');
       $(indicators).append(buttonindic);
     }
-    $(sliderzone).append(indicators);
+    $(slides).append(indicators);
     // Add images
     const splitter = this.sliderarea.split('-');
     const imageroot= splitter[0] + splitter[1];
