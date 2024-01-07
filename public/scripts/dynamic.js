@@ -352,16 +352,19 @@ $(document).ready(function () {
                if(current.catid === parseInt(catrelated[idx])) {
                    console.log(`************ ${catname} is associated to : ${current.catname} with ${current.catphoto}`);
                    let relcard = $('<div>').addClass('relatedcard');
+                   // Data attributes on the container, to be used by zoomCaegory()
                    $(relcard).append($('<p>').text(current.catname))
-                            .append($('<img>').attr('src',  `/images/knife/${current.catphoto}`))
+                            .append($('<img>').attr('src',  `/images/knife/${current.catphoto}`)
+                                        .attr('data-knifeid', current.knifeid))
                             .attr('data-catname', current.catname)
                             .attr('data-catdesc', current.catdesc)
-                            .attr('data-catid', current.catid)
                             .attr('data-knifeid', current.knifeid)
+                            .attr('data-catid', current.catid)
+                            
                             .attr('data-related', current.related);
                    $(relcatcontainer).append(relcard);
-                   $(relcard).on('click', (event) => {
-                        event.preventDefault();
+                   $(relcard).on('mousedown', (event) => {
+                        event.stopImmediatePropagation();
                         let target = event.target;
                         console.log(`***** ${event.target.nodeName}`);
                         // Check the image or the paragraph have not been clicked
@@ -371,11 +374,9 @@ $(document).ready(function () {
                             target = $(event.target).parent();
                         }
                         $(cardsgallery).fadeOut(800, () => {
-                            $(cardsgallery).empty();
-                            window.location = '#categories';
+                            // Now reload the category zoom
+                            zoomCategory(target);
                         });
-                        // Now find a simple way to reload the category zoom
-                        zoomCategory(target);
                    })
                 }    
             });    

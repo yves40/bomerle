@@ -227,16 +227,15 @@ body {
       justify-content: center; 
       align-items: center;
       width: 100%;
+      color: white;
       @include for-desktop {
           max-width: $responsive-max-width;
       }  
       p {
         width: 85%;
-        margin-bottom: 1rem;
         text-align: center;
         font-weight: 600;
-        color: brown;
-        margin-bottom: 0;
+        margin: 1rem 0 0 0;
       }
       max-width: $responsive-max-width;
       .relatedcard {
@@ -245,13 +244,10 @@ body {
         width: 25%;
         justify-content: center;
         align-items: center;
-        row-gap: 1rem;    
         cursor: pointer;   
         p {
-          color: white;
           font-size: .9rem;
           font-weight: normal;
-          margin-bottom: 0;
           height: 40px;
         } 
         img {

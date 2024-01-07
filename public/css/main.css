@@ -1029,11 +1029,12 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      row-gap: 1rem;
-      width: 45%; }
+      row-gap: .5rem;
+      width: 45%;
+      margin-bottom: 2rem; }
       @media screen and (min-width: 1024px) {
         #categories .catzone .catcard {
-          margin-bottom: 2rem;
+          margin-bottom: 3rem;
           width: 32%; } }
   #categories img {
     width: 90%;
@@ -1350,30 +1351,26 @@ body {
       justify-content: center;
       align-items: center;
       width: 100%;
+      color: white;
       max-width: 1024px; }
       @media screen and (min-width: 1024px) {
         #cardsgallery #cardscontainer .related {
           max-width: 1024px; } }
       #cardsgallery #cardscontainer .related p {
         width: 85%;
-        margin-bottom: 1rem;
         text-align: center;
         font-weight: 600;
-        color: brown;
-        margin-bottom: 0; }
+        margin: 1rem 0 0 0; }
       #cardsgallery #cardscontainer .related .relatedcard {
         display: flex;
         flex-direction: column;
         width: 25%;
         justify-content: center;
         align-items: center;
-        row-gap: 1rem;
         cursor: pointer; }
         #cardsgallery #cardscontainer .related .relatedcard p {
-          color: white;
           font-size: .9rem;
           font-weight: normal;
-          margin-bottom: 0;
           height: 40px; }
         #cardsgallery #cardscontainer .related .relatedcard img {
           border-radius: 50%;
