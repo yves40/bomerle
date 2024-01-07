@@ -262,9 +262,6 @@
     margin-left: 15%;
     margin-bottom: 4rem;
     list-style: none; }
-    @media screen and (min-width: 1024px) {
-      .carousel .carousel-indicators {
-        bottom: 10%; } }
     .carousel .carousel-indicators-button {
       opacity: .6;
       width: 30px;
@@ -296,7 +293,7 @@
       max-height: 100%;
       height: auto;
       width: auto;
-      object-fit: contain;
+      object-fit: cover;
       object-position: center;
       border-radius: 20px; }
 

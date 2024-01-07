@@ -559,9 +559,6 @@
     margin-left: 15%;
     margin-bottom: 4rem;
     list-style: none; }
-    @media screen and (min-width: 1024px) {
-      .carousel .carousel-indicators {
-        bottom: 10%; } }
     .carousel .carousel-indicators-button {
       opacity: .6;
       width: 30px;
@@ -593,7 +590,7 @@
       max-height: 100%;
       height: auto;
       width: auto;
-      object-fit: contain;
+      object-fit: cover;
       object-position: center;
       border-radius: 20px; }
 
@@ -1392,11 +1389,11 @@ body {
         width: 85%;
         text-align: center;
         font-weight: 600;
-        margin: 1rem 0 0 0; }
+        margin: .5rem 0 .5rem 0; }
       #cardsgallery #cardscontainer .related .relatedcard {
         display: flex;
         flex-direction: column;
-        width: 25%;
+        width: 30%;
         justify-content: center;
         align-items: center;
         cursor: pointer; }
@@ -1406,7 +1403,7 @@ body {
           height: 40px; }
         #cardsgallery #cardscontainer .related .relatedcard img {
           border-radius: 50%;
-          width: 80%;
+          width: 40%;
           height: auto; }
     #cardsgallery #cardscontainer h2 {
       margin: 2rem 0 2rem 0;
