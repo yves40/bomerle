@@ -13,6 +13,7 @@
     Oct 14 2023     Indicators to the slider frame.
     Oct 15 2023     Indicators to the slider frame..
     Dec 20 2023     Fix timer problem
+    Jan 07 2024     New DOM structure
 
     ----------------------------------------------------------------------------*/
 class Slider {
@@ -23,7 +24,7 @@ class Slider {
   // Two accepted values : SHOW (the default) and KNIFE
   constructor(container, timing = 2, description = '', allimages, slidertype = 'SHOW') {
     // Init
-      this.version = 'Slider:1.50, Dec 20 2023 ';
+      this.version = 'Slider:1.51, Jan 07 2024 ';
       this.container = container;
       this.containername = $(container).attr('name');
       this.slideinterval = timing * 1000;
@@ -53,12 +54,11 @@ class Slider {
       this.buildSliderFrame(container);
       this.addImages(allimages);
       // Arm handlers
-      $(`#${this.homezone} > .carousel-button`).children().on('click', (event) => {
+      $(`#${this.sliderarea} > .carousel-button`).children().on('click', (event) => {
         event.stopPropagation();
         this.manageActiveSlide(event);
       })
-      const indicators = $(`#${this.homezone} > .carousel-indicators`);
-      $(indicators).children().on('click', (event) => {
+      $(`#${this.sliderarea} > .carousel-indicators`).children().on('click', (event) => {
         event.stopPropagation();
         this.manageActiveIndicator(event);
       });
@@ -128,7 +128,7 @@ class Slider {
   }
   // ------------------------------------------------------------------------------------------------
   updateActiveButton() {
-    const indicatorslist = $(`#${this.homezone} > .carousel-indicators`).children();
+    const indicatorslist = $(`#${this.sliderarea} > .carousel-indicators`).children();
     for(let i = 0; i < indicatorslist.length; ++i){
       $(indicatorslist[i]).removeClass('active');
     };
