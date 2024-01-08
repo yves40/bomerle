@@ -7,17 +7,18 @@ use Exception;
 use App\Entity\Handle;
 use App\Entity\Metals;
 use App\Entity\Category;
-use App\Entity\Mechanism;
-use App\Entity\Accessories;
-
-use App\Form\MechanismType;
 use App\Form\HandleType;
-use App\Form\CategoryType;
 use App\Form\MetalsType;
+
+use App\Entity\Mechanism;
+use App\Form\CategoryType;
+use App\Services\Uploader;
+use App\Entity\Accessories;
+use App\Form\MechanismType;
+
 use App\Form\AccessoriesType;
 
 use App\Services\FileHandler;
-
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -388,6 +389,7 @@ class AdminController extends AbstractController
                                 $new,
                                 $id,
                                 $knifeconflict,
+                                Uploader $uploader,
                                 EntityManagerInterface $entityManager,
                                 TranslatorInterface $translator
                             ): Response
@@ -411,6 +413,11 @@ class AdminController extends AbstractController
         else {
             $form->handleRequest($request);
             if($form->isSubmitted() && $form->isValid()){
+                // Take care of image
+                $uploaded = $form->get('image')->getData();
+                $physicalPath = $this->getParameter('categoryimages_directory');
+                $newFileName = $uploader->uploadFile($uploaded, $physicalPath);
+                $category->setImage($newFileName);
                 $entityManager->persist($category);
                 $entityManager->flush();
                 $categories = $repo->listCategories();
@@ -435,6 +442,7 @@ class AdminController extends AbstractController
     #[Route('/categories/delete/{id}', name: 'bootadmin.categories.delete')]
     public function DeleteCategory(Request $request,
                                 int $id,
+                                Uploader $uploader,
                                 EntityManagerInterface $entityManager,
                                 TranslatorInterface $translator
                             ): Response
@@ -454,6 +462,10 @@ class AdminController extends AbstractController
                                                                         'id' => $category->getId(),
                                                                         'knifeconflict' => $conflicts[0]['id']));
         }
+        if($category->getImage() !== '') {
+            $physicalPath = $this->getParameter('categoryimages_directory');
+            $uploader->deleteFile($physicalPath.'/'.$category->getImage());
+        }
         $repo->remove($category, true);
         $this->addFlash('success', $translator->trans('admin.managecategories.deleted'));        
         return $this->redirectToRoute('bootadmin.categories', array(  'new' => "true" ));    }
@@ -461,6 +473,7 @@ class AdminController extends AbstractController
     #[Route('/categories/update/{id}', name: 'bootadmin.categories.update')]
     public function UpdateCategory(Request $request,
                                 int $id,
+                                Uploader $uploader,
                                 EntityManagerInterface $entityManager,
                                 TranslatorInterface $translator
                             ): Response
@@ -471,6 +484,17 @@ class AdminController extends AbstractController
         $form = $this->createForm(CategoryType::class, $category);
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()){
+            // Take care of image
+            $physicalPath = $this->getParameter('categoryimages_directory');
+            // 1st, if already set delete the previous file
+            if($category->getImage() !== '') {
+                $uploader->deleteFile($physicalPath.'/'.$category->getImage());
+            }
+            $uploaded = $form->get('image')->getData();
+            $newFileName = $uploader->uploadFile($uploaded, $physicalPath);
+            $category->setImage($newFileName);
+
+            
             $entityManager->persist($category);
             $entityManager->flush();
             $this->addFlash('success', $translator->trans('admin.managecategories.updated'));

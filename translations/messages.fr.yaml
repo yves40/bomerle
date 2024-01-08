@@ -118,6 +118,9 @@ admin:
     helpfullname: Description synthétique
     description: Description
     related: Liée avec
+    helprelated: Catégories qui peuvent aussi intéresser
+    image: Image associée
+    helpimage: Qui sera affichée avec cette catégorie
     helpdescription: Description complète
     isused: Cette catégorie est utilisée par au moins un couteau
     created: Catégorie ajoutée

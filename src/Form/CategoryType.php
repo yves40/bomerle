@@ -8,7 +8,9 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Validator\Constraints as Assert;
 
 class CategoryType extends AbstractType
 {
@@ -17,7 +19,6 @@ class CategoryType extends AbstractType
         $builder
             ->add('name')
             ->add('fullname')
-            ->add('image')
             ->add('description', TextareaType::class,
             ['attr' => ["rows" => 10 ]])
             ->add('relatedcategories', EntityType::class, [
@@ -27,8 +28,26 @@ class CategoryType extends AbstractType
                 'class' => Category::class,
                 'query_builder' => function(EntityRepository $er) {
                     return $er->createQueryBuilder('a')
-                              ->orderBy('a.name', 'ASC');
+                    ->orderBy('a.name', 'ASC');
                 }
+                ])
+            ->add('image', FileType::class, [
+                'mapped' => false,
+                'required' => true,
+                'multiple' => false,
+                'constraints' => [
+                    new Assert\File([
+                        'maxSize' => '8M',
+                        'maxSizeMessage' => 'file.upload.sizemax',
+                        'mimeTypes' => [
+                            'image/jpeg',
+                            'image/jpg',
+                            'image/png',
+                            'image/gif'
+                        ],
+                        'mimeTypesMessage' => 'file.upload.type',
+                        ])
+                ]
             ])
         ;
     }

@@ -66,7 +66,7 @@
             </div>    
         </div>
         <div class="row align-items-start">
-            <div class="col ylabel">
+            <div class="col-5 ylabel">
                     {{
                         form_row(form.description, { 'label' : 'admin.managecategories.description'|trans,
                             'value': categorydescription,
@@ -74,13 +74,20 @@
                         }) 
                     }}
             </div>
-            <div class="col">
+            <div class="col-3 ylabel">
                 {{
                     form_row(form.relatedcategories, { 'label' : 'admin.managecategories.related'|trans,
                         'value': relatedcategories,
+                        'help': 'admin.managecategories.helprelated'|trans
                     }) 
                 }}
-        </div>
+            </div>
+            <div class="col-4 ylabel">
+                {{
+                    form_row(form.image, {'label' : 'admin.managecategories.image'|trans,
+                                        'help': 'admin.managecategories.helpimage'|trans,})
+                }}
+            </div>
         </div>
     {{ form_end(form) }}
     {# List existing metals #}

@@ -119,6 +119,9 @@ admin:
     helpfullname: Just a short description
     description: Description
     related: Similar to
+    helprelated: Categories that may also interest
+    image: Associated image
+    helpimage: Displayed with this category
     helpdescription: Full description
     isused: This Category is used by at least one knife
     created: Category added
