@@ -9,6 +9,8 @@
 /public/css/
 /public/node_modules/
 /public/images/slideshow
+/public/images/knife
+/public/images/category
 /var/
 /vendor/
 ###< symfony/framework-bundle ###
