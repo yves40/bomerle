@@ -17,6 +17,7 @@ class CategoryType extends AbstractType
         $builder
             ->add('name')
             ->add('fullname')
+            ->add('image')
             ->add('description', TextareaType::class,
             ['attr' => ["rows" => 10 ]])
             ->add('relatedcategories', EntityType::class, [

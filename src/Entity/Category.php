@@ -34,6 +34,9 @@ class Category
     #[ORM\ManyToMany(targetEntity: self::class, fetch: "EAGER")]
     private Collection $relatedcategories;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $image = null;
+
     public function __construct()
     {
         $this->knifes = new ArrayCollection();
@@ -136,6 +139,18 @@ class Category
     public function removeRelatedcategory(self $relatedcategory): static
     {
         $this->relatedcategories->removeElement($relatedcategory);
+
+        return $this;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(?string $image): static
+    {
+        $this->image = $image;
 
         return $this;
     }
