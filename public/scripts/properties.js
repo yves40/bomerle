@@ -32,6 +32,8 @@ const $props = ( () => {
     categoryimages_directory: '/images/category',
     gif_directory: '/images/gif',
     svg_directory: '/images/svg',
+    // Default category image when none has been set
+    defaultcategoryimage: 'BastosBG3.webp',
 
     logspagesize: 20,
     logspagedateoffset: 31,
@@ -60,6 +62,7 @@ const $props = ( () => {
     svgimageslocation: () => { return allprops.svg_directory; },
     gifimageslocation: () => { return allprops.gif_directory; },
     rootimageslocation: () => { return allprops.rootimages; },
+    defaultcategoryimage: () => { return allprops.defaultcategoryimage; },
 
     imageavgloadtime: () => { return dynprops['imageavgloadtime']; },    
     imageloadcount: () => { return dynprops['imageloadcount']; },

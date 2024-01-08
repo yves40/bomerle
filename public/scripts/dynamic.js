@@ -138,17 +138,17 @@ $(document).ready(function () {
                 .attr('data-related', response.relatedcategories);
         // Check the category has an associated image, otherwise get a default
         if(response.catimage === null) {
-            response.catimage = `/BastosBG3.webp`;
-            $(img).attr('src',`${$props.rootimageslocation()}/${response.catimage}`)
+            response.catimage = `${$props.rootimageslocation()}/${$props.defaultcategoryimage()}`;
         }
         else {
-            $(img).attr('src',`${$props.categoryimageslocation()}/${response.catimage}`)
+            response.catimage = `${$props.categoryimageslocation()}/${response.catimage}`;
         }
+        $(img).attr('src',`${response.catimage}`);
         allcategoriesimage.push({
             'catid': category.catid,
             'catname': category.catname,
             'catdesc': category.catdesc,
-            'catphoto': response.catimage,
+            'catphotopath': response.catimage,
             'knifeid': response.knivesid[0],
             'related': response.relatedcategories
         });
@@ -365,12 +365,12 @@ $(document).ready(function () {
             */
            allcategoriesimage.find( (current, index) => {
                if(current.catid === parseInt(catrelated[idx])) {
-                   console.log(`************ ${catname} is associated to : ${current.catname} with ${current.catphoto}`);
+                   console.log(`************ ${catname} is associated to : ${current.catname} with ${current.catphotopath}`);
                    let relcard = $('<div>').addClass('relatedcard');
                    // Data attributes on the container, to be used by zoomCaegory()
                    $(relcard).append($('<p>').text(current.catname))
                             .append($('<img>')
-                                    .attr('src',  `${$props.categoryimageslocation()}/${current.catphoto}`)
+                                    .attr('src',  `${current.catphotopath}`)
                                     .attr('data-knifeid', current.knifeid))
                             .attr('data-catname', current.catname)
                             .attr('data-catdesc', current.catdesc)
