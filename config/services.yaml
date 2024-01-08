@@ -6,6 +6,7 @@
 parameters:
     knifeimages_directory: '%kernel.project_dir%/public/images/knife'
     slideshowimages_directory: '%kernel.project_dir%/public/images/slideshow'
+    categoryimages_directory: '%kernel.project_dir%/public/images/category'
 
 services:
     App\Events\LogoutHandler:
