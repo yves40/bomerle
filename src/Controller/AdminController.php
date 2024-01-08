@@ -416,8 +416,10 @@ class AdminController extends AbstractController
                 // Take care of image
                 $uploaded = $form->get('image')->getData();
                 $physicalPath = $this->getParameter('categoryimages_directory');
-                $newFileName = $uploader->uploadFile($uploaded, $physicalPath);
-                $category->setImage($newFileName);
+                if($uploaded !== null) {
+                    $newFileName = $uploader->uploadFile($uploaded, $physicalPath);
+                    $category->setImage($newFileName);
+                }
                 $entityManager->persist($category);
                 $entityManager->flush();
                 $categories = $repo->listCategories();
@@ -491,10 +493,10 @@ class AdminController extends AbstractController
                 $uploader->deleteFile($physicalPath.'/'.$category->getImage());
             }
             $uploaded = $form->get('image')->getData();
-            $newFileName = $uploader->uploadFile($uploaded, $physicalPath);
-            $category->setImage($newFileName);
-
-            
+            if($uploaded !== null) {
+                $newFileName = $uploader->uploadFile($uploaded, $physicalPath);
+                $category->setImage($newFileName);
+            }
             $entityManager->persist($category);
             $entityManager->flush();
             $this->addFlash('success', $translator->trans('admin.managecategories.updated'));
