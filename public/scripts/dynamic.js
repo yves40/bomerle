@@ -148,7 +148,7 @@ $(document).ready(function () {
             'catid': category.catid,
             'catname': category.catname,
             'catdesc': category.catdesc,
-            'catphoto': response.filenames[0],
+            'catphoto': response.catimage,
             'knifeid': response.knivesid[0],
             'related': response.relatedcategories
         });
@@ -369,8 +369,9 @@ $(document).ready(function () {
                    let relcard = $('<div>').addClass('relatedcard');
                    // Data attributes on the container, to be used by zoomCaegory()
                    $(relcard).append($('<p>').text(current.catname))
-                            .append($('<img>').attr('src',  `${$props.knifeimageslocation()}/${current.catphoto}`)
-                                        .attr('data-knifeid', current.knifeid))
+                            .append($('<img>')
+                                    .attr('src',  `${$props.categoryimageslocation()}/${current.catphoto}`)
+                                    .attr('data-knifeid', current.knifeid))
                             .attr('data-catname', current.catname)
                             .attr('data-catdesc', current.catdesc)
                             .attr('data-knifeid', current.knifeid)
