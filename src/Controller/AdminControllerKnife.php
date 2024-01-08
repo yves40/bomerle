@@ -295,9 +295,11 @@ class AdminControllerKnife extends AbstractController
                     array_push($relatedcategories, $one->getId());
                 }
             }
+            $thecategory = $repocat->findOneBy(['id' => $categoryid ]);
             return $this->json([
                 'message' => 'bootadmin.knives.categoryimages OK',
                 'catid' => $categoryid,
+                'catimage' => $thecategory->getImage(),
                 'relatedcategories' => $relatedcategories,
                 'single' => $single,
                 'filenames' => $filenames,

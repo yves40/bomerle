@@ -113,8 +113,7 @@ $(document).ready(function () {
                 async: false,
                 data: JSON.stringify(payload),
                 success: function (response) {
-                    AddCategory(catzone, response, dedup[idx], 
-                                response.relatedcategories);
+                    AddCategory(catzone, response, dedup[idx]);
                 },
                 error: function (xhr) {
                     console.log(xhr);
@@ -127,23 +126,31 @@ $(document).ready(function () {
      * @param container <div> to be used for loading category cards 
      * @param response json data for the category images
      * @param category The category object
-     * @param relatedcategories Categories tied to this one (0 to n)
      */
-    function AddCategory(container, response, category, relatedcategories) {
+    function AddCategory(container, response, category) {
         const div = $('<div></div>').addClass('catcard');
         const h2 = $('<h2>').text(category.catfullname).addClass('heroh2');
-        const img = $('<img>').attr('src', `${$props.knifeimageslocation()}/${response.filenames[0]}`)
-                                .attr('data-catid', category.catid)
-                                .attr('data-catname', category.catname)
-                                .attr('data-catdesc', category.catdesc)
-                                .attr('data-related', relatedcategories);
+
+        const img = $('<img>')
+                .attr('data-catid', category.catid)
+                .attr('data-catname', category.catname)
+                .attr('data-catdesc', category.catdesc)
+                .attr('data-related', response.relatedcategories);
+        // Check the category has an associated image, otherwise get a default
+        if(response.catimage === null) {
+            response.catimage = `/BastosBG3.webp`;
+            $(img).attr('src',`${$props.rootimageslocation()}/${response.catimage}`)
+        }
+        else {
+            $(img).attr('src',`${$props.categoryimageslocation()}/${response.catimage}`)
+        }
         allcategoriesimage.push({
             'catid': category.catid,
             'catname': category.catname,
             'catdesc': category.catdesc,
             'catphoto': response.filenames[0],
             'knifeid': response.knivesid[0],
-            'related': relatedcategories
+            'related': response.relatedcategories
         });
         $(img).on('click', (event) => {
             event.preventDefault();
