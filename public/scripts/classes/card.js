@@ -19,7 +19,7 @@
         const cardimage = $("<div></div>").addClass('cardframe__image');
         const cardtitle = $("<div></div>").addClass('cardframe__title').html(this.data.knifeName);
         const cardtext = $("<p>").addClass('cardframe__text').html(this.data.knifedesc);
-        const img = $("<img>").attr('src', `/images/knife/${this.data.images[0]}`);
+        const img = $("<img>").attr('src', `${$props.knifeimageslocation()}/${this.data.images[0]}`);
         $(cardimage).append(img);
         $(container).append(cardtitle);
         $(container).append(cardimage);

@@ -148,7 +148,7 @@ $(document).ready(function () {
             $(mailcol).text(element.useremail);
             $(actioncol).text(element.action);
             let image = $('<img>').addClass('svgsmall-lightblue')
-                .attr('src', '/images/svg/magnifying-glass-solid.svg' );
+                .attr('src', $props.svgimageslocation() + '/magnifying-glass-solid.svg' );
             $(zoomcol).append(image);
             $(zoomcol).click(function (e) { e.preventDefault(); zoomMessage(this); });
             $(row1).append(datecol).append(severitycol).append(mailcol)

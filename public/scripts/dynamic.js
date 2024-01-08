@@ -132,7 +132,7 @@ $(document).ready(function () {
     function AddCategory(container, response, category, relatedcategories) {
         const div = $('<div></div>').addClass('catcard');
         const h2 = $('<h2>').text(category.catfullname).addClass('heroh2');
-        const img = $('<img>').attr('src', `/images/knife/${response.filenames[0]}`)
+        const img = $('<img>').attr('src', `${$props.knifeimageslocation()}/${response.filenames[0]}`)
                                 .attr('data-catid', category.catid)
                                 .attr('data-catname', category.catname)
                                 .attr('data-catdesc', category.catdesc)
@@ -249,7 +249,7 @@ $(document).ready(function () {
         const container = $('<div>').attr('id', 'gallerycontainer');
         const h2 = $('<h2>').text($(targetcategory).data('catname'))
                             .addClass('heroh2');
-        const close = $('<img>').attr('src','/images/svg/close-outline.svg')
+        const close = $('<img>').attr('src',$props.svgimageslocation()+'/close-outline.svg')
                                 .addClass('svglarge-white')
                                 .css({ 'margin-bottom' : '2rem',
                                         'margin-top' : 0,
@@ -362,7 +362,7 @@ $(document).ready(function () {
                    let relcard = $('<div>').addClass('relatedcard');
                    // Data attributes on the container, to be used by zoomCaegory()
                    $(relcard).append($('<p>').text(current.catname))
-                            .append($('<img>').attr('src',  `/images/knife/${current.catphoto}`)
+                            .append($('<img>').attr('src',  `${$props.knifeimageslocation()}/${current.catphoto}`)
                                         .attr('data-knifeid', current.knifeid))
                             .attr('data-catname', current.catname)
                             .attr('data-catdesc', current.catdesc)

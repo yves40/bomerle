@@ -13,10 +13,11 @@
 //    Jun 05 2023 Work on slider class
 //    Sep 21 2023 WIP on email for contact requests
 //    Jan 07 2024 Some tests 
+//    Jan 08 2024 Some tests 
 //----------------------------------------------------------------------------
 const $props = ( () => {
   const allprops = {
-    version : 'bomerle:1.22, Jan 07 2024 ',
+    version : 'bomerle:1.23, Jan 08 2024 ',
     copyright:  'Ratoon software Corporation Inc, Chabreloche France ',
     imagehandler: 'images.js Feb 13 2023, 1.25 ',
     knifehandler: 'knife.js Feb 08 2023, 1.05 ',
@@ -24,7 +25,11 @@ const $props = ( () => {
     sliderhandler: 'slider.js Feb 24 2023, 1.06 ',
     sliderclass: 'slider Class.js Jun 05 2023, 1.00 ',
     logshandler: 'logs.js Mar 26 2023, 1.08 ',
-    knivesimageslocation: '%kernel.project_dir%/public/images/knife',
+    knifeimages_directory: '/images/knife',
+    slideshowimages_directory: '/images/slideshow',
+    categoryimages_directory: '/images/category',
+    gif_directory: '/images/gif',
+    svg_directory: '/images/svg',
     logspagesize: 20,
     logspagedateoffset: 31,
     slidingtime: 300,
@@ -45,7 +50,11 @@ const $props = ( () => {
     sliderhandler: () => { return allprops.sliderhandler; },
     sliderclass: () => { return allprops.sliderclass; },
     logshandler: () => { return allprops.logshandler; },
-    knivesimageslocation: () => { return allprops.knivesimageslocation; },
+    knifeimageslocation: () => { return allprops.knifeimages_directory; },
+    slideimageslocation: () => { return allprops.slideshowimages_directory; },
+    categoryimageslocation: () => { return allprops.categoryimages_directory; },
+    svgimageslocation: () => { return allprops.svg_directory; },
+    gifimageslocation: () => { return allprops.gif_directory; },
     imageavgloadtime: () => { return dynprops['imageavgloadtime']; },
     imageloadcount: () => { return dynprops['imageloadcount']; },
     applang: () => { return dynprops['applang']; },

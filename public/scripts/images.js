@@ -16,7 +16,7 @@ $(document).ready(function () {
         let filename = url.replace(/^.*[\\\/]/, '');
         // let elemwidth = element.width;
         // let elemheight = element.height;
-        element.src = "/images/gif/loading.gif";
+        element.src = $props.gifimageslocation()+"/loading.gif";
         // $(element).height("20px").width("20px").attr( { 'object-fit': 'cover', 'object-position': 'center'} );
         $(element).on("load", () => {    // End of the wait gif load
             $(element).off("load");      // Removes event handlers that were attached with .on()

@@ -317,13 +317,13 @@ function swapImages(movingimageid, relatedimageid) {
     let imgshowid2 = $(relatedimg).attr('data-imageshowid');
     let imgrank2 = $(relatedimg).attr('data-imagerank');
 
-    $(movingimg).attr('src', '/images/slideshow/' + imgfile2);
+    $(movingimg).attr('src', $props.slideimageslocation() + imgfile2);
     $(movingimg).attr('data-imageid', imgid2);
     $(movingimg).attr('data-imagefile', imgfile2);
     $(movingimg).attr('data-imageshowid', imgshowid2);
     $(movingimg).attr('data-imagerank', imgrank2);
     
-    $(relatedimg).attr('src', '/images/slideshow/' + imgfile1);
+    $(relatedimg).attr('src', $props.slideimageslocation() + imgfile1);
     $(relatedimg).attr('data-imageid', imgid1);
     $(relatedimg).attr('data-imagefile', imgfile1);
     $(relatedimg).attr('data-imageshowid', imgshowid1);

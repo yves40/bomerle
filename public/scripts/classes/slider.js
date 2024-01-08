@@ -24,7 +24,7 @@ class Slider {
   // Two accepted values : SHOW (the default) and KNIFE
   constructor(container, timing = 2, description = '', allimages, slidertype = 'SHOW') {
     // Init
-      this.version = 'Slider:1.51, Jan 07 2024 ';
+      this.version = 'Slider:1.52, Jan 08 2024 ';
       this.container = container;
       this.containername = $(container).attr('name');
       this.slideinterval = timing * 1000;
@@ -44,11 +44,11 @@ class Slider {
 
       // Manage the web path used to load images, depending on slidertype
       switch (this.slidertype) {
-        case 'SHOW':  this.imagespath = "/images/slideshow/";
+        case 'SHOW':  this.imagespath = $props.slideimageslocation() +  "/";
                       break;
-        case 'KNIFE': this.imagespath = "/images/knife/";
+        case 'KNIFE': this.imagespath = $props.knifeimageslocation() + "/";
                       break;
-        default:      this.imagespath = "/images/slideshow/";
+        default:      this.imagespath = $props.slideimageslocation() +  "/";
                       break;
       }
       this.buildSliderFrame(container);
@@ -156,10 +156,10 @@ class Slider {
     $(galleryzone).append(slidetext);
     const ul = $('<ul></ul>').attr('id', this.sliderarea).addClass('sliderarea');
     const prev = $("<a></a>").addClass('carousel-button prev');
-    const previmage = $("<img>").attr('src', "/images/svg/arrow-back.svg").addClass("svg-white");
+    const previmage = $("<img>").attr('src', `${$props.svgimageslocation()}/arrow-back.svg`).addClass("svg-white");
     $(prev).append(previmage);
     const next = $("<a></a>").addClass('carousel-button next');
-    const nextimage = $("<img>").attr('src', "/images/svg/arrow-forward.svg").addClass("svg-white");
+    const nextimage = $("<img>").attr('src',  `${$props.svgimageslocation()}/arrow-forward.svg`).addClass("svg-white");
     $(next).append(nextimage);
     $(ul).append(prev);
     $(ul).append(next);

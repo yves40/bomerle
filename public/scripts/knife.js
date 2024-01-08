@@ -213,13 +213,13 @@ function swapImages(movingimageid, relatedimageid) {
     let imgknifeid2 = $(relatedimg).attr('data-imageknifeid');
     let imgrank2 = $(relatedimg).attr('data-imagerank');
 
-    $(movingimg).attr('src', '/images/knife/' + imgfile2);
+    $(movingimg).attr('src', $props.knifeimageslocation() + imgfile2);
     $(movingimg).attr('data-imageid', imgid2);
     $(movingimg).attr('data-imagefile', imgfile2);
     $(movingimg).attr('data-imageknifeid', imgknifeid2);
     $(movingimg).attr('data-imagerank', imgrank2);
     
-    $(relatedimg).attr('src', '/images/knife/' + imgfile1);
+    $(relatedimg).attr('src', $props.knifeimageslocation() + imgfile1);
     $(relatedimg).attr('data-imageid', imgid1);
     $(relatedimg).attr('data-imagefile', imgfile1);
     $(relatedimg).attr('data-imageknifeid', imgknifeid1);
@@ -319,7 +319,7 @@ function buildCard(imgcard, index, lastimageindex) {
         command.className = "mt-4";
         // The image
         let img = document.createElement("img");
-        img.src = '/images/knife/' + imgcard.file;
+        img.src = $props.knifeimageslocation() + imgcard.file;
         img.className = "imagesmall";
         img.setAttribute('data-imageid', imgcard.imageid);
         img.setAttribute('data-imagefile', imgcard.file);

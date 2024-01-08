@@ -54,10 +54,10 @@ class Gallery {
         for(let i = 0; i < allimages.length; ++i) {
           let newimg;
           if(imagetype === 'SLIDESHOW') {
-            newimg = $('<img>').attr('src', "/images/slideshow/"+allimages[i]);
+            newimg = $('<img>').attr('src', $props.slideimageslocation()+"/"+allimages[i]);
           }
           else {
-            newimg = $('<img>').attr('src', "/images/knife/"+allimages[i]);
+            newimg = $('<img>').attr('src', $props.knifeimageslocation()+"/"+allimages[i]);
           }
           if(associatedknivesids) { // In some cases it's usefull to store the associated 
                                     // Knifeid. When clicking on the image, we can get all 
@@ -85,7 +85,7 @@ class Gallery {
     $("body").css("overflow", "hidden");
     // Position the zoom 
     const top = window.scrollY;
-    $("#globalfullscreen").css("background-image", "url(/images/slideshow/" + imagesrc + ")");
+    $("#globalfullscreen").css("background-image", `url(${$props.slideimageslocation()}/${imagesrc})`);
     $("#globalfullscreen").css({'top': top, 'left': 0, 'z-index': 1000});
     $("#globalfullscreen").addClass("zoomon").removeClass('zoomoff').show();
     // Hide a few things
