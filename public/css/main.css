@@ -341,12 +341,12 @@
         width: 60%;
         max-width: 1024px; } }
   .cards .cardframe {
-    width: 90%;
+    width: 100%;
     height: auto;
-    padding: .5rem;
     transition: all .8s ease-in; }
     @media screen and (min-width: 1024px) {
       .cards .cardframe {
+        width: 90%;
         padding: 2rem;
         max-width: 1024px; } }
     .cards .cardframe__zoom {
@@ -362,13 +362,14 @@
         display: none; }
     .cards .cardframe__image img {
       height: auto;
-      width: 55%;
+      width: 40%;
       border: solid darkgrey 3px;
       border-radius: 50%;
       float: right;
       margin: .7rem; }
       @media screen and (min-width: 1024px) {
         .cards .cardframe__image img {
+          width: 60%;
           height: auto;
           width: 50%; } }
     .cards .cardframe__title {
@@ -1424,7 +1425,6 @@ body {
         #cardsgallery #cardscontainer h2 {
           font-size: 4rem; } }
     #cardsgallery #cardscontainer p {
-      width: 85%;
       margin-bottom: 1rem; }
       @media screen and (min-width: 1024px) {
         #cardsgallery #cardscontainer p {

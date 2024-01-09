@@ -269,7 +269,6 @@ body {
       }
     }
     p {
-      width: 85%;
       margin-bottom: 1rem;
       @include for-desktop {
           max-width: $responsive-max-width;

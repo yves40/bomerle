@@ -53,11 +53,11 @@
     }
   }
   .cardframe {
-    width: 90%; 
+    width: 100%; 
     height: auto;
-    padding: .5rem;
     transition: all .8s ease-in;
     @include for-desktop {
+      width: 90%; 
       padding: 2rem;
       max-width: $responsive-max-width;
     }
@@ -76,12 +76,13 @@
     }
     &__image img {
       height: auto;
-      width: 55%;
+      width: 40%;
       border: solid darkgrey 3px;
       border-radius: 50%; 
       float: right; 
       margin: .7rem;
       @include for-desktop {
+        width: 60%;
         height: auto;
         width: 50%;
       }
