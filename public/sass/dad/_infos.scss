@@ -3,7 +3,6 @@
   flex-direction: column; 
   justify-content: center;
   align-items: center;
-  padding-top: 2rem;
   color: white;
   margin: 0 auto;
   @include for-desktop { 
@@ -38,11 +37,23 @@
       flex-direction: column;
       gap: .7em;
     }
-    h1, h2, h3, ul {
-      margin: 1rem 0 2rem 0;
+    h1, h2 {
+      margin: 2.5rem 0 .5rem 0; 
       font-size: 1.7rem;
-      font-family: "Acme, sans-serif";
+      font-family: $heroh2;
+      @include for-desktop {
+        margin: 2rem 0 2rem 0; 
+      }
     }
+    h3 {
+      margin: 1rem 0 2rem 0; 
+      font-size: 1.7rem;
+      font-family: $heroh2;
+      @include for-desktop {
+        margin: 2rem 0 2rem 0; 
+      }
+    }
+
     iframe { 
       margin: 20px 0;
       width: 200px;

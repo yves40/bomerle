@@ -943,7 +943,6 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding-top: 2rem;
   color: white;
   margin: 0 auto;
   gap: 1rem;
@@ -975,10 +974,20 @@
       display: flex;
       flex-direction: column;
       gap: .7em; }
-    .infos .infoelement h1, .infos .infoelement h2, .infos .infoelement h3, .infos .infoelement ul {
+    .infos .infoelement h1, .infos .infoelement h2 {
+      margin: 2.5rem 0 .5rem 0;
+      font-size: 1.7rem;
+      font-family: "Gideon Roman", sans-serif; }
+      @media screen and (min-width: 1024px) {
+        .infos .infoelement h1, .infos .infoelement h2 {
+          margin: 2rem 0 2rem 0; } }
+    .infos .infoelement h3 {
       margin: 1rem 0 2rem 0;
       font-size: 1.7rem;
-      font-family: "Acme, sans-serif"; }
+      font-family: "Gideon Roman", sans-serif; }
+      @media screen and (min-width: 1024px) {
+        .infos .infoelement h3 {
+          margin: 2rem 0 2rem 0; } }
     .infos .infoelement iframe {
       margin: 20px 0;
       width: 200px;
@@ -1380,6 +1389,7 @@ body {
       align-items: center;
       width: 100%;
       color: white;
+      margin-bottom: 2rem;
       max-width: 1024px; }
       @media screen and (min-width: 1024px) {
         #cardsgallery #cardscontainer .related {

@@ -228,6 +228,7 @@ body {
       align-items: center;
       width: 100%;
       color: white;
+      margin-bottom: 2rem;
       @include for-desktop {
           max-width: $responsive-max-width;
       }  
