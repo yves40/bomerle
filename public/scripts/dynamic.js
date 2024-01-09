@@ -401,10 +401,6 @@ $(document).ready(function () {
                 }    
             });    
         };
-        if($(relcatcontainer).children().length > 0)   {
-            $(relcatcontainer).prepend($('<p>').text($labels.get('interested')));
-            $('#cardscontainer').append(relcatcontainer);
-        }      
         allpublished.forEach( knife => {    // Cards loop
             const payload = {
                 "knifeid" :  knife.id,
@@ -414,7 +410,7 @@ $(document).ready(function () {
                 url: '/knives/public/getimages',
                 data: JSON.stringify(payload),
                 dataType: "json",
-                async: true,
+                async: false,
                 success: function (response) {
                     buildCard(response, $('#cardscontainer'));
                 },
@@ -423,6 +419,10 @@ $(document).ready(function () {
                 }
             });    
         })
+        if($(relcatcontainer).children().length > 0)   {
+            $(relcatcontainer).prepend($('<p>').text($labels.get('interested')));
+            $('#cardscontainer').append(relcatcontainer);
+        }      
         $(cardsgallery).off('mousedown').on('mousedown', (event) => {
             event.preventDefault();
             if(event.target.nodeName !== 'IMG') {   // Close the gallery ?
