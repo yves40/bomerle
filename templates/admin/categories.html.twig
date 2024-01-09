@@ -103,9 +103,19 @@
         {% for category in categories %}
             <li class="list-group-item">
                 <div class="row">
-                    <div class="col-4">{{category.name}}</div>
-                    <div class="col-4">{{category.fullname}}</div>
-                    <div class="col-2">{{category.rank}}</div>
+                    <div class="col-1">{{category.rank}}</div>
+                    <div class="col-2">{{category.name}}</div>
+                    <div class="col-3">{{category.fullname}}</div>
+                    <div class="col-2">
+                        {% if category.image != '' %}
+                            <img class="iconicimage" src="/images/category/{{category.image}}" alt=""/>
+                        {% endif %}
+                    </div>
+                    <div class="col-2">
+                        {% if used[loop.index-1] %}
+                                <img class="svgsmall-lightgreen" src="/images/svg/plug-circle-plus-solid.svg" alt=""/>
+                        {% endif %}
+                    </div>
                     <div class="col-1">
                         <a href="{{ path('bootadmin.categories.delete', {id: category.id}) }}">
                             <img class="svgsmall-lightblue" src="/images/svg/trash-bin-outline.svg" alt=""/>

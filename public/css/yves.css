@@ -819,6 +819,11 @@ button.ylink:hover {
   max-height: 8rem;
   border-radius: 50%; }
 
+.iconicimage {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%; }
+
 .textsmall {
   font-size: 0.7rem; }
 

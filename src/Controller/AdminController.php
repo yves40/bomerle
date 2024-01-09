@@ -426,7 +426,15 @@ class AdminController extends AbstractController
                 $this->addFlash('success', $translator->trans('admin.managecategories.created'));
             }
         }
-        $rel = $category->getRelatedcategories();
+        $used = [];
+        foreach($categories as $one) {
+            if(count($one->getKnifes())) {
+                array_push($used, true);
+            }
+            else {
+                array_push($used, false);
+            }
+        }
         return $this->render('admin/categories.html.twig', [
             "locale" =>  $loc,
             "new" =>  $new,
@@ -434,10 +442,11 @@ class AdminController extends AbstractController
             "categoryfullname" => $category->getFullname(),
             'rank' => $category->getRank(),
             "categorydescription" => $category->getDescription(),
-            "relatedcategories" => $rel,
+            "relatedcategories" =>  $category->getRelatedcategories(),
             "id" => $id,
             "knifeconflict" => $knifeconflict,
             "categories" => $categories,
+            "used" => $used,
             "form" => $form->createView()
             ]
         );       
@@ -490,8 +499,9 @@ class AdminController extends AbstractController
         if($form->isSubmitted() && $form->isValid()){
             // Take care of image
             $physicalPath = $this->getParameter('categoryimages_directory');
-            // 1st, if already set delete the previous file
-            if($category->getImage() !== '') {
+            // 1st, if already set and a new one is requested 
+            // delete the previous file
+            if(($category->getImage() !== '') && $form->get('image')->getData()) {
                 $uploader->deleteFile($physicalPath.'/'.$category->getImage());
             }
             $uploaded = $form->get('image')->getData();
