@@ -230,6 +230,7 @@ class AdminControllerKnife extends AbstractController
                 $categories[$key]['catfullname'] = $one->getCategory()->getFullname();
                 $categories[$key]['catid'] = $one->getCategory()->getId();
                 $categories[$key]['catdesc'] = $one->getCategory()->getDescription();
+                $categories[$key]['catrank'] = $one->getCategory()->getRank();
             }
             // $dedup = array_unique($categories);
             return $this->json([

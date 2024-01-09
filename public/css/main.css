@@ -1045,7 +1045,6 @@
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
-    align-items: center;
     margin: .8rem 0;
     padding-top: 1.5rem;
     border-top: solid white 2px; }
@@ -1067,13 +1066,13 @@
           width: 32%; } }
   #categories img {
     width: 90%;
-    height: auto;
+    aspect-ratio: 1;
     border-radius: 10px;
     margin: .5rem; }
     @media screen and (min-width: 1024px) {
       #categories img {
         width: 80%;
-        height: auto; } }
+        aspect-ratio: 1; } }
   #categories h1 {
     font-family: "Cinzel Decorative", sans-serif;
     font-size: 2rem;

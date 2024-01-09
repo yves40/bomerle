@@ -1,7 +1,7 @@
 # Have a look at config/packages/translation.yaml
 app:
   version: Beaumerle Administration Console  [Jan, 1.61]
-  debugversion: Jan 08 2024, 1.81
+  debugversion: Jan 09 2024, 1.82
   copyright: "&copy; Ratoon Dev Corporation, 2024"
   location: 63250 Chabreloche, Département du Puy-de-Dôme
   public:
@@ -117,6 +117,8 @@ admin:
     help: Category name
     fullname: Short description
     helpfullname: Just a short description
+    rank: Priority
+    helprank: Display order 
     description: Description
     related: Similar to
     helprelated: Categories that may also interest

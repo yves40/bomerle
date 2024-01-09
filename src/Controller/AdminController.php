@@ -432,6 +432,7 @@ class AdminController extends AbstractController
             "new" =>  $new,
             "categoryname" => $category->getName(),
             "categoryfullname" => $category->getFullname(),
+            'rank' => $category->getRank(),
             "categorydescription" => $category->getDescription(),
             "relatedcategories" => $rel,
             "id" => $id,

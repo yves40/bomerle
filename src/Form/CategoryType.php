@@ -20,8 +20,9 @@ class CategoryType extends AbstractType
     {
         $this->selectedname = $options['data']->getName();
         $builder
-        ->add('name')
+            ->add('name')
             ->add('fullname')
+            ->add('rank')
             ->add('description', TextareaType::class,
             ['attr' => ["rows" => 10 ]])
             ->add('relatedcategories', EntityType::class, [

@@ -1,7 +1,7 @@
 # Have a look at config/packages/translation.yaml
 app:
   version: Administration Beaumerle  [Jan, 1.61]
-  debugversion: Jan 08 2024, 1.81
+  debugversion: Jan 09 2024, 1.82
   copyright: "&copy; Ratoon Dev Corporation, 2024"
   location: 63250 Chabreloche, Département du Puy-de-Dôme
   public:
@@ -116,6 +116,8 @@ admin:
     help: Nom de la catégorie
     fullname: Description courte
     helpfullname: Description synthétique
+    rank: Priorité
+    helprank: Ordre d'affichage 
     description: Description
     related: Liée avec
     helprelated: Catégories qui peuvent aussi intéresser
