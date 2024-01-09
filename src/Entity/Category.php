@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\CategoryRepository;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -36,6 +37,9 @@ class Category
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $image = null;
+
+    #[ORM\Column(type: Types::SMALLINT, nullable: true)]
+    private ?int $rank = null;
 
     public function __construct()
     {
@@ -151,6 +155,18 @@ class Category
     public function setImage(?string $image): static
     {
         $this->image = $image;
+
+        return $this;
+    }
+
+    public function getRank(): ?int
+    {
+        return $this->rank;
+    }
+
+    public function setRank(?int $rank): static
+    {
+        $this->rank = $rank;
 
         return $this;
     }

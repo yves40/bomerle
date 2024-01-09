@@ -39,13 +39,23 @@ class CategoryRepository extends ServiceEntityRepository
         }
     }
 
-    public function listCategories(): array
+    public function listCategories($new, $id): array
     {
-        return $this->createQueryBuilder('c')
-            ->orderBy('c.name', 'ASC')
-            ->getQuery()
-            ->getResult()
-        ;
+        // Creating a new one or modifying an existing ? 
+        if($new) {
+            return $this->createQueryBuilder('c')
+                ->andWhere('c.id <> :id')
+                ->setParameter('id', $id)
+                ->orderBy('c.rank, c.name', 'ASC')
+                ->getQuery()
+                ->getResult();
+        }
+        else {
+            return $this->createQueryBuilder('c')
+                ->orderBy('c.rank, c.name', 'ASC')
+                ->getQuery()
+                ->getResult();
+        }
     }
 
 //    /**

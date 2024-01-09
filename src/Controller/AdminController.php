@@ -405,7 +405,7 @@ class AdminController extends AbstractController
         if($id != 0){ // Exisiting Category ? 
             $category = $repo->find($id);
         }
-        $categories = $repo->listCategories();
+        $categories = $repo->listCategories($new, $id);
         $form = $this->createForm(CategoryType::class, $category);
         if($new === 'abort') {  // The user aborted the modification
             $new = "true";
@@ -422,17 +422,18 @@ class AdminController extends AbstractController
                 }
                 $entityManager->persist($category);
                 $entityManager->flush();
-                $categories = $repo->listCategories();
+                $categories = $repo->listCategories($new, $id);
                 $this->addFlash('success', $translator->trans('admin.managecategories.created'));
             }
         }
+        $rel = $category->getRelatedcategories();
         return $this->render('admin/categories.html.twig', [
             "locale" =>  $loc,
             "new" =>  $new,
             "categoryname" => $category->getName(),
             "categoryfullname" => $category->getFullname(),
             "categorydescription" => $category->getDescription(),
-            "relatedcategories" => $category->getRelatedcategories(),
+            "relatedcategories" => $rel,
             "id" => $id,
             "knifeconflict" => $knifeconflict,
             "categories" => $categories,

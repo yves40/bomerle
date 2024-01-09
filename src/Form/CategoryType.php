@@ -14,10 +14,13 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 class CategoryType extends AbstractType
 {
+    private $selectedname = '';
+
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
+        $this->selectedname = $options['data']->getName();
         $builder
-            ->add('name')
+        ->add('name')
             ->add('fullname')
             ->add('description', TextareaType::class,
             ['attr' => ["rows" => 10 ]])
@@ -27,8 +30,16 @@ class CategoryType extends AbstractType
                 'required' => false,
                 'class' => Category::class,
                 'query_builder' => function(EntityRepository $er) {
-                    return $er->createQueryBuilder('a')
-                    ->orderBy('a.name', 'ASC');
+                    if($this->selectedname) {
+                        return $er->createQueryBuilder('a')
+                            ->where('a.name <> :selected')
+                            ->setParameter('selected', $this->selectedname)
+                            ->orderBy('a.rank, a.name', 'ASC');
+                    }
+                    else {
+                        return $er->createQueryBuilder('a')
+                            ->orderBy('a.rank, a.name', 'ASC');
+                    }
                 }
                 ])
             ->add('image', FileType::class, [
