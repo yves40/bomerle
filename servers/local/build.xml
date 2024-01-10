@@ -1,0 +1,57 @@
+<!--  
+    build.xml
+     
+    Jan 10 2024       Initial
+
+-->
+<project name="bomerle" default="help" basedir=".">
+<property file="build.properties"/>
+<!-- D E F A U L T   H E L P -->
+<target name="help" description="What's in this build file">
+    <echo message="-----> Available targets "/>
+    <echo message=""/>
+    <echo message="-----> .......... prodjasmin : jasmin prod"/>
+    <echo message="-----> .......... devjasmin : jasmin dev "/>
+    <echo message="-----> .......... sshjasmin : test ssh jasmin"/>
+    <echo message="-----> .......... cleanup : Shoot all previous local build files"/>
+    <echo message=""/>
+</target>
+<!--  =====================================================================================  -->
+<!--  Hosts work -->
+<!--  =====================================================================================  -->
+<!-- GET IMAGES ON JASMIN  -->
+<target name="devjasmin" depends="cleanup, servercleanup">
+</target>
+<!-- CHECK SSH CONNECTIVITY ON JASMIN  -->
+<target name="sshjasmin" depends="cleanup, servercleanup">
+    <echo message="-----> Check ssh connectivity on ${remoteserver}"/>
+<!-- 
+    <sshexec command="ls -al" host="${remoteserver}" username="${remoteaccount}" password="${remoteaccountpass}" trust="true" verbose="${delete.verbosemode}"/>
+    <sshexec host="${jasmin}"
+                    knownhosts=".ssh/known_hosts"
+                    username="toba3789" 
+                    keyfile=".ssh/id_dad"
+                    sshConfig=".ssh/config" command="ls -al" trust="true" />
+-->    
+    <sshexec host="jasmin.o2switch.net"
+                    username="toba3789" keyfile=".ssh/id_dad" 
+                    command="ls -al" trust="true" verbose="true" />
+</target>
+<!--  =====================================================================================  -->
+<!--  Generic task  -->
+<!--  =====================================================================================  -->
+<!-- CLEANUP THE BUILD FOLDER  -->
+<target name="cleanup" depends="dir.check" if="dir.exists">
+    <echo message="-----> Local build environment cleaning"/>
+</target>
+<!-- CHECK EXISTENCE OF A DIRECTORY  -->
+<target name="dir.check">
+    <condition property="dir.exists">
+        <available file="${build.workdir}" type="dir"/>
+    </condition>
+</target>
+<!-- PERFORM SOME TARGET SERVER CLEANUP ON THE REMOTE WORKING DIRECTORY   -->
+<target name="servercleanup">
+    <echo message="-----> Remote target work"/>
+</target>
+</project>
