@@ -24,14 +24,15 @@
     <!-- BACKUP & GET IMAGES ON JASMIN  -->
     <target name="backupjasmindev" depends="cleanup, servercleanup">
         <echo/>
-        <sshexec    command="zip -qr  ${jasmin.workdir}/images.zip ${jasmin.devimageslocations}/knife/*.webp" 
+        <echo message="Zip site images"/>
+        <echo/>
+        <sshexec    command="rm $HOME/BACKUP/*.*;chmod +x $DEV/servers/jasmin/*.sh;$DEV/servers/jasmin/save-webp-gif-svg.sh" 
                     host="${jasminserver}"
                     username="${jasminuser}" 
                     password="${jasminpass}"                    
                     trust="true" 
                     verbose="${verbosemode}"/>
-        <echo/>
-        <sshexec    command="ls -l ${jasmin.workdir};du -kh ${jasmin.workdir};df -kh" 
+        <sshexec    command="$DEV/servers/jasmin/save-some-jpg-jpeg.sh;ls -l $HOME/BACKUP;du -kh ${jasmin.workdir};df -kh" 
                     host="${jasminserver}"
                     username="${jasminuser}" 
                     password="${jasminpass}"                    
