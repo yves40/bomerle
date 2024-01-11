@@ -1,1 +1,1 @@
-zip -@ $HOME/BACKUP/some-jpg-jpeg.zip -x "*.webp" "*.png" $DEV/public/images
+zip BACKUP/0-gif-svg.zip DEV/bomerle/public/images/*.jpg DEV/bomerle/public/images/*.jpeg
