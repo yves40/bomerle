@@ -14,6 +14,7 @@
         <echo message=""/>
         <echo message="-----> .......... prodjasmin : jasmin prod, get images"/>
         <echo message="-----> .......... backupjasmindev : jasmin dev, get images "/>
+        <echo message="-----> .......... getzipdev : test zip files copy"/>
         <echo message="-----> .......... sshjasmin : test ssh jasmin"/>
         <echo message="-----> .......... cleanup : Shoot all previous local build files"/>
         <echo message=""/>
@@ -38,6 +39,18 @@
                     password="${jasminpass}"                    
                     trust="true" 
                     verbose="${verbosemode}"/>
+    </target>
+    <!-- UNIT TEST OF ZIP FILES TRANSFER  -->
+    <target name="getzipdev">
+        <echo/>
+        <echo message="Get the zip files locally"/>
+        <echo/>
+        <scp        todir="${save.dir}" 
+                    password="${jasminpass}" 
+                    trust="true" verbose="${copy.verbosemode}"
+                    failonerror="no">
+                            <fileset dir="${jasminuser}:${jasminpass}@${jasminserver}:${jasmin.workdir}" includes="**/*.zip"/>
+        </scp>
     </target>
     <!-- CHECK SSH CONNECTIVITY ON JASMIN  -->
     <target name="sshjasmin" depends="cleanup, servercleanup">
