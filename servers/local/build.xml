@@ -14,7 +14,6 @@
         <echo message=""/>
         <echo message="-----> .......... prodjasmin : jasmin prod, get images"/>
         <echo message="-----> .......... backupjasmindev : jasmin dev, get images "/>
-        <echo message="-----> .......... getzipdev : test zip files copy"/>
         <echo message="-----> .......... sshjasmin : test ssh jasmin"/>
         <echo message="-----> .......... cleanup : Shoot all previous local build files"/>
         <echo message=""/>
@@ -39,18 +38,21 @@
                     password="${jasminpass}"                    
                     trust="true" 
                     verbose="${verbosemode}"/>
+        <antcall target="getzip">
+            <param name="targetenv" value="DEVEL"/>
+        </antcall>
     </target>
-    <!-- UNIT TEST OF ZIP FILES TRANSFER  -->
-    <target name="getzipdev">
+    <!-- ZIP FILES TRANSFER  -->
+    <target name="getzip">
         <echo/>
-        <echo message="Get the zip files locally"/>
+        <echo message="Get the zip files locally for ${targetenv} environment"/>
         <echo/>
-        <scp        todir="${save.dir}" 
-                    password="${jasminpass}" 
-                    trust="true" verbose="${copy.verbosemode}"
-                    failonerror="no">
-                            <fileset dir="${jasminuser}:${jasminpass}@${jasminserver}:${jasmin.workdir}" includes="**/*.zip"/>
-        </scp>
+        <scp file="${jasminuser}:${jasminpass}@${jasminserver}:${jasmin.workdir}/webp-gif-svg.zip" 
+                    trust="true" todir="${save.dir}"/>
+        <scp file="${jasminuser}:${jasminpass}@${jasminserver}:${jasmin.workdir}/some-jpg-jpeg.zip" 
+                    trust="true" todir="${save.dir}"/>
+        <move file="${save.dir}/webp-gif-svg.zip" tofile="${save.dir}/${targetenv}-webp-gif-svg.zip"/>
+        <move file="${save.dir}/some-jpg-jpeg.zip" tofile="${save.dir}/${targetenv}-some-jpg-jpeg.zip"/>
     </target>
     <!-- CHECK SSH CONNECTIVITY ON JASMIN  -->
     <target name="sshjasmin" depends="cleanup, servercleanup">
