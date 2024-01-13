@@ -363,15 +363,18 @@ $(document).ready(function () {
         // -------------------------------------------------------------
         // Build the cards gallery
         $(cardsgallery).append($('<div>').attr('id', 'cardscontainer'));
-        $('#cardscontainer').append($('<h2>').text(catname));
-        $('#cardscontainer').append($('<img>').attr('src', imgsrc));
-        $('#cardscontainer').append($('<p>').text(catdesc));
-        // Add in the header the image of any related category
+        const cardscontainerheader = $('<div>').attr('id', 'cardscontainer__header');
+        $(cardscontainerheader).append($('<h2>').text(catname));
+        $(cardscontainerheader).append($('<img>').attr('src', imgsrc));
+        $(cardscontainerheader).append($('<p>').text(catdesc));
+        $(cardscontainer).append(cardscontainerheader);
+
         let relcatcontainer = $('<div>').attr('id', 'relatedcategories').addClass('related');
         for( let idx = 0; idx < catrelated.length; ++idx) {
             /**
              * Search for associated categories. This association will be ignored if  
              * the associated category is currently not used by by any knife !!!!!
+             * Add in the header the image of any related category
             */
            allcategoriesimage.find( (current, index) => {
                if(current.catid === parseInt(catrelated[idx])) {

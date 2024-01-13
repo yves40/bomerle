@@ -369,7 +369,6 @@
       margin: .7rem; }
       @media screen and (min-width: 1024px) {
         .cards .cardframe__image img {
-          width: 60%;
           height: auto;
           width: 50%; } }
     .cards .cardframe__title {
@@ -1382,10 +1381,14 @@ body {
       #cardsgallery #cardscontainer {
         width: 70%;
         max-width: 1024px; } }
-    #cardsgallery #cardscontainer img {
-      width: 60px;
+    #cardsgallery #cardscontainer__header img {
+      width: 15%;
       border-radius: 50%;
-      margin-bottom: 1rem; }
+      margin: 1rem;
+      float: left; }
+      @media screen and (min-width: 1024px) {
+        #cardsgallery #cardscontainer__header img {
+          width: 20%; } }
     #cardsgallery #cardscontainer .related {
       display: flex;
       flex-direction: row;
