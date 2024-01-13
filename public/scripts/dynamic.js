@@ -179,6 +179,10 @@ $(document).ready(function () {
         const categoryid = $(targetcategory).data('catid');
         const catname = $(targetcategory).data('catname');
         const catdesc = $(targetcategory).data('catdesc');
+        let imgsrc = $(targetcategory).attr('src');
+        if(imgsrc === undefined) {
+            imgsrc = $(targetcategory).data('catsrc');
+        }
         let catrelated = [];
         try {
             catrelated = $(targetcategory).data('related').split(',');
@@ -220,7 +224,7 @@ $(document).ready(function () {
                     console.log(`Add ${knifeincard.knifename} with ID ${knifeincard.id} to the card section`);
                     activeknives.push(knifeincard);
                 });
-                if(loadPublishedCatalog(activeknives, categoryid,catname, catdesc, catrelated)) {
+                if(loadPublishedCatalog(activeknives, categoryid,catname, catdesc, catrelated, imgsrc)) {
                     $(cardsgallery).show().fadeIn(2000);
                 }
                 window.location = '#cardsgallery';
@@ -337,12 +341,13 @@ $(document).ready(function () {
      * @param {*} catdesc Category full description
      *                    These 2 strings are displayed in the zoomed
      *                    category header
+     * @param {*} imgsrc Category full description
      * @returns 
      *          false if the category is already displayed
      *          true if the category has been displayed
      */
     function loadPublishedCatalog(allpublished, categoryid,
-                                    catname, catdesc, catrelated) {
+                                    catname, catdesc, catrelated, imgsrc) {
         // -------------------------------------------------------------
         // Track double click or double request
         let displayedcateoryid = parseInt($(cardsgallery).attr('data-catid'));
@@ -358,8 +363,9 @@ $(document).ready(function () {
         // -------------------------------------------------------------
         // Build the cards gallery
         $(cardsgallery).append($('<div>').attr('id', 'cardscontainer'));
-        $('#cardscontainer').append($('<h2>').text(catname))
-        $('#cardscontainer').append($('<p>').text(catdesc))
+        $('#cardscontainer').append($('<h2>').text(catname));
+        $('#cardscontainer').append($('<img>').attr('src', imgsrc));
+        $('#cardscontainer').append($('<p>').text(catdesc));
         // Add in the header the image of any related category
         let relcatcontainer = $('<div>').attr('id', 'relatedcategories').addClass('related');
         for( let idx = 0; idx < catrelated.length; ++idx) {
@@ -376,12 +382,12 @@ $(document).ready(function () {
                             .append($('<img>')
                                     .attr('src',  `${current.catphotopath}`)
                                     .attr('data-knifeid', current.knifeid))
-                            .attr('data-catname', current.catname)
-                            .attr('data-catdesc', current.catdesc)
-                            .attr('data-knifeid', current.knifeid)
-                            .attr('data-catid', current.catid)
-                            
-                            .attr('data-related', current.related);
+                                    .attr('data-catname', current.catname)
+                                    .attr('data-catdesc', current.catdesc)
+                                    .attr('data-knifeid', current.knifeid)
+                                    .attr('data-catid', current.catid)
+                                    .attr('data-catsrc', current.catphotopath)
+                                    .attr('data-related', current.related);
                    $(relcatcontainer).append(relcard);
                    $(relcard).on('mousedown', (event) => {
                         event.stopImmediatePropagation();

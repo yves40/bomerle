@@ -1382,6 +1382,10 @@ body {
       #cardsgallery #cardscontainer {
         width: 70%;
         max-width: 1024px; } }
+    #cardsgallery #cardscontainer img {
+      width: 60px;
+      border-radius: 50%;
+      margin-bottom: 1rem; }
     #cardsgallery #cardscontainer .related {
       display: flex;
       flex-direction: row;

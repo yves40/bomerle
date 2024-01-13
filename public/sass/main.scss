@@ -220,6 +220,11 @@ body {
       width: 70%;
       max-width: $responsive-max-width;
     }
+    img {
+      width: 60px;
+      border-radius: 50%;
+      margin-bottom: 1rem;
+    }
     .related {
       display: flex;
       flex-direction: row;
