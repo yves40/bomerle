@@ -156,7 +156,8 @@ $(document).ready(function () {
         $(cardsgallery).append($('<div>').attr('id', 'cardscontainer'));
         const cardscontainerheader = $('<div>').attr('id', 'cardscontainer__header');
         $(cardscontainerheader).append($('<h2>').text(catname));
-        $(cardscontainerheader).append($('<img>').attr('src', imgsrc));
+        // Remove image : client request on jan 13 2024
+        // $(cardscontainerheader).append($('<img>').attr('src', imgsrc));
         $(cardscontainerheader).append($('<p>').text(catdesc));
         $(cardscontainer).append(cardscontainerheader);
 
