@@ -14,6 +14,7 @@
     Oct 15 2023     Indicators to the slider frame..
     Dec 20 2023     Fix timer problem
     Jan 07 2024     New DOM structure
+    Jan 13 2024     New management of Y scrolling
 
     ----------------------------------------------------------------------------*/
 class Slider {
@@ -24,7 +25,7 @@ class Slider {
   // Two accepted values : SHOW (the default) and KNIFE
   constructor(container, timing = 2, description = '', allimages, slidertype = 'SHOW') {
     // Init
-      this.version = 'Slider:1.52, Jan 08 2024 ';
+      this.version = 'Slider:1.53, Jan 13 2024 ';
       this.container = container;
       this.containername = $(container).attr('name');
       this.slideinterval = timing * 1000;
@@ -214,8 +215,7 @@ class Slider {
     // Position the zoom 
     const top = window.scrollY;
     // // Remove body scroll bar so user cant scroll up or down
-    // $("body").css("overflow", "hidden");
-    // $("#zoomer").css({ "background-image" : `url(${this.imagespath}${imagesrc}`,
+    $("body").css("overflow", "hidden");
     $("#zoomer").css({ 'top': top, 'left': 0, 'z-index': 2000 } )
             .addClass("zoomon").removeClass('zoomoff');
     $("#zoomer").append($('<div>').attr('id', 'zoomer__image')
@@ -235,7 +235,7 @@ class Slider {
                       .addClass('zoomoff').hide();
       $(`#${this.indicators}`).show();
       $(".slidercontrol").show();
-      $("body").css("overflow", "auto");
+      // $("body").css("overflow", "auto"); No longer reactivate scroll in requesting parent
     });
   }
   // ------------------------------------------------------------------------------------------------
