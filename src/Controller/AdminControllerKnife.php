@@ -271,7 +271,7 @@ class AdminControllerKnife extends AbstractController
             $knivesid = [];
             $relatedcategories = [];
             if($single) {
-                $oneknife = $repoknife->findBy(['category' => $categoryid ], [], 1);
+                $oneknife = $repoknife->findBy(['category' => $categoryid, 'published' => true  ], [ ], 1);
                 $images = $oneknife[0]->getImages();
                 foreach($images as $img) {
                     array_push($filenames, $img->getFilename());
@@ -279,7 +279,7 @@ class AdminControllerKnife extends AbstractController
                 array_push($knivesid, $oneknife[0]->getID());
             }
             else {
-                $knives = $repoknife->findBy(['category' => $categoryid ]);
+                $knives = $repoknife->findBy(['category' => $categoryid, 'published' => true  ]);
                 foreach($knives as $knife) {
                     $images = $knife->getImages();
                     foreach($images as $img) {
