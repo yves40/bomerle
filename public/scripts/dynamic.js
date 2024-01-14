@@ -125,6 +125,138 @@ $(document).ready(function () {
             });    
         }
     }
+    /** -------------------------------------------------------------
+     * @param {*} allpublished List of published knives for a given category
+     * @param {*} categoryid The category ID to which the knives belong
+     * @param {*} catname Category name
+     * @param {*} catdesc Category full description
+     *                    These 2 strings are displayed in the zoomed
+     *                    category header
+     * @param {*} imgsrc Category full description
+     * @returns 
+     *          false if the category is already displayed
+     *          true if the category has been displayed
+     */
+    function loadPublishedCatalog(allpublished, categoryid,
+                                    catname, catdesc, catrelated, imgsrc) {
+        // -------------------------------------------------------------
+        // Track double click or double request
+        let displayedcateoryid = parseInt($(cardsgallery).attr('data-catid'));
+        console.log(`*** Current : ${displayedcateoryid} requested : ${categoryid}`);
+        if( !isNaN(displayedcateoryid) && displayedcateoryid === categoryid) {
+            console.log(`Category ${categoryid} already display`);
+            return false;
+        }
+        else {
+            console.log(`Category ${categoryid} display`);
+            $(cardsgallery).empty().attr('data-catid', categoryid);
+        }
+        // -------------------------------------------------------------
+        // Build the cards gallery
+        $(cardsgallery).append($('<div>').attr('id', 'cardscontainer'));
+        const cardscontainerheader = $('<div>').attr('id', 'cardscontainer__header');
+        $(cardscontainerheader).append($('<h2>').text(catname));
+        $(cardscontainerheader).append($('<img>').attr('src', imgsrc));
+        $(cardscontainerheader).append($('<p>').text(catdesc));
+        $(cardscontainer).append(cardscontainerheader);
+
+        let relcatcontainer = $('<div>').attr('id', 'relatedcategories').addClass('related');
+        for( let idx = 0; idx < catrelated.length; ++idx) {
+            /**
+             * Search for associated categories. This association will be ignored if  
+             * the associated category is currently not used by by any knife !!!!!
+             * Add in the header the image of any related category
+            */
+           allcategoriesimage.find( (current, index) => {
+               if(current.catid === parseInt(catrelated[idx])) {
+                   console.log(`************ ${catname} is associated to : ${current.catname} with ${current.catphotopath}`);
+                   let relcard = $('<div>').addClass('relatedcard');
+                   // Data attributes on the container, to be used by zoomCaegory()
+                   $(relcard).append($('<p>').text(current.catname))
+                            .append($('<img>')
+                                    .attr('src',  `${current.catphotopath}`)
+                                    .attr('data-knifeid', current.knifeid))
+                                    .attr('data-catname', current.catname)
+                                    .attr('data-catdesc', current.catdesc)
+                                    .attr('data-knifeid', current.knifeid)
+                                    .attr('data-catid', current.catid)
+                                    .attr('data-catsrc', current.catphotopath)
+                                    .attr('data-related', current.related);
+                   $(relcatcontainer).append(relcard);
+                   $(relcard).on('mousedown', (event) => {
+                        event.stopImmediatePropagation();
+                        let target = event.target;
+                        console.log(`***** ${event.target.nodeName}`);
+                        // Check the image or the paragraph have not been clicked
+                        // If so, switch to parent DIV, which holds the data
+                        if((event.target.nodeName === 'P')||
+                                (event.target.nodeName === 'IMG')){
+                            target = $(event.target).parent();
+                        }
+                        $(cardsgallery).fadeOut(800, () => {
+                            // Now reload the category zoom
+                            zoomCategory(target);
+                        });
+                   })
+                }    
+            });    
+        };
+        allpublished.forEach( knife => {    // Cards loop
+            const payload = {
+                "knifeid" :  knife.id,
+            }
+            $.ajax({
+                type: "POST",
+                url: '/knives/public/getimages',
+                data: JSON.stringify(payload),
+                dataType: "json",
+                async: false,
+                success: function (response) {
+                    buildCard(response, $('#cardscontainer'));
+                },
+                error: function (xhr) {
+                    console.log(xhr);
+                }
+            });    
+        })
+        if($(relcatcontainer).children().length > 0)   {
+            $(relcatcontainer).prepend($('<p>').text($labels.get('interested')));
+            $('#cardscontainer').append(relcatcontainer);
+        }      
+        $(cardsgallery).off('mousedown').on('mousedown', (event) => {
+            event.preventDefault();
+            if(event.target.nodeName !== 'IMG') {   // Close the gallery ?
+                $(cardsgallery).fadeOut(800, () => {
+                    $(cardsgallery).empty().hide().attr('data-catid', 0);
+                    window.location = '#categories';
+                });
+            }
+            else {
+                if(!knifeslideractive) {
+                    knifeslideractive = true;                    
+                    const payload = {
+                        "knifeid" :  $(event.target).data('knifeid'),
+                    }
+                    $.ajax({
+                        type: "POST",
+                        url: '/knives/public/getimages',
+                        data: JSON.stringify(payload),
+                        dataType: "json",
+                        async: true,
+                        success: function (response) {
+                            displayKnifeSlider(response.knifeName,
+                                                    response.knifedesc,
+                                                    response.images);
+                        },
+                        error: function (xhr) {
+                            console.log(xhr);
+                        }
+                    });        
+                }
+            }
+        });
+        return true;
+    }
     // --------------------------------------------------------
     /** 
      * @param container <div> to be used for loading category cards 
@@ -333,138 +465,6 @@ $(document).ready(function () {
                     $("body").css("overflow", "auto");
                 }
             });
-    }
-    /** -------------------------------------------------------------
-     * @param {*} allpublished List of published knives for a given category
-     * @param {*} categoryid The category ID to which the knives belong
-     * @param {*} catname Category name
-     * @param {*} catdesc Category full description
-     *                    These 2 strings are displayed in the zoomed
-     *                    category header
-     * @param {*} imgsrc Category full description
-     * @returns 
-     *          false if the category is already displayed
-     *          true if the category has been displayed
-     */
-    function loadPublishedCatalog(allpublished, categoryid,
-                                    catname, catdesc, catrelated, imgsrc) {
-        // -------------------------------------------------------------
-        // Track double click or double request
-        let displayedcateoryid = parseInt($(cardsgallery).attr('data-catid'));
-        console.log(`*** Current : ${displayedcateoryid} requested : ${categoryid}`);
-        if( !isNaN(displayedcateoryid) && displayedcateoryid === categoryid) {
-            console.log(`Category ${categoryid} already display`);
-            return false;
-        }
-        else {
-            console.log(`Category ${categoryid} display`);
-            $(cardsgallery).empty().attr('data-catid', categoryid);
-        }
-        // -------------------------------------------------------------
-        // Build the cards gallery
-        $(cardsgallery).append($('<div>').attr('id', 'cardscontainer'));
-        const cardscontainerheader = $('<div>').attr('id', 'cardscontainer__header');
-        $(cardscontainerheader).append($('<h2>').text(catname));
-        $(cardscontainerheader).append($('<img>').attr('src', imgsrc));
-        $(cardscontainerheader).append($('<p>').text(catdesc));
-        $(cardscontainer).append(cardscontainerheader);
-
-        let relcatcontainer = $('<div>').attr('id', 'relatedcategories').addClass('related');
-        for( let idx = 0; idx < catrelated.length; ++idx) {
-            /**
-             * Search for associated categories. This association will be ignored if  
-             * the associated category is currently not used by by any knife !!!!!
-             * Add in the header the image of any related category
-            */
-           allcategoriesimage.find( (current, index) => {
-               if(current.catid === parseInt(catrelated[idx])) {
-                   console.log(`************ ${catname} is associated to : ${current.catname} with ${current.catphotopath}`);
-                   let relcard = $('<div>').addClass('relatedcard');
-                   // Data attributes on the container, to be used by zoomCaegory()
-                   $(relcard).append($('<p>').text(current.catname))
-                            .append($('<img>')
-                                    .attr('src',  `${current.catphotopath}`)
-                                    .attr('data-knifeid', current.knifeid))
-                                    .attr('data-catname', current.catname)
-                                    .attr('data-catdesc', current.catdesc)
-                                    .attr('data-knifeid', current.knifeid)
-                                    .attr('data-catid', current.catid)
-                                    .attr('data-catsrc', current.catphotopath)
-                                    .attr('data-related', current.related);
-                   $(relcatcontainer).append(relcard);
-                   $(relcard).on('mousedown', (event) => {
-                        event.stopImmediatePropagation();
-                        let target = event.target;
-                        console.log(`***** ${event.target.nodeName}`);
-                        // Check the image or the paragraph have not been clicked
-                        // If so, switch to parent DIV, which holds the data
-                        if((event.target.nodeName === 'P')||
-                                (event.target.nodeName === 'IMG')){
-                            target = $(event.target).parent();
-                        }
-                        $(cardsgallery).fadeOut(800, () => {
-                            // Now reload the category zoom
-                            zoomCategory(target);
-                        });
-                   })
-                }    
-            });    
-        };
-        allpublished.forEach( knife => {    // Cards loop
-            const payload = {
-                "knifeid" :  knife.id,
-            }
-            $.ajax({
-                type: "POST",
-                url: '/knives/public/getimages',
-                data: JSON.stringify(payload),
-                dataType: "json",
-                async: false,
-                success: function (response) {
-                    buildCard(response, $('#cardscontainer'));
-                },
-                error: function (xhr) {
-                    console.log(xhr);
-                }
-            });    
-        })
-        if($(relcatcontainer).children().length > 0)   {
-            $(relcatcontainer).prepend($('<p>').text($labels.get('interested')));
-            $('#cardscontainer').append(relcatcontainer);
-        }      
-        $(cardsgallery).off('mousedown').on('mousedown', (event) => {
-            event.preventDefault();
-            if(event.target.nodeName !== 'IMG') {   // Close the gallery ?
-                $(cardsgallery).fadeOut(800, () => {
-                    $(cardsgallery).empty().hide().attr('data-catid', 0);
-                    window.location = '#categories';
-                });
-            }
-            else {
-                if(!knifeslideractive) {
-                    knifeslideractive = true;                    
-                    const payload = {
-                        "knifeid" :  $(event.target).data('knifeid'),
-                    }
-                    $.ajax({
-                        type: "POST",
-                        url: '/knives/public/getimages',
-                        data: JSON.stringify(payload),
-                        dataType: "json",
-                        async: true,
-                        success: function (response) {
-                            displayKnifeSlider(response.knifeName,
-                                                    response.knifedesc,
-                                                    response.images);
-                        },
-                        error: function (xhr) {
-                            console.log(xhr);
-                        }
-                    });        
-                }
-            }
-        });
-        return true;
     }
     /**
      * Build and display a slider 
