@@ -85,7 +85,7 @@ footer{
                     background-color: $alternateBackground;
                     border: none;
                     outline: none;
-                    border-radius: .25em;
+                    border-radius: $border-radius;
                     color: $alternateText;
                     font-weight: lighter;
                     max-width: 300px;
@@ -125,7 +125,7 @@ footer{
                 max-width: 300px;
                 text-decoration: none;
                 color: $text;
-                border-radius: .25rem;
+                border-radius: $border-radius;
                 border: solid 2px $alternateBackground;
                 margin-top: 10px;
                 padding: 10px 15px;

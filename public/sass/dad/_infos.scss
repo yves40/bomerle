@@ -59,11 +59,11 @@
       width: 200px;
       height: 200px;
       border: solid darkgrey 3px;  
-      border-radius: 10px;
+      border-radius: $border-radius;
     } 
     button {
       color: white;
-      border-radius: .25em;
+      border-radius: $border-radius;
       width: 5rem; 
       margin: 1em 0;
       padding: .5em;
@@ -95,7 +95,7 @@
       margin: 0; 
       padding: .5em 0; 
       border: solid darkolivegreen 2px;  
-      border-radius: .25em; 
+      border-radius: $border-radius; 
       font-weight: lighter;
     }
     select {

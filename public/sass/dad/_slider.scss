@@ -27,7 +27,7 @@
         transform: translateY(-50%);
         color: rgba(255, 255, 255, 0.5); 
         cursor: pointer;
-        border-radius: .25rem; 
+        border-radius: $border-radius; 
         padding: 0 .5rem;
         background-color: rgba(0, 0, 0, 0.1);
         width: 4rem; 
@@ -84,7 +84,7 @@
             opacity: .6;
             width: 30px;
             height: 10px;
-            border-radius: 4px;
+            border-radius: $border-radius;
             @include for-desktop {
                 height: 10px;
             }
@@ -129,7 +129,7 @@
 .sliderzoomon {
     position: absolute;
     top: 0; left:0; height: 100%; width: 100%;
-    border-radius: 20px;
+    border-radius: $border-radius;
     background-position: center;
     background-repeat: no-repeat;
     background-size: contain;
@@ -144,7 +144,7 @@
         background-color: darkgrey;
         top: 5%;
         left: 5%;
-        border-radius: 20px;
+        border-radius: $border-radius;
         opacity: 0.4;
     }
 }

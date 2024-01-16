@@ -6,7 +6,7 @@
     left: 50%;
     transform: translateX(-50%);
     background: $formBackgroundDark;
-    border-radius: .25em;
+    border-radius: $border-radius;
     display: flex;
     justify-content: center;
     align-items: center;

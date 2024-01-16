@@ -165,7 +165,7 @@
       width: 300px;
       height: 300px;
       border: solid darkgrey 3px;
-      border-radius: 10px; }
+      border-radius: 5px; }
     .allnews .news:nth-child(even) h1, .allnews .news:nth-child(even) h2 {
       text-align: left; }
     .allnews .news:nth-child(even) img {
@@ -281,7 +281,7 @@
       align-items: center;
       background: #1a1917;
       padding: 20px;
-      border-radius: 10px;
+      border-radius: 5px;
       min-width: fit-content; }
       .nav-links ul li {
         font-size: 1.2rem; }
@@ -357,7 +357,7 @@
       color: white;
       justify-content: center;
       align-items: center;
-      border-radius: 10px; }
+      border-radius: 5px; }
       .cards .cardframe__zoom .cardframe__text {
         display: none; }
     .cards .cardframe__image img {
@@ -401,7 +401,7 @@
     color: white;
     justify-content: center;
     align-items: center;
-    border-radius: 10px; }
+    border-radius: 5px; }
   #globalfullscreen .cardframe__title {
     margin-top: 2rem; }
   #globalfullscreen .cardframe__text {
@@ -518,7 +518,7 @@
     transform: translateY(-50%);
     color: rgba(255, 255, 255, 0.5);
     cursor: pointer;
-    border-radius: .25rem;
+    border-radius: 5px;
     padding: 0 .5rem;
     background-color: rgba(0, 0, 0, 0.1);
     width: 4rem; }
@@ -563,7 +563,7 @@
       opacity: .6;
       width: 30px;
       height: 10px;
-      border-radius: 4px;
+      border-radius: 5px;
       margin-left: 3px;
       margin-right: 3px;
       cursor: pointer; }
@@ -603,7 +603,7 @@
   left: 0;
   height: 100%;
   width: 100%;
-  border-radius: 20px;
+  border-radius: 5px;
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
@@ -618,7 +618,7 @@
     background-color: darkgrey;
     top: 5%;
     left: 5%;
-    border-radius: 20px;
+    border-radius: 5px;
     opacity: 0.4; }
 
 .sliderzoomoff {
@@ -760,7 +760,7 @@
     width: auto;
     object-fit: contain;
     object-position: center;
-    border-radius: 20px; }
+    border-radius: 5px; }
   .zoomon__image {
     display: flex;
     justify-content: center;
@@ -898,7 +898,7 @@
     #thegallery .galleryzone p {
       font-family: "Gideon Roman", sans-serif;
       background-color: rgba(34, 7, 7, 0.3);
-      border-radius: 10px;
+      border-radius: 5px;
       font-size: 1rem;
       line-height: 1.4rem;
       text-align: justify;
@@ -920,7 +920,7 @@
       #thegallery .galleryzone .gallery img {
         width: 100%;
         height: 100%;
-        border-radius: 10px;
+        border-radius: 5px;
         border: solid 1px white;
         object-fit: cover; }
       #thegallery .galleryzone .gallery ::after {
@@ -992,10 +992,10 @@
       width: 200px;
       height: 200px;
       border: solid darkgrey 3px;
-      border-radius: 10px; }
+      border-radius: 5px; }
     .infos .infoelement button {
       color: white;
-      border-radius: .25em;
+      border-radius: 5px;
       width: 5rem;
       margin: 1em 0;
       padding: .5em;
@@ -1021,7 +1021,7 @@
       margin: 0;
       padding: .5em 0;
       border: solid darkolivegreen 2px;
-      border-radius: .25em;
+      border-radius: 5px;
       font-weight: lighter; }
     .infos .contact select {
       padding: .5em; }
@@ -1075,7 +1075,7 @@
   #categories img {
     width: 90%;
     aspect-ratio: 1;
-    border-radius: 10px;
+    border-radius: 5px;
     margin: .5rem; }
     @media screen and (min-width: 1024px) {
       #categories img {
@@ -1104,7 +1104,7 @@
     line-height: 1.4rem;
     padding: 1rem;
     background-color: rgba(34, 7, 7, 0.3);
-    border-radius: 10px;
+    border-radius: 5px;
     border-bottom: 2px solid white;
     width: 50%;
     text-align: center; }
@@ -1164,7 +1164,7 @@ body {
         height: auto;
         float: left;
         margin: 1rem;
-        border-radius: 10px; }
+        border-radius: 5px; }
         @media screen and (min-width: 1024px) {
           body .hero-section .hero-title img {
             width: 300px;
@@ -1197,7 +1197,7 @@ body {
         text-align: right;
         padding: 1rem;
         background-color: rgba(34, 7, 7, 0.3);
-        border-radius: 10px;
+        border-radius: 5px;
         width: 100%; }
         @media screen and (min-width: 1024px) {
           body .hero-section .hero-title p {
@@ -1266,7 +1266,7 @@ body {
     #categorygallery .galleryzone p {
       font-family: "Gideon Roman", sans-serif;
       background-color: rgba(34, 7, 7, 0.3);
-      border-radius: 10px;
+      border-radius: 5px;
       font-size: 1rem;
       line-height: 1.4rem;
       text-align: justify;
@@ -1288,7 +1288,7 @@ body {
       #categorygallery .galleryzone .gallery img {
         width: 100%;
         height: 100%;
-        border-radius: 10px;
+        border-radius: 5px;
         border: solid 1px white;
         object-fit: cover; }
       #categorygallery .galleryzone .gallery ::after {
@@ -1336,7 +1336,7 @@ body {
     #cardsgallery .galleryzone p {
       font-family: "Gideon Roman", sans-serif;
       background-color: rgba(34, 7, 7, 0.3);
-      border-radius: 10px;
+      border-radius: 5px;
       font-size: 1rem;
       line-height: 1.4rem;
       text-align: justify;
@@ -1358,7 +1358,7 @@ body {
       #cardsgallery .galleryzone .gallery img {
         width: 100%;
         height: 100%;
-        border-radius: 10px;
+        border-radius: 5px;
         border: solid 1px white;
         object-fit: cover; }
       #cardsgallery .galleryzone .gallery ::after {
@@ -1372,7 +1372,7 @@ body {
     align-items: center;
     width: 100%;
     background-color: rgba(34, 7, 7, 0.6);
-    border-radius: 20px;
+    border-radius: 5px;
     padding: 0 2rem;
     margin-bottom: 50svh; }
     @media screen and (min-width: 1024px) {
@@ -1414,7 +1414,7 @@ body {
           font-weight: normal;
           height: 40px; }
         #cardsgallery #cardscontainer .related .relatedcard img {
-          border-radius: 50%;
+          border-radius: 5px;
           width: 70%;
           height: auto; }
     #cardsgallery #cardscontainer h2 {
