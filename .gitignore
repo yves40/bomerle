@@ -5,12 +5,8 @@
 /.env.local.php
 /.env.*.local
 /config/secrets/prod/prod.decrypt.private.php
-/public/bundles/
 /public/css/
 /public/node_modules/
-/public/images/slideshow
-/public/images/knife
-/public/images/category
 /var/
 /vendor/
 ###< symfony/framework-bundle ###
