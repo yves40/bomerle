@@ -58,7 +58,7 @@
     transition: all .8s ease-in;
     @include for-desktop {
       width: 90%; 
-      padding: 2rem;
+      padding: 1rem 0 0 0;
       max-width: $responsive-max-width;
     }
     &__zoom {
@@ -74,16 +74,23 @@
         display: none;
       }
     }
-    &__image img {
-      height: auto;
-      width: 40%;
-      border: solid darkgrey 3px;
-      border-radius: 50%; 
-      float: right; 
-      margin: .7rem;
+    &__txtimgcontainer {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
       @include for-desktop {
-        height: auto;
-        width: 50%;
+        flex-direction: row;
+      }
+      img {
+        width: $imgsmall;
+        height: $imagesmall;
+        border: solid darkgrey 3px;
+        border-radius: $border-radius; 
+        margin: .7rem;
+        @include for-desktop {
+          width: $imgmedium;
+          height: $imgmedium;
+        }
       }
     }
     &__title {
@@ -96,15 +103,11 @@
     } 
     &__text {
       line-height: 1.2rem;
+      text-align: justify;
       padding: .5rem;
       @include for-desktop {
         line-height: 1.8rem;
         padding: 2rem;
-        &:hover {
-          box-shadow: 0px 0px 11px 5px #cec5c5;
-          transition: all .5s  ease;
-          padding: 4rem;
-        }
       }
     }
   }

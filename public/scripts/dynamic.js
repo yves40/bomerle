@@ -202,7 +202,7 @@ $(document).ready(function () {
                 }    
             });    
         };
-        allpublished.forEach( knife => {    // Cards loop
+        allpublished.forEach( (knife, idx) => {    // Cards loop
             const payload = {
                 "knifeid" :  knife.id,
             }
@@ -213,7 +213,7 @@ $(document).ready(function () {
                 dataType: "json",
                 async: false,
                 success: function (response) {
-                    buildCard(response, $('#cardscontainer'));
+                    buildCard(response, $('#cardscontainer'), idx);
                 },
                 error: function (xhr) {
                     console.log(xhr);
@@ -494,10 +494,10 @@ $(document).ready(function () {
      * @param {*} response json data containing some knife information
      * @param {*} container The target element where the card will be displayed
      */
-    function buildCard(response, container ) {
+    function buildCard(response, container, cardindex ) {
         let thecard = $('<div>').attr('id', `knifeid-${response.knifeId}`)
                                     .addClass('cardframe');
-        let card  = new Card(thecard, response);
+        let card  = new Card(thecard, response, cardindex);
         container.append(thecard);
         // Set a knife ID for future zoom
         $(thecard).find('img').attr('data-knifeid', response.knifeId);

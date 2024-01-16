@@ -7,23 +7,40 @@
     ----------------------------------------------------------------------------*/
     class Card {
 
-      constructor(container, data) {
+      /**
+       * 
+       * @param {*} container The DOM element into which the card will be appended
+       * @param {*} data Related to the new card
+       * @param {*} cardindex The card position in the parent Dom element
+       *                      It's used to know if the image will be in 1st or 2nd position
+       */
+      constructor(container, data, cardindex) {
         // Init
-          this.version = 'Card:1.2, Jan 03 2024 ';
+          this.version = 'Card:1.38, Jan 16 2024 ';
           this.container = container;
           this.data = data;
+          this.cardindex = cardindex;
           this.loadCard(container, data);
           this.mandatorydelay = 10; // When card zoom on a slider, delay is forced
       }
       loadCard(container, data) {
-        const cardimage = $("<div></div>").addClass('cardframe__image');
         const cardtitle = $("<div></div>").addClass('cardframe__title').html(this.data.knifeName);
+        const textimagecontainer = $('<div>').addClass('cardframe__txtimgcontainer');
         const cardtext = $("<p>").addClass('cardframe__text').html(this.data.knifedesc);
         const img = $("<img>").attr('src', `${$props.knifeimageslocation()}/${this.data.images[0]}`);
-        $(cardimage).append(img);
+        // Check if we must alternate images and text
+        // or always put img above text
+        const ww = $(window).width();
+        console.log(`Window width is : ${ww}`);
+        if((this.cardindex % 2 !== 0)||(ww < 1400)) {
+          $(textimagecontainer).append(img).append(cardtext);
+        }
+        else {
+          $(textimagecontainer).append(cardtext).append(img);
+        }
+        // Pack the elements
         $(container).append(cardtitle);
-        $(container).append(cardimage);
-        $(container).append(cardtext);
+        $(container).append(textimagecontainer);
       }
       // ---------------------------------------------------------------------
       Zoom(event) {
