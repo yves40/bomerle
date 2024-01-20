@@ -122,7 +122,7 @@
     font-weight: 600;
     padding: 2rem 0;
     width: 100%; }
-    @media screen and (min-width: 1400px) {
+    @media screen and (min-width: 1200px) {
       .allnews h1 {
         font-size: 3rem; } }
   .allnews h2 {
@@ -133,7 +133,7 @@
     line-height: 1.5rem;
     display: inline-block;
     width: 100%; }
-    @media screen and (min-width: 1400px) {
+    @media screen and (min-width: 1200px) {
       .allnews h2 {
         font-size: 2rem; } }
   .allnews p {
@@ -142,16 +142,16 @@
     line-height: 1.4rem;
     text-align: right;
     width: 100%; }
-    @media screen and (min-width: 1400px) {
+    @media screen and (min-width: 1200px) {
       .allnews p {
         font-size: 1.5rem;
         line-height: 2rem; } }
   .allnews .news {
     width: 80%;
     margin-bottom: 2.5rem; }
-    @media screen and (min-width: 1400px) {
+    @media screen and (min-width: 1200px) {
       .allnews .news {
-        max-width: 1600px; } }
+        max-width: 1024px; } }
     .allnews .news p {
       text-align: left;
       font-family: "Gideon Roman", sans-serif; }
@@ -188,7 +188,7 @@
   background: #1a1917; }
   .topmenu #homelink {
     margin: 1rem; }
-    @media screen and (min-width: 1400px) {
+    @media screen and (min-width: 1200px) {
       .topmenu #homelink {
         display: none; } }
   .topmenu .logozone {
@@ -244,7 +244,7 @@
   filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(131deg) brightness(102%) contrast(102%); }
 
 /* --------------------  R E S P O N S I V E --------------------*/
-@media screen and (max-width: 1400px) {
+@media screen and (max-width: 1200px) {
   .topmenu {
     padding: 0; }
     .topmenu .logozone {
@@ -308,7 +308,7 @@
     font-weight: 600;
     padding: 2rem 0;
     width: 100%; }
-    @media screen and (min-width: 1400px) {
+    @media screen and (min-width: 1200px) {
       .cards h1 {
         font-size: 3rem; } }
   .cards h2 {
@@ -318,37 +318,38 @@
     line-height: 1.5rem;
     display: inline-block;
     width: 100%; }
-    @media screen and (min-width: 1400px) {
+    @media screen and (min-width: 1200px) {
       .cards h2 {
         font-size: 2rem; } }
   .cards p {
     font-family: "Gideon Roman", sans-serif;
     font-size: 1rem;
     line-height: 1.4rem;
-    text-align: left;
+    text-align: right;
     width: 100%; }
-    @media screen and (min-width: 1400px) {
+    @media screen and (min-width: 1200px) {
       .cards p {
         font-size: 1.5rem;
-        line-height: 2rem; } }
+        line-height: 2rem;
+        text-align: left; } }
   .cards .cards-header {
     width: 80%;
     margin: 2rem;
     padding-bottom: 2rem;
     border-bottom: 2px solid gray; }
-    @media screen and (min-width: 1400px) {
+    @media screen and (min-width: 1200px) {
       .cards .cards-header {
         width: 60%;
-        max-width: 1600px; } }
+        max-width: 1024px; } }
   .cards .cardframe {
     width: 100%;
     height: auto;
     transition: all .8s ease-in; }
-    @media screen and (min-width: 1400px) {
+    @media screen and (min-width: 1200px) {
       .cards .cardframe {
         width: 90%;
         padding: 1rem 0 0 0;
-        max-width: 1600px; } }
+        max-width: 1024px; } }
     .cards .cardframe__zoom {
       display: flex;
       flex-direction: column;
@@ -364,7 +365,7 @@
       display: flex;
       align-items: center;
       flex-direction: column; }
-      @media screen and (min-width: 1400px) {
+      @media screen and (min-width: 1200px) {
         .cards .cardframe__txtimgcontainer {
           flex-direction: row; } }
       .cards .cardframe__txtimgcontainer img {
@@ -373,7 +374,7 @@
         border: solid darkgrey 3px;
         border-radius: 5px;
         margin: .7rem; }
-        @media screen and (min-width: 1400px) {
+        @media screen and (min-width: 1200px) {
           .cards .cardframe__txtimgcontainer img {
             width: 300px;
             height: 300px; } }
@@ -381,14 +382,13 @@
       padding: 20px 10px;
       font-size: 2rem;
       font-family: "Gideon Roman", sans-serif; }
-      @media screen and (min-width: 1400px) {
+      @media screen and (min-width: 1200px) {
         .cards .cardframe__title {
           font-size: 3rem; } }
     .cards .cardframe__text {
       line-height: 1.2rem;
-      text-align: justify;
       padding: .5rem; }
-      @media screen and (min-width: 1400px) {
+      @media screen and (min-width: 1200px) {
         .cards .cardframe__text {
           line-height: 1.8rem;
           padding: 2rem; } }
@@ -502,10 +502,10 @@
   margin: 0 auto;
   width: 80vw;
   height: 80vh; }
-  @media screen and (min-width: 1400px) {
+  @media screen and (min-width: 1200px) {
     .carousel {
-      max-width: 1600px;
-      max-height: 1600px; } }
+      max-width: 1024px;
+      max-height: 1024px; } }
   .carousel > ul {
     margin: 0;
     padding: 0;
@@ -542,7 +542,7 @@
       align-items: end; }
     .carousel .carousel-button img {
       width: 30px; }
-    @media screen and (min-width: 1400px) {
+    @media screen and (min-width: 1200px) {
       .carousel .carousel-button img {
         width: 50px; }
       .carousel .carousel-button.prev {
@@ -570,7 +570,7 @@
       margin-left: 3px;
       margin-right: 3px;
       cursor: pointer; }
-      @media screen and (min-width: 1400px) {
+      @media screen and (min-width: 1200px) {
         .carousel .carousel-indicators-button {
           height: 10px; } }
       .carousel .carousel-indicators-button.active {
@@ -768,7 +768,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    max-width: 1600px;
+    max-width: 1024px;
     width: 95svw; }
   .zoomon h2 {
     size: 1rem;
@@ -893,11 +893,11 @@
   color: white; }
   #thegallery .galleryzone {
     padding: 0 2em 3em 2em; }
-    @media screen and (min-width: 1400px) {
+    @media screen and (min-width: 1200px) {
       #thegallery .galleryzone {
         padding: 0 5em 3em 5em;
         width: 100%;
-        max-width: 1600px; } }
+        max-width: 1024px; } }
     #thegallery .galleryzone p {
       font-family: "Gideon Roman", sans-serif;
       background-color: rgba(34, 7, 7, 0.3);
@@ -907,7 +907,7 @@
       text-align: justify;
       margin: 1rem auto;
       padding: 1em; }
-      @media screen and (min-width: 1400px) {
+      @media screen and (min-width: 1200px) {
         #thegallery .galleryzone p {
           font-size: 1.5rem;
           line-height: 2rem; } }
@@ -950,17 +950,17 @@
   gap: 1rem;
   scroll-margin: 100px;
   border-top: 2px solid gray; }
-  @media screen and (min-width: 1400px) {
+  @media screen and (min-width: 1200px) {
     .infos {
       flex-direction: row;
-      max-width: 1600px; } }
+      max-width: 1024px; } }
   .infos .infoelement {
     margin: .5rem;
     width: 80%;
     display: flex;
     flex-direction: column;
     align-items: center; }
-    @media screen and (min-width: 1400px) {
+    @media screen and (min-width: 1200px) {
       .infos .infoelement {
         align-items: start;
         width: 30%;
@@ -980,14 +980,14 @@
       margin: 2.5rem 0 .5rem 0;
       font-size: 1.7rem;
       font-family: "Gideon Roman", sans-serif; }
-      @media screen and (min-width: 1400px) {
+      @media screen and (min-width: 1200px) {
         .infos .infoelement h1, .infos .infoelement h2 {
           margin: 2rem 0 2rem 0; } }
     .infos .infoelement h3 {
       margin: 1rem 0 2rem 0;
       font-size: 1.7rem;
       font-family: "Gideon Roman", sans-serif; }
-      @media screen and (min-width: 1400px) {
+      @media screen and (min-width: 1200px) {
         .infos .infoelement h3 {
           margin: 2rem 0 2rem 0; } }
     .infos .infoelement iframe {
@@ -1059,10 +1059,10 @@
     margin: .8rem 0;
     padding-top: 1.5rem;
     border-top: solid white 2px; }
-    @media screen and (min-width: 1400px) {
+    @media screen and (min-width: 1200px) {
       #categories .catzone {
         padding-top: 3rem;
-        max-width: 1600px; } }
+        max-width: 1024px; } }
     #categories .catzone .catcard {
       display: flex;
       flex-direction: column;
@@ -1071,7 +1071,7 @@
       row-gap: .5rem;
       width: 45%;
       margin-bottom: 2rem; }
-      @media screen and (min-width: 1400px) {
+      @media screen and (min-width: 1200px) {
         #categories .catzone .catcard {
           margin-bottom: 3rem;
           width: 32%; } }
@@ -1080,7 +1080,7 @@
     aspect-ratio: 1;
     border-radius: 5px;
     margin: .5rem; }
-    @media screen and (min-width: 1400px) {
+    @media screen and (min-width: 1200px) {
       #categories img {
         width: 80%;
         aspect-ratio: 1; } }
@@ -1089,7 +1089,7 @@
     font-size: 2rem;
     font-weight: 600;
     padding: 1rem 0; }
-    @media screen and (min-width: 1400px) {
+    @media screen and (min-width: 1200px) {
       #categories h1 {
         font-size: 3rem; } }
   #categories h2 {
@@ -1098,7 +1098,7 @@
     font-weight: 600;
     padding: 1rem 0 .5rem 0;
     line-height: 1.5rem; }
-    @media screen and (min-width: 1400px) {
+    @media screen and (min-width: 1200px) {
       #categories h2 {
         font-size: 2.5rem; } }
   #categories p {
@@ -1111,7 +1111,7 @@
     border-bottom: 2px solid white;
     width: 50%;
     text-align: center; }
-    @media screen and (min-width: 1400px) {
+    @media screen and (min-width: 1200px) {
       #categories p {
         font-size: 2rem;
         line-height: 2rem;
@@ -1134,6 +1134,10 @@ body {
   font-family: "Arial, Helvetica", sans-serif;
   display: flex;
   flex-direction: column; }
+  body .textright {
+    text-align: right; }
+  body .textleft {
+    text-align: left; }
   body .hero-section {
     display: flex;
     flex-direction: row;
@@ -1146,20 +1150,20 @@ body {
     background-position: center;
     background-size: cover;
     background-attachment: fixed; }
-    @media screen and (min-width: 1400px) {
+    @media screen and (min-width: 1200px) {
       body .hero-section {
         background-image: url(../images/BastosBG2.webp); } }
     body .hero-section .hero-title {
-      width: 95%;
       padding: 1rem;
       margin-right: 1rem;
       color: white; }
-      @media screen and (min-width: 1400px) {
+      @media screen and (min-width: 1200px) {
         body .hero-section .hero-title {
-          margin-right: 2rem;
-          max-width: 1600px; } }
+          margin-right: 1rem;
+          max-width: 1024px; } }
       body .hero-section .hero-title .htmltemplate:nth-child(1) img {
-        float: right; }
+        float: right;
+        margin: 1rem; }
       body .hero-section .hero-title .htmltemplate:nth-child(1) h1, body .hero-section .hero-title .htmltemplate:nth-child(1) h2, body .hero-section .hero-title .htmltemplate:nth-child(1) p {
         text-align: left; }
       body .hero-section .hero-title img {
@@ -1168,7 +1172,7 @@ body {
         float: left;
         margin: 1rem;
         border-radius: 5px; }
-        @media screen and (min-width: 1400px) {
+        @media screen and (min-width: 1200px) {
           body .hero-section .hero-title img {
             width: 300px;
             height: 300px; } }
@@ -1179,7 +1183,7 @@ body {
         padding: 2rem 0;
         text-align: right;
         width: 100%; }
-        @media screen and (min-width: 1400px) {
+        @media screen and (min-width: 1200px) {
           body .hero-section .hero-title h1 {
             font-size: 3rem; } }
       body .hero-section .hero-title h2 {
@@ -1190,7 +1194,7 @@ body {
         line-height: 1.5rem;
         text-align: right;
         width: 100%; }
-        @media screen and (min-width: 1400px) {
+        @media screen and (min-width: 1200px) {
           body .hero-section .hero-title h2 {
             font-size: 2.5rem; } }
       body .hero-section .hero-title p {
@@ -1202,7 +1206,7 @@ body {
         background-color: rgba(34, 7, 7, 0.3);
         border-radius: 5px;
         width: 100%; }
-        @media screen and (min-width: 1400px) {
+        @media screen and (min-width: 1200px) {
           body .hero-section .hero-title p {
             font-size: 1.5rem;
             line-height: 2rem; } }
@@ -1241,13 +1245,13 @@ body {
   #categoryslider h2 {
     font-size: 2rem;
     padding: 1rem; }
-    @media screen and (min-width: 1400px) {
+    @media screen and (min-width: 1200px) {
       #categoryslider h2 {
         font-size: 4rem; } }
   #categoryslider p {
     display: none;
     width: 50%;
-    max-width: 1600px;
+    max-width: 1024px;
     margin-bottom: 2rem; }
 
 #categorygallery {
@@ -1261,11 +1265,11 @@ body {
   scroll-margin: 100px; }
   #categorygallery .galleryzone {
     padding: 0 2em 3em 2em; }
-    @media screen and (min-width: 1400px) {
+    @media screen and (min-width: 1200px) {
       #categorygallery .galleryzone {
         padding: 0 5em 3em 5em;
         width: 100%;
-        max-width: 1600px; } }
+        max-width: 1024px; } }
     #categorygallery .galleryzone p {
       font-family: "Gideon Roman", sans-serif;
       background-color: rgba(34, 7, 7, 0.3);
@@ -1275,7 +1279,7 @@ body {
       text-align: justify;
       margin: 1rem auto;
       padding: 1em; }
-      @media screen and (min-width: 1400px) {
+      @media screen and (min-width: 1200px) {
         #categorygallery .galleryzone p {
           font-size: 1.5rem;
           line-height: 2rem; } }
@@ -1304,7 +1308,7 @@ body {
     justify-content: center;
     align-items: center;
     width: 80%; }
-    @media screen and (min-width: 1400px) {
+    @media screen and (min-width: 1200px) {
       #categorygallery #gallerycontainer {
         width: 70%; } }
     #categorygallery #gallerycontainer h2 {
@@ -1315,10 +1319,10 @@ body {
     #categorygallery #gallerycontainer p {
       width: 100%;
       margin-bottom: 2rem; }
-    @media screen and (min-width: 1400px) {
+    @media screen and (min-width: 1200px) {
       #categorygallery #gallerycontainer p {
         width: 70%;
-        max-width: 1600px; } }
+        max-width: 1024px; } }
 
 #cardsgallery {
   width: 100%;
@@ -1331,11 +1335,11 @@ body {
   scroll-margin: 100px; }
   #cardsgallery .galleryzone {
     padding: 0 2em 3em 2em; }
-    @media screen and (min-width: 1400px) {
+    @media screen and (min-width: 1200px) {
       #cardsgallery .galleryzone {
         padding: 0 5em 3em 5em;
         width: 100%;
-        max-width: 1600px; } }
+        max-width: 1024px; } }
     #cardsgallery .galleryzone p {
       font-family: "Gideon Roman", sans-serif;
       background-color: rgba(34, 7, 7, 0.3);
@@ -1345,7 +1349,7 @@ body {
       text-align: justify;
       margin: 1rem auto;
       padding: 1em; }
-      @media screen and (min-width: 1400px) {
+      @media screen and (min-width: 1200px) {
         #cardsgallery .galleryzone p {
           font-size: 1.5rem;
           line-height: 2rem; } }
@@ -1378,10 +1382,10 @@ body {
     border-radius: 5px;
     padding: 0 2rem;
     margin-bottom: 50svh; }
-    @media screen and (min-width: 1400px) {
+    @media screen and (min-width: 1200px) {
       #cardsgallery #cardscontainer {
         width: 70%;
-        max-width: 1600px; } }
+        max-width: 1024px; } }
     #cardsgallery #cardscontainer__header img {
       width: 30%;
       border-radius: 50%;
@@ -1396,10 +1400,10 @@ body {
       width: 100%;
       color: white;
       margin-bottom: 2rem;
-      max-width: 1600px; }
-      @media screen and (min-width: 1400px) {
+      max-width: 1024px; }
+      @media screen and (min-width: 1200px) {
         #cardsgallery #cardscontainer .related {
-          max-width: 1600px; } }
+          max-width: 1024px; } }
       #cardsgallery #cardscontainer .related p {
         width: 85%;
         text-align: center;
@@ -1426,11 +1430,11 @@ body {
       border-bottom: solid white 2px;
       font-size: 2rem;
       padding: 2rem; }
-      @media screen and (min-width: 1400px) {
+      @media screen and (min-width: 1200px) {
         #cardsgallery #cardscontainer h2 {
           font-size: 4rem; } }
     #cardsgallery #cardscontainer p {
       margin-bottom: 1rem; }
-      @media screen and (min-width: 1400px) {
+      @media screen and (min-width: 1200px) {
         #cardsgallery #cardscontainer p {
-          max-width: 1600px; } }
+          max-width: 1024px; } }

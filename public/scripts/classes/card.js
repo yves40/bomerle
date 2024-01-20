@@ -32,10 +32,17 @@
         // or always put img above text
         const ww = $(window).width();
         console.log(`Window width is : ${ww}`);
-        if((this.cardindex % 2 !== 0)||(ww < 1400)) {
+        if((this.cardindex % 2 !== 0)||(ww < 1200)) {
+          if(ww < 1200) {
+            $(cardtext).css('text-align', 'justify');
+          }
+          else {
+            $(cardtext).addClass('textright');
+          }
           $(textimagecontainer).append(img).append(cardtext);
         }
         else {
+          $(cardtext).addClass('textleft');
           $(textimagecontainer).append(cardtext).append(img);
         }
         // Pack the elements
