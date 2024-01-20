@@ -19,6 +19,13 @@
 }
 
 body {
+  .textright {
+      text-align: right;
+  }
+  .textleft {
+      text-align: left;
+  }
+
   background: $background;
   font-family: $main; 
   display: flex;
@@ -41,19 +48,19 @@ body {
     }
 
     .hero-title {
-      width: 95%;
       padding: 1rem;
       margin-right: 1rem;
       color: $primaryText;
 
       @include for-desktop{
-          margin-right: 2rem;
+          margin-right: 1rem;
           max-width: $responsive-max-width;
       }
 
       .htmltemplate:nth-child(1) {
         img {
           float: right;
+          margin: 1rem;
         }
         h1, h2, p {
           text-align: left;
