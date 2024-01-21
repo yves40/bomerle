@@ -6,6 +6,7 @@ import Logger  from './classes/logger.js';
 import Slider from './classes/slider.js';
 import Gallery from './classes/gallery.js';
 import Card from './classes/card.js';
+import Timer from './classes/timer.js';
 
 $(document).ready(function () {
     $props.load();
@@ -215,6 +216,9 @@ $(document).ready(function () {
             const payload = {
                 "knifeid" :  knife.id,
             }
+            const timer = new Timer();
+            timer.startTimer();
+            logger.debug(`Load knife images from the DB`);
             $.ajax({
                 type: "POST",
                 url: '/knives/public/getimages',
@@ -222,6 +226,8 @@ $(document).ready(function () {
                 dataType: "json",
                 async: false,
                 success: function (response) {
+                    timer.stopTimer();
+                    logger.debug(`Loaded knife images from the DB in ${timer.getElapsedString()}`);
                     buildCard(response, $('#cardscontainer'), idx);
                 },
                 error: function (xhr) {
@@ -247,6 +253,9 @@ $(document).ready(function () {
                     const payload = {
                         "knifeid" :  $(event.target).data('knifeid'),
                     }
+                    const timer = new Timer();
+                    timer.startTimer();
+                    logger.debug(`Load SLIDER knife images from the DB`);
                     $.ajax({
                         type: "POST",
                         url: '/knives/public/getimages',
@@ -254,6 +263,8 @@ $(document).ready(function () {
                         dataType: "json",
                         async: true,
                         success: function (response) {
+                            timer.stopTimer();
+                            logger.debug(`Loaded SLIDER images for ${response.knifeName}  from the DB in ${timer.getElapsedString()}`);
                             displayKnifeSlider(response.knifeName,
                                                     response.knifedesc,
                                                     response.images);
@@ -434,6 +445,8 @@ $(document).ready(function () {
                 const payload = {
                     "knifeid" :  $(event.target).data('knifeid'),
                 }
+                const timer = new Timer();
+                timer.startTimer();
                 $.ajax({
                     type: "POST",
                     url: '/knives/public/getimages',
@@ -441,6 +454,8 @@ $(document).ready(function () {
                     dataType: "json",
                     async: true,
                     success: function (response) {
+                        timer.stopTimer();
+                        logger.debug(`Got knife images in ${timer.getElapsedString()}`);
                         displayKnifeSlider(response.knifeName,
                                                 response.knifedesc,
                                                 response.images);
