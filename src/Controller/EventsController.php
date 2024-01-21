@@ -34,7 +34,6 @@ class EventsController extends AbstractController
         $form = $this->createForm(EventsType::class, $event);
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()){
-            dump($event);
             $entityManager->persist($event);
             $entityManager->flush();
             $events = $eve->listEvents();

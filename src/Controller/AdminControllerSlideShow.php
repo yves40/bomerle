@@ -101,7 +101,6 @@ class AdminControllerSlideShow extends AbstractController
                 }
                 else {
                     $errors = $form->getErrors(true, false);
-                    dump($errors);
                     foreach ($errors as $fielderrors) {
                         foreach($fielderrors as $error) {
                             $this->addFlash('error', $error->getMessage());
@@ -142,7 +141,6 @@ class AdminControllerSlideShow extends AbstractController
                 }
                 else {
                     $errors = $form->getErrors(true, false);
-                    dump($errors);
                     foreach ($errors as $fielderrors) {
                         foreach($fielderrors as $error) {
                             $this->addFlash('error', $error->getMessage());

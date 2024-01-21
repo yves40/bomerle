@@ -42,7 +42,6 @@ class AdminControllerKnife extends AbstractController
         $allknives = $repo->findBy([], ['name' => 'asc']);
 
         $form = $this->createForm(KnifesType::class, $knife);
-        dump($allknives);
         return $this->render('admin/knives.html.twig', [
             "locale" =>  $loc,
             "new" => true,
