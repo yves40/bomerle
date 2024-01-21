@@ -5,7 +5,7 @@
     Jan 03 2024     Remove img click handler
 
     ----------------------------------------------------------------------------*/
-    class Card {
+    export default class Card {
 
       /**
        * 
@@ -31,7 +31,6 @@
         // Check if we must alternate images and text
         // or always put img above text
         const ww = $(window).width();
-        console.log(`Window width is : ${ww}`);
         if((this.cardindex % 2 !== 0)||(ww < 1200)) {
           if(ww < 1200) {
             $(cardtext).css('text-align', 'justify');

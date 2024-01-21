@@ -17,7 +17,9 @@
     Jan 13 2024     New management of Y scrolling
 
     ----------------------------------------------------------------------------*/
-class Slider {
+
+import Logger  from './logger.js';
+export default class Slider {
 
   // slidertype is used to generate images location.
   // As the slider can display diaporama images or knife images
@@ -25,7 +27,7 @@ class Slider {
   // Two accepted values : SHOW (the default) and KNIFE
   constructor(container, timing = 2, description = '', allimages, slidertype = 'SHOW') {
     // Init
-      this.version = 'Slider:1.53, Jan 13 2024 ';
+      this.version = 'Slider:1.54, Jan 21 2024 ';
       this.container = container;
       this.containername = $(container).attr('name');
       this.slideinterval = timing * 1000;
@@ -43,6 +45,9 @@ class Slider {
       this.slidertype = slidertype;
       this.imagespath = "";
 
+      const devmode = $('.debug').length === 1 ? 'dev' : 'prod';
+      this.logger = new Logger(devmode);
+  
       // Manage the web path used to load images, depending on slidertype
       switch (this.slidertype) {
         case 'SHOW':  this.imagespath = $props.slideimageslocation() +  "/";
@@ -246,12 +251,12 @@ class Slider {
       this.intervalid = setInterval( () => {
         this.nextSlide();
       }, this.slideinterval);
-      console.log(`##VISIBLE## ${this.homezone} : Delay for slides set to ${this.slideinterval} with interval ID: ${this.intervalid}` );
+      this.logger.debug(`##VISIBLE## ${this.homezone} : Delay for slides set to ${this.slideinterval} with interval ID: ${this.intervalid}` );
     }
   }
   stopSlider() {
     if(this.intervalid !== 0) {
-      console.log(`##HIDDEN## ${this.homezone} : Stop slideware with interval ID: ${this.intervalid}` );
+      this.logger.debug(`##HIDDEN## ${this.homezone} : Stop slideware with interval ID: ${this.intervalid}` );
       clearInterval(this.intervalid);
       this.intervalid = 0;
     }

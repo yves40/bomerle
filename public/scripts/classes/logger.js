@@ -25,8 +25,8 @@ export default class Logger {
         if(runmode === 'dev') {
             this.loggerlevel = 0;
         }
-        else {  // In production, only trace ERROR and FATAL
-            this.loggerlevel = 3;
+        else {  // In production, only trace INFORMATIONAL, WARNING, ERROR and FATAL
+            this.loggerlevel = 1;
         }
     }
     /**

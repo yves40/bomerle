@@ -8,7 +8,7 @@
     Aug 29 2023     Reorg into single css file
 
 ----------------------------------------------------------------------------*/
-class Gallery {
+export default class Gallery {
 
     constructor(container, description) {
         // Init

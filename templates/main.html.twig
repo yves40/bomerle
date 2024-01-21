@@ -112,9 +112,14 @@
 <script src="{{ asset('node_modules/jquery/dist/jquery.min.js')}}"></script>
 <script src="{{ asset('scripts/properties.js')}}"></script>
 <script src="{{ asset('scripts/translations/labels.js')}}"></script>
+{# <script type="importmap">{
+  "imports": {
+    "Logger": "./scripts/classes/logger.js",
+    "DateHelper": "./scripts/classes/datetime.js"
+  }
+}</script> #}
 <script type="module" src="{{ asset('scripts/dynamic.js')}}"></script>
-<script src="{{ asset('scripts/classes/slider.js')}}"></script>
-<script src="{{ asset('scripts/classes/gallery.js')}}"></script>
-<script src="{{ asset('scripts/classes/card.js')}}"></script>
-
+{# <script type="module" src="{{ asset('scripts/classes/gallery.js')}}"></script>
+<script type="module" src="{{ asset('scripts/classes/card.js')}}"></script>
+<script type="module" src="{{ asset('scripts/classes/slider.js')}}"></script> #}
 </html>

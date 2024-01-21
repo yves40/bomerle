@@ -3,10 +3,12 @@
 //  -------------------------
 
 import Logger  from './classes/logger.js';
+import Slider from './classes/slider.js';
+import Gallery from './classes/gallery.js';
+import Card from './classes/card.js';
 
 $(document).ready(function () {
     $props.load();
-    console.log(`[${$props.version()} ]` );
 
     const cardsmenu = $("#cardsmenu");
     const cardsgallery = $('#cardsgallery');
@@ -43,18 +45,13 @@ $(document).ready(function () {
 
     // Determine if running in dev or prod mode
     const devmode = $('.debug').length === 1 ? 'dev' : 'prod';
-    // ----------------------------------------------------------
     const logger = new Logger(devmode);
-    logger.debug('Debug level test');
-    logger.info('Info level test');
-    logger.warning('Warning level test');
-    logger.error('Error level test');
-    logger.fatal('Fatal level test');
+    logger.info(`[${$props.version()} ]` );
 
     // various handlers
     $('.langselector').on('click', (event) => {
         const choice = $(event.target).data('lang');
-        console.log(`Switch lang to ${choice}`);
+        logger.debug(`Switch lang to ${choice}`);
         $props.set('applang', choice);
         $props.save();
     })
@@ -133,7 +130,7 @@ $(document).ready(function () {
                     AddCategory(catzone, response, dedup[idx]);
                 },
                 error: function (xhr) {
-                    console.log(xhr);
+                    logger.error(xhr);
                 }
             });    
         }
@@ -155,13 +152,13 @@ $(document).ready(function () {
         // -------------------------------------------------------------
         // Track double click or double request
         let displayedcateoryid = parseInt($(cardsgallery).attr('data-catid'));
-        console.log(`*** Current : ${displayedcateoryid} requested : ${categoryid}`);
+        logger.debug(`*** Current : ${displayedcateoryid} requested : ${categoryid}`);
         if( !isNaN(displayedcateoryid) && displayedcateoryid === categoryid) {
-            console.log(`Category ${categoryid} already display`);
+            logger.debug(`Category ${categoryid} already display`);
             return false;
         }
         else {
-            console.log(`Category ${categoryid} display`);
+            logger.debug(`Category ${categoryid} display`);
             $(cardsgallery).empty().attr('data-catid', categoryid);
         }
         // -------------------------------------------------------------
@@ -183,7 +180,7 @@ $(document).ready(function () {
             */
            allcategoriesimage.find( (current, index) => {
                if(current.catid === parseInt(catrelated[idx])) {
-                   console.log(`************ ${catname} is associated to : ${current.catname} with ${current.catphotopath}`);
+                logger.debug(`************ ${catname} is associated to : ${current.catname} with ${current.catphotopath}`);
                    let relcard = $('<div>').addClass('relatedcard');
                    // Data attributes on the container, to be used by zoomCaegory()
                    $(relcard).append($('<p>').text(current.catname))
@@ -200,7 +197,6 @@ $(document).ready(function () {
                    $(relcard).on('mousedown', (event) => {
                         event.stopImmediatePropagation();
                         let target = event.target;
-                        console.log(`***** ${event.target.nodeName}`);
                         // Check the image or the paragraph have not been clicked
                         // If so, switch to parent DIV, which holds the data
                         if((event.target.nodeName === 'P')||
@@ -229,7 +225,7 @@ $(document).ready(function () {
                     buildCard(response, $('#cardscontainer'), idx);
                 },
                 error: function (xhr) {
-                    console.log(xhr);
+                    logger.error(xhr);
                 }
             });    
         })
@@ -263,7 +259,7 @@ $(document).ready(function () {
                                                     response.images);
                         },
                         error: function (xhr) {
-                            console.log(xhr);
+                            logger.error(xhr);
                         }
                     });        
                 }
@@ -363,11 +359,12 @@ $(document).ready(function () {
                 // Update the card section with deduplicated knives list
                 // images and descriptions
                 const dedupkniveslist = sortedUnique(response.knivesid);
-                console.log(`Now update the card section with these knives ${dedupkniveslist}`);
+                logger.debug(`Now update the card section with these knives ${dedupkniveslist}`);
                 let activeknives = [];
+                let knifeincard = [];
                 dedupkniveslist.forEach(knifeId => {
                     knifeincard = allcategoriesknives.find((knife) => knife.id === knifeId);
-                    console.log(`Add ${knifeincard.knifename} with ID ${knifeincard.id} to the card section`);
+                    logger.debug(`Add ${knifeincard.knifename} with ID ${knifeincard.id} to the card section`);
                     activeknives.push(knifeincard);
                 });
                 if(loadPublishedCatalog(activeknives, categoryid,catname, catdesc, catrelated, imgsrc)) {
@@ -376,7 +373,7 @@ $(document).ready(function () {
                 window.location = '#cardsgallery';
             },
             error: function (xhr) {
-                console.log(xhr);
+                logger.error(xhr);
             }
         });    
     }
@@ -433,7 +430,7 @@ $(document).ready(function () {
                 });
             }
             else{
-                console.log(`Now display photos for ${$(event.target).data('knifeid')}`);
+                logger.debug(`Now display photos for ${$(event.target).data('knifeid')}`);
                 const payload = {
                     "knifeid" :  $(event.target).data('knifeid'),
                 }
@@ -449,7 +446,7 @@ $(document).ready(function () {
                                                 response.images);
                     },
                     error: function (xhr) {
-                        console.log(xhr);
+                        logger.error(xhr);
                     }
                 });        
             }
@@ -488,7 +485,7 @@ $(document).ready(function () {
      * @param {*} container The target element where the slider will be instanciated
      */
     function buildImagesSlider(allimages, timing, description, container) {
-        console.log(`Container name is ${$(container).attr('name')} for ${allimages.length} images`);
+        logger.debug(`Container name is ${$(container).attr('name')} for ${allimages.length} images`);
         let slider = new Slider(container, timing, description, allimages);     // Build the slider frame
     }
     /**
@@ -498,7 +495,7 @@ $(document).ready(function () {
      * @param {*} container The target element where the gallery will be instanciated
      */
     function buildImagesGallery(allimages, description,  container) {
-        console.log(`Container name is ${$(container).attr('name')} for ${allimages.length} images`);
+        logger.debug(`Container name is ${$(container).attr('name')} for ${allimages.length} images`);
         let gallery = new Gallery(container, description);
         gallery.addImages(allimages);
     }
@@ -522,13 +519,14 @@ $(document).ready(function () {
      * Request the active diaporamas from the DB
      */
     function getActiveDiaporamas() {
+        logger.info('Loading active diaporamas list');
         $.ajax({
             type: "GET",
             url: '/slides/public/getactivediaporamas',
             dataType: "json",
             async: true,
             success: function (response) {
-                console.log(response);
+                logger.info(`Loaded ${response.activecount} diaporamas`);
                 if(response.activecount != 0) {
                     $(gallerymenu).show();
                     $('#thegallery').show();
@@ -536,7 +534,7 @@ $(document).ready(function () {
                 }
             },
             error: function (xhr) {
-                console.log(xhr);
+                logger.console.error();(xhr);
             }
         });    
     }
@@ -544,13 +542,14 @@ $(document).ready(function () {
      * Request the active knives from the DB
      */
     function getPublishedKnives() {
+        logger.info('Loading all related active knives')
         $.ajax({
             type: "GET",
             url: '/knives/public/getpublished',
             dataType: "json",
             async: true,
             success: function (response) {
-                console.log(response);
+                logger.info(`Loaded ${response.knivescount} knives for ${response.categoriescount} categories`);
                 if(response.categoriescount != 0) {
                     $(categoriesmenu).show();
                     $(categorysection).show();
@@ -559,7 +558,7 @@ $(document).ready(function () {
                 }
             },
             error: function (xhr) {
-                console.log(xhr);
+                logger.error(xhr);
             }
         });    
     }
@@ -604,7 +603,7 @@ $(document).ready(function () {
                     }
                 },
                 error: function (xhr) {
-                    console.log(xhr);
+                    logger.error(xhr);
                 }
             });    
         });
@@ -648,7 +647,7 @@ $(document).ready(function () {
                 break;
         }
         if(choosedid != 0) {
-            console.log(`For knife : ${choosedname} / ${choosedid}`);
+            logger.debug(`For knife : ${choosedname} / ${choosedid}`);
         }
         // Build the request object
         if($('#contact_object option:selected').val() === 'infoknife') {
@@ -675,7 +674,6 @@ $(document).ready(function () {
             async: true,
             success: function (response) {
                 clearTimeout(tid);
-                console.log(response);
                 $('#feedback').text(response.message)
                     .css("color",  "green");
                 $('#contact_email').val('');
@@ -690,7 +688,7 @@ $(document).ready(function () {
             },
             error: function (xhr) {
                 clearTimeout(tid);
-                console.log(xhr);
+                logger.error(xhr);
                 $('#feedback').text(response.message)
                     .css("color",  "red");
                 ;
