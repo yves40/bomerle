@@ -1,6 +1,9 @@
 //  -------------------------
 //  dynamic.js
 //  -------------------------
+
+import Logger  from './classes/logger.js';
+
 $(document).ready(function () {
     $props.load();
     console.log(`[${$props.version()} ]` );
@@ -37,6 +40,16 @@ $(document).ready(function () {
     let validText = false;
     let categorygalleryactive = false;
     let knifeslideractive = false;
+
+    // Determine if running in dev or prod mode
+    const devmode = $('.debug').length === 1 ? 'dev' : 'prod';
+    // ----------------------------------------------------------
+    const logger = new Logger(devmode);
+    logger.debug('Debug level test');
+    logger.info('Info level test');
+    logger.warning('Warning level test');
+    logger.error('Error level test');
+    logger.fatal('Fatal level test');
 
     // various handlers
     $('.langselector').on('click', (event) => {
