@@ -67,3 +67,15 @@ $ php bin/console doctrine:migrations:execute DoctrineMigrations\Version20230318
 # Delete it manually otherwise the doctrine status will be wrong
 # Also cleanup any modification in the entity related to the attributes used in the migratioun file
 $ php bin/console doctrine:migrations:version Version20230318092754 --delete
+# -------------------------------------------------------------------------------
+#     The commands are used to enable js modules in the prod environment
+#     Check this doc:
+#         https://symfony.com/doc/current/frontend/asset_mapper.html
+# -------------------------------------------------------------------------------
+$ composer require symfony/asset-mapper symfony/twig-pack
+$ php bin/console asset-map:compile
+#      Optionnally:
+$ php bin/console debug:asset-map
+
+
+  
