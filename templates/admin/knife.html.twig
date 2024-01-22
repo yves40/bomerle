@@ -60,14 +60,6 @@
                     type="button" role="tab" aria-controls="profile" 
                     aria-selected="false">{% trans %}admin.manageknives.tab2{% endtrans %}</button>
         </li>
-        <li class="nav-item" role="presentation">
-            <button class="nav-link ylink" 
-                    id="slider-tab" 
-                    data-bs-toggle="tab" 
-                    data-bs-target="#slider"
-                    type="button" role="tab" aria-controls="profile" 
-                    aria-selected="false">{% trans %}admin.manageknives.tab3{% endtrans %}</button>
-        </li>
     </ul>
   
 
@@ -146,14 +138,6 @@
                     <div id="feedback" class="row mt-4"><p></p></div>
                 </div>
             {% endif %}
-        </div>
-        {# S L I D E R --------------------------------------------------------------------------------------------------------- #}
-        <div class="tab-pane mt-4" id="slider" role="tabpanel" aria-labelledby="slider-tab">
-            <div id="theslider">
-                {% include "admin/slider.html.twig" with { imgsourceid: 'refreshzone', 
-                                                            auto: 'true',
-                                                            interval: '2000' } only %}
-            </div>
         </div>
         {# K N I F E    L A B E L ---------------------------------------------------------------------------------------------- #}
         <div class="tab-pane mt-4" id="title" role="tabpanel" aria-labelledby="title-tab"  align-items="left">
