@@ -5,6 +5,8 @@
     Jan 03 2024     Remove img click handler
 
     ----------------------------------------------------------------------------*/
+
+    import Logger  from './logger.js';
     export default class Card {
 
       /**
@@ -16,14 +18,19 @@
        */
       constructor(container, data, cardindex) {
         // Init
-          this.version = 'Card:1.38, Jan 16 2024 ';
+          this.version = 'Card:1.39, Jan 22 2024 ';
           this.container = container;
           this.data = data;
           this.cardindex = cardindex;
+          // Determine if running in dev or prod mode
+          const devmode = $('.debug').length === 1 ? 'dev' : 'prod';
+          this.logger = new Logger(devmode);
+
           this.loadCard(container, data);
           this.mandatorydelay = 10; // When card zoom on a slider, delay is forced
       }
       loadCard(container, data) {
+        this.logger.debug(`Build a knife card in category zoom for [ ${this.data.knifeName} ]`);
         const cardtitle = $("<div></div>").addClass('cardframe__title').html(this.data.knifeName);
         const textimagecontainer = $('<div>').addClass('cardframe__txtimgcontainer');
         const cardtext = $("<p>").addClass('cardframe__text').html(this.data.knifedesc);
@@ -73,7 +80,7 @@
             dataType: "json",
             async: true,
             success: function (response) {
-              console.log(`Got ${response.imagecount} images for ${response.knifeName}`);
+              this.logger.debug(`Got ${response.imagecount} images for ${response.knifeName}`);
               // Remove body scroll bar so user cant scroll up or down
               $("body").css("overflow", "hidden");
               const top = window.scrollY;
@@ -91,7 +98,7 @@
                                 'KNIFE');
             },
             error: function (xhr) {
-              console.log(xhr);
+              logger.error(xhr);
             }
         });    
       }

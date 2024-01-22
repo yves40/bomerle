@@ -139,7 +139,6 @@ export default class Slider {
       $(indicatorslist[i]).removeClass('active');
     };
     $(indicatorslist[this.activeindex]).addClass('active');
-    // console.log(indicatorslist);
   }
   // ------------------------------------------------------------------------------------------------
   checkBoundaries() {
