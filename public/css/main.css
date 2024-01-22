@@ -362,7 +362,7 @@
       .cards .cardframe__zoom .cardframe__text {
         display: none; }
     .cards .cardframe__txtimgcontainer {
-      display: flex;
+      display: block;
       align-items: center;
       flex-direction: column; }
       @media screen and (min-width: 1200px) {

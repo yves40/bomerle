@@ -76,7 +76,7 @@
       }
     }
     &__txtimgcontainer {
-      display: flex;
+      display: block;
       align-items: center;
       flex-direction: column;
       @include for-desktop {
