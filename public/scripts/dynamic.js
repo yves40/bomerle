@@ -88,9 +88,9 @@ $(document).ready(function () {
         event.preventDefault();
         buttonClicked();
     })
-    getActiveDiaporamas();
-    getPublishedKnives()
     getHtmlTemplates();
+    getPublishedKnives()
+    getActiveDiaporamas();
 
     /** --------------------------------------------------------
      * @param container
@@ -112,7 +112,7 @@ $(document).ready(function () {
                 if (x > y) {return 1;}
                 return 0;
         });
-
+        let tt = new Timer(); tt.startTimer();
         const catzone = $('<div></div>').addClass('catzone');
         $(container).append(catzone);
         // Display categories containing at least 1 published knife
@@ -135,6 +135,8 @@ $(document).ready(function () {
                 }
             });    
         }
+        tt.stopTimer();
+        logger.info(`loaded categories catalog in ${tt.getElapsedString()}`);
     }
     /** -------------------------------------------------------------
      * @param {*} allpublished List of published knives for a given category
@@ -153,13 +155,10 @@ $(document).ready(function () {
         // -------------------------------------------------------------
         // Track double click or double request
         let displayedcateoryid = parseInt($(cardsgallery).attr('data-catid'));
-        logger.debug(`*** Current : ${displayedcateoryid} requested : ${categoryid}`);
         if( !isNaN(displayedcateoryid) && displayedcateoryid === categoryid) {
-            logger.debug(`Category ${categoryid} already display`);
             return false;
         }
         else {
-            logger.debug(`Category ${categoryid} display`);
             $(cardsgallery).empty().attr('data-catid', categoryid);
         }
         // -------------------------------------------------------------
@@ -181,7 +180,6 @@ $(document).ready(function () {
             */
            allcategoriesimage.find( (current, index) => {
                if(current.catid === parseInt(catrelated[idx])) {
-                logger.debug(`************ ${catname} is associated to : ${current.catname} with ${current.catphotopath}`);
                    let relcard = $('<div>').addClass('relatedcard');
                    // Data attributes on the container, to be used by zoomCaegory()
                    $(relcard).append($('<p>').text(current.catname))
@@ -218,7 +216,6 @@ $(document).ready(function () {
             }
             const timer = new Timer();
             timer.startTimer();
-            logger.debug(`Load knife images from the DB`);
             $.ajax({
                 type: "POST",
                 url: '/knives/public/getimages',
@@ -227,7 +224,7 @@ $(document).ready(function () {
                 async: false,
                 success: function (response) {
                     timer.stopTimer();
-                    logger.debug(`Loaded knife images from the DB in ${timer.getElapsedString()}`);
+                    logger.debug(`Loaded [ ${response.knifeName} ] images from the DB in ${timer.getElapsedString()}`);
                     buildCard(response, $('#cardscontainer'), idx);
                 },
                 error: function (xhr) {
@@ -534,14 +531,16 @@ $(document).ready(function () {
      * Request the active diaporamas from the DB
      */
     function getActiveDiaporamas() {
-        logger.info('Loading active diaporamas list');
+        let ttx = new Timer();
+        ttx.startTimer();
         $.ajax({
             type: "GET",
             url: '/slides/public/getactivediaporamas',
             dataType: "json",
             async: true,
             success: function (response) {
-                logger.info(`Loaded ${response.activecount} diaporamas`);
+                ttx.stopTimer();
+                logger.info(`Loaded ${response.activecount} diaporamas in ${ttx.getElapsedString()}`);
                 if(response.activecount != 0) {
                     $(gallerymenu).show();
                     $('#thegallery').show();
@@ -557,14 +556,16 @@ $(document).ready(function () {
      * Request the active knives from the DB
      */
     function getPublishedKnives() {
-        logger.info('Loading all related active knives')
+        let timer = new Timer();
+        timer.startTimer();
         $.ajax({
             type: "GET",
             url: '/knives/public/getpublished',
             dataType: "json",
             async: true,
             success: function (response) {
-                logger.info(`Loaded ${response.knivescount} knives for ${response.categoriescount} categories`);
+                timer.stopTimer();
+                logger.info(`Loaded ${response.knivescount} knives in ${timer.getElapsedString()}`);
                 if(response.categoriescount != 0) {
                     $(categoriesmenu).show();
                     $(categorysection).show();
@@ -581,12 +582,15 @@ $(document).ready(function () {
      * Find dynamic html pieces
      */
     function getHtmlTemplates() {
+        let timer = new Timer();
+        timer.startTimer();
         $(".htmltemplate").each(function (index, element) {
             const thelang = $(this).data('lang');
             // element == this
             const templatename = $(this).data('templatename');
             $(this).load(`/templates/${thelang}/${templatename}.html`);
         });
+        logger.info(`Loaded template(s) in ${timer.getElapsedString()}`);
     }
     /**
      * Find and load active diaporamas in the page

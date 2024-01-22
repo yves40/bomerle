@@ -12,7 +12,7 @@ export default class Logger {
     static WARNING = 2;
     static ERROR = 3;
     static FATAL = 4;
-    static Version = 'logger:1.50, Jan 21 2024';
+    static Version = 'logger:1.51, Jan 22 2024';
     static OUTFILE = '/tmp/' + this.Version.replace(/[,:]/g,'_').replace(/ /g, '_') + '.log'
 
     /**
@@ -78,7 +78,7 @@ export default class Logger {
             let logstring = this.datetime.getDateTime()
                     + ' [' + this.levelToString(level) + '] '
                     + ' ' + mess ;
-            console.log(logstring);
+                    console.log(logstring);
             return;
         }
     }
