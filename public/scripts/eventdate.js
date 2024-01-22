@@ -11,7 +11,6 @@ let dateUI = {
 // ------------------ Init loop to trap all mouse clicks -------------------------
 $(document).ready(function () {
     $props.load();
-    console.log(`[${$props.datehandler()} ]` );
     // In the events TWIG form, IDs are prefixed by events
     getDateFields('events');                    // events if the root string for TWIG generated IDs
     updateDateFields('eventdata', 'eventobj');  // eventdata is the ID of the div containing object data
