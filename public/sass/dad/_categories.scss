@@ -1,4 +1,4 @@
-#categories {
+#categorygallery {
     scroll-margin: $menu-height;
     display: flex;  
     background-image: url(../../images/home5.jpg);
@@ -20,7 +20,7 @@
             padding-top: 3rem;
             max-width: $responsive-max-width;
         }
-        .catcard {
+        &__card {
             display: flex;  
             flex-direction: column;
             justify-content: center;
@@ -32,56 +32,26 @@
                 margin-bottom: 3rem;
                 width: 32%;
             }
-        }
-    }
-    img {
-        width: 90%;
-        aspect-ratio: 1;
-        border-radius: $border-radius;
-        margin: .5rem;
-        @include for-desktop {
-            width: 80%;
-            aspect-ratio: 1;
-        }
-    } 
-    h1{
-        font-family: $herotitle;
-        font-size: 2rem;
-        font-weight: 600;
-        padding: 1rem 0;
-        @include for-desktop{
-            font-size: 3rem;
-        }
-    }
-    h2{
-        font-family: $heroh2;
-        font-size: 1.2rem;
-        font-weight: 600;
-        padding: 1rem 0 .5rem 0;
-        line-height: 1.5rem;
-        @include for-desktop{
-            font-size: 2.5rem;
-        }
-    }
-    p{
-        font-family: $herop;
-        font-size: 1.5rem;
-        line-height: 1.4rem;
-        padding: 1rem;
-        background-color: rgba(34, 7, 7, .3);
-        border-radius: $border-radius;
-        border-bottom: 2px solid white;
-        width: 50%;
-        text-align: center;
-        @include for-desktop{
-            font-size: 2rem;
-            line-height: 2rem;
-            min-height: 15rem;
-            min-width: 15rem;
-        }
-        a {
-          color: white;
-          font-size: 3rem;
+            h2{
+                font-family: $h2font;
+                font-size: 1.2rem;
+                font-weight: 600;
+                padding: 1rem 0 1rem 0;
+                line-height: 1.5rem;
+                @include for-desktop{
+                    font-size: 2.5rem;
+                }
+            }
+            img {
+                width: 90%;
+                aspect-ratio: 1;
+                border-radius: $border-radius;
+                margin: .5rem;
+                @include for-desktop {
+                    width: 80%;
+                    aspect-ratio: 1;
+                }
+            } 
         }
     }
 }

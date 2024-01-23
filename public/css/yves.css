@@ -579,26 +579,26 @@
 *, *::before, *::after {
   box-sizing: border-box; }
 
-#thegallery {
+#newsgallery {
   scroll-margin: 100px;
   padding: 3rem 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-image: url(../images/home4.jpg);
+  background-image: url(../images/BastosBG3.webp);
   background-position: center;
   background-attachment: fixed;
   background-size: cover;
   color: white; }
-  #thegallery .galleryzone {
+  #newsgallery .galleryzone {
     padding: 0 2em 3em 2em; }
     @media screen and (min-width: 1200px) {
-      #thegallery .galleryzone {
+      #newsgallery .galleryzone {
         padding: 0 5em 3em 5em;
         width: 100%;
         max-width: 1024px; } }
-    #thegallery .galleryzone p {
+    #newsgallery .galleryzone p {
       font-family: "Gideon Roman", sans-serif;
       background-color: rgba(34, 7, 7, 0.3);
       border-radius: 5px;
@@ -608,25 +608,25 @@
       margin: 1rem auto;
       padding: 1em; }
       @media screen and (min-width: 1200px) {
-        #thegallery .galleryzone p {
+        #newsgallery .galleryzone p {
           font-size: 1.5rem;
           line-height: 2rem; } }
-    #thegallery .galleryzone .gallery {
+    #newsgallery .galleryzone .gallery {
       margin: 0 auto;
       display: flex;
       flex-wrap: wrap;
       gap: 2vmin;
       list-style-type: none; }
-      #thegallery .galleryzone .gallery li {
+      #newsgallery .galleryzone .gallery li {
         height: 250px;
         flex-grow: 1; }
-      #thegallery .galleryzone .gallery img {
+      #newsgallery .galleryzone .gallery img {
         width: 100%;
         height: 100%;
         border-radius: 5px;
         border: solid 1px white;
         object-fit: cover; }
-      #thegallery .galleryzone .gallery ::after {
+      #newsgallery .galleryzone .gallery ::after {
         content: "";
         display: block;
         flex-grow: 10; }

@@ -290,7 +290,7 @@
         gap: 2px;
         background: transparent; } }
 
-#cardsgallery {
+#knivesgallery {
   width: 100%;
   padding-top: 1rem;
   background-image: url(../images/BastosBG4.webp);
@@ -883,26 +883,26 @@
 *, *::before, *::after {
   box-sizing: border-box; }
 
-#thegallery {
+#newsgallery {
   scroll-margin: 100px;
   padding: 3rem 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-image: url(../images/home4.jpg);
+  background-image: url(../images/BastosBG3.webp);
   background-position: center;
   background-attachment: fixed;
   background-size: cover;
   color: white; }
-  #thegallery .galleryzone {
+  #newsgallery .galleryzone {
     padding: 0 2em 3em 2em; }
     @media screen and (min-width: 1200px) {
-      #thegallery .galleryzone {
+      #newsgallery .galleryzone {
         padding: 0 5em 3em 5em;
         width: 100%;
         max-width: 1024px; } }
-    #thegallery .galleryzone p {
+    #newsgallery .galleryzone p {
       font-family: "Gideon Roman", sans-serif;
       background-color: rgba(34, 7, 7, 0.3);
       border-radius: 5px;
@@ -912,25 +912,25 @@
       margin: 1rem auto;
       padding: 1em; }
       @media screen and (min-width: 1200px) {
-        #thegallery .galleryzone p {
+        #newsgallery .galleryzone p {
           font-size: 1.5rem;
           line-height: 2rem; } }
-    #thegallery .galleryzone .gallery {
+    #newsgallery .galleryzone .gallery {
       margin: 0 auto;
       display: flex;
       flex-wrap: wrap;
       gap: 2vmin;
       list-style-type: none; }
-      #thegallery .galleryzone .gallery li {
+      #newsgallery .galleryzone .gallery li {
         height: 250px;
         flex-grow: 1; }
-      #thegallery .galleryzone .gallery img {
+      #newsgallery .galleryzone .gallery img {
         width: 100%;
         height: 100%;
         border-radius: 5px;
         border: solid 1px white;
         object-fit: cover; }
-      #thegallery .galleryzone .gallery ::after {
+      #newsgallery .galleryzone .gallery ::after {
         content: "";
         display: block;
         flex-grow: 10; }
@@ -1045,7 +1045,7 @@
     .infos .contact li {
       color: red; }
 
-#categories {
+#categorygallery {
   scroll-margin: 100px;
   display: flex;
   background-image: url(../../images/home5.jpg);
@@ -1054,7 +1054,7 @@
   background-size: cover;
   color: white;
   justify-content: center; }
-  #categories .catzone {
+  #categorygallery .catzone {
     display: flex;
     align-items: flex-start;
     flex-direction: row;
@@ -1064,10 +1064,10 @@
     padding-top: 1.5rem;
     border-top: solid white 2px; }
     @media screen and (min-width: 1200px) {
-      #categories .catzone {
+      #categorygallery .catzone {
         padding-top: 3rem;
         max-width: 1024px; } }
-    #categories .catzone .catcard {
+    #categorygallery .catzone__card {
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -1076,54 +1076,27 @@
       width: 45%;
       margin-bottom: 2rem; }
       @media screen and (min-width: 1200px) {
-        #categories .catzone .catcard {
+        #categorygallery .catzone__card {
           margin-bottom: 3rem;
           width: 32%; } }
-  #categories img {
-    width: 90%;
-    aspect-ratio: 1;
-    border-radius: 5px;
-    margin: .5rem; }
-    @media screen and (min-width: 1200px) {
-      #categories img {
-        width: 80%;
-        aspect-ratio: 1; } }
-  #categories h1 {
-    font-family: "Cinzel Decorative", sans-serif;
-    font-size: 2rem;
-    font-weight: 600;
-    padding: 1rem 0; }
-    @media screen and (min-width: 1200px) {
-      #categories h1 {
-        font-size: 3rem; } }
-  #categories h2 {
-    font-family: "Gideon Roman", sans-serif;
-    font-size: 1.2rem;
-    font-weight: 600;
-    padding: 1rem 0 .5rem 0;
-    line-height: 1.5rem; }
-    @media screen and (min-width: 1200px) {
-      #categories h2 {
-        font-size: 2.5rem; } }
-  #categories p {
-    font-family: "Gideon Roman", sans-serif;
-    font-size: 1.5rem;
-    line-height: 1.4rem;
-    padding: 1rem;
-    background-color: rgba(34, 7, 7, 0.3);
-    border-radius: 5px;
-    border-bottom: 2px solid white;
-    width: 50%;
-    text-align: center; }
-    @media screen and (min-width: 1200px) {
-      #categories p {
-        font-size: 2rem;
-        line-height: 2rem;
-        min-height: 15rem;
-        min-width: 15rem; } }
-    #categories p a {
-      color: white;
-      font-size: 3rem; }
+      #categorygallery .catzone__card h2 {
+        font-family: "Gideon Roman", sans-serif;
+        font-size: 1.2rem;
+        font-weight: 600;
+        padding: 1rem 0 1rem 0;
+        line-height: 1.5rem; }
+        @media screen and (min-width: 1200px) {
+          #categorygallery .catzone__card h2 {
+            font-size: 2.5rem; } }
+      #categorygallery .catzone__card img {
+        width: 90%;
+        aspect-ratio: 1;
+        border-radius: 5px;
+        margin: .5rem; }
+        @media screen and (min-width: 1200px) {
+          #categorygallery .catzone__card img {
+            width: 80%;
+            aspect-ratio: 1; } }
 
 * {
   margin: 0;
@@ -1236,7 +1209,7 @@ body {
   width: 100%;
   height: 100%; }
 
-#categoryslider {
+#slider {
   position: absolute;
   display: flex;
   flex-direction: column;
@@ -1246,84 +1219,14 @@ body {
   width: 100%;
   min-height: 100svh;
   color: white; }
-  #categoryslider h2 {
+  #slider h2 {
     font-size: 2rem;
     padding: 1rem; }
     @media screen and (min-width: 1200px) {
-      #categoryslider h2 {
+      #slider h2 {
         font-size: 4rem; } }
-  #categoryslider p {
+  #slider p {
     display: none;
     width: 50%;
     max-width: 1024px;
     margin-bottom: 2rem; }
-
-#categorygallery {
-  width: 100%;
-  color: white;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  scroll-margin: 100px; }
-  #categorygallery .galleryzone {
-    padding: 0 2em 3em 2em; }
-    @media screen and (min-width: 1200px) {
-      #categorygallery .galleryzone {
-        padding: 0 5em 3em 5em;
-        width: 100%;
-        max-width: 1024px; } }
-    #categorygallery .galleryzone p {
-      font-family: "Gideon Roman", sans-serif;
-      background-color: rgba(34, 7, 7, 0.3);
-      border-radius: 5px;
-      font-size: 1rem;
-      line-height: 1.4rem;
-      text-align: justify;
-      margin: 1rem auto;
-      padding: 1em; }
-      @media screen and (min-width: 1200px) {
-        #categorygallery .galleryzone p {
-          font-size: 1.5rem;
-          line-height: 2rem; } }
-    #categorygallery .galleryzone .gallery {
-      margin: 0 auto;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 2vmin;
-      list-style-type: none; }
-      #categorygallery .galleryzone .gallery li {
-        height: 250px;
-        flex-grow: 1; }
-      #categorygallery .galleryzone .gallery img {
-        width: 100%;
-        height: 100%;
-        border-radius: 5px;
-        border: solid 1px white;
-        object-fit: cover; }
-      #categorygallery .galleryzone .gallery ::after {
-        content: "";
-        display: block;
-        flex-grow: 10; }
-  #categorygallery #gallerycontainer {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 80%; }
-    @media screen and (min-width: 1200px) {
-      #categorygallery #gallerycontainer {
-        width: 70%; } }
-    #categorygallery #gallerycontainer h2 {
-      margin-top: 3rem;
-      border-top: solid white 2px;
-      font-size: 4rem;
-      padding: 2rem; }
-    #categorygallery #gallerycontainer p {
-      width: 100%;
-      margin-bottom: 2rem; }
-    @media screen and (min-width: 1200px) {
-      #categorygallery #gallerycontainer p {
-        width: 70%;
-        max-width: 1024px; } }

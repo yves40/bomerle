@@ -1,4 +1,4 @@
-#cardsgallery {
+#knivesgallery {
   width: 100%;
   padding-top: 1rem;
   background-image: url(../images/BastosBG4.webp);
@@ -16,7 +16,6 @@
   align-items: center;
   transition: all .8s ease-in;
   background-color: rgba(34, 7, 7, .6);
-  // @include galleryzone;
   border-radius: $border-radius;
   padding: 0 2rem;
   @include for-desktop {

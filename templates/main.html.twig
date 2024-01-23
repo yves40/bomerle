@@ -22,8 +22,8 @@
       <div class="nav-links">
         <ul>
             <li><a href="#hero">{% trans %}app.public.menu.accueil{% endtrans %}</a></li>
-            <li id="categoriesmenu"><a href="#categories">{% trans %}app.public.menu.categories{% endtrans %}</a></li>
-            <li id="gallerymenu"><a href="#thegallery">{% trans %}app.public.menu.galerie{% endtrans %}</a></li>
+            <li id="categoriesmenu"><a href="#categorygallery">{% trans %}app.public.menu.categories{% endtrans %}</a></li>
+            <li id="newsmenu"><a href="#newsgallery">{% trans %}app.public.menu.galerie{% endtrans %}</a></li>
             <li><a href="#contactrequest">{% trans %}app.public.menu.contact{% endtrans %}</a></li>
             <ul>
               <li><a href="{{ path('public.switchlang', { locale: 'en' }) }}" class="langselector" data-lang="en">en |</a></li>
@@ -40,17 +40,16 @@
     </div>
 </header>
 <main>
-  <div id="categories"></div>
-  <div id="categoryslider"></div>
+  {# <div id="categories"></div> #}
   <div id="categorygallery"></div>
-  <div id="cardsgallery"></div>
-  <div id="thegallery"></div>
+  <div id="knivesgallery"></div>
+  <div id="newsgallery"></div>
   <div id="infos" class="infos">
     <div class="infoelement">
       <h3>{% trans %}contact.nav{% endtrans %}</h3>
       <div class="infoelement__details">
         <a href="#hero">{% trans %}app.public.menu.accueil{% endtrans %}</a>
-        <a href="#categories">{% trans %}app.public.menu.categories{% endtrans %}</a>
+        <a href="#categorygallery">{% trans %}app.public.menu.categories{% endtrans %}</a>
       </div>
     </div>
     <div class="infoelement">
@@ -101,13 +100,14 @@
       </div>
     </div>
     </div> 
+  <div id="slider"></div>
+  <div id="zoomer"></div>
 </main>
   <footer class="footer">
       <img class="menu-hamburger svg-white" src="/images/svg/bars-solid.svg" alt="Show Hide Menu"/>
   </footer>
   <div id="globalfullscreen"></div>
   <div id="cardzoom"></div>
-  <div id="zoomer"></div>
 </body>
 <script src="{{ asset('node_modules/jquery/dist/jquery.min.js')}}"></script>
 <script src="{{ asset('scripts/properties.js')}}"></script>
