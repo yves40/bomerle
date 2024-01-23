@@ -163,15 +163,12 @@ $(document).ready(function () {
         }
         // -------------------------------------------------------------
         // Build the cards gallery
-        $(cardsgallery).append($('<div>').attr('id', 'cardscontainer'));
-        const cardscontainerheader = $('<div>').attr('id', 'cardscontainer__header');
-        $(cardscontainerheader).append($('<h2>').text(catname));
-        // Remove category image : client request on jan 13 2024
-        // $(cardscontainerheader).append($('<img>').attr('src', imgsrc));
-        $(cardscontainerheader).append($('<p>').text(catdesc));
-        $(cardscontainer).append(cardscontainerheader);
+        const cardsheader = $('<div>').attr('id', 'cards__header').addClass('cards__header');
+        $(cardsheader).append($('<h2>').text(catname));
+        $(cardsheader).append($('<p>').text(catdesc));
+        $(cardsgallery).append(cardsheader);
 
-        let relcatcontainer = $('<div>').attr('id', 'relatedcategories').addClass('related');
+        let relcatcontainer = $('<div>').attr('id', 'relatedcategories').addClass('cards__related');
         for( let idx = 0; idx < catrelated.length; ++idx) {
             /**
              * Search for associated categories. This association will be ignored if  
@@ -180,7 +177,7 @@ $(document).ready(function () {
             */
            allcategoriesimage.find( (current, index) => {
                if(current.catid === parseInt(catrelated[idx])) {
-                   let relcard = $('<div>').addClass('relatedcard');
+                   let relcard = $('<div>').addClass('cards__related__details');
                    // Data attributes on the container, to be used by zoomCaegory()
                    $(relcard).append($('<p>').text(current.catname))
                             .append($('<img>')
@@ -225,7 +222,7 @@ $(document).ready(function () {
                 success: function (response) {
                     timer.stopTimer();
                     logger.debug(`Loaded [ ${response.knifeName} ] images from the DB in ${timer.getElapsedString()}`);
-                    buildCard(response, $('#cardscontainer'), idx);
+                    buildCard(response, $('#cardsgallery'), idx);
                 },
                 error: function (xhr) {
                     logger.error(xhr);
@@ -234,7 +231,7 @@ $(document).ready(function () {
         })
         if($(relcatcontainer).children().length > 0)   {
             $(relcatcontainer).prepend($('<p>').text($labels.get('interested')));
-            $('#cardscontainer').append(relcatcontainer);
+            $('#cardsgallery').append(relcatcontainer);
         }      
         $(cardsgallery).off('mousedown').on('mousedown', (event) => {
             event.preventDefault();
@@ -518,7 +515,7 @@ $(document).ready(function () {
      */
     function buildCard(response, container, cardindex ) {
         let thecard = $('<div>').attr('id', `knifeid-${response.knifeId}`)
-                                    .addClass('cardframe');
+                                    .addClass('cards__cardframe');
         let card  = new Card(thecard, response, cardindex, false);
         container.append(thecard);
         // Set a knife ID for future zoom

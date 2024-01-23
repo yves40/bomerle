@@ -68,6 +68,13 @@ export default class Slider {
         event.stopPropagation();
         this.manageActiveIndicator(event);
       });
+      // Track any keyboard or mobile input
+      $('html').keyup( (event) => { 
+          console.log(event.keyCode);
+          event.stopPropagation();
+          // $(this.container).empty().hide();
+          // $("body").css("overflow", "auto");
+      });
       // Some other handlers
       $(window).resize ( () =>  {
         if(this.zoomactive) {

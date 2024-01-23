@@ -40,9 +40,9 @@
        */
       loadCard(container, data, externalcss) {
         this.logger.debug(`Build a knife card in category zoom for [ ${this.data.knifeName} ]`);
-        const cardtitle = $("<div></div>").addClass('cardframe__title').html(this.data.knifeName);
-        const textimagecontainer = $('<div>').addClass('cardframe__txtimgcontainer');
-        const cardtext = $("<p>").addClass('cardframe__text').html(this.data.knifedesc);
+        const cardtitle = $("<div></div>").addClass('cards__cardframe__title').html(this.data.knifeName);
+        const textimagecontainer = $('<div>').addClass('cards__cardframe__txtimgcontainer');
+        const cardtext = $("<p>").addClass('cards__cardframe__text').html(this.data.knifedesc);
         const img = $("<img>").attr('src', `${$props.knifeimageslocation()}/${this.data.images[0]}`);
         if(!externalcss) {
           // Check if we must alternate images and text
@@ -70,15 +70,15 @@
       // ---------------------------------------------------------------------
       Zoom(event) {
         const cardzoom = $('#cardzoom');
-        const zoomframe = $("<div></div>").addClass('cardframe') 
+        const zoomframe = $("<div></div>").addClass('cards__cardframe') 
                     .addClass('cardframe__zoom');
-        const title = $("<div></div>").addClass('cardframe__title').html(this.data.knifeName);
-        const text = $("<div></div>").addClass('cardframe__text').html(this.data.knifedesc);
+        const title = $("<div></div>").addClass('cards_cardframe__title').html(this.data.knifeName);
+        const text = $("<div></div>").addClass('cards__cardframe__text').html(this.data.knifedesc);
         const sliderdiv = $("<div></div>").attr('name', 'cardzoom'); // To inject the slider 
         $(zoomframe).append(title).append(text).append(sliderdiv);
         $(cardzoom).addClass('cards').append(zoomframe);
 
-        const framecontainer = $(event.target).closest('.cardframe');
+        const framecontainer = $(event.target).closest('.cards__cardframe');
         const splitter = $(framecontainer).attr('id').split('-');
 
         // Hello Mr Ajax
