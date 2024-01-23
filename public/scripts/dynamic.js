@@ -163,10 +163,12 @@ $(document).ready(function () {
         }
         // -------------------------------------------------------------
         // Build the cards gallery
+        const gallerycontainer = $('<div>').addClass('cards');
         const cardsheader = $('<div>').attr('id', 'cards__header').addClass('cards__header');
         $(cardsheader).append($('<h2>').text(catname));
         $(cardsheader).append($('<p>').text(catdesc));
-        $(cardsgallery).append(cardsheader);
+        $(gallerycontainer).append(cardsheader);
+        $(cardsgallery).append(gallerycontainer);
 
         let relcatcontainer = $('<div>').attr('id', 'relatedcategories').addClass('cards__related');
         for( let idx = 0; idx < catrelated.length; ++idx) {
@@ -222,7 +224,7 @@ $(document).ready(function () {
                 success: function (response) {
                     timer.stopTimer();
                     logger.debug(`Loaded [ ${response.knifeName} ] images from the DB in ${timer.getElapsedString()}`);
-                    buildCard(response, $('#cardsgallery'), idx);
+                    buildCard(response, gallerycontainer, idx);
                 },
                 error: function (xhr) {
                     logger.error(xhr);
