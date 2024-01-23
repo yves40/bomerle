@@ -28,7 +28,6 @@ $(document).ready(function () {
 
     // Initial state of UI
     $('#globalfullscreen').hide();
-    $('#cardzoom').hide();
     $('#zoomer').hide();
     $(infoknife).hide();
     $(gallerymenu).hide();

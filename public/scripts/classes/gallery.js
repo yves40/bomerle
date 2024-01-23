@@ -81,21 +81,25 @@ export default class Gallery {
       this.zoomactive = true;
       this.currentzoom = imagesrc;
     }
-    // Remove body scroll bar so user cant scroll up or down
-    $("body").css("overflow", "hidden");
     // Position the zoom 
     const top = window.scrollY;
-    $("#globalfullscreen").css("background-image", `url(${$props.slideimageslocation()}/${imagesrc})`);
-    $("#globalfullscreen").css({'top': top, 'left': 0, 'z-index': 1000});
-    $("#globalfullscreen").addClass("zoomon").removeClass('zoomoff').show();
+    // Remove body scroll bar so user cant scroll up or down
+    $("body").css("overflow", "hidden");
+
+    $("#zoomer").css({ 'top': top, 'left': 0, 'z-index': 2000 } )
+          .addClass("zoomon").removeClass('zoomoff');
+    $("#zoomer").append($('<div>').attr('id', 'zoomer__image')
+          .addClass('zoomon__image')
+          .append($('<img>').attr('src', `${$props.slideimageslocation()}/${imagesrc}`))
+    );
+    $("#zoomer").show()
     // Hide a few things
     $(`#${this.indicators}`).hide();
     $(".slidercontrol").hide();
-
     // Wait for the user to close the box
-    $("#globalfullscreen").click( () => { 
+    $("#zoomer").click( () => { 
       this.zoomactive = false;
-      $("#globalfullscreen").removeClass("zoomon")
+      $("#zoomer").removeClass("zoomon")
                       .addClass('zoomoff').hide().empty();
       $(`#${this.indicators}`).show();
       $(".slidercontrol").show();
