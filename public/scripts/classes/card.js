@@ -1,10 +1,6 @@
 /*----------------------------------------------------------------------------
     Card
-
-    Sep 02 2023     Initial
-    Jan 03 2024     Remove img click handler
-
-    ----------------------------------------------------------------------------*/
+ ----------------------------------------------------------------------------*/
 
     import Logger  from './logger.js';
     export default class Card {
@@ -40,9 +36,9 @@
        */
       loadCard(container, data, externalcss) {
         this.logger.debug(`Build a knife card in category zoom for [ ${this.data.knifeName} ]`);
-        const cardtitle = $("<div></div>").addClass('cards__cardframe__title').html(this.data.knifeName);
-        const textimagecontainer = $('<div>').addClass('cards__cardframe__txtimgcontainer');
-        const cardtext = $("<p>").addClass('cards__cardframe__text').html(this.data.knifedesc);
+        const cardtitle = $("<div></div>").addClass('cards__frame__title').html(this.data.knifeName);
+        const textimagecontainer = $('<div>').addClass('cards__frame__txtimg');
+        const cardtext = $("<p>").addClass('cards__frame__text').html(this.data.knifedesc);
         const img = $("<img>").attr('src', `${$props.knifeimageslocation()}/${this.data.images[0]}`);
         if(!externalcss) {
           // Check if we must alternate images and text
@@ -70,15 +66,15 @@
       // ---------------------------------------------------------------------
       Zoom(event) {
         const cardzoom = $('#cardzoom');
-        const zoomframe = $("<div></div>").addClass('cards__cardframe') 
+        const zoomframe = $("<div></div>").addClass('cards__frame') 
                     .addClass('cardframe__zoom');
         const title = $("<div></div>").addClass('cards_cardframe__title').html(this.data.knifeName);
-        const text = $("<div></div>").addClass('cards__cardframe__text').html(this.data.knifedesc);
+        const text = $("<div></div>").addClass('cards__frame__text').html(this.data.knifedesc);
         const sliderdiv = $("<div></div>").attr('name', 'cardzoom'); // To inject the slider 
         $(zoomframe).append(title).append(text).append(sliderdiv);
         $(cardzoom).addClass('cards').append(zoomframe);
 
-        const framecontainer = $(event.target).closest('.cards__cardframe');
+        const framecontainer = $(event.target).closest('.cards__frame');
         const splitter = $(framecontainer).attr('id').split('-');
 
         // Hello Mr Ajax

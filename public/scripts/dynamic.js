@@ -170,7 +170,7 @@ $(document).ready(function () {
         $(gallerycontainer).append(cardsheader);
         $(cardsgallery).append(gallerycontainer);
 
-        let relcatcontainer = $('<div>').attr('id', 'relatedcategories').addClass('cards__related');
+        let relcatcontainer = $('<div>').attr('id', 'relatedcategories').addClass('cards__links');
         for( let idx = 0; idx < catrelated.length; ++idx) {
             /**
              * Search for associated categories. This association will be ignored if  
@@ -179,7 +179,7 @@ $(document).ready(function () {
             */
            allcategoriesimage.find( (current, index) => {
                if(current.catid === parseInt(catrelated[idx])) {
-                   let relcard = $('<div>').addClass('cards__related__details');
+                   let relcard = $('<div>').addClass('cards__links__details');
                    // Data attributes on the container, to be used by zoomCaegory()
                    $(relcard).append($('<p>').text(current.catname))
                             .append($('<img>')
@@ -517,7 +517,7 @@ $(document).ready(function () {
      */
     function buildCard(response, container, cardindex ) {
         let thecard = $('<div>').attr('id', `knifeid-${response.knifeId}`)
-                                    .addClass('cards__cardframe');
+                                    .addClass('cards__frame');
         let card  = new Card(thecard, response, cardindex, false);
         container.append(thecard);
         // Set a knife ID for future zoom

@@ -333,47 +333,47 @@
     .cards__header p {
       font-size: 1.5rem;
       line-height: 1.8rem; } }
-  .cards__cardframe {
+  .cards__frame {
     height: auto; }
     @media screen and (min-width: 1200px) {
-      .cards__cardframe {
+      .cards__frame {
         width: 90%;
         padding: 1rem 0 0 0;
         max-width: 1024px; } }
-    .cards__cardframe__title {
+    .cards__frame__title {
       padding: 20px 10px;
       font-size: 2rem;
       font-family: "Gideon Roman", sans-serif; }
       @media screen and (min-width: 1200px) {
-        .cards__cardframe__title {
+        .cards__frame__title {
           font-size: 3rem; } }
-    .cards__cardframe__txtimgcontainer {
+    .cards__frame__txtimg {
       display: block;
       align-items: center;
       flex-direction: column; }
       @media screen and (min-width: 1200px) {
-        .cards__cardframe__txtimgcontainer {
+        .cards__frame__txtimg {
           flex-direction: row; } }
-      .cards__cardframe__txtimgcontainer img {
+      .cards__frame__txtimg img {
         width: 140px;
         height: 8rem;
         border: solid darkgrey 3px;
         border-radius: 5px;
         margin: .7rem; }
         @media screen and (min-width: 1200px) {
-          .cards__cardframe__txtimgcontainer img {
+          .cards__frame__txtimg img {
             width: 300px;
             height: 300px; } }
-    .cards__cardframe__text {
+    .cards__frame__text {
       padding: .5rem;
       font-size: 1.2rem;
       line-height: 1.5rem; }
       @media screen and (min-width: 1200px) {
-        .cards__cardframe__text {
+        .cards__frame__text {
           font-size: 1.5rem;
           line-height: 1.8rem;
           padding: 2rem; } }
-  .cards__related {
+  .cards__links {
     width: 90%;
     display: flex;
     flex-direction: row;
@@ -385,27 +385,31 @@
     margin-bottom: 2rem;
     max-width: 1024px; }
     @media screen and (min-width: 1200px) {
-      .cards__related {
+      .cards__links {
         max-width: 1024px; } }
-    .cards__related p {
+    .cards__links p {
       width: 85%;
       text-align: center;
       font-weight: 600;
+      font-size: 1.5rem;
       padding-top: 2rem;
       margin: 1rem 0 1rem 0; }
-    .cards__related__details {
+    .cards__links__details {
       display: flex;
       flex-direction: column;
       width: 30%;
       justify-content: center;
       align-items: center;
       cursor: pointer; }
-      .cards__related__details p {
+      .cards__links__details p {
         height: 5rem;
-        font-size: 1rem;
         font-weight: normal;
-        margin: 1rem 0 1rem 0; }
-      .cards__related__details img {
+        margin: 1rem 0 1rem 0;
+        font-size: 1rem; }
+        @media screen and (min-width: 1200px) {
+          .cards__links__details p {
+            font-size: 1.5rem; } }
+      .cards__links__details img {
         border-radius: 5px;
         width: 70%;
         height: auto; }
