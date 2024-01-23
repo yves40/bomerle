@@ -60,7 +60,7 @@ export default class Slider {
       this.buildSliderFrame(container);
       this.addImages(allimages);
       // Arm handlers
-      $(`#${this.sliderarea} > .carousel-button`).children().on('click', (event) => {
+      $(`#${this.sliderarea} > .slider__box__elements__action`).children().on('click', (event) => {
         event.stopPropagation();
         this.manageActiveSlide(event);
       })
@@ -159,26 +159,22 @@ export default class Slider {
   }
   // ------------------------------------------------------------------------------------------------
   buildSliderFrame(container) {
-    const galleryzone = $("<div>").addClass('galleryzone');
+    const slidescontainer = $("<div>").addClass('slider');
     const sliderzone = $("<div>").attr('id', this.homezone)
-                                          .addClass('carousel');
-    const slidetext = $('<div></div>');
-    const title = $('<p>').text(this.description);
-    $(slidetext).append(title);
-    $(galleryzone).append(slidetext);
-    const ul = $('<ul></ul>').attr('id', this.sliderarea).addClass('sliderarea');
-    const prev = $("<a></a>").addClass('carousel-button prev');
+                                          .addClass('slider__box');
+    const ul = $('<ul></ul>').attr('id', this.sliderarea).addClass('slider__box_elements');
+    const prev = $("<a></a>").addClass('slider__box__elements__action prev');
     const previmage = $("<img>").attr('src', `${$props.svgimageslocation()}/arrow-back.svg`).addClass("svg-white");
     $(prev).append(previmage);
-    const next = $("<a></a>").addClass('carousel-button next');
+    const next = $("<a></a>").addClass('slider__box__elements__action next');
     const nextimage = $("<img>").attr('src',  `${$props.svgimageslocation()}/arrow-forward.svg`).addClass("svg-white");
     $(next).append(nextimage);
     $(ul).append(prev);
     $(ul).append(next);
     $(sliderzone).append(ul);
-    $(galleryzone).append(sliderzone);
-    $(container).append(galleryzone);
-    $(container).append($('<div></div>').attr('id', 'fullscreen').addClass('zoomoff'));
+    $(slidescontainer).append(sliderzone);
+    $(container).append(slidescontainer);
+    // $(container).append($('<div></div>').attr('id', 'fullscreen').addClass('zoomoff'));
     this.startSlider();
   }
   // ------------------------------------------------------------------------------------------------
@@ -187,9 +183,9 @@ export default class Slider {
     const slides = $(`#${this.sliderarea}`);
     const sliderzone = $(`#${this.homezone}`);
     // Add the indicators
-    const indicators = $("<div>").addClass('carousel-indicators');
+    const indicators = $("<div>").addClass('slider__box__elements__indicators');
     for(let i = 0; i < allimages.length; ++i) {
-      let buttonindic = $('<button>').addClass('carousel-indicators-button')
+      let buttonindic = $('<button>').addClass('slider__box__elements__indicators__flags')
         .attr('type', 'button')
         .attr('data-imageindex', `${i}`);
       if (i == 0) $(buttonindic).addClass('active');
@@ -200,7 +196,7 @@ export default class Slider {
     const splitter = this.sliderarea.split('-');
     const imageroot= splitter[0] + splitter[1];
     for(let i = 0; i < allimages.length; ++i) {
-      let oneimage = $("<li>").attr('id', `${imageroot}-${i}`).addClass('slide');
+      let oneimage = $("<li>").attr('id', `${imageroot}-${i}`).addClass('slider__box__elements__slide');
       if(i === 0 ){
         $(oneimage).addClass('active');
       }

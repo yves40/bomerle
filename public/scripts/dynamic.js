@@ -27,7 +27,6 @@ $(document).ready(function () {
     let allcategoriesimage = [];
 
     // Initial state of UI
-    $('#globalfullscreen').hide();
     $('#zoomer').hide();
     $(infoknife).hide();
     $(gallerymenu).hide();
