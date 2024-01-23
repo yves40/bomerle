@@ -202,19 +202,3 @@ body {
     }
   }
 }
-    h2 {
-      margin: 2rem 0 2rem 0;
-      border-top: solid white 2px;
-      border-bottom: solid white 2px;
-      font-size: 2rem;
-      padding: 2rem;
-      @include for-desktop {
-        font-size: 4rem;
-      }
-    }
-    p {
-      margin-bottom: 1rem;
-      @include for-desktop {
-          max-width: $responsive-max-width;
-      }
-    }

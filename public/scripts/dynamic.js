@@ -233,7 +233,7 @@ $(document).ready(function () {
         })
         if($(relcatcontainer).children().length > 0)   {
             $(relcatcontainer).prepend($('<p>').text($labels.get('interested')));
-            $('#cardsgallery').append(relcatcontainer);
+            $('.cards').append(relcatcontainer);
         }      
         $(cardsgallery).off('mousedown').on('mousedown', (event) => {
             event.preventDefault();

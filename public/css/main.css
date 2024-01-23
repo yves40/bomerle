@@ -309,13 +309,14 @@
   transition: all .8s ease-in;
   background-color: rgba(34, 7, 7, 0.6);
   border-radius: 5px;
-  padding: 0 2rem;
-  margin-bottom: 50svh; }
+  padding: 0 2rem; }
   @media screen and (min-width: 1200px) {
     .cards {
       width: 70%;
       max-width: 1024px; } }
   .cards > p {
+    font-family: "Gideon Roman", sans-serif; }
+  .cards > h2 {
     font-family: "Gideon Roman", sans-serif; }
   .cards__header h2 {
     margin-top: 3rem;
@@ -324,10 +325,14 @@
     padding: 2rem; }
   .cards__header p {
     text-align: justify;
-    line-height: 1.2rem; }
+    font-size: 1.2rem;
+    line-height: 1.5rem; }
   @media screen and (min-width: 1200px) {
     .cards__header h2 {
-      font-size: 4rem; } }
+      font-size: 4rem; }
+    .cards__header p {
+      font-size: 1.5rem;
+      line-height: 1.8rem; } }
   .cards__cardframe {
     height: auto; }
     @media screen and (min-width: 1200px) {
@@ -361,22 +366,13 @@
             height: 300px; } }
     .cards__cardframe__text {
       padding: .5rem;
-      line-height: 1.2rem; }
+      font-size: 1.2rem;
+      line-height: 1.5rem; }
       @media screen and (min-width: 1200px) {
         .cards__cardframe__text {
+          font-size: 1.5rem;
           line-height: 1.8rem;
           padding: 2rem; } }
-    .cards__cardframe__zoom {
-      display: flex;
-      flex-direction: column;
-      gap: 2rem;
-      background: linear-gradient(to bottom left, #959595 0%, #0D0D0D 50%, #010101 50%, #0A0A0A 53%, #4E4E4E 76%, #383838 87%, #1B1B1B 100%);
-      color: white;
-      justify-content: center;
-      align-items: center;
-      border-radius: 5px; }
-      .cards__cardframe__zoom .cardframe__text {
-        display: none; }
   .cards__related {
     width: 90%;
     display: flex;
@@ -395,7 +391,8 @@
       width: 85%;
       text-align: center;
       font-weight: 600;
-      margin: .5rem 0 .5rem 0; }
+      padding-top: 2rem;
+      margin: 1rem 0 1rem 0; }
     .cards__related__details {
       display: flex;
       flex-direction: column;
@@ -404,15 +401,14 @@
       align-items: center;
       cursor: pointer; }
       .cards__related__details p {
-        font-size: .9rem;
+        font-size: 1rem;
         font-weight: normal;
-        height: 40px; }
+        margin: 1rem 0 1rem 0; }
       .cards__related__details img {
         border-radius: 5px;
-        width: 40%;
+        width: 70%;
         height: auto; }
 
-/* --------------------  R E S P O N S I V E --------------------*/
 .bg-knifeleft {
   background-image: url("../images/background-left.jpg");
   background-size: cover;
@@ -1326,19 +1322,3 @@ body {
       #categorygallery #gallerycontainer p {
         width: 70%;
         max-width: 1024px; } }
-
-h2 {
-  margin: 2rem 0 2rem 0;
-  border-top: solid white 2px;
-  border-bottom: solid white 2px;
-  font-size: 2rem;
-  padding: 2rem; }
-  @media screen and (min-width: 1200px) {
-    h2 {
-      font-size: 4rem; } }
-
-p {
-  margin-bottom: 1rem; }
-  @media screen and (min-width: 1200px) {
-    p {
-      max-width: 1024px; } }

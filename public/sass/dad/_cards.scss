@@ -19,13 +19,15 @@
   // @include galleryzone;
   border-radius: $border-radius;
   padding: 0 2rem;
-  margin-bottom: 50svh;
   @include for-desktop {
     width: 70%;
     max-width: $responsive-max-width;
   }
   > p {
-    font-family: $herop;
+    font-family: $pfont;
+  }
+  > h2 {
+    font-family: $h2font;
   }
   &__header {
     h2 {
@@ -36,11 +38,17 @@
     }
     p {
       text-align: justify;
-      line-height: 1.2rem;
+      font-size: 1.2rem;
+      line-height: 1.5rem;
     }
     @include for-desktop {
       h2 {
         font-size: 4rem;
+      }
+      p {
+        font-size: 1.5rem;
+        line-height: 1.8rem;
+
       }
     }
   }
@@ -80,23 +88,12 @@
     }
     &__text {
       padding: .5rem;
-      line-height: 1.2rem;
+      font-size: 1.2rem;
+      line-height: 1.5rem;
       @include for-desktop {
+        font-size: 1.5rem;
         line-height: 1.8rem;
         padding: 2rem;
-      }
-    }
-    &__zoom {
-      display: flex;
-      flex-direction: column;
-      gap: 2rem;
-      background: $bg-gradient-black;
-      color: white;
-      justify-content: center;
-      align-items: center;
-      border-radius: $border-radius;
-      .cardframe__text {
-        display: none;
       }
     }
   }
@@ -117,7 +114,8 @@
       width: 85%;
       text-align: center;
       font-weight: 600;
-      margin: .5rem 0 .5rem 0;
+      padding-top: 2rem;
+      margin: 1rem 0 1rem 0;
     }
     max-width: $responsive-max-width;
     &__details {
@@ -128,13 +126,13 @@
       align-items: center;
       cursor: pointer;   
       p {
-        font-size: .9rem;
+        font-size: 1rem;
         font-weight: normal;
-        height: 40px;
+        margin: 1rem 0 1rem 0;
       } 
       img {
         border-radius: $border-radius;
-        width: 40%;
+        width: 70%;
         height: auto;
       }
     }
@@ -149,61 +147,3 @@
 // }
 
 
-//   h1{
-//     font-family: $title;
-//     font-size: 1.5rem;
-//     font-weight: 600;
-//     padding: 2rem 0;
-//     width: 100%; 
-//     @include for-desktop{
-//         font-size: 3rem;
-//     }
-//   }
-//   h2{
-//       font-size: 1.2rem;
-//       font-weight: 600;
-//       padding-bottom: 2rem ;
-//       line-height: 1.5rem;
-//       display: inline-block;
-//       width: 100%;
-//       @include for-desktop{
-//           font-size: 2rem;
-//       }
-//   }
-//   p{
-//     font-family: $herop;
-//     font-size: 1rem; 
-//     line-height: 1.4rem;
-//     text-align: right;
-//     width: 100%;
-//     @include for-desktop{
-//         font-size: 1.5rem;
-//         line-height: 2rem;
-//         text-align: left;
-//     }
-//   }
-/* --------------------  R E S P O N S I V E --------------------*/
-// @media screen and (max-width: $smallsize) {
-//   #globalfullscreen {
-//     .cardframe {
-//       &__zoom {
-//         width: 100%;
-//         display: flex;
-//         flex-direction: column;
-//         gap: 2rem;
-//         background: $bg-gradient-green;
-//         color: white;
-//         justify-content: center;
-//         align-items: center;
-//         border-radius: $border-radius;  
-//       }
-//     }   
-//     .cardframe__title {
-//       margin-top: 2rem;
-//     }
-//     .cardframe__text {
-//       display: none;
-//     }
-
-//   }
-// }
