@@ -127,6 +127,7 @@ $(document).ready(function () {
                 async: false,
                 data: JSON.stringify(payload),
                 success: function (response) {
+                    console.log(response);
                     AddCategory(catzone, response, dedup[idx]);
                 },
                 error: function (xhr) {

@@ -258,6 +258,8 @@ class AdminControllerKnife extends AbstractController
         /*
             select filename from images where knifes_id 
                 in ( SELECT id FROM `knifes` WHERE category_id = 19) LIMIT 1;
+            select distinct c.name, c.image, c.rank 
+                from category c, knifes k where c.id = k.category_id order by c.rank;
         */
         try {
             /** 
@@ -296,6 +298,8 @@ class AdminControllerKnife extends AbstractController
                 }
             }
             $thecategory = $repocat->findOneBy(['id' => $categoryid ]);
+            // Test 
+            $distinctcategories = $repocat->findDistinctActiveCategories();
             return $this->json([
                 'message' => 'bootadmin.knives.categoryimages OK',
                 'catid' => $categoryid,
@@ -303,7 +307,8 @@ class AdminControllerKnife extends AbstractController
                 'relatedcategories' => $relatedcategories,
                 'single' => $single,
                 'filenames' => $filenames,
-                'knivesid' => $knivesid
+                'knivesid' => $knivesid,
+                'testdistinct' => $distinctcategories
             ], 200);        
     }
         catch(Exception $e) {
