@@ -34,7 +34,7 @@
        * @param {*} externalcss Generate the css or rely on exterlan sass ?
        *                        Default is to rely on external css
        */
-      loadCard(container, data, externalcss) {
+      loadCard(container, data, externalcss=true) {
         this.logger.debug(`Build a knife card in category zoom for [ ${this.data.knifeName} ]`);
         const cardtitle = $("<div></div>").addClass('cards__frame__title').html(this.data.knifeName);
         const textimagecontainer = $('<div>').addClass('cards__frame__txtimg');
