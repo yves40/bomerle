@@ -517,7 +517,7 @@ $(document).ready(function () {
     function buildCard(response, container, cardindex ) {
         let thecard = $('<div>').attr('id', `knifeid-${response.knifeId}`)
                                     .addClass('cards__frame');
-        let card  = new Card(thecard, response, cardindex, false);
+        let card  = new Card(thecard, response, cardindex, true);
         container.append(thecard);
         // Set a knife ID for future zoom
         $(thecard).find('img').attr('data-knifeid', response.knifeId);

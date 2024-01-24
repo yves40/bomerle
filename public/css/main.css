@@ -334,7 +334,13 @@
       .cards__frame {
         width: 90%;
         padding: 1rem 0 0 0;
-        max-width: 1024px; } }
+        max-width: 1024px; }
+        .cards__frame:nth-child(odd) img {
+          float: left;
+          margin-right: 2rem; }
+        .cards__frame:nth-child(even) img {
+          float: right;
+          margin-left: 2rem; } }
     .cards__frame__title {
       padding: 20px 10px;
       font-size: 2rem;
@@ -343,31 +349,31 @@
         .cards__frame__title {
           font-size: 3rem; } }
     .cards__frame__txtimg {
-      display: block;
+      display: flex;
       align-items: center;
       flex-direction: column; }
+      .cards__frame__txtimg > p {
+        margin-top: 1rem; }
       @media screen and (min-width: 1200px) {
         .cards__frame__txtimg {
-          flex-direction: row; } }
+          display: block; } }
       .cards__frame__txtimg img {
         width: 140px;
         height: 8rem;
         border: solid darkgrey 3px;
-        border-radius: 5px;
-        margin: .7rem; }
+        border-radius: 5px; }
         @media screen and (min-width: 1200px) {
           .cards__frame__txtimg img {
             width: 300px;
             height: 300px; } }
     .cards__frame__text {
-      padding: .5rem;
       font-size: 1.2rem;
-      line-height: 1.5rem; }
+      line-height: 1.5rem;
+      text-align: justify; }
       @media screen and (min-width: 1200px) {
         .cards__frame__text {
           font-size: 1.5rem;
-          line-height: 1.8rem;
-          padding: 2rem; } }
+          line-height: 1.8rem; } }
   .cards__links {
     width: 90%;
     display: flex;

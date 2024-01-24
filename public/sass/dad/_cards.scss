@@ -57,6 +57,18 @@
       width: 90%; 
       padding: 1rem 0 0 0;
       max-width: $responsive-max-width;
+      &:nth-child(odd) {
+        img {
+          float: left;
+          margin-right: 2rem;
+        };
+      }
+      &:nth-child(even) {
+        img {
+          float: right; 
+          margin-left: 2rem;
+        };
+      }
     }
     &__title {
       padding: 20px 10px;
@@ -67,18 +79,20 @@
       }
     } 
     &__txtimg {
-      display: block;
+      display: flex;
       align-items: center;
       flex-direction: column;
-      @include for-desktop {
-        flex-direction: row;
+      > p {
+        margin-top: 1rem;
       }
-      img {
+      @include for-desktop {
+        display: block;
+      }
+      img {      
         width: $imgsmall;
         height: $imagesmall;
         border: solid darkgrey 3px;
         border-radius: $border-radius; 
-        margin: .7rem;
         @include for-desktop {
           width: $imgmedium;
           height: $imgmedium;
@@ -86,13 +100,12 @@
       }
     }
     &__text {
-      padding: .5rem;
       font-size: 1.2rem;
       line-height: 1.5rem;
+      text-align: justify;
       @include for-desktop {
         font-size: 1.5rem;
         line-height: 1.8rem;
-        padding: 2rem;
       }
     }
   }
