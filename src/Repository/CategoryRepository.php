@@ -57,6 +57,19 @@ class CategoryRepository extends ServiceEntityRepository
                 ->getResult();
         }
     }
+    /**
+     * Jointure entre Category & knifes
+     * C'est le join qui fait tout le boulot
+     */
+    public function findDistinctActiveCategories(): array
+    {
+        return $this->createQueryBuilder('c')
+        ->select('distinct(c.name), c.id, c.image, c.rank')
+        ->join('c.knifes', 'k')
+        ->orderBy('c.rank')
+        ->getQuery()
+        ->getResult();
+    }   
 
 //    /**
 //     * @return Category[] Returns an array of Category objects
