@@ -23,7 +23,6 @@ const $props = ( () => {
     knifehandler: 'knife.js Feb 08 2023, 1.05 ',
     datehandler: 'twigdate.js Feb 16 2023, 1.02 ',
     sliderhandler: 'slider.js Feb 24 2023, 1.06 ',
-    sliderclass: 'slider Class.js Jun 05 2023, 1.00 ',
     logshandler: 'logs.js Mar 26 2023, 1.08 ',
     // Some locations
     rootimages: '/images',
@@ -53,7 +52,6 @@ const $props = ( () => {
     knifehandler: () => { return allprops.knifehandler; },
     datehandler: () => { return allprops.datehandler; },
     sliderhandler: () => { return allprops.sliderhandler; },
-    sliderclass: () => { return allprops.sliderclass; },
     logshandler: () => { return allprops.logshandler; },
 
     knifeimageslocation: () => { return allprops.knifeimages_directory; },

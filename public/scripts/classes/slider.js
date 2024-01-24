@@ -64,7 +64,7 @@ export default class Slider {
         event.stopPropagation();
         this.manageActiveSlide(event);
       })
-      $(`#${this.sliderarea} > .carousel-indicators`).children().on('click', (event) => {
+      $(`#${this.sliderarea} > .slider__box__elements__indicators`).children().on('click', (event) => {
         event.stopPropagation();
         this.manageActiveIndicator(event);
       });
@@ -141,7 +141,7 @@ export default class Slider {
   }
   // ------------------------------------------------------------------------------------------------
   updateActiveButton() {
-    const indicatorslist = $(`#${this.sliderarea} > .carousel-indicators`).children();
+    const indicatorslist = $(`#${this.sliderarea} > .slider__box__elements__indicators`).children();
     for(let i = 0; i < indicatorslist.length; ++i){
       $(indicatorslist[i]).removeClass('active');
     };
@@ -201,8 +201,8 @@ export default class Slider {
         $(oneimage).addClass('active');
       }
       let h3 = $("<h5></h5>").text(`${i+1}/${allimages.length}`);
-      let newimg = $('<img>').addClass('sliderimage')
-          .attr('src', this.imagespath+allimages[i]);
+      // let newimg = $('<img>').addClass('sliderimage')
+      let newimg = $('<img>').attr('src', this.imagespath+allimages[i]);
       $(newimg).click( (e) => { // Arrow function mandatory here to use this
         e.preventDefault();
         this.fullScreen(this.allimages[this.activeindex]);
