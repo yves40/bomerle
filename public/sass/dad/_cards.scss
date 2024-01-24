@@ -58,12 +58,18 @@
       padding: 1rem 0 0 0;
       max-width: $responsive-max-width;
       &:nth-child(odd) {
+        p {
+          text-align: $textalign-right
+        }
         img {
           float: left;
           margin-right: 2rem;
         };
       }
       &:nth-child(even) {
+        p {
+          text-align: $textalign-left;
+        }
         img {
           float: right; 
           margin-left: 2rem;
@@ -102,11 +108,7 @@
     &__text {
       font-size: 1.2rem;
       line-height: 1.5rem;
-      text-align: justify;
-      @include for-desktop {
-        font-size: 1.5rem;
-        line-height: 1.8rem;
-      }
+      text-align: $textalign-justify;
     }
   }
   &__links {

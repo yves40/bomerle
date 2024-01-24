@@ -23,6 +23,11 @@ $imagesmall: 8rem;
 
 $menu-height: 100px;
 
+// Some text policies
+$textalign-left: left;
+$textalign-right: right;
+$textalign-justify: justify;
+
 // fonts
 @import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&display=swap');
 @import url("https://fonts.googleapis.com/css2?family=Acme&display=swap");
@@ -60,32 +65,9 @@ $bg-gradient-black:  linear-gradient(to bottom left, #959595 0%, #0D0D0D 50%, #0
 $bg-gradient-blue: radial-gradient(circle, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 50%, rgba(0,212,255,1) 100%);
 $bg-gradient-green: radial-gradient(circle, rgba(2,0,36,1) 0%, rgba(9,121,54,1) 100%, rgba(0,212,255,1) 100%);
 
-.bg-knifeleft {
-  background-image: url('../images/background-left.jpg');  
-  background-size: cover;
-  color: white;
-}
-.bg-kniferight {
-  background-image: url('../images/background-right.jpg'); 
-  background-size: cover;
-  color: white;
-}
-.bg-enclume {
-  background-image: url('../images/enclume.jpg'); 
-  background-size: cover;
-  color: white;
-}
-.bg-thinknife {
-  background-image: url('../images/home-knife.jpg'); 
-  background-size: cover;
-  color: white;
-}
-.bgr-green {  background: $bg-gradient-green; color: white }
-.bgr-black {  background: $bg-gradient-black;  color: white }
-.bgr-blue {  background: $bg-gradient-blue;  color: white } 
-
-
 /*
+  Special section for SVGs
+
   How to compute the filter value ???
   Go to thi site: https://codepen.io/sosuke/pen/Pjoqqp
   Enter your color code.

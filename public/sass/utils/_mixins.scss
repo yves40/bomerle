@@ -1,5 +1,5 @@
 @mixin for-mobile {
-    @media screen and (max-width: $responsive-threshold){
+    @media screen and (max-width: $responsive-threshold-high){
         @content;
     }
 }
@@ -10,7 +10,7 @@
 }
 @mixin for-tablet {
   
-  @media screen and ($responsive-threshold-low <= width <= $responsive-threshold-high){
+  @media screen and (min-width: $responsive-threshold-low) and (max-width: $responsive-threshold-high) {
       @content;
   }
 }

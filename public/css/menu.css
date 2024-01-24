@@ -3,39 +3,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Englebert&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Gideon+Roman&display=swap");
-.bg-knifeleft {
-  background-image: url("../images/background-left.jpg");
-  background-size: cover;
-  color: white; }
-
-.bg-kniferight {
-  background-image: url("../images/background-right.jpg");
-  background-size: cover;
-  color: white; }
-
-.bg-enclume {
-  background-image: url("../images/enclume.jpg");
-  background-size: cover;
-  color: white; }
-
-.bg-thinknife {
-  background-image: url("../images/home-knife.jpg");
-  background-size: cover;
-  color: white; }
-
-.bgr-green {
-  background: radial-gradient(circle, #020024 0%, #097936 100%, #00d4ff 100%);
-  color: white; }
-
-.bgr-black {
-  background: linear-gradient(to bottom left, #959595 0%, #0D0D0D 50%, #010101 50%, #0A0A0A 53%, #4E4E4E 76%, #383838 87%, #1B1B1B 100%);
-  color: white; }
-
-.bgr-blue {
-  background: radial-gradient(circle, #020024 0%, #090979 50%, #00d4ff 100%);
-  color: white; }
-
 /*
+  Special section for SVGs
+
   How to compute the filter value ???
   Go to thi site: https://codepen.io/sosuke/pen/Pjoqqp
   Enter your color code.
