@@ -117,7 +117,7 @@
     font-weight: 600;
     padding: 2rem 0;
     width: 100%; }
-    @media screen and (min-width: 1200px) {
+    @media screen and (min-width: 1024px) {
       .allnews h1 {
         font-size: 3rem; } }
   .allnews h2 {
@@ -128,7 +128,7 @@
     line-height: 1.5rem;
     display: inline-block;
     width: 100%; }
-    @media screen and (min-width: 1200px) {
+    @media screen and (min-width: 1024px) {
       .allnews h2 {
         font-size: 2rem; } }
   .allnews p {
@@ -137,14 +137,14 @@
     line-height: 1.4rem;
     text-align: right;
     width: 100%; }
-    @media screen and (min-width: 1200px) {
+    @media screen and (min-width: 1024px) {
       .allnews p {
         font-size: 1.5rem;
         line-height: 2rem; } }
   .allnews .news {
     width: 80%;
     margin-bottom: 2.5rem; }
-    @media screen and (min-width: 1200px) {
+    @media screen and (min-width: 1024px) {
       .allnews .news {
         max-width: 1024px; } }
     .allnews .news p {
@@ -183,7 +183,7 @@
   background: #1a1917; }
   .topmenu #homelink {
     margin: 1rem; }
-    @media screen and (min-width: 1200px) {
+    @media screen and (min-width: 1024px) {
       .topmenu #homelink {
         display: none; } }
   .topmenu .logozone {
@@ -239,7 +239,7 @@
   filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(131deg) brightness(102%) contrast(102%); }
 
 /* --------------------  R E S P O N S I V E --------------------*/
-@media screen and (max-width: 1200px) {
+@media screen and (max-width: 1024px) {
   .topmenu {
     padding: 0; }
     .topmenu .logozone {
@@ -305,7 +305,7 @@
   background-color: rgba(34, 7, 7, 0.6);
   border-radius: 5px;
   padding: 0 2rem; }
-  @media screen and (min-width: 1200px) {
+  @media screen and (min-width: 1024px) {
     .cards {
       width: 70%;
       max-width: 1024px; } }
@@ -322,7 +322,7 @@
     text-align: justify;
     font-size: 1.2rem;
     line-height: 1.5rem; }
-  @media screen and (min-width: 1200px) {
+  @media screen and (min-width: 1024px) {
     .cards__header h2 {
       font-size: 4rem; }
     .cards__header p {
@@ -330,7 +330,7 @@
       line-height: 1.8rem; } }
   .cards__frame {
     height: auto; }
-    @media screen and (min-width: 1200px) {
+    @media screen and (min-width: 1024px) {
       .cards__frame {
         width: 90%;
         padding: 1rem 0 0 0;
@@ -345,7 +345,7 @@
       padding: 20px 10px;
       font-size: 2rem;
       font-family: "Gideon Roman", sans-serif; }
-      @media screen and (min-width: 1200px) {
+      @media screen and (min-width: 1024px) {
         .cards__frame__title {
           font-size: 3rem; } }
     .cards__frame__txtimg {
@@ -354,7 +354,7 @@
       flex-direction: column; }
       .cards__frame__txtimg > p {
         margin-top: 1rem; }
-      @media screen and (min-width: 1200px) {
+      @media screen and (min-width: 1024px) {
         .cards__frame__txtimg {
           display: block; } }
       .cards__frame__txtimg img {
@@ -362,7 +362,7 @@
         height: 8rem;
         border: solid darkgrey 3px;
         border-radius: 5px; }
-        @media screen and (min-width: 1200px) {
+        @media screen and (min-width: 1024px) {
           .cards__frame__txtimg img {
             width: 300px;
             height: 300px; } }
@@ -370,7 +370,7 @@
       font-size: 1.2rem;
       line-height: 1.5rem;
       text-align: justify; }
-      @media screen and (min-width: 1200px) {
+      @media screen and (min-width: 1024px) {
         .cards__frame__text {
           font-size: 1.5rem;
           line-height: 1.8rem; } }
@@ -385,7 +385,7 @@
     color: white;
     margin-bottom: 2rem;
     max-width: 1024px; }
-    @media screen and (min-width: 1200px) {
+    @media screen and (min-width: 1024px) {
       .cards__links {
         max-width: 1024px; } }
     .cards__links p {
@@ -407,7 +407,7 @@
         font-weight: normal;
         margin: 1rem 0 1rem 0;
         font-size: 1rem; }
-        @media screen and (min-width: 1200px) {
+        @media screen and (min-width: 1024px) {
           .cards__links__details p {
             font-size: 1.5rem; } }
       .cards__links__details img {
@@ -507,7 +507,7 @@
   margin: 2em auto;
   width: 80vw;
   height: 80vh; }
-  @media screen and (min-width: 1200px) {
+  @media screen and (min-width: 1024px) {
     .slider__box {
       max-width: 1024px;
       max-height: 1024px; } }
@@ -547,7 +547,7 @@
       align-items: end; }
     .slider__box__elements__action img {
       width: 30px; }
-    @media screen and (min-width: 1200px) {
+    @media screen and (min-width: 1024px) {
       .slider__box__elements__action img {
         width: 50px; }
       .slider__box__elements__action.prev {
@@ -575,7 +575,7 @@
       margin-left: 3px;
       margin-right: 3px;
       cursor: pointer; }
-      @media screen and (min-width: 1200px) {
+      @media screen and (min-width: 1024px) {
         .slider__box__elements__indicators__flags {
           height: 10px; } }
       .slider__box__elements__indicators__flags.active {
@@ -751,7 +751,7 @@
   color: white; }
   #newsgallery .galleryzone {
     padding: 0 2em 3em 2em; }
-    @media screen and (min-width: 1200px) {
+    @media screen and (min-width: 1024px) {
       #newsgallery .galleryzone {
         padding: 0 5em 3em 5em;
         width: 100%;
@@ -765,7 +765,7 @@
       text-align: justify;
       margin: 1rem auto;
       padding: 1em; }
-      @media screen and (min-width: 1200px) {
+      @media screen and (min-width: 1024px) {
         #newsgallery .galleryzone p {
           font-size: 1.5rem;
           line-height: 2rem; } }
@@ -808,7 +808,7 @@
   gap: 1rem;
   scroll-margin: 100px;
   border-top: 2px solid gray; }
-  @media screen and (min-width: 1200px) {
+  @media screen and (min-width: 1024px) {
     .infos {
       flex-direction: row;
       max-width: 1024px; } }
@@ -818,7 +818,7 @@
     display: flex;
     flex-direction: column;
     align-items: center; }
-    @media screen and (min-width: 1200px) {
+    @media screen and (min-width: 1024px) {
       .infos .infoelement {
         align-items: start;
         width: 30%;
@@ -838,14 +838,14 @@
       margin: 2.5rem 0 .5rem 0;
       font-size: 1.7rem;
       font-family: "Gideon Roman", sans-serif; }
-      @media screen and (min-width: 1200px) {
+      @media screen and (min-width: 1024px) {
         .infos .infoelement h1, .infos .infoelement h2 {
           margin: 2rem 0 2rem 0; } }
     .infos .infoelement h3 {
       margin: 1rem 0 2rem 0;
       font-size: 1.7rem;
       font-family: "Gideon Roman", sans-serif; }
-      @media screen and (min-width: 1200px) {
+      @media screen and (min-width: 1024px) {
         .infos .infoelement h3 {
           margin: 2rem 0 2rem 0; } }
     .infos .infoelement iframe {
@@ -917,7 +917,7 @@
     margin: .8rem 0;
     padding-top: 1.5rem;
     border-top: solid white 2px; }
-    @media screen and (min-width: 1200px) {
+    @media screen and (min-width: 1024px) {
       #categorygallery .catzone {
         padding-top: 3rem;
         max-width: 1024px; } }
@@ -929,7 +929,7 @@
       row-gap: .5rem;
       width: 45%;
       margin-bottom: 2rem; }
-      @media screen and (min-width: 1200px) {
+      @media screen and (min-width: 1024px) {
         #categorygallery .catzone__card {
           margin-bottom: 3rem;
           width: 32%; } }
@@ -939,7 +939,7 @@
         font-weight: 600;
         padding: 1rem 0 1rem 0;
         line-height: 1.5rem; }
-        @media screen and (min-width: 1200px) {
+        @media screen and (min-width: 1024px) {
           #categorygallery .catzone__card h2 {
             font-size: 2.5rem; } }
       #categorygallery .catzone__card img {
@@ -947,7 +947,7 @@
         aspect-ratio: 1;
         border-radius: 5px;
         margin: .5rem; }
-        @media screen and (min-width: 1200px) {
+        @media screen and (min-width: 1024px) {
           #categorygallery .catzone__card img {
             width: 80%;
             aspect-ratio: 1; } }
@@ -981,14 +981,14 @@ body {
     background-position: center;
     background-size: cover;
     background-attachment: fixed; }
-    @media screen and (min-width: 1200px) {
+    @media screen and (min-width: 1024px) {
       body .hero-section {
         background-image: url(../images/BastosBG2.webp); } }
     body .hero-section .hero-title {
       padding: 1rem;
       margin-right: 1rem;
       color: white; }
-      @media screen and (min-width: 1200px) {
+      @media screen and (min-width: 1024px) {
         body .hero-section .hero-title {
           margin-right: 1rem;
           max-width: 1024px; } }
@@ -1003,7 +1003,7 @@ body {
         float: left;
         margin: 1rem;
         border-radius: 5px; }
-        @media screen and (min-width: 1200px) {
+        @media screen and (min-width: 1024px) {
           body .hero-section .hero-title img {
             width: 300px;
             height: 300px; } }
@@ -1014,7 +1014,7 @@ body {
         padding: 2rem 0;
         text-align: right;
         width: 100%; }
-        @media screen and (min-width: 1200px) {
+        @media screen and (min-width: 1024px) {
           body .hero-section .hero-title h1 {
             font-size: 3rem; } }
       body .hero-section .hero-title h2 {
@@ -1025,7 +1025,7 @@ body {
         line-height: 1.5rem;
         text-align: right;
         width: 100%; }
-        @media screen and (min-width: 1200px) {
+        @media screen and (min-width: 1024px) {
           body .hero-section .hero-title h2 {
             font-size: 2.5rem; } }
       body .hero-section .hero-title p {
@@ -1037,7 +1037,7 @@ body {
         background-color: rgba(34, 7, 7, 0.3);
         border-radius: 5px;
         width: 100%; }
-        @media screen and (min-width: 1200px) {
+        @media screen and (min-width: 1024px) {
           body .hero-section .hero-title p {
             font-size: 1.5rem;
             line-height: 2rem; } }
@@ -1058,7 +1058,7 @@ body {
   #slider h2 {
     font-size: 2rem;
     padding: 1rem; }
-    @media screen and (min-width: 1200px) {
+    @media screen and (min-width: 1024px) {
       #slider h2 {
         font-size: 4rem; } }
   #slider p {

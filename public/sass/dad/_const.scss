@@ -3,7 +3,9 @@ $smallsize: 850px;
 $mediumsize: 1500px;
 $bigsize: 1920px; 
 $responsive-max-width: 1024px;
-$responsive-threshold: 1200px;
+$responsive-threshold-high: 1024px;
+$responsive-threshold-medium: 900px;
+$responsive-threshold-low: 600px;
 $maxslideimagewidth: 500px;
 $border-radius: 5px;
 

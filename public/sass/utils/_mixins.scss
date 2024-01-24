@@ -4,9 +4,15 @@
     }
 }
 @mixin for-desktop {
-    @media screen and (min-width:$responsive-threshold){
-        @content;
-    }
+  @media screen and (min-width: $responsive-threshold-high){
+      @content;
+  }
+}
+@mixin for-tablet {
+  
+  @media screen and ($responsive-threshold-low <= width <= $responsive-threshold-high){
+      @content;
+  }
 }
 @mixin submenuattr {
     li {
