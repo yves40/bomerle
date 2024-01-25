@@ -128,6 +128,10 @@ $(document).ready(function () {
         activecategories.forEach(cat => {
             const div = $('<div></div>').addClass('catzone__card');
             $(div).append($('<h2>').text(cat.catname));
+            // Check the category has an associated image, otherwise get a default
+            if(cat.catimage === null) {
+                cat.catimage = `${$props.rootimageslocation()}/${$props.defaultcategoryimage()}`;
+            }
             const img = $('<img>').attr('src',`${$props.categoryimageslocation()}/${cat.catimage}`)
                 .attr('data-catid', cat.catid)
                 .attr('data-catname', cat.catname)
@@ -151,7 +155,76 @@ $(document).ready(function () {
      *                      to be detailed 
      */
     function displayOneCategory(target) {
-        console.log($(target).data('catname'));
+        const categoryid = $(target).data('catid');
+        const catname = $(target).data('catname');
+        const catdesc = $(target).data('catdesc');
+        // Track double click or double request
+        let displayedcateoryid = parseInt($(knivesgallery).attr('data-catid'));
+        if( !isNaN(displayedcateoryid) && displayedcateoryid === categoryid) {
+            return false;
+        }
+        else {
+            $(knivesgallery).empty().attr('data-catid', categoryid);
+        }
+        // The category page header
+        const gallerycontainer = $('<div>').addClass('cards');
+        const cardsheader = $('<div>').attr('id', 'cards__header').addClass('cards__header');
+        $(cardsheader).append($('<h2>').text(catname));
+        $(cardsheader).append($('<p>').text(catdesc));
+        $(gallerycontainer).append(cardsheader);
+        $(knivesgallery).append(gallerycontainer);
+        // The knives
+        displayKnives(gallerycontainer, categoryid);
+        // Put it on the screen 
+        window.location = '#knivesgallery'
+        $(knivesgallery).show().fadeIn(2000);
+    }
+    /**
+     * 
+     * @param {*} container The DOM element into which the knives cards 
+     *                      will be displayed
+     * @param {*} categoryid The category containig the knives
+     */
+    function displayKnives(container, categoryid) {
+        const payload = {
+            'catid': categoryid,
+        }
+        let timk = new Timer(); timk.startTimer();
+        // Get knives
+        $.ajax({
+            type: "POST",
+            url: '/knives/public/getcategoryknives',
+            dataType: "json",
+            async: false,
+            data: JSON.stringify(payload),
+            success: function (response) {
+                response.knivesids.forEach( oneid => {       
+                    // Get knife images and build the display card
+                    $.ajax({
+                        type: "POST",
+                        url: '/knives/public/getimages',
+                        dataType: "json",
+                        async: false,
+                        data: JSON.stringify( { 'knifeid': oneid.id } ),
+                        success: function (response) {
+                            buildCard(response, container);
+                        },
+                        error: function (xhr) {
+                            logger.error(xhr);
+                        }
+                    });    
+                })
+                // Now the linked categories
+                console.log(response.relatedcategories);
+                let linkcontainer = $('<div>').attr('id', 'relatedcategories').addClass('cards__links');
+                timk.stopTimer();
+                logger.debug(`Loaded knives cards in ${timk.getElapsedString()}`);
+            },
+            error: function (xhr) {
+                logger.error(xhr);
+            }
+        });
+
     }
     /**
      * Request the active categories from the DB
@@ -181,7 +254,7 @@ $(document).ready(function () {
             }
         });    
     }    
-    /** --------------------------------------------------------
+    /** 
      * @param container
      *      div element used to load all categories 
      *      The categories list depends of published knives
@@ -217,7 +290,6 @@ $(document).ready(function () {
                 async: true,
                 data: JSON.stringify(payload),
                 success: function (response) {
-                    console.log(response);
                     AddCategory(catzone, response, dedup[idx]);
                 },
                 error: function (xhr) {
@@ -605,7 +677,7 @@ $(document).ready(function () {
      * @param {*} response json data containing some knife information
      * @param {*} container The target element where the card will be displayed
      */
-    function buildCard(response, container, cardindex ) {
+    function buildCard(response, container, cardindex=0 ) {
         let thecard = $('<div>').attr('id', `knifeid-${response.knifeId}`)
                                     .addClass('cards__frame');
         let card  = new Card(thecard, response, cardindex);

@@ -73,7 +73,6 @@ class CategoryRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }   
-
 //    /**
 //     * @return Category[] Returns an array of Category objects
 //     */

@@ -50,6 +50,15 @@ class KnifesRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }   
+    public function findCategoryKnives($catid): array
+    {
+        return $this->createQueryBuilder('c')
+            ->select('c.id')
+            ->andWhere('c.category = :catid')
+            ->setParameter('catid', $catid)
+            ->getQuery()
+            ->getResult();
+    }   
 
 //    /**
 //     * @return Knifes[] Returns an array of Knifes objects

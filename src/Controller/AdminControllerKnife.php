@@ -219,7 +219,6 @@ class AdminControllerKnife extends AbstractController
             return $this->json([
                 'message' => 'bootadmin.knives.getactivecategories OK',
                 'activecategories' => $distinctcategories,
-                // 'related' => $linkcat,
                 'categoriescount' => count($distinctcategories)
             ], 200);        
     }
@@ -261,6 +260,39 @@ class AdminControllerKnife extends AbstractController
                 'knivescount' => count($published),
                 'categories' =>  $categories,
                 'categoriescount' => count($categories)
+            ], 200);        
+    }
+        catch(Exception $e) {
+            return $this->json([
+                'message' => 'bootadmin.knives.getpublished KO',
+                'error' => $e
+            ], 500);        
+        }
+    }
+    // --------------------------------------------------------------------------
+    #[Route('/public/getcategoryknives', name: 'bootadmin.knives.getcategoryknives')]
+    public function getCategoryKnives(Request $request, EntityManagerInterface $em) {
+        $data = file_get_contents("php://input");
+        $payload = json_decode($data, true);
+        $categoryid = $payload['catid'];
+        try {
+            /** 
+             * @var CategoryRepository $repcat
+             * @var KnifesRepository $repo
+             * */
+            $repo = $em->getRepository(Knifes::class);
+            $repcat = $em->getRepository(Category::class);
+            $cat = $repcat->find($categoryid);
+            $relatedcategories = [];
+            foreach($cat->getRelatedcategories() as $one ) {
+                array_push($relatedcategories, $one->getId());
+            }
+            $dedup = array_unique($relatedcategories, SORT_NUMERIC);
+            $knivesids = $repo->findCategoryKnives($categoryid);
+            return $this->json([
+                'message' => 'bootadmin.knives.getcategoryknives OK',
+                'relatedcategories' => $dedup,
+                'knivesids' => $knivesids,
             ], 200);        
     }
         catch(Exception $e) {
@@ -330,7 +362,7 @@ class AdminControllerKnife extends AbstractController
                 'filenames' => $filenames,
                 'knivesid' => $knivesid,
             ], 200);        
-    }
+        }
         catch(Exception $e) {
             return $this->json([
                 'message' => 'bootadmin.knives.categoryimages KO',
