@@ -64,11 +64,14 @@ class CategoryRepository extends ServiceEntityRepository
     public function findDistinctActiveCategories(): array
     {
         return $this->createQueryBuilder('c')
-        ->select('distinct(c.name), c.id, c.image, c.rank')
-        ->join('c.knifes', 'k')
-        ->orderBy('c.rank')
-        ->getQuery()
-        ->getResult();
+            ->select('distinct(c.name) as catname, c.id as catid, 
+                            c.image as catimage, 
+                            c.rank,
+                            c.description as catdesc')
+            ->join('c.knifes', 'k')
+            ->orderBy('c.rank')
+            ->getQuery()
+            ->getResult();
     }   
 
 //    /**

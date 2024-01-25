@@ -12,13 +12,12 @@ $(document).ready(function () {
     $props.load();
 
     const cardsmenu = $("#cardsmenu");
-    const knivesgallery = $('#knivesgallery');
-    const gallerymenu = $("#gallerymenu");
-    const newssection = $('#newsgallery');
     const categoriesmenu = $('#categoriesmenu');
-    const categorysection = $('#categorygallery');
-    const slider = $('#slider');    // 1st gallery zoom test
-    const categorygallery = $('#categorygallery');  // 2nd gallery zoom implementation
+    const newsmenu = $('#newsmenu');
+    const categorygallery = $('#categorygallery');
+    const knivesgallery = $('#knivesgallery');
+    const newsgallery = $('#newsgallery');
+    const slider = $('#slider');
     const menuHamburger = $(".menu-hamburger");
     const navLinks = $(".nav-links");
     const infoknife = $('.knife');
@@ -29,12 +28,11 @@ $(document).ready(function () {
     // Initial state of UI
     $('#zoomer').hide();
     $(infoknife).hide();
-    $(gallerymenu).hide();
     $(cardsmenu).hide();
+    $(newsmenu).hide();
     $(categoriesmenu).hide();
-    $(newssection).hide();
+    $(newsgallery).hide();
     $(knivesgallery).hide();
-    $(categorysection).hide();
     $(categorygallery).hide();
     $(slider).hide().attr('name', 'dynamic');
 
@@ -88,9 +86,101 @@ $(document).ready(function () {
         buttonClicked();
     })
     getHtmlTemplates();
-    getPublishedKnives()
-    getActiveDiaporamas();
-
+    getActiveCategories();
+    // getPublishedKnives()
+    // getActiveDiaporamas();
+    /**
+     * Request the active categories from the DB
+     * To be considered active, a category must hold at least 
+     * one active knife
+     */
+    function getActiveCategories() {
+        let timer = new Timer();
+        timer.startTimer();
+        $.ajax({
+            type: "GET",
+            url: '/knives/public/getactivecategories',
+            dataType: "json",
+            async: true,
+            success: function (response) {
+                if(response.categoriescount != 0) {
+                    displayActiveCategories(response.activecategories);
+                    timer.stopTimer();
+                    logger.info(`Found and displayed ${response.categoriescount} active categories in ${timer.getElapsedString()}`);
+                    $(categoriesmenu).show();
+                    $(categorygallery).show();
+                }
+            },
+            error: function (xhr) {
+                logger.error(xhr);
+            }
+        });    
+    }
+    /**
+     * 
+     * @param {*} activecategories  The array of active categories to be displayed
+     *                              To be considered active, a category must hold at least 
+     *                              one active knife
+     */
+    function displayActiveCategories(activecategories) {
+        // Build the cards gallery
+        const catzone = $('<div></div>').addClass('catzone');
+        activecategories.forEach(cat => {
+            const div = $('<div></div>').addClass('catzone__card');
+            $(div).append($('<h2>').text(cat.catname));
+            const img = $('<img>').attr('src',`${$props.categoryimageslocation()}/${cat.catimage}`)
+                .attr('data-catid', cat.catid)
+                .attr('data-catname', cat.catname)
+                .attr('data-catdesc', cat.catdesc);
+            $(div).append(img);
+            $(img).on('click', (event) => {
+                event.preventDefault();
+                if (categorygalleryactive) {
+                    $(categorygallery).empty().hide();
+                    categorygalleryactive = false;
+                }
+                displayOneCategory(event.target);
+            })
+            $(catzone).append(div);
+        });
+        $(categorygallery).append(catzone);
+    }
+    /**
+     *
+     * @param {*} target A DOM element containing all category parameters
+     *                      to be detailed 
+     */
+    function displayOneCategory(target) {
+        console.log($(target).data('catname'));
+    }
+    /**
+     * Request the active categories from the DB
+     * To be considered active, a category must hold at least 
+     * one active knife
+     */
+    function getPublishedKnives() {
+        let timer = new Timer();
+        timer.startTimer();
+        $.ajax({
+            type: "GET",
+            url: '/knives/public/getpublished',
+            dataType: "json",
+            async: true,
+            success: function (response) {
+                timer.stopTimer();
+                logger.info(`Loaded ${response.knivescount} knives in ${timer.getElapsedString()}`);
+                if(response.categoriescount != 0) {
+                    $(categoriesmenu).show();
+                    $(categorygallery).show();
+                    loadCategoriesCatalog(categorygallery, response.categories);
+                    allcategoriesknives = response.knives;
+                }
+            },
+            error: function (xhr) {
+                logger.error(xhr);
+            }
+        });    
+    }    
     /** --------------------------------------------------------
      * @param container
      *      div element used to load all categories 
@@ -124,7 +214,7 @@ $(document).ready(function () {
                 type: "POST",
                 url: '/knives/public/categoryimages',
                 dataType: "json",
-                async: false,
+                async: true,
                 data: JSON.stringify(payload),
                 success: function (response) {
                     console.log(response);
@@ -541,39 +631,12 @@ $(document).ready(function () {
                 ttx.stopTimer();
                 logger.info(`Loaded ${response.activecount} diaporamas in ${ttx.getElapsedString()}`);
                 if(response.activecount != 0) {
-                    $(gallerymenu).show();
-                    $('#newsgallery').show();
+                    $(categoriesmenu).show();
                     loadDiapoSections(response.activediaporamas);                 
                 }
             },
             error: function (xhr) {
                 logger.console.error();(xhr);
-            }
-        });    
-    }
-    /**
-     * Request the active knives from the DB
-     */
-    function getPublishedKnives() {
-        let timer = new Timer();
-        timer.startTimer();
-        $.ajax({
-            type: "GET",
-            url: '/knives/public/getpublished',
-            dataType: "json",
-            async: true,
-            success: function (response) {
-                timer.stopTimer();
-                logger.info(`Loaded ${response.knivescount} knives in ${timer.getElapsedString()}`);
-                if(response.categoriescount != 0) {
-                    $(categoriesmenu).show();
-                    $(categorygallery).show();
-                    loadCategoriesCatalog(categorygallery, response.categories);
-                    allcategoriesknives = response.knives;
-                }
-            },
-            error: function (xhr) {
-                logger.error(xhr);
             }
         });    
     }
@@ -598,7 +661,7 @@ $(document).ready(function () {
     function loadDiapoSections(allactive) {
         allactive.forEach(diapo => {
             let diaposection = $('<div>').attr('name', diapo.name);
-            $(newssection).append(diaposection);
+            $(newsgallery).append(diaposection);
             const payload = {
                 "diaponame" :  diapo.name,
             }

@@ -208,6 +208,29 @@ class AdminControllerKnife extends AbstractController
         }
     }
     // --------------------------------------------------------------------------
+    #[Route('/public/getactivecategories', name: 'bootadmin.knives.getactivecategories')]
+    public function getActiveCategories(Request $request, EntityManagerInterface $em) {
+        try {   
+             /**
+              *   @var CategoryRepository $repocat  
+             */
+            $repocat = $em->getRepository(Category::class);
+            $distinctcategories = $repocat->findDistinctActiveCategories();
+            return $this->json([
+                'message' => 'bootadmin.knives.getactivecategories OK',
+                'activecategories' => $distinctcategories,
+                // 'related' => $linkcat,
+                'categoriescount' => count($distinctcategories)
+            ], 200);        
+    }
+        catch(Exception $e) {
+            return $this->json([
+                'message' => 'bootadmin.knives.getactivecategories KO',
+                'error' => $e
+            ], 500);        
+        }
+    }
+    // --------------------------------------------------------------------------
     #[Route('/public/getpublished', name: 'bootadmin.knives.getpublished')]
     public function getPublished(Request $request, EntityManagerInterface $em) {
         try {
@@ -298,8 +321,6 @@ class AdminControllerKnife extends AbstractController
                 }
             }
             $thecategory = $repocat->findOneBy(['id' => $categoryid ]);
-            // Test 
-            $distinctcategories = $repocat->findDistinctActiveCategories();
             return $this->json([
                 'message' => 'bootadmin.knives.categoryimages OK',
                 'catid' => $categoryid,
@@ -308,7 +329,6 @@ class AdminControllerKnife extends AbstractController
                 'single' => $single,
                 'filenames' => $filenames,
                 'knivesid' => $knivesid,
-                'testdistinct' => $distinctcategories
             ], 200);        
     }
         catch(Exception $e) {
