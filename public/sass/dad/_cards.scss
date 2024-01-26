@@ -7,6 +7,13 @@
   background-size: cover;
   scroll-margin: $menu-height;
 }
+#knivesgallery[active] {
+  animation: fadein 3000ms forwards ease-in;
+}
+#knivesgallery[inactive] {
+  animation: fadeout 1000ms forwards ease-out;
+}
+
 .cards {
   color: white;
   margin: 0 auto;

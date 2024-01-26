@@ -34,7 +34,7 @@ $(document).ready(function () {
     $(newsmenu).hide();
     $(categoriesmenu).hide();
     $(newsgallery).hide();
-    $(knivesgallery).hide();
+    $(knivesgallery).hide().attr('inactive', '').removeAttr('active');
     $(categorygallery).hide();
     $(slider).hide().attr('name', 'dynamic');
 
@@ -163,7 +163,6 @@ $(document).ready(function () {
         let displayedcateoryid = parseInt($(knivesgallery).attr('data-catid'));
         if( !isNaN(displayedcateoryid) && displayedcateoryid === categoryid) {
             window.location = '#knivesgallery';
-            return false;
         }
         else {
             $(knivesgallery).empty().attr('data-catid', categoryid);
@@ -175,6 +174,8 @@ $(document).ready(function () {
         $(cardsheader).append($('<p>').text(catdesc));
         $(gallerycontainer).append(cardsheader);
         $(knivesgallery).append(gallerycontainer);
+        window.location = '#knivesgallery'
+        $(knivesgallery).attr('active','').removeAttr('inactive').show();
         // The knives
         displayKnives(gallerycontainer, categoryid);
     }
@@ -213,8 +214,6 @@ $(document).ready(function () {
                         }
                     });    
                 })
-                window.location = '#knivesgallery'
-                $(knivesgallery).show().fadeIn(2000);
                 timk.stopTimer();
                 logger.debug(`Loaded knives cards in ${timk.getElapsedString()}`);
                 // Now the linked categories
@@ -236,11 +235,12 @@ $(document).ready(function () {
                         if(event.target.nodeName === 'P'){
                             target = $(event.target).next();
                         }
-                        $(knivesgallery).fadeOut(800, () => {
-                            $(knivesgallery).empty();
-                            // Now reload the category zoom
+                        $(knivesgallery).attr('inactive', '').removeAttr('active');
+                        setTimeout(() => {                    
+                            $(knivesgallery).empty().hide().attr('data-catid', 0);
                             displayOneCategory(target);
-                        });
+                            // window.location = '#categorygallery';
+                        }, 1000);                        
                    })
                 });
                 if($(linkcontainer).children().length > 0)   {
@@ -260,10 +260,11 @@ $(document).ready(function () {
         $(knivesgallery).off('mousedown').on('mousedown', (event) => {
             event.preventDefault();
             if(event.target.nodeName !== 'IMG') {   // Close the gallery ?
-                $(knivesgallery).fadeOut(800, () => {
+                $(knivesgallery).attr('inactive', '').removeAttr('active');
+                setTimeout(() => {                    
                     $(knivesgallery).empty().hide().attr('data-catid', 0);
-                    window.location = '#categories';
-                });
+                    window.location = '#categorygallery';
+                }, 1000);
             }
             else {
                 if(!knifeslideractive) {
