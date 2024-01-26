@@ -245,13 +245,53 @@ $(document).ready(function () {
                 if($(linkcontainer).children().length > 0)   {
                     $(linkcontainer).prepend($('<p>').text($labels.get('interested')));
                     $('.cards').append(linkcontainer);
-                }              
+                }
+                armKnivesGalleryHandlers();        
             },
             error: function (xhr) {
                 logger.error(xhr);
             }
         });
 
+    }
+    function armKnivesGalleryHandlers() {
+        $(knivesgallery).off('mousedown').on('mousedown', (event) => {
+            event.preventDefault();
+            if(event.target.nodeName !== 'IMG') {   // Close the gallery ?
+                $(knivesgallery).fadeOut(800, () => {
+                    $(knivesgallery).empty().hide().attr('data-catid', 0);
+                    window.location = '#categories';
+                });
+            }
+            else {
+                if(!knifeslideractive) {
+                    knifeslideractive = true;                    
+                    const payload = {
+                        "knifeid" :  $(event.target).data('knifeid'),
+                    }
+                    const timer = new Timer();
+                    timer.startTimer();
+                    logger.debug(`Load SLIDER knife images from the DB`);
+                    $.ajax({
+                        type: "POST",
+                        url: '/knives/public/getimages',
+                        data: JSON.stringify(payload),
+                        dataType: "json",
+                        async: true,
+                        success: function (response) {
+                            timer.stopTimer();
+                            logger.debug(`Loaded SLIDER images for ${response.knifeName}  from the DB in ${timer.getElapsedString()}`);
+                            displayKnifeSlider(response.knifeName,
+                                                    response.knifedesc,
+                                                    response.images);
+                        },
+                        error: function (xhr) {
+                            logger.error(xhr);
+                        }
+                    });        
+                }
+            }
+        });
     }
     /**
      * Request the active categories from the DB
