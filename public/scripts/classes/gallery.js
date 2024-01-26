@@ -8,6 +8,9 @@
     Aug 29 2023     Reorg into single css file
 
 ----------------------------------------------------------------------------*/
+
+import $props from '../properties.js';
+
 export default class Gallery {
 
     constructor(container, description) {
