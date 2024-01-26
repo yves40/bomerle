@@ -161,6 +161,7 @@ $(document).ready(function () {
         // Track double click or double request
         let displayedcateoryid = parseInt($(knivesgallery).attr('data-catid'));
         if( !isNaN(displayedcateoryid) && displayedcateoryid === categoryid) {
+            window.location = '#knivesgallery';
             return false;
         }
         else {
@@ -175,9 +176,6 @@ $(document).ready(function () {
         $(knivesgallery).append(gallerycontainer);
         // The knives
         displayKnives(gallerycontainer, categoryid);
-        // Put it on the screen 
-        window.location = '#knivesgallery'
-        $(knivesgallery).show().fadeIn(2000);
     }
     /**
      * 
@@ -214,11 +212,40 @@ $(document).ready(function () {
                         }
                     });    
                 })
-                // Now the linked categories
-                console.log(response.relatedcategories);
-                let linkcontainer = $('<div>').attr('id', 'relatedcategories').addClass('cards__links');
+                window.location = '#knivesgallery'
+                $(knivesgallery).show().fadeIn(2000);
                 timk.stopTimer();
                 logger.debug(`Loaded knives cards in ${timk.getElapsedString()}`);
+                // Now the linked categories
+                let linkcontainer = $('<div>').attr('id', 'relatedcategories').addClass('cards__links');
+                response.relatedcategories.forEach(element => {
+                    let relcard = $('<div>').addClass('cards__links__details');
+                    $(relcard).append($('<p>').text(element.catname))
+                            .append($('<img>')
+                                    .attr('src',  `${$props.categoryimageslocation()}/${element.catphoto}`)
+                                    .attr('data-catname', element.catname)
+                                    .attr('data-catdesc', element.catdesc)
+                                    .attr('data-catid', element.catid));
+                   $(linkcontainer).append(relcard);
+                   $(relcard).on('mousedown', (event) => {
+                        event.stopImmediatePropagation();
+                        let target = event.target;
+                        // Check the image or the paragraph have not been clicked
+                        // If so, switch to parent DIV, which holds the data
+                        if(event.target.nodeName === 'P'){
+                            target = $(event.target).next();
+                        }
+                        $(knivesgallery).fadeOut(800, () => {
+                            $(knivesgallery).empty();
+                            // Now reload the category zoom
+                            displayOneCategory(target);
+                        });
+                   })
+                });
+                if($(linkcontainer).children().length > 0)   {
+                    $(linkcontainer).prepend($('<p>').text($labels.get('interested')));
+                    $('.cards').append(linkcontainer);
+                }              
             },
             error: function (xhr) {
                 logger.error(xhr);

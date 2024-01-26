@@ -285,13 +285,17 @@ class AdminControllerKnife extends AbstractController
             $cat = $repcat->find($categoryid);
             $relatedcategories = [];
             foreach($cat->getRelatedcategories() as $one ) {
-                array_push($relatedcategories, $one->getId());
+                array_push($relatedcategories,[
+                            'catid' => $one->getId(),
+                            'catname' => $one->getName(),
+                            'catdesc' => $one->getDescription(),
+                            'catphoto' => $one->getImage()
+                            ] );
             }
-            $dedup = array_unique($relatedcategories, SORT_NUMERIC);
             $knivesids = $repo->findCategoryKnives($categoryid);
             return $this->json([
                 'message' => 'bootadmin.knives.getcategoryknives OK',
-                'relatedcategories' => $dedup,
+                'relatedcategories' => $relatedcategories,
                 'knivesids' => $knivesids,
             ], 200);        
     }
