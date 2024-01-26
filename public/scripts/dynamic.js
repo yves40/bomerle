@@ -165,7 +165,10 @@ $(document).ready(function () {
             window.location = '#knivesgallery';
         }
         else {
-            $(knivesgallery).empty().attr('data-catid', categoryid);
+            $(knivesgallery).attr('active','')
+                        .removeAttr('inactive')
+                        .css('display', 'none')
+                        .empty().attr('data-catid', categoryid);
         }
         // The category page header
         const gallerycontainer = $('<div>').addClass('cards');
@@ -174,8 +177,8 @@ $(document).ready(function () {
         $(cardsheader).append($('<p>').text(catdesc));
         $(gallerycontainer).append(cardsheader);
         $(knivesgallery).append(gallerycontainer);
-        window.location = '#knivesgallery'
-        $(knivesgallery).attr('active','').removeAttr('inactive').show();
+        window.location = '#knivesgallery';
+        $(knivesgallery).attr('active','').removeAttr('inactive').css('display', 'block');
         // The knives
         displayKnives(gallerycontainer, categoryid);
     }

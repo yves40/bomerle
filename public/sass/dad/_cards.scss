@@ -8,7 +8,7 @@
   scroll-margin: $menu-height;
 }
 #knivesgallery[active] {
-  animation: fadein 3000ms forwards ease-in;
+  animation: fadein 3000ms ease-in ;
 }
 #knivesgallery[inactive] {
   animation: fadeout 1000ms forwards ease-out;
