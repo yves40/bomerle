@@ -17,7 +17,7 @@
 //----------------------------------------------------------------------------
 const $props = ( () => {
   const allprops = {
-    version : 'bomerle:1.24, Jan 08 2024 ',
+    version : 'bomerle:1.25, Jan 26 2024 ',
     copyright:  'Ratoon software Corporation Inc, Chabreloche France ',
     imagehandler: 'images.js Feb 13 2023, 1.25 ',
     knifehandler: 'knife.js Feb 08 2023, 1.05 ',
@@ -87,4 +87,5 @@ const $props = ( () => {
      getAdministratorEmail: () => { return allprops.administratoremail; }
     }
 })();
+export default $props;
 

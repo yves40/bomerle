@@ -3,6 +3,8 @@
  ----------------------------------------------------------------------------*/
 
     import Logger  from './logger.js';
+    import $props from '../properties.js'
+
     export default class Card {
 
       /**

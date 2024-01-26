@@ -7,6 +7,8 @@ import Slider from './classes/slider.js';
 import Gallery from './classes/gallery.js';
 import Card from './classes/card.js';
 import Timer from './classes/timer.js';
+import $props from './properties.js'
+import $labels from './translations/labels.js';
 
 $(document).ready(function () {
     $props.load();

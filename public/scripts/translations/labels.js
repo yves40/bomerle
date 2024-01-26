@@ -1,3 +1,5 @@
+import $props from '../properties.js'
+
 const $labels = ( () => {
     const labelsfr = {
         interested: 'Vous aimerez aussi'
@@ -17,3 +19,4 @@ const $labels = ( () => {
         },
     }
 })();
+export default $labels;
