@@ -183,7 +183,7 @@ $(document).ready(function () {
      * 
      * @param {*} container The DOM element into which the knives cards 
      *                      will be displayed
-     * @param {*} categoryid The category containig the knives
+     * @param {*} categoryid The category containing the knives
      */
     function displayKnives(container, categoryid) {
         const payload = {
