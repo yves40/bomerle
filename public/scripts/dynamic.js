@@ -24,9 +24,23 @@ $(document).ready(function () {
     const navLinks = $(".nav-links");
     const infoknife = $('.knife');
     
-    let allcategoriesknives = [];
-    let allcategoriesimage = [];
+    // Animations control
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if(entry.isIntersecting) {
+                console.log(`Activate knives gallery`);
+                $(knivesgallery).attr('active','').removeAttr('inactive');
+            }
+            else{
+                console.log(`Deactivate knives gallery`);
+                $(knivesgallery).attr('inactive','').removeAttr('active');
+            }   
+        })
+    });
+    observer.observe(document.querySelector('#knivesgallery'));
+    //  try this later *****  observer.observe(knivesgallery);
 
+    
     // Initial state of UI
     $('#zoomer').hide();
     $(infoknife).hide();
@@ -165,9 +179,7 @@ $(document).ready(function () {
             window.location = '#knivesgallery';
         }
         else {
-            $(knivesgallery).attr('active','')
-                        .removeAttr('inactive')
-                        .css('display', 'none')
+            $(knivesgallery).css('display', 'none')
                         .empty().attr('data-catid', categoryid);
         }
         // The category page header

@@ -306,7 +306,7 @@
 
 #knivesgallery[active] {
   animation-name: fadein;
-  animation-duration: 2s;
+  animation-duration: 3s;
   animation-fill-mode: forwards;
   animation-timing-function: linear; }
 
