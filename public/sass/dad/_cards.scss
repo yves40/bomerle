@@ -8,10 +8,16 @@
   scroll-margin: $menu-height;
 }
 #knivesgallery[active] {
-  animation: fadein 3000ms ease-in ;
+  animation-name: fadein;
+  animation-duration: 2s;
+  animation-fill-mode: forwards;
+  animation-timing-function: linear;
 }
 #knivesgallery[inactive] {
-  animation: fadeout 1000ms forwards ease-out;
+  animation-name: slideUp;
+  animation-duration: 7s;
+  animation-fill-mode: forwards;
+  animation-timing-function: linear;
 }
 
 .cards {

@@ -109,6 +109,12 @@
   100% {
     transform: translateY(0%); } }
 
+@keyframes slideUp {
+  100% {
+    transform: translateY(-100%); }
+  0% {
+    transform: translateY(0%); } }
+
 /*
   Special section for SVGs
 
@@ -198,6 +204,12 @@
   95% {
     transform: translateY(-2%); }
   100% {
+    transform: translateY(0%); } }
+
+@keyframes slideUp {
+  100% {
+    transform: translateY(-100%); }
+  0% {
     transform: translateY(0%); } }
 
 .slider__box {
@@ -430,6 +442,12 @@
   100% {
     transform: translateY(0%); } }
 
+@keyframes slideUp {
+  100% {
+    transform: translateY(-100%); }
+  0% {
+    transform: translateY(0%); } }
+
 *, *::before, *::after {
   box-sizing: border-box; }
 
@@ -583,6 +601,12 @@
   95% {
     transform: translateY(-2%); }
   100% {
+    transform: translateY(0%); } }
+
+@keyframes slideUp {
+  100% {
+    transform: translateY(-100%); }
+  0% {
     transform: translateY(0%); } }
 
 .htmltemplate {

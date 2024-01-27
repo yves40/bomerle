@@ -274,6 +274,12 @@ section {
   100% {
     transform: translateY(0%); } }
 
+@keyframes slideUp {
+  100% {
+    transform: translateY(-100%); }
+  0% {
+    transform: translateY(0%); } }
+
 #header {
   min-height: 80vh;
   width: 100%;

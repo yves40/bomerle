@@ -104,6 +104,12 @@
   100% {
     transform: translateY(0%); } }
 
+@keyframes slideUp {
+  100% {
+    transform: translateY(-100%); }
+  0% {
+    transform: translateY(0%); } }
+
 .allnews {
   scroll-margin: 100px;
   display: flex;
@@ -299,10 +305,16 @@
   scroll-margin: 100px; }
 
 #knivesgallery[active] {
-  animation: fadein 3000ms ease-in; }
+  animation-name: fadein;
+  animation-duration: 2s;
+  animation-fill-mode: forwards;
+  animation-timing-function: linear; }
 
 #knivesgallery[inactive] {
-  animation: fadeout 1000ms forwards ease-out; }
+  animation-name: slideUp;
+  animation-duration: 7s;
+  animation-fill-mode: forwards;
+  animation-timing-function: linear; }
 
 .cards {
   color: white;
@@ -514,6 +526,12 @@
   95% {
     transform: translateY(-2%); }
   100% {
+    transform: translateY(0%); } }
+
+@keyframes slideUp {
+  100% {
+    transform: translateY(-100%); }
+  0% {
     transform: translateY(0%); } }
 
 .slider__box {
@@ -744,6 +762,12 @@
   95% {
     transform: translateY(-2%); }
   100% {
+    transform: translateY(0%); } }
+
+@keyframes slideUp {
+  100% {
+    transform: translateY(-100%); }
+  0% {
     transform: translateY(0%); } }
 
 *, *::before, *::after {
