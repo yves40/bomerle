@@ -27,6 +27,7 @@ $(document).ready(function () {
     // Animations control
     const observer = new IntersectionObserver(entries => {
         entries.forEach(entry => {
+            console.log(entry.target);
             if(entry.isIntersecting) {
                 console.log(`Activate knives gallery`);
                 $(knivesgallery).attr('active','').removeAttr('inactive');
@@ -34,12 +35,11 @@ $(document).ready(function () {
             else{
                 console.log(`Deactivate knives gallery`);
                 $(knivesgallery).attr('inactive','').removeAttr('active');
+                $(entry.target).empty().css('display', 'none');
             }   
         })
     });
     observer.observe(document.querySelector('#knivesgallery'));
-    //  try this later *****  observer.observe(knivesgallery);
-
     
     // Initial state of UI
     $('#zoomer').hide();
