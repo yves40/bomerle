@@ -55,16 +55,23 @@ body {
           margin-right: 1rem;
           max-width: $responsive-max-width;
       }
-
-      .htmltemplate:nth-child(1) {
-        img {
-          float: right;
-          margin: 1rem;
-        }
-        h1, h2, p {
-          text-align: left;
+      .htmltemplate {
+        background-color: rgba(34, 7, 7, .5);
+        border-radius: $border-radius;
+        padding: 2rem;
+        :nth-child(odd) {
+          img {
+            float: right;
+            margin: 1rem;
+          }
+          h1, h2, p {
+            text-align: left;
+          }  
         }
       }
+
+      // .htmltemplate:nth-child(1) {
+      // }
 
       img {
         width: 50%;
@@ -106,8 +113,6 @@ body {
           line-height: 1.4rem;
           text-align: right;
           padding: 1rem;
-          background-color: rgba(34, 7, 7, .3);
-          border-radius: $border-radius;
           width: 100%;
           @include for-desktop{
               font-size: 1.5rem;

@@ -27,9 +27,7 @@
             align-items: center;
             row-gap: .5rem;
             width: 45%;
-            margin-bottom: 2rem;
             @include for-desktop {
-                margin-bottom: 3rem;
                 width: 32%;
             }
             h2{

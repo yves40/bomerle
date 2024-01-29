@@ -306,12 +306,12 @@
 
 #knivesgallery[active] {
   animation-name: fadein;
-  animation-duration: 3s;
+  animation-duration: 4s;
   animation-fill-mode: forwards;
   animation-timing-function: linear; }
 
 #knivesgallery[inactive] {
-  animation-name: slideUp;
+  animation-name: fadeout;
   animation-duration: 7s;
   animation-fill-mode: forwards;
   animation-timing-function: linear; }
@@ -336,14 +336,15 @@
   .cards > h2 {
     font-family: "Gideon Roman", sans-serif; }
   .cards__header h2 {
-    margin-top: 3rem;
+    margin-top: 2rem;
     border-top: solid white 2px;
     font-size: 3rem;
     padding: 2rem; }
   .cards__header p {
-    text-align: justify;
+    text-align: left;
     font-size: 1.2rem;
-    line-height: 1.5rem; }
+    line-height: 1.5rem;
+    padding: 0 2rem 0 2rem; }
   @media screen and (min-width: 1024px) {
     .cards__header h2 {
       font-size: 4rem; }
@@ -361,23 +362,26 @@
           text-align: right; }
         .cards__frame:nth-child(odd) img {
           float: left;
-          margin-right: 2rem; }
+          margin-right: 2rem;
+          margin-bottom: 1rem; }
         .cards__frame:nth-child(even) p {
           text-align: left; }
         .cards__frame:nth-child(even) img {
           float: right;
-          margin-left: 2rem; } }
+          margin-left: 2rem;
+          margin-bottom: 1rem; } }
     .cards__frame__title {
-      padding: 20px 10px;
+      padding: 1rem 2rem 1rem 2rem;
       font-size: 2rem;
       font-family: "Gideon Roman", sans-serif; }
       @media screen and (min-width: 1024px) {
         .cards__frame__title {
-          font-size: 3rem; } }
+          font-size: 2rem; } }
     .cards__frame__txtimg {
       display: flex;
       align-items: center;
-      flex-direction: column; }
+      flex-direction: column;
+      padding: 1rem 2rem 0 2rem; }
       .cards__frame__txtimg > p {
         margin-top: 1rem; }
       @media screen and (min-width: 1024px) {
@@ -395,7 +399,7 @@
     .cards__frame__text {
       font-size: 1.2rem;
       line-height: 1.5rem;
-      text-align: justify; }
+      text-align: left; }
   .cards__links {
     width: 90%;
     display: flex;
@@ -411,6 +415,7 @@
       .cards__links {
         max-width: 1024px; } }
     .cards__links p {
+      font-family: "Gideon Roman", sans-serif;
       width: 85%;
       text-align: center;
       font-weight: 600;
@@ -963,11 +968,9 @@
       justify-content: center;
       align-items: center;
       row-gap: .5rem;
-      width: 45%;
-      margin-bottom: 2rem; }
+      width: 45%; }
       @media screen and (min-width: 1024px) {
         #categorygallery .catzone__card {
-          margin-bottom: 3rem;
           width: 32%; } }
       #categorygallery .catzone__card h2 {
         font-family: "Gideon Roman", sans-serif;
@@ -1028,11 +1031,15 @@ body {
         body .hero-section .hero-title {
           margin-right: 1rem;
           max-width: 1024px; } }
-      body .hero-section .hero-title .htmltemplate:nth-child(1) img {
-        float: right;
-        margin: 1rem; }
-      body .hero-section .hero-title .htmltemplate:nth-child(1) h1, body .hero-section .hero-title .htmltemplate:nth-child(1) h2, body .hero-section .hero-title .htmltemplate:nth-child(1) p {
-        text-align: left; }
+      body .hero-section .hero-title .htmltemplate {
+        background-color: rgba(34, 7, 7, 0.5);
+        border-radius: 5px;
+        padding: 2rem; }
+        body .hero-section .hero-title .htmltemplate :nth-child(odd) img {
+          float: right;
+          margin: 1rem; }
+        body .hero-section .hero-title .htmltemplate :nth-child(odd) h1, body .hero-section .hero-title .htmltemplate :nth-child(odd) h2, body .hero-section .hero-title .htmltemplate :nth-child(odd) p {
+          text-align: left; }
       body .hero-section .hero-title img {
         width: 50%;
         height: auto;
@@ -1070,8 +1077,6 @@ body {
         line-height: 1.4rem;
         text-align: right;
         padding: 1rem;
-        background-color: rgba(34, 7, 7, 0.3);
-        border-radius: 5px;
         width: 100%; }
         @media screen and (min-width: 1024px) {
           body .hero-section .hero-title p {
