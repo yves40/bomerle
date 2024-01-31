@@ -73,20 +73,12 @@
 @keyframes fadein {
   0% {
     opacity: 0; }
-  25% {
-    opacity: 0.25; }
-  50% {
-    opacity: 0.5; }
-  75% {
-    opacity: 0.75; }
   100% {
     opacity: 1; } }
 
 @keyframes fadeout {
   0% {
     opacity: 1; }
-  50% {
-    opacity: .4; }
   100% {
     opacity: 0; } }
 
@@ -301,9 +293,12 @@
   background-image: url(../images/BastosBG4.webp);
   background-position: center;
   background-attachment: fixed;
-  background-size: contain;
-  background-repeat: no-repeat;
+  background-size: cover;
   scroll-margin: 100px; }
+  @media screen and (min-width: 1024px) {
+    #knivesgallery {
+      background-size: 70%;
+      background-repeat: no-repeat; } }
 
 #knivesgallery[active] {
   animation-name: fadein;
@@ -313,7 +308,7 @@
 
 #knivesgallery[inactive] {
   animation-name: fadeout;
-  animation-duration: 7s;
+  animation-duration: 4s;
   animation-fill-mode: forwards;
   animation-timing-function: linear; }
 
@@ -324,8 +319,6 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  transition: all .8s ease-in;
-  background-color: rgba(34, 7, 7, 0.4);
   border-radius: 5px;
   padding: 0 2rem; }
   @media screen and (min-width: 1024px) {
@@ -336,23 +329,28 @@
     font-family: "Gideon Roman", sans-serif; }
   .cards > h2 {
     font-family: "Gideon Roman", sans-serif; }
-  .cards__header h2 {
-    margin-top: 2rem;
-    border-top: solid white 2px;
-    font-size: 3rem;
-    padding: 2rem; }
-  .cards__header p {
-    text-align: left;
-    font-size: 1.2rem;
-    line-height: 1.5rem;
-    padding: 0 2rem 0 2rem; }
-  @media screen and (min-width: 1024px) {
+  .cards__header {
+    background-color: rgba(51, 51, 51, 0.4); }
     .cards__header h2 {
-      font-size: 4rem; }
+      margin-top: 2rem;
+      border-top: solid white 2px;
+      font-size: 3rem;
+      padding: 2rem; }
     .cards__header p {
-      font-size: 1.5rem;
-      line-height: 1.8rem; } }
+      text-align: left;
+      font-size: 1.2rem;
+      line-height: 1.5rem;
+      padding: 0 2rem 0 2rem; }
+    @media screen and (min-width: 1024px) {
+      .cards__header {
+        width: 90%; }
+        .cards__header h2 {
+          font-size: 4rem; }
+        .cards__header p {
+          font-size: 1.5rem;
+          line-height: 1.8rem; } }
   .cards__frame {
+    background-color: rgba(51, 51, 51, 0.4);
     height: auto; }
     @media screen and (min-width: 1024px) {
       .cards__frame {
@@ -502,20 +500,12 @@
 @keyframes fadein {
   0% {
     opacity: 0; }
-  25% {
-    opacity: 0.25; }
-  50% {
-    opacity: 0.5; }
-  75% {
-    opacity: 0.75; }
   100% {
     opacity: 1; } }
 
 @keyframes fadeout {
   0% {
     opacity: 1; }
-  50% {
-    opacity: .4; }
   100% {
     opacity: 0; } }
 
@@ -738,20 +728,12 @@
 @keyframes fadein {
   0% {
     opacity: 0; }
-  25% {
-    opacity: 0.25; }
-  50% {
-    opacity: 0.5; }
-  75% {
-    opacity: 0.75; }
   100% {
     opacity: 1; } }
 
 @keyframes fadeout {
   0% {
     opacity: 1; }
-  50% {
-    opacity: .4; }
   100% {
     opacity: 0; } }
 
@@ -946,7 +928,8 @@
   background-image: url(../../images/BastosBG5.webp);
   background-position: center;
   background-attachment: fixed;
-  background-size: cover;
+  background-size: contain;
+  background-repeat: no-repeat;
   color: white;
   justify-content: center; }
   #categorygallery .catzone {
@@ -1032,7 +1015,7 @@ body {
           margin-right: 1rem;
           max-width: 1024px; } }
       body .hero-section .hero-title .htmltemplate {
-        background-color: rgba(34, 7, 7, 0.5);
+        background-color: rgba(51, 51, 51, 0.4);
         border-radius: 5px;
         padding: 2rem; }
         body .hero-section .hero-title .htmltemplate :nth-child(odd) img {

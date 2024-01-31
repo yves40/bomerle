@@ -35,7 +35,7 @@ $(document).ready(function () {
             else{
                 console.log(`Deactivate knives gallery`);
                 $(knivesgallery).attr('inactive','').removeAttr('active');
-                $(entry.target).empty().css('display', 'none');
+                //$(entry.target).empty().css('display', 'none');
             }   
         })
     });
