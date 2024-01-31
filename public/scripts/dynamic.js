@@ -27,15 +27,11 @@ $(document).ready(function () {
     // Animations control
     const observer = new IntersectionObserver(entries => {
         entries.forEach(entry => {
-            console.log(entry.target);
             if(entry.isIntersecting) {
-                console.log(`Activate knives gallery`);
                 $(knivesgallery).attr('active','').removeAttr('inactive');
             }
             else{
-                console.log(`Deactivate knives gallery`);
                 $(knivesgallery).attr('inactive','').removeAttr('active');
-                //$(entry.target).empty().css('display', 'none');
             }   
         })
     });
