@@ -135,12 +135,12 @@
   }
   &__links {
     width: 90%;
+    background-color: rgba($lightDark, 0.4) ;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center; 
     align-items: center;
-    width: 100%;
     color: white;
     margin-bottom: 2rem;
     @include for-desktop {
