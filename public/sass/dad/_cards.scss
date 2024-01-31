@@ -4,8 +4,9 @@
   background-image: url(../images/BastosBG4.webp);
   background-position: center;
   background-attachment: fixed;
-  background-size: cover;
-  scroll-margin: $menu-height;
+  background-size: contain;
+  background-repeat: no-repeat;
+  scroll-margin: $menu-height; 
 }
 #knivesgallery[active] {
   animation-name: fadein;
@@ -28,7 +29,7 @@
   justify-content: center;
   align-items: center;
   transition: all .8s ease-in; 
-  background-color: rgba(34, 7, 7, .6);
+  background-color: rgba(34, 7, 7, .4);
   border-radius: $border-radius;
   padding: 0 2rem;
   @include for-desktop {
@@ -150,7 +151,6 @@
       padding-top: 2rem;
       margin: 1rem 0 1rem 0;
     }
-    max-width: $responsive-max-width;
     &__details {
       display: flex;
       flex-direction: column;

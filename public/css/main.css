@@ -301,7 +301,8 @@
   background-image: url(../images/BastosBG4.webp);
   background-position: center;
   background-attachment: fixed;
-  background-size: cover;
+  background-size: contain;
+  background-repeat: no-repeat;
   scroll-margin: 100px; }
 
 #knivesgallery[active] {
@@ -324,7 +325,7 @@
   justify-content: center;
   align-items: center;
   transition: all .8s ease-in;
-  background-color: rgba(34, 7, 7, 0.6);
+  background-color: rgba(34, 7, 7, 0.4);
   border-radius: 5px;
   padding: 0 2rem; }
   @media screen and (min-width: 1024px) {
@@ -409,8 +410,7 @@
     align-items: center;
     width: 100%;
     color: white;
-    margin-bottom: 2rem;
-    max-width: 1024px; }
+    margin-bottom: 2rem; }
     @media screen and (min-width: 1024px) {
       .cards__links {
         max-width: 1024px; } }
@@ -943,7 +943,7 @@
 #categorygallery {
   scroll-margin: 100px;
   display: flex;
-  background-image: url(../../images/home5.jpg);
+  background-image: url(../../images/BastosBG5.webp);
   background-position: center;
   background-attachment: fixed;
   background-size: cover;
