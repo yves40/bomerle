@@ -51,6 +51,7 @@ $(document).ready(function () {
     let validEmail = false;
     let validText = false;
     let categorygalleryactive = false;
+    let knivesgalleryactive = false;
     let knifeslideractive = false;
 
     // Determine if running in dev or prod mode
@@ -70,6 +71,18 @@ $(document).ready(function () {
     });
     $(`.nav-links, .mobile-menu` ).on('click', (element) => {
         $(navLinks).toggleClass('mobile-menu');
+    });
+    // The browser back action
+    $(window).on('popstate', function(event) {
+        if(knifeslideractive) {
+            knifeslideractive = false;
+            $(slider).empty();
+            $(slider).hide();
+            $("body").css("overflow", "auto");
+        }
+        if($('#zoomer').hasClass('zoomon')) {
+            $("#zoomer").empty().removeClass("zoomon").addClass('zoomoff').hide();
+        }
     });
     // Handle the user choice for the object request type
     $('.object').change( function() {
@@ -197,6 +210,8 @@ $(document).ready(function () {
      * @param {*} categoryid The category containing the knives
      */
     function displayKnives(container, categoryid) {
+        //window.history.replaceState({'SPAloc': 'displayKnives'}, "", 'main');
+        knivesgalleryactive = true;
         const payload = {
             'catid': categoryid,
         }
@@ -270,6 +285,7 @@ $(document).ready(function () {
             if(event.target.nodeName !== 'IMG') {   // Close the gallery ?
                 $(knivesgallery).attr('inactive', '').removeAttr('active');
                 $(knivesgallery).empty().hide().attr('data-catid', 0);
+                knivesgalleryactive = false;
                 window.location = '#categorygallery';
             }
             else {
