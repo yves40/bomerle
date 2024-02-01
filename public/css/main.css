@@ -431,13 +431,13 @@
         height: 5rem;
         font-weight: normal;
         margin: 1rem 0 1rem 0;
-        font-size: 1rem; }
+        font-size: 0.9rem; }
         @media screen and (min-width: 1024px) {
           .cards__links__details p {
             font-size: 1.5rem; } }
       .cards__links__details img {
         border-radius: 5px;
-        width: 70%;
+        width: 90%;
         height: auto; }
 
 /*
