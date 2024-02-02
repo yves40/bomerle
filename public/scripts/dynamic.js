@@ -74,6 +74,7 @@ $(document).ready(function () {
     });
     // The browser back action
     $(window).on('popstate', function(event) {
+        console.log(event);
         if(knifeslideractive) {
             knifeslideractive = false;
             $(slider).empty();
