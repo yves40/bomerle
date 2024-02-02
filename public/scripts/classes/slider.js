@@ -221,10 +221,13 @@
       this.currentzoom = imagesrc;
       // Position the zoom 
       const top = window.scrollY;
+      const closezoom = $("<img>").attr('src',  `${$props.svgimageslocation()}/close-circle-outline.svg`)
+                  .addClass("svg-white");
       // // Remove body scroll bar so user cant scroll up or down
       $("body").css("overflow", "hidden");
       $("#zoomer").css({ 'top': top, 'left': 0, 'z-index': 2000 } )
               .addClass("zoomon").removeClass('zoomoff');
+      $('#zoomer').append(closezoom);
       $("#zoomer").append($('<div>').attr('id', 'zoomer__image')
                                   .addClass('zoomon__image')
                                   .append($('<img>').attr('src', `${this.imagespath}${imagesrc}`))
@@ -235,7 +238,7 @@
       $(".slidercontrol").hide();
 
       // Wait for the user to close the zoom
-      $("#zoomer").click( (e) => { 
+      $(closezoom).click( (e) => { 
         e.preventDefault();
         this.zoomactive = false;
         $("#zoomer").empty().removeClass("zoomon")

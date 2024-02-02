@@ -308,6 +308,8 @@
   animation-name: fadein;
   overflow: hidden;
   background-color: #1a1917; }
+  .zoomon .svg-white {
+    width: 60px; }
   .zoomon img {
     max-width: 100%;
     max-height: 100%;
