@@ -36,6 +36,14 @@
   width: 100%;
 }
 .slider__box__indicators {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   height: 2rem;
   grid-area: indic;
+}
+.slider__box__indicators  > img {
+  width: 30px;
+}.slider__box__indicators  > button {
+  margin: 0 0 0 .7rem;
 }
