@@ -227,12 +227,12 @@
       $("body").css("overflow", "hidden");
       $("#zoomer").css({ 'top': top, 'left': 0, 'z-index': 2000 } )
               .addClass("zoomon").removeClass('zoomoff');
+              $("#zoomer").append($('<div>').attr('id', 'zoomer__image')
+              .addClass('zoomon__image')
+              .append($('<img>').attr('src', `${this.imagespath}${imagesrc}`))
+              );
       $('#zoomer').append(closezoom);
-      $("#zoomer").append($('<div>').attr('id', 'zoomer__image')
-                                  .addClass('zoomon__image')
-                                  .append($('<img>').attr('src', `${this.imagespath}${imagesrc}`))
-                          );
-      $("#zoomer").show()
+      $("#zoomer").show();
       // Hide a few things
       $(`#${this.indicators}`).hide();
       $(".slidercontrol").hide();

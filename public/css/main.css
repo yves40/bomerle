@@ -631,6 +631,7 @@
 
 .zoomon {
   display: flex;
+  flex-direction: column;
   position: absolute;
   height: 100dvh;
   width: 100%;
@@ -646,17 +647,14 @@
   .zoomon img {
     max-width: 100%;
     max-height: 100%;
-    height: auto;
-    width: auto;
     object-fit: contain;
     object-position: center;
     border-radius: 5px; }
   .zoomon__image {
-    display: flex;
     justify-content: center;
     align-items: center;
     max-width: 1024px;
-    width: 95svw; }
+    width: 90%; }
   .zoomon h2 {
     size: 1rem;
     position: absolute;
