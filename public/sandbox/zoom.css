@@ -10,11 +10,11 @@
 .slider__box {
   display: grid;
   gap: 1rem;
-  grid-template-columns: repeat(10, 1fr);
-  grid-template-rows: auto minmax(40px, 60px);
+  grid-template-columns: 1fr 6fr 1fr;
+  grid-template-rows: 10fr 1fr;
   grid-template-areas: 
-    'left img img img img img img img img right'
-    'indic indic indic indic indic indic indic indic indic indic';
+    'left img right'
+    'indic indic indic';
   width: 80vw;
   height: 80svh;
   max-width: 1024px;
@@ -23,11 +23,11 @@
   align-items: center;
   justify-content: center;
 }
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 1024px) {
   .slider__box {
     grid-template-areas: 
-      'img img img img img img img img img img'
-      'left indic indic indic indic indic indic indic indic right';
+      'img img img'
+      'left indic right';
   }
 }
 .slider__box > .svg-white {
