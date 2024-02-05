@@ -5,11 +5,13 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  margin: 0 auto;
 }
 .slider__box {
   display: grid;
   gap: 1rem;
   grid-template-columns: repeat(10, 1fr);
+  grid-template-rows: auto minmax(40px, 60px);
   grid-template-areas: 
     'left img img img img img img img img right'
     'indic indic indic indic indic indic indic indic indic indic';
@@ -21,15 +23,23 @@
   align-items: center;
   justify-content: center;
 }
+@media screen and (max-width: 400px) {
+  .slider__box {
+    grid-template-areas: 
+      'img img img img img img img img img img'
+      'left indic indic indic indic indic indic indic indic right';
+  }
+}
+.slider__box > .svg-white {
+  width: 30px;
+}
 .left {
   grid-area: left;
-  justify-self: center;
-  align-self: center;
+  justify-self: right;
 }
 .right {
-  justify-self: center;
   grid-area: right;
-  align-self: center;
+  justify-self: left;
 }
 .img {
   grid-area: img;
