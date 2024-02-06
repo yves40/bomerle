@@ -15,6 +15,7 @@
     Dec 20 2023     Fix timer problem
     Jan 07 2024     New DOM structure
     Jan 13 2024     New management of Y scrolling
+    Feb 06 2024     New slider frame
 
     ----------------------------------------------------------------------------*/
 
@@ -28,7 +29,7 @@
   // Two accepted values : SHOW (the default) and KNIFE
   constructor(container, timing = 2, description = '', allimages, slidertype = 'SHOW') {
     // Init
-      this.version = 'Slider:1.54, Jan 21 2024 ';
+      this.version = 'Slider:1.55, Feb 06 2024 ';
       this.container = container;
       this.containername = $(container).attr('name');
       this.slideinterval = timing * 1000;
@@ -160,9 +161,8 @@
   }
   // ------------------------------------------------------------------------------------------------
   buildSliderFrame(container) {
-    const slidescontainer = $("<div>").addClass('slider');
     const sliderzone = $("<div>").attr('id', this.homezone)
-                                          .addClass('slider__box');
+                    .addClass('slider__box');
     const ul = $('<ul></ul>').attr('id', this.sliderarea).addClass('slider__box_elements');
     const prev = $("<a></a>").addClass('slider__box__elements__action prev');
     const previmage = $("<img>").attr('src', `${$props.svgimageslocation()}/arrow-back.svg`).addClass("svg-white");
@@ -173,9 +173,7 @@
     $(ul).append(prev);
     $(ul).append(next);
     $(sliderzone).append(ul);
-    $(slidescontainer).append(sliderzone);
-    $(container).append(slidescontainer);
-    // $(container).append($('<div></div>').attr('id', 'fullscreen').addClass('zoomoff'));
+    $(container).append(sliderzone);
     this.startSlider();
   }
   // ------------------------------------------------------------------------------------------------

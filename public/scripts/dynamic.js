@@ -46,7 +46,7 @@ $(document).ready(function () {
     $(newsgallery).hide();
     $(knivesgallery).hide().attr('inactive', '').removeAttr('active');
     $(categorygallery).hide();
-    $(slider).hide().attr('name', 'dynamic');
+    $(slider).hide();
 
     let validEmail = false;
     let validText = false;
@@ -327,8 +327,9 @@ $(document).ready(function () {
     function displayKnifeSlider(knifename, knifedesc, knifeimages) {
         const h2 = $('<h2>').text(knifename)
                     .addClass('heroh2');
-        const p = $('<p>').text(knifedesc);
-        $(slider).append(h2).append(p);
+        //const p = $('<p>').text(knifedesc);
+        //$(slider).append(h2).append(p);
+        $(slider).attr('name', 'slider');
         let dynslider = new Slider($(slider), 10, '', knifeimages, 'KNIFE');
         $("body").css("overflow", "hidden");
         $(slider).css({'top': window.scrollY,
