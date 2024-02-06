@@ -161,18 +161,48 @@
   }
   // ------------------------------------------------------------------------------------------------
   buildSliderFrame(container) {
+    $(container).addClass('slider');
     const sliderzone = $("<div>").attr('id', this.homezone)
                     .addClass('slider__box');
-    const ul = $('<ul></ul>').attr('id', this.sliderarea).addClass('slider__box_elements');
-    const prev = $("<a></a>").addClass('slider__box__elements__action prev');
-    const previmage = $("<img>").attr('src', `${$props.svgimageslocation()}/arrow-back.svg`).addClass("svg-white");
+    const prev = $("<a></a>").addClass('slider__box__action prev');
+    const previmage = $("<img>").attr('src', `${$props.svgimageslocation()}/arrow-back.svg`)
+                .addClass("svg-white").addClass('prev');
     $(prev).append(previmage);
-    const next = $("<a></a>").addClass('slider__box__elements__action next');
-    const nextimage = $("<img>").attr('src',  `${$props.svgimageslocation()}/arrow-forward.svg`).addClass("svg-white");
+    $(sliderzone).append(prev);
+    const next = $("<a></a>").addClass('slider__box__action next');
+    const nextimage = $("<img>").attr('src', `${$props.svgimageslocation()}/arrow-forward.svg`)
+                .addClass("svg-white").addClass('prev');
     $(next).append(nextimage);
-    $(ul).append(prev);
-    $(ul).append(next);
+    $(sliderzone).append(next);
+    const ul = $('<ul></ul>').attr('id', this.sliderarea).addClass('slider__box__slides')
+                .addClass('img');
     $(sliderzone).append(ul);
+    // Add the indicators
+    const indicators = $("<div>").addClass('slider__box__indicators')
+      .addClass('indic');
+    for(let i = 0; i < this.allimages.length; ++i) {
+      let buttonindic = $('<button>').addClass('slider__box__indicators__flags')
+        .attr('type', 'button')
+        .attr('data-imageindex', `${i}`);
+      if (i == 0) $(buttonindic).addClass('active');
+      $(indicators).append(buttonindic);
+    }
+    $(sliderzone).append(indicators);
+
+    // $(slider).append($('<div></div>').value('Un').addClass('left'));
+    // $(slider).append$(('<div></div>').value('Un').addClass('right'));
+    // $(slider).append$(('<div></div>').value('Un').addClass('indic'));
+    // const ul = $('<ul></ul>').attr('id', this.sliderarea).addClass('slider__box_elements');
+    // const prev = $("<a></a>").addClass('slider__box__action prev');
+    // const previmage = $("<img>").attr('src', `${$props.svgimageslocation()}/arrow-back.svg`).addClass("svg-white");
+    // $(prev).append(previmage);
+    // const next = $("<a></a>").addClass('slider__box__action next');
+    // const nextimage = $("<img>").attr('src',  `${$props.svgimageslocation()}/arrow-forward.svg`).addClass("svg-white");
+    // $(next).append(nextimage);
+    // // Navigation buttons and slides area
+    // $(sliderzone).append(prev);
+    // $(sliderzone).append(ul);
+    // $(sliderzone).append(next);
     $(container).append(sliderzone);
     this.startSlider();
   }
@@ -180,27 +210,17 @@
   addImages(allimages) {
     // Get the container
     const slides = $(`#${this.sliderarea}`);
-    const sliderzone = $(`#${this.homezone}`);
-    // Add the indicators
-    const indicators = $("<div>").addClass('slider__box__elements__indicators');
-    for(let i = 0; i < allimages.length; ++i) {
-      let buttonindic = $('<button>').addClass('slider__box__elements__indicators__flags')
-        .attr('type', 'button')
-        .attr('data-imageindex', `${i}`);
-      if (i == 0) $(buttonindic).addClass('active');
-      $(indicators).append(buttonindic);
-    }
-    $(slides).append(indicators);
     // Add images
     const splitter = this.sliderarea.split('-');
     const imageroot= splitter[0] + splitter[1];
     for(let i = 0; i < allimages.length; ++i) {
-      let oneimage = $("<li>").attr('id', `${imageroot}-${i}`).addClass('slider__box__elements__slide');
+      let oneimage = $("<li>").attr('id', `${imageroot}-${i}`)
+                  .addClass('slider__box__slides__img')
+                  .addClass('img');
       if(i === 0 ){
         $(oneimage).addClass('active');
       }
       let h3 = $("<h5></h5>").text(`${i+1}/${allimages.length}`);
-      // let newimg = $('<img>').addClass('sliderimage')
       let newimg = $('<img>').attr('src', this.imagespath+allimages[i]);
       $(newimg).click( (e) => { // Arrow function mandatory here to use this
         e.preventDefault();

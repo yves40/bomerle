@@ -332,6 +332,8 @@ $(document).ready(function () {
         $(slider).attr('name', 'slider');
         let dynslider = new Slider($(slider), 10, '', knifeimages, 'KNIFE');
         $("body").css("overflow", "hidden");
+        const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
+        console.log(parseInt(scrollTop) , clientHeight, scrollHeight);
         $(slider).css({'top': window.scrollY,
             'left': 0, 'z-index': 1000})
             .show()
