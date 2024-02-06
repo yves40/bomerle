@@ -9,10 +9,10 @@
 }
 .slider__box {
   display: grid;
-  gap: 1rem;
+  gap: .5rem;
   grid-template-columns: 1fr 6fr 1fr;
-  grid-template-rows: 10fr 1fr;
   grid-template-areas: 
+    'kname kname kname'
     'left img right'
     'indic indic indic';
   width: 80vw;
@@ -26,12 +26,17 @@
 @media screen and (max-width: 1024px) {
   .slider__box {
     grid-template-areas: 
+      'kname kname kname'
       'img img img'
       'left indic right';
   }
 }
 .slider__box > .svg-white {
   width: 30px;
+}
+.knifename {
+  grid-area: kname;
+  justify-self: center;
 }
 .left {
   grid-area: left;
@@ -44,6 +49,9 @@
 .img {
   grid-area: img;
   width: 100%;
+  max-height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
 }
 .slider__box__indicators {
   display: flex;
