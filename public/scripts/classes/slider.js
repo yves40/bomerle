@@ -174,8 +174,7 @@
                 .addClass("svg-white").addClass('prev');
     $(next).append(nextimage);
     $(sliderzone).append(next);
-    const ul = $('<ul></ul>').attr('id', this.sliderarea).addClass('slider__box__slides')
-                .addClass('img');
+    const ul = $('<ul></ul>').attr('id', this.sliderarea).addClass('slider__box__slides');
     $(sliderzone).append(ul);
     // Add the indicators
     const indicators = $("<div>").addClass('slider__box__indicators')
@@ -215,19 +214,18 @@
     const imageroot= splitter[0] + splitter[1];
     for(let i = 0; i < allimages.length; ++i) {
       let oneimage = $("<li>").attr('id', `${imageroot}-${i}`)
-                  .addClass('slider__box__slides__img')
-                  .addClass('img');
+                  .addClass('slider__box__slides__img').addClass('img');
       if(i === 0 ){
         $(oneimage).addClass('active');
       }
-      let h3 = $("<h5></h5>").text(`${i+1}/${allimages.length}`);
-      let newimg = $('<img>').attr('src', this.imagespath+allimages[i]);
+      let newimg = $('<img>').attr('src', this.imagespath+allimages[i])
+                .addClass('img');
       $(newimg).click( (e) => { // Arrow function mandatory here to use this
         e.preventDefault();
         this.fullScreen(this.allimages[this.activeindex]);
       });
       $(oneimage).append(newimg);
-      $(slides).append(oneimage);      
+      $(slides).append(oneimage);
     }
     this.activeindex = 0;    
     this.allimages = allimages; // Save it for later use by buttons handler

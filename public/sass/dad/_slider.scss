@@ -11,17 +11,17 @@
   align-items: center;
   margin: 0 auto;
   &__box {
-    display: grid;
+    display: grid; 
     gap: .5rem;
     grid-template-columns: 1fr 6fr 1fr;
     grid-template-rows: 10fr  1fr;
     grid-template-areas: 
-    'img img img'
+    '. img .'
     'left indic right';
     @include for-desktop {
       grid-template-areas: 
       'left img right'
-      'indic indic indic';
+      '. indic .';
     }
     width: 80vw;
     height: 80svh;
@@ -35,21 +35,15 @@
     }
 
     &__slides {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 1rem 0;
-      position: absolute; 
+      display: contents;
+      margin: 1rem 0; 
+      position: absolute;
       inset: 0;
       &__img {
         opacity: 0;
         transition: 1s opacity ease-in-out;
         &.active {
             opacity: 1;
-        }
-        > img {
-            display: block;
-            max-width: 100%;
         }
       }
     }
@@ -91,14 +85,14 @@
   width: 100%;
   max-height: 100%;
   object-fit: cover;
-  border-radius: 10px;
+  border-radius: 10px;          
 }
 .zoomon {
   display: flex;
   flex-direction: column;
   position: absolute;
   height: 100dvh;
-  width: 100%;
+  width: 100%; 
   justify-content: center;
   align-items: center;
   animation-duration: 1.2s;
