@@ -23,7 +23,7 @@
   import $props  from '../properties.js';
     export default class Slider {
 
-  // slidertype is used to generate images location.
+  // slidertype is used to determine images location.
   // As the slider can display diaporama images or knife images
   // and the location is /images/slideshow or /images/knife
   // Two accepted values : SHOW (the default) and KNIFE
@@ -62,11 +62,11 @@
       this.buildSliderFrame(container);
       this.addImages(allimages);
       // Arm handlers
-      $(`#${this.sliderarea} > .slider__box__elements__action`).children().on('click', (event) => {
+      $(`#${this.homezone} > .slider__box__action`).children().on('click', (event) => {
         event.stopPropagation();
         this.manageActiveSlide(event);
       })
-      $(`#${this.sliderarea} > .slider__box__elements__indicators`).children().on('click', (event) => {
+      $(`#${this.homezone} > .slider__box__indicators`).children().on('click', (event) => {
         event.stopPropagation();
         this.manageActiveIndicator(event);
       });
@@ -143,7 +143,7 @@
   }
   // ------------------------------------------------------------------------------------------------
   updateActiveButton() {
-    const indicatorslist = $(`#${this.sliderarea} > .slider__box__elements__indicators`).children();
+    const indicatorslist = $(`#${this.homezone} > .slider__box__indicators`).children();
     for(let i = 0; i < indicatorslist.length; ++i){
       $(indicatorslist[i]).removeClass('active');
     };
@@ -171,7 +171,7 @@
     $(sliderzone).append(prev);
     const next = $("<a></a>").addClass('slider__box__action next');
     const nextimage = $("<img>").attr('src', `${$props.svgimageslocation()}/arrow-forward.svg`)
-                .addClass("svg-white").addClass('prev');
+                .addClass("svg-white").addClass('next');
     $(next).append(nextimage);
     $(sliderzone).append(next);
     const ul = $('<ul></ul>').attr('id', this.sliderarea).addClass('slider__box__slides');
@@ -187,21 +187,6 @@
       $(indicators).append(buttonindic);
     }
     $(sliderzone).append(indicators);
-
-    // $(slider).append($('<div></div>').value('Un').addClass('left'));
-    // $(slider).append$(('<div></div>').value('Un').addClass('right'));
-    // $(slider).append$(('<div></div>').value('Un').addClass('indic'));
-    // const ul = $('<ul></ul>').attr('id', this.sliderarea).addClass('slider__box_elements');
-    // const prev = $("<a></a>").addClass('slider__box__action prev');
-    // const previmage = $("<img>").attr('src', `${$props.svgimageslocation()}/arrow-back.svg`).addClass("svg-white");
-    // $(prev).append(previmage);
-    // const next = $("<a></a>").addClass('slider__box__action next');
-    // const nextimage = $("<img>").attr('src',  `${$props.svgimageslocation()}/arrow-forward.svg`).addClass("svg-white");
-    // $(next).append(nextimage);
-    // // Navigation buttons and slides area
-    // $(sliderzone).append(prev);
-    // $(sliderzone).append(ul);
-    // $(sliderzone).append(next);
     $(container).append(sliderzone);
     this.startSlider();
   }
