@@ -16,6 +16,7 @@
     Jan 07 2024     New DOM structure
     Jan 13 2024     New management of Y scrolling
     Feb 06 2024     New slider frame
+    Feb 09 2024     New slider frame
 
     ----------------------------------------------------------------------------*/
 
@@ -29,7 +30,7 @@
   // Two accepted values : SHOW (the default) and KNIFE
   constructor(container, timing = 2, description = '', allimages, slidertype = 'SHOW') {
     // Init
-      this.version = 'Slider:1.55, Feb 06 2024 ';
+      this.version = 'Slider:1.56, Feb 09 2024 ';
       this.container = container;
       this.containername = $(container).attr('name');
       this.slideinterval = timing * 1000;
@@ -74,8 +75,6 @@
       $('html').keyup( (event) => { 
           console.log(event.keyCode);
           event.stopPropagation();
-          // $(this.container).empty().hide();
-          // $("body").css("overflow", "auto");
       });
       // Some other handlers
       $(window).resize ( () =>  {
@@ -174,8 +173,8 @@
                 .addClass("svg-white").addClass('next');
     $(next).append(nextimage);
     $(sliderzone).append(next);
-    const ul = $('<ul></ul>').attr('id', this.sliderarea).addClass('slider__box__slides');
-    $(sliderzone).append(ul);
+    const slidesbox = $('<div></div>').attr('id', this.sliderarea).addClass('slider__box__slides img');
+    $(sliderzone).append(slidesbox);
     // Add the indicators
     const indicators = $("<div>").addClass('slider__box__indicators')
       .addClass('indic');
@@ -198,8 +197,8 @@
     const splitter = this.sliderarea.split('-');
     const imageroot= splitter[0] + splitter[1];
     for(let i = 0; i < allimages.length; ++i) {
-      let oneimage = $("<li>").attr('id', `${imageroot}-${i}`)
-                  .addClass('slider__box__slides__img').addClass('img');
+      let oneimage = $("<div>").attr('id', `${imageroot}-${i}`)
+                  .addClass('slider__box__slides__img img' );
       if(i === 0 ){
         $(oneimage).addClass('active');
       }

@@ -10,14 +10,14 @@
   align-items: center;
   backdrop-filter: blur(6px); 
   width: 100vw;
-  height: 90dvh;
+  height: 100dvh;
   color: white;
   border: red 2px solid;
   &__box {
     display: grid; 
     gap: .5rem;
     grid-template-columns: 1fr 6fr 1fr;
-    grid-template-rows: minmax(70%, 1fr);
+    grid-template-rows: 70% 10%;
     grid-template-areas: 
       '. img .'
       'left indic right';
@@ -27,6 +27,7 @@
       '. indic .';
     }
     width: 80vw;
+    height: 90dvh;
     max-width: 1024px;
     align-items: center;
     justify-content: center;  
@@ -47,7 +48,9 @@
       margin: 1rem 0; 
       position: absolute;
       inset: 0;
+      border: green 2px solid; 
       &__img {
+        display: flex;
         opacity: 0;
         transition: 1s opacity ease-in-out;
         &.active {
@@ -90,9 +93,13 @@
 }
 .img {
   grid-area: img;
-  width: 100%;
-  object-fit: cover;
+  // width: 100%;
+  // object-fit: cover;
   border-radius: 10px;          
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
 }
 .zoomon {
   display: flex;

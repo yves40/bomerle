@@ -85,6 +85,12 @@ $(document).ready(function () {
             $("#zoomer").empty().removeClass("zoomon").addClass('zoomoff').hide();
         }
     });
+    $(window).resize( () => {
+        knifeslideractive = false;
+        $(slider).empty();
+        $(slider).hide();
+        $("body").css("overflow", "auto");
+    })
     // Handle the user choice for the object request type
     $('.object').change( function() {
         $('select option:selected').each( function(index, element) {
