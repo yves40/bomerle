@@ -80,3 +80,4 @@ class timeHelper {
         }
     }
 }
+export default timeHelper;

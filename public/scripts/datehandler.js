@@ -1,3 +1,6 @@
+import $props from './properties.js'
+import timeHelper from './timeHelper.js'
+
 // ------------------ Init loop to trap all mouse clicks -------------------------
 $(document).ready(function () {
     $props.load();
@@ -197,8 +200,8 @@ $(document).ready(function () {
     // ------------------------------------------------------------------------------
     function refillDays(element, selectedmonth, selectedyear, today, nofuture) {
         $(element).empty();
-        smonth = parseInt(selectedmonth);
-        syear = parseInt(selectedyear);
+        let smonth = parseInt(selectedmonth);
+        let syear = parseInt(selectedyear);
         let daylimit = new Date(syear, smonth, 0).getDate();
         // Final check to remove days over current day if year and month are the same
         if(nofuture) {
@@ -214,7 +217,7 @@ $(document).ready(function () {
     // ------------------------------------------------------------------------------
     function refillMonths(element, selectedyear, today, nofuture) {
         $(element).empty();
-        syear = parseInt(selectedyear);
+        const syear = parseInt(selectedyear);
         let monthlimit = 13;
         if(nofuture) {
             if(syear === today.y) {

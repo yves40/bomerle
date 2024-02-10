@@ -1,3 +1,5 @@
+import $props from './properties.js'
+
 // ------------------ Init loop to trap all mouse clicks -------------------------
 $(document).ready(function () {
     $props.load();
@@ -215,7 +217,7 @@ function moveImage(imageslist, url) {
     let feedbackmessage = $('#feedback');
     let movingimageid = 0;
     let relatedimageid = 0;
-    for(index = 0; index < imageslist.length; ++index) {
+    for(let index = 0; index < imageslist.length; ++index) {
         let element = imageslist[index];
         if(element.action !== NOACTION) {   
             let imagemoved = imageslist[index];
@@ -270,7 +272,8 @@ function swapImages(movingimageid, relatedimageid) {
     // Manage 2 cards, 2 images and 6 command icons
     let movingcard = null;
     let relatedcard = null;
-    let movingimg = relatedimg = null;
+    let movingimg = null;
+    let relatedimg = null;
     let movingleft, movingdel, movingright, relatedleft, relateddel, relatedright = null;
     $(`#imgcard-${movingimageid}`).each((idx, element) => {
         movingcard = element;
@@ -317,13 +320,13 @@ function swapImages(movingimageid, relatedimageid) {
     let imgshowid2 = $(relatedimg).attr('data-imageshowid');
     let imgrank2 = $(relatedimg).attr('data-imagerank');
 
-    $(movingimg).attr('src', $props.slideimageslocation() + imgfile2);
+    $(movingimg).attr('src', $props.slideimageslocation() + '/' + imgfile2);
     $(movingimg).attr('data-imageid', imgid2);
     $(movingimg).attr('data-imagefile', imgfile2);
     $(movingimg).attr('data-imageshowid', imgshowid2);
     $(movingimg).attr('data-imagerank', imgrank2);
     
-    $(relatedimg).attr('src', $props.slideimageslocation() + imgfile1);
+    $(relatedimg).attr('src', $props.slideimageslocation() + '/' + imgfile1);
     $(relatedimg).attr('data-imageid', imgid1);
     $(relatedimg).attr('data-imagefile', imgfile1);
     $(relatedimg).attr('data-imageshowid', imgshowid1);
