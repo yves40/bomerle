@@ -1,3 +1,5 @@
+import $props from './properties.js';
+
 // ------------------ Init loop to trap all mouse clicks -------------------------
 $(document).ready(function () {
     $props.load();
