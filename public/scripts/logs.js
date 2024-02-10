@@ -1,4 +1,7 @@
 // ------------------ Init loop to trap all mouse clicks -------------------------
+import $props from './properties.js';
+import timeHelper from './timeHelper.js';
+
 $(document).ready(function () {
     $props.load();
 
@@ -88,14 +91,14 @@ $(document).ready(function () {
     // Request new data based on all criterias
     // ----------------------------------------------------------------------------
     function getLogs() {
-        let arguments = buildArguments();
+        let logselector = buildArguments();
         $.ajax({
             type: "POST",
             url: `/bootadmin/logs/page/${pagenum}`,
             dataType: "json",
             contentType: 'application/json',
             async: true,
-            data: JSON.stringify({ 'allargs' : arguments}),
+            data: JSON.stringify({ 'allargs' : logselector}),
             success: function (response) {
                 // Check the number of returned lines and manage the next page button
                 if(response.logs.length < pagesize) {
@@ -154,8 +157,8 @@ $(document).ready(function () {
             $(row1).append(datecol).append(severitycol).append(mailcol)
                 .append(actioncol).append(zoomcol);
 
-            row2 = $('<div>').addClass('row mt-0 textsmall');
-            detailcol = $('<div>').addClass('col msgdetails mt-0 mb-0');
+            let row2 = $('<div>').addClass('row mt-0 textsmall');
+            let detailcol = $('<div>').addClass('col msgdetails mt-0 mb-0');
             $(detailcol).data('visible', false).hide();
 
             let span = $('<span>');
@@ -325,8 +328,8 @@ $(document).ready(function () {
     // ------------------------------------------------------------------------------
     function refillDays(element, selectedmonth, selectedyear, today) {
         $(element).empty();
-        smonth = parseInt(selectedmonth);
-        syear = parseInt(selectedyear);
+        let smonth = parseInt(selectedmonth);
+        let syear = parseInt(selectedyear);
         let daylimit = 31;
         switch(smonth) {
             case 4:
@@ -353,7 +356,7 @@ $(document).ready(function () {
     // ------------------------------------------------------------------------------
     function refillMonths(element, selectedyear, today) {
         $(element).empty();
-        syear = parseInt(selectedyear);
+        let syear = parseInt(selectedyear);
         let monthlimit = 13;
         if(syear === today.y) {
             monthlimit = today.m + 1;
