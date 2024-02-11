@@ -60,6 +60,13 @@ $(document).ready(function () {
     logger.info(`[${$props.version()} ]` );
 
     // various handlers
+    /**
+     * sliderclosed ois sent by the slider class
+     * when the slider is destroyed
+     */
+    $(slider).on('sliderclosed', function () {
+        knifeslideractive = false;
+    });
     $('.langselector').on('click', (event) => {
         const choice = $(event.target).data('lang');
         logger.debug(`Switch lang to ${choice}`);
@@ -342,16 +349,7 @@ $(document).ready(function () {
         // console.log(parseInt(scrollTop) , clientHeight, scrollHeight);
         $(slider).css({'top': window.scrollY,
             'left': 0, 'z-index': 1000})
-            .show()
-            .on('click', (event) => {
-                event.preventDefault();
-                if(event.target.nodeName !== 'IMG') {   // Close the gallery zoom?
-                    knifeslideractive = false;
-                    $(slider).empty();
-                    $(slider).hide();
-                    $("body").css("overflow", "auto");
-                }
-            });
+            .show();
     }
     /**
      * Build and display a slider 

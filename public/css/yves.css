@@ -211,8 +211,8 @@
     display: grid;
     gap: .5rem;
     grid-template-columns: 1fr fit-content(80%) 1fr;
-    grid-template-rows: 10% 70% 10%;
-    grid-template-areas: '. kdesc .' '. img .' 'left indic right';
+    grid-template-rows: 10% 70% 8% 5%;
+    grid-template-areas: '. kdesc .' '. img .' '. close .' 'left indic right';
     width: 80vw;
     height: 90dvh;
     max-width: 1024px;
@@ -220,7 +220,7 @@
     justify-content: center; }
     @media screen and (min-width: 1024px) {
       .slider__box {
-        grid-template-areas: '. kdesc .' 'left img right' '. indic .'; } }
+        grid-template-areas: '. kdesc .' 'left img right' '. close .' '. indic .'; } }
     .slider__box__action {
       cursor: pointer; }
       .slider__box__action img {
@@ -274,10 +274,16 @@
   max-width: 100%;
   max-height: 100%;
   width: auto;
-  height: auto; }
+  height: auto;
+  object-fit: cover; }
 
 .kdesc {
-  grid-area: kdesc; }
+  grid-area: kdesc;
+  justify-self: center; }
+
+.close {
+  grid-area: close;
+  justify-self: center; }
 
 .zoomon {
   display: flex;

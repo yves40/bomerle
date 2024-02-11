@@ -18,15 +18,17 @@
     display: grid; 
     gap: .5rem;
     grid-template-columns: 1fr fit-content(80%) 1fr;
-    grid-template-rows: 10% 70% 10%;
+    grid-template-rows: 10% 70% 8% 5%;
     grid-template-areas: 
       '. kdesc .'
       '. img .'
+      '. close .'
       'left indic right';
     @include for-desktop {
       grid-template-areas: 
         '. kdesc .'
         'left img right'
+        '. close .'
         '. indic .';
     }
     width: 80vw;
@@ -100,9 +102,15 @@
   max-height: 100%;
   width: auto;
   height: auto;
+  object-fit: cover;
 }
 .kdesc {
   grid-area: kdesc;
+  justify-self: center;
+}
+.close {
+  grid-area: close;
+  justify-self: center;
 }
 .zoomon {
   display: flex;
@@ -110,7 +118,7 @@
   position: absolute;
   height: 100dvh;
   width: 100%; 
-  justify-content: center;
+  justify-content: center; 
   align-items: center;
   animation-duration: 1.2s;
   animation-timing-function: linear;

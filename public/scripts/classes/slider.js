@@ -100,7 +100,12 @@
       this.nextSlide();
     }
     else {
-      this.previousSlide();
+      if($(parent).hasClass('prev')) {
+        this.previousSlide();
+      }
+      else {
+        this.closeSlider();
+      }
     }
   }
   // ------------------------------------------------------------------------------------------------
@@ -163,7 +168,13 @@
 
     const kdesc = $('<h2></h2>').addClass('kdesc heroh2').text(this.description);
     $(sliderzone).append(kdesc);
-
+    // Close button
+    const closebutton = $("<a></a>").addClass('slider__box__action close');
+    const closeimage = $("<img>").attr('src',  `${$props.svgimageslocation()}/close-circle-outline.svg`)
+                              .addClass("svg-white");
+    $(closebutton).append(closeimage);
+    $(sliderzone).append(closebutton);
+    // Nav buttons
     const prev = $("<a></a>").addClass('slider__box__action prev');
     const previmage = $("<img>").attr('src', `${$props.svgimageslocation()}/arrow-back.svg`)
                 .addClass("svg-white").addClass('prev');
@@ -216,6 +227,24 @@
     this.allimages = allimages; // Save it for later use by buttons handler
   }
   // ------------------------------------------------------------------------------------------------
+  // Slider automatic display set/reset
+  // ------------------------------------------------------------------------------------------------
+  startSlider() {
+    if(this.intervalid === 0) {
+      this.intervalid = setInterval( () => {
+        this.nextSlide();
+      }, this.slideinterval);
+      this.logger.debug(`${this.homezone} : Delay for slides set to ${this.slideinterval} with interval ID: ${this.intervalid}` );
+    }
+  }
+  stopSlider() {
+    if(this.intervalid !== 0) {
+      this.logger.debug(`${this.homezone} : Stop slideware with interval ID: ${this.intervalid}` );
+      clearInterval(this.intervalid);
+      this.intervalid = 0;
+    }
+  }
+  // ------------------------------------------------------------------------------------------------
   fullScreen(imagesrc) {
     if(!this.zoomactive) {
       this.zoomactive = true;
@@ -250,23 +279,12 @@
       });
     }
   }
-  // ------------------------------------------------------------------------------------------------
-  // Slider automatic display set/reset
-  // ------------------------------------------------------------------------------------------------
-  startSlider() {
-    if(this.intervalid === 0) {
-      this.intervalid = setInterval( () => {
-        this.nextSlide();
-      }, this.slideinterval);
-      this.logger.debug(`${this.homezone} : Delay for slides set to ${this.slideinterval} with interval ID: ${this.intervalid}` );
-    }
-  }
-  stopSlider() {
-    if(this.intervalid !== 0) {
-      this.logger.debug(`${this.homezone} : Stop slideware with interval ID: ${this.intervalid}` );
-      clearInterval(this.intervalid);
-      this.intervalid = 0;
-    }
+  /**
+   * Destroy the slider window
+   */
+  closeSlider() {
+    $(this.container).trigger('sliderclosed').empty().hide();
+    $("body").css("overflow", "auto");
   }
   // ------------------------------------------------------------------------------------------------
   // Slider element screen position evaluation
