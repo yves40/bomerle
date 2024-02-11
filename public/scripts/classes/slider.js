@@ -17,6 +17,7 @@
     Jan 13 2024     New management of Y scrolling
     Feb 06 2024     New slider frame
     Feb 09 2024     New slider frame
+    Feb 11 2024     New slider frame
 
     ----------------------------------------------------------------------------*/
 
@@ -30,7 +31,7 @@
   // Two accepted values : SHOW (the default) and KNIFE
   constructor(container, timing = 2, description = '', allimages, slidertype = 'SHOW') {
     // Init
-      this.version = 'Slider:1.56, Feb 09 2024 ';
+      this.version = 'Slider:1.57, Feb 11 2024 ';
       this.container = container;
       this.containername = $(container).attr('name');
       this.slideinterval = timing * 1000;
@@ -163,6 +164,10 @@
     $(container).addClass('slider');
     const sliderzone = $("<div>").attr('id', this.homezone)
                     .addClass('slider__box');
+
+    const kdesc = $('<h2></h2>').addClass('kdesc heroh2').text(this.description);
+    $(sliderzone).append(kdesc);
+
     const prev = $("<a></a>").addClass('slider__box__action prev');
     const previmage = $("<img>").attr('src', `${$props.svgimageslocation()}/arrow-back.svg`)
                 .addClass("svg-white").addClass('prev');

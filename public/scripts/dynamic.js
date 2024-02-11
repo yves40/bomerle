@@ -331,12 +331,12 @@ $(document).ready(function () {
      * @param knifeimages   Related images
      */
     function displayKnifeSlider(knifename, knifedesc, knifeimages) {
-        const h2 = $('<h2>').text(knifename)
-                    .addClass('heroh2');
-        //const p = $('<p>').text(knifedesc);
-        //$(slider).append(h2).append(p);
         $(slider).attr('name', 'slider');
-        let dynslider = new Slider($(slider), 10, '', knifeimages, 'KNIFE');
+        let dynslider = new Slider($(slider),
+                            10,
+                            knifename,
+                            knifeimages,
+                            'KNIFE');
         $("body").css("overflow", "hidden");
         const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
         // console.log(parseInt(scrollTop) , clientHeight, scrollHeight);

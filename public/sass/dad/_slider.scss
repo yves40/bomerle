@@ -5,7 +5,6 @@
 .slider {
   display: flex; 
   position: absolute;  
-  flex-direction: column;
   justify-content: center;
   align-items: center;
   backdrop-filter: blur(6px); 
@@ -13,16 +12,21 @@
   height: 100dvh;
   color: white;
   border: red 2px solid;
+  h2 {
+    font-family: $h2font;
+  }
   &__box {
     display: grid; 
     gap: .5rem;
     grid-template-columns: 1fr 6fr 1fr;
-    grid-template-rows: 70% 10%;
+    grid-template-rows: 10% 70% 10%;
     grid-template-areas: 
+      '. kdesc .'
       '. img .'
       'left indic right';
     @include for-desktop {
     grid-template-areas: 
+      '. kdesc .'
       'left img right'
       '. indic .';
     }
@@ -100,6 +104,9 @@
   max-height: 100%;
   width: auto;
   height: auto;
+}
+.kdesc {
+  grid-area: kdesc;
 }
 .zoomon {
   display: flex;
