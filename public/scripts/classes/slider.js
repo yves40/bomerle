@@ -84,9 +84,11 @@
         }
         this.windowx = $(window).width();
         this.windowy = $(window).height();
+        this.stopSlider();
       });
       $(window).scroll( () => {
         if(($(`#${this.homezone}`).length > 0) &&  this.isSliderVisible($(`#${this.homezone}`))) {
+          console.log(`Slider activated by scroll`);
           this.startSlider();
         }
         else {
@@ -110,6 +112,7 @@
   }
   // ------------------------------------------------------------------------------------------------
   manageActiveIndicator(event) {
+    this.stopSlider();
     const newindex = $(event.target).data('imageindex');
     const splitter = this.sliderarea.split('-');
     const imageroot= splitter[0] + splitter[1];

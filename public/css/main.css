@@ -544,7 +544,7 @@
   .slider__box {
     display: grid;
     gap: .5rem;
-    grid-template-columns: 1fr 6fr 1fr;
+    grid-template-columns: 1fr fit-content(80%) 1fr;
     grid-template-rows: 10% 70% 10%;
     grid-template-areas: '. kdesc .' '. img .' 'left indic right';
     width: 80vw;
@@ -558,10 +558,10 @@
     .slider__box__action {
       cursor: pointer; }
       .slider__box__action img {
-        width: 50px; }
+        width: 35px; }
       @media screen and (min-width: 1024px) {
         .slider__box__action img {
-          width: 60px; } }
+          width: 50px; } }
     .slider__box__slides {
       display: contents;
       margin: 1rem 0;
@@ -593,7 +593,7 @@
             height: 10px; } }
         .slider__box__indicators__flags.active {
           opacity: 1;
-          background-color: white; }
+          background-color: darkolivegreen; }
 
 .prev {
   grid-area: left;

@@ -18,17 +18,17 @@
   &__box {
     display: grid; 
     gap: .5rem;
-    grid-template-columns: 1fr 6fr 1fr;
+    grid-template-columns: 1fr fit-content(80%) 1fr;
     grid-template-rows: 10% 70% 10%;
     grid-template-areas: 
       '. kdesc .'
       '. img .'
       'left indic right';
     @include for-desktop {
-    grid-template-areas: 
-      '. kdesc .'
-      'left img right'
-      '. indic .';
+      grid-template-areas: 
+        '. kdesc .'
+        'left img right'
+        '. indic .';
     }
     width: 80vw;
     height: 90dvh;
@@ -38,11 +38,11 @@
     &__action {
       cursor: pointer;
       img {
-        width: 50px;
+        width: 35px;
       }
       @include for-desktop {
         img {
-          width: 60px;
+          width: 50px;
         }
       }
     }
@@ -81,7 +81,7 @@
         cursor: pointer;
         &.active {
             opacity: 1;
-            background-color: white;
+            background-color: darkolivegreen;
         }
       }
     }
@@ -97,8 +97,6 @@
 }
 .img {
   grid-area: img;
-  // width: 100%;
-  // object-fit: cover;
   border-radius: 10px;          
   max-width: 100%;
   max-height: 100%;
