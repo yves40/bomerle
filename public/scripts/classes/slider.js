@@ -86,21 +86,14 @@
         this.windowy = $(window).height();
         this.stopSlider();
       });
+      // Use later ???
       $(window).scroll( () => {
-        if(($(`#${this.homezone}`).length > 0) &&  this.isSliderVisible($(`#${this.homezone}`))) {
-          console.log(`Slider activated by scroll`);
-          this.startSlider();
-        }
-        else {
-          this.stopSlider();
-        }
       })
   }
   // ------------------------------------------------------------------------------------------------
   manageActiveSlide(event) {
     if(this.intervalid !== 0) {
-      clearInterval(this.intervalid);
-      this.intervalid = 0;
+      this.stopSlider();
     }
     const parent = $(event.target).parent();
     if($(parent).hasClass('next')) {
@@ -265,12 +258,12 @@
       this.intervalid = setInterval( () => {
         this.nextSlide();
       }, this.slideinterval);
-      this.logger.debug(`##VISIBLE## ${this.homezone} : Delay for slides set to ${this.slideinterval} with interval ID: ${this.intervalid}` );
+      this.logger.debug(`${this.homezone} : Delay for slides set to ${this.slideinterval} with interval ID: ${this.intervalid}` );
     }
   }
   stopSlider() {
     if(this.intervalid !== 0) {
-      this.logger.debug(`##HIDDEN## ${this.homezone} : Stop slideware with interval ID: ${this.intervalid}` );
+      this.logger.debug(`${this.homezone} : Stop slideware with interval ID: ${this.intervalid}` );
       clearInterval(this.intervalid);
       this.intervalid = 0;
     }

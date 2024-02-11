@@ -11,7 +11,6 @@
   width: 100vw;
   height: 100dvh;
   color: white;
-  border: red 2px solid;
   h2 {
     font-family: $h2font;
   }
@@ -52,7 +51,6 @@
       margin: 1rem 0; 
       position: absolute;
       inset: 0;
-      border: green 2px solid; 
       &__img {
         display: flex;
         opacity: 0;

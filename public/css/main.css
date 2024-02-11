@@ -537,8 +537,7 @@
   backdrop-filter: blur(6px);
   width: 100vw;
   height: 100dvh;
-  color: white;
-  border: red 2px solid; }
+  color: white; }
   .slider h2 {
     font-family: "Gideon Roman", sans-serif; }
   .slider__box {
@@ -566,8 +565,7 @@
       display: contents;
       margin: 1rem 0;
       position: absolute;
-      inset: 0;
-      border: green 2px solid; }
+      inset: 0; }
       .slider__box__slides__img {
         display: flex;
         opacity: 0;
