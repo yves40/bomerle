@@ -104,7 +104,7 @@
         this.previousSlide();
       }
       else {
-        this.closeSlider();
+        $(this.container).trigger('sliderclosed');
       }
     }
   }
@@ -278,13 +278,6 @@
         // $("body").css("overflow", "auto"); No longer reactivate scroll in requesting parent
       });
     }
-  }
-  /**
-   * Destroy the slider window
-   */
-  closeSlider() {
-    $(this.container).trigger('sliderclosed').empty().hide();
-    $("body").css("overflow", "auto");
   }
   // ------------------------------------------------------------------------------------------------
   // Slider element screen position evaluation

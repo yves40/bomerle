@@ -66,6 +66,7 @@ $(document).ready(function () {
      */
     $(slider).on('sliderclosed', function () {
         knifeslideractive = false;
+        closeSlider();
     });
     $('.langselector').on('click', (event) => {
         const choice = $(event.target).data('lang');
@@ -84,9 +85,7 @@ $(document).ready(function () {
         //console.log(event);
         if(knifeslideractive) {
             knifeslideractive = false;
-            $(slider).empty();
-            $(slider).hide();
-            $("body").css("overflow", "auto");
+            closeSlider();
         }
         if($('#zoomer').hasClass('zoomon')) {
             $("#zoomer").empty().removeClass("zoomon").addClass('zoomoff').hide();
@@ -94,9 +93,7 @@ $(document).ready(function () {
     });
     $(window).resize( () => {
         knifeslideractive = false;
-        $(slider).empty();
-        $(slider).hide();
-        $("body").css("overflow", "auto");
+        closeSlider();
     })
     // Handle the user choice for the object request type
     $('.object').change( function() {
@@ -350,6 +347,13 @@ $(document).ready(function () {
         $(slider).css({'top': window.scrollY,
             'left': 0, 'z-index': 1000})
             .show();
+    }
+    /**
+     * Destroy the slider window
+     */
+    function closeSlider() {
+        $(slider).empty().hide();
+        $("body").css("overflow", "auto");
     }
     /**
      * Build and display a slider 
