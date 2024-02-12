@@ -252,7 +252,7 @@
       const top = window.scrollY;
       const closezoom = $("<img>").attr('src',  `${$props.svgimageslocation()}/close-circle-outline.svg`)
                   .addClass("svg-white");
-      const kname = $('<p></p>').text('Hello').addClass('kname');
+      const kname = $('<h2></h2>').text('Hello').addClass('kname');
       // // Remove body scroll bar so user cant scroll up or down
       $("body").css("overflow", "hidden");
       $("#zoomer").css({ 'top': top, 'left': 0, 'z-index': 2000 } )

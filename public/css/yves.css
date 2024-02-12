@@ -301,14 +301,17 @@
   .zoomer__image {
     display: grid;
     gap: .5rem;
-    grid-template-columns: 1fr fit-content(80%) 1fr;
-    grid-template-rows: 10% 70% 10%;
-    grid-template-areas: '. kname .' '. img .' '. close .';
+    grid-template-columns: 100%;
+    grid-template-rows: 1fr 10fr 1fr;
+    grid-template-areas: 'kname' 'img' 'close';
     width: 80vw;
     height: 90dvh;
     max-width: 1024px;
     align-items: center;
     justify-content: center; }
+    .zoomer__image h2 {
+      font-size: "Gideon Roman", sans-serif;
+      color: white; }
   .zoomer .svg-white {
     width: 60px;
     cursor: pointer;
