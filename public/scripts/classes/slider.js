@@ -74,7 +74,6 @@
       });
       // Track any keyboard or mobile input
       $('html').keyup( (event) => { 
-          console.log(event.keyCode);
           event.stopPropagation();
       });
       // Some other handlers
@@ -253,26 +252,26 @@
       const top = window.scrollY;
       const closezoom = $("<img>").attr('src',  `${$props.svgimageslocation()}/close-circle-outline.svg`)
                   .addClass("svg-white");
+      const kname = $('<p></p>').text('Hello').addClass('kname');
       // // Remove body scroll bar so user cant scroll up or down
       $("body").css("overflow", "hidden");
       $("#zoomer").css({ 'top': top, 'left': 0, 'z-index': 2000 } )
-              .addClass("zoomon").removeClass('zoomoff');
-              $("#zoomer").append($('<div>').attr('id', 'zoomer__image')
-              .addClass('zoomon__image')
+              .addClass("zoomer");
+      $("#zoomer").append($('<div>').attr('id', 'zoomer__image')
+              .addClass('zoomer__image')
               .append($('<img>').attr('src', `${this.imagespath}${imagesrc}`))
               );
-      $('#zoomer').append(closezoom);
+      $('.zoomer__image').append(closezoom);
+      $('.zoomer__image').append(kname);
       $("#zoomer").show();
       // Hide a few things
       $(`#${this.indicators}`).hide();
       $(".slidercontrol").hide();
-
       // Wait for the user to close the zoom
       $(closezoom).click( (e) => { 
         e.preventDefault();
         this.zoomactive = false;
-        $("#zoomer").empty().removeClass("zoomon")
-                        .addClass('zoomoff').hide();
+        $("#zoomer").removeClass("zoomon").empty().hide();
         $(`#${this.indicators}`).show();
         $(".slidercontrol").show();
         // $("body").css("overflow", "auto"); No longer reactivate scroll in requesting parent
