@@ -126,28 +126,3 @@ body {
     }
   }
 }
-
-#slider {
-  position: absolute;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  backdrop-filter: blur(6px); 
-  width: 100%;
-  min-height: 100svh;
-  color: white;
-  h2 {
-    font-size: 2rem;
-    padding: 1rem;
-    @include for-desktop {
-      font-size: 4rem;
-    }
-  }
-  p {
-    display: none;
-    width: 50%;
-    max-width: $responsive-max-width;
-    margin-bottom: 2rem;
-  }
-}

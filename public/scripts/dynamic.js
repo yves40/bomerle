@@ -46,7 +46,7 @@ $(document).ready(function () {
     $(newsgallery).hide();
     $(knivesgallery).hide().attr('inactive', '').removeAttr('active');
     $(categorygallery).hide();
-    $(slider).hide().attr('name', 'dynamic');
+    $(slider).hide();
 
     let validEmail = false;
     let validText = false;
@@ -60,6 +60,14 @@ $(document).ready(function () {
     logger.info(`[${$props.version()} ]` );
 
     // various handlers
+    /**
+     * sliderclosed ois sent by the slider class
+     * when the slider is destroyed
+     */
+    $(slider).on('sliderclosed', function () {
+        knifeslideractive = false;
+        closeSlider();
+    });
     $('.langselector').on('click', (event) => {
         const choice = $(event.target).data('lang');
         logger.debug(`Switch lang to ${choice}`);
@@ -77,14 +85,19 @@ $(document).ready(function () {
         //console.log(event);
         if(knifeslideractive) {
             knifeslideractive = false;
-            $(slider).empty();
-            $(slider).hide();
-            $("body").css("overflow", "auto");
+            closeSlider();
         }
-        if($('#zoomer').hasClass('zoomon')) {
-            $("#zoomer").empty().removeClass("zoomon").addClass('zoomoff').hide();
+        if($('#zoomer').hasClass('zoomer')) {
+            $("#zoomer").removeClass("zoomer").empty().hide();
         }
     });
+    $(window).resize( () => {
+        knifeslideractive = false;
+        closeSlider();
+        if($('#zoomer').hasClass('zoomer')) {
+            $("#zoomer").removeClass("zoomer").empty().hide();
+        }
+    })
     // Handle the user choice for the object request type
     $('.object').change( function() {
         $('select option:selected').each( function(index, element) {
@@ -325,24 +338,25 @@ $(document).ready(function () {
      * @param knifeimages   Related images
      */
     function displayKnifeSlider(knifename, knifedesc, knifeimages) {
-        const h2 = $('<h2>').text(knifename)
-                    .addClass('heroh2');
-        const p = $('<p>').text(knifedesc);
-        $(slider).append(h2).append(p);
-        let dynslider = new Slider($(slider), 10, '', knifeimages, 'KNIFE');
+        $(slider).attr('name', 'slider');
+        let dynslider = new Slider($(slider),
+                            10,
+                            knifename,
+                            knifeimages,
+                            'KNIFE');
         $("body").css("overflow", "hidden");
+        const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
+        // console.log(parseInt(scrollTop) , clientHeight, scrollHeight);
         $(slider).css({'top': window.scrollY,
             'left': 0, 'z-index': 1000})
-            .show()
-            .on('click', (event) => {
-                event.preventDefault();
-                if(event.target.nodeName !== 'IMG') {   // Close the gallery zoom?
-                    knifeslideractive = false;
-                    $(slider).empty();
-                    $(slider).hide();
-                    $("body").css("overflow", "auto");
-                }
-            });
+            .show();
+    }
+    /**
+     * Destroy the slider window
+     */
+    function closeSlider() {
+        $(slider).empty().hide();
+        $("body").css("overflow", "auto");
     }
     /**
      * Build and display a slider 

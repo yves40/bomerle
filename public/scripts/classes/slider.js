@@ -15,6 +15,9 @@
     Dec 20 2023     Fix timer problem
     Jan 07 2024     New DOM structure
     Jan 13 2024     New management of Y scrolling
+    Feb 06 2024     New slider frame
+    Feb 09 2024     New slider frame
+    Feb 11 2024     New slider frame
 
     ----------------------------------------------------------------------------*/
 
@@ -22,13 +25,13 @@
   import $props  from '../properties.js';
     export default class Slider {
 
-  // slidertype is used to generate images location.
+  // slidertype is used to determine images location.
   // As the slider can display diaporama images or knife images
   // and the location is /images/slideshow or /images/knife
   // Two accepted values : SHOW (the default) and KNIFE
   constructor(container, timing = 2, description = '', allimages, slidertype = 'SHOW') {
     // Init
-      this.version = 'Slider:1.54, Jan 21 2024 ';
+      this.version = 'Slider:1.57, Feb 11 2024 ';
       this.container = container;
       this.containername = $(container).attr('name');
       this.slideinterval = timing * 1000;
@@ -61,20 +64,17 @@
       this.buildSliderFrame(container);
       this.addImages(allimages);
       // Arm handlers
-      $(`#${this.sliderarea} > .slider__box__elements__action`).children().on('click', (event) => {
+      $(`#${this.homezone} > .slider__box__action`).children().on('click', (event) => {
         event.stopPropagation();
         this.manageActiveSlide(event);
       })
-      $(`#${this.sliderarea} > .slider__box__elements__indicators`).children().on('click', (event) => {
+      $(`#${this.homezone} > .slider__box__indicators`).children().on('click', (event) => {
         event.stopPropagation();
         this.manageActiveIndicator(event);
       });
       // Track any keyboard or mobile input
       $('html').keyup( (event) => { 
-          console.log(event.keyCode);
           event.stopPropagation();
-          // $(this.container).empty().hide();
-          // $("body").css("overflow", "auto");
       });
       // Some other handlers
       $(window).resize ( () =>  {
@@ -83,32 +83,33 @@
         }
         this.windowx = $(window).width();
         this.windowy = $(window).height();
+        this.stopSlider();
       });
+      // Use later ???
       $(window).scroll( () => {
-        if(($(`#${this.homezone}`).length > 0) &&  this.isSliderVisible($(`#${this.homezone}`))) {
-          this.startSlider();
-        }
-        else {
-          this.stopSlider();
-        }
       })
   }
   // ------------------------------------------------------------------------------------------------
   manageActiveSlide(event) {
     if(this.intervalid !== 0) {
-      clearInterval(this.intervalid);
-      this.intervalid = 0;
+      this.stopSlider();
     }
     const parent = $(event.target).parent();
     if($(parent).hasClass('next')) {
       this.nextSlide();
     }
     else {
-      this.previousSlide();
+      if($(parent).hasClass('prev')) {
+        this.previousSlide();
+      }
+      else {
+        $(this.container).trigger('sliderclosed');
+      }
     }
   }
   // ------------------------------------------------------------------------------------------------
   manageActiveIndicator(event) {
+    this.stopSlider();
     const newindex = $(event.target).data('imageindex');
     const splitter = this.sliderarea.split('-');
     const imageroot= splitter[0] + splitter[1];
@@ -142,7 +143,7 @@
   }
   // ------------------------------------------------------------------------------------------------
   updateActiveButton() {
-    const indicatorslist = $(`#${this.sliderarea} > .slider__box__elements__indicators`).children();
+    const indicatorslist = $(`#${this.homezone} > .slider__box__indicators`).children();
     for(let i = 0; i < indicatorslist.length; ++i){
       $(indicatorslist[i]).removeClass('active');
     };
@@ -160,59 +161,87 @@
   }
   // ------------------------------------------------------------------------------------------------
   buildSliderFrame(container) {
-    const slidescontainer = $("<div>").addClass('slider');
+    $(container).addClass('slider');
     const sliderzone = $("<div>").attr('id', this.homezone)
-                                          .addClass('slider__box');
-    const ul = $('<ul></ul>').attr('id', this.sliderarea).addClass('slider__box_elements');
-    const prev = $("<a></a>").addClass('slider__box__elements__action prev');
-    const previmage = $("<img>").attr('src', `${$props.svgimageslocation()}/arrow-back.svg`).addClass("svg-white");
+                    .addClass('slider__box');
+
+    const kdesc = $('<h2></h2>').addClass('kdesc heroh2').text(this.description);
+    $(sliderzone).append(kdesc);
+    // Close button
+    const closebutton = $("<a></a>").addClass('slider__box__action close');
+    const closeimage = $("<img>").attr('src',  `${$props.svgimageslocation()}/close-circle-outline.svg`)
+                              .addClass("svg-white");
+    $(closebutton).append(closeimage);
+    $(sliderzone).append(closebutton);
+    // Nav buttons
+    const prev = $("<a></a>").addClass('slider__box__action prev');
+    const previmage = $("<img>").attr('src', `${$props.svgimageslocation()}/arrow-back.svg`)
+                .addClass("svg-white").addClass('prev');
     $(prev).append(previmage);
-    const next = $("<a></a>").addClass('slider__box__elements__action next');
-    const nextimage = $("<img>").attr('src',  `${$props.svgimageslocation()}/arrow-forward.svg`).addClass("svg-white");
+    $(sliderzone).append(prev);
+    const next = $("<a></a>").addClass('slider__box__action next');
+    const nextimage = $("<img>").attr('src', `${$props.svgimageslocation()}/arrow-forward.svg`)
+                .addClass("svg-white").addClass('next');
     $(next).append(nextimage);
-    $(ul).append(prev);
-    $(ul).append(next);
-    $(sliderzone).append(ul);
-    $(slidescontainer).append(sliderzone);
-    $(container).append(slidescontainer);
-    // $(container).append($('<div></div>').attr('id', 'fullscreen').addClass('zoomoff'));
+    $(sliderzone).append(next);
+    const slidesbox = $('<div></div>').attr('id', this.sliderarea).addClass('slider__box__slides img');
+    $(sliderzone).append(slidesbox);
+    // Add the indicators
+    const indicators = $("<div>").addClass('slider__box__indicators')
+      .addClass('indic');
+    for(let i = 0; i < this.allimages.length; ++i) {
+      let buttonindic = $('<button>').addClass('slider__box__indicators__flags')
+        .attr('type', 'button')
+        .attr('data-imageindex', `${i}`);
+      if (i == 0) $(buttonindic).addClass('active');
+      $(indicators).append(buttonindic);
+    }
+    $(sliderzone).append(indicators);
+    $(container).append(sliderzone);
     this.startSlider();
   }
   // ------------------------------------------------------------------------------------------------
   addImages(allimages) {
     // Get the container
     const slides = $(`#${this.sliderarea}`);
-    const sliderzone = $(`#${this.homezone}`);
-    // Add the indicators
-    const indicators = $("<div>").addClass('slider__box__elements__indicators');
-    for(let i = 0; i < allimages.length; ++i) {
-      let buttonindic = $('<button>').addClass('slider__box__elements__indicators__flags')
-        .attr('type', 'button')
-        .attr('data-imageindex', `${i}`);
-      if (i == 0) $(buttonindic).addClass('active');
-      $(indicators).append(buttonindic);
-    }
-    $(slides).append(indicators);
     // Add images
     const splitter = this.sliderarea.split('-');
     const imageroot= splitter[0] + splitter[1];
     for(let i = 0; i < allimages.length; ++i) {
-      let oneimage = $("<li>").attr('id', `${imageroot}-${i}`).addClass('slider__box__elements__slide');
+      let oneimage = $("<div>").attr('id', `${imageroot}-${i}`)
+                  .addClass('slider__box__slides__img img' );
       if(i === 0 ){
         $(oneimage).addClass('active');
       }
-      let h3 = $("<h5></h5>").text(`${i+1}/${allimages.length}`);
-      // let newimg = $('<img>').addClass('sliderimage')
-      let newimg = $('<img>').attr('src', this.imagespath+allimages[i]);
+      let newimg = $('<img>').attr('src', this.imagespath+allimages[i])
+                .addClass('img');
       $(newimg).click( (e) => { // Arrow function mandatory here to use this
         e.preventDefault();
         this.fullScreen(this.allimages[this.activeindex]);
       });
       $(oneimage).append(newimg);
-      $(slides).append(oneimage);      
+      $(slides).append(oneimage);
     }
     this.activeindex = 0;    
     this.allimages = allimages; // Save it for later use by buttons handler
+  }
+  // ------------------------------------------------------------------------------------------------
+  // Slider automatic display set/reset
+  // ------------------------------------------------------------------------------------------------
+  startSlider() {
+    if(this.intervalid === 0) {
+      this.intervalid = setInterval( () => {
+        this.nextSlide();
+      }, this.slideinterval);
+      this.logger.debug(`${this.homezone} : Delay for slides set to ${this.slideinterval} with interval ID: ${this.intervalid}` );
+    }
+  }
+  stopSlider() {
+    if(this.intervalid !== 0) {
+      this.logger.debug(`${this.homezone} : Stop slideware with interval ID: ${this.intervalid}` );
+      clearInterval(this.intervalid);
+      this.intervalid = 0;
+    }
   }
   // ------------------------------------------------------------------------------------------------
   fullScreen(imagesrc) {
@@ -223,48 +252,31 @@
       const top = window.scrollY;
       const closezoom = $("<img>").attr('src',  `${$props.svgimageslocation()}/close-circle-outline.svg`)
                   .addClass("svg-white");
+      const kname = $('<h2></h2>').text(this.description).addClass('kname');
       // // Remove body scroll bar so user cant scroll up or down
       $("body").css("overflow", "hidden");
       $("#zoomer").css({ 'top': top, 'left': 0, 'z-index': 2000 } )
-              .addClass("zoomon").removeClass('zoomoff');
-              $("#zoomer").append($('<div>').attr('id', 'zoomer__image')
-              .addClass('zoomon__image')
-              .append($('<img>').attr('src', `${this.imagespath}${imagesrc}`))
-              );
-      $('#zoomer').append(closezoom);
+              .addClass("zoomer");
+      $("#zoomer").append($('<div>').attr('id', 'zoomer__box')
+              .addClass('zoomer__box'));
+      const imgcontainer = $('<div></div>').addClass('zoomer__box__img');
+      $(imgcontainer).append($('<img>').attr('src', `${this.imagespath}${imagesrc}`));
+      $('.zoomer__box').append(imgcontainer);
+      $('.zoomer__box').append(closezoom);
+      $('.zoomer__box').append(kname);
       $("#zoomer").show();
       // Hide a few things
       $(`#${this.indicators}`).hide();
       $(".slidercontrol").hide();
-
       // Wait for the user to close the zoom
       $(closezoom).click( (e) => { 
         e.preventDefault();
         this.zoomactive = false;
-        $("#zoomer").empty().removeClass("zoomon")
-                        .addClass('zoomoff').hide();
+        $("#zoomer").removeClass("zoomer").empty().hide();
         $(`#${this.indicators}`).show();
         $(".slidercontrol").show();
         // $("body").css("overflow", "auto"); No longer reactivate scroll in requesting parent
       });
-    }
-  }
-  // ------------------------------------------------------------------------------------------------
-  // Slider automatic display set/reset
-  // ------------------------------------------------------------------------------------------------
-  startSlider() {
-    if(this.intervalid === 0) {
-      this.intervalid = setInterval( () => {
-        this.nextSlide();
-      }, this.slideinterval);
-      this.logger.debug(`##VISIBLE## ${this.homezone} : Delay for slides set to ${this.slideinterval} with interval ID: ${this.intervalid}` );
-    }
-  }
-  stopSlider() {
-    if(this.intervalid !== 0) {
-      this.logger.debug(`##HIDDEN## ${this.homezone} : Stop slideware with interval ID: ${this.intervalid}` );
-      clearInterval(this.intervalid);
-      this.intervalid = 0;
     }
   }
   // ------------------------------------------------------------------------------------------------
