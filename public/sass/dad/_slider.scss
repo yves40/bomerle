@@ -125,7 +125,7 @@
   animation-name: fadein;
   overflow: hidden;
   background-color: $background;
-  &__image {
+  &__box {
     display: grid;
     gap: .5rem;
     grid-template-columns: 100%;
@@ -143,9 +143,17 @@
       font-size: $h2font;
       color: white;
     }
+    &__img {
+      grid-area: img;
+      max-width: 100%;
+      max-height: 100%;
+      width: 80dvh;
+      object-fit: contain;
+      justify-self: center;
+    }
   }
   .svg-white {
-    width: 60px;
+    width: 50px;
     cursor: pointer;
     justify-self: center;
     grid-area: close;
@@ -153,10 +161,9 @@
   img {
     max-width: 100%;
     max-height: 100%;
-    object-fit: contain;
-    object-position: center;
+    width: auto;
+    height: auto;
     border-radius: $border-radius;
-    grid-area: img;
   }
   .kname {
     grid-area: kname;

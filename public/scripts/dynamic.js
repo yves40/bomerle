@@ -87,13 +87,16 @@ $(document).ready(function () {
             knifeslideractive = false;
             closeSlider();
         }
-        if($('#zoomer').hasClass('zoomon')) {
-            $("#zoomer").empty().removeClass("zoomon").addClass('zoomoff').hide();
+        if($('#zoomer').hasClass('zoomer')) {
+            $("#zoomer").removeClass("zoomer").empty().hide();
         }
     });
     $(window).resize( () => {
         knifeslideractive = false;
         closeSlider();
+        if($('#zoomer').hasClass('zoomer')) {
+            $("#zoomer").removeClass("zoomer").empty().hide();
+        }
     })
     // Handle the user choice for the object request type
     $('.object').change( function() {

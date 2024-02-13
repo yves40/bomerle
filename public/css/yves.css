@@ -298,7 +298,7 @@
   animation-name: fadein;
   overflow: hidden;
   background-color: #1a1917; }
-  .zoomer__image {
+  .zoomer__box {
     display: grid;
     gap: .5rem;
     grid-template-columns: 100%;
@@ -309,21 +309,27 @@
     max-width: 1024px;
     align-items: center;
     justify-content: center; }
-    .zoomer__image h2 {
+    .zoomer__box h2 {
       font-size: "Gideon Roman", sans-serif;
       color: white; }
+    .zoomer__box__img {
+      grid-area: img;
+      max-width: 100%;
+      max-height: 100%;
+      width: 80dvh;
+      object-fit: contain;
+      justify-self: center; }
   .zoomer .svg-white {
-    width: 60px;
+    width: 50px;
     cursor: pointer;
     justify-self: center;
     grid-area: close; }
   .zoomer img {
     max-width: 100%;
     max-height: 100%;
-    object-fit: contain;
-    object-position: center;
-    border-radius: 5px;
-    grid-area: img; }
+    width: auto;
+    height: auto;
+    border-radius: 5px; }
   .zoomer .kname {
     grid-area: kname;
     justify-self: center; }

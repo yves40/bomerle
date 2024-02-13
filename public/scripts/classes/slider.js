@@ -257,12 +257,14 @@
       $("body").css("overflow", "hidden");
       $("#zoomer").css({ 'top': top, 'left': 0, 'z-index': 2000 } )
               .addClass("zoomer");
-      $("#zoomer").append($('<div>').attr('id', 'zoomer__image')
-              .addClass('zoomer__image')
-              .append($('<img>').attr('src', `${this.imagespath}${imagesrc}`))
-              );
-      $('.zoomer__image').append(closezoom);
-      $('.zoomer__image').append(kname);
+      $("#zoomer").append($('<div>').attr('id', 'zoomer__box')
+              .addClass('zoomer__box'));
+      const imgcontainer = $('<div></div>').addClass('zoomer__box__img');
+      $(imgcontainer).append($('<img>').attr('src', `${this.imagespath}${imagesrc}`));
+      // $(imgcontainer).append($('<h2></h2>').text('IMG').addClass('img'));
+      $('.zoomer__box').append(imgcontainer);
+      $('.zoomer__box').append(closezoom);
+      $('.zoomer__box').append(kname);
       $("#zoomer").show();
       // Hide a few things
       $(`#${this.indicators}`).hide();
@@ -271,7 +273,7 @@
       $(closezoom).click( (e) => { 
         e.preventDefault();
         this.zoomactive = false;
-        $("#zoomer").removeClass("zoomon").empty().hide();
+        $("#zoomer").removeClass("zoomer").empty().hide();
         $(`#${this.indicators}`).show();
         $(".slidercontrol").show();
         // $("body").css("overflow", "auto"); No longer reactivate scroll in requesting parent

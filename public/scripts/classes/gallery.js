@@ -91,7 +91,7 @@ export default class Gallery {
 
     $("#zoomer").css({ 'top': top, 'left': 0, 'z-index': 2000 } )
           .addClass("zoomon").removeClass('zoomoff');
-    $("#zoomer").append($('<div>').attr('id', 'zoomer__image')
+    $("#zoomer").append($('<div>').attr('id', 'zoomer_box')
           .addClass('zoomon__image')
           .append($('<img>').attr('src', `${$props.slideimageslocation()}/${imagesrc}`))
     );
