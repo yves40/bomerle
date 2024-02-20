@@ -193,6 +193,7 @@ $(document).ready(function () {
      *                      to be detailed 
      */
     function displayOneCategory(target) {
+        dataLayer.push({'CategorySelection': `${$(target).data('catname')} selected`});
         const categoryid = $(target).data('catid');
         const catname = $(target).data('catname');
         const catdesc = $(target).data('catdesc');
