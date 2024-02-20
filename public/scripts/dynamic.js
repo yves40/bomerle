@@ -11,6 +11,7 @@ import $props from './properties.js'
 import $labels from './translations/labels.js';
 
 $(document).ready(function () {
+    window.dataLayer = window.dataLayer || [];
     $props.load();
 
     const cardsmenu = $("#cardsmenu");
