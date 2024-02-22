@@ -11,7 +11,6 @@ import $props from './properties.js'
 import $labels from './translations/labels.js';
 
 $(document).ready(function () {
-    window.dataLayer = window.dataLayer || [];
     $props.load();
 
     const cardsmenu = $("#cardsmenu");
@@ -194,7 +193,6 @@ $(document).ready(function () {
      *                      to be detailed 
      */
     function displayOneCategory(target) {
-        dataLayer.push({'CategorySelection': `${$(target).data('catname')} selected`});
         const categoryid = $(target).data('catid');
         const catname = $(target).data('catname');
         const catdesc = $(target).data('catdesc');
