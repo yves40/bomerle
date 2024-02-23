@@ -33,10 +33,10 @@
       </div>
       <div class="nav-links">
         <ul>
-            <li><a href="#hero">{% trans %}app.public.menu.accueil{% endtrans %}</a></li>
-            <li id="categoriesmenu"><a href="#categorygallery">{% trans %}app.public.menu.categories{% endtrans %}</a></li>
-            <li id="newsmenu"><a href="#newsgallery">{% trans %}app.public.menu.galerie{% endtrans %}</a></li>
-            <li><a href="#contactrequest">{% trans %}app.public.menu.contact{% endtrans %}</a></li>
+            <li><a class="menuaction" href="#hero">{% trans %}app.public.menu.accueil{% endtrans %}</a></li>
+            <li id="categoriesmenu"><a class="menuaction" href="#categorygallery">{% trans %}app.public.menu.categories{% endtrans %}</a></li>
+            <li id="newsmenu"><a class="menuaction" href="#newsgallery">{% trans %}app.public.menu.galerie{% endtrans %}</a></li>
+            <li><a class="menuaction" href="#contactrequest">{% trans %}app.public.menu.contact{% endtrans %}</a></li>
             {% if devmode == 'dev' %}
               <ul>
                 <li><a href="{{ path('public.switchlang', { locale: 'en' }) }}" class="langselector" data-lang="en">en |</a></li>
