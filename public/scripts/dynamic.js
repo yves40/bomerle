@@ -269,7 +269,7 @@ $(document).ready(function () {
                                     .attr('data-catdesc', element.catdesc)
                                     .attr('data-catid', element.catid));
                    $(linkcontainer).append(relcard);
-                   $(relcard).on('mousedown', (event) => {
+                   $(relcard).on('click', (event) => {
                         event.stopImmediatePropagation();
                         let target = event.target;
                         // Check the image or the paragraph have not been clicked
