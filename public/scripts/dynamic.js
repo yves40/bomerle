@@ -171,7 +171,7 @@ $(document).ready(function () {
                 cat.catimage = `${$props.rootimageslocation()}/${$props.defaultcategoryimage()}`;
             }
             const img = $('<img>').attr('src',`${$props.categoryimageslocation()}/${cat.catimage}`)
-                .addClass('categoryaction')
+                .addClass('GA4__category')
                 .attr('data-catid', cat.catid)
                 .attr('data-catname', cat.catname)
                 .attr('data-catdesc', cat.catdesc);
