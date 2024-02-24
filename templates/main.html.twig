@@ -24,7 +24,7 @@
 <header>
     <nav class="topmenu">
       <div class="logozone">
-        <a class="menuaction" href="#hero"><img class="logo svg-white"  src="/images/svg/beaumerle.svg" alt="Logo Beau Merle"></a>
+        <a class="GA4__menuaction" href="#hero"><img class="logo svg-white"  src="/images/svg/beaumerle.svg" alt="Logo Beau Merle"></a>
         {% if devmode == 'dev' %}
           <div class="debug">
             {% trans %}app.debugversion{% endtrans %} : {% trans %}app.copyright{% endtrans %}
@@ -33,10 +33,10 @@
       </div>
       <div class="nav-links">
         <ul>
-            <li><a class="menuaction" href="#hero">{% trans %}app.public.menu.accueil{% endtrans %}</a></li>
-            <li id="categoriesmenu"><a class="menuaction" href="#categorygallery">{% trans %}app.public.menu.categories{% endtrans %}</a></li>
-            <li id="newsmenu"><a class="menuaction" href="#newsgallery">{% trans %}app.public.menu.galerie{% endtrans %}</a></li>
-            <li><a class="menuaction" href="#contactrequest">{% trans %}app.public.menu.contact{% endtrans %}</a></li>
+            <li><a class="GA4__menuaction" href="#hero">{% trans %}app.public.menu.accueil{% endtrans %}</a></li>
+            <li id="categoriesmenu"><a class="GA4__menuaction" href="#categorygallery">{% trans %}app.public.menu.categories{% endtrans %}</a></li>
+            <li id="newsmenu"><a class="GA4__menuaction" href="#newsgallery">{% trans %}app.public.menu.galerie{% endtrans %}</a></li>
+            <li><a class="GA4__menuaction" href="#contactrequest">{% trans %}app.public.menu.contact{% endtrans %}</a></li>
             {% if devmode == 'dev' %}
               <ul>
                 <li><a href="{{ path('public.switchlang', { locale: 'en' }) }}" class="langselector" data-lang="en">en |</a></li>
