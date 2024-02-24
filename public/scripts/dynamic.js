@@ -263,6 +263,7 @@ $(document).ready(function () {
                     let relcard = $('<div>').addClass('cards__links__details');
                     $(relcard).append($('<p>').text(element.catname))
                             .append($('<img>')
+                                    .addClass('GA4__category')
                                     .attr('src',  `${$props.categoryimageslocation()}/${element.catphoto}`)
                                     .attr('data-catname', element.catname)
                                     .attr('data-catdesc', element.catdesc)
