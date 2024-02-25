@@ -59,6 +59,10 @@
             }
           }
         }
+        // Set a knife ID for future zoom
+        $(img).attr('data-knifeid', data.knifeId)
+        .attr('data-knifename', data.knifeName);
+
         $(textimagecontainer).append(img).append(cardtext);
         // Pack the elements
         $(container).append(cardtitle);

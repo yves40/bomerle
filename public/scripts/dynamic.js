@@ -391,8 +391,6 @@ $(document).ready(function () {
                                     .addClass('cards__frame');
         let card  = new Card(thecard, response, cardindex);
         container.append(thecard);
-        // Set a knife ID for future zoom
-        $(thecard).find('img').attr('data-knifeid', response.knifeId);
     }
     /**
      * Request the active diaporamas from the DB
