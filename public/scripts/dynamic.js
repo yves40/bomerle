@@ -203,20 +203,19 @@ $(document).ready(function () {
             window.location = '#knivesgallery';
         }
         else {
-            $(knivesgallery).css('display', 'none')
-                        .empty().attr('data-catid', categoryid);
+            $(knivesgallery).css('display', 'none').empty().attr('data-catid', categoryid);
+            // The category page header
+            const gallerycontainer = $('<div>').addClass('cards');
+            const cardsheader = $('<div>').attr('id', 'cards__header').addClass('cards__header');
+            $(cardsheader).append($('<h2>').text(catname));
+            $(cardsheader).append($('<p>').text(catdesc));
+            $(gallerycontainer).append(cardsheader);
+            $(knivesgallery).append(gallerycontainer);
+            window.location = '#knivesgallery';
+            $(knivesgallery).attr('active','').removeAttr('inactive').css('display', 'block');
+            // The knives
+            displayKnives(gallerycontainer, categoryid);
         }
-        // The category page header
-        const gallerycontainer = $('<div>').addClass('cards');
-        const cardsheader = $('<div>').attr('id', 'cards__header').addClass('cards__header');
-        $(cardsheader).append($('<h2>').text(catname));
-        $(cardsheader).append($('<p>').text(catdesc));
-        $(gallerycontainer).append(cardsheader);
-        $(knivesgallery).append(gallerycontainer);
-        window.location = '#knivesgallery';
-        $(knivesgallery).attr('active','').removeAttr('inactive').css('display', 'block');
-        // The knives
-        displayKnives(gallerycontainer, categoryid);
     }
     /**
      * 
