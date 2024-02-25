@@ -924,7 +924,6 @@
 #categorygallery {
   scroll-margin: 100px;
   display: flex;
-  background-image: url(../../images/BastosBG5.webp);
   background-position: center;
   background-attachment: fixed;
   background-size: contain;
