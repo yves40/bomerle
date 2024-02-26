@@ -171,7 +171,6 @@ $(document).ready(function () {
                 cat.catimage = `${$props.rootimageslocation()}/${$props.defaultcategoryimage()}`;
             }
             const img = $('<img>').attr('src',`${$props.categoryimageslocation()}/${cat.catimage}`)
-                .addClass('GA4__category')
                 .attr('data-catid', cat.catid)
                 .attr('data-catname', cat.catname)
                 .attr('data-catdesc', cat.catdesc);
@@ -262,7 +261,6 @@ $(document).ready(function () {
                     let relcard = $('<div>').addClass('cards__links__details');
                     $(relcard).append($('<p>').text(element.catname))
                             .append($('<img>')
-                                    .addClass('GA4__category')
                                     .attr('src',  `${$props.categoryimageslocation()}/${element.catphoto}`)
                                     .attr('data-catname', element.catname)
                                     .attr('data-catdesc', element.catdesc)
