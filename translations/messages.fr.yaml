@@ -1,7 +1,7 @@
 # Have a look at config/packages/translation.yaml
 app:
   version: Administration Beaumerle  [Jan, 1.61]
-  debugversion: Feb 26 2024, 2.07
+  debugversion: Feb 26 2024, 2.08
   copyright: "&copy; Ratoon Dev Corporation, 2024"
   location: 63250 Chabreloche, Département du Puy-de-Dôme
   public:
@@ -41,7 +41,12 @@ contact:
   mailko: Votre demande ne peut être transmise actuellement
   shopaddress1: 335 Route de Saint-Thomas, Bras de Fer
   shopaddress2: 63250 Arconsat - France
-  nav: Retour
+  nav: Informations
+legal:
+  mentions: Mentions légales
+  cgv: CGV
+  rgpd: Politique de confidentialité
+  cookies: Gestion des cookies
 user:
   login: Connexion
   email: Email
