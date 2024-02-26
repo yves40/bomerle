@@ -202,20 +202,19 @@ $(document).ready(function () {
             window.location = '#knivesgallery';
         }
         else {
-            $(knivesgallery).css('display', 'none')
-                        .empty().attr('data-catid', categoryid);
+            $(knivesgallery).css('display', 'none').empty().attr('data-catid', categoryid);
+            // The category page header
+            const gallerycontainer = $('<div>').addClass('cards');
+            const cardsheader = $('<div>').attr('id', 'cards__header').addClass('cards__header');
+            $(cardsheader).append($('<h2>').text(catname));
+            $(cardsheader).append($('<p>').text(catdesc));
+            $(gallerycontainer).append(cardsheader);
+            $(knivesgallery).append(gallerycontainer);
+            window.location = '#knivesgallery';
+            $(knivesgallery).attr('active','').removeAttr('inactive').css('display', 'block');
+            // The knives
+            displayKnives(gallerycontainer, categoryid);
         }
-        // The category page header
-        const gallerycontainer = $('<div>').addClass('cards');
-        const cardsheader = $('<div>').attr('id', 'cards__header').addClass('cards__header');
-        $(cardsheader).append($('<h2>').text(catname));
-        $(cardsheader).append($('<p>').text(catdesc));
-        $(gallerycontainer).append(cardsheader);
-        $(knivesgallery).append(gallerycontainer);
-        window.location = '#knivesgallery';
-        $(knivesgallery).attr('active','').removeAttr('inactive').css('display', 'block');
-        // The knives
-        displayKnives(gallerycontainer, categoryid);
     }
     /**
      * 
@@ -267,7 +266,7 @@ $(document).ready(function () {
                                     .attr('data-catdesc', element.catdesc)
                                     .attr('data-catid', element.catid));
                    $(linkcontainer).append(relcard);
-                   $(relcard).on('mousedown', (event) => {
+                   $(relcard).on('click', (event) => {
                         event.stopImmediatePropagation();
                         let target = event.target;
                         // Check the image or the paragraph have not been clicked
@@ -390,8 +389,6 @@ $(document).ready(function () {
                                     .addClass('cards__frame');
         let card  = new Card(thecard, response, cardindex);
         container.append(thecard);
-        // Set a knife ID for future zoom
-        $(thecard).find('img').attr('data-knifeid', response.knifeId);
     }
     /**
      * Request the active diaporamas from the DB
