@@ -971,9 +971,26 @@
   background-attachment: fixed;
   background-size: contain;
   background-repeat: no-repeat;
-  color: white;
-  justify-content: center;
-  height: 100dvh; }
+  color: lightblue;
+  height: 100dvh;
+  font-family: "Gideon Roman", sans-serif; }
+  .legal a {
+    color: white; }
+  .legal h1, .legal h2 {
+    margin: 1rem; }
+  .legal li {
+    margin-top: .4rem; }
+  .legal__company {
+    margin: auto;
+    background-color: rgba(51, 51, 51, 0.6);
+    width: 90%;
+    padding: 2rem; }
+    @media screen and (min-width: 1024px) {
+      .legal__company {
+        width: 70%; } }
+    .legal__company p {
+      margin-top: 1rem;
+      line-height: 1.3rem; }
 
 * {
   margin: 0;

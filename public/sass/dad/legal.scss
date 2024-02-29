@@ -6,7 +6,29 @@
     background-attachment: fixed;
     background-size: contain;
     background-repeat: no-repeat; 
-    color: white; 
-    justify-content: center; 
+    color: lightblue; 
     height: 100dvh;
-}
+    font-family: $pfont;
+    a {
+        color: white;
+    }
+    h1, h2 {
+        margin: 1rem;
+    }
+    li {
+        margin-top: .4rem;
+    }
+    &__company {
+        margin: auto;
+        background-color: rgba(51, 51, 51, 0.6);
+        width: 90%;
+        @include for-desktop {
+            width: 70%
+        }
+        padding: 2rem;
+        p { 
+            margin-top: 1rem;
+            line-height: 1.3rem;
+        }
+    }
+} 
