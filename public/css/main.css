@@ -981,20 +981,20 @@
   .legal li {
     margin-top: .4rem;
     padding-left: 6rem; }
-  .legal b {
+  .legal b, .legal u {
     text-decoration: underline; }
-  .legal__company {
+  .legal__section {
     margin: auto;
     background-color: rgba(51, 51, 51, 0.6);
     width: 90%;
     padding: 2rem; }
     @media screen and (min-width: 1024px) {
-      .legal__company {
+      .legal__section {
         width: 70%; } }
-    .legal__company p {
+    .legal__section p {
       margin-top: 1rem;
       line-height: 1.3rem; }
-    .legal__company__list {
+    .legal__section__list {
       margin: 2rem 0 2rem 0; }
 
 * {

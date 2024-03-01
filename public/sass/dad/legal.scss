@@ -19,10 +19,10 @@
         margin-top: .4rem;
         padding-left: 6rem;
     }
-    b {
+    b, u {
         text-decoration: underline;
     }
-    &__company {
+    &__section {
         margin: auto;
         background-color: rgba(51, 51, 51, 0.6);
         width: 90%;
@@ -30,7 +30,7 @@
             width: 70%
         }
         padding: 2rem; 
-        p { 
+        p {  
             margin-top: 1rem;
             line-height: 1.3rem;
         }
