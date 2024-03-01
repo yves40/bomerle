@@ -17,6 +17,10 @@
     }
     li {
         margin-top: .4rem;
+        padding-left: 6rem;
+    }
+    b {
+        text-decoration: underline;
     }
     &__company {
         margin: auto;
@@ -25,10 +29,13 @@
         @include for-desktop {
             width: 70%
         }
-        padding: 2rem;
+        padding: 2rem; 
         p { 
             margin-top: 1rem;
             line-height: 1.3rem;
+        }
+        &__list {
+            margin: 2rem 0 2rem 0;
         }
     }
 } 
