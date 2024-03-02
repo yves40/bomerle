@@ -505,10 +505,9 @@ $(document).ready(function () {
             logger.debug(`For knife : ${choosedname} / ${choosedid}`);
         }
         let messagetext = $("#contact_text").val();
-        // Bypass the jquery interpreter which tries to tranform 
+        // Bypass the jquery interpreter which tries to transform 
         // any double ??
         messagetext = messagetext.replaceAll(/\?{1,}/gi, '?');
-        console.log(messagetext);
         let payload = {
             'email': $("#contact_email").val(),
             'infotype': $('#contact_object option:selected').val(),
@@ -530,8 +529,7 @@ $(document).ready(function () {
             async: true,
             success: function (response) {
                 clearTimeout(tid);
-                $('#feedback').text($labels.get('emailok'))
-                    .css("color",  "green");
+                JQalert($labels.get('emailok'), 'email');
                 $('#contact_email').val('');
                 $('#contact_text').val('');
                 $('#contact_object').val('info');
@@ -545,14 +543,35 @@ $(document).ready(function () {
             error: function (xhr) {
                 clearTimeout(tid);
                 logger.error(xhr);
-                $('#feedback').text($labels.get('emailko'))
-                    .css("color",  "red");
-                ;
+                JQalert($labels.get('emailko'), 'email');
                 setTimeout(() => {
                     $('#feedback').val('');
                 }, 5000);
             }
         });    
+    }
+    /**
+     * This code uses JQUERYUI lib. Must be installed with npm then referenced in main.html
+     * @param {*} message The message in the box
+     * @param {*} title     Box title
+     */
+    function JQalert( message, title ) {
+        if ( !title )
+            title = 'Alert';
+    
+        if ( !message )
+            message = 'No Message to Display.';
+    
+        $('<div></div>').html( message ).dialog({
+            title: title,
+            resizable: false,
+            modal: true,
+            buttons: {
+                'Ok': function()  {
+                    $( this ).dialog( 'close' );
+                }
+            }
+        });
     }
     /**
      * Sort knives ID

@@ -3,6 +3,7 @@
     "bootstrap": "^5.2.3",
     "fontawesome-free": "^1.0.4",
     "jquery": "^3.6.2",
+    "jqueryui": "^1.11.1",
     "node-sass": "^7.0.3",
     "startbootstrap-sb-admin": "^7.0.5"
   },
