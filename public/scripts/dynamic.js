@@ -504,14 +504,15 @@ $(document).ready(function () {
         if(choosedid != 0) {
             logger.debug(`For knife : ${choosedname} / ${choosedid}`);
         }
-        // Build the request object
-        if($('#contact_object option:selected').val() === 'infoknife') {
-            chooseid = $('#contact_reservation option:selected').val();
-        }
+        let messagetext = $("#contact_text").val();
+        // Bypass the jquery interpreter which tries to tranform 
+        // any double ??
+        messagetext = messagetext.replaceAll(/\?{1,}/gi, '?');
+        console.log(messagetext);
         let payload = {
             'email': $("#contact_email").val(),
             'infotype': $('#contact_object option:selected').val(),
-            'message': $("#contact_text").val(),
+            'message': messagetext,
             'knifeid': choosedid,
             'adminmail': $props.getAdministratorEmail()
         }
@@ -529,7 +530,7 @@ $(document).ready(function () {
             async: true,
             success: function (response) {
                 clearTimeout(tid);
-                $('#feedback').text(response.message)
+                $('#feedback').text($labels.get('emailok'))
                     .css("color",  "green");
                 $('#contact_email').val('');
                 $('#contact_text').val('');
@@ -544,7 +545,7 @@ $(document).ready(function () {
             error: function (xhr) {
                 clearTimeout(tid);
                 logger.error(xhr);
-                $('#feedback').text(response.message)
+                $('#feedback').text($labels.get('emailko'))
                     .css("color",  "red");
                 ;
                 setTimeout(() => {

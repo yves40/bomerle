@@ -2,10 +2,14 @@ import $props from '../properties.js'
 
 const $labels = ( () => {
     const labelsfr = {
-        interested: 'Vous aimerez aussi'
+        interested: 'Vous aimerez aussi',
+        emailok: 'Votre demande a été transmise',
+        emailko: 'Demande non transmise, réésayez plus tard'
     }
     const labelsen = {
-        interested: 'You may also like'
+        interested: 'You may also like',
+        emailok: 'email sent',
+        emailko: 'email not sent, try later'
     }
     
     return {
