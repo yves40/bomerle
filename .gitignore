@@ -25,3 +25,5 @@ public/package-lock.json
 ###> symfony/asset-mapper ###
 /public/assets/
 ###< symfony/asset-mapper ###
+### Temprarily exclude sitemap
+/public/sitemap*.xml
