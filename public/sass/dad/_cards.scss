@@ -72,6 +72,8 @@
   &__frame {
     background-color: rgba($lightDark, 0.4) ;
     height: auto;
+    display: flex;
+    flex-direction: column;
     @include for-desktop {
       width: 90%;
       padding: 1rem 0 0 0;
@@ -117,8 +119,7 @@
         display: block;
       }
       img {      
-        width: $imgsmall;
-        height: $imagesmall;
+        width: 50%;
         border: solid darkgrey 3px;
         border-radius: $border-radius; 
         @include for-desktop {

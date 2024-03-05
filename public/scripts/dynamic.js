@@ -348,7 +348,7 @@ $(document).ready(function () {
         // console.log(parseInt(scrollTop) , clientHeight, scrollHeight);
         $(slider).css({'top': window.scrollY,
             'left': 0, 'z-index': 1000})
-            .show();
+            .css('display', 'flex');
     }
     /**
      * Destroy the slider window

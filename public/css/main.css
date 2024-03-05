@@ -342,7 +342,9 @@
           line-height: 1.8rem; } }
   .cards__frame {
     background-color: rgba(51, 51, 51, 0.4);
-    height: auto; }
+    height: auto;
+    display: flex;
+    flex-direction: column; }
     @media screen and (min-width: 1024px) {
       .cards__frame {
         width: 90%;
@@ -378,8 +380,7 @@
         .cards__frame__txtimg {
           display: block; } }
       .cards__frame__txtimg img {
-        width: 140px;
-        height: 8rem;
+        width: 50%;
         border: solid darkgrey 3px;
         border-radius: 5px; }
         @media screen and (min-width: 1024px) {

@@ -264,7 +264,7 @@
       $('.zoomer__box').append(imgcontainer);
       $('.zoomer__box').append(closezoom);
       $('.zoomer__box').append(kname);
-      $("#zoomer").show();
+      $("#zoomer").css('display', 'flex')
       // Hide a few things
       $(`#${this.indicators}`).hide();
       $(".slidercontrol").hide();
