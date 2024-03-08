@@ -136,4 +136,27 @@ body {
       }
     }
   }
+  .flash {
+    position: absolute;
+    color: white;
+    border: red 2px solid;
+    height: 100dvh;
+    width: 100%;
+    backdrop-filter: blur(4px);
+    &__area {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      height: 50%;
+      width: 50%;
+      color: white;
+      border: green 2px solid;
+      background-color: $background;
+      animation: slideDown 1s linear;
+      img {
+        width: 30px;
+      }
+    }
+  }
 }

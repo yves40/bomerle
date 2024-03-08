@@ -7,6 +7,7 @@ import Slider from './classes/slider.js';
 import Gallery from './classes/gallery.js';
 import Card from './classes/card.js';
 import Timer from './classes/timer.js';
+import Flash from './classes/flash.js';
 import $props from './properties.js'
 import $labels from './translations/labels.js';
 
@@ -23,6 +24,12 @@ $(document).ready(function () {
     const menuHamburger = $(".menu-hamburger");
     const navLinks = $(".nav-links");
     const infoknife = $('.knife');
+    const flashzone = $('.flash');
+
+    $(flashzone).hide();
+    const todelete = new Flash('todelete', 'Pas de message particulier',
+                            'Ce message sera traité par nos \
+                            équipes dans les plus brefs délais');
     
     // Animations control
     const observer = new IntersectionObserver(entries => {
@@ -36,6 +43,7 @@ $(document).ready(function () {
         })
     });
     observer.observe(document.querySelector('#knivesgallery'));
+    observer.observe(document.querySelector('.flash'));
     
     // Initial state of UI
     $('#zoomer').hide();
@@ -529,7 +537,7 @@ $(document).ready(function () {
             async: true,
             success: function (response) {
                 clearTimeout(tid);
-                JQalert($labels.get('emailok'), 'email');
+                const flash = new Flash('email', $labels.get('emailok'));
                 $('#contact_email').val('');
                 $('#contact_text').val('');
                 $('#contact_object').val('info');
@@ -543,35 +551,12 @@ $(document).ready(function () {
             error: function (xhr) {
                 clearTimeout(tid);
                 logger.error(xhr);
-                JQalert($labels.get('emailko'), 'email');
+                const flash = new Flash('email', $labels.get('emailko'));
                 setTimeout(() => {
                     $('#feedback').val('');
                 }, 5000);
             }
         });    
-    }
-    /**
-     * This code uses JQUERYUI lib. Must be installed with npm then referenced in main.html
-     * @param {*} message The message in the box
-     * @param {*} title     Box title
-     */
-    function JQalert( message, title ) {
-        if ( !title )
-            title = 'Alert';
-    
-        if ( !message )
-            message = 'No Message to Display.';
-    
-        $('<div></div>').html( message ).dialog({
-            title: title,
-            resizable: false,
-            modal: true,
-            buttons: {
-                'Ok': function()  {
-                    $( this ).dialog( 'close' );
-                }
-            }
-        });
     }
     /**
      * Sort knives ID

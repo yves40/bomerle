@@ -1093,3 +1093,23 @@ body {
         body .hero-section .hero-title p a {
           color: white;
           font-size: 3rem; }
+  body .flash {
+    position: absolute;
+    color: white;
+    border: red 2px solid;
+    height: 100dvh;
+    width: 100%;
+    backdrop-filter: blur(4px); }
+    body .flash__area {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      height: 50%;
+      width: 50%;
+      color: white;
+      border: green 2px solid;
+      background-color: #1a1917;
+      animation: slideDown 1s linear; }
+      body .flash__area img {
+        width: 30px; }
