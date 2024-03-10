@@ -283,6 +283,30 @@ section {
   100% {
     transform: translate(50%, 50%); } }
 
+@keyframes flashUpClockwise {
+  0% {
+    transform: translateY(200%); }
+  20% {
+    transform: translateX(10%, 90%) rotate(100deg); }
+  50% {
+    transform: translateX(25%, 70%) rotate(180deg); }
+  75% {
+    transform: translate(40%, 50%) rotate(270deg); }
+  100% {
+    transform: translate(50%, 50%) rotate(360deg); } }
+
+@keyframes flashUpCounterClockwise {
+  0% {
+    transform: translateY(200%); }
+  20% {
+    transform: translateX(10%, 90%) rotate(-100deg); }
+  50% {
+    transform: translateX(25%, 70%) rotate(-180deg); }
+  75% {
+    transform: translate(40%, 50%) rotate(-270deg); }
+  100% {
+    transform: translate(50%, 50%) rotate(-360deg); } }
+
 @keyframes slideUp {
   100% {
     transform: translateY(-100%); }

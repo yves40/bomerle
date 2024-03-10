@@ -157,7 +157,11 @@ body {
       border: green 2px solid;
       border-radius: $border-radius;
       background-color: $background;
-      animation: flashUp .7s linear;
+      animation: flashUpCounterClockwise .7s linear;
+      p {
+        margin: 0 1rem;
+        line-height: 1.5rem;
+      }
       img {
         width: 30px;
       }

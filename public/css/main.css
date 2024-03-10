@@ -107,6 +107,30 @@
   100% {
     transform: translate(50%, 50%); } }
 
+@keyframes flashUpClockwise {
+  0% {
+    transform: translateY(200%); }
+  20% {
+    transform: translateX(10%, 90%) rotate(100deg); }
+  50% {
+    transform: translateX(25%, 70%) rotate(180deg); }
+  75% {
+    transform: translate(40%, 50%) rotate(270deg); }
+  100% {
+    transform: translate(50%, 50%) rotate(360deg); } }
+
+@keyframes flashUpCounterClockwise {
+  0% {
+    transform: translateY(200%); }
+  20% {
+    transform: translateX(10%, 90%) rotate(-100deg); }
+  50% {
+    transform: translateX(25%, 70%) rotate(-180deg); }
+  75% {
+    transform: translate(40%, 50%) rotate(-270deg); }
+  100% {
+    transform: translate(50%, 50%) rotate(-360deg); } }
+
 @keyframes slideUp {
   100% {
     transform: translateY(-100%); }
@@ -555,6 +579,30 @@
   100% {
     transform: translate(50%, 50%); } }
 
+@keyframes flashUpClockwise {
+  0% {
+    transform: translateY(200%); }
+  20% {
+    transform: translateX(10%, 90%) rotate(100deg); }
+  50% {
+    transform: translateX(25%, 70%) rotate(180deg); }
+  75% {
+    transform: translate(40%, 50%) rotate(270deg); }
+  100% {
+    transform: translate(50%, 50%) rotate(360deg); } }
+
+@keyframes flashUpCounterClockwise {
+  0% {
+    transform: translateY(200%); }
+  20% {
+    transform: translateX(10%, 90%) rotate(-100deg); }
+  50% {
+    transform: translateX(25%, 70%) rotate(-180deg); }
+  75% {
+    transform: translate(40%, 50%) rotate(-270deg); }
+  100% {
+    transform: translate(50%, 50%) rotate(-360deg); } }
+
 @keyframes slideUp {
   100% {
     transform: translateY(-100%); }
@@ -801,6 +849,30 @@
     transform: translate(40%, 50%); }
   100% {
     transform: translate(50%, 50%); } }
+
+@keyframes flashUpClockwise {
+  0% {
+    transform: translateY(200%); }
+  20% {
+    transform: translateX(10%, 90%) rotate(100deg); }
+  50% {
+    transform: translateX(25%, 70%) rotate(180deg); }
+  75% {
+    transform: translate(40%, 50%) rotate(270deg); }
+  100% {
+    transform: translate(50%, 50%) rotate(360deg); } }
+
+@keyframes flashUpCounterClockwise {
+  0% {
+    transform: translateY(200%); }
+  20% {
+    transform: translateX(10%, 90%) rotate(-100deg); }
+  50% {
+    transform: translateX(25%, 70%) rotate(-180deg); }
+  75% {
+    transform: translate(40%, 50%) rotate(-270deg); }
+  100% {
+    transform: translate(50%, 50%) rotate(-360deg); } }
 
 @keyframes slideUp {
   100% {
@@ -1174,7 +1246,10 @@ body {
       border: green 2px solid;
       border-radius: 5px;
       background-color: #1a1917;
-      animation: flashUp .7s linear; }
+      animation: flashUpCounterClockwise .7s linear; }
+      body .flash__area p {
+        margin: 0 1rem;
+        line-height: 1.5rem; }
       body .flash__area img {
         width: 30px; }
       @media screen and (min-width: 1024px) {
