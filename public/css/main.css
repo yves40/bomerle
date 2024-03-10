@@ -1243,7 +1243,6 @@ body {
       height: 50%;
       width: 50%;
       color: white;
-      border: green 2px solid;
       border-radius: 5px;
       background-color: #1a1917;
       animation: flashUpCounterClockwise .7s linear; }
@@ -1255,3 +1254,5 @@ body {
       @media screen and (min-width: 1024px) {
         body .flash__area img {
           width: 40px; } }
+    body .flash__informational {
+      border: green 2px solid; }

@@ -535,7 +535,9 @@ $(document).ready(function () {
             success: function (response) {
                 clearTimeout(tid);
                 $('#feedback').text('');
-                flash.flashSuccess('email', $labels.get('emailok'));
+                flash.flashSuccess('email', 
+                                    $labels.get('emailok'),
+                                    messagetext);
                 $('#contact_email').val('');
                 $('#contact_text').val('');
                 $('#contact_object').val('info');

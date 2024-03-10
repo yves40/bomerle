@@ -9,6 +9,9 @@
     constructor(modulename = 'Generic') {
       this.modulename = modulename;
       this.severity = 'Information'; // DIWEF model
+      this.version = 'Flash:1.04, mar 10 2024 ';
+      const devmode = $('.debug').length === 1 ? 'dev' : 'prod';
+      this.logger = new Logger(devmode);
     }
     /**
      * 
@@ -17,12 +20,7 @@
      * @param {*} info Additiona information
      */
     flashSuccess(title='alert', message='No message', info) {
-
-      this.version = 'Flash:1.04, mar 10 2024 ';
-      const devmode = $('.debug').length === 1 ? 'dev' : 'prod';
-      this.logger = new Logger(devmode);
       this.info = info == undefined ? '': info;
-
       const flashdiv = $('.flash');
       const flasharea = $('<div></div>').addClass('flash__area');
 
@@ -33,7 +31,7 @@
       $(flasharea).append($('<h2>').addClass('flash__area__title').text(title));
       $(flasharea).append($('<p></p>').addClass('flash__area__message').text(message));
       $(flasharea).append($('<p></p>').addClass('flash__area__info').text(this.info));
-
+      $(flasharea).addClass('flash__informational');
       $("body").css("overflow", "hidden");
       $(flasharea).append(closezoom);
       $(flashdiv).append(flasharea);
