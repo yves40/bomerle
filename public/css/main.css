@@ -1113,7 +1113,10 @@
     margin: 1rem; }
   .legal li {
     margin-top: .4rem;
-    padding-left: 6rem; }
+    padding-left: 3rem; }
+    @media screen and (min-width: 1024px) {
+      .legal li {
+        padding-left: 6rem; } }
   .legal b, .legal u {
     text-decoration: underline; }
   .legal__section {

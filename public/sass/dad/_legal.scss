@@ -17,7 +17,10 @@
     }
     li {
         margin-top: .4rem;
-        padding-left: 6rem;
+        padding-left: 3rem;
+        @include for-desktop {
+            padding-left: 6rem;
+        }
     }
     b, u {
         text-decoration: underline;
