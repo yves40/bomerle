@@ -88,8 +88,24 @@
 @keyframes flashDown {
   0% {
     transform: translateY(-100%); }
-  50% {
+  20% {
     transform: translateX(10%, -70%); }
+  50% {
+    transform: translateX(25%, -50%); }
+  75% {
+    transform: translate(40%, 50%); }
+  100% {
+    transform: translate(50%, 50%); } }
+
+@keyframes flashUp {
+  0% {
+    transform: translateY(200%); }
+  20% {
+    transform: translateX(10%, 90%); }
+  50% {
+    transform: translateX(25%, 70%); }
+  75% {
+    transform: translate(40%, 50%); }
   100% {
     transform: translate(50%, 50%); } }
 
@@ -181,8 +197,24 @@
 @keyframes flashDown {
   0% {
     transform: translateY(-100%); }
-  50% {
+  20% {
     transform: translateX(10%, -70%); }
+  50% {
+    transform: translateX(25%, -50%); }
+  75% {
+    transform: translate(40%, 50%); }
+  100% {
+    transform: translate(50%, 50%); } }
+
+@keyframes flashUp {
+  0% {
+    transform: translateY(200%); }
+  20% {
+    transform: translateX(10%, 90%); }
+  50% {
+    transform: translateX(25%, 70%); }
+  75% {
+    transform: translate(40%, 50%); }
   100% {
     transform: translate(50%, 50%); } }
 
@@ -412,8 +444,24 @@
 @keyframes flashDown {
   0% {
     transform: translateY(-100%); }
-  50% {
+  20% {
     transform: translateX(10%, -70%); }
+  50% {
+    transform: translateX(25%, -50%); }
+  75% {
+    transform: translate(40%, 50%); }
+  100% {
+    transform: translate(50%, 50%); } }
+
+@keyframes flashUp {
+  0% {
+    transform: translateY(200%); }
+  20% {
+    transform: translateX(10%, 90%); }
+  50% {
+    transform: translateX(25%, 70%); }
+  75% {
+    transform: translate(40%, 50%); }
   100% {
     transform: translate(50%, 50%); } }
 
@@ -569,8 +617,24 @@
 @keyframes flashDown {
   0% {
     transform: translateY(-100%); }
-  50% {
+  20% {
     transform: translateX(10%, -70%); }
+  50% {
+    transform: translateX(25%, -50%); }
+  75% {
+    transform: translate(40%, 50%); }
+  100% {
+    transform: translate(50%, 50%); } }
+
+@keyframes flashUp {
+  0% {
+    transform: translateY(200%); }
+  20% {
+    transform: translateX(10%, 90%); }
+  50% {
+    transform: translateX(25%, 70%); }
+  75% {
+    transform: translate(40%, 50%); }
   100% {
     transform: translate(50%, 50%); } }
 

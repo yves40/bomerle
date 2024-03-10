@@ -139,15 +139,18 @@ $bg-gradient-green: radial-gradient(circle, rgba(2,0,36,1) 0%, rgba(9,121,54,1) 
 	100% {transform: translateY(0%);}		
 }
 @keyframes flashDown {
-	0% { 
-    transform: translateY(-100%);
-  }
-	50%{
-    transform: translateX(10%, -70%);
-  }
-	100% {
-    transform: translate(50%, 50%);
-  }		
+	0% { transform: translateY(-100%);}
+	20%{transform: translateX(10%, -70%);}
+	50%{transform: translateX(25%, -50%);}
+	75% {transform: translate(40%, 50%);}		
+	100% {transform: translate(50%, 50%);}		
+}
+@keyframes flashUp {
+	0% { transform: translateY(200%);}
+	20%{transform: translateX(10%, 90%);}
+	50%{transform: translateX(25%, 70%);}
+	75% {transform: translate(40%, 50%);}		
+	100% {transform: translate(50%, 50%);}		
 }
 
 @keyframes slideUp {

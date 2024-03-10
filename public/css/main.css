@@ -86,8 +86,24 @@
 @keyframes flashDown {
   0% {
     transform: translateY(-100%); }
-  50% {
+  20% {
     transform: translateX(10%, -70%); }
+  50% {
+    transform: translateX(25%, -50%); }
+  75% {
+    transform: translate(40%, 50%); }
+  100% {
+    transform: translate(50%, 50%); } }
+
+@keyframes flashUp {
+  0% {
+    transform: translateY(200%); }
+  20% {
+    transform: translateX(10%, 90%); }
+  50% {
+    transform: translateX(25%, 70%); }
+  75% {
+    transform: translate(40%, 50%); }
   100% {
     transform: translate(50%, 50%); } }
 
@@ -518,8 +534,24 @@
 @keyframes flashDown {
   0% {
     transform: translateY(-100%); }
-  50% {
+  20% {
     transform: translateX(10%, -70%); }
+  50% {
+    transform: translateX(25%, -50%); }
+  75% {
+    transform: translate(40%, 50%); }
+  100% {
+    transform: translate(50%, 50%); } }
+
+@keyframes flashUp {
+  0% {
+    transform: translateY(200%); }
+  20% {
+    transform: translateX(10%, 90%); }
+  50% {
+    transform: translateX(25%, 70%); }
+  75% {
+    transform: translate(40%, 50%); }
   100% {
     transform: translate(50%, 50%); } }
 
@@ -749,8 +781,24 @@
 @keyframes flashDown {
   0% {
     transform: translateY(-100%); }
-  50% {
+  20% {
     transform: translateX(10%, -70%); }
+  50% {
+    transform: translateX(25%, -50%); }
+  75% {
+    transform: translate(40%, 50%); }
+  100% {
+    transform: translate(50%, 50%); } }
+
+@keyframes flashUp {
+  0% {
+    transform: translateY(200%); }
+  20% {
+    transform: translateX(10%, 90%); }
+  50% {
+    transform: translateX(25%, 70%); }
+  75% {
+    transform: translate(40%, 50%); }
   100% {
     transform: translate(50%, 50%); } }
 
@@ -1120,13 +1168,15 @@ body {
       transform: translate(50%, 50%);
       align-items: center;
       justify-content: center;
-      flex-direction: column;
       height: 50%;
       width: 50%;
       color: white;
       border: green 2px solid;
       border-radius: 5px;
       background-color: #1a1917;
-      animation: flashDown .8s linear; }
+      animation: flashUp .7s linear; }
       body .flash__area img {
         width: 30px; }
+      @media screen and (min-width: 1024px) {
+        body .flash__area img {
+          width: 40px; } }
