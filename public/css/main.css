@@ -77,15 +77,19 @@
   0% {
     transform: translateY(-100%); }
   50% {
-    transform: translateY(8%); }
+    transform: translateY(-50%); }
   65% {
-    transform: translateY(-4%); }
-  80% {
-    transform: translateY(4%); }
-  95% {
-    transform: translateY(-2%); }
+    transform: translateY(-20%); }
   100% {
     transform: translateY(0%); } }
+
+@keyframes flashDown {
+  0% {
+    transform: translateY(-100%); }
+  50% {
+    transform: translateX(10%, -70%); }
+  100% {
+    transform: translate(50%, 50%); } }
 
 @keyframes slideUp {
   100% {
@@ -505,15 +509,19 @@
   0% {
     transform: translateY(-100%); }
   50% {
-    transform: translateY(8%); }
+    transform: translateY(-50%); }
   65% {
-    transform: translateY(-4%); }
-  80% {
-    transform: translateY(4%); }
-  95% {
-    transform: translateY(-2%); }
+    transform: translateY(-20%); }
   100% {
     transform: translateY(0%); } }
+
+@keyframes flashDown {
+  0% {
+    transform: translateY(-100%); }
+  50% {
+    transform: translateX(10%, -70%); }
+  100% {
+    transform: translate(50%, 50%); } }
 
 @keyframes slideUp {
   100% {
@@ -732,15 +740,19 @@
   0% {
     transform: translateY(-100%); }
   50% {
-    transform: translateY(8%); }
+    transform: translateY(-50%); }
   65% {
-    transform: translateY(-4%); }
-  80% {
-    transform: translateY(4%); }
-  95% {
-    transform: translateY(-2%); }
+    transform: translateY(-20%); }
   100% {
     transform: translateY(0%); } }
+
+@keyframes flashDown {
+  0% {
+    transform: translateY(-100%); }
+  50% {
+    transform: translateX(10%, -70%); }
+  100% {
+    transform: translate(50%, 50%); } }
 
 @keyframes slideUp {
   100% {
@@ -1102,6 +1114,10 @@ body {
     backdrop-filter: blur(4px); }
     body .flash__area {
       display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+      position: relative;
+      transform: translate(50%, 50%);
       align-items: center;
       justify-content: center;
       flex-direction: column;
@@ -1109,7 +1125,8 @@ body {
       width: 50%;
       color: white;
       border: green 2px solid;
+      border-radius: 5px;
       background-color: #1a1917;
-      animation: slideDown 1s linear; }
+      animation: flashDown .8s linear; }
       body .flash__area img {
         width: 30px; }

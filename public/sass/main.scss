@@ -145,6 +145,10 @@ body {
     backdrop-filter: blur(4px);
     &__area {
       display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+      position: relative;
+      transform: translate(50%, 50%);
       align-items: center;
       justify-content: center;
       flex-direction: column;
@@ -152,8 +156,9 @@ body {
       width: 50%;
       color: white;
       border: green 2px solid;
+      border-radius: $border-radius;
       background-color: $background;
-      animation: slideDown 1s linear;
+      animation: flashDown .8s linear;
       img {
         width: 30px;
       }

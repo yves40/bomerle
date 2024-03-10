@@ -133,24 +133,21 @@ $bg-gradient-green: radial-gradient(circle, rgba(2,0,36,1) 0%, rgba(9,121,54,1) 
   100% { opacity: 0;}
 }
 @keyframes slideDown {
-	0% {
-		transform: translateY(-100%);
-	}
+	0% { transform: translateY(-100%);}
+	50%{transform: translateY(-50%);}
+	65%{transform: translateY(-20%);}
+	100% {transform: translateY(0%);}		
+}
+@keyframes flashDown {
+	0% { 
+    transform: translateY(-100%);
+  }
 	50%{
-		transform: translateY(8%);
-	}
-	65%{
-		transform: translateY(-4%);
-	}
-	80%{
-		transform: translateY(4%);
-	}
-	95%{
-		transform: translateY(-2%);
-	}			
+    transform: translateX(10%, -70%);
+  }
 	100% {
-		transform: translateY(0%);
-	}		
+    transform: translate(50%, 50%);
+  }		
 }
 
 @keyframes slideUp {
