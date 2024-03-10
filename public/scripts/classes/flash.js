@@ -17,13 +17,23 @@
      * 
      * @param {*} title The message title
      * @param {*} message The short message 
-     * @param {*} info Additiona information
+     * @param {*} info Additional information
      */
     flashSuccess(title='alert', message='No message', info) {
+      this.flash(title, message, info, 'informational');
+    }
+    /**
+     * 
+     * @param {*} title The message title
+     * @param {*} message The short message 
+     * @param {*} info Additional information
+     * @param {*} severity The message severity, according to DIWEF
+     */
+    flash(title='alert', message='No message', info, severity = 'informational') {
       this.info = info == undefined ? '': info;
       const flashdiv = $('.flash');
       const flasharea = $('<div></div>').addClass('flash__area');
-
+  
       $(flashdiv).css({ 'top': window.scrollY, 'left': 0, 'z-index': 2000 } );
       const closezoom = $("<img>")
             .attr('src',  `${$props.svgimageslocation()}/close-circle-outline.svg`)
@@ -31,7 +41,7 @@
       $(flasharea).append($('<h2>').addClass('flash__area__title').text(title));
       $(flasharea).append($('<p></p>').addClass('flash__area__message').text(message));
       $(flasharea).append($('<p></p>').addClass('flash__area__info').text(this.info));
-      $(flasharea).addClass('flash__informational');
+      $(flasharea).addClass(`flash__${severity}`);
       $("body").css("overflow", "hidden");
       $(flasharea).append(closezoom);
       $(flashdiv).append(flasharea);
@@ -42,4 +52,5 @@
         $("body").css("overflow", "auto");
       });
     }
+
 }
