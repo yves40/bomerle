@@ -27,10 +27,6 @@ $(document).ready(function () {
     const flashzone = $('.flash');
 
     $(flashzone).hide();
-    const todelete = new Flash('todelete', 'Pas de message particulier',
-                            'Ce message sera traité par nos \
-                            équipes dans les plus brefs délais');
-    
     // Animations control
     const observer = new IntersectionObserver(entries => {
         entries.forEach(entry => {

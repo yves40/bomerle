@@ -14,18 +14,14 @@
      */
     constructor(title='alert', message='No message', info) {
     // Init
-      this.version = 'Flash:1.02, mar 08 2024 ';
+      this.version = 'Flash:1.03, mar 10 2024 ';
       const devmode = $('.debug').length === 1 ? 'dev' : 'prod';
       this.logger = new Logger(devmode);
       this.info = info == undefined ? '': info;
 
-      this.windowx = $(window).width();
-      this.windowy = $(window).height();
-
       const flashdiv = $('.flash');
-      const flasharea = $('.flash__area');
+      const flasharea = $('<div></div>').addClass('flash__area');
 
-      const checkPosition = this.getBoundingClientRect(flashdiv);
       $(flashdiv).css({ 'top': window.scrollY, 'left': 0, 'z-index': 2000 } );
       const closezoom = $("<img>")
             .attr('src',  `${$props.svgimageslocation()}/close-circle-outline.svg`)
@@ -36,34 +32,13 @@
 
       $("body").css("overflow", "hidden");
       $(flasharea).append(closezoom);
+      $(flashdiv).append(flasharea);
       $(flashdiv).show();
       $(closezoom).click( (e) => { 
         e.preventDefault();
-        $(flasharea).find('.flash__area__title').empty()
-        $(flasharea).find('.flash__area__message').empty();
-        $(flasharea).find('.flash__area__info').empty();
-        $(flasharea).find('.svg-white').remove();
-        $(flashdiv).hide();
+        $(flashdiv).hide().empty();
         $("body").css("overflow", "auto");
       });
 
-  }
-
-  // Utilities
-  getBoundingClientRect(el) {
-    let offset = el.offset();
-    let width = el.width();
-    let height = el.height();
-    let windowHeight = $(window).height();
-    let scrollTop = $(window).scrollTop();
-
-    return {
-      top: offset.top,
-      left: offset.left,
-      bottom: offset.top + height,
-      right: offset.left + width,
-      width: width,
-      height: height
-    };
   }
 }
