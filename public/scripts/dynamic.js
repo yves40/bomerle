@@ -25,6 +25,7 @@ $(document).ready(function () {
     const navLinks = $(".nav-links");
     const infoknife = $('.knife');
     const flashzone = $('.flash');
+    const flash = new Flash();
 
     $(flashzone).hide();
     // Animations control
@@ -533,24 +534,20 @@ $(document).ready(function () {
             async: true,
             success: function (response) {
                 clearTimeout(tid);
-                const flash = new Flash('email', $labels.get('emailok'));
+                $('#feedback').text('');
+                flash.flashSuccess('email', $labels.get('emailok'));
                 $('#contact_email').val('');
                 $('#contact_text').val('');
                 $('#contact_object').val('info');
                 $(infoknife).hide();
                 $("#contactrequest").addClass('inactive').removeClass('active')
                     .prop('disabled', true);
-                setTimeout(() => {
-                    $('#feedback').text('');
-                }, 5000);
             },
             error: function (xhr) {
                 clearTimeout(tid);
+                $('#feedback').text('');
                 logger.error(xhr);
-                const flash = new Flash('email', $labels.get('emailko'));
-                setTimeout(() => {
-                    $('#feedback').val('');
-                }, 5000);
+                flash.flashSuccess('email', $labels.get('emailko'));
             }
         });    
     }

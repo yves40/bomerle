@@ -6,15 +6,19 @@
   import $props  from '../properties.js';
   export default class Flash {
 
+    constructor(modulename = 'Generic') {
+      this.modulename = modulename;
+      this.severity = 'Information'; // DIWEF model
+    }
     /**
      * 
      * @param {*} title The message title
      * @param {*} message The short message 
      * @param {*} info Additiona information
      */
-    constructor(title='alert', message='No message', info) {
-    // Init
-      this.version = 'Flash:1.03, mar 10 2024 ';
+    flashSuccess(title='alert', message='No message', info) {
+
+      this.version = 'Flash:1.04, mar 10 2024 ';
       const devmode = $('.debug').length === 1 ? 'dev' : 'prod';
       this.logger = new Logger(devmode);
       this.info = info == undefined ? '': info;
@@ -39,6 +43,5 @@
         $(flashdiv).hide().empty();
         $("body").css("overflow", "auto");
       });
-
-  }
+    }
 }
