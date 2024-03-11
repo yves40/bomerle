@@ -22,6 +22,12 @@
     flashSuccess(title='alert', message='No message', info) {
       this.flash(title, message, info, 'informational');
     }
+    flashError(title='alert', message='No message', info) {
+      this.flash(title, message, info, 'warning');
+    }
+    flashWarning(title='alert', message='No message', info) {
+      this.flash(title, message, info, 'error');
+    }
     /**
      * 
      * @param {*} title The message title

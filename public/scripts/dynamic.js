@@ -537,7 +537,7 @@ $(document).ready(function () {
                 $('#feedback').text('');
                 flash.flashSuccess('email', 
                                     $labels.get('emailok'),
-                                    messagetext);
+                                    $labels.get('emailadvice'));
                 $('#contact_email').val('');
                 $('#contact_text').val('');
                 $('#contact_object').val('info');
@@ -549,7 +549,7 @@ $(document).ready(function () {
                 clearTimeout(tid);
                 $('#feedback').text('');
                 logger.error(xhr);
-                flash.flashSuccess('email', $labels.get('emailko'));
+                flash.flashError('email', $labels.get('emailko'));
             }
         });    
     }

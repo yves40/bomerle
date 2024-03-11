@@ -1231,7 +1231,6 @@ body {
   body .flash {
     position: absolute;
     color: white;
-    border: red 2px solid;
     height: 100dvh;
     width: 100%;
     backdrop-filter: blur(4px); }
@@ -1253,9 +1252,14 @@ body {
         margin: 0 1rem;
         line-height: 1.5rem; }
       body .flash__area img {
-        width: 30px; }
+        width: 30px;
+        cursor: pointer; }
       @media screen and (min-width: 1024px) {
         body .flash__area img {
           width: 40px; } }
     body .flash__informational {
       border: green 2px solid; }
+    body .flash__error {
+      border: red 2px solid; }
+    body .flash__warning {
+      border: orange solid; }
