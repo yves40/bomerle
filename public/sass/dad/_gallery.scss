@@ -6,36 +6,39 @@
 }
 
 #newsgallery {
-    scroll-margin: $menu-height;
-    padding: 3rem 0;
-    display: flex;  
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    width: 100%;
+    padding-top: 1rem;
     background-image: url(../images/BastosBG3.webp);
     background-position: center;
     background-attachment: fixed;
     background-size: cover;
-    color: white;
+    @include for-desktop {
+        background-size: 70%;
+        background-repeat: no-repeat;
+    }
     .galleryzone {
+        color: white;
         padding: 0 2em 3em 2em;
         @include for-desktop { 
-            padding: 0 5em 3em 5em;
+            padding: 0 5em 3em 5em; 
             width: 100%; 
             max-width: $responsive-max-width;
         }
+        > h2 {
+            font-family: $h2font;
+        }        
         p{
-            font-family: $herop;
+            font-family: $pfont;
             background-color: rgba(34, 7, 7, .3);
             border-radius: $border-radius;
             font-size: 1rem;
-            line-height: 1.4rem;
+            line-height: 1.3rem;
             text-align: justify;
             margin: 1rem auto;
             padding: 1em;
             @include for-desktop{
-                font-size: 1.5rem;
-                line-height: 2rem;
+                font-size: 1.3rem;
+                line-height: 1.3rem;
             }
         }
         .gallery{ 

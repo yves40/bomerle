@@ -28,18 +28,32 @@ $(document).ready(function () {
     const flash = new Flash();
 
     $(flashzone).hide();
-    // Animations control
+    // Single page zones management
     const observer = new IntersectionObserver(entries => {
         entries.forEach(entry => {
-            if(entry.isIntersecting) {
-                $(knivesgallery).attr('active','').removeAttr('inactive');
+            console.log(entry.target);
+            switch($(entry.target).attr('id')) {
+                case 'knivesgallery': 
+                    if(entry.isIntersecting) {
+                        $(knivesgallery).attr('active','').removeAttr('inactive');
+                    }
+                    else{
+                        $(knivesgallery).attr('inactive','').removeAttr('active');
+                    }   
+                    break;
+                case 'newsgallery':
+                    if(entry.isIntersecting) {
+                        $(newsgallery).attr('active','').removeAttr('inactive');
+                    }
+                    else{
+                        $(newsgallery).attr('inactive','').removeAttr('active');
+                    }   
+                    break;
             }
-            else{
-                $(knivesgallery).attr('inactive','').removeAttr('active');
-            }   
         })
     });
     observer.observe(document.querySelector('#knivesgallery'));
+    observer.observe(document.querySelector('#newsgallery'));
     observer.observe(document.querySelector('.flash'));
     
     // Initial state of UI
