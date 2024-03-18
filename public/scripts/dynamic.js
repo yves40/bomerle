@@ -410,7 +410,7 @@ $(document).ready(function () {
         container.append(thecard);
     }
     /**
-     * Request the active diaporamas from the DB
+     * Request the active news from the DB
      */
     function getActiveDiaporamas() {
         let ttx = new Timer();
@@ -422,7 +422,7 @@ $(document).ready(function () {
             async: true,
             success: function (response) {
                 ttx.stopTimer();
-                logger.info(`Loaded ${response.activecount} diaporamas in ${ttx.getElapsedString()}`);
+                logger.info(`Loaded ${response.activecount} news in ${ttx.getElapsedString()}`);
                 if(response.activecount != 0) {
                     $(newsmenu).show();
                     loadDiapoSections(response.activediaporamas);                 
@@ -434,8 +434,8 @@ $(document).ready(function () {
         });    
     }
     /**
-     * Find and load active diaporamas in the page
-     * @param {*} allactive The diaporamas list to be displayed
+     * Find and load active news in the page
+     * @param {*} allactive The news list to be displayed
      */
     function loadDiapoSections(allactive) {
         allactive.forEach(diapo => {

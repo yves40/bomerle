@@ -1,7 +1,7 @@
 # Have a look at config/packages/translation.yaml
 app:
-  version: Administration Beaumerle  [Feb, 1.62]
-  debugversion: Mar 11 2024, 2.15
+  version: Administration Beaumerle  [Mar, 1.63]
+  debugversion: Mar 18 2024, 2.16
   copyright: "&copy; Ratoon Dev Corporation, 2024"
   location: 63250 Chabreloche, Département du Puy-de-Dôme
   public:
@@ -10,7 +10,7 @@ app:
       test: Test
       atelier: L'atelier
       categories: Catégories
-      galerie: La galerie
+      galerie: Les news
       catalog: Couteaux
       contact: Contact
       en: Anglais
@@ -211,9 +211,9 @@ admin:
     eventaction: Action
     eventmessage: Détails
   manageslides:
-    title: Gestion des diaporamas
+    title: Gestion des news
     imagestab: Sélectionnez vos photos
-    listheader: Liste des diaporamas
+    listheader: Liste des news
     list: Lister
     add: Créer
     edit: Editer
@@ -254,7 +254,7 @@ logs:
   error: Error
   fatal: Fatal
 diapos:
-  menuheader: Les diaporamas
+  menuheader: Les news
   list: Lister
   add: Créer
   manage: Gérer
