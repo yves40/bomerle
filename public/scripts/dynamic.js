@@ -438,9 +438,17 @@ $(document).ready(function () {
      * @param {*} allactive The news list to be displayed
      */
     function loadDiapoSections(allactive) {
+        let newsID = 0;
         allactive.forEach(diapo => {
-            let diaposection = $('<div>').attr('name', diapo.name);
-            $(newsgallery).append(diaposection);
+            let diaposection = $('<div>').attr('name', diapo.name)
+                                .css('display', 'flex')
+                                .css('align-items', 'center')
+                                .css('justify-content', 'center')
+                                .addClass('newsdetails')
+                                .attr('id', `news-${newsID}`);
+                                $(newsgallery).append(diaposection);
+            observer.observe(document.querySelector(`#news-${newsID}`));
+            ++newsID;
             const payload = {
                 "diaponame" :  diapo.name,
             }

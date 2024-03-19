@@ -218,7 +218,7 @@ admin:
     list: List
     add: Add
     edit: Edit
-    name: Name ( ID )
+    name: News title
     namehelp: "No space, short. Ex: PAGEONE"
     description: Description
     daterange: Date range ? 

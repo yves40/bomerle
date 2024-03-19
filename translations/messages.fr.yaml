@@ -217,7 +217,7 @@ admin:
     list: Lister
     add: Créer
     edit: Editer
-    name: Nom ( ID )
+    name: Titre de la news
     namehelp: "Pas d'espace, court. Ex: PAGEONE"
     description: Description
     daterange: Plage de dates ? 

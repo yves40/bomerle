@@ -6,6 +6,7 @@
     jun 19 2023     Get slideshow description text
     jun 21 2023     Gallery zoom for the 2nd time !!!
     Aug 29 2023     Reorg into single css file
+    Mar 18 2024     Change on container name
 
 ----------------------------------------------------------------------------*/
 
@@ -15,10 +16,10 @@ export default class Gallery {
 
     constructor(container, description) {
         // Init
-        this.version = 'Gallery:1.04, Aug 29 2023 ';
+        this.version = 'Gallery:1.05, Mar 18 2024 ';
         this.container = container;
         this.description = description;
-        this.containername = $(container).attr('name');
+        this.containername = $(container).attr('name').replaceAll(' ', '-');
         this.gallery = `${this.containername}-zone`;
         this.galleryarea = `${this.containername}-area`;
         this.windowx = $(window).width();
@@ -30,7 +31,7 @@ export default class Gallery {
         // Initialize handlers
         $(window).resize ( () =>  {
             if(this.zoomactive) {
-            this.fullScreen(this.currentzoom);
+              this.fullScreen(this.currentzoom);
             }
             this.windowx = $(window).width();
             this.windowy = $(window).height();
@@ -39,11 +40,11 @@ export default class Gallery {
     // ------------------------------------------------------------------------------------------------
     buildGalleryFrame(container) {
         const galleryzone = $("<div>").addClass('galleryzone');
+        const h2 = $('<h2></h2>').text($(container).attr('name'));
+        $(galleryzone).append(h2);
         if(this.description.length !== 0) {
-          const gallerytext = $("<div>");
           const text = $('<p>').text(this.description);
-          $(gallerytext).append(text);
-          $(galleryzone).append(gallerytext);
+          $(galleryzone).append(text);
         }
         const gallery = $("<ul>").attr('id', this.gallery).addClass('gallery')
         $(galleryzone).append(gallery);

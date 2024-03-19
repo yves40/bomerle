@@ -547,6 +547,7 @@
   box-sizing: border-box; }
 
 #newsgallery {
+  scroll-margin: 100px;
   width: 100%;
   padding-top: 1rem;
   background-image: url(../images/BastosBG3.webp);

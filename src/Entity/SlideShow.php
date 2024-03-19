@@ -20,7 +20,9 @@ class SlideShow
 
     #[ORM\Column(length: 64)]
     #[Assert\NotBlank(message: "generic.notempty")]
-    #[Assert\Regex( '/^(\w|\w-\w)+$/', message: 'admin.manageslides.singleword')]   
+    // Change this rule, the ID is now used as a descriptive string
+    // i.e ; February Knives
+    // #[Assert\Regex( '/^(\w|\w-\w)+$/', message: 'admin.manageslides.singleword')]   
     private ?string $name = null;
 
     #[ORM\Column]
