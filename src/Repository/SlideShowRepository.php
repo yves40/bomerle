@@ -46,7 +46,7 @@ class SlideShowRepository extends ServiceEntityRepository
         ->andWhere('s.active = 1')
         ->setParameter('val', $now)
         ->andWhere('s.daterange = 0 or :val between s.datein and s.dateout')
-        ->orderBy('s.name')
+        ->orderBy('s.datein',  'desc')
         ->getQuery()
         ->getResult();
     }   

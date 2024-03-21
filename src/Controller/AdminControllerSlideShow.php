@@ -49,7 +49,7 @@ class AdminControllerSlideShow extends AbstractController
          * 
         */
         $repo = $entityManager->getRepository(SlideShow::class);
-        $allslides = $repo->findBy([], [ 'name' => 'ASC', 'datein' => 'ASC']);
+        $allslides = $repo->findBy([], [ 'name' => 'ASC', 'datein' => 'DESC']);
         $slide = new SlideShow();
         $form = $this->createForm(SlideShowType::class, $slide);
         return $this->render('admin/slides.html.twig', [
@@ -87,11 +87,10 @@ class AdminControllerSlideShow extends AbstractController
                         $slideshow->addSlide($image);
                     }    
                     // Manage other properties
-                    $lowername = strtolower($slideshow->getName());
-                    $slideshow->setName($lowername);
+                    $slideshow->setName($slideshow->getName());
                     $entityManager->persist($slideshow);
                     $entityManager->flush();
-                    $this->addFlash('success', $lowername.': '.$translator->trans('admin.manageslides.created'));
+                    $this->addFlash('success', $slideshow->getName().': '.$translator->trans('admin.manageslides.created'));
                     $this->dblog->info($slideshow->getName().' created',
                         'SlideShow CREATION',
                         self::MODULE,
@@ -149,7 +148,7 @@ class AdminControllerSlideShow extends AbstractController
                 }
             }
         }
-        $allshow = $entityManager->getRepository(SlideShow::class)->findBy([], [ 'name' => 'ASC', 'datein' => 'ASC']);
+        $allshow = $entityManager->getRepository(SlideShow::class)->findBy([], [ 'name' => 'ASC', 'datein' => 'DESC']);
         return $this->render('admin/slide.html.twig', [
             'form' => $form->createView(),
             'id' => $id,
@@ -189,7 +188,7 @@ class AdminControllerSlideShow extends AbstractController
         );
         //  Back to the slideshow list
         $slideshow = new SlideShow();
-        $allshow = $repo->findBy([], [ 'datein' => 'ASC']);
+        $allshow = $repo->findBy([], [ 'datein' => 'DESC']);
         $form = $this->createForm(SlideShowType::class, $slideshow);
         return $this->render('admin/slides.html.twig', [
             'form' => $form->createView(),

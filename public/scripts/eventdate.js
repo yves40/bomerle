@@ -1,3 +1,4 @@
+import $props from './properties.js'
 
 // ------------------ Global elements handles            -------------------------
 let dateUI = {
