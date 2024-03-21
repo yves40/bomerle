@@ -20,6 +20,7 @@
     .galleryzone {
         color: white;
         padding: 0 2em 3em 2em;
+        width: 90%; 
         @include for-desktop { 
             padding: 0 5em 3em 5em; 
             width: 100%; 
@@ -30,7 +31,6 @@
         }        
         p{
             font-family: $pfont;
-            background-color: rgba(34, 7, 7, .3);
             border-radius: $border-radius;
             font-size: 1rem;
             line-height: 1.3rem;

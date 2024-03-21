@@ -87,12 +87,12 @@
                 #}
                     <div class="col ylabel"> {{ form_row(form.datein, { 'label' : 'admin.manageslides.datein'|trans,
                                                                             'value': slide.datein,
-                                                                        'attr' : { "init": 'today', 'nofuture' : 'false', 'chronoposition' : '1' }  
+                                                                        'attr' : { "init": 'soy', 'nofuture' : 'false', 'chronoposition' : '1' }  
                                                                         })}}
                     </div>
                     <div class="col ylabel"> {{ form_row(form.dateout, { 'label' : 'admin.manageslides.dateout'|trans,
                                                                             'value': slide.dateout,
-                                                                            'attr' : { "init": 'nm', 'nofuture' : 'false', 'chronoposition' : '2' }  
+                                                                            'attr' : { "init": 'eoy', 'nofuture' : 'false', 'chronoposition' : '2' }  
                                                                         })}}
                     </div>
                 {% else %}  {# Existing diapo #}

@@ -18,6 +18,7 @@
     Feb 06 2024     New slider frame
     Feb 09 2024     New slider frame
     Feb 11 2024     New slider frame
+    Mar 21 2024     Fix problem with div name
 
     ----------------------------------------------------------------------------*/
 
@@ -31,9 +32,9 @@
   // Two accepted values : SHOW (the default) and KNIFE
   constructor(container, timing = 2, description = '', allimages, slidertype = 'SHOW') {
     // Init
-      this.version = 'Slider:1.57, Feb 11 2024 ';
+      this.version = 'Slider:1.58, Mar 21 2024 ';
       this.container = container;
-      this.containername = $(container).attr('name');
+      this.containername = ($(container).attr('name')).replaceAll(' ', '-');
       this.slideinterval = timing * 1000;
       this.intervalid = 0;
       this.description = description;

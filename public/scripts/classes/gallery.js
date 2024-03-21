@@ -40,12 +40,14 @@ export default class Gallery {
     // ------------------------------------------------------------------------------------------------
     buildGalleryFrame(container) {
         const galleryzone = $("<div>").addClass('galleryzone');
+        const divcontainer = $('<div></div>').addClass('div--bgtextbrown');
         const h2 = $('<h2></h2>').text($(container).attr('name'));
-        $(galleryzone).append(h2);
+        $(divcontainer).append(h2);
         if(this.description.length !== 0) {
           const text = $('<p>').text(this.description);
-          $(galleryzone).append(text);
+          $(divcontainer).append(text);
         }
+        $(galleryzone).append(divcontainer);
         const gallery = $("<ul>").attr('id', this.gallery).addClass('gallery')
         $(galleryzone).append(gallery);
         $(container).append(galleryzone);

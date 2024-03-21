@@ -560,7 +560,8 @@
       background-repeat: no-repeat; } }
   #newsgallery .galleryzone {
     color: white;
-    padding: 0 2em 3em 2em; }
+    padding: 0 2em 3em 2em;
+    width: 90%; }
     @media screen and (min-width: 1024px) {
       #newsgallery .galleryzone {
         padding: 0 5em 3em 5em;
@@ -570,7 +571,6 @@
       font-family: "Gideon Roman", sans-serif; }
     #newsgallery .galleryzone p {
       font-family: "Gideon Roman", sans-serif;
-      background-color: rgba(34, 7, 7, 0.3);
       border-radius: 5px;
       font-size: 1rem;
       line-height: 1.3rem;
