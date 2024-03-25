@@ -905,7 +905,8 @@
         width: 100%;
         max-width: 1024px; } }
     #newsgallery .galleryzone > h2 {
-      font-family: "Gideon Roman", sans-serif; }
+      font-family: "Gideon Roman", sans-serif;
+      margin: 1rem; }
     #newsgallery .galleryzone p {
       font-family: "Gideon Roman", sans-serif;
       border-radius: 5px;
@@ -1268,3 +1269,5 @@ body {
       border: orange solid; }
   body .div--bgtextbrown {
     background-color: rgba(34, 7, 7, 0.3); }
+  body .div--bgtextlightblue {
+    background-color: rgba(77, 148, 255, 0.3); }

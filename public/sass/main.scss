@@ -180,7 +180,12 @@ body {
       border: orange solid;
     }
   }
-  .div--bgtextbrown {
-    background-color: rgba(34, 7, 7, 0.3);
+  .div {
+    &--bgtextbrown {
+      background-color: rgba(34, 7, 7, 0.3);
+    }
+    &--bgtextlightblue {
+      background-color: rgba(77, 148, 255, 0.3);
+    }
   }
 }

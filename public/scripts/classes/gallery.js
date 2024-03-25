@@ -40,7 +40,7 @@ export default class Gallery {
     // ------------------------------------------------------------------------------------------------
     buildGalleryFrame(container) {
         const galleryzone = $("<div>").addClass('galleryzone');
-        const divcontainer = $('<div></div>').addClass('div--bgtextbrown');
+        const divcontainer = $('<div></div>').addClass('div--bgtextlightblue');
         const h2 = $('<h2></h2>').text($(container).attr('name'));
         $(divcontainer).append(h2);
         if(this.description.length !== 0) {
