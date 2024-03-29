@@ -127,11 +127,9 @@ class AdminControllerSlideShow extends AbstractController
                         $slideshow->addSlide($image);
                     }    
                     // Manage other properties
-                    $lowername = strtolower($slideshow->getName());
-                    $slideshow->setName($lowername);
                     $entityManager->persist($slideshow);
                     $entityManager->flush();
-                    $this->addFlash('success', $lowername.': '.$translator->trans('admin.manageslides.updated'));
+                    $this->addFlash('success', $slideshow->getName().': '.$translator->trans('admin.manageslides.updated'));
                     $this->dblog->info($slideshow->getName().' updated',
                         'SlideShow UPDATE',
                         self::MODULE,
