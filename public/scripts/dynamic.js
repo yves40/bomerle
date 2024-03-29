@@ -31,7 +31,6 @@ $(document).ready(function () {
     // Single page zones management
     const observer = new IntersectionObserver(entries => {
         entries.forEach(entry => {
-            console.log(entry.target);
             switch($(entry.target).attr('id')) {
                 case 'knivesgallery': 
                     if(entry.isIntersecting) {
@@ -41,19 +40,18 @@ $(document).ready(function () {
                         $(knivesgallery).attr('inactive','').removeAttr('active');
                     }   
                     break;
-                case 'newsgallery':
+                default:
                     if(entry.isIntersecting) {
-                        $(newsgallery).attr('active','').removeAttr('inactive');
+                        console.log(`${$(entry.target).attr('name')} is visible` );
                     }
                     else{
-                        $(newsgallery).attr('inactive','').removeAttr('active');
+                        console.log(`${$(entry.target).attr('name')} is hidden` );
                     }   
                     break;
             }
         })
     });
     observer.observe(document.querySelector('#knivesgallery'));
-    observer.observe(document.querySelector('#newsgallery'));
     observer.observe(document.querySelector('.flash'));
     
     // Initial state of UI
@@ -440,7 +438,7 @@ $(document).ready(function () {
     function loadDiapoSections(allactive) {
         let newsID = 0;
         allactive.forEach(diapo => {
-            let diaposection = $('<div>').attr('name', diapo.name)
+            let diaposection = $('<div>').attr('name', diapo.name.replaceAll(' ', '-'))
                                 .css('display', 'flex')
                                 .css('align-items', 'center')
                                 .css('justify-content', 'center')

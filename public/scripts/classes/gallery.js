@@ -7,6 +7,7 @@
     jun 21 2023     Gallery zoom for the 2nd time !!!
     Aug 29 2023     Reorg into single css file
     Mar 18 2024     Change on container name
+    Mar 29 2024     Some tests on IDs and DIV names
 
 ----------------------------------------------------------------------------*/
 
@@ -16,10 +17,10 @@ export default class Gallery {
 
     constructor(container, description) {
         // Init
-        this.version = 'Gallery:1.05, Mar 18 2024 ';
+        this.version = 'Gallery:1.06, Mar 29 2024 ';
         this.container = container;
         this.description = description;
-        this.containername = $(container).attr('name').replaceAll(' ', '-');
+        this.containername = $(container).attr('name');
         this.gallery = `${this.containername}-zone`;
         this.galleryarea = `${this.containername}-area`;
         this.windowx = $(window).width();
