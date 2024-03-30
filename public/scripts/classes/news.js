@@ -16,11 +16,11 @@ import $props from '../properties.js';
 
 export default class News {
 
-    constructor(container, description) {
+    constructor(container, description, allimages) {
         // Init
         this.newsid = $(container).attr('id');
-        this.newsimages = [];
-        this.version = 'News:1.09, Mar 30 2024 ';
+        this.newsimages = allimages;
+        this.version = 'News:1.10, Mar 30 2024 ';
         this.container = container;
         this.description = description;
         this.containername = $(container).attr('name');
@@ -58,11 +58,6 @@ export default class News {
         $(container).append($('<div></div>').attr('id', 'fullscreen').addClass('zoomoff'));
     }
     // ------------------------------------------------------------------------------------------------
-    findImages(allimages, imagetype = 'SLIDESHOW', associatedknivesids = null) {
-      // Get the container
-      this.newsimages = allimages;
-  }
-    // ------------------------------------------------------------------------------------------------
     displayImages() {
       // Get the container
       const news = $(`#${this.news}`);
@@ -72,11 +67,19 @@ export default class News {
         $(theline).append(newimg);
         $(news).append(theline);
         $(newimg).click( (e) => { // Arrow function mandatory here to use this
-            console.log(`Clucked on${e.target}`);
+            console.log(`Clicked on ${e.target.src}`);
             e.preventDefault();
             // this.fullScreen(allimages[i]);
         });
       }
+      console.log(`Loaded ${this.newsimages.length} images for ${this.newsid}`);
+  }
+    // ------------------------------------------------------------------------------------------------
+    clearImages() {
+      // Get the container
+      const news = $(`#${this.news}`);
+      $(news).empty();
+      console.log(`Cleared ${this.newsimages.length} images for ${this.newsid}`);
   }
 // ------------------------------------------------------------------------------------------------
     // Getters

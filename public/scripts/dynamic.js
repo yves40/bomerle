@@ -42,15 +42,19 @@ $(document).ready(function () {
                     }   
                     break;
                 default:    // Did a news card became visibile or invisible ?
-                    if($(entry.target).hasClass('newsdetails')&&newslist.length !== 0) {
+                    if($(entry.target).hasClass('newsdetails') && newslist.length !== 0) {
                         // Find the related news card in the array
                         let newscard = newslist.find( n => n.id === $(entry.target).attr('id'));                     
-                        if(entry.isIntersecting) {
-                            console.log(`Load images for news ID : ${newscard.id}` );
+                        if(entry.isIntersecting && !newscard.active) {
                             newscard.newsobject.displayImages();
+                            newscard.active = true;
+                            $(entry.target).attr('active','').removeAttr('inactive');
                         }
                         else{
                             console.log(`${newscard.id} is hidden` );
+                            newscard.newsobject.clearImages();
+                            $(entry.target).attr('inactive','').removeAttr('active');
+                            newscard.active = false;
                         }   
                     }
                     break;
@@ -388,7 +392,6 @@ $(document).ready(function () {
      * @param {*} container The target element where the slider will be instanciated
      */
     function buildImagesSlider(allimages, timing, description, container) {
-        logger.debug(`Container name is ${$(container).attr('name')} for ${allimages.length} images`);
         let slider = new Slider(container, timing, description, allimages);     // Build the slider frame
     }
     /**
@@ -398,9 +401,7 @@ $(document).ready(function () {
      * @param {*} container The target element where the news will be displayed
      */
     function buildNewsGallery(allimages, description,  container) {
-        logger.debug(`Container name is ${$(container).attr('name')} for ${allimages.length} images`);
-        let news = new News(container, description);
-        news.findImages(allimages);
+        let news = new News(container, description, allimages);
         newslist.push({ id: news.getID(),
             newsobject: news,
             active: false
@@ -454,7 +455,8 @@ $(document).ready(function () {
                                 .css('justify-content', 'center')
                                 .addClass('newsdetails')
                                 .attr('id', `news-${newsID}`);
-                                $(newsgallery).append(diaposection);
+            $(newsgallery).append(diaposection);
+            $(diaposection).attr('inactive','').removeAttr('active');
             observer.observe(document.querySelector(`#news-${newsID}`));
             ++newsID;
             const payload = {

@@ -17,6 +17,18 @@
         background-size: 70%;
         background-repeat: no-repeat;
     }
+    .newsdetails[active]  {
+        animation-name: fadein;
+        animation-duration: 4s;
+        animation-fill-mode: forwards;
+        animation-timing-function: linear;      
+    }
+    .newsdetails[inactive]  {
+        animation-name: fadeout;
+        animation-duration: 4s;
+        animation-fill-mode: forwards;
+        animation-timing-function: linear;      
+    }
     .newszone {
         color: white;
         padding: 0 2em 3em 2em;
