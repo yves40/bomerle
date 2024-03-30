@@ -975,7 +975,8 @@
         height: 30svh; } }
     .infos .infoelement a {
       color: white;
-      text-decoration: none; }
+      text-decoration: none;
+      align-self: center; }
     .infos .infoelement__data {
       display: flex;
       flex-direction: column;
