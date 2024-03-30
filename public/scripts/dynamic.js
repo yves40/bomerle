@@ -26,6 +26,7 @@ $(document).ready(function () {
     const infoknife = $('.knife');
     const flashzone = $('.flash');
     const flash = new Flash();
+    let newslist = [];
 
     $(flashzone).hide();
     // Single page zones management
@@ -41,12 +42,14 @@ $(document).ready(function () {
                     }   
                     break;
                 default:
-                    if(entry.isIntersecting) {
-                        console.log(`${$(entry.target).attr('name')} is visible` );
+                    if($(entry.target).attr('name') !== undefined) {
+                        if(entry.isIntersecting) {
+                            console.log(`${$(entry.target).attr('name')} is visible` );
+                        }
+                        else{
+                            console.log(`${$(entry.target).attr('name')} is hidden` );
+                        }   
                     }
-                    else{
-                        console.log(`${$(entry.target).attr('name')} is hidden` );
-                    }   
                     break;
             }
         })
@@ -395,6 +398,10 @@ $(document).ready(function () {
         logger.debug(`Container name is ${$(container).attr('name')} for ${allimages.length} images`);
         let gallery = new Gallery(container, description);
         gallery.addImages(allimages);
+        newslist.push({ id: gallery.getID(), 
+                        name: gallery.getName(), 
+                        imagelist: gallery.getImagesList()
+                    });
     }
     /**
      * Build a single card to be displayed in a parent element
@@ -473,6 +480,7 @@ $(document).ready(function () {
                 }
             });    
         });
+        console.log(newslist);
     }
     /**
      * Find dynamic html pieces

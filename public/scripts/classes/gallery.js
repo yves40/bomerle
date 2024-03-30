@@ -18,6 +18,8 @@ export default class Gallery {
 
     constructor(container, description) {
         // Init
+        this.galleryid = $(container).attr('id');
+        this.galleryimages = [];
         this.version = 'Gallery:1.08, Mar 30 2024 ';
         this.container = container;
         this.description = description;
@@ -58,6 +60,7 @@ export default class Gallery {
     // ------------------------------------------------------------------------------------------------
     addImages(allimages, imagetype = 'SLIDESHOW', associatedknivesids = null) {
         // Get the container
+        this.galleryimages = allimages;
         const gallery = $(`#${this.gallery}`);
         for(let i = 0; i < allimages.length; ++i) {
           let newimg;
@@ -83,6 +86,10 @@ export default class Gallery {
           }
         }
     }
+    // Getters
+    getID() {return this.galleryid;}
+    getName() {return this.containername;}
+    getImagesList() {return this.galleryimages;}
   // ------------------------------------------------------------------------------------------------
   fullScreen(imagesrc) {
     if(!this.zoomactive) {
