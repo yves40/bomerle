@@ -17,10 +17,6 @@
     }
     li {
         margin-top: .4rem;
-        padding-left: 3rem;
-        @include for-desktop {
-            padding-left: 6rem;
-        }
     }
     b, u {
         text-decoration: underline;
@@ -32,13 +28,18 @@
         @include for-desktop {
             width: 70%
         }
-        padding: 2rem; 
-        p {  
-            margin-top: 1rem;
-            line-height: 1.3rem;
-        }
-        &__list {
-            margin: 2rem 0 2rem 0;
+        &__container {
+            padding: 1rem 2rem; 
+            p {  
+                margin-top: 1rem;
+                line-height: 1.3rem;
+            }
+            &__list {
+                margin: 2rem 0 2rem 0;
+                li {
+                    list-style-type: circle;
+                }
+            }
         }
     }
 } 
