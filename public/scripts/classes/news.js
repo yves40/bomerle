@@ -1,5 +1,5 @@
 /*----------------------------------------------------------------------------
-    Gallery
+    News
 
     jun 17 2023     Initial
     jun 18 2023     Add div and text to the gallery template
@@ -14,23 +14,23 @@
 
 import $props from '../properties.js';
 
-export default class Gallery {
+export default class News {
 
     constructor(container, description) {
         // Init
-        this.galleryid = $(container).attr('id');
-        this.galleryimages = [];
-        this.version = 'Gallery:1.08, Mar 30 2024 ';
+        this.newsid = $(container).attr('id');
+        this.newsimages = [];
+        this.version = 'News:1.09, Mar 30 2024 ';
         this.container = container;
         this.description = description;
         this.containername = $(container).attr('name');
-        this.gallery = `${this.containername}-zone`;
-        this.galleryarea = `${this.containername}-area`;
+        this.news = `${this.containername}-zone`;
+        this.newsarea = `${this.containername}-area`;
         this.windowx = $(window).width();
         this.windowy = $(window).height();
         this.zoomactive = false;
         this.currentzoom = '';
-        this.buildGalleryFrame(container);
+        this.buildnewsFrame(container);
 
         // Initialize handlers
         $(window).resize ( () =>  {
@@ -42,8 +42,8 @@ export default class Gallery {
         })
     }
     // ------------------------------------------------------------------------------------------------
-    buildGalleryFrame(container) {
-        const galleryzone = $("<div>").addClass('galleryzone');
+    buildnewsFrame(container) {
+        const newszone = $("<div>").addClass('newszone');
         const divcontainer = $('<div></div>').addClass('div--bgtextlightblue');
         const h2 = $('<h2></h2>').text($(container).attr('name'));
         $(divcontainer).append(h2);
@@ -51,45 +51,39 @@ export default class Gallery {
           const text = $('<p>').text(this.description);
           $(divcontainer).append(text);
         }
-        $(galleryzone).append(divcontainer);
-        const gallery = $("<ul>").attr('id', this.gallery).addClass('gallery')
-        $(galleryzone).append(gallery);
-        $(container).append(galleryzone);
+        $(newszone).append(divcontainer);
+        const news = $("<ul>").attr('id', this.news).addClass('news')
+        $(newszone).append(news);
+        $(container).append(newszone);
         $(container).append($('<div></div>').attr('id', 'fullscreen').addClass('zoomoff'));
     }
     // ------------------------------------------------------------------------------------------------
-    addImages(allimages, imagetype = 'SLIDESHOW', associatedknivesids = null) {
-        // Get the container
-        this.galleryimages = allimages;
-        const gallery = $(`#${this.gallery}`);
-        for(let i = 0; i < allimages.length; ++i) {
-          let newimg;
-          if(imagetype === 'SLIDESHOW') {
-            newimg = $('<img>').attr('src', $props.slideimageslocation()+"/"+allimages[i]);
-          }
-          else {
-            newimg = $('<img>').attr('src', $props.knifeimageslocation()+"/"+allimages[i]);
-          }
-          if(associatedknivesids) { // In some cases it's usefull to store the associated 
-                                    // Knifeid. When clicking on the image, we can get all 
-                                    // images for this knife, in a slide ;-)
-            $(newimg).attr('data-knifeid', associatedknivesids[i]);
-          }
-          let theline = $('<li>');
-          $(theline).append(newimg);
-          $(gallery).append(theline);
-          if(imagetype === 'SLIDESHOW') {
-            $(newimg).click( (e) => { // Arrow function mandatory here to use this
-                e.preventDefault();
-                this.fullScreen(allimages[i]);
-            });
-          }
-        }
-    }
+    findImages(allimages, imagetype = 'SLIDESHOW', associatedknivesids = null) {
+      // Get the container
+      this.newsimages = allimages;
+  }
+    // ------------------------------------------------------------------------------------------------
+    displayImages() {
+      // Get the container
+      const news = $(`#${this.news}`);
+      for(let i = 0; i < this.newsimages.length; ++i) {
+        let newimg= $('<img>').attr('src', $props.slideimageslocation()+"/"+this.newsimages[i]);
+        let theline = $('<li>');
+        $(theline).append(newimg);
+        $(news).append(theline);
+        $(newimg).click( (e) => { // Arrow function mandatory here to use this
+            console.log(`Clucked on${e.target}`);
+            e.preventDefault();
+            // this.fullScreen(allimages[i]);
+        });
+      }
+  }
+// ------------------------------------------------------------------------------------------------
     // Getters
-    getID() {return this.galleryid;}
+    getID() {return this.newsid;}
     getName() {return this.containername;}
-    getImagesList() {return this.galleryimages;}
+    getImagesList() {return this.newsimages;}
+    getDescription() {return this.description;}
   // ------------------------------------------------------------------------------------------------
   fullScreen(imagesrc) {
     if(!this.zoomactive) {

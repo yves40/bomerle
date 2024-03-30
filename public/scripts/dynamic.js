@@ -4,7 +4,7 @@
 
 import Logger  from './classes/logger.js';
 import Slider from './classes/slider.js';
-import Gallery from './classes/gallery.js';
+import News from './classes/news.js';
 import Card from './classes/card.js';
 import Timer from './classes/timer.js';
 import Flash from './classes/flash.js';
@@ -41,13 +41,16 @@ $(document).ready(function () {
                         $(knivesgallery).attr('inactive','').removeAttr('active');
                     }   
                     break;
-                default:
-                    if($(entry.target).attr('name') !== undefined) {
+                default:    // Did a news card became visibile or invisible ?
+                    if($(entry.target).hasClass('newsdetails')&&newslist.length !== 0) {
+                        // Find the related news card in the array
+                        let newscard = newslist.find( n => n.id === $(entry.target).attr('id'));                     
                         if(entry.isIntersecting) {
-                            console.log(`${$(entry.target).attr('name')} is visible` );
+                            console.log(`Load images for news ID : ${newscard.id}` );
+                            newscard.newsobject.displayImages();
                         }
                         else{
-                            console.log(`${$(entry.target).attr('name')} is hidden` );
+                            console.log(`${newscard.id} is hidden` );
                         }   
                     }
                     break;
@@ -389,19 +392,19 @@ $(document).ready(function () {
         let slider = new Slider(container, timing, description, allimages);     // Build the slider frame
     }
     /**
-     * Build and display a gallery of images
+     * Build and display a news card
      * @param {*} allimages Associated images
-     * @param {*} description A short gallery description displayed above the images
-     * @param {*} container The target element where the gallery will be instanciated
+     * @param {*} description A short news description displayed above the images
+     * @param {*} container The target element where the news will be displayed
      */
-    function buildImagesGallery(allimages, description,  container) {
+    function buildNewsGallery(allimages, description,  container) {
         logger.debug(`Container name is ${$(container).attr('name')} for ${allimages.length} images`);
-        let gallery = new Gallery(container, description);
-        gallery.addImages(allimages);
-        newslist.push({ id: gallery.getID(), 
-                        name: gallery.getName(), 
-                        imagelist: gallery.getImagesList()
-                    });
+        let news = new News(container, description);
+        news.findImages(allimages);
+        newslist.push({ id: news.getID(),
+            newsobject: news,
+            active: false
+        });
     }
     /**
      * Build a single card to be displayed in a parent element
@@ -471,7 +474,7 @@ $(document).ready(function () {
                         buildImagesSlider(response.images, response.timing, response.description, diaposection);
                     }
                     else {
-                        buildImagesGallery(response.images, response.description,  diaposection);
+                        buildNewsGallery(response.images, response.description,  diaposection);
                     }
                     $(newsgallery).show();
                 },

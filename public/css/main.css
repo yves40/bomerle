@@ -895,19 +895,19 @@
     #newsgallery {
       background-size: 70%;
       background-repeat: no-repeat; } }
-  #newsgallery .galleryzone {
+  #newsgallery .newszone {
     color: white;
     padding: 0 2em 3em 2em;
     width: 90%; }
     @media screen and (min-width: 1024px) {
-      #newsgallery .galleryzone {
+      #newsgallery .newszone {
         padding: 0 5em 3em 5em;
         width: 100%;
         max-width: 1024px; } }
-    #newsgallery .galleryzone > h2 {
+    #newsgallery .newszone > h2 {
       font-family: "Gideon Roman", sans-serif;
       margin: 1rem; }
-    #newsgallery .galleryzone p {
+    #newsgallery .newszone p {
       font-family: "Gideon Roman", sans-serif;
       border-radius: 5px;
       font-size: 1rem;
@@ -916,25 +916,25 @@
       margin: 1rem auto;
       padding: 1em; }
       @media screen and (min-width: 1024px) {
-        #newsgallery .galleryzone p {
+        #newsgallery .newszone p {
           font-size: 1.3rem;
           line-height: 1.3rem; } }
-    #newsgallery .galleryzone .gallery {
+    #newsgallery .newszone .news {
       margin: 0 auto;
       display: flex;
       flex-wrap: wrap;
       gap: 2vmin;
       list-style-type: none; }
-      #newsgallery .galleryzone .gallery li {
+      #newsgallery .newszone .news li {
         height: 250px;
         flex-grow: 1; }
-      #newsgallery .galleryzone .gallery img {
+      #newsgallery .newszone .news img {
         width: 100%;
         height: 100%;
         border-radius: 5px;
         border: solid 1px white;
         object-fit: cover; }
-      #newsgallery .galleryzone .gallery ::after {
+      #newsgallery .newszone .news ::after {
         content: "";
         display: block;
         flex-grow: 10; }
