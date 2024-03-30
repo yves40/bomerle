@@ -1124,14 +1124,14 @@
     margin: auto;
     background-color: rgba(51, 51, 51, 0.6);
     width: 90%; }
+    .legal__section p {
+      margin-top: 1rem;
+      line-height: 1.3rem; }
     @media screen and (min-width: 1024px) {
       .legal__section {
         width: 70%; } }
     .legal__section__container {
       padding: 1rem 2rem; }
-      .legal__section__container p {
-        margin-top: 1rem;
-        line-height: 1.3rem; }
       .legal__section__container__list {
         margin: 2rem 0 2rem 0; }
         .legal__section__container__list li {
