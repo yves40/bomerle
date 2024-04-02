@@ -395,13 +395,17 @@ $(document).ready(function () {
         let slider = new Slider(container, timing, description, allimages);     // Build the slider frame
     }
     /**
-     * Build and display a news card
+     * Build and display a news card. Store the card in an array
+     * 
      * @param {*} allimages Associated images
      * @param {*} description A short news description displayed above the images
-     * @param {*} container The target element where the news will be displayed
+     * @param {*} diapo Data on the news to build (name....)
+     * @param {*} container The target element where the news will be appended
      */
-    function buildNewsGallery(allimages, description,  container) {
-        let news = new News(container, description, allimages);
+    function buildNewsGallery(allimages, description, diapo, container) {
+        const newsindex = newslist.length;
+        let news = new News(container, description, allimages, diapo, newsindex);
+        observer.observe(document.querySelector(`#news-${newsindex}`));
         newslist.push({ id: news.getID(),
             newsobject: news,
             active: false
@@ -434,7 +438,7 @@ $(document).ready(function () {
                 logger.info(`Loaded ${response.activecount} news in ${ttx.getElapsedString()}`);
                 if(response.activecount != 0) {
                     $(newsmenu).show();
-                    loadDiapoSections(response.activediaporamas);                 
+                    loadNewsSections(response.activediaporamas);                 
                 }
             },
             error: function (xhr) {
@@ -446,25 +450,14 @@ $(document).ready(function () {
      * Find and load active news in the page
      * @param {*} allactive The news list to be displayed
      */
-    function loadDiapoSections(allactive) {
-        let newsID = 0;
-        allactive.forEach(diapo => {
-            let diaposection = $('<div>').attr('name', diapo.name.replaceAll(' ', '-'))
-                                .css('display', 'flex')
-                                .css('align-items', 'center')
-                                .css('justify-content', 'center')
-                                .addClass('newsdetails')
-                                .attr('id', `news-${newsID}`);
-            $(newsgallery).append(diaposection);
-            $(diaposection).attr('inactive','').removeAttr('active');
-            observer.observe(document.querySelector(`#news-${newsID}`));
-            ++newsID;
+    function loadNewsSections(allactive) {
+        allactive.forEach(news => {
             const payload = {
-                "diaponame" :  diapo.name,
+                "newsname" :  news.name,
             }
             $.ajax({
                 type: "POST",
-                url: '/slides/public/getdiapos',
+                url: '/slides/public/getnews',
                 data: JSON.stringify(payload),
                 dataType: "json",
                 async: true,
@@ -473,10 +466,13 @@ $(document).ready(function () {
                         if(response.timing === null) {
                             response.timing = 2;
                         }
-                        buildImagesSlider(response.images, response.timing, response.description, diaposection);
+                        buildImagesSlider(response.images, response.timing, response.description, newsgallery);
                     }
                     else {
-                        buildNewsGallery(response.images, response.description,  diaposection);
+                        buildNewsGallery(response.images, 
+                                            response.description,
+                                            news.name,
+                                            newsgallery);
                     }
                     $(newsgallery).show();
                 },

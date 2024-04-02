@@ -914,7 +914,7 @@
         padding: 0 5em 3em 5em;
         width: 100%;
         max-width: 1024px; } }
-    #newsgallery .newszone > h2 {
+    #newsgallery .newszone h2 {
       font-family: "Gideon Roman", sans-serif;
       margin: 1rem; }
     #newsgallery .newszone p {
@@ -922,9 +922,8 @@
       border-radius: 5px;
       font-size: 1rem;
       line-height: 1.3rem;
-      text-align: justify;
-      margin: 1rem auto;
-      padding: 1em; }
+      margin: 1rem;
+      padding: 1rem 0; }
       @media screen and (min-width: 1024px) {
         #newsgallery .newszone p {
           font-size: 1.3rem;

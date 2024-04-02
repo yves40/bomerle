@@ -288,13 +288,13 @@ class AdminControllerSlideShow extends AbstractController
         }
     }
     // --------------------------------------------------------------------------
-    #[Route('/public/getdiapos', name: 'bootadmin.slides.getdiapos')]
-    public function getDiapos(Request $request, EntityManagerInterface $em) {
+    #[Route('/public/getnews', name: 'bootadmin.slides.getnews')]
+    public function getNews(Request $request, EntityManagerInterface $em) {
         try {
             $data = file_get_contents("php://input");
             $payload = json_decode($data, true);
-            $diaponame = $payload['diaponame'];
-            $slides = $em->getRepository(SlideShow::class)->findBy([ 'name' => $diaponame, 
+            $newsname = $payload['newsname'];
+            $slides = $em->getRepository(SlideShow::class)->findBy([ 'name' => $newsname, 
                                                                     'active' => true]);
             $candidatescount = count($slides) ;
             /**  @var SlideImages $img */
@@ -333,8 +333,8 @@ class AdminControllerSlideShow extends AbstractController
                 $text = '';
             }
             return $this->json([
-                'message' => 'bootadmin.slides.getdiapos OK',
-                'diaponame' => $diaponame,
+                'message' => 'bootadmin.slides.getnews OK',
+                'newsname' => $newsname,
                 'description' => $text,
                 'candidatescount' => $candidatescount,
                 'slidermode' => $slidermode,
@@ -355,7 +355,7 @@ class AdminControllerSlideShow extends AbstractController
         catch(Exception $e) {
             return $this->json([
                 'message' => 'bootadmin.slides.getdiapo KO',
-                'diaponame' => $diaponame,
+                'newsname' => $newsname,
                 'error' => $e
             ], 400);        
         }
