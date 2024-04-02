@@ -30,8 +30,12 @@ $(document).ready(function () {
     armDeleteAlert();
     // Set default show mode to slider if new show
     if($(slidename).val() == '') {
-        $(slidermode).prop('checked', true);
+        $(gallerymode).prop('checked', true);
     }
+    // YT Apr 02 2024, news do not use slider
+    $(sliderdelay).hide();
+    $(slidermode).hide();
+
 // ----------------------------------------------------------------------------
     // Handle show mode actions
     // ----------------------------------------------------------------------------
