@@ -52,7 +52,6 @@ $(document).ready(function () {
                         }
                         else{
                             console.log(`${newscard.id} is hidden` );
-                            newscard.newsobject.clearImages();
                             $(entry.target).attr('inactive','').removeAttr('active');
                             newscard.active = false;
                         }   

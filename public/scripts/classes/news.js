@@ -59,16 +59,20 @@ export default class News {
     displayImages() {
       // Get the container
       const news = $(`#${this.news}`);
-      for(let i = 0; i < this.newsimages.length; ++i) {
-        let newimg= $('<img>').attr('src', $props.slideimageslocation()+"/"+this.newsimages[i]);
-        let theline = $('<li>');
-        $(theline).append(newimg);
-        $(news).append(theline);
-        $(newimg).click( (e) => { // Arrow function mandatory here to use this
-            console.log(`Clicked on ${e.target.src}`);
-            e.preventDefault();
-            // this.fullScreen(allimages[i]);
-        });
+      const imagesloaded = $(`#${this.news}`).find('img');
+      console.log(`Available images : ${imagesloaded.length}`);
+      if(imagesloaded.length === 0) {
+        for(let i = 0; i < this.newsimages.length; ++i) {
+          let newimg= $('<img>').attr('src', $props.slideimageslocation()+"/"+this.newsimages[i]);
+          let theline = $('<li>');
+          $(theline).append(newimg);
+          $(news).append(theline);
+          $(newimg).click( (e) => { // Arrow function mandatory here to use this
+              console.log(`Clicked on ${e.target.src}`);
+              e.preventDefault();
+              // this.fullScreen(allimages[i]);
+          });
+      }
       }
       console.log(`Loaded ${this.newsimages.length} images for ${this.newsname}`);
   }
