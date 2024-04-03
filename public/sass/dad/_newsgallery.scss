@@ -17,6 +17,11 @@
         background-size: 70%;
         background-repeat: no-repeat;
     }
+    .newsdetails {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
     .newsdetails[active]  {
         animation-name: fadein;
         animation-duration: 4s;
