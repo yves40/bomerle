@@ -460,7 +460,7 @@ $(document).ready(function () {
                 url: '/slides/public/getnews',
                 data: JSON.stringify(payload),
                 dataType: "json",
-                async: true,
+                async: false,       // can perform async, not in a hurry and preserve news order on screen
                 success: function (response) {
                     if(response.slidermode) {
                         if(response.timing === null) {
