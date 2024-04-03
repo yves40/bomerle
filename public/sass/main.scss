@@ -1,10 +1,11 @@
 @import './dad/const.scss';
+@import './dad/animations.scss';
 @import './utils/mixins';
 @import './dad/news';
 @import './dad/menu';
 @import './dad/cards';
 @import './dad/slider';
-@import './dad/gallery';
+@import './dad/newsgallery';
 @import './dad/infos'; 
 @import './dad/categories'; 
 @import './dad/legal';
@@ -80,10 +81,6 @@ body {
           }  
         }
       }
-
-      // .htmltemplate:nth-child(1) {
-      // }
-
       img {
         width: 50%;
         height: auto;

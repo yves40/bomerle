@@ -34,13 +34,9 @@ export default class News {
     }
     // ------------------------------------------------------------------------------------------------
     buildnewsFrame(container) {
- 
       let newsection = $('<div>')
             .attr('id', this.newsid)
             .attr('name', this.newsname.replaceAll(' ', '-'))
-            .css('display', 'flex')
-            .css('align-items', 'center')
-            .css('justify-content', 'center')
             .addClass('newsdetails');
       $(container).append(newsection);
       $(newsection).attr('inactive','').removeAttr('active');

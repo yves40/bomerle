@@ -451,7 +451,9 @@ $(document).ready(function () {
      * @param {*} allactive The news list to be displayed
      */
     function loadNewsSections(allactive) {
-        allactive.forEach(news => {
+        let newscontainer = $('<div>').addClass('news');
+        $(newsgallery).append(newscontainer);
+          allactive.forEach(news => {
             const payload = {
                 "newsname" :  news.name,
             }
@@ -472,7 +474,7 @@ $(document).ready(function () {
                         buildNewsGallery(response.images, 
                                             response.description,
                                             news.name,
-                                            newsgallery);
+                                            newscontainer);
                     }
                     $(newsgallery).show();
                 },

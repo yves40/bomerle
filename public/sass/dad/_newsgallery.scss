@@ -17,77 +17,77 @@
         background-size: 70%;
         background-repeat: no-repeat;
     }
-    .newsdetails {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-    .newsdetails[active]  {
-        animation-name: fadein;
-        animation-duration: 4s;
-        animation-fill-mode: forwards;
-        animation-timing-function: linear;      
-    }
-    .newsdetails[inactive]  {
-        animation-name: fadeout;
-        animation-duration: 4s;
-        animation-fill-mode: forwards;
-        animation-timing-function: linear;      
-    }
-    .newszone {
-        color: white;
-        padding: 0 2em 3em 2em;
-        width: 90%; 
-        @include for-desktop { 
-            padding: 0 5em 3em 5em; 
-            width: 100%; 
+    .news {
+        margin: 0 auto;
+        @include for-desktop {
             max-width: $responsive-max-width;
+            width: 70%;
         }
-        h2 {
-            font-family: $h2font;
-            margin: 1rem;
-        }        
-        p{
-            font-family: $pfont;
-            border-radius: $border-radius;
-            font-size: 1rem;
-            line-height: 1.3rem;
-            margin: 1rem;
-            padding: 1rem 0;
-            @include for-desktop{
-                font-size: 1.3rem;
-                line-height: 1.3rem;
-            }
-        }
-        .news { 
-            margin: 0 auto;
+        .newsdetails {
             display: flex;
-            flex-wrap: wrap;
-            gap: 2vmin;
-            list-style-type: none;
-            li { 
-                height: 250px;
-                flex-grow: 1;
+            align-items: center;
+            justify-content: center;
+        }
+        .newsdetails[active]  {
+            animation-name: slideRightIn;
+            animation-duration: 0.8s;
+            animation-fill-mode: forwards; 
+            animation-timing-function: linear;      
+        }
+        .newsdetails[inactive]  {
+            animation-name: slideRightOut;
+            animation-duration: 0.5s;
+            animation-fill-mode: forwards;
+            animation-timing-function: linear;      
+        }
+        .newszone {
+            color: white;
+            padding: 0 2em 3em 2em;
+            width: 90%; 
+            @include for-desktop { 
+                padding: 0 5em 3em 5em; 
+                width: 100%; 
+                max-width: $responsive-max-width;
             }
-            img {
-                width: 100%;
-                height: 100%;
+            h2 {
+                font-family: $h2font;
+                margin: 1rem;
+            }        
+            p{
+                font-family: $pfont;
                 border-radius: $border-radius;
-                border: solid 1px white;
-                object-fit: cover;
+                font-size: 1rem;
+                line-height: 1.3rem;
+                margin: 1rem;
+                padding: 1rem 0;
+                @include for-desktop{
+                    font-size: 1.3rem;
+                    line-height: 1.3rem;
+                }
             }
-            ::after {
-                content: "";
-                display: block;
-                flex-grow: 10;
-            }
+            .news { 
+                margin: 0 auto;
+                display: flex;
+                flex-wrap: wrap;
+                gap: 2vmin;
+                list-style-type: none;
+                li { 
+                    height: 250px;
+                    flex-grow: 1;
+                }
+                img {
+                    width: 100%;
+                    height: 100%;
+                    border-radius: $border-radius;
+                    border: solid 1px white;
+                    object-fit: cover;
+                }
+                ::after {
+                    content: "";
+                    display: block;
+                    flex-grow: 10;
+                }
+            }    
         }    
     }
-}
-#fullscreen {
-    background-color: $background;
-}  
-@keyframes fadein {
-    0%   { opacity: 0;}
-    100% { opacity: 1;}
 }
