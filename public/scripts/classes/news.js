@@ -37,11 +37,11 @@ export default class News {
       let newsection = $('<div>')
             .attr('id', this.newsid)
             .attr('name', this.newsname.replaceAll(' ', '-'))
-            .addClass('newsdetails');
+            .addClass('news__details');
       $(container).append(newsection);
       $(newsection).attr('inactive','').removeAttr('active');
       
-      const newszone = $("<div>").addClass('newszone');
+      const newszone = $("<div>").addClass('news__zone');
       const divcontainer = $('<div></div>').addClass('div--bgtextlightblue');
       const h2 = $('<h2></h2>').text(this.newsname);
       $(divcontainer).append(h2);
@@ -50,7 +50,7 @@ export default class News {
         $(divcontainer).append(text);
       }
       $(newszone).append(divcontainer);
-      const news = $("<ul>").attr('id', this.news).addClass('news')
+      const news = $("<ul>").attr('id', this.news).addClass('news__zone__images')
       $(newszone).append(news);
       $(newsection).append(newszone);
       $(container).append(newsection);

@@ -767,33 +767,36 @@
       #newsgallery .news {
         max-width: 1024px;
         width: 70%; } }
-    #newsgallery .news .newsdetails {
+    #newsgallery .news__details {
       display: flex;
       align-items: center;
       justify-content: center; }
-    #newsgallery .news .newsdetails[active] {
-      animation-name: slideRightIn;
+    #newsgallery .news__details:nth-child(odd) {
+      animation-name: slideRightIn; }
+    #newsgallery .news__details:nth-child(even) {
+      animation-name: slideLeftIn; }
+    #newsgallery .news__details[active] {
       animation-duration: 0.8s;
       animation-fill-mode: forwards;
       animation-timing-function: linear; }
-    #newsgallery .news .newsdetails[inactive] {
+    #newsgallery .news__details[inactive] {
       animation-name: slideRightOut;
       animation-duration: 0.5s;
       animation-fill-mode: forwards;
       animation-timing-function: linear; }
-    #newsgallery .news .newszone {
+    #newsgallery .news__zone {
       color: white;
       padding: 0 2em 3em 2em;
       width: 90%; }
       @media screen and (min-width: 1024px) {
-        #newsgallery .news .newszone {
+        #newsgallery .news__zone {
           padding: 0 5em 3em 5em;
           width: 100%;
           max-width: 1024px; } }
-      #newsgallery .news .newszone h2 {
+      #newsgallery .news__zone h2 {
         font-family: "Gideon Roman", sans-serif;
         margin: 1rem; }
-      #newsgallery .news .newszone p {
+      #newsgallery .news__zone p {
         font-family: "Gideon Roman", sans-serif;
         border-radius: 5px;
         font-size: 1rem;
@@ -801,25 +804,25 @@
         margin: 1rem;
         padding: 1rem 0; }
         @media screen and (min-width: 1024px) {
-          #newsgallery .news .newszone p {
+          #newsgallery .news__zone p {
             font-size: 1.3rem;
             line-height: 1.3rem; } }
-      #newsgallery .news .newszone .news {
+      #newsgallery .news__zone__images {
         margin: 0 auto;
         display: flex;
         flex-wrap: wrap;
         gap: 2vmin;
         list-style-type: none; }
-        #newsgallery .news .newszone .news li {
+        #newsgallery .news__zone__images li {
           height: 250px;
           flex-grow: 1; }
-        #newsgallery .news .newszone .news img {
+        #newsgallery .news__zone__images img {
           width: 100%;
           height: 100%;
           border-radius: 5px;
           border: solid 1px white;
           object-fit: cover; }
-        #newsgallery .news .newszone .news ::after {
+        #newsgallery .news__zone__images ::after {
           content: "";
           display: block;
           flex-grow: 10; }

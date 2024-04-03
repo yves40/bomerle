@@ -42,7 +42,7 @@ $(document).ready(function () {
                     }   
                     break;
                 default:    // Did a news card became visibile or invisible ?
-                    if($(entry.target).hasClass('newsdetails') && newslist.length !== 0) {
+                    if($(entry.target).hasClass('news__details') && newslist.length !== 0) {
                         // Find the related news card in the array
                         let newscard = newslist.find( n => n.id === $(entry.target).attr('id'));                     
                         if(entry.isIntersecting && !newscard.active) {
