@@ -361,23 +361,23 @@ class AdminControllerSlideShow extends AbstractController
         }
     }
     // --------------------------------------------------------------------------
-    #[Route('/public/getactivediaporamas', name: 'slides.public.getactivediaporamas')]
-    public function getActiveDiaporamas(Request $request, EntityManagerInterface $em) {
+    #[Route('/public/getactivenews', name: 'slides.public.getactivenews')]
+    public function getActiveNews(Request $request, EntityManagerInterface $em) {
         try {
                 $active = [];
                 // $slides = $em->getRepository(SlideShow::class)->findBy(['active' => true ],
                 //                                                 array('name' => 'ASC'));
                 $now = new DateTime();
-                $slides = $em->getRepository(SlideShow::class)->findDistinctActiveDiaporamas($now);
+                $slides = $em->getRepository(SlideShow::class)->findDistinctActiveNews($now);
                 return $this->json([
-                    'message' => 'bootadmin.slides.getactivediaporamas OK',
+                    'message' => 'bootadmin.slides.getactivenews OK',
                     'activecount' => count($slides),
-                    'activediaporamas' => $slides
+                    'activenews' => $slides
                 ], 200);        
         }
         catch(Exception $e) {
             return $this->json([
-                'message' => 'bootadmin.slides.getactivediaporamas KO',
+                'message' => 'bootadmin.slides.getactivenews KO',
                 'error' => $e
             ], 400);        
         }

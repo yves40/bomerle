@@ -42,7 +42,7 @@ export default class News {
       $(newsection).attr('inactive','').removeAttr('active');
       
       const newszone = $("<div>").addClass('news__zone');
-      const divcontainer = $('<div></div>').addClass('div--bgtextlightblue');
+      const divcontainer = $('<div></div>');
       const h2 = $('<h2></h2>').text(this.newsname);
       $(divcontainer).append(h2);
       if(this.description.length !== 0) {
@@ -60,7 +60,6 @@ export default class News {
       // Get the container
       const news = $(`#${this.news}`);
       const imagesloaded = $(`#${this.news}`).find('img');
-      console.log(`Available images : ${imagesloaded.length}`);
       if(imagesloaded.length === 0) {
         for(let i = 0; i < this.newsimages.length; ++i) {
           let newimg= $('<img>').attr('src', $props.slideimageslocation()+"/"+this.newsimages[i]);
@@ -73,20 +72,19 @@ export default class News {
               // this.fullScreen(allimages[i]);
           });
       }
-      }
-      console.log(`Loaded ${this.newsimages.length} images for ${this.newsname}`);
+    }
   }
-    // ------------------------------------------------------------------------------------------------
-    clearImages() {
-      // Get the container
-      const news = $(`#${this.news}`);
-      $(news).empty();
-      console.log(`Cleared ${this.newsimages.length} images for ${this.newsname}`);
-  }
+  // ------------------------------------------------------------------------------------------------
+  clearImages() {
+    // Get the container
+    const news = $(`#${this.news}`);
+    $(news).empty();
+    console.log(`Cleared ${this.newsimages.length} images for ${this.newsname}`);
+}
 // ------------------------------------------------------------------------------------------------
-    // Getters
-    getID() {return this.newsid;}
-    getName() {return this.newsname;}
-    getImagesList() {return this.newsimages;}
-    getDescription() {return this.description;}
+// Getters
+  getID() {return this.newsid;}
+  getName() {return this.newsname;}
+  getImagesList() {return this.newsimages;}
+  getDescription() {return this.description;}
 }

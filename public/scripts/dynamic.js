@@ -27,6 +27,7 @@ $(document).ready(function () {
     const flashzone = $('.flash');
     const flash = new Flash();
     let newslist = [];
+    let foundnews = [];
 
     $(flashzone).hide();
     // Single page zones management
@@ -41,18 +42,26 @@ $(document).ready(function () {
                         $(knivesgallery).attr('inactive','').removeAttr('active');
                     }   
                     break;
-                default:    // Did a news card became visibile or invisible ?
+                case 'newsgallery': 
+                    if(entry.isIntersecting) {
+                        if(newslist.length === 0) {
+                            loadActiveNews();
+                        }
+                    }
+                    break;
+                default:    // Did a news card become visibile or invisible ?
                     if($(entry.target).hasClass('news__details') && newslist.length !== 0) {
                         // Find the related news card in the array
                         let newscard = newslist.find( n => n.id === $(entry.target).attr('id'));                     
                         if(entry.isIntersecting && !newscard.active) {
-                            newscard.newsobject.displayImages();
+                            if(!newscard.displayed) {
+                                newscard.newsobject.displayImages();
+                            }
                             newscard.active = true;
+                            newscard.displayed = true;
                             $(entry.target).attr('active','').removeAttr('inactive');
                         }
                         else{
-                            console.log(`${newscard.id} is hidden` );
-                            $(entry.target).attr('inactive','').removeAttr('active');
                             newscard.active = false;
                         }   
                     }
@@ -61,6 +70,7 @@ $(document).ready(function () {
         })
     });
     observer.observe(document.querySelector('#knivesgallery'));
+    observer.observe(document.querySelector('#newsgallery'));
     observer.observe(document.querySelector('.flash'));
     
     // Initial state of UI
@@ -69,10 +79,11 @@ $(document).ready(function () {
     $(cardsmenu).hide();
     $(newsmenu).hide();
     $(categoriesmenu).hide();
-    $(newsgallery).hide();
     $(knivesgallery).hide().attr('inactive', '').removeAttr('active');
     $(categorygallery).hide();
     $(slider).hide();
+    // Shall we display the news menu
+    countActiveNews();
 
     let validEmail = false;
     let validText = false;
@@ -152,7 +163,6 @@ $(document).ready(function () {
     })
     getHtmlTemplates();
     getActiveCategories();
-    getActiveDiaporamas();
     /**
      * Request the active categories from the DB
      * To be considered active, a category must hold at least 
@@ -407,7 +417,8 @@ $(document).ready(function () {
         observer.observe(document.querySelector(`#news-${newsindex}`));
         newslist.push({ id: news.getID(),
             newsobject: news,
-            active: false
+            active: false,
+            displayed: false
         });
     }
     /**
@@ -423,27 +434,41 @@ $(document).ready(function () {
     }
     /**
      * Request the active news from the DB
+     * Display the news menu if any
      */
-    function getActiveDiaporamas() {
+    function countActiveNews() {
         let ttx = new Timer();
         ttx.startTimer();
         $.ajax({
             type: "GET",
-            url: '/slides/public/getactivediaporamas',
+            url: '/slides/public/getactivenews',
             dataType: "json",
             async: true,
             success: function (response) {
                 ttx.stopTimer();
-                logger.info(`Loaded ${response.activecount} news in ${ttx.getElapsedString()}`);
+                logger.info(`Found ${response.activecount} news in ${ttx.getElapsedString()}`);
                 if(response.activecount != 0) {
                     $(newsmenu).show();
-                    loadNewsSections(response.activediaporamas);                 
+                    foundnews = response.activenews;
                 }
             },
             error: function (xhr) {
                 logger.console.error();(xhr);
             }
         });    
+    }
+
+    /**
+     * The news Gallery is now visible, load its structure
+     */
+    function loadActiveNews() {
+        if(foundnews.length !== 0) {
+            let ttx = new Timer();
+            ttx.startTimer();
+            loadNewsSections(foundnews);                 
+            ttx.stopTimer();
+            logger.info(`Loaded ${foundnews.length} news in ${ttx.getElapsedString()}`);
+        }
     }
     /**
      * Find and load active news in the page
@@ -482,7 +507,6 @@ $(document).ready(function () {
                 }
             });    
         });
-        console.log(newslist);
     }
     /**
      * Find dynamic html pieces
