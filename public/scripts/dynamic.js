@@ -62,6 +62,7 @@ $(document).ready(function () {
                             $(entry.target).attr('active','').removeAttr('inactive');
                         }
                         else{
+                            $(entry.target).attr('inactive','').removeAttr('active');
                             newscard.active = false;
                         }   
                     }
@@ -404,24 +405,6 @@ $(document).ready(function () {
         let slider = new Slider(container, timing, description, allimages);     // Build the slider frame
     }
     /**
-     * Build and display a news card. Store the card in an array
-     * 
-     * @param {*} allimages Associated images
-     * @param {*} description A short news description displayed above the images
-     * @param {*} diapo Data on the news to build (name....)
-     * @param {*} container The target element where the news will be appended
-     */
-    function buildNewsGallery(allimages, description, diapo, container) {
-        const newsindex = newslist.length;
-        let news = new News(container, description, allimages, diapo, newsindex);
-        observer.observe(document.querySelector(`#news-${newsindex}`));
-        newslist.push({ id: news.getID(),
-            newsobject: news,
-            active: false,
-            displayed: false
-        });
-    }
-    /**
      * Build a single card to be displayed in a parent element
      * @param {*} response json data containing some knife information
      * @param {*} container The target element where the card will be displayed
@@ -467,7 +450,7 @@ $(document).ready(function () {
             ttx.startTimer();
             loadNewsSections(foundnews);                 
             ttx.stopTimer();
-            logger.info(`Loaded ${foundnews.length} news in ${ttx.getElapsedString()}`);
+            logger.info(`Get images for ${foundnews.length} news in ${ttx.getElapsedString()}`);
         }
     }
     /**
@@ -500,12 +483,30 @@ $(document).ready(function () {
                                             news.name,
                                             newscontainer);
                     }
-                    $(newsgallery).show();
                 },
                 error: function (xhr) {
                     logger.error(xhr);
                 }
             });    
+        });
+        $(newsgallery).show();
+    }
+    /**
+     * Build and display a news card. Store the card in an array
+     * 
+     * @param {*} allimages Associated images
+     * @param {*} description A short news description displayed above the images
+     * @param {*} diapo Data on the news to build (name....)
+     * @param {*} container The target element where the news will be appended
+     */
+    function buildNewsGallery(allimages, description, diapo, container) {
+        const newsindex = newslist.length;
+        let news = new News(container, description, allimages, diapo, newsindex);
+        observer.observe(document.querySelector(`#news-${newsindex}`));
+        newslist.push({ id: news.getID(),
+            newsobject: news,
+            active: false,
+            displayed: false
         });
     }
     /**
