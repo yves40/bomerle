@@ -27,7 +27,7 @@ $(document).ready(function () {
     const flashzone = $('.flash');
     const flash = new Flash();
     let newslist = [];
-    let foundnews = [];
+    let activenews = [];
 
     $(flashzone).hide();
     // Single page zones management
@@ -71,7 +71,7 @@ $(document).ready(function () {
         })
     });
     observer.observe(document.querySelector('#knivesgallery'));
-    observer.observe(document.querySelector('#newsgallery'));
+    // observer.observe(document.querySelector('#newsgallery'));
     observer.observe(document.querySelector('.flash'));
     
     // Initial state of UI
@@ -432,7 +432,7 @@ $(document).ready(function () {
                 logger.info(`Found ${response.activecount} news in ${ttx.getElapsedString()}`);
                 if(response.activecount != 0) {
                     $(newsmenu).show();
-                    foundnews = response.activenews;
+                    activenews = response.activenews;
                 }
             },
             error: function (xhr) {
@@ -445,12 +445,12 @@ $(document).ready(function () {
      * The news Gallery is now visible, load its structure
      */
     function loadActiveNews() {
-        if(foundnews.length !== 0) {
+        if(activenews.length !== 0) {
             let ttx = new Timer();
             ttx.startTimer();
-            loadNewsSections(foundnews);                 
+            loadNewsSections(activenews);                 
             ttx.stopTimer();
-            logger.info(`Get images for ${foundnews.length} news in ${ttx.getElapsedString()}`);
+            logger.info(`Get images for ${activenews.length} news in ${ttx.getElapsedString()}`);
         }
     }
     /**
@@ -469,7 +469,7 @@ $(document).ready(function () {
                 url: '/slides/public/getnews',
                 data: JSON.stringify(payload),
                 dataType: "json",
-                async: false,       // can perform async, not in a hurry and preserve news order on screen
+                async: false,       // can perform synchronously, not in a hurry and preserve news order on screen
                 success: function (response) {
                     if(response.slidermode) {
                         if(response.timing === null) {
