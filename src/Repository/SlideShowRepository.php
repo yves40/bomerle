@@ -42,7 +42,7 @@ class SlideShowRepository extends ServiceEntityRepository
     public function findDistinctActiveNews($now): array
     {
         return $this->createQueryBuilder('s')
-        ->select('distinct(s.name) as name')
+        ->select('distinct(s.name) as name, s.id')
         ->andWhere('s.active = 1')
         ->setParameter('val', $now)
         ->andWhere('s.daterange = 0 or :val between s.datein and s.dateout')
