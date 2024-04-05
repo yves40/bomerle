@@ -478,9 +478,9 @@ $(document).ready(function () {
                         buildImagesSlider(response.images, response.timing, response.description, newsgallery);
                     }
                     else {
-                        buildNewsGallery(response.images, 
-                                            response.description,
-                                            news.name,
+                        buildNewsGallery(response.newsimages, 
+                                            response.newsdescription,
+                                            response.newsname,
                                             newscontainer);
                     }
                 },

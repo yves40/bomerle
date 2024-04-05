@@ -335,7 +335,7 @@ class AdminControllerSlideShow extends AbstractController
             return $this->json([
                 'message' => 'bootadmin.slides.getnews OK',
                 'newsname' => $newsname,
-                'description' => $text,
+                'newsdescription' => $text,
                 'candidatescount' => $candidatescount,
                 'slidermode' => $slidermode,
                 'timing' => $timing,
@@ -349,7 +349,7 @@ class AdminControllerSlideShow extends AbstractController
                 'Friday' => $friday,
                 'Saturday' => $saturday,
                 'Sunday' => $sunday,
-                'images' => $images,
+                'newsimages' => $images,
             ], 200);    
         }
         catch(Exception $e) {

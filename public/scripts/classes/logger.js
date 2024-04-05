@@ -78,7 +78,7 @@ export default class Logger {
             let logstring = this.datetime.getDateTime()
                     + ' [' + this.levelToString(level) + '] '
                     + ' ' + mess ;
-                    console.log(logstring);
+            console.trace(logstring);
             return;
         }
     }

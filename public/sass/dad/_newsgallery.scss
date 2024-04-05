@@ -28,23 +28,21 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: all 2.5s ease-in-out;
         }
         &__details:nth-child(odd) {
             animation-name: slideRightIn;
         }
         &__details:nth-child(even) {
-            transition: all .5s ease-in-out;
             animation-name: slideLeftIn;
         }
         &__details[active]  {
-            animation-duration: 0.8s;
+            animation-duration: 0.5s;
             animation-fill-mode: forwards; 
             animation-timing-function: linear;      
         }
         &__details[inactive]  {
             animation-name: slideRightOut;
-            animation-duration: 0.5s;
+            animation-duration: 0.3s;
             animation-fill-mode: forwards;
             animation-timing-function: linear;      
         }
@@ -70,7 +68,7 @@
                 padding: 1rem 0;
                 @include for-desktop{
                     font-size: 1.3rem;
-                    line-height: 1.3rem;
+                    line-height: 1.5rem;
                 }
             }
             &__images { 
