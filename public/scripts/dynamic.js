@@ -71,7 +71,7 @@ $(document).ready(function () {
         })
     });
     observer.observe(document.querySelector('#knivesgallery'));
-    // observer.observe(document.querySelector('#newsgallery'));
+    observer.observe(document.querySelector('#newsgallery'));
     observer.observe(document.querySelector('.flash'));
     
     // Initial state of UI
