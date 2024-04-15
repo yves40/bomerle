@@ -771,6 +771,11 @@
       #newsgallery .news {
         max-width: 1024px;
         width: 70%; } }
+    #newsgallery .news h2 {
+      font-family: "Gideon Roman", sans-serif;
+      font-size: 2rem;
+      margin: 2rem;
+      color: white; }
     #newsgallery .news__details {
       background-color: rgba(51, 51, 51, 0.4);
       display: flex;
@@ -799,9 +804,6 @@
           padding: 0 5em 3em 5em;
           width: 100%;
           max-width: 1024px; } }
-      #newsgallery .news__header h2 {
-        font-family: "Gideon Roman", sans-serif;
-        margin: 1rem; }
       #newsgallery .news__header p {
         font-family: "Gideon Roman", sans-serif;
         border-radius: 5px;
@@ -814,7 +816,10 @@
             font-size: 1.3rem;
             line-height: 1.5rem; } }
       #newsgallery .news__header img {
-        width: 50%; }
+        width: 50%;
+        float: left;
+        margin: 1rem;
+        border-radius: 5px; }
     #newsgallery .news__images {
       margin: 0 auto;
       display: flex;

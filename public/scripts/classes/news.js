@@ -42,12 +42,6 @@ export default class News {
       $(newsdiv).attr('inactive','').removeAttr('active');
       
       const newsheader = $('<div></div>').addClass('news__header');
-      const h2 = $('<h2></h2>').text(this.newsname);
-      $(newsheader).append(h2);
-      if(this.description.length !== 0) {
-        const text = $('<p>').text(this.description);
-        $(newsheader).append(text);
-      }
       $(newsdiv).append(newsheader);
       const newsimages = $("<ul>").attr('id', this.news).addClass('news__images')
       $(newsdiv).append(newsimages);
@@ -57,6 +51,8 @@ export default class News {
     displayImages() {
       // Get the container
       const news = $(`#${this.news}`).parent();
+      const h2 = $('<h2></h2>').text(this.newsname);
+      news.prepend(h2);
       const imagesloaded = $(`#${this.news}`).find('img');
       
       if(imagesloaded.length === 0) { // Images already loaded ?
@@ -64,7 +60,13 @@ export default class News {
           let newimg= $('<img>').attr('src', $props.slideimageslocation()+"/"+this.newsimages[i]);
           if(i === 0 ) { // 1st image displayed in header
             const imagetarget = $(news).find('.news__header');
+            // Order of element insertions important here!
+            // Image first otherwise float does not work
             imagetarget.append(newimg);
+            if(this.description.length !== 0) {
+              const text = $('<p>').text(this.description);
+              imagetarget.append(text);
+            }  
           }
           else {         // Other ones in the image section
             const imagetarget = $(news).find('.news__images');
