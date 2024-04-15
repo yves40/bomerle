@@ -34,45 +34,51 @@ export default class News {
     }
     // ------------------------------------------------------------------------------------------------
     buildnewsFrame(container) {
-      let newsection = $('<div>')
+      let newsdiv = $('<div>')
             .attr('id', this.newsid)
             .attr('name', this.newsname.replaceAll(' ', '-'))
             .addClass('news__details');
-      $(container).append(newsection);
-      $(newsection).attr('inactive','').removeAttr('active');
+      $(container).append(newsdiv);
+      $(newsdiv).attr('inactive','').removeAttr('active');
       
-      const newszone = $("<div>").addClass('news__zone');
-      const divcontainer = $('<div></div>');
+      const newsheader = $('<div></div>').addClass('news__header');
       const h2 = $('<h2></h2>').text(this.newsname);
-      $(divcontainer).append(h2);
+      $(newsheader).append(h2);
       if(this.description.length !== 0) {
         const text = $('<p>').text(this.description);
-        $(divcontainer).append(text);
+        $(newsheader).append(text);
       }
-      $(newszone).append(divcontainer);
-      const news = $("<ul>").attr('id', this.news).addClass('news__zone__images')
-      $(newszone).append(news);
-      $(newsection).append(newszone);
-      $(container).append(newsection);
+      $(newsdiv).append(newsheader);
+      const newsimages = $("<ul>").attr('id', this.news).addClass('news__images')
+      $(newsdiv).append(newsimages);
+      $(container).append(newsdiv);
     }
     // ------------------------------------------------------------------------------------------------
     displayImages() {
       // Get the container
-      const news = $(`#${this.news}`);
+      const news = $(`#${this.news}`).parent();
       const imagesloaded = $(`#${this.news}`).find('img');
-      if(imagesloaded.length === 0) {
+      
+      if(imagesloaded.length === 0) { // Images already loaded ?
         for(let i = 0; i < this.newsimages.length; ++i) {
           let newimg= $('<img>').attr('src', $props.slideimageslocation()+"/"+this.newsimages[i]);
-          let theline = $('<li>');
-          $(theline).append(newimg);
-          $(news).append(theline);
+          if(i === 0 ) { // 1st image displayed in header
+            const imagetarget = $(news).find('.news__header');
+            imagetarget.append(newimg);
+          }
+          else {         // Other ones in the image section
+            const imagetarget = $(news).find('.news__images');
+            let theline = $('<li>');
+            $(theline).append(newimg);
+            imagetarget.append(theline);
+          }
           $(newimg).click( (e) => { // Arrow function mandatory here to use this
               console.log(`Clicked on ${e.target.src}`);
               e.preventDefault();
               // this.fullScreen(allimages[i]);
           });
+        }
       }
-    }
   }
   // ------------------------------------------------------------------------------------------------
   clearImages() {

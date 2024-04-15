@@ -61,10 +61,10 @@ $(document).ready(function () {
                             newscard.displayed = true;
                             $(entry.target).attr('active','').removeAttr('inactive');
                         }
-                        else{
-                            $(entry.target).attr('inactive','').removeAttr('active');
-                            newscard.active = false;
-                        }   
+                        // else{
+                        //     $(entry.target).attr('inactive','').removeAttr('active');
+                        //     newscard.active = false;
+                        // }   
                     }
                     break;
             }
