@@ -49,7 +49,7 @@ class AdminControllerSlideShow extends AbstractController
          * 
         */
         $repo = $entityManager->getRepository(SlideShow::class);
-        $allslides = $repo->findBy([], [ 'name' => 'ASC', 'datein' => 'DESC']);
+        $allslides = $repo->findBy([], [ 'datein' => 'DESC']);
         $slide = new SlideShow();
         $form = $this->createForm(SlideShowType::class, $slide);
         return $this->render('admin/slides.html.twig', [
