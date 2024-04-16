@@ -57,7 +57,10 @@
                     }
                 }
                 img {
-                    width: 50%;
+                    width: 90%;
+                    @include for-desktop {
+                        width: 50%;
+                    }
                     margin: 1rem;
                     border-radius: $border-radius;
                 }
@@ -68,10 +71,7 @@
                 flex-wrap: wrap;
                 gap: 2vmin;
                 list-style-type: none;
-                li { 
-                    height: 250px;
-                    flex-grow: 1;
-                }
+                justify-content: center;
                 img {
                     width: 100px;
                     height: 100px;
@@ -90,14 +90,18 @@
         }
         &__details:nth-child(odd) {
             animation-name: slideRightIn;
-            img {
-                float: left;
+            @include for-desktop {
+                img {
+                    float: left;
+                }
             }
         }
         &__details:nth-child(even) {
             animation-name: slideLeftIn;
-            img {
-                float: right;
+            @include for-desktop {
+                img {
+                    float: right;
+                }
             }
         }
         &__details[active]  {

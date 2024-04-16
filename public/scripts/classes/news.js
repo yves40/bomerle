@@ -57,7 +57,8 @@ export default class News {
       
       if(imagesloaded.length === 0) { // Images already loaded ?
         for(let i = 0; i < this.newsimages.length; ++i) {
-          let newimg= $('<img>').attr('src', $props.slideimageslocation()+"/"+this.newsimages[i]);
+          let newimg= $('<img>').attr('src', $props.slideimageslocation()+"/"+this.newsimages[i])
+                .attr('data-index', i);
           if(i === 0 ) { // 1st image displayed in header
             const imagetarget = $(news).find('.news__details__header');
             // Order of element insertions important here!
@@ -71,7 +72,7 @@ export default class News {
             imagetarget.append(theline);
           }
           $(newimg).click( (e) => { // Arrow function mandatory here to use this
-              console.log(`Clicked on ${e.target.src}`);
+              console.log(`Clicked on ${e.target.src} with index ${$(e.target).data('index')}`);
               e.preventDefault();
               // this.fullScreen(allimages[i]);
           });
