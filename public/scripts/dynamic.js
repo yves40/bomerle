@@ -43,10 +43,15 @@ $(document).ready(function () {
                     }   
                     break;
                 case 'newsgallery': 
-                    if(entry.isIntersecting) {
-                        if(newslist.length === 0) {
-                            loadActiveNews();
+                    if (!window.location.href.endsWith('contactrequest')) {                        
+                        if(entry.isIntersecting) {
+                            if(newslist.length === 0) {
+                                loadActiveNews();
+                            }
                         }
+                    }
+                    else {
+                        console.log('No need to activate news; skip to contact');
                     }
                     break;
                 default:    // Did a news card become visibile or invisible ?
