@@ -63,10 +63,6 @@ export default class News {
             // Order of element insertions important here!
             // Image first otherwise float does not work
             imagetarget.append(newimg);
-            if(this.description.length !== 0) {
-              const text = $('<p>').text(this.description);
-              imagetarget.append(text);
-            }  
           }
           else {         // Other ones in the image section
             const imagetarget = $(news).find('.news__details__images');
@@ -80,7 +76,12 @@ export default class News {
               // this.fullScreen(allimages[i]);
           });
         }
-      }
+        // Add a description if any, even if no image 
+        if(this.description.length !== 0) {
+          const text = $('<p>').text(this.description);
+          $(news).find('.news__details__header').append(text);
+        }  
+    }
   }
   // ------------------------------------------------------------------------------------------------
   clearImages() {
