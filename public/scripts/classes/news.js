@@ -3,6 +3,7 @@
 ----------------------------------------------------------------------------*/
 
 import $props from '../properties.js';
+import Slider from './slider.js';
 
 export default class News {
 
@@ -74,8 +75,14 @@ export default class News {
           $(newimg).click( (e) => { // Arrow function mandatory here to use this
               console.log(`Clicked on ${e.target.src} with index ${$(e.target).data('index')}`);
               e.preventDefault();
-              // this.fullScreen(allimages[i]);
-          });
+              $(slider).attr('name', this.newsname);
+              let dynslider = new Slider($(slider),
+                    10,
+                    this.newsname,
+                    this.newsimages);
+              $("body").css("overflow", "hidden");
+              $(slider).css({'top': window.scrollY,'left': 0, 'z-index': 1000}).css('display', 'flex');
+            });
         }
         // Add a description if any, even if no image 
         if(this.description.length !== 0) {

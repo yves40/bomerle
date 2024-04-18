@@ -24,7 +24,7 @@
 
   import Logger  from './logger.js';
   import $props  from '../properties.js';
-    export default class Slider {
+  export default class Slider {
 
   // slidertype is used to determine images location.
   // As the slider can display diaporama images or knife images

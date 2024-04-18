@@ -796,11 +796,11 @@
           font-family: "Gideon Roman", sans-serif;
           border-radius: 5px;
           font-size: 1rem;
-          line-height: 1.3rem;
-          margin: 1rem;
-          padding: 1rem 0; }
+          line-height: 1.3rem; }
           @media screen and (min-width: 1024px) {
             #newsgallery .news__details__header p {
+              margin: 1rem;
+              padding: 1rem 0;
               font-size: 1.3rem;
               line-height: 1.5rem; } }
         #newsgallery .news__details__header img {
