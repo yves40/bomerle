@@ -3,7 +3,7 @@
 ----------------------------------------------------------------------------*/
 
 import $props from '../properties.js';
-import Slider from './slider.js';
+import Sliderzoom from './sliderzoom.js';
 
 export default class News {
 
@@ -76,7 +76,7 @@ export default class News {
               console.log(`Clicked on ${e.target.src} with index ${$(e.target).data('index')}`);
               e.preventDefault();
               $(slider).attr('name', this.newsname);
-              let dynslider = new Slider($(slider),
+              let dynslider = new Sliderzoom($(slider),
                     10,
                     this.newsname,
                     this.newsimages);
