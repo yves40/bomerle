@@ -63,82 +63,6 @@
 .svg-white {
   filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(131deg) brightness(102%) contrast(102%); }
 
-@keyframes fadein {
-  0% {
-    opacity: 0; }
-  100% {
-    opacity: 1; } }
-
-@keyframes fadeout {
-  0% {
-    opacity: 1; }
-  100% {
-    opacity: 0; } }
-
-@keyframes slideDown {
-  0% {
-    transform: translateY(-100%); }
-  50% {
-    transform: translateY(-50%); }
-  65% {
-    transform: translateY(-20%); }
-  100% {
-    transform: translateY(0%); } }
-
-@keyframes flashDown {
-  0% {
-    transform: translateY(-100%); }
-  20% {
-    transform: translateX(10%, -70%); }
-  50% {
-    transform: translateX(25%, -50%); }
-  75% {
-    transform: translate(40%, 50%); }
-  100% {
-    transform: translate(50%, 50%); } }
-
-@keyframes flashUp {
-  0% {
-    transform: translateY(200%); }
-  20% {
-    transform: translateX(10%, 90%); }
-  50% {
-    transform: translateX(25%, 70%); }
-  75% {
-    transform: translate(40%, 50%); }
-  100% {
-    transform: translate(50%, 50%); } }
-
-@keyframes flashUpClockwise {
-  0% {
-    transform: translateY(200%); }
-  20% {
-    transform: translateX(10%, 90%) rotate(100deg); }
-  50% {
-    transform: translateX(25%, 70%) rotate(180deg); }
-  75% {
-    transform: translate(40%, 50%) rotate(270deg); }
-  100% {
-    transform: translate(50%, 50%) rotate(360deg); } }
-
-@keyframes flashUpCounterClockwise {
-  0% {
-    transform: translateY(200%); }
-  20% {
-    transform: translateX(10%, 90%) rotate(-100deg); }
-  50% {
-    transform: translateX(25%, 70%) rotate(-180deg); }
-  75% {
-    transform: translate(40%, 50%) rotate(-270deg); }
-  100% {
-    transform: translate(50%, 50%) rotate(-360deg); } }
-
-@keyframes slideUp {
-  100% {
-    transform: translateY(-100%); }
-  0% {
-    transform: translateY(0%); } }
-
 /*
   Special section for SVGs
 
@@ -196,82 +120,6 @@
 .svg-white {
   filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(131deg) brightness(102%) contrast(102%); }
 
-@keyframes fadein {
-  0% {
-    opacity: 0; }
-  100% {
-    opacity: 1; } }
-
-@keyframes fadeout {
-  0% {
-    opacity: 1; }
-  100% {
-    opacity: 0; } }
-
-@keyframes slideDown {
-  0% {
-    transform: translateY(-100%); }
-  50% {
-    transform: translateY(-50%); }
-  65% {
-    transform: translateY(-20%); }
-  100% {
-    transform: translateY(0%); } }
-
-@keyframes flashDown {
-  0% {
-    transform: translateY(-100%); }
-  20% {
-    transform: translateX(10%, -70%); }
-  50% {
-    transform: translateX(25%, -50%); }
-  75% {
-    transform: translate(40%, 50%); }
-  100% {
-    transform: translate(50%, 50%); } }
-
-@keyframes flashUp {
-  0% {
-    transform: translateY(200%); }
-  20% {
-    transform: translateX(10%, 90%); }
-  50% {
-    transform: translateX(25%, 70%); }
-  75% {
-    transform: translate(40%, 50%); }
-  100% {
-    transform: translate(50%, 50%); } }
-
-@keyframes flashUpClockwise {
-  0% {
-    transform: translateY(200%); }
-  20% {
-    transform: translateX(10%, 90%) rotate(100deg); }
-  50% {
-    transform: translateX(25%, 70%) rotate(180deg); }
-  75% {
-    transform: translate(40%, 50%) rotate(270deg); }
-  100% {
-    transform: translate(50%, 50%) rotate(360deg); } }
-
-@keyframes flashUpCounterClockwise {
-  0% {
-    transform: translateY(200%); }
-  20% {
-    transform: translateX(10%, 90%) rotate(-100deg); }
-  50% {
-    transform: translateX(25%, 70%) rotate(-180deg); }
-  75% {
-    transform: translate(40%, 50%) rotate(-270deg); }
-  100% {
-    transform: translate(50%, 50%) rotate(-360deg); } }
-
-@keyframes slideUp {
-  100% {
-    transform: translateY(-100%); }
-  0% {
-    transform: translateY(0%); } }
-
 .slider {
   display: flex;
   position: absolute;
@@ -287,16 +135,13 @@
     display: grid;
     gap: .5rem;
     grid-template-columns: 1fr fit-content(80%) 1fr;
-    grid-template-rows: 10% 70% 8% 5%;
-    grid-template-areas: '. kdesc .' '. img .' '. close .' 'left indic right';
-    width: 80vw;
-    height: 90dvh;
+    grid-template-rows: 10% 70% 8%;
+    grid-template-areas: '. kdesc .' '. img .' '. techzone .';
+    width: 100%;
+    height: 100dvh;
     max-width: 1024px;
     align-items: center;
     justify-content: center; }
-    @media screen and (min-width: 1024px) {
-      .slider__box {
-        grid-template-areas: '. kdesc .' 'left img right' '. close .' '. indic .'; } }
     .slider__box__action {
       cursor: pointer; }
       .slider__box__action img {
@@ -310,11 +155,21 @@
       position: absolute;
       inset: 0; }
       .slider__box__slides__img {
+        grid-area: img;
+        border-radius: 10px;
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: contain;
         display: flex;
         opacity: 0;
         transition: 1s opacity ease-in-out; }
         .slider__box__slides__img.active {
           opacity: 1; }
+        .slider__box__slides__img img {
+          grid-area: img;
+          border-radius: 10px;
+          max-width: 100%;
+          object-fit: contain; }
     .slider__box__indicators {
       display: flex;
       align-items: center;
@@ -336,30 +191,12 @@
           opacity: 1;
           background-color: darkolivegreen; }
 
-.prev {
-  grid-area: left;
-  justify-self: right; }
-
-.next {
-  grid-area: right;
-  justify-self: left; }
-
-.img {
-  grid-area: img;
-  border-radius: 10px;
-  max-width: 100%;
-  max-height: 100%;
-  width: auto;
-  height: auto;
-  object-fit: cover; }
-
 .kdesc {
   grid-area: kdesc;
   justify-self: center; }
 
-.close {
-  grid-area: close;
-  justify-self: center; }
+.techzone {
+  grid-area: techzone; }
 
 .zoomer {
   display: flex;
@@ -467,89 +304,12 @@
 .svg-white {
   filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(131deg) brightness(102%) contrast(102%); }
 
-@keyframes fadein {
-  0% {
-    opacity: 0; }
-  100% {
-    opacity: 1; } }
-
-@keyframes fadeout {
-  0% {
-    opacity: 1; }
-  100% {
-    opacity: 0; } }
-
-@keyframes slideDown {
-  0% {
-    transform: translateY(-100%); }
-  50% {
-    transform: translateY(-50%); }
-  65% {
-    transform: translateY(-20%); }
-  100% {
-    transform: translateY(0%); } }
-
-@keyframes flashDown {
-  0% {
-    transform: translateY(-100%); }
-  20% {
-    transform: translateX(10%, -70%); }
-  50% {
-    transform: translateX(25%, -50%); }
-  75% {
-    transform: translate(40%, 50%); }
-  100% {
-    transform: translate(50%, 50%); } }
-
-@keyframes flashUp {
-  0% {
-    transform: translateY(200%); }
-  20% {
-    transform: translateX(10%, 90%); }
-  50% {
-    transform: translateX(25%, 70%); }
-  75% {
-    transform: translate(40%, 50%); }
-  100% {
-    transform: translate(50%, 50%); } }
-
-@keyframes flashUpClockwise {
-  0% {
-    transform: translateY(200%); }
-  20% {
-    transform: translateX(10%, 90%) rotate(100deg); }
-  50% {
-    transform: translateX(25%, 70%) rotate(180deg); }
-  75% {
-    transform: translate(40%, 50%) rotate(270deg); }
-  100% {
-    transform: translate(50%, 50%) rotate(360deg); } }
-
-@keyframes flashUpCounterClockwise {
-  0% {
-    transform: translateY(200%); }
-  20% {
-    transform: translateX(10%, 90%) rotate(-100deg); }
-  50% {
-    transform: translateX(25%, 70%) rotate(-180deg); }
-  75% {
-    transform: translate(40%, 50%) rotate(-270deg); }
-  100% {
-    transform: translate(50%, 50%) rotate(-360deg); } }
-
-@keyframes slideUp {
-  100% {
-    transform: translateY(-100%); }
-  0% {
-    transform: translateY(0%); } }
-
 *, *::before, *::after {
   box-sizing: border-box; }
 
 #newsgallery {
   scroll-margin: 100px;
   width: 100%;
-  padding-top: 1rem;
   background-image: url(../images/BastosBG3.webp);
   background-position: center;
   background-attachment: fixed;
@@ -558,67 +318,89 @@
     #newsgallery {
       background-size: 70%;
       background-repeat: no-repeat; } }
-  #newsgallery .newsdetails[active] {
-    animation-name: fadein;
-    animation-duration: 4s;
-    animation-fill-mode: forwards;
-    animation-timing-function: linear; }
-  #newsgallery .newsdetails[inactive] {
-    animation-name: fadeout;
-    animation-duration: 4s;
-    animation-fill-mode: forwards;
-    animation-timing-function: linear; }
-  #newsgallery .newszone {
-    color: white;
-    padding: 0 2em 3em 2em;
-    width: 90%; }
+  #newsgallery .news {
+    margin: 0 auto; }
     @media screen and (min-width: 1024px) {
-      #newsgallery .newszone {
-        padding: 0 5em 3em 5em;
-        width: 100%;
-        max-width: 1024px; } }
-    #newsgallery .newszone h2 {
+      #newsgallery .news {
+        max-width: 1024px;
+        width: 70%; } }
+    #newsgallery .news h2 {
       font-family: "Gideon Roman", sans-serif;
-      margin: 1rem; }
-    #newsgallery .newszone p {
-      font-family: "Gideon Roman", sans-serif;
-      border-radius: 5px;
-      font-size: 1rem;
-      line-height: 1.3rem;
-      margin: 1rem;
-      padding: 1rem 0; }
-      @media screen and (min-width: 1024px) {
-        #newsgallery .newszone p {
-          font-size: 1.3rem;
-          line-height: 1.3rem; } }
-    #newsgallery .newszone .news {
-      margin: 0 auto;
+      font-size: 2rem;
+      margin: 2rem;
+      color: white; }
+    #newsgallery .news__details {
+      background-color: rgba(51, 51, 51, 0.4);
       display: flex;
-      flex-wrap: wrap;
-      gap: 2vmin;
-      list-style-type: none; }
-      #newsgallery .newszone .news li {
-        height: 250px;
-        flex-grow: 1; }
-      #newsgallery .newszone .news img {
-        width: 100%;
-        height: 100%;
-        border-radius: 5px;
-        border: solid 1px white;
-        object-fit: cover; }
-      #newsgallery .newszone .news ::after {
-        content: "";
-        display: block;
-        flex-grow: 10; }
-
-#fullscreen {
-  background-color: #1a1917; }
-
-@keyframes fadein {
-  0% {
-    opacity: 0; }
-  100% {
-    opacity: 1; } }
+      align-items: center;
+      flex-direction: column;
+      justify-content: center;
+      border-top: 2px white solid;
+      margin-top: 2rem; }
+      #newsgallery .news__details__header {
+        color: white;
+        padding: 0 2em 3em 2em;
+        width: 90%; }
+        @media screen and (min-width: 1024px) {
+          #newsgallery .news__details__header {
+            padding: 0 5em 3em 5em;
+            width: 100%;
+            max-width: 1024px; } }
+        #newsgallery .news__details__header p {
+          font-family: "Gideon Roman", sans-serif;
+          border-radius: 5px;
+          font-size: 1rem;
+          line-height: 1.3rem; }
+          @media screen and (min-width: 1024px) {
+            #newsgallery .news__details__header p {
+              margin: 1rem;
+              padding: 1rem 0;
+              font-size: 1.3rem;
+              line-height: 1.5rem; } }
+        #newsgallery .news__details__header img {
+          width: 90%;
+          margin: 1rem;
+          border-radius: 5px; }
+          @media screen and (min-width: 1024px) {
+            #newsgallery .news__details__header img {
+              width: 50%; } }
+      #newsgallery .news__details__images {
+        margin: 1rem;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 2vmin;
+        list-style-type: none;
+        justify-content: center; }
+        #newsgallery .news__details__images img {
+          width: 100px;
+          height: 100px;
+          border-radius: 5px;
+          border: solid 1px white;
+          object-fit: cover;
+          float: none; }
+        #newsgallery .news__details__images ::after {
+          content: "";
+          display: block;
+          flex-grow: 10; }
+    #newsgallery .news__details:nth-child(odd) {
+      animation-name: slideRightIn; }
+      @media screen and (min-width: 1024px) {
+        #newsgallery .news__details:nth-child(odd) img {
+          float: left; } }
+    #newsgallery .news__details:nth-child(even) {
+      animation-name: slideLeftIn; }
+      @media screen and (min-width: 1024px) {
+        #newsgallery .news__details:nth-child(even) img {
+          float: right; } }
+    #newsgallery .news__details[active] {
+      animation-duration: 0.5s;
+      animation-fill-mode: forwards;
+      animation-timing-function: linear; }
+    #newsgallery .news__details[inactive] {
+      animation-name: slideRightOut;
+      animation-duration: 0.3s;
+      animation-fill-mode: forwards;
+      animation-timing-function: linear; }
 
 /*
   Special section for SVGs
@@ -676,82 +458,6 @@
 
 .svg-white {
   filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(131deg) brightness(102%) contrast(102%); }
-
-@keyframes fadein {
-  0% {
-    opacity: 0; }
-  100% {
-    opacity: 1; } }
-
-@keyframes fadeout {
-  0% {
-    opacity: 1; }
-  100% {
-    opacity: 0; } }
-
-@keyframes slideDown {
-  0% {
-    transform: translateY(-100%); }
-  50% {
-    transform: translateY(-50%); }
-  65% {
-    transform: translateY(-20%); }
-  100% {
-    transform: translateY(0%); } }
-
-@keyframes flashDown {
-  0% {
-    transform: translateY(-100%); }
-  20% {
-    transform: translateX(10%, -70%); }
-  50% {
-    transform: translateX(25%, -50%); }
-  75% {
-    transform: translate(40%, 50%); }
-  100% {
-    transform: translate(50%, 50%); } }
-
-@keyframes flashUp {
-  0% {
-    transform: translateY(200%); }
-  20% {
-    transform: translateX(10%, 90%); }
-  50% {
-    transform: translateX(25%, 70%); }
-  75% {
-    transform: translate(40%, 50%); }
-  100% {
-    transform: translate(50%, 50%); } }
-
-@keyframes flashUpClockwise {
-  0% {
-    transform: translateY(200%); }
-  20% {
-    transform: translateX(10%, 90%) rotate(100deg); }
-  50% {
-    transform: translateX(25%, 70%) rotate(180deg); }
-  75% {
-    transform: translate(40%, 50%) rotate(270deg); }
-  100% {
-    transform: translate(50%, 50%) rotate(360deg); } }
-
-@keyframes flashUpCounterClockwise {
-  0% {
-    transform: translateY(200%); }
-  20% {
-    transform: translateX(10%, 90%) rotate(-100deg); }
-  50% {
-    transform: translateX(25%, 70%) rotate(-180deg); }
-  75% {
-    transform: translate(40%, 50%) rotate(-270deg); }
-  100% {
-    transform: translate(50%, 50%) rotate(-360deg); } }
-
-@keyframes slideUp {
-  100% {
-    transform: translateY(-100%); }
-  0% {
-    transform: translateY(0%); } }
 
 .htmltemplate {
   display: flex;

@@ -65,7 +65,7 @@
       this.buildSliderFrame(container);
       this.addImages(allimages);
       // Arm handlers
-      $(`#${this.homezone} > .slider__box__action`).children().on('click', (event) => {
+      $('.slider__box__action').on('click', (event) => {
         event.stopPropagation();
         this.manageActiveSlide(event);
       })
@@ -97,11 +97,11 @@
     }
     const parent = $(event.target).parent();
     if($(parent).hasClass('next')) {
-      this.nextSlide();
+      this.nextSlide($(event.target).closest('.slider__box'));
     }
     else {
       if($(parent).hasClass('prev')) {
-        this.previousSlide();
+        this.previousSlide($(event.target).closest('.slider__box'));
       }
       else {
         $(this.container).trigger('sliderclosed');
@@ -109,39 +109,43 @@
     }
   }
   // ------------------------------------------------------------------------------------------------
+  nextSlide(sliderbox) {
+    const imageroot= $(sliderbox).find('.slider__box__slides');
+    // const activeline = $(`#${imageroot}-${this.activeindex}`);
+    const activeline = $(imageroot).find(`[data-imgindex=${this.activeindex}]`);
+    ++this.activeindex;
+    const newindex = this.checkBoundaries();
+    $(activeline).removeClass('active');
+    // $(`#${imageroot}-${newindex}`).addClass('active');
+    $(imageroot).find(`[data-imgindex=${newindex}]`).addClass('active');
+    this.updateActiveButton();
+  }
+  // ------------------------------------------------------------------------------------------------
+  previousSlide(sliderbox) {
+    const imageroot= $(sliderbox).find('.slider__box__slides');
+    // const activeline = $(`#${imageroot}-${this.activeindex}`);
+    const activeline = $(imageroot).find(`[data-imgindex=${this.activeindex}]`);
+    --this.activeindex;
+    const newindex = this.checkBoundaries();
+    $(activeline).removeClass('active');
+    // $(`#${imageroot}-${newindex}`).addClass('active');
+    $(imageroot).find(`[data-imgindex=${newindex}]`).addClass('active');
+    this.updateActiveButton();
+  }  // ------------------------------------------------------------------------------------------------
   manageActiveIndicator(event) {
     this.stopSlider();
     const newindex = $(event.target).data('imageindex');
     const splitter = this.sliderarea.split('-');
-    const imageroot= splitter[0] + splitter[1];
+    const imageroot= $(sliderbox).find('.slider__box__slides');
+    // const imageroot= splitter[0] + splitter[1];
     const activeline = $(`#${imageroot}-${this.activeindex}`);
     this.activeindex = newindex;
     $(activeline).removeClass('active');
-    $(`#${imageroot}-${newindex}`).addClass('active');
+//    $(`#${imageroot}-${newindex}`).addClass('active');
+    $(imageroot).find(`[data-imgindex=${newindex}]`).addClass('active');
     this.updateActiveButton();
   }
-  // ------------------------------------------------------------------------------------------------
-  nextSlide() {
-    const splitter = this.sliderarea.split('-');
-    const imageroot= splitter[0] + splitter[1];
-    const activeline = $(`#${imageroot}-${this.activeindex}`);
-    ++this.activeindex;
-    const newindex = this.checkBoundaries();
-    $(activeline).removeClass('active');
-    $(`#${imageroot}-${newindex}`).addClass('active');
-    this.updateActiveButton();
-  }
-  // ------------------------------------------------------------------------------------------------
-  previousSlide() {
-    const splitter = this.sliderarea.split('-');
-    const imageroot= splitter[0] + splitter[1];
-    const activeline = $(`#${imageroot}-${this.activeindex}`);
-    --this.activeindex;
-    const newindex = this.checkBoundaries();
-    $(activeline).removeClass('active');
-    $(`#${imageroot}-${newindex}`).addClass('active');
-    this.updateActiveButton();
-  }
+
   // ------------------------------------------------------------------------------------------------
   updateActiveButton() {
     const indicatorslist = $(`#${this.homezone} > .slider__box__indicators`).children();
@@ -168,28 +172,26 @@
 
     const kdesc = $('<h2></h2>').addClass('kdesc heroh2').text(this.description);
     $(sliderzone).append(kdesc);
-    // Close button
-    const closebutton = $("<a></a>").addClass('slider__box__action close');
+    // Close and Nav button
+    const closebutton = $("<a></a>").addClass('slider__box__action techzone close');
+    const prev = $("<a></a>").addClass('slider__box__action techzone prev');
+    const next = $("<a></a>").addClass('slider__box__action techzone next');
+    // Close and Nav images
     const closeimage = $("<img>").attr('src',  `${$props.svgimageslocation()}/close-circle-outline.svg`)
-                              .addClass("svg-white");
-    $(closebutton).append(closeimage);
-    $(sliderzone).append(closebutton);
-    // Nav buttons
-    const prev = $("<a></a>").addClass('slider__box__action prev');
+        .addClass("svg-white");
     const previmage = $("<img>").attr('src', `${$props.svgimageslocation()}/arrow-back.svg`)
-                .addClass("svg-white").addClass('prev');
-    $(prev).append(previmage);
-    $(sliderzone).append(prev);
-    const next = $("<a></a>").addClass('slider__box__action next');
+        .addClass("svg-white").addClass('techzone');
     const nextimage = $("<img>").attr('src', `${$props.svgimageslocation()}/arrow-forward.svg`)
-                .addClass("svg-white").addClass('next');
+        .addClass("svg-white").addClass('techzone');
+    $(closebutton).append(closeimage);
+    $(prev).append(previmage);
     $(next).append(nextimage);
-    $(sliderzone).append(next);
+    // Images section
     const slidesbox = $('<div></div>').attr('id', this.sliderarea).addClass('slider__box__slides');
     $(sliderzone).append(slidesbox);
     // Add the indicators
     const indicators = $("<div>").addClass('slider__box__indicators')
-      .addClass('indic');
+      .addClass('techzone');
     for(let i = 0; i < this.allimages.length; ++i) {
       let buttonindic = $('<button>').addClass('slider__box__indicators__flags')
         .attr('type', 'button')
@@ -197,7 +199,10 @@
       if (i == 0) $(buttonindic).addClass('active');
       $(indicators).append(buttonindic);
     }
+    $(indicators).append(prev);
     $(sliderzone).append(indicators);
+    $(indicators).append(next);
+    $(indicators).append(closebutton);
     $(container).append(sliderzone);
     this.startSlider();
   }
@@ -210,6 +215,7 @@
     const imageroot= splitter[0] + splitter[1];
     for(let i = 0; i < allimages.length; ++i) {
       let oneimage = $("<div>").attr('id', `${imageroot}-${i}`)
+                  .attr(`data-imgindex`, `${i}`)
                   .addClass('slider__box__slides__img' );
       if(i === 0 ){
         $(oneimage).addClass('active');
