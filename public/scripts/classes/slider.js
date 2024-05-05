@@ -32,7 +32,7 @@
   // Two accepted values : SHOW (the default) and KNIFE
   constructor(container, timing = 2, description = '', allimages, slidertype = 'SHOW') {
     // Init
-      this.version = 'Slider:1.58, Mar 21 2024 ';
+      this.version = 'Slider:1.59, May 05 2024 ';
       this.container = container;
       this.containername = ($(container).attr('name')).replaceAll(' ', '-');
       this.slideinterval = timing * 1000;
@@ -71,7 +71,7 @@
       })
       $(`#${this.homezone} > .slider__box__indicators`).children().on('click', (event) => {
         event.stopPropagation();
-        this.manageActiveIndicator(event);
+        this.selectActiveIndicator(event.target);
       });
       // Track any keyboard or mobile input
       $('html').keyup( (event) => { 
@@ -132,17 +132,15 @@
     $(imageroot).find(`[data-imgindex=${newindex}]`).addClass('active');
     this.updateActiveButton();
   }  // ------------------------------------------------------------------------------------------------
-  manageActiveIndicator(event) {
+  selectActiveIndicator(targetindicator) {
     this.stopSlider();
-    const newindex = $(event.target).data('imageindex');
-    const splitter = this.sliderarea.split('-');
-    const imageroot= $(sliderbox).find('.slider__box__slides');
-    // const imageroot= splitter[0] + splitter[1];
+    const targetparent = $(targetindicator).parent();
+    const newindex = $(targetindicator).parent().data('imageindex');
+    const imageroot= $(`#${this.homezone} > .slider__box__slides`);
     const activeline = $(`#${imageroot}-${this.activeindex}`);
-    this.activeindex = newindex;
     $(activeline).removeClass('active');
-//    $(`#${imageroot}-${newindex}`).addClass('active');
-    $(imageroot).find(`[data-imgindex=${newindex}]`).addClass('active');
+    this.activeindex = newindex;
+    $(imageroot).find(`[data-imgindex=${this.activeindex}]`).addClass('active');
     this.updateActiveButton();
   }
 
