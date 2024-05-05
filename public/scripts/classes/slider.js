@@ -39,7 +39,6 @@
       this.intervalid = 0;
       this.description = description;
       this.homezone = `${this.containername}-zone`;
-      this.indicators = `${this.containername}-indicators`;   // Used to manage inidicators when sliding
       this.sliderarea = `${this.containername}-area`;
       this.windowx = $(window).width();
       this.windowy = $(window).height();
@@ -64,14 +63,15 @@
       }
       this.buildSliderFrame(container);
       this.addImages(allimages);
-      // Arm handlers
+      // Arm handlers for next prev and close
       $('.slider__box__action').on('click', (event) => {
         event.stopPropagation();
         this.manageActiveSlide(event);
       })
-      $(`#${this.homezone} > .slider__box__indicators`).children().on('click', (event) => {
+      // Arm handler for indicators
+      $('.slider__box__indicators__flags').on('click', (event) => {
         event.stopPropagation();
-        this.selectActiveIndicator(event.target);
+        this.managerActiveIndicator(event.target);
       });
       // Track any keyboard or mobile input
       $('html').keyup( (event) => { 
@@ -97,11 +97,11 @@
     }
     const parent = $(event.target).parent();
     if($(parent).hasClass('next')) {
-      this.nextSlide($(event.target).closest('.slider__box'));
+      this.updateSlide($(event.target).closest('.slider__box'), 1);
     }
     else {
       if($(parent).hasClass('prev')) {
-        this.previousSlide($(event.target).closest('.slider__box'));
+        this.updateSlide($(event.target).closest('.slider__box'), -1);
       }
       else {
         $(this.container).trigger('sliderclosed');
@@ -109,58 +109,42 @@
     }
   }
   // ------------------------------------------------------------------------------------------------
-  nextSlide(sliderbox) {
+  /**
+   * 
+   * @param {*} sliderbox The UI container
+   * @param {*} action    , 0 display current slide, 1 for next slide, -1 for previous
+   */
+  updateSlide(sliderbox, action) {
     const imageroot= $(sliderbox).find('.slider__box__slides');
-    // const activeline = $(`#${imageroot}-${this.activeindex}`);
-    const activeline = $(imageroot).find(`[data-imgindex=${this.activeindex}]`);
-    ++this.activeindex;
-    const newindex = this.checkBoundaries();
-    $(activeline).removeClass('active');
-    // $(`#${imageroot}-${newindex}`).addClass('active');
-    $(imageroot).find(`[data-imgindex=${newindex}]`).addClass('active');
-    this.updateActiveButton();
-  }
-  // ------------------------------------------------------------------------------------------------
-  previousSlide(sliderbox) {
-    const imageroot= $(sliderbox).find('.slider__box__slides');
-    // const activeline = $(`#${imageroot}-${this.activeindex}`);
-    const activeline = $(imageroot).find(`[data-imgindex=${this.activeindex}]`);
-    --this.activeindex;
-    const newindex = this.checkBoundaries();
-    $(activeline).removeClass('active');
-    // $(`#${imageroot}-${newindex}`).addClass('active');
-    $(imageroot).find(`[data-imgindex=${newindex}]`).addClass('active');
-    this.updateActiveButton();
-  }  // ------------------------------------------------------------------------------------------------
-  selectActiveIndicator(targetindicator) {
-    this.stopSlider();
-    const targetparent = $(targetindicator).parent();
-    const newindex = $(targetindicator).parent().data('imageindex');
-    const imageroot= $(`#${this.homezone} > .slider__box__slides`);
-    const activeline = $(`#${imageroot}-${this.activeindex}`);
-    $(activeline).removeClass('active');
-    this.activeindex = newindex;
+    const activeimagediv = $(imageroot).find(`[data-imgindex=${this.activeindex}]`);
+    const previndex = this.activeindex;
+    this.activeindex = this.checkBoundaries(this.activeindex + action);
+    $(activeimagediv).removeClass('active');
     $(imageroot).find(`[data-imgindex=${this.activeindex}]`).addClass('active');
-    this.updateActiveButton();
-  }
-
-  // ------------------------------------------------------------------------------------------------
-  updateActiveButton() {
-    const indicatorslist = $(`#${this.homezone} > .slider__box__indicators`).children();
-    for(let i = 0; i < indicatorslist.length; ++i){
-      $(indicatorslist[i]).removeClass('active');
-    };
-    $(indicatorslist[this.activeindex]).addClass('active');
+    this.updateActiveButton(previndex, this.activeindex);
   }
   // ------------------------------------------------------------------------------------------------
-  checkBoundaries() {
-    if(this.activeindex === this.allimages.length) {
-      this.activeindex = 0;
+  checkBoundaries(requestedindex) {
+    if(requestedindex  === this.allimages.length) {
+      requestedindex = 0;
     }
-    if(this.activeindex < 0) {
-      this.activeindex = this.allimages.length - 1;
+    if(requestedindex < 0) {
+      requestedindex= this.allimages.length - 1;
     }
-    return this.activeindex;
+    return requestedindex;
+  }
+  // ------------------------------------------------------------------------------------------------
+  updateActiveButton(previndex, nextindex) {
+    const currentindicator = $(`#${this.homezone} > .slider__box__indicators`).find(`[data-imageindex=${previndex}]`);
+    const newindicator = $(`#${this.homezone} > .slider__box__indicators`).find(`[data-imageindex=${nextindex}]`);
+    $(currentindicator).removeClass('active');
+    $(newindicator).addClass('active');
+  }
+  // ------------------------------------------------------------------------------------------------
+  managerActiveIndicator(targetindicator) {
+    this.stopSlider();
+    this.activeindex = $(targetindicator).data('imageindex');
+    this.updateSlide($('.slider__box'), 0);
   }
   // ------------------------------------------------------------------------------------------------
   buildSliderFrame(container) {
@@ -202,7 +186,6 @@
     $(indicators).append(next);
     $(indicators).append(closebutton);
     $(container).append(sliderzone);
-    this.startSlider();
   }
   // ------------------------------------------------------------------------------------------------
   addImages(allimages) {
@@ -215,9 +198,6 @@
       let oneimage = $("<div>").attr('id', `${imageroot}-${i}`)
                   .attr(`data-imgindex`, `${i}`)
                   .addClass('slider__box__slides__img' );
-      if(i === 0 ){
-        $(oneimage).addClass('active');
-      }
       let newimg = $('<img>').attr('src', this.imagespath+allimages[i]);
       $(newimg).click( (e) => { // Arrow function mandatory here to use this
         e.preventDefault();
@@ -228,6 +208,8 @@
     }
     this.activeindex = 0;    
     this.allimages = allimages; // Save it for later use by buttons handler
+    this.updateSlide($('.slider__box'), 0);
+    this.startSlider();
   }
   // ------------------------------------------------------------------------------------------------
   // Slider automatic display set/reset
@@ -235,7 +217,7 @@
   startSlider() {
     if(this.intervalid === 0) {
       this.intervalid = setInterval( () => {
-        this.nextSlide();
+        this.updateSlide($('.slider__box'), 1);
       }, this.slideinterval);
       this.logger.debug(`${this.homezone} : Delay for slides set to ${this.slideinterval} with interval ID: ${this.intervalid}` );
     }
@@ -270,14 +252,12 @@
       $('.zoomer__box').append(kname);
       $("#zoomer").css('display', 'flex')
       // Hide a few things
-      $(`#${this.indicators}`).hide();
       $(".slidercontrol").hide();
       // Wait for the user to close the zoom
       $(closezoom).click( (e) => { 
         e.preventDefault();
         this.zoomactive = false;
         $("#zoomer").removeClass("zoomer").empty().hide();
-        $(`#${this.indicators}`).show();
         $(".slidercontrol").show();
         // $("body").css("overflow", "auto"); No longer reactivate scroll in requesting parent
       });
