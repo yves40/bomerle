@@ -162,9 +162,9 @@
   }
   // ------------------------------------------------------------------------------------------------
   buildSliderFrame(container) {
+    // Container and slider box, displayed as grid
     $(container).addClass('slider');
-    const sliderzone = $("<div>").attr('id', this.homezone)
-                    .addClass('slider__box');
+    const sliderzone = $("<div>").attr('id', this.homezone).addClass('slider__box');
 
     const kdesc = $('<h2></h2>').addClass('kdesc heroh2').text(this.description);
     $(sliderzone).append(kdesc);
@@ -188,6 +188,7 @@
     // Add the indicators
     const indicators = $("<div>").addClass('slider__box__indicators')
       .addClass('techzone');
+    $(indicators).append(prev);
     for(let i = 0; i < this.allimages.length; ++i) {
       let buttonindic = $('<button>').addClass('slider__box__indicators__flags')
         .attr('type', 'button')
@@ -195,10 +196,9 @@
       if (i == 0) $(buttonindic).addClass('active');
       $(indicators).append(buttonindic);
     }
-    $(indicators).append(prev);
-    $(sliderzone).append(indicators);
     $(indicators).append(next);
     $(indicators).append(closebutton);
+    $(sliderzone).append(indicators);
     $(container).append(sliderzone);
   }
   // ------------------------------------------------------------------------------------------------
