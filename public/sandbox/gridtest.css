@@ -1,0 +1,23 @@
+  .grid {
+    height: 60vh;
+    border: blue solid 1px;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(4, minmax(100px, auto));
+  }
+
+  .item {
+    display: grid;
+    border: red solid 1px;
+    grid-column: 2 / 7;
+    grid-row: 2 / 4;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: subgrid;
+  }
+
+  .subitem {
+    border: green solid 1px;
+    margin: 1rem;
+    grid-column: 2 / 4;
+    grid-row: 1 / 3;
+  }

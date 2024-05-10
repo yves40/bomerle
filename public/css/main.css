@@ -569,9 +569,9 @@
   .slider__box {
     display: grid;
     gap: .5rem;
-    grid-template-columns: 1fr fit-content(80%) 1fr;
-    grid-template-rows: 10% 70% 8%;
-    grid-template-areas: '. kdesc .' '. img .' '. techzone .';
+    grid-template-columns: 1fr fit-content(90%) 1fr;
+    grid-template-rows: 10% 90%;
+    grid-template-areas: '. kdesc .' '. img .';
     width: 100%;
     height: 100dvh;
     max-width: 1024px;
@@ -610,7 +610,7 @@
       align-items: center;
       justify-content: center;
       height: 2rem;
-      grid-area: indic; }
+      grid-area: img; }
       .slider__box__indicators__flags {
         opacity: .6;
         width: 30px;
@@ -631,7 +631,10 @@
   justify-self: center; }
 
 .techzone {
-  grid-area: techzone; }
+  grid-area: img;
+  margin-top: 85%;
+  background-color: black;
+  border-radius: 5px; }
 
 .zoomer {
   display: flex;
