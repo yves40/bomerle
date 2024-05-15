@@ -23,11 +23,12 @@
 </body>
 <style>
     .slider {
-        container-type: size;
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
+        height: 100vh;
+        backdrop-filter: blur(6px); 
     }
     .sliderpicture {
         display: flex;
@@ -37,17 +38,22 @@
     }
     .sliderpicture img {
         width: 90%;
-
+        max-width: 1024px;
+        border-radius: 10px;
+        object-fit: contain;  
     }
     .slidercommand {
-        transform: translateY(-100px);
+        transform: translateY(-70px);
+        background-color: darkgrey;
+        border-radius: 10px;
+        padding: 0.1rem .5rem;
     }
     .slidercommand img {
         width: 40px;
     }
     @media (max-width: 800px) {
         .slidercommand {
-            transform: translateY(-50px);
+            transform: translateY(-40px);
         }    
         .slidercommand img {
             width: 25px;
