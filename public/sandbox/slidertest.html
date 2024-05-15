@@ -8,17 +8,17 @@
 <body>
     <div class="slider">
         <div class="sliderheader">
-            <p>Le canif de la mort</p>
+            <p>Le canif du 63</p>
         </div>
         <div class="sliderpicture">
             <img src="../images/knife/20230905-184001-65932c203876c.webp" alt="">
-            <div class="slidercommand">
-                <img src="../images/svg/arrow-back.svg" alt="">
-                <img src="../images/svg/arrow-forward.svg" alt="">
-                <img src="../images/svg/close-circle-outline.svg" alt="">  
-            </div>
         </div>
-    </div>
+        <div class="slidercommand">
+            <img src="../images/svg/arrow-back.svg" alt="">
+            <img src="../images/svg/arrow-forward.svg" alt="">
+            <img src="../images/svg/close-circle-outline.svg" alt="">  
+        </div>
+</div>
     
 </body>
 <style>
@@ -33,11 +33,13 @@
     .sliderpicture {
         display: flex;
         flex-direction: column;
+        width: 100%;
         align-items: center;
         justify-content: center;
     }
     .sliderpicture img {
-        width: 90%;
+        width: 100%;
+        height: 100%;
         max-width: 1024px;
         border-radius: 10px;
         object-fit: contain;  
