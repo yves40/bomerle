@@ -1,25 +1,5 @@
 /*----------------------------------------------------------------------------
     Slider
-
-    jun 05 2023     Initial
-    jun 06 2023     Build the code
-    jun 07 2023     Slider and zoom
-    jun 08 2023     Slider and zoom, cont
-    jun 09 2023     Add slider timing set into the UI
-    jun 20 2023     Add slider description into the UI
-    Aug 29 2023     Reorg into single css file
-    Sep 01 2023     Fix some details
-    Oct 12 2023     Typo. Add indicators to the slider frame
-    Oct 14 2023     Indicators to the slider frame.
-    Oct 15 2023     Indicators to the slider frame..
-    Dec 20 2023     Fix timer problem
-    Jan 07 2024     New DOM structure
-    Jan 13 2024     New management of Y scrolling
-    Feb 06 2024     New slider frame
-    Feb 09 2024     New slider frame
-    Feb 11 2024     New slider frame
-    Mar 21 2024     Fix problem with div name
-
     ----------------------------------------------------------------------------*/
 
   import Logger  from './logger.js';
@@ -65,7 +45,7 @@
       this.buildSliderFrame(container);
       this.addImages(allimages);
       // Arm handlers for next prev and close
-      $('.slider__box__action').on('click', (event) => {
+      $('.slidercommand').on('click', (event) => {
         event.stopPropagation();
         this.setActiveSlide(event);
       })
@@ -162,16 +142,15 @@
   }
   // ------------------------------------------------------------------------------------------------
   buildSliderFrame(container) {
-    // Container and slider box, displayed as grid
+    // Container and slider box, displayed as flex
+    const slider = $('<div></div>').addClass('slider');
     $(container).addClass('slider');
-    const sliderzone = $("<div>").attr('id', this.homezone).addClass('slider__box');
-
-    const kdesc = $('<h2></h2>').addClass('kdesc heroh2').text(this.description);
-    $(sliderzone).append(kdesc);
+    const kdesc = $('<h2></h2>').text(this.description);
+    $(slider).append(kdesc);
     // Close and Nav button
-    const closebutton = $("<a></a>").addClass('slider__box__action techzone close');
-    const prev = $("<a></a>").addClass('slider__box__action techzone prev');
-    const next = $("<a></a>").addClass('slider__box__action techzone next');
+    const closebutton = $("<a></a>").addClass('slidercommand close');
+    const prev = $("<a></a>").addClass('slidercommand  prev');
+    const next = $("<a></a>").addClass('slidercommand  next');
     // Close and Nav images
     const closeimage = $("<img>").attr('src',  `${$props.svgimageslocation()}/close-circle-outline.svg`)
         .addClass("svg-white");
@@ -183,28 +162,34 @@
     $(prev).append(previmage);
     $(next).append(nextimage);
     // Images section
-    const slidesbox = $('<div></div>').attr('id', this.sliderarea).addClass('slider__box__slides');
-    $(sliderzone).append(slidesbox);
+    const pictures = $('<div></div>').addClass('slider__pictures');
+    $(slider).append(pictures);
+    // Commands section
+    const commands = $('<div></div>').addClass('slider__command');
+    $(commands).append(prev);
+    $(commands).append(next);
+    $(commands).append(closebutton);
+    $(slider).append(commands);
     // Add the indicators
-    const indicators = $("<div>").addClass('slider__box__indicators')
-      .addClass('techzone');
-    $(indicators).append(prev);
-    for(let i = 0; i < this.allimages.length; ++i) {
-      let buttonindic = $('<button>').addClass('slider__box__indicators__flags')
-        .attr('type', 'button')
-        .attr('data-imageindex', `${i}`);
-      if (i == 0) $(buttonindic).addClass('active');
-      $(indicators).append(buttonindic);
-    }
-    $(indicators).append(next);
-    $(indicators).append(closebutton);
-    $(sliderzone).append(indicators);
-    $(container).append(sliderzone);
+    // const indicators = $("<div>").addClass('slider__box__indicators')
+    //   .addClass('techzone');
+    // $(indicators).append(prev);
+    // for(let i = 0; i < this.allimages.length; ++i) {
+    //   let buttonindic = $('<button>').addClass('slider__box__indicators__flags')
+    //     .attr('type', 'button')
+    //     .attr('data-imageindex', `${i}`);
+    //   if (i == 0) $(buttonindic).addClass('active');
+    //   $(indicators).append(buttonindic);
+    // }
+    // $(indicators).append(next);
+    // $(indicators).append(closebutton);
+    // $(sliderzone).append(indicators);
+    $(container).append(slider);
   }
   // ------------------------------------------------------------------------------------------------
   addImages(allimages) {
     // Get the container
-    const slides = $(`#${this.sliderarea}`);
+    const slides = $(`.slider__pictures`);
     // Add images
     const splitter = this.sliderarea.split('-');
     const imageroot= splitter[0] + splitter[1];
