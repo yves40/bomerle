@@ -99,9 +99,9 @@
       this.previousindex = this.activeindex;
       this.activeindex = this.checkBoundaries(this.activeindex + action);
     } 
-    $('.slider__box__slides').find(`[data-imgindex=${this.activeindex}]`).addClass('active');
+    $('.slider__pictures').find(`[data-imgindex=${this.activeindex}]`).addClass('active');
     if(this.activeindex !== this.previousindex) {
-      $('.slider__box__slides').find(`[data-imgindex=${this.previousindex}]`).removeClass('active');
+      $('.slider__pictures').find(`[data-imgindex=${this.previousindex}]`).removeClass('active');
     }
     this.updateActiveButton(this.previousindex, this.activeindex);
   }
@@ -142,9 +142,9 @@
   }
   // ------------------------------------------------------------------------------------------------
   buildSliderFrame(container) {
+    $(container).css('position', 'absolute');
     // Container and slider box, displayed as flex
     const slider = $('<div></div>').addClass('slider');
-    $(container).addClass('slider');
     const kdesc = $('<h2></h2>').text(this.description);
     $(slider).append(kdesc);
     // Close and Nav button
@@ -196,12 +196,8 @@
     for(let i = 0; i < allimages.length; ++i) {
       let oneimage = $("<div>").attr('id', `${imageroot}-${i}`)
                   .attr(`data-imgindex`, `${i}`)
-                  .addClass('slider__box__slides__img' );
+                  .addClass('slider__pictures__img' );
       let newimg = $('<img>').attr('src', this.imagespath+allimages[i]);
-      $(newimg).click( (e) => { // Arrow function mandatory here to use this
-        e.preventDefault();
-        this.fullScreen(this.allimages[this.activeindex]);
-      });
       $(oneimage).append(newimg);
       $(slides).append(oneimage);
     }
@@ -227,67 +223,5 @@
       clearInterval(this.intervalid);
       this.intervalid = 0;
     }
-  }
-  // ------------------------------------------------------------------------------------------------
-  fullScreen(imagesrc) {
-    if(!this.zoomactive) {
-      this.zoomactive = true;
-      this.currentzoom = imagesrc;
-      // Position the zoom 
-      const top = window.scrollY;
-      const closezoom = $("<img>").attr('src',  `${$props.svgimageslocation()}/close-circle-outline.svg`)
-                  .addClass("svg-white");
-      const kname = $('<h2></h2>').text(this.description).addClass('kname');
-      // // Remove body scroll bar so user cant scroll up or down
-      $("body").css("overflow", "hidden");
-      $("#zoomer").css({ 'top': top, 'left': 0, 'z-index': 2000 } )
-              .addClass("zoomer");
-      $("#zoomer").append($('<div>').attr('id', 'zoomer__box')
-              .addClass('zoomer__box'));
-      const imgcontainer = $('<div></div>').addClass('zoomer__box__img');
-      $(imgcontainer).append($('<img>').attr('src', `${this.imagespath}${imagesrc}`));
-      $('.zoomer__box').append(imgcontainer);
-      $('.zoomer__box').append(closezoom);
-      $('.zoomer__box').append(kname);
-      $("#zoomer").css('display', 'flex')
-      // Hide a few things
-      $(".slidercontrol").hide();
-      // Wait for the user to close the zoom
-      $(closezoom).click( (e) => { 
-        e.preventDefault();
-        this.zoomactive = false;
-        $("#zoomer").removeClass("zoomer").empty().hide();
-        $(".slidercontrol").show();
-        // $("body").css("overflow", "auto"); No longer reactivate scroll in requesting parent
-      });
-    }
-  }
-  // ------------------------------------------------------------------------------------------------
-  // Slider element screen position evaluation
-  // ------------------------------------------------------------------------------------------------
-  isSliderVisible(el) {
-    var windowHeight = $(window).height();
-    var scrollTop = $(window).scrollTop();
-    var elementTop = el.offset().top;
-    var elementBottom = elementTop + el.height();
-
-    return (elementTop >= scrollTop && elementTop <= (scrollTop + windowHeight)) ||
-           (elementBottom >= scrollTop && elementBottom <= (scrollTop + windowHeight));
-  }  
-  getBoundingClientRect(el) {
-    let offset = el.offset();
-    let width = el.width();
-    let height = el.height();
-    let windowHeight = $(window).height();
-    let scrollTop = $(window).scrollTop();
-
-    return {
-      top: offset.top,
-      left: offset.left,
-      bottom: offset.top + height,
-      right: offset.left + width,
-      width: width,
-      height: height
-    };
   }
 }
