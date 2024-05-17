@@ -558,25 +558,34 @@
 .slider {
   display: flex;
   flex-direction: column;
+  row-gap: .7rem;
   justify-content: center;
   align-items: center;
   backdrop-filter: blur(6px);
   width: 100vw;
   height: 100dvh;
   z-index: 1000;
-  color: white; }
+  color: white;
+  border: yellow 2px solid; }
   .slider h2 {
     font-family: "Gideon Roman", sans-serif;
-    margin-bottom: 2rem; }
+    margin-top: 2rem; }
   .slider__pictures {
-    width: 95%; }
+    width: 95%;
+    height: 95%;
+    border: red 2px solid;
+    display: flex;
+    justify-content: center;
+    align-items: center; }
     .slider__pictures__img {
+      border: blue 2px solid;
       display: none;
       object-fit: contain; }
       .slider__pictures__img.active {
         animation: 1s fadein;
         display: flex;
-        justify-content: center; }
+        justify-content: center;
+        max-height: 100%; }
       .slider__pictures__img img {
         width: 100%;
         max-width: 1024px;
