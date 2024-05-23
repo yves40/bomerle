@@ -14,14 +14,10 @@
   z-index: 1000;
   color: white; 
   border: yellow 2px solid; 
-  padding: 2rem;
-  @include for-desktop {
-    padding: 3rem;
-  }
   h2 {
     font-family: $h2font;
-    margin-top: 2rem;
-    // transform: translateY(50px);
+    margin-top: 2rem; 
+    transform: translateY(50px);
   }
   &__pictures {
     width: 95%;
@@ -48,7 +44,7 @@
     }
   }
   &__command {
-    // transform: translateY(-40px);
+    transform: translateY(-70px);
     background-color: darkgrey;
     border-radius: 10px;
     padding: 0.1rem .5rem;
