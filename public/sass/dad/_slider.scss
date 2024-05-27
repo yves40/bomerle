@@ -18,6 +18,9 @@
     font-family: $h2font;
     margin-top: 2rem; 
     transform: translateY(10vh);
+    @include for-desktop {
+      transform: translateY(15vh);
+    }
   }
   &__pictures {
     width: 95%;
@@ -30,15 +33,16 @@
       border: blue 2px solid; 
       display: none;
       object-fit: contain;
+      max-width: 1024px;
+      max-height: 100%;
+      aspect-ratio: auto 1/1;
       &.active {
         animation: 1s fadein;
         display: flex;
         justify-content: center;
-        max-height: 100%;
       }    
       img {
         width: 100%;
-        max-width: 1024px;
         border-radius: $border-radius;
       }
     }
@@ -53,7 +57,7 @@
       cursor: pointer;
     }
     @include for-desktop {
-      // transform: translateY(-70px);
+      transform: translateY(-15vh);
       img {
         width: 40px;
       }
