@@ -103,6 +103,7 @@
     if(this.activeindex !== this.previousindex) {
       $('.slider__pictures').find(`[data-imgindex=${this.previousindex}]`).removeClass('active');
     }
+    $('.slidercounter').text(` : ${this.activeindex + 1} / ${this.allimages.length}`);
     this.updateActiveButton(this.previousindex, this.activeindex);
   }
   /**
@@ -145,8 +146,12 @@
     $(container).css('position', 'absolute');
     // Container and slider box, displayed as flex
     const slider = $('<div></div>').addClass('slider');
+    const divdesc = $('<div></div>').addClass('slider__head');
     const kdesc = $('<h2></h2>').text(this.description);
-    $(slider).append(kdesc);
+    const count = $('<span></span>').addClass('slidercounter');
+    $(kdesc).append(count);
+    $(divdesc).append(kdesc);
+    $(slider).append(divdesc);
     // Close and Nav button
     const closebutton = $("<a></a>").addClass('slidercommand close');
     const prev = $("<a></a>").addClass('slidercommand  prev');

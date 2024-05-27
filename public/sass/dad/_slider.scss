@@ -14,12 +14,13 @@
   z-index: 1000;
   color: white; 
   border: yellow 2px solid; 
-  h2 {
-    font-family: $h2font;
-    margin-top: 2rem; 
+  &__head {
     transform: translateY(10vh);
     @include for-desktop {
       transform: translateY(15vh);
+    }
+    h2 {
+      font-family: $h2font;
     }
   }
   &__pictures {
@@ -37,12 +38,12 @@
       max-height: 100%;
       aspect-ratio: auto 1/1;
       &.active {
-        animation: 1s fadein;
         display: flex;
         justify-content: center;
       }    
       img {
         width: 100%;
+        // animation: 1s fadein;
         border-radius: $border-radius;
       }
     }

@@ -567,13 +567,13 @@
   z-index: 1000;
   color: white;
   border: yellow 2px solid; }
-  .slider h2 {
-    font-family: "Gideon Roman", sans-serif;
-    margin-top: 2rem;
+  .slider__head {
     transform: translateY(10vh); }
     @media screen and (min-width: 1024px) {
-      .slider h2 {
+      .slider__head {
         transform: translateY(15vh); } }
+    .slider__head h2 {
+      font-family: "Gideon Roman", sans-serif; }
   .slider__pictures {
     width: 95%;
     height: 95%;
@@ -589,7 +589,6 @@
       max-height: 100%;
       aspect-ratio: auto 1/1; }
       .slider__pictures__img.active {
-        animation: 1s fadein;
         display: flex;
         justify-content: center; }
       .slider__pictures__img img {
