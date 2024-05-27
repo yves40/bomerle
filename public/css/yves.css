@@ -135,7 +135,7 @@
   .slider h2 {
     font-family: "Gideon Roman", sans-serif;
     margin-top: 2rem;
-    transform: translateY(50px); }
+    transform: translateY(10vh); }
   .slider__pictures {
     width: 95%;
     height: 95%;
@@ -157,7 +157,7 @@
         max-width: 1024px;
         border-radius: 5px; }
   .slider__command {
-    transform: translateY(-50px);
+    transform: translateY(-10vh);
     background-color: darkgrey;
     border-radius: 10px;
     padding: 0.1rem .5rem; }

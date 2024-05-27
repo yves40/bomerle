@@ -17,7 +17,7 @@
   h2 {
     font-family: $h2font;
     margin-top: 2rem; 
-    transform: translateY(50px);
+    transform: translateY(10vh);
   }
   &__pictures {
     width: 95%;
@@ -44,7 +44,7 @@
     }
   }
   &__command {
-    transform: translateY(-70px);
+    transform: translateY(-10vh);
     background-color: darkgrey;
     border-radius: 10px;
     padding: 0.1rem .5rem;
