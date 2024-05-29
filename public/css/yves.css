@@ -133,7 +133,8 @@
   color: white;
   border: yellow 2px solid; }
   .slider__head {
-    transform: translateY(10vh); }
+    transform: translateY(10vh);
+    margin: 0 2rem; }
     @media screen and (min-width: 1024px) {
       .slider__head {
         transform: translateY(15vh); } }
@@ -165,8 +166,9 @@
     border-radius: 10px;
     padding: 0.1rem .5rem; }
     .slider__command img {
-      width: 25px;
-      cursor: pointer; }
+      width: 60px;
+      cursor: pointer;
+      padding: 0 1rem 0 1rem; }
     @media screen and (min-width: 1024px) {
       .slider__command {
         transform: translateY(-15vh); }

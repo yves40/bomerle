@@ -122,6 +122,7 @@
         width: 50%;
         border: solid darkgrey 3px;
         border-radius: $border-radius; 
+        width: 90%;
         @include for-desktop {
           width: $imgmedium;
           height: $imgmedium;

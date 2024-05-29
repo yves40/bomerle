@@ -448,7 +448,8 @@
       .cards__frame__txtimg img {
         width: 50%;
         border: solid darkgrey 3px;
-        border-radius: 5px; }
+        border-radius: 5px;
+        width: 90%; }
         @media screen and (min-width: 1024px) {
           .cards__frame__txtimg img {
             width: 300px;
@@ -568,7 +569,8 @@
   color: white;
   border: yellow 2px solid; }
   .slider__head {
-    transform: translateY(10vh); }
+    transform: translateY(10vh);
+    margin: 0 2rem; }
     @media screen and (min-width: 1024px) {
       .slider__head {
         transform: translateY(15vh); } }
@@ -600,8 +602,9 @@
     border-radius: 10px;
     padding: 0.1rem .5rem; }
     .slider__command img {
-      width: 25px;
-      cursor: pointer; }
+      width: 60px;
+      cursor: pointer;
+      padding: 0 1rem 0 1rem; }
     @media screen and (min-width: 1024px) {
       .slider__command {
         transform: translateY(-15vh); }
@@ -901,7 +904,7 @@
         font-family: "Gideon Roman", sans-serif;
         font-size: 1.2rem;
         font-weight: 600;
-        padding: 1rem 0 1rem 0;
+        padding: 2rem 0 0 0;
         line-height: 1.5rem; }
         @media screen and (min-width: 1024px) {
           #categorygallery .catzone__card h2 {
