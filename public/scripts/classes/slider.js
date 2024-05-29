@@ -29,7 +29,11 @@
       this.previousindex = 0;
       this.slidertype = slidertype;
       this.imagespath = "";
-
+      this.touchstartY = 0;
+      this.touchendY = 0;
+      this.NEXT = 1;
+      this.PREV = -1;
+  
       const devmode = $('.debug').length === 1 ? 'dev' : 'prod';
       this.logger = new Logger(devmode);
   
@@ -48,6 +52,25 @@
       $('.slidercommand').on('click', (event) => {
         event.stopPropagation();
         this.setActiveSlide(event);
+      })
+      // Arm handlers for next prev and close with drag
+      $('.slider__pictures').on('touchstart', (event) => {
+        event.stopPropagation();
+        this.touchstartY = event.originalEvent.touches[0].screenY;
+        console.log(`Start`);
+      })
+      $('.slider__pictures').on('touchend', (event) => {
+        event.stopPropagation();
+        this.touchendY = event.originalEvent.changedTouches[0].screenY;
+        console.log(`End`);
+        if(this.touchendY > this.touchstartY) {
+          this.stopSlider();
+          this.updateSlide(this.NEXT);
+        }
+        else {
+          this.stopSlider();
+          this.updateSlide(this.PREV);
+        }
       })
       // Arm handler for indicators
       $('.slider__box__indicators__flags').on('click', (event) => {
@@ -78,11 +101,11 @@
     }
     const parent = $(event.target).parent();
     if($(parent).hasClass('next')) {
-      this.updateSlide(1);
+      this.updateSlide(this.NEXT);
     }
     else {
       if($(parent).hasClass('prev')) {
-        this.updateSlide(-1);
+        this.updateSlide(this.PREV);
       }
       else {
         $(this.container).trigger('sliderclosed');
