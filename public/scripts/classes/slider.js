@@ -54,23 +54,25 @@
         this.setActiveSlide(event);
       })
       // Arm handlers for next prev and close with drag
-      $('.slider__pictures').on('touchstart', (event) => {
+      $('.slider__pictures__img').on('touchstart', (event) => {
+        this.stopSlider();      // User interacts with finger dragging
         event.stopPropagation();
         this.touchstartY = event.originalEvent.touches[0].screenY;
         console.log(`Start`);
       })
-      $('.slider__pictures').on('touchend', (event) => {
+      $('.slider__pictures__img').on('touchend', (event) => {
         event.stopPropagation();
         this.touchendY = event.originalEvent.changedTouches[0].screenY;
-        console.log(`End`);
-        if(this.touchendY > this.touchstartY) {
-          this.stopSlider();
-          this.updateSlide(this.NEXT);
-        }
-        else {
-          this.stopSlider();
-          this.updateSlide(this.PREV);
-        }
+        const delta = this.touchendY - this.touchstartY;
+        console.log(`End delta : ${delta}`);
+        if(delta !== 0) {
+          if(this.touchendY > this.touchstartY) {
+            this.updateSlide(this.NEXT);
+          }
+          else {
+            this.updateSlide(this.PREV);
+          }
+        } 
       })
       // Arm handler for indicators
       $('.slider__box__indicators__flags').on('click', (event) => {
