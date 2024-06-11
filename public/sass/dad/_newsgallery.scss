@@ -40,6 +40,10 @@
                 color: white;
                 padding: 0 2em 3em 2em;
                 width: 90%; 
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
                 @include for-desktop { 
                     padding: 0 5em 3em 5em; 
                     width: 100%; 
@@ -48,19 +52,18 @@
                 p{
                     font-family: $pfont;
                     border-radius: $border-radius;
-                    font-size: 1rem;
-                    line-height: 1.3rem;
+                    font-size: 1.6rem;
+                    line-height: 1.5rem;
                     @include for-desktop{
-                        margin: 1rem;
                         padding: 1rem 0;
-                        font-size: 1.3rem;
-                        line-height: 1.5rem;
+                        font-size: 1.8rem;
+                        line-height: 1.8rem;
                     }
                 }
                 img {
-                    width: 90%;
+                    width: 60%;
                     @include for-desktop {
-                        width: 50%;
+                        width: 70%;
                     }
                     margin: 1rem;
                     border-radius: $border-radius;
