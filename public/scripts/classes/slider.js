@@ -172,7 +172,7 @@
     if(this.activeindex !== this.previousindex) {
       $('.slider__pictures').find(`[data-imgindex=${this.previousindex}]`).removeClass('active');
     }
-    $('.slidercounter').text(` : ${this.activeindex + 1} / ${this.allimages.length}`);
+    $('.slidercounter').text(`${this.activeindex + 1} / ${this.allimages.length}`);
     this.updateActiveButton(this.previousindex, this.activeindex);
   }
   /**
@@ -218,7 +218,6 @@
     const divdesc = $('<div></div>').addClass('slider__head');
     const kdesc = $('<h2></h2>').text(this.description);
     const count = $('<span></span>').addClass('slidercounter');
-    $(kdesc).append(count);
     $(divdesc).append(kdesc);
     $(slider).append(divdesc);
     // Close and Nav button
@@ -243,6 +242,8 @@
     $(commands).append(prev);
     $(commands).append(next);
     $(commands).append(closebutton);
+    $(commands).append(count);
+
     $(slider).append(commands);
     // Add the indicators
     // const indicators = $("<div>").addClass('slider__box__indicators')

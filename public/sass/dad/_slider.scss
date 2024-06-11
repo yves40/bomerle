@@ -13,7 +13,6 @@
   height: 100dvh;
   z-index: 1000;
   color: white; 
-  border: yellow 2px solid; 
   &__head {
     transform: translateY(10vh);
     margin: 0 2rem;
@@ -27,12 +26,10 @@
   &__pictures {
     width: 95%;
     height: 95%;
-    border: red 2px solid; 
     display: flex;
     justify-content: center;
     align-items: center;
     &__img {
-      border: blue 2px solid; 
       display: none;
       object-fit: contain;
       max-width: 1024px;
@@ -50,20 +47,26 @@
     }
   }
   &__command {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     transform: translateY(-10vh);
-    background-color: darkgrey;
+    background-color: $menubackground;
     border-radius: 10px;
     padding: 0.1rem .5rem;
     img {
-      width: 60px;
+      width: 80px;
       cursor: pointer;
       padding: 0 1rem 0 1rem;
     }
     @include for-desktop {
       transform: translateY(-15vh);
-      img {
-        width: 70px;
-      }
     }
+  }
+  .slidercounter {
+    font-size: .8rem;
+    color: white;
+    padding-left: 1rem;
+    padding-right: 1rem;
   }
 }

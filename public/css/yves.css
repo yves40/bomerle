@@ -130,8 +130,7 @@
   width: 100vw;
   height: 100dvh;
   z-index: 1000;
-  color: white;
-  border: yellow 2px solid; }
+  color: white; }
   .slider__head {
     transform: translateY(10vh);
     margin: 0 2rem; }
@@ -143,12 +142,10 @@
   .slider__pictures {
     width: 95%;
     height: 95%;
-    border: red 2px solid;
     display: flex;
     justify-content: center;
     align-items: center; }
     .slider__pictures__img {
-      border: blue 2px solid;
       display: none;
       object-fit: contain;
       max-width: 1024px;
@@ -161,19 +158,25 @@
         width: 100%;
         border-radius: 5px; }
   .slider__command {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     transform: translateY(-10vh);
-    background-color: darkgrey;
+    background-color: #26160f;
     border-radius: 10px;
     padding: 0.1rem .5rem; }
     .slider__command img {
-      width: 60px;
+      width: 80px;
       cursor: pointer;
       padding: 0 1rem 0 1rem; }
     @media screen and (min-width: 1024px) {
       .slider__command {
-        transform: translateY(-15vh); }
-        .slider__command img {
-          width: 70px; } }
+        transform: translateY(-15vh); } }
+  .slider .slidercounter {
+    font-size: .8rem;
+    color: white;
+    padding-left: 1rem;
+    padding-right: 1rem; }
 
 /*
   Special section for SVGs
