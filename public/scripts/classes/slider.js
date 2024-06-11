@@ -12,7 +12,7 @@
   // Two accepted values : SHOW (the default) and KNIFE
   constructor(container, timing = 2, description = '', allimages, slidertype = 'SHOW') {
     // Init
-      this.version = 'Slider:1.59, May 05 2024 ';
+      this.version = 'Slider:1.61, Jun 11 2024 ';
       this.container = container;
       this.containername = ($(container).attr('name')).replaceAll(' ', '-');
       this.slideinterval = timing * 1000;
@@ -22,7 +22,6 @@
       this.sliderarea = `${this.containername}-area`;
       this.windowx = $(window).width();
       this.windowy = $(window).height();
-      this.zoomactive = false;
       this.currentzoom = '';
       this.allimages = allimages;
       this.activeindex = 0;
@@ -33,7 +32,12 @@
       this.touchendY = 0;
       this.NEXT = 1;
       this.PREV = -1;
-  
+      this.evCache = new Array();
+      this.media = null;
+      this.zoomcounter = 0;
+      this.removeZoomListener = null;
+      this.zoomactive = false;
+
       const devmode = $('.debug').length === 1 ? 'dev' : 'prod';
       this.logger = new Logger(devmode);
   
@@ -54,25 +58,36 @@
         this.setActiveSlide(event);
       })
       // Arm handlers for next prev and close with drag
+      $('.slider__pictures__img').on('touchmove', (event) => {
+        this.stopSlider();     
+        // event.stopPropagation();
+        if(event.originalEvent.touches.length > 1) {
+          this.stopSlider();
+          this.zoomactive = true; // Disable sliding records with fingers on mobile
+        }
+      })
       $('.slider__pictures__img').on('touchstart', (event) => {
-        this.stopSlider();      // User interacts with finger dragging
+        if(!this.zoomactive) {
+          this.evCache.push(event);
+          this.stopSlider(); 
+          this.touchstartY = event.originalEvent.touches[0].screenY;
+        }
         event.stopPropagation();
-        this.touchstartY = event.originalEvent.touches[0].screenY;
-        console.log(`Start`);
       })
       $('.slider__pictures__img').on('touchend', (event) => {
+        if(!this.zoomactive) {
+          this.touchendY = event.originalEvent.changedTouches[0].screenY;
+          const delta = this.touchendY - this.touchstartY;
+          if(delta !== 0) {
+            if(this.touchendY > this.touchstartY) {
+              this.updateSlide(this.NEXT);
+            }
+            else {
+              this.updateSlide(this.PREV);
+            }
+          } 
+        }
         event.stopPropagation();
-        this.touchendY = event.originalEvent.changedTouches[0].screenY;
-        const delta = this.touchendY - this.touchstartY;
-        console.log(`End delta : ${delta}`);
-        if(delta !== 0) {
-          if(this.touchendY > this.touchstartY) {
-            this.updateSlide(this.NEXT);
-          }
-          else {
-            this.updateSlide(this.PREV);
-          }
-        } 
       })
       // Arm handler for indicators
       $('.slider__box__indicators__flags').on('click', (event) => {
@@ -84,19 +99,48 @@
           event.stopPropagation();
       });
       // Some other handlers
-      $(window).resize ( () =>  {
-        if(this.zoomactive) {
-          this.fullScreen(this.currentzoom);
-        }
+      $(window).resize ( (event) =>  {
         this.windowx = $(window).width();
         this.windowy = $(window).height();
         this.stopSlider();
       });
       // Use later ???
-      $(window).scroll( () => {
+      $(window).scroll( (event) => {
       })
   }
-  // ------------------------------------------------------------------------------------------------
+  /**
+   * No longer used. Many problems with window.devicePixelRatio
+   */
+  mediaChanged() {
+    ++this.zoomcounter;
+    if(this.removeZoomListener != null) {
+      this.removeZoomListener();
+    }
+    this.removeZoomListener = function () {
+      this.media.removeEventListener("change", this.mediaChanged);
+    }
+    this.media = matchMedia(`(resolution: ${window.devicePixelRatio}dppx)`);
+    this.media.addEventListener("change", this.mediaChanged);
+    if (this.media.matches) {
+      console.log(`have a match ${this.zoomcounter} : ${window.devicePixelRatio}`);
+    } else {
+      console.log(`have a miss ${this.zoomcounter} : ${window.devicePixelRatio}`);
+    }
+  }
+  /**
+   * 
+   * @param {*} elementclass The element class name which size is queried
+   * @returns 
+   */
+  getElementSizes(elementclass) {
+      // Play with element bounding rect
+      const picturescontainer = document.getElementsByClassName(elementclass);
+      return picturescontainer[0].getBoundingClientRect();
+  }
+  /**
+   * 
+   * @param {*} event Manage slideware display of active slide. 3 possible actions, next, prev, close
+   */
   setActiveSlide(event) {
     if(this.intervalid !== 0) {
       this.stopSlider();
@@ -215,6 +259,7 @@
     // $(indicators).append(closebutton);
     // $(sliderzone).append(indicators);
     $(container).append(slider);
+    //
   }
   // ------------------------------------------------------------------------------------------------
   addImages(allimages) {
