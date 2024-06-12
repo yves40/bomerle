@@ -381,6 +381,7 @@ $(document).ready(function () {
     function displayKnifeSlider(knifename, knifedesc, knifeimages) {
         $(slider).attr('name', 'slider');
         let dynslider = new Slider($(slider),
+                            0, // New initial image index introduced : YT Jun 12 2024
                             10,
                             knifename,
                             knifeimages,
@@ -407,7 +408,7 @@ $(document).ready(function () {
      * @param {*} container The target element where the slider will be instanciated
      */
     function buildImagesSlider(allimages, timing, description, container) {
-        let slider = new Slider(container, timing, description, allimages);     // Build the slider frame
+        let slider = new Slider(container, 0,  timing, description, allimages);     // Build the slider frame
     }
     /**
      * Build a single card to be displayed in a parent element

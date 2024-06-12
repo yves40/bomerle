@@ -6,11 +6,20 @@
   import $props  from '../properties.js';
   export default class Slider {
 
-  // slidertype is used to determine images location.
-  // As the slider can display diaporama images or knife images
-  // and the location is /images/slideshow or /images/knife
-  // Two accepted values : SHOW (the default) and KNIFE
-  constructor(container,initialindex = 0, timing = 2, description = '', allimages, slidertype = 'SHOW') {
+    /**
+     * 
+     * @param {*} container     Container for the whole slider 
+     * @param {*} initialindex  Which image to display first ?
+     * @param {*} timing        Delay when in automatic slideware. Default to 10 sec
+     * @param {*} description   The slideware description, displayed above images
+     * @param {*} allimages     The images to be displayed
+     * @param {*} slidertype    Used to determine images location. 
+     *                          As the slider can display diaporama images or knife images
+     *                          and the location is /images/slideshow or /images/knife
+     *                          Two accepted values : SHOW (the default) and KNIFE
+     */
+
+  constructor(container,initialindex = 0, timing = 10, description = '', allimages, slidertype = 'SHOW') {
     // Init
       this.version = 'Slider:1.62, Jun 12 2024 ';
       this.container = container;

@@ -17,7 +17,7 @@
        */
       constructor(container, data, cardindex, externalcss=true) {
         // Init
-          this.version = 'Card:1.39, Jan 22 2024 ';
+          this.version = 'Card:1.40, Jun 12 2024 ';
           this.container = container;
           this.data = data;
           this.cardindex = cardindex;
@@ -61,7 +61,8 @@
         }
         // Set a knife ID for future zoom
         $(img).attr('data-knifeid', data.knifeId)
-        .attr('data-knifename', data.knifeName);
+        .attr('data-knifename', data.knifeName)
+        .attr('data-index', 0); // For the initial slider index
 
         $(textimagecontainer).append(img).append(cardtext);
         // Pack the elements
