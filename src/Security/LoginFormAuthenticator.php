@@ -5,7 +5,8 @@ namespace App\Security;
 use App\Services\DBlogger;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Security\Core\Security;
+// use Symfony\Component\Security\Core\Security;
+use Symfony\bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Security\Http\Util\TargetPathTrait;
@@ -63,7 +64,7 @@ class LoginFormAuthenticator extends AbstractLoginFormAuthenticator
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception): Response
     {
         $this->dblogger->error($request->request->get('email', ''), 'Authentication failure', $this->applicationmodule);
-        $request->getSession()->getFlashBag()->add('error', 'Identifiant ou mot de passe incorrect');
+        // $request->getSession()->getFlashBag()->add('error', 'Identifiant ou mot de passe incorrect');
         return new RedirectResponse($this->urlGenerator->generate('app_login'));
     }
     // -----------------------------------------------------------------------------------------------------------
