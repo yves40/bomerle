@@ -1,7 +1,7 @@
 # Have a look at config/packages/translation.yaml
 app:
   version: Beaumerle Administration Console  [Mar, 1.65]
-  debugversion: Jun 11 2024, 2.27
+  debugversion: Jun 12 2024, 2.28
   copyright: "&copy; Ratoon Dev Corporation, 2024"
   location: 63250 Chabreloche, Département du Puy-de-Dôme
   public:
