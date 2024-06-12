@@ -13,7 +13,7 @@ export default class News {
         this.newsindex = newsindex;
         this.newsimages = allimages;
         this.newsname = newsname;
-        this.version = 'News:1.12, Apr 02 2024 ';
+        this.version = 'News:1.13, Jun 12 2024 ';
         this.container = container;
         this.description = description;
         this.news = `${this.newsname.replaceAll(' ', '-')}-zone`;
@@ -77,6 +77,7 @@ export default class News {
               e.preventDefault();
               $(slider).attr('name', this.newsname);
               let dynslider = new Sliderzoom($(slider),
+                    $(e.target).data('index'),  // Start slider on this image
                     10,
                     this.newsname,
                     this.newsimages);

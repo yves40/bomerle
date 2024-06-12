@@ -10,10 +10,12 @@
   // As the slider can display diaporama images or knife images
   // and the location is /images/slideshow or /images/knife
   // Two accepted values : SHOW (the default) and KNIFE
-  constructor(container, timing = 2, description = '', allimages, slidertype = 'SHOW') {
+  constructor(container,initialindex = 0, timing = 2, description = '', allimages, slidertype = 'SHOW') {
     // Init
-      this.version = 'Slider:1.61, Jun 11 2024 ';
+      this.version = 'Slider:1.62, Jun 12 2024 ';
       this.container = container;
+      this.activeindex = initialindex;
+      this.previousindex = 0;
       this.containername = ($(container).attr('name')).replaceAll(' ', '-');
       this.slideinterval = timing * 1000;
       this.intervalid = 0;
@@ -24,8 +26,6 @@
       this.windowy = $(window).height();
       this.currentzoom = '';
       this.allimages = allimages;
-      this.activeindex = 0;
-      this.previousindex = 0;
       this.slidertype = slidertype;
       this.imagespath = "";
       this.touchstartY = 0;
@@ -277,7 +277,7 @@
       $(oneimage).append(newimg);
       $(slides).append(oneimage);
     }
-    this.activeindex = 0;    
+    // this.activeindex = 0;    
     this.allimages = allimages; // Save it for later use by buttons handler
     this.updateSlide(0);
     this.startSlider();
