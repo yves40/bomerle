@@ -44,17 +44,17 @@ export default class News {
       
       const newsheader = $('<div></div>').addClass('news__details__header');
       $(newsdiv).append(newsheader);
-      const newsimages = $("<ul>").attr('id', this.news).addClass('news__details__images')
+      const newsimages = $("<ul>").attr('id', `${this.newsid}-imglist` ).addClass('news__details__images')
       $(newsdiv).append(newsimages);
       $(container).append(newsdiv);
     }
     // ------------------------------------------------------------------------------------------------
     displayImages() {
       // Get the container
-      const news = $(`#${this.news}`).parent();
+      const news = $(`#${this.newsid}-imglist`).parent();
       const h2 = $('<h2></h2>').text(this.newsname);
       news.prepend(h2);
-      const imagesloaded = $(`#${this.news}`).find('img');
+      const imagesloaded = $(`#${this.newsid}-imglist`).find('img');
       
       if(imagesloaded.length === 0) { // Images already loaded ?
         for(let i = 0; i < this.newsimages.length; ++i) {
