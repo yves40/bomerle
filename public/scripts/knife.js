@@ -62,6 +62,11 @@ function deleteImage(element){
 }
 // ------------------------------------------------------------- Rotate image handler 
 function rotateImage(element){
+
+    let div = element.parentNode.parentNode;
+    const img = div.children[0];
+    img.style.transform = 'rotate(90deg)';
+
     let feedbackmessage = $('#feedback');
     feedbackmessage.text('');
     let url = $(element).attr('href');
