@@ -124,7 +124,13 @@
                                                 { 'knifeid' : knife.id , 'imageid' : image.id }) }}">
                                         <img class="svgsmall-lightblue" src="/images/svg/trash-bin.svg" alt=""/>
                                     </a>
-                                    {# The shit right icon  #}
+                                    {# The rotate icon #}
+                                    <a id="rotate-{{knife.id}}-{{image.id}}" 
+                                        href="{{ path('bootadmin.knives.rotatephoto',
+                                                { 'knifeid' : knife.id , 'imageid' : image.id }) }}">
+                                        <img class="svgsmall-lightblue" src="/images/svg/rotate-outline.svg" alt=""/>
+                                    </a>
+                                    {# The shift right icon  #}
                                     {% if not loop.last %}
                                         <a id="right-{{knife.id}}-{{image.id}}-{{image.rank}}" 
                                             href="{{ path('bootadmin.knives.swapphotos') }}">

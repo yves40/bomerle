@@ -20,6 +20,8 @@ function actionRequest(element) {
                 break;
         case 'del': deleteImage(element);
                 break;
+        case 'rotate': rotateImage(element);
+                break;
         default: console.log('Unknown command'); 
                 break;
     }
@@ -50,6 +52,34 @@ function deleteImage(element){
                     feedbackmessage.addClass('ysuccess').removeClass('yerror');    
                 });
             });
+        },
+        error: function (xhr) {
+            feedbackmessage.text(`KO ${xhr.statusText}` );
+            feedbackmessage.addClass('yerror').removeClass('ysuccess');
+            console.log(xhr);
+        }
+    });    
+}
+// ------------------------------------------------------------- Rotate image handler 
+function rotateImage(element){
+    let feedbackmessage = $('#feedback');
+    feedbackmessage.text('');
+    let url = $(element).attr('href');
+    let knifeid = $(element).attr('id').split('-')[1];
+    let imgid = $(element).attr('id').split('-')[2];
+    let payload = {
+        knifeid: knifeid,
+        imageid: imgid,
+    }
+    console.log(`Rotate image, url: ${url}`);
+    $.ajax({
+        type: "POST",
+        url: url,
+        dataType: "json",
+        data: JSON.stringify(payload),
+        async: false,
+        success: function (response) {
+            console.log(response);
         },
         error: function (xhr) {
             feedbackmessage.text(`KO ${xhr.statusText}` );
@@ -312,6 +342,10 @@ function buildCard(imgcard, index, lastimageindex) {
         let righticon = document.createElement("ion-icon");
         righticon.setAttribute('name', 'arrow-forward-circle-outline');
 
+        let rotateiconbutton = document.createElement("a");
+        let rotateicon = document.createElement("ion-icon");
+        rotateicon.setAttribute('name', 'rotate-outline');
+
         // The image card        
         let newdiv = document.createElement("div");
         newdiv.id = "imgcard-" + imgcard.imageid;
@@ -346,6 +380,13 @@ function buildCard(imgcard, index, lastimageindex) {
                                                 + imgcard.imageid);
         deletebutton.appendChild(deleteicon);
         command.appendChild(deletebutton);
+        // Rotate icon 
+        rotateiconbutton.setAttribute('id', "rotate-" + imgcard.imagei);
+        rotateiconbutton.setAttribute('href', '/knives/protected/rotateimage/' 
+                                                + imgcard.knifeid + '/' 
+                                                + imgcard.imageid);
+        rotateiconbutton.appendChild(rotateicon);
+        command.appendChild(rotateiconbutton);
         // Right icon
         if(index !== lastimageindex) { // Right icon
             righticonbutton.setAttribute('id', "right-" + imgcard.knifeid + "-"

@@ -208,6 +208,29 @@ class AdminControllerKnife extends AbstractController
         }
     }
     // --------------------------------------------------------------------------
+    #[Route('/protected/rotatephoto', name: 'bootadmin.knives.rotatephoto')]
+    public function rotatePhoto(Request $request,
+        EntityManagerInterface $emgr)
+    {
+        try {
+            $data = file_get_contents("php://input");
+            $payload = json_decode($data, true);
+            $knifeid = $payload['knifeid'];
+            $imageid = $payload['imageid'];
+
+            return $this->json([
+                'message' => 'bootadmin.knives.rotatephoto OK',
+                'knifeid' => $knifeid,
+                'imageid' => $imageid
+            ], 200);    
+        }
+        catch(Exception $e) {
+            return $this->json([
+                'message' => $e->getMessage(),
+            ], 400);
+        }
+    }
+    // --------------------------------------------------------------------------
     #[Route('/public/getactivecategories', name: 'bootadmin.knives.getactivecategories')]
     public function getActiveCategories(Request $request, EntityManagerInterface $em) {
         try {   
