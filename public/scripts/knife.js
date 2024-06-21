@@ -65,7 +65,6 @@ function rotateImage(element){
 
     let div = element.parentNode.parentNode;
     const img = div.children[0];
-    img.style.transform = 'rotate(90deg)';
 
     let feedbackmessage = $('#feedback');
     feedbackmessage.text('');
@@ -76,7 +75,8 @@ function rotateImage(element){
         knifeid: knifeid,
         imageid: imgid,
     }
-    console.log(`Rotate image, url: ${url}`);
+    console.log(`Rotate image, url: ${img.src}`);
+
     $.ajax({
         type: "POST",
         url: url,
@@ -85,6 +85,8 @@ function rotateImage(element){
         async: false,
         success: function (response) {
             console.log(response);
+            img.style.transform = `rotate(${response.rotation}deg)`;
+
         },
         error: function (xhr) {
             feedbackmessage.text(`KO ${xhr.statusText}` );

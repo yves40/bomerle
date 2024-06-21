@@ -109,6 +109,7 @@
                                     data-imagerank="{{image.rank}}"
                                     data-knifename="{{knife.name}}"
                                     src="{{asset('images/knife/' ~ image.filename)}}" alt="Not loaded"
+                                    style="transform: rotate({{image.rotation}}deg)"
                                 >
                                 <div id="commandzone" class="mt-4">
                                     {# The shift left icon #}

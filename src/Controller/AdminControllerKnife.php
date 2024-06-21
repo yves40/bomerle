@@ -218,10 +218,21 @@ class AdminControllerKnife extends AbstractController
             $knifeid = $payload['knifeid'];
             $imageid = $payload['imageid'];
 
+            $repo = $emgr->getRepository(Images::class);
+            $rotated = $repo->findOneBy([ 'id' => $imageid ]);
+            $currentrotation = $rotated->getRotation();
+            $currentrotation += 90;
+            if($currentrotation === 360) {
+                $currentrotation = 0;
+            }
+            $rotated->setRotation($currentrotation);
+            $emgr->persist($rotated);
+            $emgr->flush();
             return $this->json([
                 'message' => 'bootadmin.knives.rotatephoto OK',
                 'knifeid' => $knifeid,
-                'imageid' => $imageid
+                'imageid' => $imageid,
+                'rotation' => $rotated->getRotation()
             ], 200);    
         }
         catch(Exception $e) {
