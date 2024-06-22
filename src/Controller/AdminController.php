@@ -31,6 +31,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class AdminController extends AbstractController
 {
     private LocaleSwitcher $localeSwitcher;
+    const rotationstep = 90;
+
     // --------------------------------------------------------------------------
     public function __construct(LocaleSwitcher $localeSwitcher)
     {
@@ -440,6 +442,9 @@ class AdminController extends AbstractController
             "new" =>  $new,
             "categoryname" => $category->getName(),
             "categoryfullname" => $category->getFullname(),
+            "imagefilename" => $category->getImage(),
+            "imagerotation" => $category->getRotation(),
+            "categoryid" => $category->getId(),
             'rank' => $category->getRank(),
             "categorydescription" => $category->getDescription(),
             "relatedcategories" =>  $category->getRelatedcategories(),
@@ -518,6 +523,41 @@ class AdminController extends AbstractController
                                                                 'id' => $category->getId()
                                                             ));
     }
+
+    // --------------------------------------------------------------------------
+    // J S O N    S E R V I C E S 
+    // --------------------------------------------------------------------------
+    #[Route('/category/rotatephoto', name: 'bootadmin.category.rotatephoto')]
+    public function rotatephoto(Request $request,
+        EntityManagerInterface $emgr)
+    {
+        try {
+            $data = file_get_contents("php://input");
+            $payload = json_decode($data, true);
+            $categoryid = $payload['categoryid'];
+
+            $repo = $emgr->getRepository(Category::class);
+            $category = $repo->findOneBy([ 'id' => $categoryid ]);
+            $currentrotation = $category->getRotation();
+            $currentrotation += AdminController::rotationstep;
+            if($currentrotation === 360) {
+                $currentrotation = 0;
+            }
+            $category->setRotation($currentrotation);
+            $emgr->persist($category);
+            $emgr->flush();
+            return $this->json([
+                'message' => 'bootadmin.category.rotatephoto OK',
+                'rotation' => $currentrotation
+            ], 200);    
+        }
+        catch(Exception $e) {
+            return $this->json([
+                'message' => $e->getMessage(),
+            ], 400);
+        }
+    }
+
     // --------------------------------------------------------------------------
     // A C C E S S O R I E S     S E R V I C E S 
     // --------------------------------------------------------------------------
