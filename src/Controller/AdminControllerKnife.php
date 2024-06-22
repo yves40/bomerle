@@ -23,6 +23,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class AdminControllerKnife extends AbstractController
 {
     private LocaleSwitcher $localeSwitcher;
+    const rotationstep = 90;
     // --------------------------------------------------------------------------
     public function __construct(LocaleSwitcher $localeSwitcher)
     {
@@ -221,7 +222,7 @@ class AdminControllerKnife extends AbstractController
             $repo = $emgr->getRepository(Images::class);
             $rotated = $repo->findOneBy([ 'id' => $imageid ]);
             $currentrotation = $rotated->getRotation();
-            $currentrotation += 90;
+            $currentrotation += AdminControllerKnife::rotationstep;
             if($currentrotation === 360) {
                 $currentrotation = 0;
             }
