@@ -247,23 +247,27 @@ function swapImages(movingimageid, relatedimageid) {
     let imgfile1 = $(movingimg).attr('data-imagefile');
     let imgknifeid1 = $(movingimg).attr('data-imageknifeid');
     let imgrank1 = $(movingimg).attr('data-imagerank');
+    let style1 =  $(movingimg).attr('style');       // Introduced Jun 22 2024 for img rotation
 
     let imgid2 = $(relatedimg).attr('data-imageid');
     let imgfile2 = $(relatedimg).attr('data-imagefile');
     let imgknifeid2 = $(relatedimg).attr('data-imageknifeid');
     let imgrank2 = $(relatedimg).attr('data-imagerank');
+    let style2 =  $(relatedimg).attr('style');
 
     $(movingimg).attr('src', $props.knifeimageslocation() + '/' + imgfile2);
     $(movingimg).attr('data-imageid', imgid2);
     $(movingimg).attr('data-imagefile', imgfile2);
     $(movingimg).attr('data-imageknifeid', imgknifeid2);
     $(movingimg).attr('data-imagerank', imgrank2);
+    $(movingimg).attr('style', style2);
     
     $(relatedimg).attr('src', $props.knifeimageslocation() + '/' + imgfile1);
     $(relatedimg).attr('data-imageid', imgid1);
     $(relatedimg).attr('data-imagefile', imgfile1);
     $(relatedimg).attr('data-imageknifeid', imgknifeid1);
     $(relatedimg).attr('data-imagerank', imgrank1);
+    $(relatedimg).attr('style', style1);
     // Swap cards ID
     $(movingcard).attr('id', `imgcard-${imgid2}`);
     $(relatedcard).attr('id', `imgcard-${imgid1}`);
