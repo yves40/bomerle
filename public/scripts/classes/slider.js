@@ -19,7 +19,8 @@
      *                          Two accepted values : SHOW (the default) and KNIFE
      */
 
-  constructor(container,initialindex = 0, timing = 10, description = '', allimages, slidertype = 'SHOW') {
+  constructor(container,initialindex = 0, timing = 10, description = '', 
+                    allimages, imagesrotations, slidertype = 'SHOW') {
     // Init
       this.version = 'Slider:1.62, Jun 12 2024 ';
       this.container = container;
@@ -35,6 +36,7 @@
       this.windowy = $(window).height();
       this.currentzoom = '';
       this.allimages = allimages;
+      this.imagesrotations = imagesrotations;
       this.slidertype = slidertype;
       this.imagespath = "";
       this.touchstartY = 0;
@@ -282,7 +284,8 @@
       let oneimage = $("<div>").attr('id', `${imageroot}-${i}`)
                   .attr(`data-imgindex`, `${i}`)
                   .addClass('slider__pictures__img' );
-      let newimg = $('<img>').attr('src', this.imagespath+allimages[i]);
+      let newimg = $('<img>').attr('src', this.imagespath+allimages[i])
+                    .css('transform', `rotate(${this.imagesrotations[i]}deg)`);
       $(oneimage).append(newimg);
       $(slides).append(oneimage);
     }

@@ -67,7 +67,8 @@ class CategoryRepository extends ServiceEntityRepository
             ->select('distinct(c.name) as catname, c.id as catid, 
                             c.image as catimage, 
                             c.rank,
-                            c.description as catdesc')
+                            c.description as catdesc,
+                            c.rotation')
             ->join('c.knifes', 'k')
             ->orderBy('c.rank')
             ->getQuery()
