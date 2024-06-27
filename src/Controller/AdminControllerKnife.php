@@ -324,7 +324,8 @@ class AdminControllerKnife extends AbstractController
                             'catid' => $one->getId(),
                             'catname' => $one->getName(),
                             'catdesc' => $one->getDescription(),
-                            'catphoto' => $one->getImage()
+                            'catphoto' => $one->getImage(),
+                            'rotation' => $one->getRotation()
                             ] );
             }
             $knivesids = $repo->findCategoryKnives($categoryid);

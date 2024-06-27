@@ -305,6 +305,7 @@ $(document).ready(function () {
                     $(relcard).append($('<p>').text(element.catname))
                             .append($('<img>')
                                     .attr('src',  `${$props.categoryimageslocation()}/${element.catphoto}`)
+                                    .css('transform', `rotate(${element.rotation}deg)`)
                                     .attr('data-catname', element.catname)
                                     .attr('data-catdesc', element.catdesc)
                                     .attr('data-catid', element.catid));
