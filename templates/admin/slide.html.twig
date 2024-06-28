@@ -151,6 +151,12 @@
                                         href="{{ path('bootadmin.slides.removephoto') }}">
                                         <img class="svgsmall-lightblue" src="/images/svg/trash-bin.svg" alt=""/>
                                     </a>
+                                    {# The rotate icon #}
+                                    <a id="rotate-{{slide.id}}-{{image.id}}" 
+                                        href="{{ path('bootadmin.knives.rotatephoto',
+                                                { 'slideid' : slide.id , 'imageid' : image.id }) }}">
+                                        <img class="svgsmall-lightblue" src="/images/svg/rotate-outline.svg" alt=""/>
+                                    </a>
                                     {# The shit right icon  #}
                                     {% if not loop.last %}
                                         <a id="right-{{slide.id}}-{{image.id}}-{{image.rank}}" 
