@@ -289,7 +289,7 @@ class AdminControllerSlideShow extends AbstractController
         }
     }
     // --------------------------------------------------------------------------
-    #[Route('/protected/rotatephoto', name: 'bootadmin.knives.rotatephoto')]
+    #[Route('/protected/rotatephoto', name: 'bootadmin.slides.rotatephoto')]
     public function rotatePhoto(Request $request,
         EntityManagerInterface $emgr)
     {

@@ -8,8 +8,8 @@
 
   export default class Sliderzoom extends Slider {
 
-  constructor(container, timing = 2, description = '', allimages, slidertype = 'SHOW') {
+  constructor(container, timing = 2, description = '', allimages, imagesrotations, slidertype = 'SHOW') {
     // Init
-    super(container, timing, description, allimages, slidertype);
+    super(container, timing, description, allimages, imagesrotations, slidertype);
   }
 }

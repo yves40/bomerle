@@ -89,7 +89,8 @@ export default class News {
                     $(e.target).data('index'),  // Start slider on this image
                     10,
                     this.newsname,
-                    this.newsimages);
+                    this.newsimages,
+                  this.imagesrotations);
               $("body").css("overflow", "hidden");
               $(slider).css({'top': window.scrollY,'left': 0, 'z-index': 1000}).css('display', 'flex');
             });
