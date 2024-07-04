@@ -25,6 +25,7 @@ class AdminControllerSlideShow extends AbstractController
 
     private LocaleSwitcher $localeSwitcher;
     private DBLogger $dblog;
+    const rotationstep = 90;
     const MODULE = 'AdminControllerSlideShow';
 
     // --------------------------------------------------------------------------
@@ -288,6 +289,40 @@ class AdminControllerSlideShow extends AbstractController
         }
     }
     // --------------------------------------------------------------------------
+    #[Route('/protected/rotatephoto', name: 'bootadmin.knives.rotatephoto')]
+    public function rotatePhoto(Request $request,
+        EntityManagerInterface $emgr)
+    {
+        try {
+            $data = file_get_contents("php://input");
+            $payload = json_decode($data, true);
+            $slideid = $payload['slideid'];
+            $imageid = $payload['imageid'];
+
+            $repo = $emgr->getRepository(SlideImages::class);
+            $rotated = $repo->findOneBy([ 'id' => $imageid ]);
+            $currentrotation = $rotated->getRotation();
+            $currentrotation += AdminControllerSlideShow::rotationstep;
+            if($currentrotation === 360) {
+                $currentrotation = 0;
+            }
+            $rotated->setRotation($currentrotation);
+            $emgr->persist($rotated);
+            $emgr->flush();
+            return $this->json([
+                'message' => 'bootadmin.slideshow.rotatephoto OK',
+                'slideid' => $slideid,
+                'imageid' => $imageid,
+                'rotation' => $rotated->getRotation()
+            ], 200);    
+        }
+        catch(Exception $e) {
+            return $this->json([
+                'message' => $e->getMessage(),
+            ], 400);
+        }
+    }
+    // --------------------------------------------------------------------------
     #[Route('/public/getnews', name: 'bootadmin.slides.getnews')]
     public function getNews(Request $request, EntityManagerInterface $em) {
         try {
@@ -302,6 +337,7 @@ class AdminControllerSlideShow extends AbstractController
             // Evaluate slide show validity
             $selectedslide = $this->selectSlideshow($slides);
             $images = [];
+            $imagesrotation = [];
             if($selectedslide->getId()) {    // One valid slide show selected ?
                 $slidermode = $selectedslide->isSlider();
                 $timing = $selectedslide->getTiming();
@@ -320,6 +356,7 @@ class AdminControllerSlideShow extends AbstractController
                 $imglist = $em->getRepository(SlideImages::class)->findSlideshowImagesByRank($selectedslide);
                 foreach($imglist as $img){
                     array_push($images, $img->getFilename());
+                    array_push($imagesrotation, $img->getRotation());
                 }
             }
             else {
@@ -350,6 +387,7 @@ class AdminControllerSlideShow extends AbstractController
                 'Saturday' => $saturday,
                 'Sunday' => $sunday,
                 'newsimages' => $images,
+                'imagesrotation' => $imagesrotation
             ], 200);    
         }
         catch(Exception $e) {

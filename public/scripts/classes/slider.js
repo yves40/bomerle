@@ -13,15 +13,20 @@
      * @param {*} timing        Delay when in automatic slideware. Default to 10 sec
      * @param {*} description   The slideware description, displayed above images
      * @param {*} allimages     The images to be displayed
+     * @param {*} imagesrotation Array of rotation values for images : 0, 90, 180... ? 
      * @param {*} slidertype    Used to determine images location. 
      *                          As the slider can display diaporama images or knife images
      *                          and the location is /images/slideshow or /images/knife
      *                          Two accepted values : SHOW (the default) and KNIFE
      */
 
-  constructor(container,initialindex = 0, timing = 10, description = '', allimages, slidertype = 'SHOW') {
+  constructor(container,initialindex = 0, timing = 10, 
+            description = '', 
+            allimages, 
+            imagesrotations = [], 
+            slidertype = 'SHOW') {
     // Init
-      this.version = 'Slider:1.62, Jun 12 2024 ';
+      this.version = 'Slider:1.63, Jun 23 2024 ';
       this.container = container;
       this.activeindex = initialindex;
       this.previousindex = 0;
@@ -35,6 +40,7 @@
       this.windowy = $(window).height();
       this.currentzoom = '';
       this.allimages = allimages;
+      this.imagesrotations = imagesrotations;
       this.slidertype = slidertype;
       this.imagespath = "";
       this.touchstartY = 0;
@@ -282,7 +288,14 @@
       let oneimage = $("<div>").attr('id', `${imageroot}-${i}`)
                   .attr(`data-imgindex`, `${i}`)
                   .addClass('slider__pictures__img' );
-      let newimg = $('<img>').attr('src', this.imagespath+allimages[i]);
+      let newimg;
+      if(this.imagesrotations.length > 0) { // Check a rotation array has been required
+        newimg = $('<img>').attr('src', this.imagespath+allimages[i])
+                      .css('transform', `rotate(${this.imagesrotations[i]}deg)`);
+      }
+      else {
+        newimg = $('<img>').attr('src', this.imagespath+allimages[i]);
+      }
       $(oneimage).append(newimg);
       $(slides).append(oneimage);
     }

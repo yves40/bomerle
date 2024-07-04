@@ -7,11 +7,17 @@ import Sliderzoom from './sliderzoom.js';
 
 export default class News {
 
-    constructor(container, description, allimages, newsname, newsindex) {
+    constructor(container, 
+              description, 
+              allimages, 
+              imagesrotations = [],
+              newsname, 
+              newsindex) {
         // Init
         this.newsid = `news-${newsindex}`;
         this.newsindex = newsindex;
         this.newsimages = allimages;
+        this.imagesrotations = imagesrotations;
         this.newsname = newsname;
         this.version = 'News:1.13, Jun 12 2024 ';
         this.container = container;
@@ -60,6 +66,9 @@ export default class News {
         for(let i = 0; i < this.newsimages.length; ++i) {
           let newimg= $('<img>').attr('src', $props.slideimageslocation()+"/"+this.newsimages[i])
                 .attr('data-index', i);
+          if(this.imagesrotations.length > 0) {
+            $(newimg).css('transform', `rotate(${this.imagesrotations[i]}deg)`);
+          }
           if(i === 0 ) { // 1st image displayed in header
             const imagetarget = $(news).find('.news__details__header');
             // Order of element insertions important here!

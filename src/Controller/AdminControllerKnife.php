@@ -324,7 +324,8 @@ class AdminControllerKnife extends AbstractController
                             'catid' => $one->getId(),
                             'catname' => $one->getName(),
                             'catdesc' => $one->getDescription(),
-                            'catphoto' => $one->getImage()
+                            'catphoto' => $one->getImage(),
+                            'rotation' => $one->getRotation()
                             ] );
             }
             $knivesids = $repo->findCategoryKnives($categoryid);
@@ -424,17 +425,20 @@ class AdminControllerKnife extends AbstractController
             $knife = $em->getRepository(Knifes::class)->findOneBy([ 'id' => $knifeid]);
             $images = $knife->getImages();
             $filenames = [];
+            $rotations = [];
             foreach($images as $img) {
                 array_push($filenames, $img->getFilename());
+                array_push($rotations, $img->getRotation());
             }
             // $images = $em->getRepository(Images::class)->findKnifeImagesByRank($knife);
             return $this->json([
-                'message' => 'bootadmin.knives.getimages KO for knife ID : '. $knifeid,
+                'message' => 'bootadmin.knives.getimages OK for knife ID : '. $knifeid,
                 'knifeId' => $knife->getId(),
                 'knifeName' => $knife->getName(),
                 'knifedesc' => $knife->getDescription(),
                 "imagecount" => count($images),
-                "images" => $filenames
+                "images" => $filenames,
+                "imagesrotations" => $rotations
             ], 200);        
         }
         catch(Exception $e) {

@@ -215,7 +215,8 @@ $(document).ready(function () {
             const img = $('<img>').attr('src',`${$props.categoryimageslocation()}/${cat.catimage}`)
                 .attr('data-catid', cat.catid)
                 .attr('data-catname', cat.catname)
-                .attr('data-catdesc', cat.catdesc);
+                .attr('data-catdesc', cat.catdesc)
+                .css('transform', `rotate(${cat.rotation}deg)`);
             $(div).append(img);
             $(img).on('click', (event) => {
                 event.preventDefault();
@@ -304,6 +305,7 @@ $(document).ready(function () {
                     $(relcard).append($('<p>').text(element.catname))
                             .append($('<img>')
                                     .attr('src',  `${$props.categoryimageslocation()}/${element.catphoto}`)
+                                    .css('transform', `rotate(${element.rotation}deg)`)
                                     .attr('data-catname', element.catname)
                                     .attr('data-catdesc', element.catdesc)
                                     .attr('data-catid', element.catid));
@@ -363,7 +365,8 @@ $(document).ready(function () {
                             logger.debug(`Loaded SLIDER images for ${response.knifeName}  from the DB in ${timer.getElapsedString()}`);
                             displayKnifeSlider(response.knifeName,
                                                     response.knifedesc,
-                                                    response.images);
+                                                    response.images,
+                                                    response.imagesrotations);
                         },
                         error: function (xhr) {
                             logger.error(xhr);
@@ -378,13 +381,14 @@ $(document).ready(function () {
      * @param knifedesc     Description
      * @param knifeimages   Related images
      */
-    function displayKnifeSlider(knifename, knifedesc, knifeimages) {
+    function displayKnifeSlider(knifename, knifedesc, knifeimages, imagesrotations) {
         $(slider).attr('name', 'slider');
         let dynslider = new Slider($(slider),
                             0, // New initial image index introduced : YT Jun 12 2024
                             10,
                             knifename,
                             knifeimages,
+                            imagesrotations,
                             'KNIFE');
         $("body").css("overflow", "hidden");
         const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
@@ -484,7 +488,8 @@ $(document).ready(function () {
                         buildImagesSlider(response.images, response.timing, response.description, newsgallery);
                     }
                     else {
-                        buildNewsGallery(response.newsimages, 
+                        buildNewsGallery(response.newsimages,
+                                            response.imagesrotation,
                                             response.newsdescription,
                                             response.newsname,
                                             newscontainer);
@@ -501,13 +506,14 @@ $(document).ready(function () {
      * Build and display a news card. Store the card in an array
      * 
      * @param {*} allimages Associated images
+     * @param {*} imagesrotation Images rotation factor for each image
      * @param {*} description A short news description displayed above the images
      * @param {*} diapo Data on the news to build (name....)
      * @param {*} container The target element where the news will be appended
      */
-    function buildNewsGallery(allimages, description, diapo, container) {
+    function buildNewsGallery(allimages, imagesrotation, description, diapo, container) {
         const newsindex = newslist.length;
-        let news = new News(container, description, allimages, diapo, newsindex);
+        let news = new News(container, description, allimages, imagesrotation, diapo, newsindex);
         observer.observe(document.querySelector(`#news-${newsindex}`));
         newslist.push({ id: news.getID(),
             newsobject: news,

@@ -40,7 +40,8 @@
         const cardtitle = $("<div></div>").addClass('cards__frame__title').html(this.data.knifeName);
         const textimagecontainer = $('<div>').addClass('cards__frame__txtimg');
         const cardtext = $("<p>").addClass('cards__frame__text').html(this.data.knifedesc);
-        const img = $("<img>").attr('src', `${$props.knifeimageslocation()}/${this.data.images[0]}`);
+        const img = $("<img>").attr('src', `${$props.knifeimageslocation()}/${this.data.images[0]}`)
+                              .css('transform', `rotate(${this.data.imagesrotations[0]}deg)`);
         if(!externalcss) {
           // Check if we must alternate images and text
           // or always put img above text

@@ -95,6 +95,14 @@
                     form_row(form.image, {'label' : 'admin.managecategories.image'|trans,
                                         'help': 'admin.managecategories.helpimage'|trans,})
                 }}
+                {% if new != "true" %}
+                    <img id={{categoryid}} class="imagesmall" src="/images/category/{{imagefilename}}" alt=""
+                                style="transform: rotate({{imagerotation}}deg)"/>
+                    {# The rotate icon #}
+                    <a id="rotator" href="#" style='margin-left: 2rem'>
+                        <img class="svgbig-blue" src="/images/svg/rotate-outline.svg" alt=""/>
+                    </a>
+                {% endif %}
             </div>
         </div>
     {{ form_end(form) }}
@@ -108,7 +116,8 @@
                     <div class="col-3">{{category.fullname}}</div>
                     <div class="col-2">
                         {% if category.image != '' %}
-                            <img class="iconicimage" src="/images/category/{{category.image}}" alt=""/>
+                            <img class="iconicimage" src="/images/category/{{category.image}}" alt=""
+                                        style="transform: rotate({{category.rotation}}deg)"/>
                         {% endif %}
                     </div>
                     <div class="col-2">
@@ -131,4 +140,6 @@
         {% endfor %}
     </ul>
     <link rel="stylesheet" href="{{asset('/css/yves.css')}}">
+    <script type="module" src="{{ asset('scripts/categories.js')}}"></script>
 {% endblock %}
+

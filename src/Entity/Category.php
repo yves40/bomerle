@@ -41,6 +41,9 @@ class Category
     #[ORM\Column(type: Types::SMALLINT, nullable: true)]
     private ?int $rank = null;
 
+    #[ORM\Column(type: Types::SMALLINT, nullable: true)]
+    private ?int $rotation = null;
+
     public function __construct()
     {
         $this->knifes = new ArrayCollection();
@@ -167,6 +170,18 @@ class Category
     public function setRank(?int $rank): static
     {
         $this->rank = $rank;
+
+        return $this;
+    }
+
+    public function getRotation(): ?int
+    {
+        return $this->rotation;
+    }
+
+    public function setRotation(?int $rotation): static
+    {
+        $this->rotation = $rotation;
 
         return $this;
     }

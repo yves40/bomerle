@@ -27,6 +27,9 @@ class SlideImages
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $legend = null;
 
+    #[ORM\Column(type: Types::SMALLINT, nullable: true)]
+    private ?int $rotation = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -76,6 +79,18 @@ class SlideImages
     public function setLegend(?string $legend): self
     {
         $this->legend = $legend;
+
+        return $this;
+    }
+
+    public function getRotation(): ?int
+    {
+        return $this->rotation;
+    }
+
+    public function setRotation(?int $rotation): static
+    {
+        $this->rotation = $rotation;
 
         return $this;
     }

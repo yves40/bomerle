@@ -99,6 +99,8 @@ function imageRequest(element) {
                 break;
         case 'del': deleteImage(element);
                 break;
+        case 'rotate': rotateImage(element);
+                break;
         default: console.log('Unknown command'); 
                 break;
     }
@@ -183,6 +185,41 @@ function moveLeft(element) {
     // Build the current image list
     moveImage(buildImagesList(selectedimageid, LEFTACTION), url);
     console.log(`Move image Left, url: ${url} Slide ID : ${slideshowid} image ID: ${selectedimageid}/${rank}`);
+}
+// ------------------------------------------------------------- Rotation handler 
+function rotateImage(element){
+
+    let div = element.parentNode.parentNode;
+    const img = div.children[0];
+
+    let feedbackmessage = $('#feedback');
+    feedbackmessage.text('');
+    let url = $(element).attr('href');
+    let slideid = $(element).attr('id').split('-')[1];
+    let imgid = $(element).attr('id').split('-')[2];
+    let payload = {
+        slideid: slideid,
+        imageid: imgid,
+    }
+    console.log(`Rotate image, url: ${img.src}`);
+
+    $.ajax({
+        type: "POST",
+        url: url,
+        dataType: "json",
+        data: JSON.stringify(payload),
+        async: false,
+        success: function (response) {
+            console.log(response);
+            img.style.transform = `rotate(${response.rotation}deg)`;
+
+        },
+        error: function (xhr) {
+            feedbackmessage.text(`KO ${xhr.statusText}` );
+            feedbackmessage.addClass('yerror').removeClass('ysuccess');
+            console.log(xhr);
+        }
+    });    
 }
 // -------------------------------------------------------------
 // Helpers section
