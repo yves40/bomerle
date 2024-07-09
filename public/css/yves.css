@@ -284,8 +284,8 @@
         #newsgallery .news__details__header p {
           font-family: "Gideon Roman", sans-serif;
           border-radius: 5px;
-          font-size: 1.6rem;
-          line-height: 1.5rem; }
+          font-size: 1rem;
+          line-height: 1.4rem; }
           @media screen and (min-width: 1024px) {
             #newsgallery .news__details__header p {
               padding: 1rem 0;
