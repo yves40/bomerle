@@ -18,6 +18,9 @@ $(document).ready(function () {
     const categoriesmenu = $('#categoriesmenu');
     const newsmenu = $('#newsmenu');
     const categorygallery = $('#categorygallery');
+    let allcategories = [];                         // Store the active categories list found in DB
+    let allcategoriesLoaded = false;                // Check the category section is displayed
+    let menucontactornews = false;                  // Used to track contact or news menu entry
     const knivesgallery = $('#knivesgallery');
     const newsgallery = $('#newsgallery');
     const slider = $('#slider');
@@ -41,6 +44,19 @@ $(document).ready(function () {
                     else{
                         $(knivesgallery).attr('inactive','').removeAttr('active');
                     }   
+                    break;
+                case 'categorygallery': 
+                    if(entry.isIntersecting) {
+                        console.log(`Categories should be displayed `);
+                        if(!allcategoriesLoaded && !menucontactornews) {
+                            displayActiveCategories(allcategories);
+                            console.log(`Categories are now displayed `);
+                            allcategoriesLoaded = true;
+                        }
+                        else {
+                            menucontactornews = false;
+                        }
+                    }
                     break;
                 case 'newsgallery': 
                     if (!window.location.href.endsWith('contactrequest')) {                        
@@ -77,6 +93,7 @@ $(document).ready(function () {
     });
     observer.observe(document.querySelector('#knivesgallery'));
     observer.observe(document.querySelector('#newsgallery'));
+    observer.observe(document.querySelector('#categorygallery'));
     observer.observe(document.querySelector('.flash'));
     
     // Initial state of UI
@@ -102,9 +119,17 @@ $(document).ready(function () {
     const logger = new Logger(devmode);
     logger.info(`[${$props.version()} ]` );
 
-    // various handlers
+    // Handlers
+    $('#contactmenu').on('click', (event) => {
+        console.log('Contact');
+        menucontactornews = true;
+    })
+    $('#newsmenu').on('click', (event) => {
+        menucontactornews = true;
+        console.log('News');
+    })
     /**
-     * sliderclosed ois sent by the slider class
+     * sliderclosed is sent by the slider class
      * when the slider is destroyed
      */
     $(slider).on('sliderclosed', function () {
@@ -184,9 +209,10 @@ $(document).ready(function () {
             async: true,
             success: function (response) {
                 if(response.categoriescount != 0) {
-                    displayActiveCategories(response.activecategories);
+                    allcategories = response.activecategories;  // Store for later use whenthe page section
+                                                                // becomes visible
                     timer.stopTimer();
-                    logger.info(`Found and displayed ${response.categoriescount} active categories in ${timer.getElapsedString()}`);
+                    logger.info(`Found ${response.categoriescount} active categories in ${timer.getElapsedString()}`);
                     $(categoriesmenu).show();
                     $(categorygallery).show();
                 }
