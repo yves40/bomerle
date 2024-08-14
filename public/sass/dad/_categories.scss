@@ -17,6 +17,7 @@
         margin: .8rem 0;
         padding-top: 1.5rem;
         border-top: solid white 2px;
+        max-width: 100%;
         @include for-desktop {
             padding-top: 3rem;
             max-width: $responsive-max-width;

@@ -18,9 +18,11 @@ $(document).ready(function () {
     const categoriesmenu = $('#categoriesmenu');
     const newsmenu = $('#newsmenu');
     const categorygallery = $('#categorygallery');
-    let allcategories = [];                         // Store the active categories list found in DB
-    let allcategoriesLoaded = false;                // Check the category section is displayed
-    let menucontactornews = false;                  // Used to track contact or news menu entry
+    let allcategories = [];              // Store the active categories list found in DB
+    let CATLOADSIZE = 3;                 // Packet size when partially loading categories images (for desktop)
+    let catloadindex = 0;                // Used to avoid loading all categories images in 1 shot
+    let allcategoriesLoaded = false;     // Check the category section is displayed
+    let menucontactornews = false;       // Used to track contact or news menu entry
     const knivesgallery = $('#knivesgallery');
     const newsgallery = $('#newsgallery');
     const slider = $('#slider');
@@ -32,6 +34,11 @@ $(document).ready(function () {
     let newslist = [];
     let activenews = [];
 
+    // Determine if running in dev or prod mode
+    const devmode = $('.debug').length === 1 ? 'dev' : 'prod';
+    const logger = new Logger(devmode);
+    logger.info(`[${$props.version()} ]` );
+    
     $(flashzone).hide();
     // Single page zones management
     const observer = new IntersectionObserver(entries => {
@@ -47,11 +54,8 @@ $(document).ready(function () {
                     break;
                 case 'categorygallery': 
                     if(entry.isIntersecting) {
-                        console.log(`Categories should be displayed`);
                         if(!allcategoriesLoaded && !menucontactornews) {
                             displayActiveCategories(allcategories);
-                            console.log(`Categories are now displayed `);
-                            allcategoriesLoaded = true;
                         }
                         else {
                             menucontactornews = false;
@@ -111,11 +115,6 @@ $(document).ready(function () {
     let knivesgalleryactive = false;
     let knifeslideractive = false;
 
-    // Determine if running in dev or prod mode
-    const devmode = $('.debug').length === 1 ? 'dev' : 'prod';
-    const logger = new Logger(devmode);
-    logger.info(`[${$props.version()} ]` );
-
     // Handlers
     $('#contactmenu').on('click', (event) => {
         console.log('Contact requested');
@@ -126,8 +125,6 @@ $(document).ready(function () {
         menucontactornews = false;
         if(!allcategoriesLoaded) {
             displayActiveCategories(allcategories);
-            console.log(`Categories are now displayed `);
-            allcategoriesLoaded = true;
         }
     })
     $('#newsmenu').on('click', (event) => {
@@ -238,32 +235,62 @@ $(document).ready(function () {
      *                              one active knife
      */
     function displayActiveCategories(activecategories) {
+        // Control partial loading
+        let loadindex = 0;
         // Build the cards gallery
-        const catzone = $('<div></div>').addClass('catzone');
-        activecategories.forEach(cat => {
-            const div = $('<div></div>').addClass('catzone__card');
-            $(div).append($('<h2>').text(cat.catname));
-            // Check the category has an associated image, otherwise get a default
-            if(cat.catimage === null) {
-                cat.catimage = `${$props.rootimageslocation()}/${$props.defaultcategoryimage()}`;
-            }
-            const img = $('<img>').attr('src',`${$props.categoryimageslocation()}/${cat.catimage}`)
-                .attr('data-catid', cat.catid)
-                .attr('data-catname', cat.catname)
-                .attr('data-catdesc', cat.catdesc)
-                .css('transform', `rotate(${cat.rotation}deg)`);
-            $(div).append(img);
-            $(img).on('click', (event) => {
-                event.preventDefault();
-                if (categorygalleryactive) {
-                    $(categorygallery).empty().hide();
-                    categorygalleryactive = false;
-                }
-                displayOneCategory(event.target);
-            })
-            $(catzone).append(div);
-        });
+        // Check some categories are not alreday displayed
+        let catzone;
+        if(catloadindex === 0) {
+            catzone = $('<div></div>').addClass('catzone');
+        }
+        else {
+            catzone = $('.catzone');
+        }
         $(categorygallery).append(catzone);
+        // Check cat zone width and adjust CATLOADSIZE
+        const catzonewidth = $('.catzone').css('max-width');
+        if(catzonewidth == '1024px') {
+            CATLOADSIZE = 3;
+        }
+        else {
+            CATLOADSIZE = 2;
+        }
+        for(let i = 0; i < activecategories.length; i++) {
+            if(i >= catloadindex) {
+                const div = $('<div></div>').addClass('catzone__card');
+                $(div).append($('<h2>').text(activecategories[i].catname));
+                // Check the category has an associated image, otherwise get a default
+                if(activecategories[i].catimage === null) {
+                    activecategories[i].catimage = `${$props.rootimageslocation()}/${$props.defaultcategoryimage()}`;
+                }
+                const img = $('<img>').attr('src',`${$props.categoryimageslocation()}/${activecategories[i].catimage}`)
+                    .attr('data-catid', activecategories[i].catid)
+                    .attr('data-catname', activecategories[i].catname)
+                    .attr('data-catdesc', activecategories[i].catdesc)
+                    .css('transform', `rotate(${activecategories[i].rotation}deg)`);
+                $(div).append(img);
+                $(img).on('click', (event) => {
+                    event.preventDefault();
+                    if (categorygalleryactive) {
+                        $(categorygallery).empty().hide();
+                        categorygalleryactive = false;
+                    }
+                    displayOneCategory(event.target);
+                })
+                $(catzone).append(div);
+                // Update load counter
+                ++loadindex;
+                // Check we have the packet loaded
+                if(loadindex == CATLOADSIZE) {
+                    catloadindex += loadindex;
+                    break;
+                }
+            }
+        }
+        console.log(`Number of loaded categories : ${catloadindex}`);
+        if(catloadindex === allcategories.length) {
+            allcategoriesLoaded = true;
+        }
     }
     /**
      *

@@ -891,7 +891,8 @@
     justify-content: center;
     margin: .8rem 0;
     padding-top: 1.5rem;
-    border-top: solid white 2px; }
+    border-top: solid white 2px;
+    max-width: 100%; }
     @media screen and (min-width: 1024px) {
       #categorygallery .catzone {
         padding-top: 3rem;
