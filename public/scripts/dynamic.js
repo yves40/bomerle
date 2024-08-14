@@ -47,7 +47,7 @@ $(document).ready(function () {
                     break;
                 case 'categorygallery': 
                     if(entry.isIntersecting) {
-                        console.log(`Categories should be displayed `);
+                        console.log(`Categories should be displayed`);
                         if(!allcategoriesLoaded && !menucontactornews) {
                             displayActiveCategories(allcategories);
                             console.log(`Categories are now displayed `);
@@ -65,9 +65,6 @@ $(document).ready(function () {
                                 loadActiveNews();
                             }
                         }
-                    }
-                    else {
-                        console.log('No need to activate news; skip to contact');
                     }
                     break;
                 default:    // Did a news card become visibile or invisible ?
@@ -121,12 +118,24 @@ $(document).ready(function () {
 
     // Handlers
     $('#contactmenu').on('click', (event) => {
-        console.log('Contact');
+        console.log('Contact requested');
         menucontactornews = true;
+    })
+    $('#categoriesmenu').on('click', (event) => {
+        console.log('Categories requested');
+        menucontactornews = false;
+        if(!allcategoriesLoaded) {
+            displayActiveCategories(allcategories);
+            console.log(`Categories are now displayed `);
+            allcategoriesLoaded = true;
+        }
     })
     $('#newsmenu').on('click', (event) => {
         menucontactornews = true;
-        console.log('News');
+        console.log('News requested');
+        if(newslist.length === 0) {
+            loadActiveNews();
+        }
     })
     /**
      * sliderclosed is sent by the slider class
