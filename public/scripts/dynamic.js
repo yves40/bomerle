@@ -52,6 +52,20 @@ $(document).ready(function () {
                         $(knivesgallery).attr('inactive','').removeAttr('active');
                     }   
                     break;
+                case 'scrollmarker':
+                        if(entry.isIntersecting) {
+                            console.log('Marker VISIBLE');
+                            if(!allcategoriesLoaded && !menucontactornews) {
+                                displayActiveCategories(allcategories);
+                            }
+                            else {
+                                menucontactornews = false;
+                            }
+                        }
+                        else {
+                            console.log('Marker HIDDEN');
+                        }
+                    break;
                 case 'categorygallery': 
                     if(entry.isIntersecting) {
                         if(!allcategoriesLoaded && !menucontactornews) {
@@ -83,10 +97,6 @@ $(document).ready(function () {
                             newscard.displayed = true;
                             $(entry.target).attr('active','').removeAttr('inactive');
                         }
-                        // else{
-                        //     $(entry.target).attr('inactive','').removeAttr('active');
-                        //     newscard.active = false;
-                        // }   
                     }
                     break;
             }
@@ -247,13 +257,24 @@ $(document).ready(function () {
             catzone = $('.catzone');
         }
         $(categorygallery).append(catzone);
-        // Check cat zone width and adjust CATLOADSIZE
+        // Check catalog zone width and adjust CATLOADSIZE which defines the 
+        // packet size to get active categories
         const catzonewidth = $('.catzone').css('max-width');
         if(catzonewidth == '1024px') {
             CATLOADSIZE = 3;
         }
         else {
             CATLOADSIZE = 2;
+        }
+        // Check the scroll marker is not already there
+        const check = document.querySelector('#scrollmarker');
+        if(check == null) { // Add it ?
+            const scrolldiv = $('<div></div>').attr('id', 'scrollmarker')
+                                                .css('height', '20px')
+                                                    .css('border', 'red 2px solid')
+                                                    .css('width', '100%');
+            $(catzone).append(scrolldiv);
+            observer.observe(document.querySelector('#scrollmarker'));
         }
         for(let i = 0; i < activecategories.length; i++) {
             if(i >= catloadindex) {
@@ -277,7 +298,7 @@ $(document).ready(function () {
                     }
                     displayOneCategory(event.target);
                 })
-                $(catzone).append(div);
+                $(div).insertBefore('#scrollmarker');
                 // Update load counter
                 ++loadindex;
                 // Check we have the packet loaded
@@ -287,6 +308,11 @@ $(document).ready(function () {
                 }
             }
         }
+        // const sectionmarker = $('<div></div>').attr('id', `sectionmarker-${catloadindex}`);
+        // $(sectionmarker).insertBefore('#scrollmarker');
+        // Scroll screen to the category section
+        const marker = document.getElementById("scrollmarker");
+        marker.scrollIntoView();
         console.log(`Number of loaded categories : ${catloadindex}`);
         if(catloadindex === allcategories.length) {
             allcategoriesLoaded = true;
