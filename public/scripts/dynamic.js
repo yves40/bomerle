@@ -201,6 +201,7 @@ $(document).ready(function () {
         event.preventDefault();
         buttonClicked();
     })
+
     getHtmlTemplates();
     getActiveCategories();
     /**
@@ -381,7 +382,7 @@ $(document).ready(function () {
                 window.location = '#categorygallery';
             }
             else {
-                if(!knifeslideractive) {
+                if(!knifeslideractive && ($(event.target).data('knifeid') != undefined)) {
                     knifeslideractive = true;                    
                     const payload = {
                         "knifeid" :  $(event.target).data('knifeid'),
