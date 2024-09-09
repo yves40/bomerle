@@ -981,6 +981,8 @@ body {
     text-align: right; }
   body .textleft {
     text-align: left; }
+  body #scrollmarker {
+    border-bottom: 1px solid white; }
   body .hero-section {
     display: flex;
     flex-direction: row;

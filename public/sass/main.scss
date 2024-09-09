@@ -37,6 +37,10 @@ body {
       text-align: left;
   }
 
+  #scrollmarker {
+    border-bottom: 1px solid white;
+  }
+
   background: $background;
   font-family: $main; 
   display: flex;

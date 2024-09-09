@@ -22,7 +22,8 @@ $(document).ready(function () {
     let CATLOADSIZE = 3;                 // Packet size when partially loading categories images (for desktop)
     let catloadindex = 0;                // Used to avoid loading all categories images in 1 shot
     let allcategoriesLoaded = false;     // Check the category section is displayed
-    let menucontactornews = false;       // Used to track contact or news menu entry
+    let loadlock = false;                // To avoid overload of catzone after an update
+    let menucontactornews = false;       // Used to track contact or news menu clicked
     const knivesgallery = $('#knivesgallery');
     const newsgallery = $('#newsgallery');
     const slider = $('#slider');
@@ -56,7 +57,12 @@ $(document).ready(function () {
                         if(entry.isIntersecting) {
                             console.log('Marker VISIBLE');
                             if(!allcategoriesLoaded && !menucontactornews) {
-                                displayActiveCategories(allcategories);
+                                if(!loadlock) {
+                                    displayActiveCategories(allcategories);
+                                }
+                                else {
+                                    loadlock = false;
+                                }
                             }
                             else {
                                 menucontactornews = false;
@@ -106,6 +112,7 @@ $(document).ready(function () {
     observer.observe(document.querySelector('#newsgallery'));
     observer.observe(document.querySelector('#categorygallery'));
     observer.observe(document.querySelector('.flash'));
+    observer.observe(document.querySelector('#scrollmarker'));
     
     // Initial state of UI
     $('#zoomer').hide();
@@ -182,6 +189,23 @@ $(document).ready(function () {
             $("#zoomer").removeClass("zoomer").empty().hide();
         }
     })
+    $(window).on('scroll', function(event) {    
+        if(! (this.oldScroll > this.scrollY )) {
+            console.log(`Scroll down`);
+            if(!allcategoriesLoaded && !menucontactornews && catloadindex != 0) {
+                if(!loadlock) {
+                    displayActiveCategories(allcategories);
+                }
+                else {
+                    loadlock = false;
+                }
+            }
+            else {
+                menucontactornews = false;
+            }
+    };
+        this.oldScroll = this.scrollY;
+    });
     // Handle the user choice for the object request type
     $('.object').change( function() {
         $('select option:selected').each( function(index, element) {
@@ -266,16 +290,6 @@ $(document).ready(function () {
         else {
             CATLOADSIZE = 2;
         }
-        // Check the scroll marker is not already there
-        const check = document.querySelector('#scrollmarker');
-        if(check == null) { // Add it ?
-            const scrolldiv = $('<div></div>').attr('id', 'scrollmarker')
-                                                .css('height', '20px')
-                                                    .css('border', 'red 2px solid')
-                                                    .css('width', '100%');
-            $(catzone).append(scrolldiv);
-            observer.observe(document.querySelector('#scrollmarker'));
-        }
         for(let i = 0; i < activecategories.length; i++) {
             if(i >= catloadindex) {
                 const div = $('<div></div>').addClass('catzone__card');
@@ -298,7 +312,7 @@ $(document).ready(function () {
                     }
                     displayOneCategory(event.target);
                 })
-                $(div).insertBefore('#scrollmarker');
+                $(catzone).append(div);
                 // Update load counter
                 ++loadindex;
                 // Check we have the packet loaded
@@ -308,12 +322,19 @@ $(document).ready(function () {
                 }
             }
         }
-        // const sectionmarker = $('<div></div>').attr('id', `sectionmarker-${catloadindex}`);
-        // $(sectionmarker).insertBefore('#scrollmarker');
-        // Scroll screen to the category section
-        const marker = document.getElementById("scrollmarker");
-        marker.scrollIntoView();
+        // const child = $('.catzone:last-child');
+        const child = $('.catzone__card:last');
+        const additionalOffset = parseInt($('.topmenu').css('height'), 10);
+        $(child).css('border', '1px solid red');
+        $('html').animate(
+            {
+                scrollTop: child.offset().top - additionalOffset,
+
+            },
+            800
+        );
         console.log(`Number of loaded categories : ${catloadindex}`);
+        loadlock = true;
         if(catloadindex === allcategories.length) {
             allcategoriesLoaded = true;
         }
@@ -434,7 +455,7 @@ $(document).ready(function () {
                 window.location = '#categorygallery';
             }
             else {
-                if(!knifeslideractive) {
+                if(!knifeslideractive && ($(event.target).data('knifeid') != undefined)) {
                     knifeslideractive = true;                    
                     const payload = {
                         "knifeid" :  $(event.target).data('knifeid'),
