@@ -98,7 +98,7 @@ export default class Logger {
                 caller = `${slashparser[slashparser.length-1]}`;
             }
             // Output message
-            let logstring = this.datetime.getDateTime() + `[ ${this.levelToString(level)} ] - ${caller} ${mess}`;
+            let logstring = `${this.datetime.getDateTime()} [ ${this.levelToString(level)} ] [${caller}] ${mess} `;
             console.log(logstring);
             return;
         }
