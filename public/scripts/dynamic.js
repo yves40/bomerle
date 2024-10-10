@@ -191,7 +191,7 @@ $(document).ready(function () {
     })
     $(window).on('scroll', function(event) {    
         if(! (this.oldScroll > this.scrollY )) {
-            console.log(`Scroll down`);
+            // console.log(`Scroll down`);
             if(!allcategoriesLoaded && !menucontactornews && catloadindex != 0) {
                 if(!loadlock) {
                     displayActiveCategories(allcategories);
