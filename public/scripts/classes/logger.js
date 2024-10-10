@@ -12,7 +12,7 @@ export default class Logger {
     static WARNING = 2;
     static ERROR = 3;
     static FATAL = 4;
-    static Version = 'logger:1.51, Jan 22 2024';
+    static Version = 'logger:1.52, Oct 10 2024';
     static OUTFILE = '/tmp/' + this.Version.replace(/[,:]/g,'_').replace(/ /g, '_') + '.log'
 
     /**
@@ -75,9 +75,30 @@ export default class Logger {
      */
     log(mess, level) {
         if (level >= this.loggerlevel) {
-            let logstring = this.datetime.getDateTime()
-                    + ' [' + this.levelToString(level) + '] '
-                    + ' ' + mess ;
+            // Get the caller
+            let stack;
+            let  caller = '';
+            try {throw new Error('');}
+            catch (error) {stack = error.stack || '';}    
+            stack = stack.split('\n').map(function (line) { return line.trim(); });
+            if (stack.length >= 4) {
+                if(stack[0] === 'Error') {  // Is it a chrome browser ?
+                    caller = stack[3];
+                }
+                else {                      // No, Error entry does not exists
+                    caller = stack[2];
+                }
+                // Manage some browser specific behavior
+                // Chrome adds parenthesis () around the log message, instead of Edge and Firefox
+                if(caller.indexOf('(') != -1) {
+                    caller = caller.substring(caller.indexOf('(') + 1, caller.indexOf(')'));
+                }
+                // let pointparser = caller.split(':');
+                let slashparser = caller.split('/');
+                caller = `${slashparser[slashparser.length-1]}`;
+            }
+            // Output message
+            let logstring = this.datetime.getDateTime() + `[ ${this.levelToString(level)} ] - ${caller} ${mess}`;
             console.log(logstring);
             return;
         }
