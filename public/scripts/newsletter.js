@@ -3,7 +3,7 @@ let validEmail = false;
 let knifeChecked = false;
 let eventsChecked = false;
 $(document).ready(function () {
-    console.log('Initializing buttons handlers');
+    logger.debug('Initializing buttons handlers');
     $(".subscribe").click( function (event) { 
         event.preventDefault();
         actionRequest(this) ;
@@ -13,7 +13,7 @@ $(document).ready(function () {
         
         validEmail = maregex.test($("#newsletter_email").val());
 
-        console.log(validEmail);
+        logger.debug(validEmail);
         buttonActivation();
     })
     $("#newsletter_forknife").change( function () {
@@ -53,7 +53,7 @@ function actionRequest(element) {
 
     if((email.length !== 0) && ((knife) || (events))){
         let url = $(element).attr('href');
-        console.log('Subcribe ' +  url);
+        logger.debug('Subcribe ' +  url);
         
         
         let data = {
@@ -70,7 +70,7 @@ function actionRequest(element) {
                 data: data,
                 async: false,
                 success: function (response) {
-                    console.log(response);
+                    logger.debug(response);
                     $("#newsletter_email").val("");
                     $("#newsletter_forknife").prop('checked', false);
                     $("#newsletter_forevents").prop('checked', false);
@@ -82,7 +82,7 @@ function actionRequest(element) {
                     eventsChecked = false;
                 },
                 error: function (xhr, status, error) {
-                    console.log(status + ' Something went wrong during ' + email + ' registration');
+                    logger.debug(status + ' Something went wrong during ' + email + ' registration');
                 }
             }
         )        
