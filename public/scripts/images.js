@@ -4,12 +4,12 @@ import timeHelper from './timeHelper.js'
 // ------------------ Init loop to trap all mouse clicks -------------------------
 $(document).ready(function () {
     $props.load();
-    console.log(`[${$props.version()} ]` );
+    logger.debug(`[${$props.version()} ]` );
     const handlerversion = $props.imagehandler();
     let totalimagesloaded = parseInt($props.imageloadcount());
     let avgloadtime  = parseInt($props.imageavgloadtime());
-    console.log(`[${handlerversion}] : You loaded ${$props.imageloadcount()} images in this session`);
-    console.log(`[${handlerversion}] : Average images load time since session started: ${avgloadtime} msec`);
+    logger.debug(`[${handlerversion}] : You loaded ${$props.imageloadcount()} images in this session`);
+    logger.debug(`[${handlerversion}] : Average images load time since session started: ${avgloadtime} msec`);
     // -------------------------
     // Load document images
     // -------------------------
@@ -41,10 +41,10 @@ $(document).ready(function () {
                 $props.save();
             })    
             $(element).on("abort", () => {
-                console.log(`Upload Abort for : ${element.src}`)
+                logger.debug(`Upload Abort for : ${element.src}`)
             })
             $(element).on("error", () => {
-                console.log(`Upload Error for : ${element.src}`)
+                logger.error(`Upload Error for : ${element.src}`)
             })
         })
     });

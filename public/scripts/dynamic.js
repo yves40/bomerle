@@ -55,7 +55,7 @@ $(document).ready(function () {
                     break;
                 case 'scrollmarker':
                         if(entry.isIntersecting) {
-                            console.log('Marker VISIBLE');
+                            logger.debug('Marker VISIBLE');
                             if(!allcategoriesLoaded && !menucontactornews) {
                                 if(!loadlock) {
                                     displayActiveCategories(allcategories);
@@ -69,7 +69,7 @@ $(document).ready(function () {
                             }
                         }
                         else {
-                            console.log('Marker HIDDEN');
+                            logger.debug('Marker HIDDEN');
                         }
                     break;
                 case 'categorygallery': 
@@ -134,11 +134,11 @@ $(document).ready(function () {
 
     // Handlers
     $('#contactmenu').on('click', (event) => {
-        console.log('Contact requested');
+        logger.debug('Contact requested');
         menucontactornews = true;
     })
     $('#categoriesmenu').on('click', (event) => {
-        console.log('Categories requested');
+        logger.debug('Categories requested');
         menucontactornews = false;
         if(!allcategoriesLoaded) {
             displayActiveCategories(allcategories);
@@ -146,7 +146,7 @@ $(document).ready(function () {
     })
     $('#newsmenu').on('click', (event) => {
         menucontactornews = true;
-        console.log('News requested');
+        logger.debug('News requested');
         if(newslist.length === 0) {
             loadActiveNews();
         }
@@ -333,7 +333,7 @@ $(document).ready(function () {
             },
             800
         );
-        console.log(`Number of loaded categories : ${catloadindex}`);
+        logger.debug(`Number of loaded categories : ${catloadindex}`);
         loadlock = true;
         if(catloadindex === allcategories.length) {
             allcategoriesLoaded = true;
