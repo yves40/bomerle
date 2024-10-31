@@ -53,12 +53,13 @@ $(document).ready(function () {
                         $(knivesgallery).attr('inactive','').removeAttr('active');
                     }   
                     break;
-                case 'scrollmarker':
+                case 'scrolltop':
                         if(entry.isIntersecting) {
                             logger.debug('Marker VISIBLE');
                             if(!allcategoriesLoaded && !menucontactornews) {
                                 if(!loadlock) {
                                     displayActiveCategories(allcategories);
+                                    loadlock = true;
                                 }
                                 else {
                                     loadlock = false;
@@ -112,7 +113,7 @@ $(document).ready(function () {
     observer.observe(document.querySelector('#newsgallery'));
     observer.observe(document.querySelector('#categorygallery'));
     observer.observe(document.querySelector('.flash'));
-    observer.observe(document.querySelector('#scrollmarker'));
+    observer.observe(document.querySelector('#scrolltop'));
     
     // Initial state of UI
     $('#zoomer').hide();
@@ -195,6 +196,7 @@ $(document).ready(function () {
             if(!allcategoriesLoaded && !menucontactornews && catloadindex != 0) {
                 if(!loadlock) {
                     displayActiveCategories(allcategories);
+                    loadlock = true;
                 }
                 else {
                     loadlock = false;
@@ -322,14 +324,11 @@ $(document).ready(function () {
                 }
             }
         }
-        // const child = $('.catzone:last-child');
         const child = $('.catzone__card:last');
         const additionalOffset = parseInt($('.topmenu').css('height'), 10);
-        $(child).css('border', '1px solid red');
         $('html').animate(
             {
                 scrollTop: child.offset().top - additionalOffset,
-
             },
             800
         );

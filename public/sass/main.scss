@@ -37,9 +37,13 @@ body {
       text-align: left;
   }
 
-  #scrollmarker {
-    border-bottom: 1px solid white;
+  #scrolltop {
+    border-bottom: 5px solid red;
   }
+  #scrollend {
+    border-bottom: 5px solid red;
+  }
+
 
   background: $background;
   font-family: $main; 

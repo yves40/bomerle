@@ -981,8 +981,10 @@ body {
     text-align: right; }
   body .textleft {
     text-align: left; }
-  body #scrollmarker {
-    border-bottom: 1px solid white; }
+  body #scrolltop {
+    border-bottom: 5px solid red; }
+  body #scrollend {
+    border-bottom: 5px solid red; }
   body .hero-section {
     display: flex;
     flex-direction: row;
