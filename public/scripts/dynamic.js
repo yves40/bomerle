@@ -18,14 +18,14 @@ $(document).ready(function () {
     const categoriesmenu = $('#categoriesmenu');
     const newsmenu = $('#newsmenu');
     const categorygallery = $('#categorygallery');
-    let allcategories = [];              // Store the active categories list found in DB
-    let CATLOADSIZE = 3;                 // Packet size when partially loading categories images (for desktop)
-    let catloadindex = 0;                // Used to avoid loading all categories images in 1 shot
-    let allcategoriesLoaded = false;     // Check the category section is displayed
-    let loadlock = false;                // To avoid overload of catzone after an update
-    let menucontactornews = false;       // Used to track contact or news menu clicked
+    let allcategories = [];                     // Store the active categories list found in DB
+    let CATLOADSIZE = 3;                        // Packet size when partially loading categories images (for desktop)
+    let catloadindex = 0;                       // Used to avoid loading all categories images in 1 shot
+    let allcategoriesLoaded = false;            // Check the category section is displayed
+    let menucontactornews = false;              // Used to track contact or news menu clicked
+    let scrollstate = { top: false, end: false };   // Track scroll position to manage partial image loading
     const knivesgallery = $('#knivesgallery');
-    const newsgallery = $('#newsgallery');
+    const newsrequest = $('#newsrequest');
     const slider = $('#slider');
     const menuHamburger = $(".menu-hamburger");
     const navLinks = $(".nav-links");
@@ -54,37 +54,31 @@ $(document).ready(function () {
                     }   
                     break;
                 case 'scrolltop':
-                        if(entry.isIntersecting) {
-                            logger.debug('Marker VISIBLE');
-                            if(!allcategoriesLoaded && !menucontactornews) {
-                                if(!loadlock) {
-                                    displayActiveCategories(allcategories);
-                                    loadlock = true;
-                                }
-                                else {
-                                    loadlock = false;
-                                }
-                            }
-                            else {
-                                menucontactornews = false;
-                            }
-                        }
-                        else {
-                            logger.debug('Marker HIDDEN');
-                        }
-                    break;
-                case 'categorygallery': 
                     if(entry.isIntersecting) {
-                        if(!allcategoriesLoaded && !menucontactornews) {
+                        scrollstate.top = true;
+                        if(!window.location.href.endsWith('request')) {
                             displayActiveCategories(allcategories);
                         }
                         else {
                             menucontactornews = false;
                         }
                     }
+                    else {
+                        scrollstate.top = false;
+                    }
+                    logger.debug(`Scroll area status : ${JSON.stringify(scrollstate)} `);
                     break;
-                case 'newsgallery': 
-                    if (!window.location.href.endsWith('contactrequest')) {                        
+                case 'scrollend': 
+                    if(entry.isIntersecting) {
+                        scrollstate.end = true;
+                    }
+                    else {
+                        scrollstate.end = false;
+                    }
+                    logger.debug(`Scroll area status : ${JSON.stringify(scrollstate)} `);
+                    break;
+                case 'newsrequest': 
+                    if (!window.location.href.endsWith('request')) {                        
                         if(entry.isIntersecting) {
                             if(newslist.length === 0) {
                                 loadActiveNews();
@@ -110,10 +104,10 @@ $(document).ready(function () {
         })
     });
     observer.observe(document.querySelector('#knivesgallery'));
-    observer.observe(document.querySelector('#newsgallery'));
-    observer.observe(document.querySelector('#categorygallery'));
+    observer.observe(document.querySelector('#newsrequest'));
     observer.observe(document.querySelector('.flash'));
     observer.observe(document.querySelector('#scrolltop'));
+    observer.observe(document.querySelector('#scrollend'));
     
     // Initial state of UI
     $('#zoomer').hide();
@@ -130,20 +124,12 @@ $(document).ready(function () {
     let validEmail = false;
     let validText = false;
     let categorygalleryactive = false;
-    let knivesgalleryactive = false;
     let knifeslideractive = false;
 
     // Handlers
     $('#contactmenu').on('click', (event) => {
         logger.debug('Contact requested');
         menucontactornews = true;
-    })
-    $('#categoriesmenu').on('click', (event) => {
-        logger.debug('Categories requested');
-        menucontactornews = false;
-        if(!allcategoriesLoaded) {
-            displayActiveCategories(allcategories);
-        }
     })
     $('#newsmenu').on('click', (event) => {
         menucontactornews = true;
@@ -191,21 +177,18 @@ $(document).ready(function () {
         }
     })
     $(window).on('scroll', function(event) {    
-        if(! (this.oldScroll > this.scrollY )) {
-            // console.log(`Scroll down`);
-            if(!allcategoriesLoaded && !menucontactornews && catloadindex != 0) {
-                if(!loadlock) {
-                    displayActiveCategories(allcategories);
-                    loadlock = true;
-                }
-                else {
-                    loadlock = false;
-                }
+        if(! (this.oldScroll > this.scrollY )) {    // Scroll down
+            if(!window.location.href.endsWith('request')) {
+                displayActiveCategories(allcategories);
             }
             else {
                 menucontactornews = false;
             }
-    };
+            logger.debug(`Scroll area state : ${JSON.stringify(scrollstate)}`);
+        }
+        else { // Scroll up no action
+            logger.debug(`Scroll area state : ${JSON.stringify(scrollstate)}`);
+        };
         this.oldScroll = this.scrollY;
     });
     // Handle the user choice for the object request type
@@ -271,8 +254,9 @@ $(document).ready(function () {
      *                              one active knife
      */
     function displayActiveCategories(activecategories) {
-        // Control partial loading
-        let loadindex = 0;
+        if(allcategoriesLoaded) {   
+            return; // Nothing to do
+        }
         // Build the cards gallery
         // Check some categories are not alreday displayed
         let catzone;
@@ -292,48 +276,43 @@ $(document).ready(function () {
         else {
             CATLOADSIZE = 2;
         }
-        for(let i = 0; i < activecategories.length; i++) {
-            if(i >= catloadindex) {
-                const div = $('<div></div>').addClass('catzone__card');
-                $(div).append($('<h2>').text(activecategories[i].catname));
-                // Check the category has an associated image, otherwise get a default
-                if(activecategories[i].catimage === null) {
-                    activecategories[i].catimage = `${$props.rootimageslocation()}/${$props.defaultcategoryimage()}`;
+        let loadindex = 0;  // Only load a CATLOADSIZE packet
+        for(let i = catloadindex; i < activecategories.length; i++) {
+            const div = $('<div></div>').addClass('catzone__card');
+            $(div).append($('<h2>').text(activecategories[i].catname));
+            // Check the category has an associated image, otherwise get a default
+            if(activecategories[i].catimage === null) {
+                activecategories[i].catimage = `${$props.rootimageslocation()}/${$props.defaultcategoryimage()}`;
+            }
+            const img = $('<img>').attr('src',`${$props.categoryimageslocation()}/${activecategories[i].catimage}`)
+                .attr('data-catid', activecategories[i].catid)
+                .attr('data-catname', activecategories[i].catname)
+                .attr('data-catdesc', activecategories[i].catdesc)
+                .css('transform', `rotate(${activecategories[i].rotation}deg)`);
+            $(div).append(img);
+            $(img).on('click', (event) => {
+                event.preventDefault();
+                if (categorygalleryactive) {
+                    $(categorygallery).empty().hide();
+                    categorygalleryactive = false;
                 }
-                const img = $('<img>').attr('src',`${$props.categoryimageslocation()}/${activecategories[i].catimage}`)
-                    .attr('data-catid', activecategories[i].catid)
-                    .attr('data-catname', activecategories[i].catname)
-                    .attr('data-catdesc', activecategories[i].catdesc)
-                    .css('transform', `rotate(${activecategories[i].rotation}deg)`);
-                $(div).append(img);
-                $(img).on('click', (event) => {
-                    event.preventDefault();
-                    if (categorygalleryactive) {
-                        $(categorygallery).empty().hide();
-                        categorygalleryactive = false;
-                    }
-                    displayOneCategory(event.target);
-                })
-                $(catzone).append(div);
-                // Update load counter
-                ++loadindex;
-                // Check we have the packet loaded
-                if(loadindex == CATLOADSIZE) {
-                    catloadindex += loadindex;
-                    break;
-                }
+                displayOneCategory(event.target);
+            })
+            $(catzone).append(div);
+            // Update load counter
+            ++loadindex;
+            // Check we have the packet loaded
+            if(loadindex == CATLOADSIZE) {
+                catloadindex += loadindex;
+                break;
             }
         }
         const child = $('.catzone__card:last');
         const additionalOffset = parseInt($('.topmenu').css('height'), 10);
-        $('html').animate(
-            {
-                scrollTop: child.offset().top - additionalOffset,
-            },
-            800
-        );
+
+        // $('html').animate({scrollTop: child.offset().top - additionalOffset,},800);
+
         logger.debug(`Number of loaded categories : ${catloadindex}`);
-        loadlock = true;
         if(catloadindex === allcategories.length) {
             allcategoriesLoaded = true;
         }
@@ -577,7 +556,7 @@ $(document).ready(function () {
      */
     function loadNewsSections(allactive) {
         let newscontainer = $('<div>').addClass('news');
-        $(newsgallery).append(newscontainer);
+        $(newsrequest).append(newscontainer);
           allactive.forEach(news => {
             const payload = {
                 "newsname" :  news.name,
@@ -593,7 +572,7 @@ $(document).ready(function () {
                         if(response.timing === null) {
                             response.timing = 2;
                         }
-                        buildImagesSlider(response.images, response.timing, response.description, newsgallery);
+                        buildImagesSlider(response.images, response.timing, response.description, newsrequest);
                     }
                     else {
                         buildNewsGallery(response.newsimages,
@@ -608,7 +587,7 @@ $(document).ready(function () {
                 }
             });    
         });
-        $(newsgallery).show();
+        $(newsrequest).show();
     }
     /**
      * Build and display a news card. Store the card in an array

@@ -674,7 +674,7 @@
 *, *::before, *::after {
   box-sizing: border-box; }
 
-#newsgallery {
+#newsrequest {
   scroll-margin: 100px;
   width: 100%;
   background-image: url(../images/BastosBG3.webp);
@@ -682,21 +682,21 @@
   background-attachment: fixed;
   background-size: cover; }
   @media screen and (min-width: 1024px) {
-    #newsgallery {
+    #newsrequest {
       background-size: 70%;
       background-repeat: no-repeat; } }
-  #newsgallery .news {
+  #newsrequest .news {
     margin: 0 auto; }
     @media screen and (min-width: 1024px) {
-      #newsgallery .news {
+      #newsrequest .news {
         max-width: 1024px;
         width: 70%; } }
-    #newsgallery .news h2 {
+    #newsrequest .news h2 {
       font-family: "Gideon Roman", sans-serif;
       font-size: 2rem;
       margin: 2rem;
       color: white; }
-    #newsgallery .news__details {
+    #newsrequest .news__details {
       background-color: rgba(51, 51, 51, 0.4);
       display: flex;
       align-items: center;
@@ -704,7 +704,7 @@
       justify-content: center;
       border-top: 2px white solid;
       margin-top: 2rem; }
-      #newsgallery .news__details__header {
+      #newsrequest .news__details__header {
         color: white;
         padding: 0 2em 3em 2em;
         width: 90%;
@@ -713,60 +713,60 @@
         align-items: center;
         justify-content: center; }
         @media screen and (min-width: 1024px) {
-          #newsgallery .news__details__header {
+          #newsrequest .news__details__header {
             padding: 0 5em 3em 5em;
             width: 100%;
             max-width: 1024px; } }
-        #newsgallery .news__details__header p {
+        #newsrequest .news__details__header p {
           font-family: "Gideon Roman", sans-serif;
           border-radius: 5px;
           font-size: 1rem;
           line-height: 1.4rem; }
           @media screen and (min-width: 1024px) {
-            #newsgallery .news__details__header p {
+            #newsrequest .news__details__header p {
               padding: 1rem 0;
               font-size: 1.8rem;
               line-height: 2rem; } }
-        #newsgallery .news__details__header img {
+        #newsrequest .news__details__header img {
           width: 60%;
           margin: 1rem;
           border-radius: 5px; }
           @media screen and (min-width: 1024px) {
-            #newsgallery .news__details__header img {
+            #newsrequest .news__details__header img {
               width: 70%; } }
-      #newsgallery .news__details__images {
+      #newsrequest .news__details__images {
         margin: 1rem;
         display: flex;
         flex-wrap: wrap;
         gap: 2vmin;
         list-style-type: none;
         justify-content: center; }
-        #newsgallery .news__details__images img {
+        #newsrequest .news__details__images img {
           width: 100px;
           height: 100px;
           border-radius: 5px;
           border: solid 1px white;
           object-fit: cover;
           float: none; }
-        #newsgallery .news__details__images ::after {
+        #newsrequest .news__details__images ::after {
           content: "";
           display: block;
           flex-grow: 10; }
-    #newsgallery .news__details:nth-child(odd) {
+    #newsrequest .news__details:nth-child(odd) {
       animation-name: slideRightIn; }
       @media screen and (min-width: 1024px) {
-        #newsgallery .news__details:nth-child(odd) img {
+        #newsrequest .news__details:nth-child(odd) img {
           float: left; } }
-    #newsgallery .news__details:nth-child(even) {
+    #newsrequest .news__details:nth-child(even) {
       animation-name: slideLeftIn; }
       @media screen and (min-width: 1024px) {
-        #newsgallery .news__details:nth-child(even) img {
+        #newsrequest .news__details:nth-child(even) img {
           float: right; } }
-    #newsgallery .news__details[active] {
+    #newsrequest .news__details[active] {
       animation-duration: 0.5s;
       animation-fill-mode: forwards;
       animation-timing-function: linear; }
-    #newsgallery .news__details[inactive] {
+    #newsrequest .news__details[inactive] {
       animation-name: slideRightOut;
       animation-duration: 0.3s;
       animation-fill-mode: forwards;
