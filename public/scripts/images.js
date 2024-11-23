@@ -1,9 +1,13 @@
 import $props from './properties.js'
 import timeHelper from './timeHelper.js'
+import Logger from './classes/logger.js'
 
 // ------------------ Init loop to trap all mouse clicks -------------------------
 $(document).ready(function () {
     $props.load();
+    // Determine if running in dev or prod mode
+    const devmode = $('.debug').length === 1 ? 'dev' : 'prod';
+    const logger = new Logger(devmode);
     logger.debug(`[${$props.version()} ]` );
     const handlerversion = $props.imagehandler();
     let totalimagesloaded = parseInt($props.imageloadcount());
