@@ -137,6 +137,7 @@
                                     data-imagerank="{{image.rank}}"
                                     data-showname="{{slide.name}}"
                                     src="{{asset('images/slideshow/' ~ image.filename)}}" alt="Not loaded"
+                                    style="transform: rotate({{image.rotation}}deg)"
                                 >
                                 <div id="commandzone" class="mt-4">
                                     {# The shift left icon #}
