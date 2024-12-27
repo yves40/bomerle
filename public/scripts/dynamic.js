@@ -316,21 +316,23 @@ $(document).ready(function () {
             async: false,
             data: JSON.stringify(payload),
             success: function (response) {
-                response.knivesids.forEach( oneid => {       
+                response.knivesids.forEach( oneknife => {       
                     // Get knife images and build the display card
-                    $.ajax({
-                        type: "POST",
-                        url: '/knives/public/getimages',
-                        dataType: "json",
-                        async: false,
-                        data: JSON.stringify( { 'knifeid': oneid.id } ),
-                        success: function (response) {
-                            buildCard(response, container);
-                        },
-                        error: function (xhr) {
-                            logger.error(xhr);
-                        }
-                    });    
+                    if(oneknife.published === true) { // Is the knife published on site ? 
+                        $.ajax({
+                            type: "POST",
+                            url: '/knives/public/getimages',
+                            dataType: "json",
+                            async: false,
+                            data: JSON.stringify( { 'knifeid': oneknife.id } ),
+                            success: function (response) {
+                                buildCard(response, container);
+                            },
+                            error: function (xhr) {
+                                logger.error(xhr);
+                            }
+                        });    
+                    }
                 })
                 timk.stopTimer();
                 logger.debug(`Loaded knives cards in ${timk.getElapsedString()}`);

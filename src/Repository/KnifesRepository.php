@@ -53,7 +53,7 @@ class KnifesRepository extends ServiceEntityRepository
     public function findCategoryKnives($catid): array
     {
         return $this->createQueryBuilder('c')
-            ->select('c.id')
+            ->select('c.id, c.published')
             ->andWhere('c.category = :catid')
             ->setParameter('catid', $catid)
             ->getQuery()
