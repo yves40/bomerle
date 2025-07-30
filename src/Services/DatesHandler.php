@@ -23,4 +23,5 @@ class DatesHandler
   }
   function getEndDate() : string { return $this->endDate->format('d/m/y'); }
   function getStartDate(): string { return $this->startDate->format('d/m/y'); }
+  function displayDate(DateTime $date) {return $date->format('d/m/y');}
 }
