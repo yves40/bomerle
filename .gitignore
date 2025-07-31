@@ -6,9 +6,12 @@
 /.env.*.local
 /config/secrets/prod/prod.decrypt.private.php
 /public/css/
+/public/sass/*.css
+/public/sass/*.map
 /public/node_modules/
 /var/
 /vendor/
+/public/sandbox/
 ###< symfony/framework-bundle ###
 
 ###> phpunit/phpunit ###
