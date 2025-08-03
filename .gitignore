@@ -11,7 +11,10 @@
 /public/node_modules/
 /var/
 /vendor/
-/public/sandbox/
+/public/sass/*.css
+/public/sass/*.map
+/public/sandbox/*.css
+/public/sandbox/*.map
 ###< symfony/framework-bundle ###
 
 ###> phpunit/phpunit ###

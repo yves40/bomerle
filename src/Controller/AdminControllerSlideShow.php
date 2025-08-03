@@ -8,10 +8,13 @@ use Exception;
 use App\Entity\SlideShow;
 use App\Services\DBlogger;
 use App\Services\Uploader;
+use App\Services\DatesHandler;
 use App\Entity\SlideImages;
 use App\Form\SlideShowType;
 use App\Repository\SlideShowRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use PhpParser\Node\Expr\Cast\Array_;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -40,7 +43,8 @@ class AdminControllerSlideShow extends AbstractController
     #[Route('/protected/list', name: 'bootadmin.slideshow.list')]
     public function list(Request $request,
                     EntityManagerInterface $entityManager,
-                    TranslatorInterface $translator
+                    TranslatorInterface $translator,
+                    LoggerInterface $logger
                 ): Response
     {
         date_default_timezone_set('Europe/Paris');
@@ -51,11 +55,47 @@ class AdminControllerSlideShow extends AbstractController
         */
         $repo = $entityManager->getRepository(SlideShow::class);
         $allslides = $repo->findBy([], [ 'datein' => 'DESC']);
+        $logger->info('**************************** list news');
+        /** @var SlideShow $slide 
+         * @var DatesHandler $dt
+        */
+        $dt = new DatesHandler();
+        $dateflag = [];
+        $today = new \DateTime('now'); 
+        foreach($allslides as $slide){
+            if($slide->isDaterange()) {
+                if($today >= $slide->getDatein() && $today <= $slide->getDateout()) {
+                    $logger->info($slide->getName() . ' ------- '
+                            . $dt->displayDate($slide->getDatein()) . ' ------- '
+                            . $dt->displayDate($slide->getDateout()) .
+                            ' =====> IN');
+                    array_push($dateflag, true);
+                }
+                else {
+                    $logger->info($slide->getName() . ' ------- '
+                            . $dt->displayDate($slide->getDatein()) . ' ------- '
+                            . $dt->displayDate($slide->getDateout()) .
+                            ' =====> OUT');
+                    array_push($dateflag, false);
+                }
+            }
+            else {
+                $logger->info($slide->getName() . ' ------- '
+                        . $dt->displayDate($slide->getDatein()) . ' ------- '
+                        . $dt->displayDate($slide->getDateout()) .
+                        ' =====> UNLIMITED');
+                array_push($dateflag, true);
+            }
+            // array_push($images, $img->getFilename());
+            // array_push($imagesrotation, $img->getRotation());
+        }
+
         $slide = new SlideShow();
         $form = $this->createForm(SlideShowType::class, $slide);
         return $this->render('admin/slides.html.twig', [
             'form' => $form->createView(),
             'allslides' => $allslides,
+            'dateflag' => $dateflag,
             'locale' => $loc
         ]);
     }
