@@ -2,6 +2,7 @@
 namespace App\Services;
 
 use App\Core\Token;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\Mime\Email;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
@@ -9,7 +10,7 @@ use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 class MailO2
 {
   //----------------------------------------------------------------------
-  public function __construct(private MailerInterface $mailer) { }
+  public function __construct(private MailerInterface $mailer, private LoggerInterface $logger) { }
   //----------------------------------------------------------------------
   public function sendRegisterConfirmation(String $to) : Token {
     // Get a token + selector object
@@ -72,7 +73,7 @@ class MailO2
   //----------------------------------------------------------------------
   // Return true if the email has been properly sent
   //----------------------------------------------------------------------
-  public function sendAdministratorInfo(string $to = null, 
+  public function sendAdministratorInfo(string $to = 'null', 
                                       $subject = 'No subject, probably a programming error', 
                                       $message = 'No message, is it a test ?') {
     if(!$to) {
@@ -94,16 +95,23 @@ class MailO2
   //----------------------------------------------------------------------
   // Return true if the email has been properly sent
   //----------------------------------------------------------------------
-  public function sendEmail(string $from, 
-                            string $to = null, 
+  public function sendEmail(string $requestor, 
+                            string $to = 'bomerleadmin@bomerle.fr', 
                             $subject = 'No subject, probably a programming error', 
-                            $message = 'No message, is it a test ?') {
+                            $message = 'No message, is it a test ?',
+                        ) 
+  {
+
+    $this->logger->debug('Contact request from '.$requestor.' sent to '.$to.' with subject '.$subject);
+
+    $from = ($_ENV['MAIL_FROM']);
     if(!$from) {
-      $from = ($_ENV['MAIL_FROM']);
+      throw new \Exception('No sender email defined in .env.local');
     }
     if(!$to) {
       $to = ($_ENV['MAIL_ADMIN']);
     }
+    $this->logger->debug('Sending email with account  '.$from);
     $email = (new Email())
         ->from($from)
         ->to($to)
